@@ -1,57 +1,41 @@
 WEBVTT
 
 1
-00:00:01.000 --> 00:00:05.500
-Sarah Chen: Good morning everyone. Let's keep it quick today. Marcus, kick us off.
+00:00:01.000 --> 00:00:04.500
+Sarah Chen: Good morning everyone. Let's keep it quick today — I know we've got a lot going on. Marcus, kick us off.
 
 2
-00:00:06.000 --> 00:00:21.000
-Marcus Johnson: Morning. Yesterday I finished up the SEPA mandate flow for issue #14 — the happy path is working. Today I'm tackling the rejected mandate edge case and the B2B variant. Should have a PR up by EOD.
+00:00:05.000 --> 00:00:20.000
+Marcus Johnson: Morning. So yesterday I finally got the ClickHouse schema locked in for issue #68 — closed that out. The partitioning by service and date is going to make our aggregation queries way faster. Today I'm starting on the latency query API, that's issue #69. Should have a draft endpoint up by EOD.
 
 3
-00:00:21.500 --> 00:00:38.000
-Sarah Chen: Great progress. Any blockers?
+00:00:20.500 --> 00:00:35.500
+Sarah Chen: Nice. And quick heads up on a decision — Marcus and I synced with the data team yesterday and we're going with ClickHouse over TimescaleDB for the metrics backend. Benchmarks showed 3-4x better performance on the aggregation queries. That's final. Priya, you're up.
 
 4
-00:00:38.500 --> 00:00:52.000
-Marcus Johnson: Not on my end, but I flagged that issue #7 — the Security Review and Pen Test — is still waiting on DevOps for environment access. That's been pending since Monday. Alex, any update?
+00:00:36.000 --> 00:00:52.000
+Priya Patel: Yeah so the notification tray component, issue #63, is coming along but I'm running into a tricky issue with real-time badge count updates. Right now we're polling the REST endpoint which means there's a lag. I need to hook into the WebSocket event stream but that depends on Marcus's fanout work in #62. So slight blocker there, but not urgent yet.
 
 5
 00:00:52.500 --> 00:01:06.000
-Alex Rivera: Yeah sorry, I've been heads down on infra migrations. I'll get that access provisioned this morning — should be ready before lunch. Unblocking that one is high priority.
+Marcus Johnson: Yeah, let's pair on that tomorrow afternoon. The fanout worker is mostly done — I'm just cleaning up the error handling. One thing: we agreed to drop priority queuing from this sprint. All notification types get treated equally for now. Keeps things simpler and we can add priority tiers in a follow-up launch.
 
 6
-00:01:06.500 --> 00:01:08.000
-Sarah Chen: Perfect. Priya?
+00:01:06.500 --> 00:01:20.000
+Priya Patel: That's fine by me, honestly. Also, the alert threshold UI for issue #71 is done and shipped — QA signed off. Feels good to close one.
 
 7
-00:01:08.500 --> 00:01:28.000
-Priya Patel: So I closed out issue #13 yesterday — the export progress indicator is verified and merged. Today I'm starting on the iDEAL redirect flow for issue #15. Marcus actually flagged a tricky edge case with pop-ups blocked, so I'm going to prototype the inline iframe fallback this morning.
+00:01:20.500 --> 00:01:35.000
+David Kim: QA side — I've started smoke testing the notification event schema that got closed yesterday, issue #61. Everything looks consistent with the CloudEvents spec. I do want to add some edge case tests around the custom extension field. Should have a report by end of day. No blockers.
 
 8
-00:01:28.500 --> 00:01:34.000
-Sarah Chen: Nice — good catch on that edge case. David, how's QA looking?
+00:01:35.500 --> 00:01:52.000
+Alex Rivera: Quick thing from me — the staging Kafka cluster had a blip this morning, about 15 minutes of downtime. It's back up. I'm adding a health check alert so we catch that faster next time. For today I'm picking up the dashboard frontend work on issue #67, getting the time-series chart component wired up with the new metrics API once Marcus has that endpoint ready.
 
 9
-00:01:34.500 --> 00:01:52.000
-David Kim: Ran a full pass on the German translation — issue #17 — and everything looked solid. Signed off on that one. Today I'm going to set up the test matrix for the French strings, issue #18. Priya mentioned pluralisation is a bit fiddly so I'll make sure we have coverage for all the plural forms.
+00:01:52.500 --> 00:02:02.000
+Sarah Chen: Great. Let's keep an eye on that Kafka reliability — if it's flaky in staging it'll be a problem in Beta. David, can you log that as a risk? Alright, that's everyone. Have a good one.
 
 10
-00:01:52.500 --> 00:02:06.000
-Sarah Chen: Good. Let's make sure we don't ship with any pluralisation bugs — that kind of thing shows up badly in reviews. Any other blockers or risks before we wrap?
-
-11
-00:02:06.500 --> 00:02:22.000
-Marcus Johnson: One thing worth flagging — the offline caching task on issue #39 just got closed, so the Android data layer epic is nearly done. But we haven't started the sync conflict resolution piece yet — that could slip if we're not careful.
-
-12
-00:02:22.500 --> 00:02:38.000
-Sarah Chen: Let's add that to the risk log. Alex, can you make sure the staging environment is stable for the EU Payment Methods testing this week? With the pen test coming up we don't want environment flakiness muddying results.
-
-13
-00:02:38.500 --> 00:02:46.000
-Alex Rivera: Absolutely, I'll run a health check after standup.
-
-14
-00:02:46.500 --> 00:02:52.000
-Sarah Chen: Great. That's a wrap — thanks everyone. Let's have a good day.
+00:02:02.500 --> 00:02:05.000
+[Multiple voices]: Thanks, bye!
