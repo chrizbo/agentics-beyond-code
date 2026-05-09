@@ -8,6 +8,8 @@ description: |
 on:
   issues:
     types: [opened, edited]
+  issue_comment:
+    types: [created]
   pull_request:
     types: [opened, synchronize]
   workflow_dispatch:
@@ -55,10 +57,29 @@ shared sensemaking.
 
 ## What Triggered This Run
 
+{{#if github.event.comment}}
+A new comment was posted on issue **#${{ github.event.issue.number }}**.
+
+Comment ID: ${{ github.event.comment.id }}
+Comment: "${{ steps.sanitized.outputs.text }}"
+
+Fetch the comment author and the full issue context:
+
+```bash
+gh api repos/${{ github.repository }}/issues/comments/${{ github.event.comment.id }} --jq '{author: .user.login, created_at: .created_at}'
+gh issue view ${{ github.event.issue.number }} --repo ${{ github.repository }} --json body,title,labels,assignees --jq '{title,body,labels:[.labels[].name],assignees:[.assignees[].login]}'
+```
+
+Focus your analysis on the **comment** content, but use the issue body for context.
+Skip comments from bots (author login ending in `[bot]`).
+{{/if}}
+
 {{#if github.event.issue}}
+{{#unless github.event.comment}}
 An issue was opened or edited: **#${{ github.event.issue.number }}**
 
 Content: "${{ steps.sanitized.outputs.text }}"
+{{/unless}}
 {{/if}}
 
 {{#if github.event.pull_request}}
@@ -287,6 +308,13 @@ issues have been reviewed.
 
 - **Skip bot-generated issues.** If the issue was created by a workflow
   or bot (check the author), use noop — don't analyze automation outputs.
+
+- **Skip bot comments.** If triggered by `issue_comment` and the comment
+  author's login ends in `[bot]`, use noop immediately.
+
+- **Don't respond to yourself.** If the comment that triggered this run
+  was posted by this workflow (contains "Assumptions Worth Discussing"),
+  use noop.
 
 ## Workflow Run Cost Footer
 
