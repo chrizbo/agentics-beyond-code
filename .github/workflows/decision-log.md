@@ -156,15 +156,37 @@ For each decision found (from comments or transcripts), extract:
 
 ### Step 5: Check for Existing Decision Records
 
-Before creating new files, check what already exists in `/decisions/`:
+Before creating new files, scan what already exists in `/decisions/`:
 
 ```bash
 ls decisions/ 2>/dev/null || echo "No decisions directory yet"
 ```
 
-Read existing decision file names to avoid duplicating a decision that
-was already recorded. Use the issue number and a content similarity check —
-if a decision about the same topic from the same issue already exists, skip it.
+If the directory has files, read their frontmatter to build an index of
+previously recorded decisions:
+
+```bash
+for f in decisions/*.md; do
+  echo "=== $(basename "$f") ==="
+  head -20 "$f"
+  echo ""
+done 2>/dev/null
+```
+
+Use this index to:
+
+1. **Skip duplicates** — If a decision about the same topic from the same
+   source (same issue number or transcript) already exists, do not create
+   a new file.
+2. **Amend existing decisions** — If you find new information that adds to
+   or refines an existing decision (e.g., a follow-up comment with updated
+   rationale, a reversal, or additional options considered), update the
+   existing file rather than creating a new one. Add an "## Amendments"
+   section at the bottom with the date and new information.
+3. **Flag reversals** — If a new decision contradicts a previous one,
+   create a new decision file but reference the original (e.g.,
+   "Supersedes `decisions/2026-05-01-use-redis.md`") and update the
+   original's Status from "Accepted" to "Superseded by YYYY-MM-DD-<slug>".
 
 ### Step 6: Generate Decision Files
 
