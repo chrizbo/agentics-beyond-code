@@ -397,5 +397,76 @@ jq -n \
 
 echo "Wrote $(jq '.items | length' "$OUTPUT_FILE") items to $OUTPUT_FILE" >&2
 
+# --- Step 5: Build pre-computed summary for agent efficiency ---
+# This avoids the agent reading the full JSON multiple times to understand the structure.
+
+SUMMARY_FILE="${OUTPUT_FILE%.json}-summary.json"
+
+jq '
+# Deduplicate items by issue number, keeping the occurrence with most subIssues
+(.items | sort_by(.number) | group_by(.number) | map(sort_by(.subIssues | length) | last)) as $unique |
+{
+  generatedAt: .metadata.generatedAt,
+  totalItems: ($unique | length),
+  launches: [
+    $unique[]
+    | select(
+        any(.labels.nodes[]?; .name == "launch") or
+        (.title | test("^\\[Launch\\]"))
+      )
+    | {
+        number,
+        title,
+        state,
+        url,
+        phase: .projectFields.Phase,
+        targetDate: .projectFields["Target Date"],
+        launchType: .projectFields["Launch Type"],
+        riskLevel: .projectFields["Risk Level"],
+        assignees: [.assignees.nodes[]?.login],
+        labels: [.labels.nodes[]?.name],
+        subIssues: (
+          [.subIssues[]? | {
+            number,
+            title,
+            state,
+            labels: [.labels.nodes[]?.name],
+            subIssues: (
+              [.subIssues[]? | {
+                number,
+                title,
+                state,
+                updatedAt,
+                assignees: [.assignees.nodes[]?.login]
+              }]
+            )
+          }]
+        ),
+        stats: {
+          totalTasks: ([.subIssues[]?.subIssues[]?] | length),
+          closedTasks: ([.subIssues[]?.subIssues[]? | select(.state == "CLOSED")] | length),
+          totalEpics: (.subIssues | length),
+          closedEpics: ([.subIssues[]? | select(.state == "CLOSED")] | length)
+        }
+      }
+  ],
+  initiatives: [
+    $unique[]
+    | select(
+        any(.labels.nodes[]?; .name == "initiative") or
+        (.title | test("^\\[Initiative\\]"))
+      )
+    | {
+        number,
+        title,
+        state,
+        assignees: [.assignees.nodes[]?.login],
+        childLaunchNumbers: [.subIssues[]?.number]
+      }
+  ]
+}' "$OUTPUT_FILE" > "$SUMMARY_FILE"
+
+echo "Wrote summary to $SUMMARY_FILE" >&2
+
 # Cleanup
 rm -f "$ITEMS_FILE" "$ENRICHED_FILE"

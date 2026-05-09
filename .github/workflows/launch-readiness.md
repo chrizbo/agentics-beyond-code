@@ -42,7 +42,7 @@ safe-outputs:
   mentions: false
   allowed-github-references: []
   create-discussion:
-    title-prefix: "[Launch Readiness] "
+    title-prefix: "ai: [Launch Readiness] "
     category: "reports"
     max: 1
 ---
@@ -55,17 +55,73 @@ downstream teams, and leaders understand the state of all active launches.
 
 ## Pre-Fetched Data
 
-A deterministic pre-step has already fetched all project data from the GitHub
-Projects GraphQL API and saved it to `launch-data.json`. This file contains:
+A deterministic pre-step has already fetched all project data and produced two files:
 
-- All items in the Launch Tracker project with their custom field values
-  (Phase, Target Date, Launch Type, Risk Level)
-- Full sub-issue trees walked recursively (launches → epics → tasks)
-- Labels, assignees, state, timestamps, and issue bodies
+- **`launch-data-summary.json`** — Pre-computed summary with just launches, initiatives,
+  and rollup stats. **Read this file first — it is small and has everything you need
+  for the report.** Use a single `cat launch-data-summary.json` call.
+- **`launch-data.json`** — Full project data (all items, bodies, field definitions).
+  Only read this if you need details not in the summary (e.g., issue bodies for
+  quality checks, field definitions).
 
-**Read `launch-data.json` first.** Use it as your primary data source. Only
-call the GitHub API for supplementary data not in the file (e.g., recent
-comments for staleness checks).
+> **⚠️ Token efficiency:** Do NOT read launch-data.json multiple times. If you need
+> specific fields from it, use `jq` to extract only what you need in a single call:
+> ```bash
+> jq '[.items[] | select(.labels.nodes[]?.name == "launch") | {number, title, body}]' launch-data.json
+> ```
+
+### Summary JSON Schema
+
+```json
+{
+  "generatedAt": "2026-05-08T00:00:00Z",
+  "totalItems": 37,
+  "launches": [
+    {
+      "number": 2,
+      "title": "[Launch] GDPR Data Export",
+      "state": "OPEN",
+      "url": "https://github.com/...",
+      "phase": "Beta",
+      "targetDate": "2026-06-15",
+      "launchType": "Major",
+      "riskLevel": "Medium",
+      "assignees": ["username"],
+      "labels": ["launch", "needs:security"],
+      "subIssues": [
+        {
+          "number": 5,
+          "title": "Backend Data Export API",
+          "state": "OPEN",
+          "labels": ["epic"],
+          "subIssues": [
+            { "number": 9, "title": "Implement /api/v1/export", "state": "CLOSED", "updatedAt": "...", "assignees": ["dev1"] }
+          ]
+        }
+      ],
+      "stats": {
+        "totalTasks": 6,
+        "closedTasks": 3,
+        "totalEpics": 2,
+        "closedEpics": 0
+      }
+    }
+  ],
+  "initiatives": [
+    {
+      "number": 1,
+      "title": "[Initiative] Expand to EU Market",
+      "state": "OPEN",
+      "assignees": [],
+      "childLaunchNumbers": [2, 3, 4]
+    }
+  ]
+}
+```
+
+> **Note:** Initiative data is included for reference and future compliance workflows
+> that may need initiative-level context (e.g., linking launch compliance status back
+> to strategic goals). For readiness reports, focus on launches.
 
 ## Policy
 
@@ -78,19 +134,18 @@ staleness windows, and risk levels. Follow it precisely.
 
 ### Step 1: Load and Parse Data
 
-Read `launch-data.json`. Identify items that have the `launch` label — these
-are the active launches. For each launch, extract:
+Read `launch-data-summary.json` with a single `cat` command. The launches are
+already extracted and enriched with rollup stats. For each launch, note:
 - Title and issue number
 - Assignee (DRI)
-- Phase (from projectFields)
-- Target Date (from projectFields)
+- Phase, Target Date, Launch Type, Risk Level
 - All labels
 - Sub-issue tree with states
+- Pre-computed stats (totalTasks, closedTasks, totalEpics, closedEpics)
 
-### Step 2: Walk the Sub-Issue Hierarchy
+### Step 2: Analyze the Sub-Issue Hierarchy
 
-For each launch, recursively discover all sub-issues (epics and tasks).
-For each sub-issue, gather:
+Using the sub-issue trees already in the summary, for each launch calculate:
 - Status (open/closed)
 - Assignee
 - Labels
