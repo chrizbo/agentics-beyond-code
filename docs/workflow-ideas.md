@@ -56,3 +56,17 @@ implementation as GitHub Agentic Workflows.
 |---|---------|-------------|
 | T1 | Transcript Processor | ✅ **Built** — Processes meeting transcripts, updates related issues. |
 | PA | Process Analyzer | ✅ **Built** — Weekly retro + process analysis. Posts team retrospective discussion, detects transcript vs how-we-work drift, identifies automation candidates, creates update PRs. |
+
+### Multiplayer — Shared Sensemaking
+
+> Inspired by [John Cutler's multiplayer framing](https://cutlefish.substack.com/): workflows where understanding emerges from interaction, not just well-organized data. These move beyond "shared-context solo" (everyone in their own AI session with good shelves) into genuine multiplayer — interpretations travel, not just information.
+
+| # | Workflow | Description |
+|---|---------|-------------|
+| M1 | Assumption Surfacer | Scans issues and PRs for implicit assumptions (timelines, user behavior, dependencies, capacity). Posts them as explicit questions on the issue, tagging relevant people for interpretation. Reasoning travels, not just data. |
+| M2 | Cross-Frame Translator | Same work viewed through PM, engineering, finance, and leadership lenses simultaneously. Each frame links back to the others. Enables Cutler's "multiple concurrent frames" without forcing one official model. |
+| M3 | Tension Detector | Finds contradictions between stated strategy and active work. Posts a discussion inviting interpretation from multiple stakeholders — not a report, a prompt for shared sensemaking. |
+| M4 | Decision Pre-Mortem Facilitator | When a decision is tagged, generates adversarial challenges and routes them to specific stakeholders for response before finalization. Extends Decision Log from recording → facilitating. |
+| M5 | Context Bridge | When someone is mentioned on an unfamiliar issue, generates a personalized briefing based on their role, team, and recent work — not a generic summary but a frame-aware bridge. |
+| M6 | Consistency Auditor | Applies Cutler's sharp/flexible/legible-variety framework. Flags where team practices have drifted from `docs/how-we-work.md` and asks whether drift is intentional or accidental. |
+| M7 | Shared Learning Loop | After a launch, synthesizes outcomes vs. predictions across multiple contributors' prior comments. Surfaces who saw what coming and why — building collective pattern recognition. |
