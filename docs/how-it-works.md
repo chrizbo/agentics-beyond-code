@@ -98,6 +98,7 @@ Workflows define the **general pattern** (e.g., "assess readiness against a poli
     workflow-health.md               ← Agentic workflow health & cost report (weekly)
     decision-log.md                  ← Decision detection + PR creation (daily)
     transcript-processor.md          ← Transcript → issue comments (on push)
+    process-analyzer.md              ← Weekly retro + process drift detection + automation candidates
   policies/
     launch-readiness-policy.md       ← Readiness thresholds & risk scoring
     weekly-status-policy.md          ← Status sections, bullet format & audience
@@ -109,6 +110,8 @@ Workflows define the **general pattern** (e.g., "assess readiness against a poli
   scripts/
     fetch-launch-data.sh             ← Deterministic data fetching (shared)
 decisions/                           ← Decision records (created by decision-log workflow)
+docs/
+  how-we-work.md                     ← Team processes & norms (updated by process-analyzer workflow)
 transcripts/                         ← Meeting transcripts (.txt, .vtt) — drop files here
 ```
 
@@ -155,6 +158,8 @@ Readiness reports are posted as GitHub Discussions (not issues) to avoid clutter
 | `ai:compliance-review` | Applied to compliance review sub-issues (distinguishes them from feature work) |
 | `ai:gtm` | Applied to GTM content sub-issues (changelog drafts, roadmap items) |
 | `ai:meeting-discussed` | Applied to issues discussed in a meeting transcript |
+| `ai:process-update` | Applied to PRs updating `docs/how-we-work.md` from transcript analysis |
+| `ai:automation-candidate` | Applied to issues proposing automation of a manual process |
 
 ### Custom Fields — structured project data
 

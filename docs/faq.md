@@ -50,6 +50,7 @@ Edit `.github/policies/voice-and-tone-policy.md`. The GTM Content workflow reads
 | Weekly Status | Friday ~8 AM PT | Yes |
 | Workflow Health | Friday ~8 AM PT | Yes |
 | Transcript Processor | On push to `/transcripts/` | Yes |
+| Process Analyzer | Weekly | Yes |
 | Sample Data Simulator | Daily on weekdays | Yes |
 
 The **Sample Data Simulator** is for demo purposes only — it generates fake project activity so the other workflows have realistic data. You don't need it for production use. Trigger it manually anytime with `gh aw run sample-data-simulator` to add more content.
@@ -135,6 +136,32 @@ It extracts key topics, names, and action items from the transcript and fuzzy-ma
 ### Will it create duplicate comments if I push the same transcript again?
 
 The workflow checks for existing comments from the same transcript file to avoid duplicates.
+
+---
+
+## Process Analyzer & Weekly Retro
+
+### What does the Process Analyzer do?
+
+It runs weekly and reads all meeting transcripts from the past 7 days. It does three things:
+
+1. **Posts a weekly retro Discussion** focused on *how* the team is working (collaboration patterns, blockers with process root causes, team energy, process health) — not what shipped (the Weekly Status workflow covers that)
+2. **Detects process drift** by comparing what people describe in transcripts against `docs/how-we-work.md`. When drift is found, it creates a PR to update the doc
+3. **Identifies automation candidates** — manual processes people mention that could be handled by a workflow — and files issues for strong candidates
+
+### What is `docs/how-we-work.md`?
+
+A living document describing how the team operates — meeting cadence, issue triage, PR review SLAs, on-call rotation, communication norms, and an inventory of what's already automated vs. still manual. The Process Analyzer keeps it current by detecting when the team's actual behavior drifts from what's documented.
+
+> ⚠️ The included `docs/how-we-work.md` is **sample data** for demo purposes. Replace it with your actual team's processes before using in production.
+
+### How does it detect process drift?
+
+It looks for discrepancies between transcript discussion and the how-we-work doc — for example, someone saying "we moved design review to Thursday" when the doc says Wednesday, or "we're doing rotating triage now" when the doc says one person handles it. Only decided changes trigger a PR update; casual suggestions are noted but don't modify the doc.
+
+### How is the weekly retro different from the Weekly Status report?
+
+The **Weekly Status** covers *what* the team shipped, learned, and needs help with — it's a leadership status rollup. The **Process Analyzer retro** covers *how* the team is working — collaboration patterns, process friction, team energy, and whether documented processes match reality. They complement each other.
 
 ---
 
