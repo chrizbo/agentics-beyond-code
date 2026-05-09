@@ -1,0 +1,57 @@
+WEBVTT
+
+1
+00:00:01.000 --> 00:00:05.500
+Sarah Chen: Good morning everyone. Let's keep it quick today. Marcus, kick us off.
+
+2
+00:00:06.000 --> 00:00:21.000
+Marcus Johnson: Morning. Yesterday I finished up the SEPA mandate flow for issue #14 — the happy path is working. Today I'm tackling the rejected mandate edge case and the B2B variant. Should have a PR up by EOD.
+
+3
+00:00:21.500 --> 00:00:38.000
+Sarah Chen: Great progress. Any blockers?
+
+4
+00:00:38.500 --> 00:00:52.000
+Marcus Johnson: Not on my end, but I flagged that issue #7 — the Security Review and Pen Test — is still waiting on DevOps for environment access. That's been pending since Monday. Alex, any update?
+
+5
+00:00:52.500 --> 00:01:06.000
+Alex Rivera: Yeah sorry, I've been heads down on infra migrations. I'll get that access provisioned this morning — should be ready before lunch. Unblocking that one is high priority.
+
+6
+00:01:06.500 --> 00:01:08.000
+Sarah Chen: Perfect. Priya?
+
+7
+00:01:08.500 --> 00:01:28.000
+Priya Patel: So I closed out issue #13 yesterday — the export progress indicator is verified and merged. Today I'm starting on the iDEAL redirect flow for issue #15. Marcus actually flagged a tricky edge case with pop-ups blocked, so I'm going to prototype the inline iframe fallback this morning.
+
+8
+00:01:28.500 --> 00:01:34.000
+Sarah Chen: Nice — good catch on that edge case. David, how's QA looking?
+
+9
+00:01:34.500 --> 00:01:52.000
+David Kim: Ran a full pass on the German translation — issue #17 — and everything looked solid. Signed off on that one. Today I'm going to set up the test matrix for the French strings, issue #18. Priya mentioned pluralisation is a bit fiddly so I'll make sure we have coverage for all the plural forms.
+
+10
+00:01:52.500 --> 00:02:06.000
+Sarah Chen: Good. Let's make sure we don't ship with any pluralisation bugs — that kind of thing shows up badly in reviews. Any other blockers or risks before we wrap?
+
+11
+00:02:06.500 --> 00:02:22.000
+Marcus Johnson: One thing worth flagging — the offline caching task on issue #39 just got closed, so the Android data layer epic is nearly done. But we haven't started the sync conflict resolution piece yet — that could slip if we're not careful.
+
+12
+00:02:22.500 --> 00:02:38.000
+Sarah Chen: Let's add that to the risk log. Alex, can you make sure the staging environment is stable for the EU Payment Methods testing this week? With the pen test coming up we don't want environment flakiness muddying results.
+
+13
+00:02:38.500 --> 00:02:46.000
+Alex Rivera: Absolutely, I'll run a health check after standup.
+
+14
+00:02:46.500 --> 00:02:52.000
+Sarah Chen: Great. That's a wrap — thanks everyone. Let's have a good day.
