@@ -7,6 +7,7 @@ description: |
 
 on:
   push:
+    branches: [main]
     paths:
       - 'transcripts/**/*.txt'
       - 'transcripts/**/*.vtt'
