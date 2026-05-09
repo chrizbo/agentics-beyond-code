@@ -82,7 +82,7 @@ Yes, but it requires editing the workflow file (`compliance-review.md`) and crea
 
 ### How do compliance labels work?
 
-- `needs:{team}` (e.g., `needs:security`) — the workflow adds this when a review is required
+- `ai:needs:{team}` (e.g., `ai:needs:security`) — the workflow adds this when a review is required
 - `approved:{team}` (e.g., `approved:security`) — a reviewer adds this manually when the review passes
 - The Launch Readiness Checker factors these labels into its risk assessment
 

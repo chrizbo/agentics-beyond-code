@@ -202,11 +202,11 @@ Use the speakers' own language where possible. Be concise.>
 
 ### Step 6: Label Issues With Meeting Activity
 
-For issues that received transcript comments, add the label `meeting-discussed`
+For issues that received transcript comments, add the label `ai:meeting-discussed`
 if it doesn't already exist. This allows filtering for issues that have
 recent meeting context.
 
-Ensure the `meeting-discussed` label exists in the repository. Create it
+Ensure the `ai:meeting-discussed` label exists in the repository. Create it
 if missing with color `#c2e0c6` (light green).
 
 ### Step 7: Summary Output

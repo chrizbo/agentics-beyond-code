@@ -46,7 +46,7 @@ safe-outputs:
   allowed-github-references: []
   create-issue:
     title-prefix: "[Compliance Review] "
-    labels: [compliance-review]
+    labels: [ai:compliance-review]
     max: 12
     expires: false
   update-issue:
@@ -90,7 +90,7 @@ Each compliance team has its own policy file that defines:
 1. **Rubric** — criteria for whether a review is needed
 2. **Review questions** — what the DRI must answer for that domain
 3. **Review checklist** — what the reviewer verifies
-4. **Labels** — the `needs:` and `approved:` labels for that team
+4. **Labels** — the `ai:needs:` and `approved:` labels for that team
 
 Read each policy file at runtime to evaluate launches:
 
@@ -141,16 +141,16 @@ When uncertain, err on the side of marking a review as **Needed**.
 
 For each launch, synchronize compliance labels. The label convention is:
 
-- `needs:{team}` — a review is needed and not yet approved
+- `ai:needs:{team}` — a review is needed and not yet approved
 - `approved:{team}` — the review has been completed and approved
 
 Teams use these label suffixes: `security`, `privacy`, `accessibility`, `responsible-ai`
 
 **Rules:**
-- If a review is **Needed** and neither `needs:{team}` nor `approved:{team}` exists → add `needs:{team}`
-- If a review is **Not Needed** and `needs:{team}` exists (but no `approved:{team}`) → remove `needs:{team}`
+- If a review is **Needed** and neither `ai:needs:{team}` nor `approved:{team}` exists → add `ai:needs:{team}`
+- If a review is **Not Needed** and `ai:needs:{team}` exists (but no `approved:{team}`) → remove `ai:needs:{team}`
 - **Never** remove an `approved:{team}` label — those are set by humans
-- **Never** remove a `needs:{team}` label if a human explicitly added it (if `needs:{team}` already existed before this run, keep it even if the rubric says not needed — defer to human judgment)
+- **Never** remove an `ai:needs:{team}` label if a human explicitly added it (if `ai:needs:{team}` already existed before this run, keep it even if the rubric says not needed — defer to human judgment)
 - If a review is **Needed** and `approved:{team}` already exists → no label change needed
 
 Before modifying labels, read the current labels on the issue. Only make
@@ -158,11 +158,11 @@ changes where the current state doesn't match the desired state.
 
 Ensure all required labels exist in the repository before applying them.
 Create any missing labels with appropriate colors:
-- `needs:security` / `approved:security` — red / green
-- `needs:privacy` / `approved:privacy` — red / green
-- `needs:accessibility` / `approved:accessibility` — red / green
-- `needs:responsible-ai` / `approved:responsible-ai` — red / green
-- `compliance-review` — purple (used on compliance sub-issues to distinguish them from feature work)
+- `ai:needs:security` / `approved:security` — red / green
+- `ai:needs:privacy` / `approved:privacy` — red / green
+- `ai:needs:accessibility` / `approved:accessibility` — red / green
+- `ai:needs:responsible-ai` / `approved:responsible-ai` — red / green
+- `ai:compliance-review` — purple (used on compliance sub-issues to distinguish them from feature work)
 
 ### Step 4: Post Compliance Status Table
 
@@ -191,7 +191,7 @@ can be found and updated on subsequent runs:
 ```
 
 **Status values:**
-- ⏳ **Pending** — `needs:{team}` label present, no `approved:{team}`
+- ⏳ **Pending** — `ai:needs:{team}` label present, no `approved:{team}`
 - ✅ **Approved** — `approved:{team}` label present
 - ➖ **N/A** — review not needed
 - ❓ **Uncertain** — could not determine, recommend manual triage
@@ -217,7 +217,7 @@ scope has changed significantly enough to warrant a fresh review.
 
 **Sub-issue configuration:**
 - **Title:** `[{Team}] Compliance Review — {Launch Title without [Launch] prefix}`
-- **Labels:** `compliance-review`, `needs:{team}`
+- **Labels:** `ai:compliance-review`, `ai:needs:{team}`
 - **Parent:** the launch issue (add as a sub-issue)
 - **Assignee:** leave unassigned (reviewer will be assigned by the team)
 
@@ -321,12 +321,12 @@ Launch #Y — [Title]
 - Use the launch body and sub-issue titles as primary signals. Don't guess beyond
   what the content tells you.
 - Never remove `approved:` labels — those represent human decisions.
-- Respect existing `needs:` labels added by humans — don't remove them even if
+- Respect existing `ai:needs:` labels added by humans — don't remove them even if
   the rubric says the review isn't needed.
 - When creating starter reviews, tailor them to the specific launch. Don't just
   post blank templates — fill in what you can infer.
 - Compliance review sub-issues should be clearly distinguishable from feature
-  work. Always apply the `compliance-review` label so they can be filtered out
+  work. Always apply the `ai:compliance-review` label so they can be filtered out
   of project task counts if desired.
 - Keep the status table compact. Use the key signals column for brief justification.
 - If no launches exist, exit early with a brief message.

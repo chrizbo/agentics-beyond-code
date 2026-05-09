@@ -43,7 +43,7 @@ safe-outputs:
   allowed-github-references: []
   create-issue:
     title-prefix: "[GTM] "
-    labels: [gtm]
+    labels: [ai:gtm]
     max: 10
     expires: false
   update-issue:
@@ -213,7 +213,7 @@ For each launch needing new GTM sub-issues:
    - For roadmap items, convert the target date to a quarter (e.g. Q3 2026)
    - **Do NOT include internal status, completion percentages, or work-item
      breakdowns in roadmap items.** These are customer-facing.
-4. Create the sub-issue with the `gtm` label, using the `parent` field to
+4. Create the sub-issue with the `ai:gtm` label, using the `parent` field to
    link it under the launch issue automatically:
    ```json
    {"type": "create_issue", "parent": 7, "title": "Roadmap item — Feature X", "body": "..."}
@@ -244,10 +244,10 @@ state of the launch — no manual merging required.
 
 ### Step 5: Add Labels
 
-Ensure the `gtm` label exists in the repository. Create it if missing
+Ensure the `ai:gtm` label exists in the repository. Create it if missing
 with color `#1d76db` (blue).
 
-All GTM sub-issues should have the `gtm` label so they can be filtered
+All GTM sub-issues should have the `ai:gtm` label so they can be filtered
 separately from feature work and compliance reviews.
 
 ### Step 6: Summary Output

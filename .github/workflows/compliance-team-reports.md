@@ -91,7 +91,7 @@ jq '[.items[] | select(.labels.nodes[]?.name == "launch") | {number, title, body
 For each OPEN launch, determine which compliance teams are involved by
 checking labels:
 
-- `needs:{team}` → review is pending (action required)
+- `ai:needs:{team}` → review is pending (action required)
 - `approved:{team}` → review is complete (awareness only)
 
 Also check for compliance review sub-issues (titles matching
@@ -236,7 +236,7 @@ Discussions created: 4
   so reviewers can jump straight to the work.
 - Keep context blocks concise — 2-3 sentences max per launch.
 - Use the launch body and sub-issue titles to explain *why* the review
-  is needed. Don't just say "has needs:security label" — explain the
+  is needed. Don't just say "has ai:needs:security label" — explain the
   underlying reason (e.g., "handles PII", "new API surface").
 - Escape all @mentions to avoid noisy notifications.
 - If a previous week's report exists (same title prefix), the new one

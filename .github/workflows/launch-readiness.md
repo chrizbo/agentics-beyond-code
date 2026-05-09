@@ -87,7 +87,7 @@ A deterministic pre-step has already fetched all project data and produced two f
       "launchType": "Major",
       "riskLevel": "Medium",
       "assignees": ["username"],
-      "labels": ["launch", "needs:security"],
+      "labels": ["launch", "ai:needs:security"],
       "subIssues": [
         {
           "number": 5,
@@ -164,7 +164,7 @@ Calculate:
 
 For each launch issue, evaluate the quality signals from the policy:
 - Check which sections of the launch template are filled in vs. empty
-- Check for domain sign-offs (`needs:` vs `approved:` labels)
+- Check for domain sign-offs (`ai:needs:` vs `approved:` labels)
 - Check for blockers (`blocker` label on any sub-issue)
 - Check for scope creep (sub-issues added after phase transition, if detectable)
 - Check compliance review status (see below)
@@ -174,7 +174,7 @@ For each launch issue, evaluate the quality signals from the policy:
 For each launch, check the compliance teams (security, privacy, accessibility,
 responsible-ai):
 
-1. **Labels:** Does the launch have `needs:{team}` or `approved:{team}` labels?
+1. **Labels:** Does the launch have `ai:needs:{team}` or `approved:{team}` labels?
 2. **Sub-issues:** Are there compliance review sub-issues (titles matching
    `[{Team}] Compliance Review — ...`)? Are they open or closed? Assigned?
 

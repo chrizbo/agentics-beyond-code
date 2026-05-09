@@ -103,18 +103,18 @@ The following labels are used by workflows. Create them in your repository:
 - `at-risk` — launch is at risk
 - `ready-for-review` — ready for domain team review
 
-**Domain tracking labels:**
-- `needs:security`, `needs:privacy`, `needs:accessibility`, `needs:responsible-ai`
+**Domain tracking labels (workflow-managed, `ai:` prefix):**
+- `ai:needs:security`, `ai:needs:privacy`, `ai:needs:accessibility`, `ai:needs:responsible-ai`
 - `approved:security`, `approved:privacy`, `approved:accessibility`, `approved:responsible-ai`
 
-**Compliance labels:**
-- `compliance-review` — marks compliance review sub-issues (auto-created by workflow)
+**Compliance labels (workflow-managed, `ai:` prefix):**
+- `ai:compliance-review` — marks compliance review sub-issues (auto-created by workflow)
 
-**GTM labels:**
-- `gtm` — marks go-to-market content sub-issues (changelog drafts, roadmap items)
+**GTM labels (workflow-managed, `ai:` prefix):**
+- `ai:gtm` — marks go-to-market content sub-issues (changelog drafts, roadmap items)
 
-**Transcript labels:**
-- `meeting-discussed` — marks issues that were discussed in a meeting transcript (auto-created by workflow)
+**Transcript labels (workflow-managed, `ai:` prefix):**
+- `ai:meeting-discussed` — marks issues that were discussed in a meeting transcript (auto-created by workflow)
 
 **Report labels:**
 - `report`, `launch-readiness`

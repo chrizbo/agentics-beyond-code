@@ -56,7 +56,7 @@ The system serves three audiences with different needs from the same data:
 | Persona | What they care about | How they use the system |
 |---------|---------------------|------------------------|
 | **DRIs (PMs)** | Their launch's status, blockers, what needs action | Create/manage launch issues, read readiness reports |
-| **Downstream teams** | Which launches need their sign-off | Watch for `needs:{domain}` labels, review domain sections in reports |
+| **Downstream teams** | Which launches need their sign-off | Watch for `ai:needs:{domain}` labels, review domain sections in reports |
 | **Leaders** | Pipeline health, which launches are at risk | Read the executive summary and risk breakdown |
 
 ### 3. Issue hierarchy: Initiative → Launch → Epic → Task
@@ -131,10 +131,10 @@ This pattern — **deterministic script for data, agent for analysis** — is re
 
 ### 7. Labels distinguish agent-created content
 
-Issues and sub-issues created by agentic workflows carry specific labels
-(`compliance-review`, `gtm`, etc.) so they can be filtered from feature
+Issues and sub-issues created by agentic workflows carry `ai:`-prefixed labels
+(`ai:compliance-review`, `ai:gtm`, etc.) so they can be filtered from feature
 work. Discussions use descriptive title prefixes like `[Launch Readiness]`
-or `[Compliance]` — no special `ai:` marker is needed.
+or `[Compliance]`.
 
 ### 8. Reports as discussions
 
@@ -149,10 +149,12 @@ Readiness reports are posted as GitHub Discussions (not issues) to avoid clutter
 | `launch` | Marks an issue as a launch |
 | `blocker` | Flags a blocking issue |
 | `at-risk` | Applied when a launch is at risk |
-| `needs:{domain}` | Flags that a domain team's input is required |
-| `approved:{domain}` | Domain sign-off granted |
+| `ai:needs:{domain}` | Flags that a domain team's input is required (added by workflow) |
+| `approved:{domain}` | Domain sign-off granted (added by humans) |
 | `ready-for-review` | Ready for domain team review |
-| `compliance-review` | Applied to compliance review sub-issues (distinguishes them from feature work) |
+| `ai:compliance-review` | Applied to compliance review sub-issues (distinguishes them from feature work) |
+| `ai:gtm` | Applied to GTM content sub-issues (changelog drafts, roadmap items) |
+| `ai:meeting-discussed` | Applied to issues discussed in a meeting transcript |
 
 ### Custom Fields — structured project data
 
@@ -175,7 +177,7 @@ compliance teams before shipping. It consists of two workflows and four policy f
    Responsible AI. For each launch it:
    - Reads the rubric from the corresponding policy file
    - Determines whether a review is needed based on launch content
-   - Adds/removes `needs:{team}` labels on the launch issue
+   - Adds/removes `ai:needs:{team}` labels on the launch issue
    - Posts a compact compliance status table as a comment on the launch
    - Creates **compliance review sub-issues** under the launch for each team
      that needs a review, pre-filled with tailored review questions, checklists,
@@ -193,7 +195,7 @@ compliance teams before shipping. It consists of two workflows and four policy f
 
 When a review is needed, the workflow creates a sub-issue under the launch
 titled `[{Team}] Compliance Review — {Launch Title}`. These sub-issues:
-- Are labeled `compliance-review` + `needs:{team}` so they can be filtered
+- Are labeled `ai:compliance-review` + `ai:needs:{team}` so they can be filtered
 - Contain the review questions from the policy file, pre-filled where possible
 - Include a checklist and findings table for the reviewer
 - Are assignable to the reviewer from the compliance team
@@ -244,7 +246,7 @@ jargon-free.
 ### GTM sub-issues
 
 Sub-issues are titled `[GTM] Changelog draft — ...` and `[GTM] Roadmap item — ...`
-and labeled `gtm` so they're filterable. They contain:
+and labeled `ai:gtm` so they're filterable. They contain:
 - A full draft written in the org's voice
 - Specifics pulled from the launch body, epics, and sub-issues
 - Clear markers that it's a draft needing DRI review before publishing
@@ -387,7 +389,7 @@ whenever `.txt` or `.vtt` files are pushed to the `/transcripts/` directory:
 3. Searches open issues for matches based on titles, labels, and content
 4. Posts structured comments on matched issues summarizing the relevant
    portions of the meeting
-5. Adds a `meeting-discussed` label to issues that were discussed
+5. Adds an `ai:meeting-discussed` label to issues that were discussed
 
 ### Transcript file conventions
 
