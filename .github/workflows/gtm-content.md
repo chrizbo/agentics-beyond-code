@@ -48,8 +48,6 @@ safe-outputs:
     expires: false
   update-issue:
     max: 10
-  link-sub-issue:
-    max: 10
   add-comment:
     max: 10
   add-labels:
@@ -215,7 +213,14 @@ For each launch needing new GTM sub-issues:
    - For roadmap items, convert the target date to a quarter (e.g. Q3 2026)
    - **Do NOT include internal status, completion percentages, or work-item
      breakdowns in roadmap items.** These are customer-facing.
-4. Create the sub-issue with the `gtm` label
+4. Create the sub-issue with the `gtm` label, using the `parent` field to
+   link it under the launch issue automatically:
+   ```json
+   {"type": "create_issue", "parent": 7, "title": "Roadmap item — Feature X", "body": "..."}
+   ```
+   The `parent` field accepts a real issue number (the launch issue number).
+   This creates the issue AND links it as a sub-issue in one step — no
+   separate `link_sub_issue` call is needed.
 
 ### Step 4: Update Existing Content
 
