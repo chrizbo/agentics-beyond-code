@@ -20,14 +20,6 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 | 📋 Launch Countdown | Daily digest of remaining launch blockers with timeline risk assessment |
 | 📣 Launch Announcement Drafter | Auto-draft release comms from merged PRs and closed issues |
 
-### 🏥 Health & Risk
-
-| Workflow | Description |
-|----------|-------------|
-| 🔴 Stale Work Detector | Flag issues/PRs that have gone quiet and may be at risk |
-| 📊 Team Pulse Report | Weekly health summary — velocity, blockers, workload balance |
-| ⚠️ Risk Radar | Identify and escalate cross-repo risks based on labels, staleness, and activity patterns |
-
 ### ✅ Compliance
 
 | Workflow | Description |

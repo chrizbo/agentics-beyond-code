@@ -146,17 +146,6 @@ Workflows that help teams ship with confidence and visibility.
 | 3 | **Launch Announcement Drafter** | When launch issue is closed | Auto-drafts release comms (changelog, stakeholder summary) from the merged PRs and closed sub-issues linked to the launch. |
 | 4 | **Launch Retrospective Kickoff** | When launch issue is closed | Creates a retro discussion/issue with pre-populated timeline, key metrics, and prompts for the team. |
 
-### 🏥 Health & Risk
-
-Workflows that surface problems before they become fires.
-
-| # | Workflow | Trigger | What it does |
-|---|----------|---------|--------------|
-| 5 | **Stale Work Detector** | Daily | Flags launch sub-issues or linked PRs that have gone quiet (no activity in N days). Comments on the launch issue with a staleness report. |
-| 6 | **Team Pulse Report** | Weekly | Across all active launches in a project, summarizes velocity, blockers, workload balance. Posts as a project-level issue or discussion. |
-| 7 | **Risk Radar** | Daily | Scans active launches for risk signals: missed dates, scope creep (new sub-issues added late), dependency bottlenecks, unassigned critical work. Escalates via issue comment or label. |
-| 8 | **SLA / Target Date Tracker** | Daily | For launches with target dates, warns when milestones are at risk of slipping based on remaining work vs time. |
-
 ### ✅ Compliance
 
 Workflows that keep launches audit-ready and policy-compliant.
