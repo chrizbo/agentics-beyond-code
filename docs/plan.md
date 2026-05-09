@@ -181,16 +181,37 @@ Workflows that keep launches audit-ready and policy-compliant.
 
 ## Open Questions
 
-- Should we provide a "starter project template" (with labels, fields pre-configured) alongside the workflows?
 - How do we handle multi-repo launches? (project spans multiple repos)
-- What's the right default for staleness thresholds, risk scoring, etc. — and where do those live in policy files?
 - Should policy files support structured frontmatter (YAML) for machine-readable rules, or stay pure prose for LLM reasoning?
+- What PAT scopes are needed for user-owned projects in Actions? (GITHUB_TOKEN may not cover `read:project`)
+- Should the fetch script accept project name instead of number for portability?
 
 ---
 
-## Next Steps
+## Progress
 
-- [ ] Pick 1-2 workflows to build first
-- [ ] Write the policy file conventions doc
-- [ ] Write the first workflow markdown files
-- [ ] Test with `gh aw compile` and `gh aw run`
+### ✅ Done
+
+- [x] Repository created and initialized with `gh aw`
+- [x] README with project overview and audience
+- [x] Issue templates: Initiative and Launch (with structured fields)
+- [x] Labels created: `launch`, `initiative`, `epic`, `blocker`, `at-risk`, `needs:*`, `approved:*`, etc.
+- [x] GitHub Project "Launch Tracker" with custom fields (Phase, Target Date, Launch Type, Risk Level)
+- [x] Sample data: 1 initiative, 3 launches (Team/Alpha/Beta), epics, tasks, sub-issue hierarchy wired up
+- [x] Some tasks closed to simulate progress
+- [x] `.github/scripts/fetch-launch-data.sh` — reusable pre-step for GraphQL data fetching
+- [x] `.github/workflows/launch-readiness.md` — weekly readiness report workflow
+- [x] `.github/policies/launch-readiness-policy.md` — customizable readiness policy
+- [x] Workflow compiled successfully (`launch-readiness.lock.yml`)
+- [x] `docs/setup.md` — setup guide with token/permission requirements
+- [x] `docs/how-it-works.md` — architecture, design decisions, progress
+- [x] Project linked to repository
+
+### 🔜 Next
+
+- [ ] Test run the launch readiness workflow end-to-end
+- [ ] Build Risk Radar workflow (daily, uses same fetch script)
+- [ ] Build Stale Work Detector workflow
+- [ ] Build Policy Gate workflow (PR-triggered)
+- [ ] Add project setup automation script (labels, fields, etc.)
+- [ ] Document how to customize for different team structures
