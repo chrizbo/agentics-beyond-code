@@ -12,6 +12,9 @@ implementation as GitHub Agentic Workflows.
 | 1 | Strategy-Execution Alignment Audit | Checks whether active work maps to stated strategic priorities. Flags orphaned initiatives. |
 | 9 | Funding/Investment Review Prep | Generates quarterly portfolio ROI report for finance stakeholders. |
 | 15 | Outcome vs Output Scorecard | Distinguishes shipping velocity from actual impact. Monthly scorecard. |
+| 25 | Tension Detector | Finds contradictions between stated strategy and active work. Posts a discussion inviting interpretation from multiple stakeholders — not a report, a prompt for shared sensemaking. |
+| 26 | Decision Pre-Mortem Facilitator | When a decision is tagged, generates adversarial challenges and routes them to specific stakeholders for response before finalization. Extends Decision Log from recording → facilitating. |
+| 27 | Shared Learning Loop | After a launch, synthesizes outcomes vs. predictions across multiple contributors' prior comments. Surfaces who saw what coming and why — building collective pattern recognition. |
 
 ### Operations
 
@@ -25,6 +28,8 @@ implementation as GitHub Agentic Workflows.
 | 12 | Time Allocation Visibility | Reactive vs strategic work split analysis. |
 | 19 | Framework/Ritual Sunset Reviewer | Audits meeting and ceremony engagement signals quarterly. |
 | 21 | Action Item Tracker | Extracts action items from meeting transcripts, creates issues, follows up weekly on completion/abandonment. Feeds into prioritization rubric updates ("we never do X, stop assigning it"). |
+| 28 | Context Bridge | When someone is mentioned on an unfamiliar issue, generates a personalized briefing based on their role, team, and recent work — not a generic summary but a frame-aware bridge. |
+| 29 | Consistency Auditor | Flags where team practices have drifted from `docs/how-we-work.md` and asks whether drift is intentional or accidental. |
 
 ### AI Governance
 
@@ -51,16 +56,5 @@ implementation as GitHub Agentic Workflows.
 | 20 | Customer Value → Business Impact Linker | Connects shipping to revenue/cost signals. |
 | 23 | Customer Feedback Aggregator | Multi-source feedback monitor: pulls from issues, discussions, Discord, Slack, and social into normalized feedback issues in one repo. Enables dedup, trend detection, and cross-channel prioritization. |
 | 24 | Feedback → Work Item Converter | Slash command on a customer feedback issue that strips PII and customer-specific details, then creates a clean, agent-ready engineering issue. Bridges the PM interpretation gap. |
+| 30 | Cross-Frame Translator | Same work viewed through PM, engineering, finance, and leadership lenses simultaneously. Each frame links back to the others — multiple concurrent frames without forcing one official model. |
 
-### Multiplayer — Shared Sensemaking
-
-> Inspired by [John Cutler's multiplayer framing](https://cutlefish.substack.com/): workflows where understanding emerges from interaction, not just well-organized data. These move beyond "shared-context solo" (everyone in their own AI session with good shelves) into genuine multiplayer — interpretations travel, not just information.
-
-| # | Workflow | Description |
-|---|---------|-------------|
-| M2 | Cross-Frame Translator | Same work viewed through PM, engineering, finance, and leadership lenses simultaneously. Each frame links back to the others. Enables Cutler's "multiple concurrent frames" without forcing one official model. |
-| M3 | Tension Detector | Finds contradictions between stated strategy and active work. Posts a discussion inviting interpretation from multiple stakeholders — not a report, a prompt for shared sensemaking. |
-| M4 | Decision Pre-Mortem Facilitator | When a decision is tagged, generates adversarial challenges and routes them to specific stakeholders for response before finalization. Extends Decision Log from recording → facilitating. |
-| M5 | Context Bridge | When someone is mentioned on an unfamiliar issue, generates a personalized briefing based on their role, team, and recent work — not a generic summary but a frame-aware bridge. |
-| M6 | Consistency Auditor | Applies Cutler's sharp/flexible/legible-variety framework. Flags where team practices have drifted from `docs/how-we-work.md` and asks whether drift is intentional or accidental. |
-| M7 | Shared Learning Loop | After a launch, synthesizes outcomes vs. predictions across multiple contributors' prior comments. Surfaces who saw what coming and why — building collective pattern recognition. |
