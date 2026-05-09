@@ -7,7 +7,7 @@ description: |
   review artifacts so DRIs don't start from scratch.
 
 on:
-  schedule: weekly
+  schedule: weekly on monday around 8am utc-7
   issues:
     types: [labeled]
   workflow_dispatch:

@@ -6,7 +6,7 @@ description: |
   portfolio health, wins, and where they need to get involved.
 
 on:
-  schedule: weekly
+  schedule: weekly on friday around 8am utc-7
   workflow_dispatch:
 
 permissions:

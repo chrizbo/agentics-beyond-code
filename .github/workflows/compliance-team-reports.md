@@ -6,7 +6,7 @@ description: |
   reviewers prioritize their work without digging through individual issues.
 
 on:
-  schedule: weekly
+  schedule: weekly on monday around 8am utc-7
   workflow_dispatch:
 
 permissions:
