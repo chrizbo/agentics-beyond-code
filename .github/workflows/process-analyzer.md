@@ -169,6 +169,13 @@ This is posted as a GitHub Discussion so the team can react and comment.
 - New informal practices emerging that aren't documented yet
 - Process changes discussed or decided this week
 
+### 🤖 Automation Health
+<Assessment of the team's automation portfolio:>
+- Existing workflows that received praise or complaints this week
+- Workflows that weren't mentioned at all (possibly not delivering value)
+- Improvement suggestions surfaced from transcript discussions
+- Manual processes still consuming significant team time
+
 ### 💡 Observations & Suggestions
 <Patterns worth noting or acting on:>
 - Repeated themes across multiple standups
@@ -233,6 +240,42 @@ For each automation candidate, assess:
 - **Impact:** How much time would this save? How often is it done?
 - **Complexity:** Is this a simple scheduled report or a complex multi-step
   process?
+
+### Step 6b: Analyze — Automation Gap Analysis
+
+Inventory the existing agentic workflows in this repository:
+
+```bash
+ls .github/workflows/*.md | grep -v '.lock.yml' | while read f; do
+  echo "=== $(basename "$f") ==="
+  head -5 "$f" | grep -A2 'description:'
+  echo ""
+done
+```
+
+Cross-reference the full set of existing workflows against transcript
+discussions to answer three questions:
+
+1. **Which existing workflows need improvement?** Look for transcript signals
+   like complaints about workflow output quality, missing information in
+   reports, false positives, timing issues, or suggestions to change how an
+   automation works. Examples: "the weekly status missed X", "the compliance
+   review flagged something that wasn't relevant", "can we make the
+   transcript processor also do Y?"
+
+2. **Where are humans still doing bulk work?** Compare the "Manual Processes"
+   table in `docs/how-we-work.md` against what people actually describe
+   doing in transcripts. If someone repeatedly mentions a manual task that
+   isn't in the automation candidates list, flag it.
+
+3. **Are any existing automations unused or ignored?** If an automated
+   process is never referenced in transcripts — no one mentions its output,
+   complains about it, or relies on it — that's a signal it may not be
+   delivering value.
+
+Include findings from this analysis in the weekly retro discussion under a
+new section "🤖 Automation Health" and in any automation candidate issues
+created in Step 9.
 
 ### Step 7: Analyze — Process Drift
 

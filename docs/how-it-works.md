@@ -410,10 +410,12 @@ All workflows share the same `fetch-launch-data.sh` pre-step for data fetching.
 
 | Workflow | Schedule | Output | Audience |
 |----------|----------|--------|----------|
-| **Launch Readiness** | Monday ~8 AM PT · Manual | Discussion with pipeline summary, risk breakdown, sign-off tracking | DRIs, leaders |
+| **Launch Readiness** | Monday ~8:30 AM PT · Manual | Discussion with pipeline summary, risk breakdown, sign-off tracking | DRIs, leaders |
 | **Compliance Review** | Monday ~8 AM PT · On issue labeled · Manual | Labels on launches, status table comment, compliance review sub-issues | DRIs, compliance teams |
-| **Compliance Team Reports** | Monday ~8 AM PT · Manual | 4 discussions (one per compliance team) with urgency-sorted launch lists | Security, Privacy, Accessibility, Responsible AI teams |
-| **GTM Content** | Monday ~8 AM PT · Manual | Changelog draft and roadmap item sub-issues per launch | DRIs, marketing, comms |
+| **Compliance Team Reports** | Monday ~8:45 AM PT · Manual | 4 discussions (one per compliance team) with urgency-sorted launch lists | Security, Privacy, Accessibility, Responsible AI teams |
+| **GTM Content** | Monday ~8:15 AM PT · Manual | Changelog draft and roadmap item sub-issues per launch | DRIs, marketing, comms |
+| **GTM Team Reports** | Monday ~8 AM PT · Manual | Discussion summarizing launches needing GTM action | GTM team |
+| **Assumption Surfacer** | On issue opened/edited · Manual | Comments surfacing implicit assumptions as explicit questions | PMs, DRIs |
 | **Decision Log** | Daily ~midnight PT · Manual | PR with individual markdown decision records in `/decisions/` | PMs, DRIs, leaders |
 | **Weekly Status** | Friday ~8 AM PT · Manual | Discussion with What Shipped, What We Learned, FYI, and SOS sections | Leaders, senior stakeholders |
 | **Workflow Health** | Friday ~8 AM PT · Manual | Discussion with success rates, failure patterns, cost estimates, cross-workflow interaction analysis, and recommendations for all agentic workflows | Leaders, ops |
@@ -422,7 +424,7 @@ All workflows share the same `fetch-launch-data.sh` pre-step for data fetching.
 
 ### Weekly cadence
 
-Most workflows run **Monday mornings around 8 AM PT** to kick off the week with fresh data. The Weekly Status runs **Friday mornings around 8 AM PT** to close out the week. Exact times are scattered by the fuzzy scheduler to avoid load spikes.
+Most workflows run **Monday mornings staggered between 8:00–8:45 AM PT** to kick off the week with fresh data, spaced 15 minutes apart to respect data dependencies. The Weekly Status and Workflow Health run **Friday mornings around 8 AM PT** to close out the week.
 
 On a typical week:
 

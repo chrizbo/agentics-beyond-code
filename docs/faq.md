@@ -42,10 +42,12 @@ Edit `.github/policies/voice-and-tone-policy.md`. The GTM Content workflow reads
 
 | Workflow | Schedule | Manual trigger? |
 |----------|----------|-----------------|
-| Launch Readiness Checker | Monday ~8 AM PT | Yes |
+| Launch Readiness Checker | Monday ~8:30 AM PT | Yes |
 | Compliance Review | Monday ~8 AM PT | Yes |
-| Compliance Team Reports | Monday ~8 AM PT | Yes |
-| GTM Content | Monday ~8 AM PT | Yes |
+| Compliance Team Reports | Monday ~8:45 AM PT | Yes |
+| GTM Content | Monday ~8:15 AM PT | Yes |
+| GTM Team Reports | Monday ~8 AM PT | Yes |
+| Assumption Surfacer | On issue opened/edited | Yes |
 | Decision Log | Daily on weekdays | Yes |
 | Weekly Status | Friday ~8 AM PT | Yes |
 | Workflow Health | Friday ~8 AM PT | Yes |

@@ -70,3 +70,16 @@ implementation as GitHub Agentic Workflows.
 | M5 | Context Bridge | When someone is mentioned on an unfamiliar issue, generates a personalized briefing based on their role, team, and recent work — not a generic summary but a frame-aware bridge. |
 | M6 | Consistency Auditor | Applies Cutler's sharp/flexible/legible-variety framework. Flags where team practices have drifted from `docs/how-we-work.md` and asks whether drift is intentional or accidental. |
 | M7 | Shared Learning Loop | After a launch, synthesizes outcomes vs. predictions across multiple contributors' prior comments. Surfaces who saw what coming and why — building collective pattern recognition. |
+
+### Talk-Inspired — Process as Code Patterns
+
+> From the [Agentics Beyond Code talk](https://github.com/chrizbo/agentics-beyond-code): patterns observed from using agentic workflows in product operations at GitHub.
+
+| # | Workflow | Description |
+|---|---------|-------------|
+| S1 | Strategy Alignment Analyzer | ✅ **Built** — Analyzes decisions against `docs/strategy.md` tradeoffs. Comments on issues with misalignment, annotates the strategy doc with alignment evidence and emerging patterns. Weekly Monday run. |
+| S2 | Customer Feedback Aggregator | Multi-source feedback monitor: pulls from issues, discussions, Discord, Slack, and social into normalized feedback issues in one repo. Enables dedup, trend detection, and cross-channel prioritization. |
+| S3 | Feedback → Work Item Converter | Slash command on a customer feedback issue that strips PII and customer-specific details, then creates a clean, agent-ready engineering issue. Bridges the PM interpretation gap. |
+| S4 | Action Item Tracker | Extracts action items from meeting transcripts, creates issues, follows up weekly on completion/abandonment. Feeds into prioritization rubric updates ("we never do X, stop assigning it"). |
+| S5 | Cross-Team Intake Dispatcher | When a launch issue is created, auto-generates draft intake issues in downstream team repos (privacy, legal, GTM, responsible AI). Goes beyond reports by creating actual work items where compliance teams do their work. |
+| S6 | Automation Gap Analyzer | ✅ **Added to Process Analyzer** — Inventories existing workflows, cross-references transcript mentions to find underperforming automations, unused workflows, and remaining manual work that should be automated. |

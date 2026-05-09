@@ -126,11 +126,16 @@
 |---------|------|---------|
 | Transcript → issue comments | Transcript Processor workflow | Push to `/transcripts/` |
 | Decision extraction | Decision Log workflow | Daily schedule |
-| Launch readiness reports | Launch Readiness workflow | Weekly (Monday) |
-| Compliance reviews | Compliance Review workflow | Weekly (Monday) |
+| Launch readiness reports | Launch Readiness workflow | Weekly (Monday ~8:30 AM) |
+| Compliance reviews | Compliance Review workflow | Weekly (Monday ~8 AM) + on issue labeled |
+| Compliance team reports | Compliance Team Reports workflow | Weekly (Monday ~8:45 AM) |
+| GTM content drafts | GTM Content workflow | Weekly (Monday ~8:15 AM) |
+| GTM team reports | GTM Team Reports workflow | Weekly (Monday ~8 AM) |
+| Assumption surfacing | Assumption Surfacer workflow | On issue opened/edited |
 | Weekly status rollup | Weekly Status workflow | Weekly (Friday) |
 | Workflow health monitoring | Workflow Health workflow | Weekly (Friday) |
-| GTM content drafts | GTM Content workflow | Weekly (Monday) |
+| Strategy alignment analysis | Strategy Alignment workflow | Weekly (Monday) |
+| Process analysis & retro | Process Analyzer workflow | Weekly |
 | Sample data generation | Sample Data Simulator | Daily |
 
 ### Manual Processes (Candidates for Automation)
