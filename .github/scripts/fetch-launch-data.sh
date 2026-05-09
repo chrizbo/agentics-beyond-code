@@ -20,11 +20,55 @@ OWNER="${1:?Usage: $0 <owner> <project-number> [output-file]}"
 PROJECT_NUMBER="${2:?Usage: $0 <owner> <project-number> [output-file]}"
 OUTPUT_FILE="${3:-launch-data.json}"
 
+# --- GraphQL helper ---
+# In CI (AWF sandbox), gh api routes through a DIFC proxy that doesn't
+# forward PAT scopes for Projects. Use curl + LAUNCH_DATA_TOKEN directly.
+graphql() {
+  local query="$1"
+  shift
+  if [ -n "${LAUNCH_DATA_TOKEN:-}" ]; then
+    # Build JSON payload with variables
+    local vars="{}"
+    while [ $# -gt 0 ]; do
+      local key="${1#-F }"
+      if [ "$1" != "$key" ]; then
+        shift; continue
+      fi
+      if [[ "$1" == -F ]]; then
+        shift
+        local pair="$1"
+        local k="${pair%%=*}"
+        local v="${pair#*=}"
+        if [[ "$v" =~ ^[0-9]+$ ]]; then
+          vars=$(echo "$vars" | jq --arg k "$k" --argjson v "$v" '. + {($k): $v}')
+        else
+          vars=$(echo "$vars" | jq --arg k "$k" --arg v "$v" '. + {($k): $v}')
+        fi
+      elif [[ "$1" == -f ]]; then
+        shift
+        local pair="$1"
+        local k="${pair%%=*}"
+        local v="${pair#*=}"
+        vars=$(echo "$vars" | jq --arg k "$k" --arg v "$v" '. + {($k): $v}')
+      fi
+      shift
+    done
+    local payload
+    payload=$(jq -n --arg q "$query" --argjson v "$vars" '{query: $q, variables: $v}')
+    curl -s -H "Authorization: bearer $LAUNCH_DATA_TOKEN" \
+         -H "Content-Type: application/json" \
+         -X POST https://api.github.com/graphql \
+         -d "$payload"
+  else
+    gh api graphql -f query="$query" "$@"
+  fi
+}
+
 # --- Step 1: Resolve project ID and custom field definitions ---
 
 echo "::group::Fetching project metadata" >&2
 
-PROJECT_META=$(gh api graphql -f query='
+PROJECT_META=$(graphql '
 query($owner: String!, $number: Int!) {
   user(login: $owner) {
     projectV2(number: $number) {
@@ -57,7 +101,7 @@ query($owner: String!, $number: Int!) {
 PROJECT_ID=$(echo "$PROJECT_META" | jq -r '.data.user.projectV2.id // empty')
 if [ -z "$PROJECT_ID" ]; then
   # Try as org owner
-  PROJECT_META=$(gh api graphql -f query='
+  PROJECT_META=$(graphql '
   query($owner: String!, $number: Int!) {
     organization(login: $owner) {
       projectV2(number: $number) {
@@ -117,7 +161,7 @@ while [ "$HAS_NEXT" = "true" ]; do
     AFTER_CLAUSE=", after: \\\"$CURSOR\\\""
   fi
 
-  PAGE=$(gh api graphql -f query="
+  PAGE=$(graphql "
   query {
     node(id: \"$PROJECT_ID\") {
       ... on ProjectV2 {
@@ -206,37 +250,59 @@ fetch_sub_issues() {
     return
   fi
 
-  local api_result
-  api_result=$(gh api graphql -f query="
-  query {
-    node(id: \"$parent_id\") {
-      ... on Issue {
-        subIssues(first: 50) {
-          nodes {
-            id
-            number
-            title
-            state
-            url
-            createdAt
-            updatedAt
-            closedAt
-            body
-            assignees(first: 10) {
-              nodes { login }
-            }
-            labels(first: 20) {
-              nodes { name }
+  # Paginate sub-issues
+  local subs_file
+  subs_file=$(mktemp)
+  echo "[]" > "$subs_file"
+  local has_next="true"
+  local cursor=""
+
+  while [ "$has_next" = "true" ]; do
+    local after_clause=""
+    if [ -n "$cursor" ]; then
+      after_clause=", after: \\\"$cursor\\\""
+    fi
+
+    local api_result
+    api_result=$(graphql "
+    query {
+      node(id: \"$parent_id\") {
+        ... on Issue {
+          subIssues(first: 50$after_clause) {
+            pageInfo { hasNextPage endCursor }
+            nodes {
+              id
+              number
+              title
+              state
+              url
+              createdAt
+              updatedAt
+              closedAt
+              body
+              assignees(first: 10) {
+                nodes { login }
+              }
+              labels(first: 20) {
+                nodes { name }
+              }
             }
           }
         }
       }
-    }
-  }" 2>/dev/null)
+    }" 2>/dev/null)
 
-  local subs_file
-  subs_file=$(mktemp)
-  echo "$api_result" | jq '[.data.node.subIssues.nodes[] // empty]' > "$subs_file"
+    local page_file
+    page_file=$(mktemp)
+    echo "$api_result" | jq '[.data.node.subIssues.nodes[] // empty]' > "$page_file"
+    jq -s '.[0] + .[1]' "$subs_file" "$page_file" > "${subs_file}.merged"
+    mv "${subs_file}.merged" "$subs_file"
+    rm -f "$page_file"
+
+    has_next=$(echo "$api_result" | jq -r '.data.node.subIssues.pageInfo.hasNextPage // false')
+    cursor=$(echo "$api_result" | jq -r '.data.node.subIssues.pageInfo.endCursor // empty')
+  done
+
   local count
   count=$(jq length "$subs_file")
 

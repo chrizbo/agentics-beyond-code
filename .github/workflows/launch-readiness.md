@@ -25,7 +25,7 @@ steps:
   - name: Fetch launch data
     id: launch-data
     env:
-      GH_TOKEN: ${{ secrets.AW_TOKEN }}
+      LAUNCH_DATA_TOKEN: ${{ secrets.AW_TOKEN }}
     run: |
       chmod +x .github/scripts/fetch-launch-data.sh
       ./.github/scripts/fetch-launch-data.sh "${{ github.repository_owner }}" 1 launch-data.json
