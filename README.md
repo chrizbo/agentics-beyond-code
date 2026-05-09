@@ -37,6 +37,7 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 |----------|-------------|
 | [📋 Decision Log](.github/workflows/decision-log.md) | Daily scan of issue comments and meeting transcripts for decisions — creates a PR with individual decision record files in `/decisions/` |
 | [🎙️ Transcript Processor](.github/workflows/transcript-processor.md) | Triggered when `.txt` or `.vtt` files are pushed to `/transcripts/` — matches transcript content to open issues and posts summary comments |
+| [🔄 Process Analyzer](.github/workflows/process-analyzer.md) | Weekly analysis of meeting transcripts against `docs/how-we-work.md` — detects process drift, automation opportunities, and creates PRs to keep the how-we-work doc current |
 
 ### 📊 Leadership
 
@@ -55,6 +56,7 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 
 ## 📖 Documentation
 
+- **[How We Work](docs/how-we-work.md)** — team processes, meeting cadence, triage, and communication norms
 - **[Getting Started](docs/setup.md)** — prerequisites, installation, and first run
 - **[How It Works](docs/how-it-works.md)** — architecture, issue hierarchy, and customization
 - **[FAQ](docs/faq.md)** — common questions about setup, workflows, and costs

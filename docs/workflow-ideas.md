@@ -55,3 +55,4 @@ implementation as GitHub Agentic Workflows.
 | # | Workflow | Description |
 |---|---------|-------------|
 | T1 | Transcript Processor | ✅ **Built** — Processes meeting transcripts, updates related issues. |
+| PA | Process Analyzer | ✅ **Built** — Weekly analysis of transcripts vs how-we-work doc. Detects process drift, automation candidates, and creates update PRs. |

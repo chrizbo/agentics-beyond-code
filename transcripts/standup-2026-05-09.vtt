@@ -34,8 +34,44 @@ Alex Rivera: Quick thing from me — the staging Kafka cluster had a blip this m
 
 9
 00:01:52.500 --> 00:02:02.000
-Sarah Chen: Great. Let's keep an eye on that Kafka reliability — if it's flaky in staging it'll be a problem in Beta. David, can you log that as a risk? Alright, that's everyone. Have a good one.
+Sarah Chen: Great. Let's keep an eye on that Kafka reliability — if it's flaky in staging it'll be a problem in Beta. David, can you log that as a risk?
 
 10
-00:02:02.500 --> 00:02:05.000
+00:02:02.500 --> 00:02:18.000
+Sarah Chen: Before we wrap — a couple process things. I've been thinking about triage. Right now I'm doing it solo every morning, but honestly it's getting to be a lot. I want to move to a rotating triage duty — one person per week handles the daily triage after standup. We can start next sprint. Thoughts?
+
+11
+00:02:18.500 --> 00:02:28.000
+Marcus Johnson: Yeah, that makes sense. It'll also help everyone understand the full backlog, not just their own stuff. I'm good with that.
+
+12
+00:02:28.500 --> 00:02:38.000
+David Kim: Agreed. Also, can we talk about the stale issue cleanup? I noticed we have like 40 issues that haven't been touched in two months. Right now it's a manual monthly thing — could we automate that? Like, have a bot flag anything with no activity in 60 days.
+
+13
+00:02:38.500 --> 00:02:50.000
+Sarah Chen: Love it. Let's do it — Alex, can you look into setting up an agentic workflow for stale issue cleanup? Auto-label them and ping the assignee before closing. We decided in last retro that 60 days is the right threshold.
+
+14
+00:02:50.500 --> 00:03:02.000
+Alex Rivera: On it. Also, one more process thing — we've been doing PR reviews with a 24-hour SLA, but honestly most of us are reviewing within a few hours anyway. Should we tighten it to 12 hours for non-draft PRs? I think it'd unblock people faster.
+
+15
+00:03:02.500 --> 00:03:12.000
+Priya Patel: I'd support that for normal PRs. But let's keep 24 hours during on-call weeks — the on-call person is already stretched thin. Maybe we do 12-hour SLA for regular PRs, keep 24 for on-call engineers.
+
+16
+00:03:12.500 --> 00:03:22.000
+Sarah Chen: Good compromise. Let's go with that. And one last thing — Jordan asked me to mention that she wants to move design reviews from Wednesday to Thursday. She's finding that Wednesday is too early in the sprint to have meaningful designs ready. Starting next week.
+
+17
+00:03:22.500 --> 00:03:32.000
+Marcus Johnson: Fine by me. Oh, and one more thing — I've been manually compiling release notes before every GA launch. It takes forever. Can we automate that too? We already have all the issue data.
+
+18
+00:03:32.500 --> 00:03:42.000
+Sarah Chen: Yeah, that's a great candidate. We'll add it to the workflow ideas list. Alright, that's everything. Good standup everyone — have a productive day.
+
+19
+00:03:42.500 --> 00:03:45.000
 [Multiple voices]: Thanks, bye!
