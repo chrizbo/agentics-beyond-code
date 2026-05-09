@@ -52,6 +52,7 @@ Edit `.github/policies/voice-and-tone-policy.md`. The GTM Content workflow reads
 | Weekly Status | Friday ~8 AM PT | Yes |
 | Workflow Health | Friday ~8 AM PT | Yes |
 | Transcript Processor | On push to `/transcripts/` | Yes |
+| Strategy Alignment | Monday ~8 AM PT | Yes |
 | Process Analyzer | Weekly | Yes |
 | Sample Data Simulator | Daily on weekdays | Yes |
 
@@ -164,6 +165,24 @@ It looks for discrepancies between transcript discussion and the how-we-work doc
 ### How is the weekly retro different from the Weekly Status report?
 
 The **Weekly Status** covers *what* the team shipped, learned, and needs help with — it's a leadership status rollup. The **Process Analyzer retro** covers *how* the team is working — collaboration patterns, process friction, team energy, and whether documented processes match reality. They complement each other.
+
+---
+
+## Strategy Alignment
+
+### What is `docs/strategy.md`?
+
+A document listing the team's strategic tradeoffs as "X, even over Y" statements — both sides are valuable, but when they conflict, the team leans toward X. The Strategy Alignment workflow keeps it annotated with real evidence from the team's decisions and activity.
+
+> ⚠️ The included `docs/strategy.md` is **sample data** for demo purposes. Replace it with your actual team's strategic tradeoffs before using in production.
+
+### How does the workflow decide what's misaligned?
+
+It applies a high bar: the contradiction between a decision and a tradeoff must be stark and unambiguous. Borderline cases are skipped. If a decision acknowledges the deviation ("we know this goes against our usual approach but…"), the workflow treats it as intentional and doesn't comment.
+
+### Will it spam my issues with comments?
+
+No. The workflow comments on a maximum of 2 issues per run, and only for clear misalignment. Most weeks it produces zero comments — just a PR annotating the strategy doc with alignment evidence.
 
 ---
 

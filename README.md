@@ -32,13 +32,15 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 | [📣 GTM Content](.github/workflows/gtm-content.md) | Monday morning generation and refresh of changelog announcement drafts and public roadmap items as sub-issues, following the org's voice & tone policy |
 | [📣 GTM Team Reports](.github/workflows/gtm-team-reports.md) | Monday morning report summarizing launches needing GTM action — missing changelog drafts, missing roadmap items, content needing refresh, and upcoming launches |
 
+### 📋 Decision & Knowledge
+
 | Workflow | Description |
 |----------|-------------|
 | [🔍 Assumption Surfacer](.github/workflows/assumption-surfacer.md) | Scans issues and PRs for implicit assumptions (timelines, dependencies, user behavior, capacity) and posts them as explicit questions for the team to reason through together |
 | [📋 Decision Log](.github/workflows/decision-log.md) | Daily scan of issue comments and meeting transcripts for decisions — creates a PR with individual decision record files in `/decisions/` |
-| [🧭 Strategy Alignment](.github/workflows/strategy-alignment.md) | Monday morning analysis of decisions against `docs/strategy.md` tradeoffs — comments on misaligned issues, annotates the strategy doc with alignment evidence and emerging patterns |
+| [🧭 Strategy Alignment](.github/workflows/strategy-alignment.md) | Monday morning analysis of team activity against `docs/strategy.md` tradeoffs — comments on clearly misaligned issues, annotates the strategy doc with alignment evidence and emerging patterns |
 | [🎙️ Transcript Processor](.github/workflows/transcript-processor.md) | Triggered when `.txt` or `.vtt` files are pushed to `/transcripts/` — matches transcript content to open issues and posts summary comments |
-| [🔄 Process Analyzer](.github/workflows/process-analyzer.md) | Weekly retro + process analysis — posts a team retrospective discussion, detects process drift in transcripts vs `docs/how-we-work.md`, identifies automation opportunities, and creates update PRs |
+| [🔄 Process Analyzer](.github/workflows/process-analyzer.md) | Weekly retro + process analysis — posts a team retrospective discussion, detects process drift in transcripts vs `docs/how-we-work.md`, identifies automation opportunities and gaps, and creates update PRs |
 
 ### 📊 Leadership
 
@@ -58,6 +60,7 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 ## 📖 Documentation
 
 - **[How We Work](docs/how-we-work.md)** — team processes, meeting cadence, triage, and communication norms
+- **[Strategic Tradeoffs](docs/strategy.md)** — the team's "even over" strategy statements, annotated with alignment evidence
 - **[Getting Started](docs/setup.md)** — prerequisites, installation, and first run
 - **[How It Works](docs/how-it-works.md)** — architecture, issue hierarchy, and customization
 - **[FAQ](docs/faq.md)** — common questions about setup, workflows, and costs
