@@ -37,6 +37,14 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 |----------|-------------|
 | [📋 Weekly Status](.github/workflows/weekly-status.md) | Friday morning leadership status rollup — What Shipped, What We Learned, FYI, and SOS — across all initiatives and launches |
 
+### 🧪 Demo / Sample Data
+
+> **Note:** The sample data simulator is for **demo purposes only**. It generates fake project activity so the other workflows have realistic data to work with. You don't need it for production use.
+
+| Workflow | Description |
+|----------|-------------|
+| [🎲 Sample Data Simulator](.github/workflows/sample-data-simulator.md) | Generates realistic project activity daily — creates launches, closes tasks, advances phases. Run manually anytime to add more content. |
+
 ## 📖 Documentation
 
 - **[Getting Started](docs/setup.md)** — prerequisites, installation, and first run

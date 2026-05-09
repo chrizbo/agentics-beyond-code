@@ -304,6 +304,7 @@ All workflows share the same `fetch-launch-data.sh` pre-step for data fetching.
 | **Compliance Team Reports** | Monday ~8 AM PT · Manual | 4 discussions (one per compliance team) with urgency-sorted launch lists | Security, Privacy, Accessibility, Responsible AI teams |
 | **GTM Content** | Monday ~8 AM PT · Manual | Changelog draft and roadmap item sub-issues per launch | DRIs, marketing, comms |
 | **Weekly Status** | Friday ~8 AM PT · Manual | Discussion with What Shipped, What We Learned, FYI, and SOS sections | Leaders, senior stakeholders |
+| **Sample Data Simulator** | Daily on weekdays · Manual | Creates launches, closes tasks, advances phases, adds comments | Demo only — not needed for production |
 
 ### Weekly cadence
 

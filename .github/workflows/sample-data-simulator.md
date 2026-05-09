@@ -50,10 +50,9 @@ safe-outputs:
     max: 20
     discussions: false
     pull-requests: false
-  link-sub-issue:
-    max: 15
   update-project:
     max: 20
+    project: "https://github.com/users/chrizbo/projects/1"
     github-token: ${{ secrets.AW_TOKEN }}
 ---
 
@@ -214,8 +213,13 @@ For the new launch:
 
 3. **Create 3-5 tasks** spread across the epics
 
-4. **Wire the hierarchy**: Link epics as sub-issues of the launch, and tasks
-   as sub-issues of their epic using `link-sub-issue`
+4. **Wire the hierarchy**: Use the `parent` field on `create_issue` to link
+   epics under the launch and tasks under their epic. For example:
+   ```json
+   {"type": "create_issue", "temporary_id": "aw_launch1", "title": "[Launch] Dark Mode Support", "body": "..."}
+   {"type": "create_issue", "parent": "aw_launch1", "temporary_id": "aw_epic1", "title": "Frontend Implementation", "body": "..."}
+   {"type": "create_issue", "parent": "aw_epic1", "title": "Add dark mode toggle", "body": "..."}
+   ```
 
 5. **Add all new issues to the project** with appropriate field values:
    - Phase: Team (new launches start in Team)
@@ -248,5 +252,5 @@ Process your actions in this order:
 4. Close finished epics (close-issue)
 5. Advance launch phases if warranted (update-project)
 6. Close a GA launch if fully complete (close-issue)
-7. Create new launch + epics + tasks (create-issue + link-sub-issue + update-project)
+7. Create new launch + epics + tasks (create-issue with parent field + update-project)
 8. Adjust risk levels (update-project)

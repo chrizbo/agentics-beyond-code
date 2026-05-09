@@ -47,6 +47,9 @@ Edit `.github/policies/voice-and-tone-policy.md`. The GTM Content workflow reads
 | Compliance Team Reports | Monday ~8 AM PT | Yes |
 | GTM Content | Monday ~8 AM PT | Yes |
 | Weekly Status | Friday ~8 AM PT | Yes |
+| Sample Data Simulator | Daily on weekdays | Yes |
+
+The **Sample Data Simulator** is for demo purposes only — it generates fake project activity so the other workflows have realistic data. You don't need it for production use. Trigger it manually anytime with `gh aw run sample-data-simulator` to add more content.
 
 All workflows can also be triggered on demand with `gh aw run <workflow-name>`.
 
