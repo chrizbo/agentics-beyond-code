@@ -6,7 +6,7 @@ description: |
   files in /decisions/ for each decision detected.
 
 on:
-  schedule: "0 23 * * 1-5"
+  schedule: "0 7 * * 2-6"
   workflow_dispatch:
 
 permissions:

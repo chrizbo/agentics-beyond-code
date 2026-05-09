@@ -346,7 +346,7 @@ and meeting transcripts — so they don't get lost in conversation threads.
 
 ### How it works
 
-The **Decision Log workflow** (`decision-log.md`) runs daily on weekdays near end of day (~4 PM PT) and:
+The **Decision Log workflow** (`decision-log.md`) runs daily on weekdays near end of day (~midnight PT) and:
 
 1. Scans recent issue comments across all initiatives, launches, epics, and tasks
    for decision signals (e.g., "we decided to…", "the call is…", "going with option…")
@@ -405,11 +405,11 @@ All workflows share the same `fetch-launch-data.sh` pre-step for data fetching.
 | **Compliance Review** | Monday ~8 AM PT · On issue labeled · Manual | Labels on launches, status table comment, compliance review sub-issues | DRIs, compliance teams |
 | **Compliance Team Reports** | Monday ~8 AM PT · Manual | 4 discussions (one per compliance team) with urgency-sorted launch lists | Security, Privacy, Accessibility, Responsible AI teams |
 | **GTM Content** | Monday ~8 AM PT · Manual | Changelog draft and roadmap item sub-issues per launch | DRIs, marketing, comms |
-| **Decision Log** | Daily ~4 PM PT · Manual | PR with individual markdown decision records in `/decisions/` | PMs, DRIs, leaders |
+| **Decision Log** | Daily ~midnight PT · Manual | PR with individual markdown decision records in `/decisions/` | PMs, DRIs, leaders |
 | **Weekly Status** | Friday ~8 AM PT · Manual | Discussion with What Shipped, What We Learned, FYI, and SOS sections | Leaders, senior stakeholders |
 | **Workflow Health** | Friday ~8 AM PT · Manual | Discussion with success rates, failure patterns, cost estimates, and efficiency recommendations for all agentic workflows | Leaders, ops |
 | **Transcript Processor** | On push to `/transcripts/` · Manual | Comments on matched issues with meeting context, decisions, action items | PMs, DRIs |
-| **Sample Data Simulator** | Daily ~3 PM PT · Manual | Creates launches, closes tasks, advances phases, adds comments | Demo only — not needed for production |
+| **Sample Data Simulator** | Daily ~11 PM PT · Manual | Creates launches, closes tasks, advances phases, adds comments | Demo only — not needed for production |
 
 ### Weekly cadence
 
