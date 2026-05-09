@@ -5,7 +5,7 @@ description: |
   to epics and tasks — feeding the launch readiness report with fresh data.
 
 on:
-  schedule: daily on weekdays
+  schedule: "0 22 * * 1-5"
   workflow_dispatch:
 
 permissions:
