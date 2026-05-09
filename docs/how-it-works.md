@@ -426,13 +426,13 @@ Most workflows run **Monday mornings around 8 AM PT** to kick off the week with 
 
 On a typical week:
 
-**Monday (~8 AM PT):**
-1. **Compliance Review** — evaluates launches, updates labels, creates/updates
+**Monday (staggered 15 min apart to respect data dependencies):**
+1. **Compliance Review** (~8:00 AM PT) — evaluates launches, updates labels, creates/updates
    sub-issues. Runs first so that labels and sub-issues are current.
-2. **GTM Content** — generates/refreshes changelog drafts and roadmap items.
-3. **Launch Readiness** — assesses overall readiness including compliance
+2. **GTM Content** (~8:15 AM PT) — generates/refreshes changelog drafts and roadmap items.
+3. **Launch Readiness** (~8:30 AM PT) — assesses overall readiness including compliance
    sign-off status. References the labels set by the compliance review.
-4. **Compliance Team Reports** — generates per-team digests reflecting the
+4. **Compliance Team Reports** (~8:45 AM PT) — generates per-team digests reflecting the
    latest label and sub-issue state.
 
 **Daily on weekdays (scattered time):**
