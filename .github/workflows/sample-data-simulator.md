@@ -56,7 +56,6 @@ safe-outputs:
     project: "https://github.com/users/chrizbo/projects/1"
     github-token: ${{ secrets.AW_TOKEN }}
   create-pull-request:
-    title-prefix: "ai: "
     labels: [transcript]
     auto-merge: true
     allowed-files:
