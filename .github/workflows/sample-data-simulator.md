@@ -177,8 +177,15 @@ issue with a celebratory comment:
 
 ### 6. Create a New Launch (approximately weekly)
 
-Create **one new launch** with a realistic product theme. Use creative but
-plausible product feature names. Examples of good themes:
+Create **one new launch** with a realistic product theme. Every launch must
+belong to an initiative.
+
+**Always reuse an existing initiative if possible.** Look at the project data
+for open `[Initiative]` issues and pick the best fit. Only create a new
+initiative if the launch truly doesn't fit any existing one — this should
+happen roughly once every 1-2 weeks at most, not every run.
+
+Use creative but plausible product feature names. Examples of good themes:
 
 - API Rate Limiting & Throttling
 - Dark Mode Support
@@ -198,7 +205,13 @@ plausible product feature names. Examples of good themes:
 
 For the new launch:
 
-1. **Create the launch issue** with a body that follows this template:
+1. **Create or reuse an initiative.** If creating a new one, give it a
+   strategic theme name and a brief body with goals and success criteria:
+   ```json
+   {"type": "create_issue", "temporary_id": "aw_init1", "title": "[Initiative] Developer Platform Improvements", "body": "## Overview\n..."}
+   ```
+
+2. **Create the launch issue** under the initiative:
    ```
    ## Overview
    Brief 2-3 sentence description of what this launch delivers.
@@ -215,19 +228,24 @@ For the new launch:
    Phase rollout: Team → Alpha → Beta → GA
    ```
 
-2. **Create 2-3 epics** under the launch with realistic workstream names
+3. **Create 2-3 epics** under the launch with realistic workstream names
 
-3. **Create 3-5 tasks** spread across the epics
+4. **Create 3-5 tasks** spread across the epics
 
-4. **Wire the hierarchy**: Use the `parent` field on `create_issue` to link
-   epics under the launch and tasks under their epic. For example:
+5. **Wire the full hierarchy**: Use the `parent` field on `create_issue` to
+   link initiatives → launches → epics → tasks. For example:
    ```json
-   {"type": "create_issue", "temporary_id": "aw_launch1", "title": "[Launch] Dark Mode Support", "body": "..."}
+   {"type": "create_issue", "temporary_id": "aw_init1", "title": "[Initiative] Developer Platform", "body": "..."}
+   {"type": "create_issue", "parent": "aw_init1", "temporary_id": "aw_launch1", "title": "[Launch] Dark Mode Support", "body": "..."}
    {"type": "create_issue", "parent": "aw_launch1", "temporary_id": "aw_epic1", "title": "Frontend Implementation", "body": "..."}
    {"type": "create_issue", "parent": "aw_epic1", "title": "Add dark mode toggle", "body": "..."}
    ```
+   If reusing an existing initiative, use its real issue number as the parent:
+   ```json
+   {"type": "create_issue", "parent": 74, "temporary_id": "aw_launch1", "title": "[Launch] Dark Mode Support", "body": "..."}
+   ```
 
-5. **Add all new issues to the project** with appropriate field values:
+6. **Add all new issues to the project** with appropriate field values:
    - Phase: Team (new launches start in Team)
    - Target Date: 8-16 weeks from today
    - Launch Type: randomly pick Major or Minor
