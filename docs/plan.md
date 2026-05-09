@@ -206,6 +206,12 @@ Workflows that keep launches audit-ready and policy-compliant.
 - [x] `docs/setup.md` — setup guide with token/permission requirements
 - [x] `docs/how-it-works.md` — architecture, design decisions, progress
 - [x] Project linked to repository
+- [x] `.github/workflows/compliance-review.md` — compliance triage, labels, status tables, review sub-issues
+- [x] `.github/workflows/compliance-team-reports.md` — per-team weekly compliance discussions
+- [x] `.github/policies/security-review-policy.md` — security rubric & review questions
+- [x] `.github/policies/privacy-review-policy.md` — privacy rubric & review questions
+- [x] `.github/policies/accessibility-review-policy.md` — accessibility rubric & review questions
+- [x] `.github/policies/responsible-ai-review-policy.md` — responsible AI rubric & review questions
 
 ### 🔜 Next
 

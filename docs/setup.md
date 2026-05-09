@@ -105,7 +105,12 @@ The following labels are used by workflows. Create them in your repository:
 
 **Domain tracking labels:**
 - `needs:security`, `needs:legal`, `needs:docs`, `needs:support`
+- `needs:privacy`, `needs:accessibility`, `needs:responsible-ai`
 - `approved:security`, `approved:legal`, `approved:docs`
+- `approved:privacy`, `approved:accessibility`, `approved:responsible-ai`
+
+**Compliance labels:**
+- `compliance-review` — marks compliance review sub-issues (auto-created by workflow)
 
 **Report labels:**
 - `report`, `launch-readiness`
@@ -140,6 +145,10 @@ gh aw logs launch-readiness
 Policy files live in `.github/policies/` and control how workflows assess your launches. Edit them to match your team's standards:
 
 - **[launch-readiness-policy.md](../.github/policies/launch-readiness-policy.md)** — completeness thresholds, staleness windows, domain sign-off requirements, risk scoring
+- **[security-review-policy.md](../.github/policies/security-review-policy.md)** — when security review is needed, review questions, checklist
+- **[privacy-review-policy.md](../.github/policies/privacy-review-policy.md)** — when privacy review is needed, review questions, checklist
+- **[accessibility-review-policy.md](../.github/policies/accessibility-review-policy.md)** — when accessibility review is needed, review questions, checklist
+- **[responsible-ai-review-policy.md](../.github/policies/responsible-ai-review-policy.md)** — when responsible AI review is needed, review questions, checklist
 
 Policy changes take effect on the next workflow run — no recompilation needed.
 

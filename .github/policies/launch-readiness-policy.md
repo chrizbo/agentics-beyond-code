@@ -69,6 +69,29 @@ as the launch progresses through phases.
 
 **Common domains:** security, legal, docs, support, accessibility, privacy
 
+### Compliance Review Status
+
+Launches are evaluated by the compliance review workflow against four
+compliance teams: Security, Privacy, Accessibility, and Responsible AI.
+Each team may have a compliance review sub-issue (titled
+`[{Team}] Compliance Review — ...`) tracking the review.
+
+Compliance review status is a risk signal based on phase:
+
+| Phase   | Open Compliance Reviews | Risk Level |
+|---------|------------------------|------------|
+| Team    | Expected               | Low        |
+| Alpha   | Acceptable             | Medium     |
+| Beta    | Concerning             | High       |
+| GA      | Blocking               | Critical   |
+
+A launch **cannot be 🟢 On Track** if it has any `needs:{team}` labels
+for compliance teams (security, privacy, accessibility, responsible-ai)
+while in Beta or GA phase. At minimum it should be 🟡 Needs Attention.
+
+A launch is **🔴 High Risk** if it is in GA phase with any open compliance
+review sub-issues or missing `approved:{team}` labels for required teams.
+
 ### Staleness
 
 A sub-issue is considered stale if it has had no activity (comments, status

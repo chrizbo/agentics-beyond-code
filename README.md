@@ -32,6 +32,8 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 
 | Workflow | Description |
 |----------|-------------|
+| [🛡️ Compliance Review](.github/workflows/compliance-review.md) | Evaluates launches against Security, Privacy, Accessibility, and Responsible AI rubrics — updates labels, posts status tables, creates review sub-issues |
+| [📊 Compliance Team Reports](.github/workflows/compliance-team-reports.md) | Weekly per-team discussion showing launches needing review, sorted by urgency |
 | 📝 Policy Gate | Verify PRs include required sign-offs, labels, or documentation before merge |
 | 🔍 Audit Log Generator | Produce periodic compliance reports from repo activity |
 | 📜 License & Attribution Checker | Scan dependencies for license compliance and flag issues |

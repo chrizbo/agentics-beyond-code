@@ -167,6 +167,21 @@ For each launch issue, evaluate the quality signals from the policy:
 - Check for domain sign-offs (`needs:` vs `approved:` labels)
 - Check for blockers (`blocker` label on any sub-issue)
 - Check for scope creep (sub-issues added after phase transition, if detectable)
+- Check compliance review status (see below)
+
+#### Compliance Review Status
+
+For each launch, check the compliance teams (security, privacy, accessibility,
+responsible-ai):
+
+1. **Labels:** Does the launch have `needs:{team}` or `approved:{team}` labels?
+2. **Sub-issues:** Are there compliance review sub-issues (titles matching
+   `[{Team}] Compliance Review — ...`)? Are they open or closed? Assigned?
+
+Compliance gaps increase risk based on phase — see the compliance review
+status table in the readiness policy. A launch in Beta or GA with pending
+compliance reviews is at least 🟡 Needs Attention; in GA with unresolved
+reviews it is 🔴 High Risk.
 
 ### Step 4: Assign Risk Levels
 
@@ -177,7 +192,7 @@ Using the policy's risk matrix, assign each launch an overall risk level:
 - 🔴 **High Risk**
 
 Consider all signals: completeness vs. phase expectations, quality gaps,
-missing approvals, staleness, and blockers.
+missing approvals, staleness, blockers, and compliance review status.
 
 ### Step 5: Generate the Report
 
@@ -221,9 +236,9 @@ Brief confirmation, any notable progress.
 Table showing which launches need which domain approvals, and which
 have been granted. Helps downstream teams see what needs their input.
 
-| Launch | Security | Legal | Docs | Support |
-|--------|----------|-------|------|---------|
-| #N Title | ✅ | ⏳ needs | ❌ missing | ✅ |
+| Launch | Security | Privacy | Accessibility | Responsible AI | Legal | Docs | Support |
+|--------|----------|---------|---------------|----------------|-------|------|---------|
+| #N Title | ✅ | ⏳ needs | ➖ N/A | ❌ missing | ✅ | ⏳ needs | ✅ |
 
 </details>
 

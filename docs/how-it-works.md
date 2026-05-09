@@ -90,11 +90,17 @@ Workflows define the **general pattern** (e.g., "assess readiness against a poli
 ```
 .github/
   workflows/
-    launch-readiness.md          ← General pattern (reusable)
+    launch-readiness.md              ← Readiness assessment (weekly)
+    compliance-review.md             ← Compliance triage + sub-issues (weekly + on label)
+    compliance-team-reports.md       ← Per-team compliance digests (weekly)
   policies/
-    launch-readiness-policy.md   ← Team rules (customizable)
+    launch-readiness-policy.md       ← Readiness thresholds & risk scoring
+    security-review-policy.md        ← Security rubric & review questions
+    privacy-review-policy.md         ← Privacy rubric & review questions
+    accessibility-review-policy.md   ← Accessibility rubric & review questions
+    responsible-ai-review-policy.md  ← Responsible AI rubric & review questions
   scripts/
-    fetch-launch-data.sh         ← Deterministic data fetching (shared)
+    fetch-launch-data.sh             ← Deterministic data fetching (shared)
 ```
 
 This means:
@@ -136,6 +142,7 @@ Readiness reports are posted as GitHub Discussions (not issues) to avoid clutter
 | `needs:{domain}` | Flags that a domain team's input is required |
 | `approved:{domain}` | Domain sign-off granted |
 | `ready-for-review` | Ready for domain team review |
+| `compliance-review` | Applied to compliance review sub-issues (distinguishes them from feature work) |
 
 ### Custom Fields — structured project data
 
@@ -145,6 +152,84 @@ Readiness reports are posted as GitHub Discussions (not issues) to avoid clutter
 | Target Date | Date | Expected ship date |
 | Launch Type | Single select | Major, Minor, Patch, Internal |
 | Risk Level | Single select | Low, Medium, High, Critical |
+
+## Compliance Review System
+
+The compliance review system ensures every launch gets evaluated by the right
+compliance teams before shipping. It consists of two workflows and four policy files.
+
+### How it works
+
+1. **Compliance Review workflow** (`compliance-review.md`) evaluates each launch
+   against four compliance rubrics — Security, Privacy, Accessibility, and
+   Responsible AI. For each launch it:
+   - Reads the rubric from the corresponding policy file
+   - Determines whether a review is needed based on launch content
+   - Adds/removes `needs:{team}` labels on the launch issue
+   - Posts a compact compliance status table as a comment on the launch
+   - Creates **compliance review sub-issues** under the launch for each team
+     that needs a review, pre-filled with tailored review questions, checklists,
+     and context inferred from the launch
+
+2. **Compliance Team Reports workflow** (`compliance-team-reports.md`) generates
+   a weekly discussion for each compliance team showing:
+   - Launches needing their review, sorted by urgency
+   - Context on *why* each launch needs review
+   - Links to the review sub-issues
+   - Summary metrics (pending, in-progress, critical)
+
+### Compliance review sub-issues
+
+When a review is needed, the workflow creates a sub-issue under the launch
+titled `[{Team}] Compliance Review — {Launch Title}`. These sub-issues:
+- Are labeled `compliance-review` + `needs:{team}` so they can be filtered
+- Contain the review questions from the policy file, pre-filled where possible
+- Include a checklist and findings table for the reviewer
+- Are assignable to the reviewer from the compliance team
+- Track review lifecycle: open → assigned → closed → `approved:{team}` on parent
+
+### Policy files
+
+Each compliance team owns a policy file that defines:
+
+| File | Team | Contents |
+|------|------|----------|
+| `security-review-policy.md` | 🔒 Security | Threat modeling, auth, data protection, dependency scanning |
+| `privacy-review-policy.md` | 🔏 Privacy | Data inventory, user rights, tracking, third-party processors |
+| `accessibility-review-policy.md` | ♿ Accessibility | WCAG conformance, keyboard nav, screen readers, visual design |
+| `responsible-ai-review-policy.md` | 🤖 Responsible AI | Fairness, transparency, human oversight, safety |
+
+Each file has three sections:
+1. **Rubric** — criteria for when a review is/isn't needed
+2. **Review Questions** — domain-specific questions the DRI must answer
+3. **Review Checklist** — verification items for the reviewer
+
+Teams can edit their policy file at any time — changes take effect on the next
+workflow run without recompilation.
+
+## Workflow Schedule
+
+All workflows share the same `fetch-launch-data.sh` pre-step for data fetching.
+
+| Workflow | Trigger | Output | Audience |
+|----------|---------|--------|----------|
+| **Launch Readiness** | Weekly (scheduled) · Manual | Discussion with pipeline summary, risk breakdown, sign-off tracking | DRIs, leaders |
+| **Compliance Review** | Weekly (scheduled) · On issue labeled · Manual | Labels on launches, status table comment, compliance review sub-issues | DRIs, compliance teams |
+| **Compliance Team Reports** | Weekly (scheduled) · Manual | 4 discussions (one per compliance team) with urgency-sorted launch lists | Security, Privacy, Accessibility, Responsible AI teams |
+
+### Weekly cadence
+
+On a typical week the scheduled workflows run in this order:
+
+1. **Compliance Review** — evaluates launches, updates labels, creates/updates
+   sub-issues. Runs first so that labels and sub-issues are current.
+2. **Launch Readiness** — assesses overall readiness including compliance
+   sign-off status. References the labels set by the compliance review.
+3. **Compliance Team Reports** — generates per-team digests reflecting the
+   latest label and sub-issue state.
+
+The Compliance Review workflow also runs **on-demand** whenever a `launch`
+label is added to an issue, so new launches get evaluated immediately.
 
 ## What's Built So Far
 
@@ -156,11 +241,13 @@ Readiness reports are posted as GitHub Discussions (not issues) to avoid clutter
 - **Data fetching script** — `.github/scripts/fetch-launch-data.sh` fetches project items + sub-issue trees via GraphQL
 - **Launch Readiness workflow** — `.github/workflows/launch-readiness.md` with weekly schedule, policy-based assessment, discussion output
 - **Readiness policy** — `.github/policies/launch-readiness-policy.md` with completeness thresholds, staleness windows, domain sign-off tracking, risk levels
+- **Compliance Review workflow** — `.github/workflows/compliance-review.md` with rubric evaluation, label management, status tables, review sub-issues
+- **Compliance Team Reports workflow** — `.github/workflows/compliance-team-reports.md` with per-team weekly discussions
+- **Compliance policy files** — Security, Privacy, Accessibility, Responsible AI rubrics with review questions and checklists
 
 ### 🔜 Next
 
-- Compile and test the launch readiness workflow end-to-end
+- Compile and test all workflows end-to-end
 - Build additional workflows (Risk Radar, Stale Work Detector, Policy Gate)
-- Add more policy files for different workflow types
 - Create a project setup script to automate label/field creation
 - Document how to customize for different team structures
