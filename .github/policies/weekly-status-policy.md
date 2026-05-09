@@ -55,9 +55,12 @@ Insights, retrospective findings, or non-obvious discoveries from the week.
 - A technical decision was made that changes the approach
 - A compliance review surfaced a systemic issue
 - Customer feedback shifted priorities or assumptions
+- A task or epic comment describes a surprise, trade-off, or "TIL" moment
 
 **Derive from:**
-- Issue comments containing retro notes, decision records, or experiment results
+- Comments on tasks, epics, and launches — these are the primary source
+  of learnings. Look for status updates, retro notes, decision rationale,
+  experiment results, and surprises.
 - Launches that changed phase or scope with explanatory comments
 - Compliance review sub-issues that were recently closed with findings
 
@@ -84,6 +87,9 @@ Items where leadership attention, decision-making, or escalation is needed.
 - A target date is within 2 weeks and completeness is below threshold
 - A resource conflict or staffing gap is blocking progress
 - An external dependency is unresponsive and blocking a launch
+- Task-level comments explicitly request escalation or leadership help
+- Multiple tasks on the same launch report the same blocker, suggesting
+  a systemic issue
 
 **Severity signals (order items by severity):**
 1. GA launches with open blockers
@@ -114,6 +120,20 @@ Every item in every section uses this format:
 - **Action-oriented** — especially in SOS, say what you need from leadership
 - **Celebratory** — in What Shipped, acknowledge the effort
 - **Neutral** — in FYI and What We Learned, state facts without spin
+
+## Data Sources
+
+The report draws context from multiple layers of the issue hierarchy:
+
+1. **Issue metadata** — state, labels, assignees, phases, target dates
+   (from pre-fetched `launch-data.json`)
+2. **Issue bodies** — descriptions on initiatives, launches, epics
+   (from pre-fetched `launch-data.json`)
+3. **Comments on tasks, epics, and launches** — fetched at runtime via
+   `gh issue view` for issues updated within the reporting window. Comments
+   are the richest source of signal for What We Learned, SOS, and FYI
+   sections. Status updates, blockers, decisions, and escalations are
+   most often found in task-level comments.
 
 ## Time Window
 

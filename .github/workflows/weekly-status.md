@@ -99,7 +99,37 @@ Calculate the 7-day window ending at the current run time. You will use this
 window to identify what changed (state transitions, label changes, new issues,
 closed issues, phase changes, new comments).
 
-### Step 3: Identify What Shipped
+### Step 3: Fetch Comments From Active Issues
+
+The pre-fetched data includes issue bodies but **not comments**. Comments on
+tasks, epics, and launches often contain the most valuable context — status
+updates, blockers, decisions, learnings, and escalations. Fetch them now.
+
+For each **open launch** and its sub-issues (epics and tasks) that were
+updated within the reporting window, fetch recent comments:
+
+```bash
+# For each issue number that was updated in the last 7 days:
+gh issue view <number> --repo ${{ github.repository }} --json comments --jq '.comments[] | select(.createdAt >= "<7-days-ago>") | {author: .author.login, body: .body, createdAt: .createdAt}'
+```
+
+> **⚠️ Token efficiency:** Only fetch comments for issues whose `updatedAt`
+> falls within the reporting window. Skip issues with no recent activity.
+> Batch by launch — fetch the launch's comments, then its epics', then its
+> tasks'. Stop early if you have enough signal for each section.
+
+Scan all fetched comments for:
+- **Status updates** — progress notes, completion announcements
+- **Blockers** — mentions of being blocked, waiting on someone, stuck
+- **Decisions** — "we decided to…", "going with option…", trade-off rationale
+- **Learnings** — retro notes, experiment results, surprises, "TIL"
+- **Escalations** — requests for help, resource asks, deadline concerns
+- **Scope changes** — "adding…", "removing…", "descoping…"
+
+Build a context map of notable comments keyed by launch, so you can attribute
+insights to the right initiative or launch in the report.
+
+### Step 4: Identify What Shipped
 
 Scan for activity in the reporting window that qualifies as "shipped" per the
 policy:
@@ -110,43 +140,54 @@ policy:
 - Significant epics that closed and unblock downstream work
 
 For each item, determine the linked initiative (parent) for context.
+Use task-level comments to enrich the summary — e.g., if a task comment
+explains what was built or why it matters, incorporate that into the bullet.
 
-### Step 4: Identify What We Learned
+### Step 5: Identify What We Learned
 
 Look for learning signals in the reporting window:
 
-- Issue comments containing retrospective notes, decision records, or
-  experiment results
-- Launches that changed phase or scope with explanatory comments
+- **Task and epic comments** containing retrospective notes, decision records,
+  experiment results, or unexpected findings
+- Launch-level comments documenting phase transitions or scope changes with
+  explanatory rationale
 - Compliance review sub-issues closed with findings
 - Any issues with labels like `learning`, `retro`, or `decision`
+- Comments on tasks that reveal systemic issues (e.g., "this is the third
+  time we've hit this API limit")
 
-Synthesize each learning into a one-sentence insight.
+Synthesize each learning into a one-sentence insight. Attribute it to the
+launch or initiative it came from.
 
-### Step 5: Identify FYIs
+### Step 6: Identify FYIs
 
 Scan for awareness-worthy changes in the reporting window:
 
 - Target date changes on launches
 - New initiatives or launches created
-- External dependencies identified
-- Scope changes (sub-issues added/removed from in-flight launches)
+- External dependencies identified (often surfaced in task comments)
+- Scope changes (sub-issues added/removed from in-flight launches, or
+  comments mentioning scope adjustments)
 - Compliance reviews completed (approved labels added)
 - DRI or assignee changes on launches
+- Notable decisions documented in task/epic comments that affect direction
 
-### Step 6: Identify SOS Items
+### Step 7: Identify SOS Items
 
 Scan for items requiring leadership attention:
 
-- Launches with `blocker` label and no resolution path
+- Launches with `blocker` label with no resolution path
 - Launches in Beta/GA missing required compliance approvals
 - Launches that are 🔴 High Risk per launch readiness policy
 - Launches within 2 weeks of target with completeness below threshold
-- Resource conflicts or staffing gaps mentioned in comments
+- Resource conflicts or staffing gaps mentioned in task/epic comments
+- **Task comments** that explicitly ask for escalation or leadership help
+- Patterns across multiple tasks that suggest systemic risk (e.g., several
+  tasks on the same launch reporting the same blocker)
 
 Order SOS items by severity as defined in the policy.
 
-### Step 7: Generate the Discussion Post
+### Step 8: Generate the Discussion Post
 
 Create **one discussion** with the following structure.
 
@@ -199,7 +240,7 @@ Use the Monday of the current week as the date.
 | Open blockers | N |
 ```
 
-### Step 8: Handle Empty Sections
+### Step 9: Handle Empty Sections
 
 If a section has no qualifying items, include the section header with:
 
@@ -210,7 +251,7 @@ If a section has no qualifying items, include the section header with:
 Never omit a section — leaders should see all four sections every week,
 even if some are empty. An empty SOS section is good news worth showing.
 
-### Step 9: Summary Output
+### Step 10: Summary Output
 
 After creating the discussion, print a summary to stdout:
 
