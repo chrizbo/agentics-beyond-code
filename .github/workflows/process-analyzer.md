@@ -46,7 +46,6 @@ safe-outputs:
   create-discussion:
     title-prefix: "[Weekly Retro] "
     category: General
-    close-older-discussions: true
     max: 1
 ---
 
