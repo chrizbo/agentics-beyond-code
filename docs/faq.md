@@ -42,10 +42,11 @@ Edit `.github/policies/voice-and-tone-policy.md`. The GTM Content workflow reads
 
 | Workflow | Schedule | Manual trigger? |
 |----------|----------|-----------------|
-| Launch Readiness Checker | Weekly | Yes |
-| Compliance Review | Weekly | Yes |
-| Compliance Team Reports | Weekly | Yes |
-| GTM Content | Weekly | Yes |
+| Launch Readiness Checker | Monday ~8 AM PT | Yes |
+| Compliance Review | Monday ~8 AM PT | Yes |
+| Compliance Team Reports | Monday ~8 AM PT | Yes |
+| GTM Content | Monday ~8 AM PT | Yes |
+| Weekly Status | Friday ~8 AM PT | Yes |
 
 All workflows can also be triggered on demand with `gh aw run <workflow-name>`.
 
@@ -103,4 +104,4 @@ Workflows use GitHub Copilot via GitHub Actions, which consumes [Copilot premium
 
 ### Can I control costs?
 
-Yes. Workflows run weekly by default — you can adjust the schedule or run them only on demand. Each workflow also has a `timeout-minutes` setting to cap execution time.
+Yes. Workflows run on a weekly schedule (Monday/Friday mornings PT) — you can adjust the schedule or run them only on demand. Each workflow also has a `timeout-minutes` setting to cap execution time.

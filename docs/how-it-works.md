@@ -297,18 +297,21 @@ without modifying the workflow itself.
 
 All workflows share the same `fetch-launch-data.sh` pre-step for data fetching.
 
-| Workflow | Trigger | Output | Audience |
-|----------|---------|--------|----------|
-| **Launch Readiness** | Weekly (scheduled) · Manual | Discussion with pipeline summary, risk breakdown, sign-off tracking | DRIs, leaders |
-| **Compliance Review** | Weekly (scheduled) · On issue labeled · Manual | Labels on launches, status table comment, compliance review sub-issues | DRIs, compliance teams |
-| **Compliance Team Reports** | Weekly (scheduled) · Manual | 4 discussions (one per compliance team) with urgency-sorted launch lists | Security, Privacy, Accessibility, Responsible AI teams |
-| **GTM Content** | Weekly (scheduled) · Manual | Changelog draft and roadmap item sub-issues per launch | DRIs, marketing, comms |
-| **Weekly Status** | Weekly (scheduled) · Manual | Discussion with What Shipped, What We Learned, FYI, and SOS sections | Leaders, senior stakeholders |
+| Workflow | Schedule | Output | Audience |
+|----------|----------|--------|----------|
+| **Launch Readiness** | Monday ~8 AM PT · Manual | Discussion with pipeline summary, risk breakdown, sign-off tracking | DRIs, leaders |
+| **Compliance Review** | Monday ~8 AM PT · On issue labeled · Manual | Labels on launches, status table comment, compliance review sub-issues | DRIs, compliance teams |
+| **Compliance Team Reports** | Monday ~8 AM PT · Manual | 4 discussions (one per compliance team) with urgency-sorted launch lists | Security, Privacy, Accessibility, Responsible AI teams |
+| **GTM Content** | Monday ~8 AM PT · Manual | Changelog draft and roadmap item sub-issues per launch | DRIs, marketing, comms |
+| **Weekly Status** | Friday ~8 AM PT · Manual | Discussion with What Shipped, What We Learned, FYI, and SOS sections | Leaders, senior stakeholders |
 
 ### Weekly cadence
 
-On a typical week the scheduled workflows run in this order:
+Most workflows run **Monday mornings around 8 AM PT** to kick off the week with fresh data. The Weekly Status runs **Friday mornings around 8 AM PT** to close out the week. Exact times are scattered by the fuzzy scheduler to avoid load spikes.
 
+On a typical week:
+
+**Monday (~8 AM PT):**
 1. **Compliance Review** — evaluates launches, updates labels, creates/updates
    sub-issues. Runs first so that labels and sub-issues are current.
 2. **GTM Content** — generates/refreshes changelog drafts and roadmap items.
@@ -316,6 +319,8 @@ On a typical week the scheduled workflows run in this order:
    sign-off status. References the labels set by the compliance review.
 4. **Compliance Team Reports** — generates per-team digests reflecting the
    latest label and sub-issue state.
+
+**Friday (~8 AM PT):**
 5. **Weekly Status** — rolls up all activity into a single leadership status
    post with What Shipped, What We Learned, FYI, and SOS sections.
 

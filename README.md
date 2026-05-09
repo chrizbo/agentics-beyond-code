@@ -16,26 +16,26 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 
 | Workflow | Description |
 |----------|-------------|
-| [🚦 Launch Readiness Checker](.github/workflows/launch-readiness.md) | Weekly readiness report across all launches — completeness, risk, blockers, sign-offs |
+| [🚦 Launch Readiness Checker](.github/workflows/launch-readiness.md) | Monday morning readiness report across all launches — completeness, risk, blockers, sign-offs |
 
 ### ✅ Compliance
 
 | Workflow | Description |
 |----------|-------------|
-| [🛡️ Compliance Review](.github/workflows/compliance-review.md) | Evaluates launches against Security, Privacy, Accessibility, and Responsible AI rubrics — updates labels, posts status tables, creates review sub-issues |
-| [📊 Compliance Team Reports](.github/workflows/compliance-team-reports.md) | Weekly per-team discussion showing launches needing review, sorted by urgency |
+| [🛡️ Compliance Review](.github/workflows/compliance-review.md) | Evaluates launches against Security, Privacy, Accessibility, and Responsible AI rubrics — updates labels, posts status tables, creates review sub-issues (Monday mornings) |
+| [📊 Compliance Team Reports](.github/workflows/compliance-team-reports.md) | Monday morning per-team discussion showing launches needing review, sorted by urgency |
 
 ### 📣 Go-to-Market
 
 | Workflow | Description |
 |----------|-------------|
-| [📣 GTM Content](.github/workflows/gtm-content.md) | Generates and refreshes changelog announcement drafts and public roadmap items as sub-issues, following the org's voice & tone policy |
+| [📣 GTM Content](.github/workflows/gtm-content.md) | Monday morning generation and refresh of changelog announcement drafts and public roadmap items as sub-issues, following the org's voice & tone policy |
 
 ### 📊 Leadership
 
 | Workflow | Description |
 |----------|-------------|
-| [📋 Weekly Status](.github/workflows/weekly-status.md) | Weekly leadership status rollup — What Shipped, What We Learned, FYI, and SOS — across all initiatives and launches |
+| [📋 Weekly Status](.github/workflows/weekly-status.md) | Friday morning leadership status rollup — What Shipped, What We Learned, FYI, and SOS — across all initiatives and launches |
 
 ## 📖 Documentation
 
