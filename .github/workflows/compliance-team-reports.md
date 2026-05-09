@@ -42,7 +42,7 @@ safe-outputs:
   mentions: false
   allowed-github-references: []
   create-discussion:
-    title-prefix: "ai: [Compliance] "
+    title-prefix: "[Compliance] "
     category: "reports"
     max: 4
 ---
@@ -126,12 +126,12 @@ is a self-contained report for that team.
 #### Discussion Title Format
 
 ```
-ai: [Compliance] {Team Name} Review Status — Week of {YYYY-MM-DD}
+[Compliance] {Team Name} Review Status — Week of {YYYY-MM-DD}
 ```
 
 Examples:
-- `ai: [Compliance] Security Review Status — Week of 2026-05-11`
-- `ai: [Compliance] Privacy Review Status — Week of 2026-05-11`
+- `[Compliance] Security Review Status — Week of 2026-05-11`
+- `[Compliance] Privacy Review Status — Week of 2026-05-11`
 
 Use the Monday of the current week as the date.
 

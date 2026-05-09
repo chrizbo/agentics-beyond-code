@@ -42,7 +42,7 @@ safe-outputs:
   mentions: false
   allowed-github-references: []
   create-discussion:
-    title-prefix: "ai: [Launch Readiness] "
+    title-prefix: "[Launch Readiness] "
     category: "reports"
     max: 1
 ---
