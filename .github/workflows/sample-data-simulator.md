@@ -56,6 +56,7 @@ safe-outputs:
     github-token: ${{ secrets.AW_TOKEN }}
   create-pull-request:
     labels: [ai:transcript]
+    draft: false
     auto-merge: true
     allowed-files:
       - "transcripts/**"

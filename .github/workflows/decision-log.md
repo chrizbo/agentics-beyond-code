@@ -42,6 +42,8 @@ safe-outputs:
   allowed-github-references: []
   create-pull-request:
     title-prefix: "[Decision Log] "
+    draft: false
+    auto-merge: true
     max: 1
 ---
 
