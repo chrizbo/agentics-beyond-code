@@ -63,7 +63,7 @@ implementation as GitHub Agentic Workflows.
 
 | # | Workflow | Description |
 |---|---------|-------------|
-| M1 | Assumption Surfacer | Scans issues and PRs for implicit assumptions (timelines, user behavior, dependencies, capacity). Posts them as explicit questions on the issue, tagging relevant people for interpretation. Reasoning travels, not just data. |
+| M1 | Assumption Surfacer | ✅ **Built** — Scans issues and PRs for implicit assumptions (timelines, user behavior, dependencies, capacity). Posts them as explicit questions on the issue, tagging relevant people for interpretation. Reasoning travels, not just data. |
 | M2 | Cross-Frame Translator | Same work viewed through PM, engineering, finance, and leadership lenses simultaneously. Each frame links back to the others. Enables Cutler's "multiple concurrent frames" without forcing one official model. |
 | M3 | Tension Detector | Finds contradictions between stated strategy and active work. Posts a discussion inviting interpretation from multiple stakeholders — not a report, a prompt for shared sensemaking. |
 | M4 | Decision Pre-Mortem Facilitator | When a decision is tagged, generates adversarial challenges and routes them to specific stakeholders for response before finalization. Extends Decision Log from recording → facilitating. |

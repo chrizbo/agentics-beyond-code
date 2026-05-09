@@ -31,6 +31,12 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 |----------|-------------|
 | [📣 GTM Content](.github/workflows/gtm-content.md) | Monday morning generation and refresh of changelog announcement drafts and public roadmap items as sub-issues, following the org's voice & tone policy |
 
+### 🧩 Multiplayer — Shared Sensemaking
+
+| Workflow | Description |
+|----------|-------------|
+| [🔍 Assumption Surfacer](.github/workflows/assumption-surfacer.md) | Scans issues and PRs for implicit assumptions (timelines, dependencies, user behavior, capacity) and posts them as explicit questions for the team to reason through together |
+
 ### 📋 Decision & Knowledge
 
 | Workflow | Description |
