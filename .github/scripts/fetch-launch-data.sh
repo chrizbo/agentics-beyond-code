@@ -362,13 +362,14 @@ for i in $(seq 0 $((TOTAL - 1))); do
   ) | add // {}" "$ITEMS_FILE")
 
   # Combine content + project fields + sub-issues
-  ITEM=$(jq --argjson fields "$FIELD_VALUES" \
-             --argjson subs "$(cat "$SUB_FILE")" \
-             ".[$i].content + {\"projectFields\": \$fields, \"subIssues\": \$subs}" "$ITEMS_FILE")
+  ITEM_FILE=$(mktemp)
+  jq --argjson fields "$FIELD_VALUES" \
+             --slurpfile subs "$SUB_FILE" \
+             ".[$i].content + {\"projectFields\": \$fields, \"subIssues\": \$subs[0]}" "$ITEMS_FILE" > "$ITEM_FILE"
 
-  jq --argjson item "$ITEM" '. + [$item]' "$ENRICHED_FILE" > "${ENRICHED_FILE}.tmp"
+  jq --slurpfile item "$ITEM_FILE" '. + $item' "$ENRICHED_FILE" > "${ENRICHED_FILE}.tmp"
   mv "${ENRICHED_FILE}.tmp" "$ENRICHED_FILE"
-  rm -f "$SUB_FILE"
+  rm -f "$SUB_FILE" "$ITEM_FILE"
 done
 
 echo "::endgroup::" >&2
@@ -383,7 +384,7 @@ jq -n \
   --arg project_id "$PROJECT_ID" \
   --arg generated_at "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
   --argjson fields "$FIELDS_DEF" \
-  --argjson items "$(cat "$ENRICHED_FILE")" \
+  --slurpfile items "$ENRICHED_FILE" \
   '{
     metadata: {
       owner: $owner,
@@ -392,7 +393,7 @@ jq -n \
       generatedAt: $generated_at
     },
     fieldDefinitions: $fields,
-    items: $items
+    items: $items[0]
   }' > "$OUTPUT_FILE"
 
 echo "Wrote $(jq '.items | length' "$OUTPUT_FILE") items to $OUTPUT_FILE" >&2
