@@ -41,8 +41,8 @@ safe-outputs:
   allowed-github-references: []
   create-discussion:
     title-prefix: "[Launch Readiness] "
-    category: "Announcements"
-    close-older-discussions: true
+    category: "announcements"
+    max: 1
 ---
 
 # Launch Readiness Report
