@@ -152,10 +152,18 @@ Workflows that keep launches audit-ready and policy-compliant.
 
 | # | Workflow | Trigger | What it does |
 |---|----------|---------|--------------|
-| 9 | **Policy Gate** | On PR / on-demand | Verifies PRs linked to a launch include required sign-offs, labels, documentation, or security review before merge. |
-| 10 | **Audit Log Generator** | Weekly / on launch close | Produces a compliance report for a launch: who approved what, when changes were made, what reviews happened. |
-| 11 | **License & Attribution Checker** | On PR / weekly | Scans dependencies introduced during a launch for license compliance issues. |
-| 12 | **Change Advisory Board (CAB) Summary** | Weekly / on-demand | Summarizes all changes across active launches for change management review meetings. |
+| 5 | **Compliance Review** | Weekly / on label | Evaluates launches against rubrics, updates labels, creates review sub-issues |
+| 6 | **Compliance Team Reports** | Weekly | Per-team discussions with urgency-sorted launch lists |
+| 7 | **Policy Gate** | On PR / on-demand | Verifies PRs linked to a launch include required sign-offs, labels, documentation, or security review before merge. |
+| 8 | **Audit Log Generator** | Weekly / on launch close | Produces a compliance report for a launch: who approved what, when changes were made, what reviews happened. |
+
+### 📣 Go-to-Market
+
+Workflows that help teams communicate launches to customers.
+
+| # | Workflow | Trigger | What it does |
+|---|----------|---------|--------------|
+| 9 | **GTM Content** | Weekly | Generates changelog announcement drafts and public roadmap items as sub-issues, following the voice & tone policy |
 
 ---
 
@@ -201,12 +209,11 @@ Workflows that keep launches audit-ready and policy-compliant.
 - [x] `.github/policies/privacy-review-policy.md` — privacy rubric & review questions
 - [x] `.github/policies/accessibility-review-policy.md` — accessibility rubric & review questions
 - [x] `.github/policies/responsible-ai-review-policy.md` — responsible AI rubric & review questions
+- [x] `.github/workflows/gtm-content.md` — changelog drafts & roadmap items as sub-issues
+- [x] `.github/policies/voice-and-tone-policy.md` — org voice & tone for customer-facing content
 
 ### 🔜 Next
 
-- [ ] Test run the launch readiness workflow end-to-end
-- [ ] Build Risk Radar workflow (daily, uses same fetch script)
-- [ ] Build Stale Work Detector workflow
-- [ ] Build Policy Gate workflow (PR-triggered)
+- [ ] Test run all workflows end-to-end
 - [ ] Add project setup automation script (labels, fields, etc.)
 - [ ] Document how to customize for different team structures

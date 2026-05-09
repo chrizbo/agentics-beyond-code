@@ -93,12 +93,14 @@ Workflows define the **general pattern** (e.g., "assess readiness against a poli
     launch-readiness.md              ← Readiness assessment (weekly)
     compliance-review.md             ← Compliance triage + sub-issues (weekly + on label)
     compliance-team-reports.md       ← Per-team compliance digests (weekly)
+    gtm-content.md                   ← Changelog drafts + roadmap items (weekly)
   policies/
     launch-readiness-policy.md       ← Readiness thresholds & risk scoring
     security-review-policy.md        ← Security rubric & review questions
     privacy-review-policy.md         ← Privacy rubric & review questions
     accessibility-review-policy.md   ← Accessibility rubric & review questions
     responsible-ai-review-policy.md  ← Responsible AI rubric & review questions
+    voice-and-tone-policy.md         ← How we write customer-facing content
   scripts/
     fetch-launch-data.sh             ← Deterministic data fetching (shared)
 ```
@@ -207,6 +209,43 @@ Each file has three sections:
 Teams can edit their policy file at any time — changes take effect on the next
 workflow run without recompilation.
 
+## GTM Content System
+
+The GTM (go-to-market) system generates customer-facing content drafts as
+sub-issues under each launch, so DRIs don't have to start from scratch when
+it's time to announce a feature or update the public roadmap.
+
+### How it works
+
+The **GTM Content workflow** (`gtm-content.md`) runs weekly and:
+
+1. Evaluates each open launch's phase, scope, and completeness
+2. Creates two sub-issues per launch (when appropriate):
+   - **📣 Changelog draft** — a customer-facing announcement post (Alpha+ only)
+   - **🗺️ Roadmap item** — a forward-looking description for public roadmaps (all phases)
+3. Refreshes existing drafts when the launch changes significantly (phase
+   transition, major scope change, target date shift)
+
+All content follows the **voice & tone policy** (`voice-and-tone-policy.md`),
+which defines the org's writing style: friendly, benefit-led, specific, and
+jargon-free.
+
+### GTM sub-issues
+
+Sub-issues are titled `[GTM] Changelog draft — ...` and `[GTM] Roadmap item — ...`
+and labeled `gtm` so they're filterable. They contain:
+- A full draft written in the org's voice
+- Specifics pulled from the launch body, epics, and sub-issues
+- Clear markers that it's a draft needing DRI review before publishing
+
+### Voice & tone policy
+
+The policy at `.github/policies/voice-and-tone-policy.md` defines:
+- Core writing principles (human, benefit-led, specific, brief)
+- Tone guidance per content type (changelog vs. roadmap)
+- Formatting rules (sentence case, active voice, present/future tense)
+- Words to use and avoid
+
 ## Workflow Schedule
 
 All workflows share the same `fetch-launch-data.sh` pre-step for data fetching.
@@ -216,6 +255,7 @@ All workflows share the same `fetch-launch-data.sh` pre-step for data fetching.
 | **Launch Readiness** | Weekly (scheduled) · Manual | Discussion with pipeline summary, risk breakdown, sign-off tracking | DRIs, leaders |
 | **Compliance Review** | Weekly (scheduled) · On issue labeled · Manual | Labels on launches, status table comment, compliance review sub-issues | DRIs, compliance teams |
 | **Compliance Team Reports** | Weekly (scheduled) · Manual | 4 discussions (one per compliance team) with urgency-sorted launch lists | Security, Privacy, Accessibility, Responsible AI teams |
+| **GTM Content** | Weekly (scheduled) · Manual | Changelog draft and roadmap item sub-issues per launch | DRIs, marketing, comms |
 
 ### Weekly cadence
 
@@ -223,9 +263,10 @@ On a typical week the scheduled workflows run in this order:
 
 1. **Compliance Review** — evaluates launches, updates labels, creates/updates
    sub-issues. Runs first so that labels and sub-issues are current.
-2. **Launch Readiness** — assesses overall readiness including compliance
+2. **GTM Content** — generates/refreshes changelog drafts and roadmap items.
+3. **Launch Readiness** — assesses overall readiness including compliance
    sign-off status. References the labels set by the compliance review.
-3. **Compliance Team Reports** — generates per-team digests reflecting the
+4. **Compliance Team Reports** — generates per-team digests reflecting the
    latest label and sub-issue state.
 
 The Compliance Review workflow also runs **on-demand** whenever a `launch`
@@ -244,6 +285,8 @@ label is added to an issue, so new launches get evaluated immediately.
 - **Compliance Review workflow** — `.github/workflows/compliance-review.md` with rubric evaluation, label management, status tables, review sub-issues
 - **Compliance Team Reports workflow** — `.github/workflows/compliance-team-reports.md` with per-team weekly discussions
 - **Compliance policy files** — Security, Privacy, Accessibility, Responsible AI rubrics with review questions and checklists
+- **GTM Content workflow** — `.github/workflows/gtm-content.md` with changelog drafts and roadmap items as sub-issues
+- **Voice & tone policy** — `.github/policies/voice-and-tone-policy.md` defining org writing style for customer-facing content
 
 ### 🔜 Next
 

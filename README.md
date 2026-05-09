@@ -25,6 +25,12 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 | [🛡️ Compliance Review](.github/workflows/compliance-review.md) | Evaluates launches against Security, Privacy, Accessibility, and Responsible AI rubrics — updates labels, posts status tables, creates review sub-issues |
 | [📊 Compliance Team Reports](.github/workflows/compliance-team-reports.md) | Weekly per-team discussion showing launches needing review, sorted by urgency |
 
+### 📣 Go-to-Market
+
+| Workflow | Description |
+|----------|-------------|
+| [📣 GTM Content](.github/workflows/gtm-content.md) | Generates and refreshes changelog announcement drafts and public roadmap items as sub-issues, following the org's voice & tone policy |
+
 ## 📖 Documentation
 
 - **[Getting Started](docs/setup.md)** — prerequisites, installation, and first run

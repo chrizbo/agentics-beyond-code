@@ -112,6 +112,9 @@ The following labels are used by workflows. Create them in your repository:
 **Compliance labels:**
 - `compliance-review` — marks compliance review sub-issues (auto-created by workflow)
 
+**GTM labels:**
+- `gtm` — marks go-to-market content sub-issues (changelog drafts, roadmap items)
+
 **Report labels:**
 - `report`, `launch-readiness`
 
@@ -149,6 +152,7 @@ Policy files live in `.github/policies/` and control how workflows assess your l
 - **[privacy-review-policy.md](../.github/policies/privacy-review-policy.md)** — when privacy review is needed, review questions, checklist
 - **[accessibility-review-policy.md](../.github/policies/accessibility-review-policy.md)** — when accessibility review is needed, review questions, checklist
 - **[responsible-ai-review-policy.md](../.github/policies/responsible-ai-review-policy.md)** — when responsible AI review is needed, review questions, checklist
+- **[voice-and-tone-policy.md](../.github/policies/voice-and-tone-policy.md)** — how to write customer-facing content (changelog posts, roadmap items)
 
 Policy changes take effect on the next workflow run — no recompilation needed.
 
