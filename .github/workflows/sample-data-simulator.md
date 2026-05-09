@@ -40,7 +40,6 @@ safe-outputs:
   mentions: false
   allowed-github-references: []
   create-issue:
-    title-prefix: "ai: "
     max: 15
   close-issue:
     target: "*"
