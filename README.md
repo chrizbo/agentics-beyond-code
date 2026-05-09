@@ -35,6 +35,7 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 
 - **[Getting Started](docs/setup.md)** — prerequisites, installation, and first run
 - **[How It Works](docs/how-it-works.md)** — architecture, issue hierarchy, and customization
+- **[FAQ](docs/faq.md)** — common questions about setup, workflows, and costs
 
 ## 🤝 Contributing
 
