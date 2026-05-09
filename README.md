@@ -43,6 +43,7 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 | Workflow | Description |
 |----------|-------------|
 | [📋 Weekly Status](.github/workflows/weekly-status.md) | Friday morning leadership status rollup — What Shipped, What We Learned, FYI, and SOS — across all initiatives and launches |
+| [🩺 Workflow Health](.github/workflows/workflow-health.md) | Friday morning health report across all agentic workflows — success rates, failure patterns, cost estimates, and efficiency recommendations |
 
 ### 🧪 Demo / Sample Data
 
