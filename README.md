@@ -17,8 +17,6 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 | Workflow | Description |
 |----------|-------------|
 | [🚦 Launch Readiness Checker](.github/workflows/launch-readiness.md) | Weekly readiness report across all launches — completeness, risk, blockers, sign-offs |
-| 📋 Launch Countdown | Daily digest of remaining launch blockers with timeline risk assessment |
-| 📣 Launch Announcement Drafter | Auto-draft release comms from merged PRs and closed issues |
 
 ### ✅ Compliance
 
@@ -26,9 +24,6 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 |----------|-------------|
 | [🛡️ Compliance Review](.github/workflows/compliance-review.md) | Evaluates launches against Security, Privacy, Accessibility, and Responsible AI rubrics — updates labels, posts status tables, creates review sub-issues |
 | [📊 Compliance Team Reports](.github/workflows/compliance-team-reports.md) | Weekly per-team discussion showing launches needing review, sorted by urgency |
-| 📝 Policy Gate | Verify PRs include required sign-offs, labels, or documentation before merge |
-| 🔍 Audit Log Generator | Produce periodic compliance reports from repo activity |
-| 📜 License & Attribution Checker | Scan dependencies for license compliance and flag issues |
 
 ## 📖 Documentation
 
