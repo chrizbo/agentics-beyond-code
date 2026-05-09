@@ -1,5 +1,10 @@
 # How We Work
 
+> ⚠️ **This is sample data.** The team, processes, and details below are
+> fictional — they exist so the Process Analyzer workflow has realistic
+> content to work with. **Replace this entire document with your actual
+> team's processes** before using the workflow in production.
+
 > **Living document.** This describes how the team operates day-to-day. When
 > processes change — whether by explicit decision or organic drift — update this
 > doc so it stays accurate. The **Process Analyzer** workflow watches meeting
