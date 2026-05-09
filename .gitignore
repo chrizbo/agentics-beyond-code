@@ -1,2 +1,5 @@
 launch-data.json
 launch-data-summary.json
+
+# gh aw audit logs (generated locally)
+.github/aw/logs/
