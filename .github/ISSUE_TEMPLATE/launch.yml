@@ -1,0 +1,146 @@
+name: Launch
+description: A shippable milestone that moves through Team → Alpha → Beta → GA
+title: "[Launch] "
+labels: ["launch"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A launch is a shippable milestone — the primary unit that DRIs own.
+        Completeness of this issue is tracked by automated workflows.
+        Missing sections increase the assessed risk level, especially as you
+        approach later phases (Beta, GA).
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What are we launching and why? One paragraph.
+      placeholder: "e.g., Adding GDPR-compliant data export so EU users can request their data per Article 15."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: phase
+    attributes:
+      label: Current Phase
+      description: Where is this launch in terms of customer access?
+      options:
+        - Team
+        - Alpha
+        - Beta
+        - GA
+    validations:
+      required: true
+
+  - type: dropdown
+    id: launch-type
+    attributes:
+      label: Launch Type
+      description: Scale and impact of this launch.
+      options:
+        - Major
+        - Minor
+        - Patch
+        - Internal
+    validations:
+      required: true
+
+  - type: input
+    id: target-date
+    attributes:
+      label: Target GA Date
+      description: When do we expect this to reach GA?
+      placeholder: "YYYY-MM-DD"
+    validations:
+      required: true
+
+  - type: input
+    id: dri
+    attributes:
+      label: DRI
+      description: Who is the directly responsible individual for this launch?
+      placeholder: "@username"
+    validations:
+      required: true
+
+  - type: textarea
+    id: customer-impact
+    attributes:
+      label: Customer Impact
+      description: Who is affected and how? What changes for them?
+      placeholder: |
+        - **Who:** EU customers on Pro and Enterprise plans
+        - **What changes:** New "Export my data" button in account settings
+        - **Risk if delayed:** Regulatory non-compliance
+    validations:
+      required: true
+
+  - type: textarea
+    id: success-criteria
+    attributes:
+      label: Success Criteria
+      description: How will we measure success post-launch?
+      placeholder: |
+        - 95% of data export requests complete within 24 hours
+        - Zero compliance violations in first 90 days
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope & Workstreams
+      description: What epics / workstreams make up this launch? Link sub-issues once created.
+      placeholder: |
+        - [ ] #201 Backend data export API
+        - [ ] #202 Frontend export UI
+        - [ ] #203 Security review
+        - [ ] #204 Documentation & support articles
+    validations:
+      required: true
+
+  - type: textarea
+    id: domain-requirements
+    attributes:
+      label: Domain Requirements
+      description: What downstream/compliance teams need to sign off? Use `needs:` labels on this issue.
+      placeholder: |
+        - [ ] Security — penetration test (`needs:security`)
+        - [ ] Legal — GDPR compliance review (`needs:legal`)
+        - [ ] Docs — user-facing documentation (`needs:docs`)
+        - [ ] Support — runbook and escalation path (`needs:support`)
+
+  - type: textarea
+    id: rollout-plan
+    attributes:
+      label: Rollout Plan
+      description: How will this move through phases? What gates exist between each?
+      placeholder: |
+        **Team → Alpha:** Core export flow works end-to-end
+        **Alpha → Beta:** Security review passed, error handling complete
+        **Beta → GA:** Load tested at scale, docs published, support trained
+
+  - type: textarea
+    id: risks
+    attributes:
+      label: Known Risks & Mitigations
+      description: What could delay or derail this launch?
+      placeholder: |
+        - **Risk:** Legal review may take 3+ weeks → **Mitigation:** Started review early
+        - **Risk:** Data export at scale untested → **Mitigation:** Load test scheduled for Beta
+
+  - type: textarea
+    id: comms-plan
+    attributes:
+      label: Communications Plan
+      description: How will customers, stakeholders, and internal teams be informed?
+      placeholder: |
+        - Internal: Slack announcement + demo at all-hands
+        - External: Blog post, changelog entry, in-app notification
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Links to designs, specs, research, parent initiative, or anything else relevant.

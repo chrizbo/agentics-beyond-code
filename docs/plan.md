@@ -1,0 +1,196 @@
+# Agentics Beyond Code — Brainstorm & Planning
+
+## Core Design Principle
+
+**Workflows operate on top of GitHub Issues + Projects, where issues represent launches.**
+
+A PM/ops team uses a GitHub Project board to track launches. Each issue = a launch (or a workstream within a launch). Labels, milestones, custom fields, and sub-issues provide the structure. Our agentic workflows read this existing structure and add intelligence on top — no new tools, no context-switching.
+
+### Why GitHub Issues as the foundation?
+
+- PMs are already (or should be) tracking launches somewhere — Issues/Projects is native
+- Labels, milestones, assignees, sub-issues = structured metadata for agents to reason over
+- Projects custom fields (status, target date, priority, launch type) = rich signal
+- Comments = natural place for agents to report findings
+- Cross-repo references = agents can trace dependencies across services
+
+---
+
+## Key Users
+
+Three distinct personas interact with the system:
+
+### 1. 🎯 DRIs (Directly Responsible Individuals) — usually PMs
+
+The launch owner. They create and manage launch issues, set target dates, and are accountable for shipping. Workflows serve them by surfacing blockers, tracking readiness, and reducing manual status-gathering.
+
+### 2. 🔧 Downstream / Compliance Teams
+
+Domain experts (security, legal, accessibility, ops, etc.) who own a piece of each launch. They need to know what's coming, what's expected of them, and when. Workflows serve them by flagging launches that need their input, tracking their domain-specific checklist items, and generating compliance artifacts.
+
+### 3. 📊 Leaders
+
+Want the big picture: how is the launch pipeline going? Where are the risks? Workflows serve them with roll-up reports, pipeline health dashboards, and trend analysis — without requiring anyone to manually write status updates.
+
+---
+
+## Issue Hierarchy
+
+Sub-issues provide the structure. The hierarchy maps to organizational levels:
+
+```
+Initiative (strategic goal, e.g. "Expand to EU market")
+  └── Launch (shippable milestone, e.g. "GDPR compliance launch")
+        └── Epic (workstream, e.g. "Data residency")
+              └── Task (atomic work item, e.g. "Add EU storage region config")
+```
+
+- **Initiatives** — owned by leaders, tracked at portfolio level
+- **Launches** — the primary unit DRIs own; this is where most workflows anchor
+- **Epics** — workstreams within a launch, often owned by downstream teams
+- **Tasks** — individual work items assigned to contributors
+
+Each level is a GitHub Issue. Parent-child relationships use sub-issues. Workflows can walk the tree in either direction.
+
+---
+
+## Metadata Strategy
+
+### Labels — for automation state flagging
+
+Labels signal *state transitions* that trigger or inform workflows. Quick to apply, visible in lists, filterable.
+
+| Label | Purpose |
+|-------|---------|
+| `launch` | Marks an issue as a launch (vs epic, task, etc.) |
+| `blocker` | Flags a blocking issue |
+| `at-risk` | Applied by agents or humans when a launch is at risk |
+| `ready-for-review` | Signals a domain team's work is ready for sign-off |
+| `approved:{domain}` | e.g. `approved:security`, `approved:legal` — domain sign-offs |
+| `needs:{domain}` | e.g. `needs:security` — flags that a domain team's input is required |
+
+### Custom Fields (on GitHub Projects) — for structured data
+
+Custom fields hold values that change over time and need querying/sorting.
+
+| Field | Type | Purpose |
+|-------|------|---------|
+| `Phase` | Single select | Customer-access-based: Team, Alpha, Beta, GA (see below) |
+| `Target Date` | Date | Expected ship date |
+| `Launch Type` | Single select | e.g. Major, Minor, Patch, Internal |
+| `Risk Level` | Single select | Low, Medium, High, Critical |
+| `DRI` | Text / Assignee | Who owns this launch |
+
+### Phases — customer access milestones
+
+Phases describe *who can access the feature*, not internal engineering stages. This keeps the language meaningful to all three personas.
+
+| Phase | Who has access | Typical state |
+|-------|---------------|---------------|
+| **Team** | Internal team only | Building, designing, early prototyping |
+| **Alpha** | Hand-selected users / dogfood | Core functionality works, rough edges expected |
+| **Beta** | Broader opt-in audience | Feature-complete, collecting feedback, polishing |
+| **GA** | All customers | Fully launched, documented, supported |
+
+Agents use phase transitions as key signals — e.g., a launch moving to Beta without completed security review is a risk event.
+
+### Sub-Issues — for hierarchy and decomposition
+
+As described in the issue hierarchy above. Sub-issues are the structural backbone; labels and custom fields are the metadata layer.
+
+---
+
+## Customization Architecture
+
+**Separation of concerns: workflow instructions vs. policy files.**
+
+```
+.github/
+  workflows/           # Compiled agentic workflow YAML (generated by gh aw)
+  policies/            # Team-specific policy markdown files
+    launch-checklist.md
+    security-requirements.md
+    compliance-gates.md
+    label-conventions.md
+
+workflows/             # Agentic workflow source (markdown)
+  launch-readiness.md  # General pattern: "check readiness against policy"
+  risk-radar.md        # General pattern: "scan for risk signals"
+  ...
+```
+
+**How it works:**
+
+- **Workflow files** (`workflows/*.md`) define the *general pattern* — e.g., "scan a launch issue's sub-issues and check them against a readiness policy." They are reusable across teams.
+- **Policy files** (`.github/policies/*.md`) define the *team-specific rules* — e.g., "a launch is ready when: security review is approved, load test passed, docs updated." Each team customizes these.
+- Workflows reference policy files at runtime: *"Read the policy at `.github/policies/launch-checklist.md` and evaluate the current launch against it."*
+
+This means:
+- Teams adopt workflows without forking them
+- Policy changes don't require workflow changes
+- Compliance teams can own their policy files independently
+- Auditors can review policies as plain markdown
+
+---
+
+## Focus Areas & Workflow Ideas
+
+### 🚢 Launch Tracking
+
+Workflows that help teams ship with confidence and visibility.
+
+| # | Workflow | Trigger | What it does |
+|---|----------|---------|--------------|
+| 1 | **Launch Readiness Checker** | Daily / on-demand | Scans a launch issue's sub-issues, linked PRs, and checklist items. Posts a go/no-go status comment with breakdown of what's done vs blocking. |
+| 2 | **Launch Countdown** | Daily (scheduled) | For launches with a target date, posts a daily digest: days remaining, open blockers, velocity trend, risk assessment. |
+| 3 | **Launch Announcement Drafter** | When launch issue is closed | Auto-drafts release comms (changelog, stakeholder summary) from the merged PRs and closed sub-issues linked to the launch. |
+| 4 | **Launch Retrospective Kickoff** | When launch issue is closed | Creates a retro discussion/issue with pre-populated timeline, key metrics, and prompts for the team. |
+
+### 🏥 Health & Risk
+
+Workflows that surface problems before they become fires.
+
+| # | Workflow | Trigger | What it does |
+|---|----------|---------|--------------|
+| 5 | **Stale Work Detector** | Daily | Flags launch sub-issues or linked PRs that have gone quiet (no activity in N days). Comments on the launch issue with a staleness report. |
+| 6 | **Team Pulse Report** | Weekly | Across all active launches in a project, summarizes velocity, blockers, workload balance. Posts as a project-level issue or discussion. |
+| 7 | **Risk Radar** | Daily | Scans active launches for risk signals: missed dates, scope creep (new sub-issues added late), dependency bottlenecks, unassigned critical work. Escalates via issue comment or label. |
+| 8 | **SLA / Target Date Tracker** | Daily | For launches with target dates, warns when milestones are at risk of slipping based on remaining work vs time. |
+
+### ✅ Compliance
+
+Workflows that keep launches audit-ready and policy-compliant.
+
+| # | Workflow | Trigger | What it does |
+|---|----------|---------|--------------|
+| 9 | **Policy Gate** | On PR / on-demand | Verifies PRs linked to a launch include required sign-offs, labels, documentation, or security review before merge. |
+| 10 | **Audit Log Generator** | Weekly / on launch close | Produces a compliance report for a launch: who approved what, when changes were made, what reviews happened. |
+| 11 | **License & Attribution Checker** | On PR / weekly | Scans dependencies introduced during a launch for license compliance issues. |
+| 12 | **Change Advisory Board (CAB) Summary** | Weekly / on-demand | Summarizes all changes across active launches for change management review meetings. |
+
+---
+
+## Possible Extras (future)
+
+- **OKR Progress Reporter** — maps launch activity to OKR progress
+- **Incident Postmortem Tracker** — ensures postmortems get filed after incidents
+- **Dependency Map** — visualizes cross-launch and cross-repo dependencies
+- **Stakeholder Update Drafter** — weekly stakeholder email/summary from project activity
+
+---
+
+## Open Questions
+
+- Should we provide a "starter project template" (with labels, fields pre-configured) alongside the workflows?
+- How do we handle multi-repo launches? (project spans multiple repos)
+- What's the right default for staleness thresholds, risk scoring, etc. — and where do those live in policy files?
+- Should policy files support structured frontmatter (YAML) for machine-readable rules, or stay pure prose for LLM reasoning?
+
+---
+
+## Next Steps
+
+- [ ] Pick 1-2 workflows to build first
+- [ ] Write the policy file conventions doc
+- [ ] Write the first workflow markdown files
+- [ ] Test with `gh aw compile` and `gh aw run`

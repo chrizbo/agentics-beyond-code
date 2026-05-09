@@ -1,0 +1,97 @@
+name: Initiative
+description: A strategic goal that spans multiple launches
+title: "[Initiative] "
+labels: ["initiative"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        An initiative is a strategic goal that one or more launches contribute to.
+        Fill in as much as you can — completeness of this issue is used by automated
+        workflows to assess initiative health and risk.
+
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: What is the strategic outcome we're driving toward?
+      placeholder: "e.g., Expand to the EU market to grow international revenue by 30%"
+    validations:
+      required: true
+
+  - type: textarea
+    id: success-criteria
+    attributes:
+      label: Success Criteria
+      description: How will we know this initiative succeeded? List measurable outcomes.
+      placeholder: |
+        - Revenue from EU customers reaches $X/quarter
+        - Y% of new signups come from EU regions
+        - Compliance with GDPR verified by legal
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: What is in scope and out of scope for this initiative?
+      placeholder: |
+        **In scope:**
+        - ...
+
+        **Out of scope:**
+        - ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: launches
+    attributes:
+      label: Planned Launches
+      description: List the launches (as sub-issues) that contribute to this initiative. Link them once created.
+      placeholder: |
+        - [ ] #123 GDPR compliance launch
+        - [ ] #124 EU payment methods
+        - [ ] #125 Localization (DE, FR, ES)
+
+  - type: input
+    id: target-date
+    attributes:
+      label: Target Completion Date
+      description: When should this initiative be complete?
+      placeholder: "YYYY-MM-DD"
+
+  - type: input
+    id: dri
+    attributes:
+      label: DRI
+      description: Who is the directly responsible individual for this initiative?
+      placeholder: "@username"
+    validations:
+      required: true
+
+  - type: textarea
+    id: stakeholders
+    attributes:
+      label: Stakeholders
+      description: Who needs to be informed or consulted?
+      placeholder: |
+        - @leader — executive sponsor
+        - @pm-team — launch DRIs
+        - @legal — regulatory oversight
+
+  - type: textarea
+    id: risks
+    attributes:
+      label: Known Risks & Dependencies
+      description: What could go wrong? What external dependencies exist?
+      placeholder: |
+        - Dependency on legal review timeline
+        - Risk: EU data residency requirements may change
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Links to docs, research, prior art, or anything else relevant.
