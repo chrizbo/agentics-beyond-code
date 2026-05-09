@@ -31,6 +31,13 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 |----------|-------------|
 | [📣 GTM Content](.github/workflows/gtm-content.md) | Monday morning generation and refresh of changelog announcement drafts and public roadmap items as sub-issues, following the org's voice & tone policy |
 
+### 📋 Decision & Knowledge
+
+| Workflow | Description |
+|----------|-------------|
+| [📋 Decision Log](.github/workflows/decision-log.md) | Daily scan of issue comments and meeting transcripts for decisions — creates a PR with individual decision record files in `/decisions/` |
+| [🎙️ Transcript Processor](.github/workflows/transcript-processor.md) | Triggered when `.txt` or `.vtt` files are pushed to `/transcripts/` — matches transcript content to open issues and posts summary comments |
+
 ### 📊 Leadership
 
 | Workflow | Description |
@@ -50,6 +57,7 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 - **[Getting Started](docs/setup.md)** — prerequisites, installation, and first run
 - **[How It Works](docs/how-it-works.md)** — architecture, issue hierarchy, and customization
 - **[FAQ](docs/faq.md)** — common questions about setup, workflows, and costs
+- **[Workflow Ideas](docs/workflow-ideas.md)** — catalog of future workflow ideas for PM, ops, compliance, and GTM
 
 ## 🤝 Contributing
 

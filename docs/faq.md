@@ -46,7 +46,9 @@ Edit `.github/policies/voice-and-tone-policy.md`. The GTM Content workflow reads
 | Compliance Review | Monday ~8 AM PT | Yes |
 | Compliance Team Reports | Monday ~8 AM PT | Yes |
 | GTM Content | Monday ~8 AM PT | Yes |
+| Decision Log | Daily on weekdays | Yes |
 | Weekly Status | Friday ~8 AM PT | Yes |
+| Transcript Processor | On push to `/transcripts/` | Yes |
 | Sample Data Simulator | Daily on weekdays | Yes |
 
 The **Sample Data Simulator** is for demo purposes only — it generates fake project activity so the other workflows have realistic data. You don't need it for production use. Trigger it manually anytime with `gh aw run sample-data-simulator` to add more content.
@@ -96,6 +98,38 @@ Two sub-issues per launch:
 ### Why does the roadmap item only show a quarter, not a specific date?
 
 Roadmap items are customer-facing. Sharing a specific internal target date creates false precision and sets expectations the team may not be able to meet. A quarter (e.g., "Q3 2026") communicates timing without over-committing.
+
+---
+
+## Decision Log
+
+### How does the decision log detect decisions?
+
+The workflow scans issue comments and transcript files for decision-signal language — phrases like "we decided to…", "the call is…", "going with option…", or "final decision:". It uses context clues to extract the decision, options considered, rationale, and participants.
+
+### Where are decision records stored?
+
+Individual markdown files in the `/decisions/` directory, named `YYYY-MM-DD-<slug>.md`. The workflow creates a PR with the new files so you can review before merging.
+
+### Can I write decision records manually?
+
+Yes. The `/decisions/` directory is just markdown files. You can create them manually following the same format, or edit the ones the workflow generates.
+
+---
+
+## Transcript Processing
+
+### What transcript formats are supported?
+
+Plain text (`.txt`) and WebVTT (`.vtt`) files. Drop them into the `/transcripts/` directory and push to trigger the workflow.
+
+### How does the transcript processor match to issues?
+
+It extracts key topics, names, and action items from the transcript and fuzzy-matches them against open issue titles, labels, and body content. Only high-confidence matches get comments posted.
+
+### Will it create duplicate comments if I push the same transcript again?
+
+The workflow checks for existing comments from the same transcript file to avoid duplicates.
 
 ---
 

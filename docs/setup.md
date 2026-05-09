@@ -113,6 +113,9 @@ The following labels are used by workflows. Create them in your repository:
 **GTM labels:**
 - `gtm` — marks go-to-market content sub-issues (changelog drafts, roadmap items)
 
+**Transcript labels:**
+- `meeting-discussed` — marks issues that were discussed in a meeting transcript (auto-created by workflow)
+
 **Report labels:**
 - `report`, `launch-readiness`
 
@@ -128,7 +131,20 @@ Link launches as sub-issues of initiatives, and epics/tasks as sub-issues of lau
 
 Add your initiative, launch, epic, and task issues to the Launch Tracker project. Set the Phase and Target Date custom fields on each launch.
 
-### 6. Compile and run workflows
+### 6. Create directories for decision log and transcript workflows
+
+```bash
+# Create the directories (with .gitkeep so they're tracked)
+mkdir -p decisions transcripts
+touch decisions/.gitkeep transcripts/.gitkeep
+git add decisions/.gitkeep transcripts/.gitkeep
+git commit -m "Add decisions and transcripts directories"
+```
+
+- **`/decisions/`** — Decision record markdown files are created here by the Decision Log workflow via PR
+- **`/transcripts/`** — Drop `.txt` or `.vtt` meeting transcripts here to trigger the Transcript Processor workflow
+
+### 7. Compile and run workflows
 
 ```bash
 # Compile all workflows

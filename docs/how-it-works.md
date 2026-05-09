@@ -95,6 +95,8 @@ Workflows define the **general pattern** (e.g., "assess readiness against a poli
     compliance-team-reports.md       ← Per-team compliance digests (weekly)
     gtm-content.md                   ← Changelog drafts + roadmap items (weekly)
     weekly-status.md                 ← Leadership status rollup (weekly)
+    decision-log.md                  ← Decision detection + PR creation (daily)
+    transcript-processor.md          ← Transcript → issue comments (on push)
   policies/
     launch-readiness-policy.md       ← Readiness thresholds & risk scoring
     weekly-status-policy.md          ← Status sections, bullet format & audience
@@ -105,6 +107,8 @@ Workflows define the **general pattern** (e.g., "assess readiness against a poli
     voice-and-tone-policy.md         ← How we write customer-facing content
   scripts/
     fetch-launch-data.sh             ← Deterministic data fetching (shared)
+decisions/                           ← Decision records (created by decision-log workflow)
+transcripts/                         ← Meeting transcripts (.txt, .vtt) — drop files here
 ```
 
 This means:
@@ -293,6 +297,62 @@ The policy at `.github/policies/weekly-status-policy.md` defines:
 Leaders can customize the policy to adjust what surfaces in each section
 without modifying the workflow itself.
 
+## Decision Log System
+
+The decision log system captures decisions as they happen — from issue comments
+and meeting transcripts — so they don't get lost in conversation threads.
+
+### How it works
+
+The **Decision Log workflow** (`decision-log.md`) runs daily on weekdays and:
+
+1. Scans recent issue comments across all initiatives, launches, epics, and tasks
+   for decision signals (e.g., "we decided to…", "the call is…", "going with option…")
+2. Reads any `.txt` or `.vtt` files in the `/transcripts/` directory for decision
+   language in meeting recordings
+3. For each decision found, creates a structured markdown record capturing:
+   - The decision itself and its rationale
+   - Options that were considered
+   - Who was involved and when it was made
+   - Links back to the source (issue comment or transcript)
+4. Opens a PR adding the new decision files to `/decisions/` for review
+
+### Decision record format
+
+Each decision is stored as an individual markdown file at
+`decisions/YYYY-MM-DD-<slug>.md` with structured frontmatter and sections
+for context, options considered, rationale, and consequences.
+
+### Integration with other workflows
+
+The Weekly Status workflow can reference recent decisions in its
+"What We Learned" section. The Compliance Review workflow can flag
+decisions that have compliance implications.
+
+## Transcript Processing System
+
+The transcript processing system bridges the gap between meetings and
+your issue tracker, ensuring action items and discussions don't get lost.
+
+### How it works
+
+The **Transcript Processor workflow** (`transcript-processor.md`) triggers
+whenever `.txt` or `.vtt` files are pushed to the `/transcripts/` directory:
+
+1. Parses the transcript file, handling both plain text and WebVTT formats
+2. Extracts key topics: decisions, action items, status updates, blockers,
+   and questions
+3. Searches open issues for matches based on titles, labels, and content
+4. Posts structured comments on matched issues summarizing the relevant
+   portions of the meeting
+5. Adds a `meeting-discussed` label to issues that were discussed
+
+### Transcript file conventions
+
+- Drop `.txt` or `.vtt` files into the `/transcripts/` directory
+- Name files descriptively (e.g., `2025-06-20-sprint-planning.vtt`)
+- The workflow processes all new files in each push
+
 ## Workflow Schedule
 
 All workflows share the same `fetch-launch-data.sh` pre-step for data fetching.
@@ -303,7 +363,9 @@ All workflows share the same `fetch-launch-data.sh` pre-step for data fetching.
 | **Compliance Review** | Monday ~8 AM PT · On issue labeled · Manual | Labels on launches, status table comment, compliance review sub-issues | DRIs, compliance teams |
 | **Compliance Team Reports** | Monday ~8 AM PT · Manual | 4 discussions (one per compliance team) with urgency-sorted launch lists | Security, Privacy, Accessibility, Responsible AI teams |
 | **GTM Content** | Monday ~8 AM PT · Manual | Changelog draft and roadmap item sub-issues per launch | DRIs, marketing, comms |
+| **Decision Log** | Daily on weekdays · Manual | PR with individual markdown decision records in `/decisions/` | PMs, DRIs, leaders |
 | **Weekly Status** | Friday ~8 AM PT · Manual | Discussion with What Shipped, What We Learned, FYI, and SOS sections | Leaders, senior stakeholders |
+| **Transcript Processor** | On push to `/transcripts/` · Manual | Comments on matched issues with meeting context, decisions, action items | PMs, DRIs |
 | **Sample Data Simulator** | Daily on weekdays · Manual | Creates launches, closes tasks, advances phases, adds comments | Demo only — not needed for production |
 
 ### Weekly cadence
@@ -321,9 +383,17 @@ On a typical week:
 4. **Compliance Team Reports** — generates per-team digests reflecting the
    latest label and sub-issue state.
 
+**Daily on weekdays (scattered time):**
+5. **Decision Log** — scans issue comments and transcripts for decisions,
+   creates PRs with markdown decision records.
+
 **Friday (~8 AM PT):**
-5. **Weekly Status** — rolls up all activity into a single leadership status
+6. **Weekly Status** — rolls up all activity into a single leadership status
    post with What Shipped, What We Learned, FYI, and SOS sections.
+
+**On push to `/transcripts/`:**
+7. **Transcript Processor** — matches transcript content to open issues and
+   posts summary comments with meeting context.
 
 The Compliance Review workflow also runs **on-demand** whenever a `launch`
 label is added to an issue, so new launches get evaluated immediately.
@@ -345,6 +415,9 @@ label is added to an issue, so new launches get evaluated immediately.
 - **Voice & tone policy** — `.github/policies/voice-and-tone-policy.md` defining org writing style for customer-facing content
 - **Weekly Status workflow** — `.github/workflows/weekly-status.md` with leadership-focused rollup across initiatives and launches
 - **Weekly status policy** — `.github/policies/weekly-status-policy.md` defining report sections, bullet format, and audience guidelines
+- **Decision Log workflow** — `.github/workflows/decision-log.md` scanning comments and transcripts for decisions, creating PRs with markdown records in `/decisions/`
+- **Transcript Processor workflow** — `.github/workflows/transcript-processor.md` matching transcripts to open issues and posting summary comments
+- **Workflow Ideas catalog** — `docs/workflow-ideas.md` with 20 future workflow ideas for PM, ops, compliance, and GTM
 
 ### 🔜 Next
 
