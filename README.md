@@ -31,6 +31,12 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 |----------|-------------|
 | [📣 GTM Content](.github/workflows/gtm-content.md) | Generates and refreshes changelog announcement drafts and public roadmap items as sub-issues, following the org's voice & tone policy |
 
+### 📊 Leadership
+
+| Workflow | Description |
+|----------|-------------|
+| [📋 Weekly Status](.github/workflows/weekly-status.md) | Weekly leadership status rollup — What Shipped, What We Learned, FYI, and SOS — across all initiatives and launches |
+
 ## 📖 Documentation
 
 - **[Getting Started](docs/setup.md)** — prerequisites, installation, and first run

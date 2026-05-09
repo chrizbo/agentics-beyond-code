@@ -94,8 +94,10 @@ Workflows define the **general pattern** (e.g., "assess readiness against a poli
     compliance-review.md             ← Compliance triage + sub-issues (weekly + on label)
     compliance-team-reports.md       ← Per-team compliance digests (weekly)
     gtm-content.md                   ← Changelog drafts + roadmap items (weekly)
+    weekly-status.md                 ← Leadership status rollup (weekly)
   policies/
     launch-readiness-policy.md       ← Readiness thresholds & risk scoring
+    weekly-status-policy.md          ← Status sections, bullet format & audience
     security-review-policy.md        ← Security rubric & review questions
     privacy-review-policy.md         ← Privacy rubric & review questions
     accessibility-review-policy.md   ← Accessibility rubric & review questions
@@ -250,6 +252,47 @@ The policy at `.github/policies/voice-and-tone-policy.md` defines:
 - Formatting rules (sentence case, active voice, present/future tense)
 - Words to use and avoid
 
+## Weekly Leadership Status
+
+The weekly status system produces a single discussion post that gives leaders
+a fast, scannable view of portfolio health — without reading individual issues.
+
+### How it works
+
+The **Weekly Status workflow** (`weekly-status.md`) runs weekly and:
+
+1. Loads all initiatives, launches, epics, and tasks from the pre-fetched data
+2. Identifies activity from the previous 7 days (state changes, phase transitions,
+   new issues, label changes, comments)
+3. Categorizes each notable item into one of four sections
+4. Generates a single discussion post with a portfolio snapshot
+
+### Report sections
+
+| Section | Purpose | Example |
+|---------|---------|---------|
+| 🚀 **What Shipped** | Launches that reached GA, advanced phases, or completed milestones | "GDPR Data Export launched to GA" |
+| 🧠 **What We Learned** | Insights from retros, experiments, compliance findings, or decisions | "Beta feedback showed 40% of users need bulk export" |
+| 📢 **FYI** | Awareness items — date changes, new launches, scope shifts, approvals | "EU Expansion target moved from Q3 to Q4" |
+| 🆘 **SOS** | Items needing leadership attention — blockers, missing approvals, risk | "Payments v2 blocked on legal review, no assignee" |
+
+Each item follows a consistent bullet format:
+```
+* [Launch Title](url) - One sentence summary.
+```
+
+### Status policy
+
+The policy at `.github/policies/weekly-status-policy.md` defines:
+- Rules for what qualifies in each section
+- Severity ordering for SOS items
+- Tone and voice guidelines (concise, specific, action-oriented)
+- The 7-day reporting window
+- Audience expectations (celebrate, inform, escalate)
+
+Leaders can customize the policy to adjust what surfaces in each section
+without modifying the workflow itself.
+
 ## Workflow Schedule
 
 All workflows share the same `fetch-launch-data.sh` pre-step for data fetching.
@@ -260,6 +303,7 @@ All workflows share the same `fetch-launch-data.sh` pre-step for data fetching.
 | **Compliance Review** | Weekly (scheduled) · On issue labeled · Manual | Labels on launches, status table comment, compliance review sub-issues | DRIs, compliance teams |
 | **Compliance Team Reports** | Weekly (scheduled) · Manual | 4 discussions (one per compliance team) with urgency-sorted launch lists | Security, Privacy, Accessibility, Responsible AI teams |
 | **GTM Content** | Weekly (scheduled) · Manual | Changelog draft and roadmap item sub-issues per launch | DRIs, marketing, comms |
+| **Weekly Status** | Weekly (scheduled) · Manual | Discussion with What Shipped, What We Learned, FYI, and SOS sections | Leaders, senior stakeholders |
 
 ### Weekly cadence
 
@@ -272,6 +316,8 @@ On a typical week the scheduled workflows run in this order:
    sign-off status. References the labels set by the compliance review.
 4. **Compliance Team Reports** — generates per-team digests reflecting the
    latest label and sub-issue state.
+5. **Weekly Status** — rolls up all activity into a single leadership status
+   post with What Shipped, What We Learned, FYI, and SOS sections.
 
 The Compliance Review workflow also runs **on-demand** whenever a `launch`
 label is added to an issue, so new launches get evaluated immediately.
@@ -291,6 +337,8 @@ label is added to an issue, so new launches get evaluated immediately.
 - **Compliance policy files** — Security, Privacy, Accessibility, Responsible AI rubrics with review questions and checklists
 - **GTM Content workflow** — `.github/workflows/gtm-content.md` with changelog drafts and roadmap items as sub-issues
 - **Voice & tone policy** — `.github/policies/voice-and-tone-policy.md` defining org writing style for customer-facing content
+- **Weekly Status workflow** — `.github/workflows/weekly-status.md` with leadership-focused rollup across initiatives and launches
+- **Weekly status policy** — `.github/policies/weekly-status-policy.md` defining report sections, bullet format, and audience guidelines
 
 ### 🔜 Next
 
