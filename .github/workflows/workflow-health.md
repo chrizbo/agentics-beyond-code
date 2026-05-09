@@ -101,13 +101,20 @@ For each workflow run, estimate cost using these heuristics:
 2. **Copilot premium request estimate**: Each agentic workflow run typically
    consumes premium requests. Count the number of runs per workflow.
 
+Use the following rates for dollar cost estimates:
+- **Runner cost**: $0.008 per minute for Linux runners (standard GitHub-hosted)
+- **Premium requests**: $0.04 per premium request (Copilot Business rate)
+
 Present costs as:
 - **Total runner minutes** per workflow (sum of job durations)
 - **Total premium requests** (estimated as 1 per run minimum)
+- **Estimated dollar cost** per workflow (runner cost + premium request cost)
 - **Combined totals** across all workflows
 
-> **Note:** These are estimates. Actual billing depends on runner type, Copilot
-> plan, and organization settings.
+> **Note:** These are estimates using standard GitHub-hosted Linux runner and
+> Copilot Business rates. Actual billing depends on runner type, Copilot plan,
+> and organization settings. Adjust rates if the repo uses larger runners or
+> a different Copilot tier.
 
 ### Step 4: Assess Health
 
@@ -246,17 +253,20 @@ For each degraded/critical workflow:
 
 ### 💰 Cost Summary
 
-| Workflow | Runs | Runner Minutes | Est. Premium Requests |
-|----------|------|---------------|----------------------|
-| workflow-name | N | Xm | N |
-| ... | ... | ... | ... |
-| **Total** | **N** | **Xm** | **N** |
+| Workflow | Runs | Runner Minutes | Est. Premium Requests | Est. Cost |
+|----------|------|---------------|----------------------|-----------|
+| workflow-name | N | Xm | N | $X.XX |
+| ... | ... | ... | ... | ... |
+| **Total** | **N** | **Xm** | **N** | **$X.XX** |
 
 <details>
 <summary>Cost Estimation Methodology</summary>
 
 - Runner minutes = sum of all job durations across runs
+- Runner cost = minutes × $0.008/min (standard GitHub-hosted Linux)
 - Premium requests = estimated at 1 per agentic workflow run
+- Premium request cost = requests × $0.04/request (Copilot Business)
+- Est. Cost = runner cost + premium request cost
 - Actual costs depend on your GitHub plan, runner type, and Copilot subscription
 
 </details>
