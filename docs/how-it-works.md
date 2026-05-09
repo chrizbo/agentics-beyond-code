@@ -443,32 +443,3 @@ On a typical week:
 
 The Compliance Review workflow also runs **on-demand** whenever a `launch`
 label is added to an issue, so new launches get evaluated immediately.
-
-## What's Built So Far
-
-### ✅ Completed
-
-- **Repository scaffolding** — README, issue templates (Initiative, Launch), labels, `.gitignore`
-- **GitHub Project** — "Launch Tracker" with custom fields (Phase, Target Date, Launch Type, Risk Level)
-- **Sample data** — 1 initiative, 3 launches (at different phases), epics and tasks with sub-issue hierarchy, some tasks closed to simulate progress
-- **Data fetching script** — `.github/scripts/fetch-launch-data.sh` fetches project items + sub-issue trees via GraphQL
-- **Launch Readiness workflow** — `.github/workflows/launch-readiness.md` with weekly schedule, policy-based assessment, discussion output
-- **Readiness policy** — `.github/policies/launch-readiness-policy.md` with completeness thresholds, staleness windows, domain sign-off tracking, risk levels
-- **Compliance Review workflow** — `.github/workflows/compliance-review.md` with rubric evaluation, label management, status tables, review sub-issues
-- **Compliance Team Reports workflow** — `.github/workflows/compliance-team-reports.md` with per-team weekly discussions
-- **Compliance policy files** — Security, Privacy, Accessibility, Responsible AI rubrics with review questions and checklists
-- **GTM Content workflow** — `.github/workflows/gtm-content.md` with changelog drafts and roadmap items as sub-issues
-- **Voice & tone policy** — `.github/policies/voice-and-tone-policy.md` defining org writing style for customer-facing content
-- **Weekly Status workflow** — `.github/workflows/weekly-status.md` with leadership-focused rollup across initiatives and launches
-- **Weekly status policy** — `.github/policies/weekly-status-policy.md` defining report sections, bullet format, and audience guidelines
-- **Decision Log workflow** — `.github/workflows/decision-log.md` scanning comments and transcripts for decisions, creating PRs with markdown records in `/decisions/`
-- **Transcript Processor workflow** — `.github/workflows/transcript-processor.md` matching transcripts to open issues and posting summary comments
-- **Workflow Health report** — `.github/workflows/workflow-health.md` analyzing agentic workflow runs for success rates, failure patterns, cost estimates, and efficiency recommendations
-- **Workflow Ideas catalog** — `docs/workflow-ideas.md` with 20 future workflow ideas for PM, ops, compliance, and GTM
-
-### 🔜 Next
-
-- Compile and test all workflows end-to-end
-- Build additional workflows (Risk Radar, Stale Work Detector, Policy Gate)
-- Create a project setup script to automate label/field creation
-- Document how to customize for different team structures
