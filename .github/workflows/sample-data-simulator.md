@@ -316,6 +316,34 @@ Priya Patel: I'm still on the notification tray component, issue #63. Hit a snag
 - Vary the tone — some days are smooth, some have friction
 - Each standup should feel different from the last
 
+**Process discussion (1-2 times per week):**
+
+The **Process Analyzer** workflow reads these transcripts to detect changes
+to how the team works. To give it realistic material, **include process-related
+discussion in 1-2 standups per week.** Vary the topics — don't repeat the
+same process discussion across consecutive standups.
+
+Examples of process-relevant dialogue to include:
+- **Meeting cadence changes:** "Can we move design review to Thursday? Wednesday
+  is too early in the sprint to have designs ready."
+- **Triage process changes:** "I want to move to rotating triage duty — one person
+  per week handles daily triage instead of me doing it solo."
+- **SLA adjustments:** "We've been reviewing PRs within a few hours anyway — should
+  we tighten the SLA from 24 hours to 12?"
+- **Automation requests:** "I've been manually compiling release notes before every
+  GA launch. Can we automate that?" or "Can we set up a bot to flag stale issues?"
+- **Process pain points:** "The monthly stale issue cleanup is tedious — we have
+  40 issues that haven't been touched in two months."
+- **Role/responsibility shifts:** "David's going to start handling the QA sign-off
+  checklist instead of it being ad hoc."
+- **Tool changes:** "We're switching from Google Calendar to GitHub Projects for
+  on-call scheduling."
+- **Retro follow-ups:** "From last retro — we said we'd start doing async standups
+  on Fridays. Should we try that this sprint?"
+
+These should feel natural — like real team members raising process topics at
+the end of standup. Don't force every type into one transcript.
+
 **Commit the file:**
 
 Write the VTT file to the `transcripts/` directory. The `create-pull-request`

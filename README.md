@@ -37,7 +37,7 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 |----------|-------------|
 | [📋 Decision Log](.github/workflows/decision-log.md) | Daily scan of issue comments and meeting transcripts for decisions — creates a PR with individual decision record files in `/decisions/` |
 | [🎙️ Transcript Processor](.github/workflows/transcript-processor.md) | Triggered when `.txt` or `.vtt` files are pushed to `/transcripts/` — matches transcript content to open issues and posts summary comments |
-| [🔄 Process Analyzer](.github/workflows/process-analyzer.md) | Weekly analysis of meeting transcripts against `docs/how-we-work.md` — detects process drift, automation opportunities, and creates PRs to keep the how-we-work doc current |
+| [🔄 Process Analyzer](.github/workflows/process-analyzer.md) | Weekly retro + process analysis — posts a team retrospective discussion, detects process drift in transcripts vs `docs/how-we-work.md`, identifies automation opportunities, and creates update PRs |
 
 ### 📊 Leadership
 

@@ -60,6 +60,10 @@ All workflows can also be triggered on demand with `gh aw run <workflow-name>`.
 
 Workflows are idempotent. They check for existing sub-issues, labels, and comments before creating new ones. On a second run, existing content is updated in place rather than duplicated.
 
+### Can workflows conflict with each other?
+
+Yes — workflows that run on the same schedule or modify the same resources (issues, labels, discussions) can interfere. For example, Monday-morning workflows may read stale data if another workflow is still updating labels. The **Workflow Health** report includes a **Cross-Workflow Interactions** section that detects these conflicts automatically each week: concurrent runs, shared resource modifications, label churn, and cascade chains (one workflow's output triggering another). Check the Friday health report for any 🔴 high-risk interactions and follow the recommended mitigations.
+
 ### Will workflows create issues I don't want?
 
 Workflows only create sub-issues when their rubric or policy says one is needed. You control the criteria by editing the policy files. Sub-issues are always created as children of the relevant launch — they won't clutter your repo with orphaned issues.

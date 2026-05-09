@@ -19,7 +19,7 @@ implementation as GitHub Agentic Workflows.
 | # | Workflow | Description |
 |---|---------|-------------|
 | 2 | Unplanned Work Tracker | Detects mid-sprint scope creep, tracks ratio over time. |
-| 4 | Product Ops Health Dashboard | ✅ **Built** — Weekly agentic workflow health report with success rates, costs, and recommendations. |
+| 4 | Product Ops Health Dashboard | ✅ **Built** — Weekly agentic workflow health report with success rates, costs, cross-workflow interaction analysis, and recommendations. |
 | 6 | Stakeholder Feedback Synthesizer | Monthly synthesis of themes and sentiment from meeting notes. |
 | 7 | Process Retirement Auditor | Finds stale templates, unused labels, zero-engagement workflows. |
 | 8 | Cross-Team Dependency Radar | Surfaces conflicting timelines and blocked handoffs. |
@@ -55,4 +55,4 @@ implementation as GitHub Agentic Workflows.
 | # | Workflow | Description |
 |---|---------|-------------|
 | T1 | Transcript Processor | ✅ **Built** — Processes meeting transcripts, updates related issues. |
-| PA | Process Analyzer | ✅ **Built** — Weekly analysis of transcripts vs how-we-work doc. Detects process drift, automation candidates, and creates update PRs. |
+| PA | Process Analyzer | ✅ **Built** — Weekly retro + process analysis. Posts team retrospective discussion, detects transcript vs how-we-work drift, identifies automation candidates, creates update PRs. |
