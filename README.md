@@ -6,25 +6,21 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 
 ## 🎯 Who is this for?
 
-- **Product Managers** — track launches, monitor feature health, keep roadmaps honest
-- **Product Operations** — surface risks, automate status reporting, keep processes running
-- **Compliance & Governance** — audit trails, policy checks, regulatory readiness
+- **DRIs / Product Managers** — track launches, monitor feature health, keep roadmaps honest
+- **Downstream / Compliance Teams** — domain sign-offs, audit trails, policy checks
+- **Leaders** — launch pipeline visibility, risk dashboards, trend analysis
 
 ## 📂 Available Workflows
 
 ### 🚢 Launch Tracking
 
-Workflows that help teams ship with confidence and visibility.
-
 | Workflow | Description |
 |----------|-------------|
-| 🚦 Launch Readiness Checker | Scan issues/PRs against a launch checklist and report go/no-go status |
+| [🚦 Launch Readiness Checker](.github/workflows/launch-readiness.md) | Weekly readiness report across all launches — completeness, risk, blockers, sign-offs |
 | 📋 Launch Countdown | Daily digest of remaining launch blockers with timeline risk assessment |
 | 📣 Launch Announcement Drafter | Auto-draft release comms from merged PRs and closed issues |
 
 ### 🏥 Health & Risk
-
-Workflows that surface problems before they become fires.
 
 | Workflow | Description |
 |----------|-------------|
@@ -34,38 +30,17 @@ Workflows that surface problems before they become fires.
 
 ### ✅ Compliance
 
-Workflows that keep your repos audit-ready and policy-compliant.
-
 | Workflow | Description |
 |----------|-------------|
 | 📝 Policy Gate | Verify PRs include required sign-offs, labels, or documentation before merge |
 | 🔍 Audit Log Generator | Produce periodic compliance reports from repo activity |
 | 📜 License & Attribution Checker | Scan dependencies for license compliance and flag issues |
 
-## 🛠️ Getting Started
+## 📖 Documentation
 
-### Prerequisites
-
-- [GitHub CLI](https://cli.github.com/) (`gh`)
-- [Agentic Workflows CLI extension](https://github.com/github/gh-aw) (`gh extension install github/gh-aw`)
-
-### Setup
-
-```bash
-# Clone this repo
-gh repo clone chrizbo/agentics-beyond-code
-cd agentics-beyond-code
-
-# Initialize agentic workflows (if not already done)
-gh aw init
-
-# Add a workflow to your repo
-gh aw add workflows/launch-readiness.md
-
-# Compile and run
-gh aw compile
-gh aw run launch-readiness
-```
+- **[Getting Started](docs/setup.md)** — prerequisites, installation, and first run
+- **[How It Works](docs/how-it-works.md)** — architecture, issue hierarchy, and customization
+- **[Planning & Roadmap](docs/plan.md)** — brainstorm, workflow ideas, and open questions
 
 ## 🤝 Contributing
 

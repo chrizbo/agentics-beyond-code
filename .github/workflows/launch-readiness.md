@@ -39,7 +39,6 @@ tools:
 safe-outputs:
   mentions: false
   allowed-github-references: []
-  max-bot-mentions: 0
   create-discussion:
     title-prefix: "[Launch Readiness] "
     category: "Announcements"
