@@ -113,13 +113,13 @@ grep -v '^WEBVTT' <file> | grep -v '^[0-9][0-9]:[0-9][0-9]' | grep -v '^\s*$' | 
 
 Extract **all** content, but categorize it into two buckets:
 
-**Bucket A — Work activity** (for the retro):
-- Status updates on issues and tasks
-- Blockers and risks raised
-- Decisions about technical or product direction
-- Collaboration mentions (pairing, reviews, handoffs)
-- Wins and completions
-- Frustrations or morale signals
+**Bucket A — How the team is working** (for the retro):
+- Collaboration patterns (pairing, handoffs, cross-team dependencies)
+- Blockers and what's causing them (process gaps, dependencies, tooling)
+- Communication patterns (async vs sync, where discussions happen)
+- Morale and energy signals (frustration, excitement, fatigue, friction)
+- How decisions are being made (who's involved, where they happen)
+- Meeting effectiveness signals (standups running long, ceremonies skipped)
 
 **Bucket B — Process activity** (for drift detection and automation):
 - Mentions of how the team works, meeting changes, cadence adjustments
@@ -130,7 +130,11 @@ Extract **all** content, but categorize it into two buckets:
 
 ### Step 4: Generate the Weekly Retro
 
-Synthesize Bucket A content across all transcripts into a team retrospective.
+Synthesize Bucket A content across all transcripts into a team retrospective
+focused on **how the team is doing its work** — not what it shipped. The
+Weekly Status workflow already covers shipped work. This retro is about
+working patterns, collaboration health, and process effectiveness.
+
 This is posted as a GitHub Discussion so the team can react and comment.
 
 **Discussion format:**
@@ -138,41 +142,52 @@ This is posted as a GitHub Discussion so the team can react and comment.
 ```markdown
 ## 📅 Weekly Retro — Week of YYYY-MM-DD
 
-### 🚀 What Shipped
-<Bulleted list of tasks, epics, or launches that were completed or closed
-this week, based on what people reported in standups.>
+### 🤝 Collaboration & Communication
+<How is the team working together this week? Observations about:>
+- Pairing patterns (who's working with whom, cross-functional collaboration)
+- Handoff effectiveness (smooth or causing delays)
+- Where decisions are happening (standup, async, ad-hoc syncs)
+- Communication channel usage (are the right conversations in the right places)
 
-### 🚧 What's In Progress
-<Major work streams that are actively being worked on. Note who's doing what
-and any notable progress.>
+### 🚧 What's Getting in the Way
+<Process-level blockers and friction — not task-level blockers. Examples:>
+- Recurring dependency patterns that slow people down
+- Tooling or infrastructure pain points
+- Process steps that cause delays or frustration
+- Information gaps (people not knowing what they need to know)
 
-### 🚫 Blockers & Risks
-<Blockers mentioned in standups. Include who raised them and what they're
-waiting on. Flag recurring blockers that appeared in multiple standups.>
+### 🌡️ Team Energy
+<Qualitative read on how the team is feeling based on tone and language:>
+- Signs of momentum or excitement
+- Signs of fatigue, frustration, or overload
+- Shifts from previous weeks
 
-### 💬 Team Themes
-<Qualitative observations about how the week went. Examples:>
-- Collaboration patterns (who's pairing with whom, cross-team dependencies)
-- Morale signals (frustration, excitement, fatigue)
-- Recurring topics that came up across multiple standups
+### 🔄 Process Health
+<How well are the team's documented processes working?>
+- Which processes are working well (people follow them naturally)
+- Which processes are being worked around or ignored
+- New informal practices emerging that aren't documented yet
+- Process changes discussed or decided this week
 
-### 🔄 Process Observations
-<Brief summary of any process-related discussion — meeting changes proposed,
-SLA adjustments, automation requests. Link to the PR or issues created below
-if applicable.>
+### 💡 Observations & Suggestions
+<Patterns worth noting or acting on:>
+- Repeated themes across multiple standups
+- Opportunities to improve how the team works
+- Things the team should consider discussing in their next retro
 
-### 📊 By the Numbers
+### 📊 Week at a Glance
 | Metric | Count |
 |--------|-------|
 | Standups analyzed | N |
-| Issues referenced | N |
-| Blockers raised | N |
-| Decisions made | N |
+| Process topics raised | N |
+| Blockers with process root causes | N |
+| Collaboration touchpoints | N |
 
 ---
 
 *Auto-generated from this week's meeting transcripts by the Process Analyzer
-workflow. Add your own reflections in the comments!*
+workflow. This is about how we work, not what we shipped. Add your own
+reflections in the comments!*
 ```
 
 Post the retro as a discussion:
