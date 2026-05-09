@@ -121,7 +121,69 @@ For each workflow, assign a health status:
 | 🔴 Critical | Success rate < 50%, or completely non-functional |
 | ⚪ Inactive | No runs in the last 7 days |
 
-### Step 5: Generate Recommendations
+### Step 5: Analyze Cross-Workflow Interactions
+
+After gathering run data for all workflows, analyze how they interact with each
+other. This step detects conflicts, race conditions, and cascading effects.
+
+#### 5a: Detect Temporal Overlaps
+
+For each pair of workflows that ran in the last 7 days, check whether any runs
+overlapped in time or started within 30 minutes of each other:
+
+```bash
+# For each workflow's runs, compare start/end times against other workflows' runs
+# Flag pairs where run windows overlap or are within 30 minutes
+```
+
+Produce a list of **concurrent run pairs** — two workflows whose runs overlapped
+or were near-simultaneous. Pay special attention to workflows scheduled on the
+same day (e.g., multiple Monday-morning workflows).
+
+#### 5b: Detect Shared Resource Modifications
+
+For each workflow run, check the Actions run logs or timeline to identify which
+GitHub resources were modified (issues commented on, labels added/removed,
+discussions created, PRs opened). Then cross-reference:
+
+- **Issues touched by multiple workflows** in the same 24-hour window — list
+  the issue number and which workflows touched it.
+- **Labels added or removed by multiple workflows** on the same issue — flag
+  any label that was added by one workflow and removed (or overwritten) by
+  another.
+- **Discussions created in the same category** by multiple workflows on the same
+  day — note if naming collisions or duplicate topics could occur.
+
+Use the run IDs from Step 2 to inspect job logs:
+
+```bash
+gh run view <run-id> \
+  --repo "${{ github.repository }}" \
+  --log 2>/dev/null | grep -iE "(label|comment|issue|discussion|created)" | head -30
+```
+
+#### 5c: Identify Cascade Chains
+
+Detect when one workflow's output triggers another workflow:
+
+1. Look for `push` or `issues:labeled` triggered runs that started shortly
+   after a scheduled or `workflow_dispatch` run of a different workflow.
+2. Map the chain: e.g., `sample-data-simulator` → creates transcript →
+   triggers `transcript-processor` → adds label → triggers `compliance-review`.
+
+Document each cascade chain with timestamps and run IDs.
+
+#### 5d: Assess Interaction Risk
+
+For each detected interaction, assign a risk level:
+
+| Risk | Criteria |
+|------|----------|
+| 🔴 High | Two workflows modified the same resource concurrently, or a label/state was overwritten |
+| 🟡 Medium | Workflows ran concurrently on shared resources but no conflict observed this week |
+| 🟢 Low | Workflows touched the same resource in the same day but at different times with no conflict |
+
+### Step 6: Generate Recommendations
 
 Analyze the data and produce actionable recommendations:
 
@@ -140,7 +202,12 @@ Analyze the data and produce actionable recommendations:
 - Opportunities to reduce timeout-minutes settings
 - Workflows that could be consolidated
 
-### Step 6: Generate the Discussion Post
+**Cross-workflow conflicts:**
+- Workflows that should be staggered to avoid concurrent resource modification
+- Cascade chains that could cause unintended side effects
+- Label or state management conflicts that need coordination rules
+
+### Step 7: Generate the Discussion Post
 
 Create **one discussion** with the following structure.
 
@@ -196,6 +263,44 @@ For each degraded/critical workflow:
 
 ---
 
+### 🔄 Cross-Workflow Interactions
+
+> **{N} interactions detected** · **{X} high risk** · **{Y} cascade chains**
+
+#### Concurrent Runs
+
+| Time Window | Workflow A | Workflow B | Shared Resources | Risk |
+|-------------|-----------|-----------|-----------------|------|
+| YYYY-MM-DD HH:MM | workflow-a | workflow-b | issues #X, #Y | 🔴/🟡/🟢 |
+
+#### Resource Conflicts
+
+[Only include if any issues/labels were modified by multiple workflows]
+
+- **Issue #N**: Modified by `workflow-a` (run [§ID]) and `workflow-b` (run [§ID]) within X minutes
+- **Label `label-name`**: Added by `workflow-a`, removed by `workflow-b` on issue #N
+
+#### Cascade Chains
+
+[Only include if cascade triggers were detected]
+
+```
+workflow-a (scheduled) → creates transcript → triggers workflow-b → adds label → triggers workflow-c
+  Run §ID₁ (HH:MM) → Run §ID₂ (HH:MM) → Run §ID₃ (HH:MM)
+```
+
+<details>
+<summary>Interaction Analysis Methodology</summary>
+
+- Temporal overlaps: Runs starting within 30 minutes of each other
+- Resource conflicts: Same issue/PR modified by multiple workflow runs in 24h
+- Cascade detection: Event-triggered runs starting shortly after another workflow's completion
+- Risk levels: 🔴 concurrent modification, 🟡 potential conflict, 🟢 low risk
+
+</details>
+
+---
+
 ### 🛠️ Recommendations
 
 #### Efficiency
@@ -210,6 +315,10 @@ For each degraded/critical workflow:
 - Recommendation 1
 - Recommendation 2
 
+#### Cross-Workflow Conflicts
+- Recommendation 1 (e.g., stagger Monday schedules)
+- Recommendation 2 (e.g., add coordination guards)
+
 ---
 
 <details>
@@ -220,7 +329,7 @@ Per-workflow breakdown of every run with ID, trigger, conclusion, and duration.
 </details>
 ```
 
-### Step 7: Handle Edge Cases
+### Step 8: Handle Edge Cases
 
 - If a workflow has **no runs** in the 7-day window, mark it ⚪ Inactive and
   note when its last run occurred (if discoverable).
