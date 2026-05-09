@@ -210,10 +210,8 @@ Write a comment that is:
 ```markdown
 ## 🔍 Assumptions Worth Discussing
 
-I found **N assumptions** in this [issue/PR] that might be worth making
-explicit. These aren't criticisms — they're invitations to align.
-
-### 🔴 High Risk
+I found **N high-risk assumption(s)** in this [issue/PR] that might be
+worth making explicit. These aren't criticisms — they're invitations to align.
 
 #### 1. <Assumption name>
 
@@ -225,26 +223,6 @@ explicit. These aren't criticisms — they're invitations to align.
 
 **Question for the team:** <specific question that invites interpretation,
 not just a yes/no>
-
----
-
-### 🟡 Medium Risk
-
-#### 2. <Assumption name>
-
-> "<quoted text>"
-
-**The assumption:** <description>
-
-**Question:** <question>
-
----
-
-### 🟢 Low Risk
-
-<Brief list format for low-risk items — no need for full detail>
-
-- **<Assumption>**: "<quoted text>" → <question>
 
 ---
 
@@ -263,7 +241,8 @@ your perspective — that's how shared understanding forms.*
 
 ### Step 6: Post or Skip
 
-**Post a comment** if you found at least one 🔴 or 🟡 assumption.
+**Post a comment** if you found at least one 🔴 high-risk assumption.
+Only include high-risk assumptions in the comment — skip medium and low risk.
 Also add the `assumptions-surfaced` label so the team can track which
 issues have been reviewed.
 
@@ -321,9 +300,8 @@ issues have been reviewed.
 Every comment body MUST end with:
 
 ```markdown
----
-
-### 🧾 Workflow Run Cost
+<details>
+<summary>🧾 Workflow Run Cost</summary>
 
 | Metric | Value |
 |--------|-------|
@@ -334,4 +312,6 @@ Every comment body MUST end with:
 | Estimated cost | $X.XX |
 
 *Cost estimate based on current Copilot pricing. Actual billing may vary.*
+
+</details>
 ```
