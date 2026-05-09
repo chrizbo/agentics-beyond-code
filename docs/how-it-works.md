@@ -304,7 +304,7 @@ without modifying the workflow itself.
 
 The workflow health report gives the team visibility into how the agentic
 workflows themselves are performing — success rates, failure patterns, cost
-estimates, and actionable recommendations.
+estimates, cross-workflow interaction analysis, and actionable recommendations.
 
 ### How it works
 
@@ -315,7 +315,8 @@ The **Workflow Health workflow** (`workflow-health.md`) runs weekly and:
 3. Calculates success rates, average durations, and trigger breakdowns
 4. Estimates costs based on runner minutes and premium request counts
 5. Assigns a health status to each workflow (🟢 Healthy → 🔴 Critical)
-6. Generates recommendations for efficiency, reliability, and cost optimization
+6. Analyzes cross-workflow interactions — temporal overlaps, shared resource conflicts, and cascade chains
+7. Generates recommendations for efficiency, reliability, cost optimization, and conflict resolution
 
 ### Health status levels
 
@@ -333,7 +334,8 @@ The discussion includes:
 - **Overall Health Summary** — table of all workflows with run counts, success rates, durations, and health status
 - **Critical & Degraded Workflows** — details on failing workflows with run links and investigation suggestions
 - **Cost Summary** — runner minutes and estimated premium requests per workflow
-- **Recommendations** — specific, data-backed suggestions for efficiency, reliability, and cost optimization
+- **Cross-Workflow Interactions** — concurrent run detection, shared resource conflicts (issues/labels modified by multiple workflows), cascade chain mapping (one workflow triggering another), and risk assessment (🔴 high / 🟡 medium / 🟢 low)
+- **Recommendations** — specific, data-backed suggestions for efficiency, reliability, cost optimization, and cross-workflow conflict resolution
 
 ### What it doesn't need
 
@@ -409,7 +411,7 @@ All workflows share the same `fetch-launch-data.sh` pre-step for data fetching.
 | **GTM Content** | Monday ~8 AM PT · Manual | Changelog draft and roadmap item sub-issues per launch | DRIs, marketing, comms |
 | **Decision Log** | Daily ~midnight PT · Manual | PR with individual markdown decision records in `/decisions/` | PMs, DRIs, leaders |
 | **Weekly Status** | Friday ~8 AM PT · Manual | Discussion with What Shipped, What We Learned, FYI, and SOS sections | Leaders, senior stakeholders |
-| **Workflow Health** | Friday ~8 AM PT · Manual | Discussion with success rates, failure patterns, cost estimates, and efficiency recommendations for all agentic workflows | Leaders, ops |
+| **Workflow Health** | Friday ~8 AM PT · Manual | Discussion with success rates, failure patterns, cost estimates, cross-workflow interaction analysis, and recommendations for all agentic workflows | Leaders, ops |
 | **Transcript Processor** | On push to `/transcripts/` · Manual | Comments on matched issues with meeting context, decisions, action items | PMs, DRIs |
 | **Sample Data Simulator** | Daily ~11 PM PT · Manual | Creates launches, closes tasks, advances phases, adds comments | Demo only — not needed for production |
 
@@ -436,8 +438,9 @@ On a typical week:
 6. **Weekly Status** — rolls up all activity into a single leadership status
    post with What Shipped, What We Learned, FYI, and SOS sections.
 7. **Workflow Health** — analyzes all agentic workflow runs from the past week,
-   reports success rates, failure patterns, cost estimates, and generates
-   recommendations for efficiency and reliability improvements.
+   reports success rates, failure patterns, cost estimates, detects cross-workflow
+   conflicts and cascade chains, and generates recommendations for efficiency,
+   reliability, and conflict resolution.
 
 **On push to `/transcripts/`:**
 7. **Transcript Processor** — matches transcript content to open issues and
