@@ -46,6 +46,8 @@ safe-outputs:
     labels: [gtm]
     max: 10
     expires: false
+  update-issue:
+    max: 10
   link-sub-issue:
     max: 10
   add-comment:
@@ -148,7 +150,6 @@ Even early-stage launches should have a roadmap presence.
 ### 🗺️ Public Roadmap Item
 
 **Launch:** #{launch_number} — {launch title}
-**Phase:** {phase} · **Target:** {target date}
 **Status:** 🔄 Draft — auto-generated, edit before publishing
 
 ---
@@ -161,14 +162,11 @@ customer problem being solved. Follow the voice & tone policy.}
 **Who it's for:** {Target audience in one sentence}
 
 **What's planned:**
-- {Scope item 1 — derived from epics/sub-issues}
+- {Scope item 1 — described in user-facing language}
 - {Scope item 2}
 - {Scope item 3}
 
-**Current status:** {Phase} — {brief status based on completeness %
-and key milestones}
-
-**Expected availability:** {Target date or quarter}
+**Expected availability:** {Quarter and year, e.g. "Q3 2026"}
 
 ---
 
@@ -197,7 +195,8 @@ For each OPEN launch:
    `[GTM] Changelog draft — ...`)
 2. Check if a roadmap sub-issue already exists (title matches
    `[GTM] Roadmap item — ...`)
-3. Determine which content needs to be created vs. updated
+3. Determine which content needs to be **created** (no existing sub-issue)
+   vs. **updated** (existing sub-issue found — edit its body in place)
 
 **Creation rules:**
 - **Roadmap item:** Create for ALL open launches (any phase)
@@ -213,30 +212,31 @@ For each launch needing new GTM sub-issues:
    - Translate internal/technical scope into user-facing language
    - Extract key features from epic and task titles
    - Derive the user benefit from the launch summary and customer impact
-   - Use the completeness stats to describe current status
+   - For roadmap items, convert the target date to a quarter (e.g. Q3 2026)
+   - **Do NOT include internal status, completion percentages, or work-item
+     breakdowns in roadmap items.** These are customer-facing.
 4. Create the sub-issue with the `gtm` label
 
 ### Step 4: Update Existing Content
 
-For launches that already have GTM sub-issues, check if the content needs
-refreshing based on changes since the last update:
+For launches that already have GTM sub-issues, regenerate the content
+using the latest launch data and **update the issue body directly** using
+`edit-issue`. This ensures the GTM sub-issue always reflects the current
+state of the launch — no manual merging required.
 
+**When to update:**
 - Phase changed (e.g., moved from Alpha to Beta)
 - Significant completeness change (>20% increase)
 - New epics or major scope additions
-- Target date changed
+- Target date / quarter changed
 
-If updates are needed, post a comment on the existing GTM sub-issue with
-the refreshed content. Use this marker:
-
-```
-<!-- gtm-refresh -->
-```
-
-The comment should include:
-- What changed since the last version
-- The updated content (full replacement draft)
-- A note asking the DRI to review and merge changes into the main body
+**How to update:**
+1. Regenerate the full body content from scratch using current launch data
+2. Use `update_issue` with `operation: "replace"` to replace the issue body
+   with the refreshed content
+3. **Do NOT create a new sub-issue** — always update the existing one
+4. Optionally add a brief comment noting what changed (e.g., "Updated:
+   phase changed from Alpha → Beta, added new scope items")
 
 ### Step 5: Add Labels
 
@@ -269,15 +269,18 @@ Launch #Z — [Title] (GA, target 2026-06-01)
 ## Guidelines
 
 - **Write for customers, not for internal teams.** Strip internal jargon,
-  project codenames, and technical implementation details.
+  project codenames, technical implementation details, completion percentages,
+  and internal work-item status from roadmap items. Show only a quarter for
+  expected availability — never a specific target date.
 - **Be accurate about scope.** Only include features that are actually in
   the launch's sub-issues. Don't invent or assume features.
 - **Respect the DRI.** These are drafts. Make it clear they need human
   review before publishing. Never publish directly.
 - **Keep it fresh.** The weekly refresh ensures roadmap items reflect
   reality. Stale roadmap items erode trust.
-- **Don't duplicate.** If a GTM sub-issue already exists and nothing
-  material changed, skip it.
+- **Don't duplicate.** If a GTM sub-issue already exists, update its body
+  in place with `update_issue`. Never create a second sub-issue for the same
+  launch and content type.
 - **Match the voice.** Re-read the voice & tone policy before writing.
   The content should sound like it comes from the same person every time.
 

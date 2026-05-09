@@ -49,6 +49,8 @@ safe-outputs:
     labels: [compliance-review]
     max: 12
     expires: false
+  update-issue:
+    max: 12
   link-sub-issue:
     max: 12
   add-comment:
@@ -207,8 +209,9 @@ create a sub-issue under the launch issue.
 **Detecting existing sub-issues:**
 Before creating, check the launch's existing sub-issues for any whose title
 matches the pattern `[{Team}] Compliance Review — ...` (e.g.,
-`[Security] Compliance Review — GDPR Data Export`). If one exists, skip
-creation for that team. Also check if the sub-issue is closed — a closed
+`[Security] Compliance Review — GDPR Data Export`). If one exists, **update
+its body** using `update_issue` with `operation: "replace"` instead of
+creating a new one. Also check if the sub-issue is closed — a closed
 sub-issue means the review was completed.
 
 **Sub-issue configuration:**
