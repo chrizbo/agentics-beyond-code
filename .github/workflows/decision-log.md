@@ -33,7 +33,7 @@ steps:
 tools:
   github:
     mode: gh-proxy
-    toolsets: [default]
+    toolsets: [default, issues]
     lockdown: false
     min-integrity: none
 
