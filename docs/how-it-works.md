@@ -173,6 +173,7 @@ compliance teams before shipping. It consists of two workflows and four policy f
    - Creates **compliance review sub-issues** under the launch for each team
      that needs a review, pre-filled with tailored review questions, checklists,
      and context inferred from the launch
+   - Updates existing open sub-issues in place when the launch changes
 
 2. **Compliance Team Reports workflow** (`compliance-team-reports.md`) generates
    a weekly discussion for each compliance team showing:
@@ -220,12 +221,14 @@ it's time to announce a feature or update the public roadmap.
 
 The **GTM Content workflow** (`gtm-content.md`) runs weekly and:
 
-1. Evaluates each open launch's phase, scope, and completeness
+1. Evaluates each open launch's phase, scope, and content
 2. Creates two sub-issues per launch (when appropriate):
    - **📣 Changelog draft** — a customer-facing announcement post (Alpha+ only)
    - **🗺️ Roadmap item** — a forward-looking description for public roadmaps (all phases)
-3. Refreshes existing drafts when the launch changes significantly (phase
-   transition, major scope change, target date shift)
+3. Updates existing sub-issues in place when the launch changes significantly
+   (phase transition, major scope change, target quarter shift)
+4. Roadmap items show only a **quarter** for expected availability — never
+   specific dates or internal status
 
 All content follows the **voice & tone policy** (`voice-and-tone-policy.md`),
 which defines the org's writing style: friendly, benefit-led, specific, and

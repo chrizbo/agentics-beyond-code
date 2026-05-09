@@ -104,10 +104,8 @@ The following labels are used by workflows. Create them in your repository:
 - `ready-for-review` — ready for domain team review
 
 **Domain tracking labels:**
-- `needs:security`, `needs:legal`, `needs:docs`, `needs:support`
-- `needs:privacy`, `needs:accessibility`, `needs:responsible-ai`
-- `approved:security`, `approved:legal`, `approved:docs`
-- `approved:privacy`, `approved:accessibility`, `approved:responsible-ai`
+- `needs:security`, `needs:privacy`, `needs:accessibility`, `needs:responsible-ai`
+- `approved:security`, `approved:privacy`, `approved:accessibility`, `approved:responsible-ai`
 
 **Compliance labels:**
 - `compliance-review` — marks compliance review sub-issues (auto-created by workflow)

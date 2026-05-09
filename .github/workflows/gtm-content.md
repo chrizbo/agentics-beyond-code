@@ -221,14 +221,13 @@ For each launch needing new GTM sub-issues:
 
 For launches that already have GTM sub-issues, regenerate the content
 using the latest launch data and **update the issue body directly** using
-`edit-issue`. This ensures the GTM sub-issue always reflects the current
+`update_issue`. This ensures the GTM sub-issue always reflects the current
 state of the launch — no manual merging required.
 
 **When to update:**
 - Phase changed (e.g., moved from Alpha to Beta)
-- Significant completeness change (>20% increase)
 - New epics or major scope additions
-- Target date / quarter changed
+- Target quarter changed
 
 **How to update:**
 1. Regenerate the full body content from scratch using current launch data

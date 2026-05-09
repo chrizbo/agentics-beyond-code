@@ -209,10 +209,11 @@ create a sub-issue under the launch issue.
 **Detecting existing sub-issues:**
 Before creating, check the launch's existing sub-issues for any whose title
 matches the pattern `[{Team}] Compliance Review — ...` (e.g.,
-`[Security] Compliance Review — GDPR Data Export`). If one exists, **update
-its body** using `update_issue` with `operation: "replace"` instead of
-creating a new one. Also check if the sub-issue is closed — a closed
-sub-issue means the review was completed.
+`[Security] Compliance Review — GDPR Data Export`). If one exists and is
+**open**, **update its body** using `update_issue` with `operation: "replace"`
+instead of creating a new one. If one exists but is **closed**, it means the
+review was previously completed — create a new sub-issue only if the launch
+scope has changed significantly enough to warrant a fresh review.
 
 **Sub-issue configuration:**
 - **Title:** `[{Team}] Compliance Review — {Launch Title without [Launch] prefix}`
