@@ -151,6 +151,16 @@ read like real status updates from team members:
 - "Discovered edge case with timezone handling, investigating"
 - "Pairing with backend team on the integration layer"
 
+**Include at least one decision comment per run.** One of the progress comments
+should document a decision that was made. Use natural decision language:
+- "After discussion with the team, we decided to go with WebSockets over SSE for the real-time layer."
+- "We evaluated Redis and Memcached — going with Redis because we need pub/sub."
+- "Agreed to descope the bulk export feature from this launch to hit the deadline."
+- "After benchmarking, we're choosing Postgres full-text search over Elasticsearch for v1."
+
+These should read like a person recording a decision in the issue thread, not a
+formal decision document. The decision-log workflow will pick these up.
+
 ### 3. Close an Epic When All Tasks Are Done (every run)
 
 Check each open epic. If **all its child tasks are closed**, close the epic
@@ -296,6 +306,11 @@ Priya Patel: I'm still on the notification tray component, issue #63. Hit a snag
 **Key rules:**
 - Reference **3-5 real open issues** by number and title naturally in conversation
 - Include at least one blocker or risk mentioned by someone
+- **Include at least one decision** — have someone announce or confirm a decision
+  made by the team. Examples:
+  - "We talked it over and decided to use a polling approach instead of WebSockets for the dashboard."
+  - "Sarah and I agreed yesterday — we're going with the phased rollout. Feature flag first, then 10% canary."
+  - "Quick update — we're dropping the CSV export from this sprint. Agreed to push it to next launch."
 - Keep it conversational and natural — not robotic
 - Vary the tone — some days are smooth, some have friction
 - Each standup should feel different from the last
