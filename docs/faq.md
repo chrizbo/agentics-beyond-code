@@ -48,6 +48,7 @@ Edit `.github/policies/voice-and-tone-policy.md`. The GTM Content workflow reads
 | GTM Content | Monday ~8 AM PT | Yes |
 | Decision Log | Daily on weekdays | Yes |
 | Weekly Status | Friday ~8 AM PT | Yes |
+| Workflow Health | Friday ~8 AM PT | Yes |
 | Transcript Processor | On push to `/transcripts/` | Yes |
 | Sample Data Simulator | Daily on weekdays | Yes |
 

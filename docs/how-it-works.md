@@ -95,6 +95,7 @@ Workflows define the **general pattern** (e.g., "assess readiness against a poli
     compliance-team-reports.md       ← Per-team compliance digests (weekly)
     gtm-content.md                   ← Changelog drafts + roadmap items (weekly)
     weekly-status.md                 ← Leadership status rollup (weekly)
+    workflow-health.md               ← Agentic workflow health & cost report (weekly)
     decision-log.md                  ← Decision detection + PR creation (daily)
     transcript-processor.md          ← Transcript → issue comments (on push)
   policies/
@@ -297,6 +298,47 @@ The policy at `.github/policies/weekly-status-policy.md` defines:
 Leaders can customize the policy to adjust what surfaces in each section
 without modifying the workflow itself.
 
+## Workflow Health Report
+
+The workflow health report gives the team visibility into how the agentic
+workflows themselves are performing — success rates, failure patterns, cost
+estimates, and actionable recommendations.
+
+### How it works
+
+The **Workflow Health workflow** (`workflow-health.md`) runs weekly and:
+
+1. Identifies all agentic workflows (`.md` files in `.github/workflows/`)
+2. Fetches run data from the last 7 days for each workflow via `gh run list`
+3. Calculates success rates, average durations, and trigger breakdowns
+4. Estimates costs based on runner minutes and premium request counts
+5. Assigns a health status to each workflow (🟢 Healthy → 🔴 Critical)
+6. Generates recommendations for efficiency, reliability, and cost optimization
+
+### Health status levels
+
+| Status | Criteria |
+|--------|----------|
+| 🟢 Healthy | Success rate ≥ 90%, no recurring failures |
+| 🟡 Needs Attention | Success rate 70–89%, or occasional failures |
+| 🟠 Degraded | Success rate 50–69%, or recurring failure pattern |
+| 🔴 Critical | Success rate < 50%, or completely non-functional |
+| ⚪ Inactive | No runs in the last 7 days |
+
+### Report sections
+
+The discussion includes:
+- **Overall Health Summary** — table of all workflows with run counts, success rates, durations, and health status
+- **Critical & Degraded Workflows** — details on failing workflows with run links and investigation suggestions
+- **Cost Summary** — runner minutes and estimated premium requests per workflow
+- **Recommendations** — specific, data-backed suggestions for efficiency, reliability, and cost optimization
+
+### What it doesn't need
+
+Unlike most other workflows in this repo, the Workflow Health report does **not**
+use the `fetch-launch-data.sh` pre-step or read from GitHub Projects. It works
+entirely from GitHub Actions run data via the `gh` CLI.
+
 ## Decision Log System
 
 The decision log system captures decisions as they happen — from issue comments
@@ -365,6 +407,7 @@ All workflows share the same `fetch-launch-data.sh` pre-step for data fetching.
 | **GTM Content** | Monday ~8 AM PT · Manual | Changelog draft and roadmap item sub-issues per launch | DRIs, marketing, comms |
 | **Decision Log** | Daily on weekdays · Manual | PR with individual markdown decision records in `/decisions/` | PMs, DRIs, leaders |
 | **Weekly Status** | Friday ~8 AM PT · Manual | Discussion with What Shipped, What We Learned, FYI, and SOS sections | Leaders, senior stakeholders |
+| **Workflow Health** | Friday ~8 AM PT · Manual | Discussion with success rates, failure patterns, cost estimates, and efficiency recommendations for all agentic workflows | Leaders, ops |
 | **Transcript Processor** | On push to `/transcripts/` · Manual | Comments on matched issues with meeting context, decisions, action items | PMs, DRIs |
 | **Sample Data Simulator** | Daily on weekdays · Manual | Creates launches, closes tasks, advances phases, adds comments | Demo only — not needed for production |
 
@@ -390,6 +433,9 @@ On a typical week:
 **Friday (~8 AM PT):**
 6. **Weekly Status** — rolls up all activity into a single leadership status
    post with What Shipped, What We Learned, FYI, and SOS sections.
+7. **Workflow Health** — analyzes all agentic workflow runs from the past week,
+   reports success rates, failure patterns, cost estimates, and generates
+   recommendations for efficiency and reliability improvements.
 
 **On push to `/transcripts/`:**
 7. **Transcript Processor** — matches transcript content to open issues and
@@ -417,6 +463,7 @@ label is added to an issue, so new launches get evaluated immediately.
 - **Weekly status policy** — `.github/policies/weekly-status-policy.md` defining report sections, bullet format, and audience guidelines
 - **Decision Log workflow** — `.github/workflows/decision-log.md` scanning comments and transcripts for decisions, creating PRs with markdown records in `/decisions/`
 - **Transcript Processor workflow** — `.github/workflows/transcript-processor.md` matching transcripts to open issues and posting summary comments
+- **Workflow Health report** — `.github/workflows/workflow-health.md` analyzing agentic workflow runs for success rates, failure patterns, cost estimates, and efficiency recommendations
 - **Workflow Ideas catalog** — `docs/workflow-ideas.md` with 20 future workflow ideas for PM, ops, compliance, and GTM
 
 ### 🔜 Next
