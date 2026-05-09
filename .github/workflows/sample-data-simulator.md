@@ -11,6 +11,7 @@ on:
 permissions:
   contents: read
   issues: read
+  pull-requests: read
 
 strict: true
 timeout-minutes: 15
@@ -54,6 +55,13 @@ safe-outputs:
     max: 20
     project: "https://github.com/users/chrizbo/projects/1"
     github-token: ${{ secrets.AW_TOKEN }}
+  create-pull-request:
+    title-prefix: "ai: "
+    labels: [transcript]
+    auto-merge: true
+    allowed-files:
+      - "transcripts/**"
+    protected-files: allowed
 ---
 
 # Sample Data Simulator
@@ -233,6 +241,74 @@ For launches in Alpha or Beta phase, occasionally update the Risk Level field:
 - If a launch has stale tasks (no comments in >5 days), bump risk to Medium or High
 - If a launch is making steady progress, keep or lower risk to Low
 
+### 8. Generate a Standup Transcript (every run)
+
+Generate a fake WebVTT standup meeting transcript and commit it to the repo.
+This feeds the **transcript-processor** workflow, which will automatically
+trigger and post issue comments based on the meeting content.
+
+**Cast of characters** (rotate 3-4 per standup):
+- **Sarah Chen** — Engineering Manager
+- **Marcus Johnson** — Senior Backend Engineer
+- **Priya Patel** — Frontend Engineer
+- **David Kim** — QA Lead
+- **Alex Rivera** — DevOps Engineer
+- **Jordan Taylor** — Product Designer
+
+**Format:** Write a realistic 3-5 minute standup in WebVTT format. Each person
+gives a brief update on what they did, what they're working on, and any blockers.
+Reference **real open issues by number and title** from the project data so the
+transcript processor can match them.
+
+**Example VTT structure:**
+```
+WEBVTT
+
+1
+00:00:01.000 --> 00:00:05.500
+Sarah Chen: Alright, let's get started. Marcus, you're up first.
+
+2
+00:00:06.000 --> 00:00:18.000
+Marcus Johnson: Yeah, so yesterday I wrapped up the WebSocket server auth — that's issue #61. Tests are green. Today I'm picking up the event fanout system, issue #62.
+
+3
+00:00:18.500 --> 00:00:30.000
+Priya Patel: I'm still on the notification tray component, issue #63. Hit a snag with the badge count not updating in real time. Might need Marcus's help once the fanout piece is in.
+```
+
+**Key rules:**
+- Reference **3-5 real open issues** by number and title naturally in conversation
+- Include at least one blocker or risk mentioned by someone
+- Keep it conversational and natural — not robotic
+- Vary the tone — some days are smooth, some have friction
+- Each standup should feel different from the last
+
+**Commit the file:**
+
+Write the VTT file to the `transcripts/` directory. The `create-pull-request`
+safe output will automatically detect the new file and create a PR for it.
+
+```bash
+DATE=$(date +%Y-%m-%d)
+FILENAME="transcripts/standup-${DATE}.vtt"
+mkdir -p transcripts
+
+cat > "${FILENAME}" << 'TRANSCRIPT_EOF'
+<your generated VTT content here>
+TRANSCRIPT_EOF
+```
+
+Then call the `create_pull_request` safe output to push the file:
+```json
+{
+  "type": "create_pull_request",
+  "title": "Standup transcript for YYYY-MM-DD",
+  "body": "Auto-generated standup transcript from the sample data simulator.",
+  "branch": "transcript/standup-YYYY-MM-DD"
+}
+```
+
 ## Constraints
 
 - **Never create more than 1 new launch per run** — we want gradual growth
@@ -246,7 +322,7 @@ For launches in Alpha or Beta phase, occasionally update the Risk Level field:
 ## Output Sequence
 
 Process your actions in this order:
-1. Read `launch-data.json` and understand current state
+1. Read `launch-data-summary.json` and understand current state
 2. Close completed tasks (close-issue + add-comment)
 3. Add progress comments to open work (add-comment)
 4. Close finished epics (close-issue)
@@ -254,3 +330,4 @@ Process your actions in this order:
 6. Close a GA launch if fully complete (close-issue)
 7. Create new launch + epics + tasks (create-issue with parent field + update-project)
 8. Adjust risk levels (update-project)
+9. Generate and commit the standup transcript (bash: write file + git push)
