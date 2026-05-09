@@ -25,6 +25,7 @@ gh auth refresh -s read:project,project
 |--------|----------|---------|
 | `GITHUB_TOKEN` | Automatic | Default Actions token — used for issue/PR reads and safe-outputs writes |
 | `COPILOT_GITHUB_TOKEN` | Yes (for Copilot engine) | Token for the AI engine. Set up via `gh aw init` |
+| `AW_TOKEN` | Yes | PAT with `read:project` scope — used by pre-steps to fetch project data via GraphQL |
 
 The `GITHUB_TOKEN` needs these permissions (configured in the workflow frontmatter):
 - `contents: read` — read repo files (policy files, scripts)
@@ -34,9 +35,20 @@ The `GITHUB_TOKEN` needs these permissions (configured in the workflow frontmatt
 
 Write operations (creating discussions) are handled by `safe-outputs` in a separate secured job — the agent job itself stays read-only.
 
-### For project data fetching (pre-step)
+### Setting up `AW_TOKEN`
 
-The `fetch-launch-data.sh` pre-step uses `gh api graphql` which requires the `read:project` scope. This is provided by the default `GITHUB_TOKEN` in Actions when `issues: read` permission is set, but for **user-owned projects** (vs. org projects), you may need a PAT with `read:project` scope stored as a repository secret.
+The pre-step script fetches data from GitHub Projects via GraphQL, which requires the `read:project` scope. The default `GITHUB_TOKEN` doesn't include this scope, so you need a PAT:
+
+1. Create a **fine-grained PAT** at [github.com/settings/tokens](https://github.com/settings/tokens?type=beta)
+   - Repository access: your `agentics-beyond-code` repo
+   - Permissions: **Projects → Read-only**
+2. Or create a **classic PAT** with the `read:project` scope
+3. Add it as a repository secret:
+
+```bash
+gh secret set AW_TOKEN
+# Paste your PAT when prompted
+```
 
 ## Installation
 
