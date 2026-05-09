@@ -6,7 +6,7 @@ description: |
   Reports per-launch status and an overall pipeline summary.
 
 on:
-  schedule: weekly on monday around 8am utc-7
+  schedule: weekly on monday around 8:30am utc-7
   workflow_dispatch:
 
 permissions:

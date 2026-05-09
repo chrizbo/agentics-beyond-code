@@ -12,6 +12,10 @@ on:
     types: [labeled]
   workflow_dispatch:
 
+concurrency:
+  group: compliance-review-${{ github.event.issue.number || github.run_id }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
   issues: read

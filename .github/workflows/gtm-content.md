@@ -6,7 +6,7 @@ description: |
   and scope. Content follows the voice & tone policy.
 
 on:
-  schedule: weekly on monday around 8am utc-7
+  schedule: weekly on monday around 8:15am utc-7
   workflow_dispatch:
 
 permissions:
