@@ -7,7 +7,7 @@ description: |
   misalignment examples, and emerging strategic patterns.
 
 on:
-  schedule: weekly on monday around 8am utc-7
+  schedule: weekly on wednesday around 8am utc-7
   workflow_dispatch:
 
 permissions:
