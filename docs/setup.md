@@ -89,7 +89,35 @@ Create a GitHub Project (Projects V2) to track your launches. Add these custom f
 | **Launch Type** | Single select | Major, Minor, Patch, Internal |
 | **Risk Level** | Single select | Low, Medium, High, Critical |
 
-### 3. Create labels
+### 4. Create an Intake Triage project
+
+Create a second GitHub Project (Projects V2) to track incoming feature requests and bug reports. Add these custom fields:
+
+| Field | Type | Options |
+|-------|------|---------|
+| **RICE Score** | Text | — |
+| **Request Type** | Single select | Feature Request, Bug Report |
+| **Kano Category** | Single select | Must-be, One-dimensional, Attractive, Indifferent |
+| **RICE Level** | Single select | High, Medium, Low |
+
+Set up the **Status** field with these options:
+
+| Status | Purpose |
+|--------|---------|
+| **Needs Triage** (default) | New items awaiting triage |
+| **Needs More Info** | Incomplete submissions — bot has asked follow-up questions |
+| **Triaged** | Fully scored and assessed |
+| **Duplicate** | Duplicate of an existing issue |
+| **Accepted** | Accepted into the backlog |
+| **Deferred** | Not now — revisit later |
+
+> **Important:** Set "Needs Triage" as the default status value so items added by workflows are always visible in your views, even if the workflow fails to set the status.
+
+Create two views:
+- **Needs Triage** — filter: `status:"Needs Triage","Needs More Info"`
+- **Triaged** — filter: `status:Triaged,Duplicate,Accepted,Deferred`
+
+### 5. Create labels
 
 The following labels are used by workflows. Create them in your repository:
 
@@ -119,19 +147,29 @@ The following labels are used by workflows. Create them in your repository:
 **Report labels:**
 - `report`, `launch-readiness`
 
-### 4. Create issues using templates
+**Intake triage labels:**
+- `triage-needed` — marks an issue for automated triage (auto-applied by the intake issue template)
+- `triaged` — triage complete (added by workflow)
+- `needs-more-info` — submission is incomplete (added by workflow)
+- `duplicate` — duplicate of an existing issue (added by workflow)
+- `rice:high`, `rice:medium`, `rice:low` — RICE score level (added by workflow)
+- `kano:must-be`, `kano:one-dimensional`, `kano:attractive`, `kano:indifferent` — Kano category (added by workflow)
+- `aligns-with-current` — aligns with an active initiative or launch (added by workflow)
+
+### 6. Create issues using templates
 
 Use the built-in issue templates to create properly structured issues:
 - **Initiative** — for strategic goals spanning multiple launches
 - **Launch** — for shippable milestones (the primary unit of work)
+- **Intake Request** — for submitting new feature requests or bug reports for triage
 
 Link launches as sub-issues of initiatives, and epics/tasks as sub-issues of launches.
 
-### 5. Add issues to your project
+### 7. Add issues to your project
 
 Add your initiative, launch, epic, and task issues to the Launch Tracker project. Set the Phase and Target Date custom fields on each launch.
 
-### 6. Create directories for decision log and transcript workflows
+### 8. Create directories for decision log and transcript workflows
 
 ```bash
 # Create the directories (with .gitkeep so they're tracked)
@@ -144,7 +182,7 @@ git commit -m "Add decisions and transcripts directories"
 - **`/decisions/`** — Decision record markdown files are created here by the Decision Log workflow via PR
 - **`/transcripts/`** — Drop `.txt` or `.vtt` meeting transcripts here to trigger the Transcript Processor workflow
 
-### 7. Compile and run workflows
+### 9. Compile and run workflows
 
 ```bash
 # Compile all workflows

@@ -121,6 +121,9 @@ Workflows define the **general pattern** (e.g., "assess readiness against a poli
     decision-log.md                  ← Decision detection + PR creation (daily)
     transcript-processor.md          ← Transcript → issue comments (on push)
     process-analyzer.md              ← Weekly retro + process drift detection + automation candidates
+    intake-triage.md                 ← Intake request triage with RICE/Kano scoring (on label)
+  ISSUE_TEMPLATE/
+    intake.yml                       ← Intake request template for features and bugs
   policies/
     launch-readiness-policy.md       ← Readiness thresholds & risk scoring
     weekly-status-policy.md          ← Status sections, bullet format & audience
@@ -182,6 +185,13 @@ Readiness reports are posted as GitHub Discussions (not issues) to avoid clutter
 | `ai:meeting-discussed` | Applied to issues discussed in a meeting transcript |
 | `ai:process-update` | Applied to PRs updating `docs/how-we-work.md` from transcript analysis |
 | `ai:automation-candidate` | Applied to issues proposing automation of a manual process |
+| `triage-needed` | Marks an issue for automated triage (applied by intake issue template) |
+| `triaged` | Triage complete — RICE and Kano scores applied |
+| `needs-more-info` | Intake request is incomplete — bot has asked follow-up questions |
+| `duplicate` | Duplicate of an existing issue |
+| `rice:high` / `rice:medium` / `rice:low` | RICE score level |
+| `kano:must-be` / `kano:one-dimensional` / `kano:attractive` / `kano:indifferent` | Kano classification |
+| `aligns-with-current` | Request aligns with an active initiative or launch |
 
 ### Custom Fields — structured project data
 
@@ -191,6 +201,16 @@ Readiness reports are posted as GitHub Discussions (not issues) to avoid clutter
 | Target Date | Date | Expected ship date |
 | Launch Type | Single select | Major, Minor, Patch, Internal |
 | Risk Level | Single select | Low, Medium, High, Critical |
+
+**Intake Triage project** (`projects/2`):
+
+| Field | Type | Purpose |
+|-------|------|---------|
+| Status | Single select | Needs Triage (default), Needs More Info, Triaged, Duplicate, Accepted, Deferred |
+| RICE Score | Text | Numeric RICE score |
+| Request Type | Single select | Feature Request, Bug Report |
+| Kano Category | Single select | Must-be, One-dimensional, Attractive, Indifferent |
+| RICE Level | Single select | High, Medium, Low |
 
 ## Compliance Review System
 
@@ -426,6 +446,78 @@ whenever `.txt` or `.vtt` files are pushed to the `/transcripts/` directory:
 - Name files descriptively (e.g., `2025-06-20-sprint-planning.vtt`)
 - The workflow processes all new files in each push
 
+## Intake Triage System
+
+The intake triage system provides a structured process for evaluating incoming
+feature requests and bug reports before they enter the product backlog. It uses
+RICE and Kano scoring frameworks, strategy alignment checks, and duplicate
+detection to help teams prioritize effectively.
+
+### How it works
+
+1. A user creates an issue using the **Intake Request** template (`.github/ISSUE_TEMPLATE/intake.yml`),
+   which auto-applies the `triage-needed` label
+2. The **Intake Request Triage workflow** (`intake-triage.md`) triggers on the label event and:
+   - Reads the issue body, strategy doc, and current initiatives/launches
+   - **Checks for completeness** — if key fields are missing (who is affected, problem statement),
+     it labels the issue `needs-more-info` and posts a comment asking for the missing details
+   - **Scores with RICE** — Reach × Impact × Confidence ÷ Effort, applying labels like `rice:high`
+   - **Classifies with Kano** — Must-be, One-dimensional, Attractive, or Indifferent
+   - **Checks strategy alignment** — compares against `docs/strategy.md` tradeoffs
+   - **Detects duplicates** — searches for similar existing issues
+   - **Assesses current work overlap** — checks whether the request aligns with active
+     initiatives or launches and applies `aligns-with-current` if so
+   - **Posts a structured triage comment** with all scores, rationale, and recommendations
+   - **Adds the item to the Intake Triage project board** (`projects/2`) with status and field values
+
+### Intake Triage project board
+
+The triage system uses a **separate project board** (`projects/2`) from the main
+Launch Tracker (`projects/1`). This keeps unvetted requests out of the sprint
+backlog until they've been reviewed and accepted.
+
+| Status | Meaning |
+|--------|---------|
+| **Needs Triage** (default) | New items awaiting automated or manual triage |
+| **Needs More Info** | Submission is incomplete — bot has posted follow-up questions |
+| **Triaged** | Fully scored with RICE and Kano, strategy alignment assessed |
+| **Duplicate** | Duplicate of an existing issue |
+| **Accepted** | Accepted into the product backlog |
+| **Deferred** | Not prioritized now — will revisit later |
+
+> **Tip:** Set "Needs Triage" as the default status value in the project settings
+> so items always appear in views even if the workflow fails to set a status.
+
+### RICE scoring
+
+| Factor | How it's assessed |
+|--------|------------------|
+| **Reach** | Users/quarter affected, inferred from "Who is affected" field |
+| **Impact** | 0.25 (minimal) to 3 (massive), based on severity and breadth |
+| **Confidence** | 50–100%, based on specificity of the request |
+| **Effort** | Person-months, estimated from solution complexity |
+
+The workflow applies `rice:high` (score ≥ 1000), `rice:medium` (100–999), or `rice:low` (< 100).
+
+### Kano classification
+
+| Category | Description |
+|----------|-------------|
+| **Must-be** | Expected features — users are dissatisfied without them (e.g., bug fixes, security) |
+| **One-dimensional** | Satisfaction scales linearly with implementation quality |
+| **Attractive** | Unexpected delighters — absence doesn't cause dissatisfaction |
+| **Indifferent** | Users don't care either way |
+
+### Interaction with other workflows
+
+- **Assumption Surfacer** skips issues with the `triage-needed` label (prompt-level guard)
+  to avoid surfacing assumptions on unvetted requests
+- **Compliance Review** uses a `labels:` filter that only activates on `launch`/`needs:*`
+  labels, so triage label events are skipped before the agent starts
+- The triage workflow uses `skip-bots: [github-actions]` is not needed here since the
+  workflow only triggers on label events, but other workflows use it to prevent
+  feedback loops from bot-authored comments
+
 ## Workflow Schedule
 
 All workflows share the same `fetch-launch-data.sh` pre-step for data fetching.
@@ -438,6 +530,7 @@ All workflows share the same `fetch-launch-data.sh` pre-step for data fetching.
 | **GTM Content** | Monday ~8:15 AM PT · Manual | Changelog draft and roadmap item sub-issues per launch | DRIs, marketing, comms |
 | **GTM Team Reports** | Monday ~8 AM PT · Manual | Discussion summarizing launches needing GTM action | GTM team |
 | **Assumption Surfacer** | On issue opened/edited · Manual | Comments surfacing implicit assumptions as explicit questions | PMs, DRIs |
+| **Intake Request Triage** | On issue labeled `triage-needed` | RICE/Kano scores, strategy alignment, triage comment, project board update | PMs, DRIs |
 | **Decision Log** | Daily ~midnight PT · Manual | PR with individual markdown decision records in `/decisions/` | PMs, DRIs, leaders |
 | **Weekly Status** | Friday ~8 AM PT · Manual | Discussion with What Shipped, What We Learned, FYI, and SOS sections | Leaders, senior stakeholders |
 | **Workflow Health** | Friday ~8 AM PT · Manual | Discussion with success rates, failure patterns, cost estimates, cross-workflow interaction analysis, and recommendations for all agentic workflows | Leaders, ops |
@@ -474,6 +567,11 @@ On a typical week:
 **On push to `/transcripts/`:**
 7. **Transcript Processor** — matches transcript content to open issues and
    posts summary comments with meeting context.
+
+**On issue labeled `triage-needed`:**
+8. **Intake Request Triage** — scores the request with RICE and Kano,
+   checks strategy alignment, detects duplicates, flags incomplete submissions,
+   and adds the item to the Intake Triage project board (`projects/2`).
 
 The Compliance Review workflow also runs **on-demand** whenever a `launch`
 label is added to an issue, so new launches get evaluated immediately.

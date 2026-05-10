@@ -152,12 +152,13 @@
 | Strategy alignment analysis | Strategy Alignment workflow | Weekly (Monday) |
 | Process analysis & retro | Process Analyzer workflow | Weekly |
 | Ritual cadence tracking | Process Analyzer workflow | Weekly (part of retro) |
+| Intake request triage | Intake Request Triage workflow | On issue labeled `triage-needed` |
 | Sample data generation | Sample Data Simulator | Daily |
 
 ### Manual Processes (Candidates for Automation)
 | Process | Current Owner | Notes |
 |---------|---------------|-------|
-| Issue triage & labeling | Sarah | Could be partially automated with an AI triage workflow |
+| ~~Issue triage & labeling~~ | ~~Sarah~~ | **Automated** — see Intake Request Triage workflow below |
 | Sprint velocity reporting | Sarah | Manual spreadsheet export; could use a scheduled workflow |
 | Stale issue cleanup | Sarah | Monthly manual review; could be a scheduled workflow |
 | On-call rotation scheduling | Alex | Manual Google Calendar updates |

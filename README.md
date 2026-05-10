@@ -32,6 +32,12 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 | [📣 GTM Content](.github/workflows/gtm-content.md) | Monday morning generation and refresh of changelog announcement drafts and public roadmap items as sub-issues, following the org's voice & tone policy | [Changelog draft — EU Payment Methods](https://github.com/chrizbo/agentics-beyond-code/issues/77) |
 | [📣 GTM Team Reports](.github/workflows/gtm-team-reports.md) | Monday morning report summarizing launches needing GTM action — missing changelog drafts, missing roadmap items, content needing refresh, and upcoming launches | [GTM Readiness — Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/105) |
 
+### 📥 Intake & Triage
+
+| Workflow | Description | Example output |
+|----------|-------------|----------------|
+| [📥 Intake Request Triage](.github/workflows/intake-triage.md) | Scores incoming feature requests and bug reports using RICE and Kano frameworks, checks strategy alignment, detects duplicates, flags incomplete submissions, and adds items to the triage project board | [Triage comment](https://github.com/chrizbo/agentics-beyond-code/issues/109#issuecomment) |
+
 ### 📋 Decision & Knowledge
 
 | Workflow | Description | Example output |
@@ -97,6 +103,7 @@ Good agentic systems compound. The process analyzer detects drift, the decision 
 - **[How We Work](docs/how-we-work.md)** — team processes, meeting cadence, triage, and communication norms
 - **[Strategic Tradeoffs](docs/strategy.md)** — the team's "even over" strategy statements, annotated with alignment evidence
 - **[Launch Tracker Project](https://github.com/users/chrizbo/projects/1)** — the sample GitHub Project with issues, launches, and workflow-generated artifacts
+- **[Intake Triage Project](https://github.com/users/chrizbo/projects/2)** — project board for triaging incoming feature requests and bug reports
 
 ## 🤝 Contributing
 
