@@ -59,7 +59,7 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 
 ## 💡 Philosophy
 
-Three ideas shaped this project:
+Five ideas shaped this project:
 
 ### Process as Code
 
@@ -72,6 +72,14 @@ Strategy docs, decision logs, and how-we-work guides go stale the moment someone
 ### Artifacts over Roles
 
 The scoping unit for each workflow is the **artifact** it produces (a readiness report, a compliance review, a decision record), not the role it replaces. When everyone agrees on the output artifact, the workflow has a natural boundary and the agent's constraints stay focused. Animate the artifact, not the job title.
+
+### The Repo Is the Architecture
+
+The model is interchangeable — what makes these workflows effective is the **environment** they operate in: issues, labels, docs, transcripts, git history. Designing the repo topology well matters more than picking the right LLM.
+
+### Every Run Improves the System
+
+Good agentic systems [compound](https://medium.com/intuitionmachine/building-agent-systems-that-compound-39554705c064). The process analyzer detects drift, the decision log accumulates records, strategy alignment annotates docs with evidence. Each run leaves the repo a little smarter than it found it.
 
 ## 📖 Documentation
 
