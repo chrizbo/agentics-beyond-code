@@ -15,6 +15,11 @@ implementation as GitHub Agentic Workflows.
 | 25 | Tension Detector | Finds contradictions between stated strategy and active work. Posts a discussion inviting interpretation from multiple stakeholders — not a report, a prompt for shared sensemaking. |
 | 26 | Decision Pre-Mortem Facilitator | When a decision is tagged, generates adversarial challenges and routes them to specific stakeholders for response before finalization. Extends Decision Log from recording → facilitating. |
 | 27 | Shared Learning Loop | After a launch, synthesizes outcomes vs. predictions across multiple contributors' prior comments. Surfaces who saw what coming and why — building collective pattern recognition. |
+| 31 | Bet Lifecycle Tracker | Scans issues tagged as bets and checks lifecycle completeness — hypothesis, metrics, targeted actionable inputs, one-pager artifact, learning review. Flags stale or disconnected bets weekly. |
+| 32 | Actionable Input Review Prep | Before each biweekly review, gathers metric movement, related bet activity, new insights, and open questions per team. Posts a structured prep discussion so reviews focus on interpretation, not data assembly. |
+| 33 | Goal Graph Health Monitor | Audits goals for orphaned goals (no linked bets or inputs), staleness (no updates in N weeks), missing metrics, and missing counterbalancing/guardrail companions. Periodic health report. |
+| 34 | Learning Review Synthesizer | After bets complete, scans their learning review artifacts and synthesizes cross-bet patterns into a monthly Insight Brief. Identifies recurring themes so learnings don't stay siloed in individual bets. |
+| 35 | Funding Model Reality Check | Quarterly comparison of declared funding models and team stages against actual work patterns. Flags drift — e.g., a "Growth Accelerator" team with no bets targeting growth metrics, or a "New Offerings" team with no experiments. |
 
 ### Operations
 
@@ -26,10 +31,14 @@ implementation as GitHub Agentic Workflows.
 | 8 | Cross-Team Dependency Radar | Surfaces conflicting timelines and blocked handoffs. |
 | 10 | Change Adoption Monitor | 30/60/90-day adoption tracking for new processes. |
 | 12 | Time Allocation Visibility | Reactive vs strategic work split analysis. |
-| 19 | Framework/Ritual Sunset Reviewer | Audits meeting and ceremony engagement signals quarterly. |
+| 19 | Framework/Ritual Sunset Reviewer | Audits meeting and ceremony engagement signals quarterly. See also: ritual cadence tracking built into the **Process Analyzer** workflow, which checks the Ritual Cadence table in `docs/how-we-work.md` weekly and reports status in the retro discussion. |
 | 21 | Action Item Tracker | Extracts action items from meeting transcripts, creates issues, follows up weekly on completion/abandonment. Feeds into prioritization rubric updates ("we never do X, stop assigning it"). |
 | 28 | Context Bridge | When someone is mentioned on an unfamiliar issue, generates a personalized briefing based on their role, team, and recent work — not a generic summary but a frame-aware bridge. |
 | 29 | Consistency Auditor | Flags where team practices have drifted from `docs/how-we-work.md` and asks whether drift is intentional or accidental. |
+| 36 | Team Health Checklist Auditor | For each team, checks whether the 8 POM basics are in place: charter/mission, strategy, models, roadmap of bets, bet artifacts, metrics & input targets, goals, and kickoff/learning review docs. Periodic health report. |
+| 37 | Scope Ownership Auditor | Scans the scope registry for orphaned scopes (no team assigned), overlapping ownership, stale scopes (not referenced in recent bets), and scopes missing linked capabilities or customer context. |
+| 38 | Cross-Team Collaboration Tracker | Analyzes cross-team mentions, shared labels, PR reviews across boundaries, and transcript references to surface actual collaboration patterns. Compares against declared Team Topology interaction modes and flags mismatches or friction. |
+| 39 | Artifact Freshness Tracker | Checks key artifacts (product vision, strategy docs, roadmaps, bet one-pagers) against their expected refresh cadence — strategy yearly, roadmap quarterly, bet one-pagers monthly. Flags stale artifacts and missing required types. |
 
 ### AI Governance
 

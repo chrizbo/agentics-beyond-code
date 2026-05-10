@@ -53,6 +53,21 @@
 - **Participants:** Sarah + stakeholders
 - **Purpose:** Launch status, risk escalation, priority alignment
 
+## Ritual Cadence
+
+> Expected ceremonies and how to detect they happened. The **Process Analyzer**
+> workflow checks this table weekly and reports which rituals are on track,
+> overdue, or emerging informally.
+
+| Ritual | Cadence | Evidence | Grace Period |
+|--------|---------|----------|--------------|
+| Daily Standup | Daily (weekdays) | transcript filename contains `standup` | 1 day |
+| Sprint Planning | Biweekly (Monday) | transcript filename contains `sprint-planning` or `planning` | 3 days |
+| Sprint Retrospective | Biweekly (Friday) | transcript filename contains `retro` | 3 days |
+| Design Review | Weekly (Wednesday) | transcript filename contains `design-review` or `design` | 5 days |
+| Stakeholder Sync | Weekly (Friday) | transcript filename contains `stakeholder` | 5 days |
+| Stale Issue Review | Monthly (1st Monday) | issue with `stale-review` label or transcript mention | 10 days |
+
 ## Issue Triage
 
 ### New Issue Triage
@@ -136,6 +151,7 @@
 | Workflow health monitoring | Workflow Health workflow | Weekly (Friday) |
 | Strategy alignment analysis | Strategy Alignment workflow | Weekly (Monday) |
 | Process analysis & retro | Process Analyzer workflow | Weekly |
+| Ritual cadence tracking | Process Analyzer workflow | Weekly (part of retro) |
 | Sample data generation | Sample Data Simulator | Daily |
 
 ### Manual Processes (Candidates for Automation)

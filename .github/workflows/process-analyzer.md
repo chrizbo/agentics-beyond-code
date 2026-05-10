@@ -75,6 +75,7 @@ cat docs/how-we-work.md
 
 Parse and internalize the document structure. Pay attention to:
 - Meeting cadence (times, frequency, participants)
+- **Ritual Cadence table** (declared ceremonies, evidence patterns, grace periods)
 - Issue triage process (who, when, how)
 - PR review SLAs and policies
 - On-call rotation and incident process
@@ -128,6 +129,49 @@ Extract **all** content, but categorize it into two buckets:
 - Pain points — "it takes forever", "too much manual work"
 - Tool and process references
 
+### Step 3b: Ritual Cadence Check
+
+Parse the **Ritual Cadence** table from `docs/how-we-work.md`. This table
+declares expected ceremonies, how often they should happen, how to detect
+them (transcript filename patterns, labels, discussion titles), and a grace
+period before flagging them as overdue.
+
+For each declared ritual:
+
+1. **Check for evidence this week.** Scan transcript filenames and content
+   for matching patterns. Also check recent issues and discussions if the
+   evidence column references them.
+
+   ```bash
+   # Example: find standup transcripts from this week
+   ls transcripts/ | grep -i "standup" | head -20
+   ```
+
+2. **Determine whether the ritual was due.** Use the declared cadence:
+   - **Daily:** Expected every weekday
+   - **Weekly:** Expected once per week on the specified day
+   - **Biweekly:** Determine which week of the cycle based on sprint start
+     dates documented in "Sprint / Iteration Cadence"
+   - **Monthly:** Expected once per month on the specified day
+
+3. **Classify each ritual's status:**
+   - ✅ **On track** — evidence found within the expected window
+   - ⏳ **Due soon** — next occurrence falls within the grace period
+   - ⚠️ **Overdue** — past due date plus grace period with no evidence
+   - ⏭️ **Not due** — next occurrence is outside the current window
+   - 🆕 **Emerging** — detected in transcripts but not in the declared table
+
+4. **Detect emerging rituals.** Scan transcript content for recurring
+   meetings that aren't in the Ritual Cadence table. Signals include:
+   - Repeated meeting names across multiple transcripts (e.g., "architecture
+     sync" appearing 3+ times in recent weeks)
+   - Phrases like "our weekly X" or "the usual Y meeting" for undeclared
+     ceremonies
+   - Consistent attendee groups gathering around an undocumented topic
+
+Collect all findings for inclusion in the weekly retro (Step 4) and the
+summary output (Step 10).
+
 ### Step 4: Generate the Weekly Retro
 
 Synthesize Bucket A content across all transcripts into a team retrospective
@@ -175,6 +219,21 @@ This is posted as a GitHub Discussion so the team can react and comment.
 - Workflows that weren't mentioned at all (possibly not delivering value)
 - Improvement suggestions surfaced from transcript discussions
 - Manual processes still consuming significant team time
+
+### 🗓️ Ritual Cadence
+<Status of declared rituals from the Ritual Cadence table in docs/how-we-work.md>
+
+| Ritual | Expected | Status | Notes |
+|--------|----------|--------|-------|
+| <ritual name> | <cadence> | <✅/⏳/⚠️/⏭️> | <evidence or explanation> |
+
+**Emerging rituals** (detected in transcripts but not declared):
+- <meeting name> — mentioned in N transcripts this week — consider formalizing
+- (or "None detected this week")
+
+*Ritual tracking helps the team notice when important ceremonies slip and
+when new practices are forming organically. Update the Ritual Cadence table
+in `docs/how-we-work.md` to add, remove, or adjust ceremonies.*
 
 ### 💡 Observations & Suggestions
 <Patterns worth noting or acting on:>
@@ -365,6 +424,12 @@ Process Analysis & Weekly Retro Complete
 🔄 Process Drift Detected:
   - <section>: <old> → <new> (source: <transcript>)
   - PR created: #XX
+
+🗓️ Ritual Cadence:
+  - <ritual>: ✅ on track (N/N occurrences found)
+  - <ritual>: ⚠️ overdue — no evidence since YYYY-MM-DD
+  - <ritual>: ⏭️ not due until YYYY-MM-DD
+  - Emerging: "<meeting name>" detected in N transcripts
 
 📊 No Changes Needed:
   - <area> — transcript discussion matches documentation
