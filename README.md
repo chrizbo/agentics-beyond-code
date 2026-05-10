@@ -22,7 +22,7 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 
 | Workflow | Description | Example output |
 |----------|-------------|----------------|
-| [🛡️ Compliance Review](.github/workflows/compliance-review.md) | Evaluates launches against Security, Privacy, Accessibility, and Responsible AI rubrics — updates labels, posts status tables, creates review sub-issues (Monday mornings) | [Security Review — EU Payment Methods](https://github.com/chrizbo/agentics-beyond-code/issues/83) |
+| [🛡️ Compliance Review](.github/workflows/compliance-review.md) | Evaluates launches against Security, Privacy, Accessibility, and Responsible AI rubrics — updates labels, posts status tables, creates review sub-issues (Monday mornings) | [Status table comment](https://github.com/chrizbo/agentics-beyond-code/issues/4#issuecomment-4411223864) |
 | [📊 Compliance Team Reports](.github/workflows/compliance-team-reports.md) | Monday morning per-team discussion showing launches needing review, sorted by urgency | [Security Status — Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/88) |
 
 ### 📣 Go-to-Market
@@ -36,7 +36,7 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 
 | Workflow | Description | Example output |
 |----------|-------------|----------------|
-| [🔍 Assumption Surfacer](.github/workflows/assumption-surfacer.md) | Scans issues and PRs for implicit assumptions (timelines, dependencies, user behavior, capacity) and posts them as explicit questions for the team to reason through together | [API Rate Limiting](https://github.com/chrizbo/agentics-beyond-code/issues/93) |
+| [🔍 Assumption Surfacer](.github/workflows/assumption-surfacer.md) | Scans issues and PRs for implicit assumptions (timelines, dependencies, user behavior, capacity) and posts them as explicit questions for the team to reason through together | [Assumptions comment](https://github.com/chrizbo/agentics-beyond-code/issues/93#issuecomment-4413916898) |
 | [📋 Decision Log](.github/workflows/decision-log.md) | Daily scan of issue comments and meeting transcripts for decisions — creates a PR with individual decision record files in `/decisions/` | [Decision Log — 2026-05-09](https://github.com/chrizbo/agentics-beyond-code/issues/87) |
 | [🧭 Strategy Alignment](.github/workflows/strategy-alignment.md) | Monday morning analysis of team activity against `docs/strategy.md` tradeoffs — comments on clearly misaligned issues, annotates the strategy doc with alignment evidence and emerging patterns | [Strategy evidence PR](https://github.com/chrizbo/agentics-beyond-code/pull/107) |
 | [🎙️ Transcript Processor](.github/workflows/transcript-processor.md) | Triggered when `.txt` or `.vtt` files are pushed to `/transcripts/` — matches transcript content to open issues and posts summary comments | [Meeting notes comment](https://github.com/chrizbo/agentics-beyond-code/issues/14#issuecomment-4413622565) |

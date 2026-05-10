@@ -11,9 +11,10 @@ Browse real artifacts produced by the workflows in this repo:
 | 📋 Initiative | [Expand to EU Market](https://github.com/chrizbo/agentics-beyond-code/issues/1) | Sample Data Simulator |
 | 🚀 Launch | [API Rate Limiting & Throttling](https://github.com/chrizbo/agentics-beyond-code/issues/93) | Sample Data Simulator |
 | 🛡️ Compliance sub-issue | [Security Compliance Review — EU Payment Methods](https://github.com/chrizbo/agentics-beyond-code/issues/83) | Compliance Review |
+| 🛡️ Compliance status table | [Status table comment](https://github.com/chrizbo/agentics-beyond-code/issues/4#issuecomment-4411223864) | Compliance Review |
 | 📣 GTM sub-issue | [Changelog draft — EU Payment Methods](https://github.com/chrizbo/agentics-beyond-code/issues/77) | GTM Content |
 | 📋 Decision log | [Decision Log — 2026-05-09](https://github.com/chrizbo/agentics-beyond-code/issues/87) | Decision Log |
-| 🔍 Assumptions | [API Rate Limiting & Throttling](https://github.com/chrizbo/agentics-beyond-code/issues/93) | Assumption Surfacer |
+| 🔍 Assumptions | [Assumptions comment](https://github.com/chrizbo/agentics-beyond-code/issues/93#issuecomment-4413916898) | Assumption Surfacer |
 | 📊 Launch readiness report | [Launch Readiness Report — 2026-05-09](https://github.com/chrizbo/agentics-beyond-code/discussions/76) | Launch Readiness |
 | 📊 Weekly status | [Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/86) | Weekly Status |
 | 📊 Compliance team report | [Security Review Status — Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/88) | Compliance Team Reports |
