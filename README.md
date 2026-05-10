@@ -83,12 +83,19 @@ Good agentic systems compound. The process analyzer detects drift, the decision 
 
 ## 📖 Documentation
 
-- **[How We Work](docs/how-we-work.md)** — team processes, meeting cadence, triage, and communication norms
-- **[Strategic Tradeoffs](docs/strategy.md)** — the team's "even over" strategy statements, annotated with alignment evidence
+### Getting Started
+
 - **[Getting Started](docs/setup.md)** — prerequisites, installation, and first run
 - **[How It Works](docs/how-it-works.md)** — architecture, issue hierarchy, and customization
 - **[FAQ](docs/faq.md)** — common questions about setup, workflows, and costs
 - **[Workflow Ideas](docs/workflow-ideas.md)** — catalog of future workflow ideas for PM, ops, compliance, and GTM
+
+### Sample Team Context
+
+> These docs represent a **fictional team** used as sample context for the workflows. Fork the repo and replace them with your own team's docs.
+
+- **[How We Work](docs/how-we-work.md)** — team processes, meeting cadence, triage, and communication norms
+- **[Strategic Tradeoffs](docs/strategy.md)** — the team's "even over" strategy statements, annotated with alignment evidence
 
 ## 🤝 Contributing
 
