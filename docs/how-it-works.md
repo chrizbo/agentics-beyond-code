@@ -17,7 +17,7 @@ Browse real artifacts produced by the workflows in this repo:
 | 🔍 Assumptions | [Assumptions comment](https://github.com/chrizbo/agentics-beyond-code/issues/93#issuecomment-4413916898) | Assumption Surfacer |
 | 📊 Launch readiness report | [Launch Readiness Report — 2026-05-09](https://github.com/chrizbo/agentics-beyond-code/discussions/76) | Launch Readiness |
 | 📊 Weekly status | [Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/86) | Weekly Status |
-| 📊 Leadership brief | _New — no output yet_ | Leadership Briefs |
+| 📊 Leadership brief | [Alex Chen — Week of 2026-05-11](https://github.com/chrizbo/agentics-beyond-code/discussions/112) | Leadership Briefs |
 | 📊 Compliance team report | [Security Review Status — Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/88) | Compliance Team Reports |
 | 📊 GTM team report | [Go-to-Market Readiness — Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/105) | GTM Team Reports |
 | 📊 Workflow health | [Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/106) | Workflow Health |

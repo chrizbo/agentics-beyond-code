@@ -61,9 +61,9 @@ implementation as GitHub Agentic Workflows.
 | # | Workflow | Description |
 |---|---------|-------------|
 | 11 | Competitive Intelligence Digest | Weekly market/competitor intel rollup. |
-| 18 | Stakeholder Narrative Generator | Data → audience-tailored status narratives. |
+| 18 | Stakeholder Narrative Generator | Data → audience-tailored status narratives. _Partially implemented by **[Leadership Briefs](.github/workflows/leadership-brief.md)** — generates per-leader briefs tailored to their domain and goals._ |
 | 20 | Customer Value → Business Impact Linker | Connects shipping to revenue/cost signals. |
 | 23 | Customer Feedback Aggregator | Multi-source feedback monitor: pulls from issues, discussions, Discord, Slack, and social into normalized feedback issues in one repo. Enables dedup, trend detection, and cross-channel prioritization. |
 | 24 | Feedback → Work Item Converter | Slash command on a customer feedback issue that strips PII and customer-specific details, then creates a clean, agent-ready engineering issue. Bridges the PM interpretation gap. |
-| 30 | Cross-Frame Translator | Same work viewed through PM, engineering, finance, and leadership lenses simultaneously. Each frame links back to the others — multiple concurrent frames without forcing one official model. |
+| 30 | Cross-Frame Translator | Same work viewed through PM, engineering, finance, and leadership lenses simultaneously. Each frame links back to the others — multiple concurrent frames without forcing one official model. _See **[Leadership Briefs](.github/workflows/leadership-brief.md)** for an initial implementation — each leader policy file creates a different "frame" on the same portfolio data._ |
 
