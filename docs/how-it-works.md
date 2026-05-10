@@ -20,6 +20,8 @@ Browse real artifacts produced by the workflows in this repo:
 | 📊 GTM team report | [Go-to-Market Readiness — Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/105) | GTM Team Reports |
 | 📊 Workflow health | [Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/106) | Workflow Health |
 | 🔄 Weekly retro | [Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/104) | Process Analyzer |
+| 🧭 Strategy evidence | [Strategy alignment PR](https://github.com/chrizbo/agentics-beyond-code/pull/107) | Strategy Alignment |
+| 🎙️ Transcript comment | [Meeting notes on issue](https://github.com/chrizbo/agentics-beyond-code/issues/14#issuecomment-4413622565) | Transcript Processor |
 
 ## Architecture Overview
 
