@@ -239,6 +239,13 @@ If some fields aren't available from the source material (e.g., no
 alternatives were discussed), include the section with a note like
 "Not discussed in source material."
 
+**Important — always populate Impact:** The Impact field is critical for
+downstream workflows (e.g., Adversarial PM, Strategy Alignment) that need
+to post feedback on relevant issues. When a decision comes from a transcript,
+search `launch-data-summary.json` for issues related to the topics discussed
+and list them in Impact. A decision with no Impact issues is invisible to
+the review pipeline.
+
 ### Step 7: Create the Pull Request
 
 Create a single PR that adds all new decision files. The PR should:

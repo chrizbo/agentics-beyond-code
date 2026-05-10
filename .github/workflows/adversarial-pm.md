@@ -37,17 +37,24 @@ steps:
       fi
 
       # Build a JSON array of decision contents
-      echo '{"count":0,"decisions":[]}' | jq --null-input '{"decisions":[]}' > /tmp/adversarial-pm/recent-decisions.json
+      jq --null-input '{"decisions":[]}' > /tmp/adversarial-pm/recent-decisions.json
       COUNT=0
       for f in $DECISION_FILES; do
         if [ -f "$f" ]; then
           COUNT=$((COUNT + 1))
           CONTENT=$(cat "$f")
           FILENAME=$(basename "$f")
-          # Extract source issue number if present
+          # Extract source issue number from Source field
           SOURCE_ISSUE=$(grep -i '^\| \*\*Source\*\*' "$f" | grep -o '#[0-9]*' | head -1 | tr -d '#' || echo "")
-          jq --arg file "$FILENAME" --arg path "$f" --arg content "$CONTENT" --arg source "$SOURCE_ISSUE" \
-            '.decisions += [{"file": $file, "path": $path, "source_issue": $source, "content": $content}]' \
+          # Fall back to Impact field if Source has no issue reference (e.g. transcript-only)
+          if [ -z "$SOURCE_ISSUE" ]; then
+            SOURCE_ISSUE=$(grep -i '^\| \*\*Impact\*\*' "$f" | grep -o '#[0-9]*' | head -1 | tr -d '#' || echo "")
+          fi
+          # Also collect all impact issues for context
+          IMPACT_ISSUES=$(grep -i '^\| \*\*Impact\*\*' "$f" | grep -o '#[0-9]*' | tr -d '#' | tr '\n' ',' | sed 's/,$//' || echo "")
+          jq --arg file "$FILENAME" --arg path "$f" --arg content "$CONTENT" \
+             --arg source "$SOURCE_ISSUE" --arg impact "$IMPACT_ISSUES" \
+            '.decisions += [{"file": $file, "path": $path, "source_issue": $source, "impact_issues": $impact, "content": $content}]' \
             /tmp/adversarial-pm/recent-decisions.json > /tmp/adversarial-pm/tmp.json
           mv /tmp/adversarial-pm/tmp.json /tmp/adversarial-pm/recent-decisions.json
         fi
@@ -261,11 +268,13 @@ issue, skip it (you can't challenge a decision nobody can discuss).
 Extract the source issue number from the pre-fetched data:
 
 ```bash
-cat /tmp/adversarial-pm/recent-decisions.json | jq -r '.decisions[] | "\(.file): #\(.source_issue)"'
+cat /tmp/adversarial-pm/recent-decisions.json | jq -r '.decisions[] | "\(.file): source=#\(.source_issue) impact=\(.impact_issues)"'
 ```
 
-If a decision's `source_issue` is empty, skip it — you can't challenge a
-decision nobody can discuss.
+The pre-step extracts issue numbers from both **Source** and **Impact** fields.
+When a decision comes from a transcript (no issue in Source), it falls back
+to the first issue in the Impact field. If a decision has neither — no
+`source_issue` at all — skip it; there's no venue for discussion.
 
 **Comment format:**
 
