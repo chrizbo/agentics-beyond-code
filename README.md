@@ -57,6 +57,22 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 |----------|-------------|
 | [🎲 Sample Data Simulator](.github/workflows/sample-data-simulator.md) | Generates realistic project activity daily — creates launches, closes tasks, advances phases. Run manually anytime to add more content. |
 
+## 💡 Philosophy
+
+Three ideas shaped this project:
+
+### Process as Code
+
+Team policies — how we triage, what "launch-ready" means, compliance rubrics — are written as markdown files that humans review and agents execute. When the policy file _is_ the automation input, docs can't rot: changing `how-we-work.md` changes how the workflow behaves on its next run.
+
+### Living Documents
+
+Strategy docs, decision logs, and how-we-work guides go stale the moment someone merges a PR or wraps up a meeting. Agentic workflows close that gap by _connecting_ documents to the events that should update them — transcript pushes, issue closures, weekly cadences — so the document stays as current as the work itself.
+
+### Artifacts over Roles
+
+The scoping unit for each workflow is the **artifact** it produces (a readiness report, a compliance review, a decision record), not the role it replaces. When everyone agrees on the output artifact, the workflow has a natural boundary and the agent's constraints stay focused. Animate the artifact, not the job title.
+
 ## 📖 Documentation
 
 - **[How We Work](docs/how-we-work.md)** — team processes, meeting cadence, triage, and communication norms
