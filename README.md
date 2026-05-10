@@ -46,8 +46,6 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 | [📋 Decision Log](.github/workflows/decision-log.md) | Daily scan of issue comments and meeting transcripts for decisions — creates a PR with individual decision record files in `/decisions/` | [Decision Log — 2026-05-09](https://github.com/chrizbo/agentics-beyond-code/issues/87) |
 | [🧭 Strategy Alignment](.github/workflows/strategy-alignment.md) | Monday morning analysis of team activity against `docs/strategy.md` tradeoffs — comments on clearly misaligned issues, annotates the strategy doc with alignment evidence and emerging patterns | [Strategy evidence PR](https://github.com/chrizbo/agentics-beyond-code/pull/107) |
 | [🎙️ Transcript Processor](.github/workflows/transcript-processor.md) | Triggered when `.txt` or `.vtt` files are pushed to `/transcripts/` — matches transcript content to open issues and posts summary comments | [Meeting notes comment](https://github.com/chrizbo/agentics-beyond-code/issues/14#issuecomment-4413622565) |
-| [🔄 Process Analyzer](.github/workflows/process-analyzer.md) | Weekly retro + process analysis — posts a team retrospective discussion, detects process drift in transcripts vs `docs/how-we-work.md`, identifies automation opportunities and gaps, and creates update PRs | [Retro — Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/104) |
-
 ### 📊 Leadership
 
 | Workflow | Description | Example output |
@@ -60,6 +58,7 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 | Workflow | Description | Example output |
 |----------|-------------|----------------|
 | [🩺 Workflow Health](.github/workflows/workflow-health.md) | Friday morning health report across all agentic workflows — success rates, failure patterns, cost estimates, cross-workflow interaction analysis (conflict detection, cascade chains, resource contention), and efficiency recommendations | [Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/106) |
+| [🔄 Process Analyzer](.github/workflows/process-analyzer.md) | Weekly retro + process analysis — posts a team retrospective discussion, detects process drift in transcripts vs `docs/how-we-work.md`, identifies automation opportunities and gaps, and creates update PRs | [Retro — Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/104) |
 
 ### 🧪 Demo / Sample Data
 
