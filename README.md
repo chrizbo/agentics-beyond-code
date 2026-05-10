@@ -96,6 +96,7 @@ Good agentic systems compound. The process analyzer detects drift, the decision 
 
 - **[How We Work](docs/how-we-work.md)** — team processes, meeting cadence, triage, and communication norms
 - **[Strategic Tradeoffs](docs/strategy.md)** — the team's "even over" strategy statements, annotated with alignment evidence
+- **[Launch Tracker Project](https://github.com/users/chrizbo/projects/1)** — the sample GitHub Project with issues, launches, and workflow-generated artifacts
 
 ## 🤝 Contributing
 
