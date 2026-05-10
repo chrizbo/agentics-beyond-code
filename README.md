@@ -79,7 +79,7 @@ The model is interchangeable — what makes these workflows effective is the **e
 
 ### Every Run Improves the System
 
-Good agentic systems [compound](https://medium.com/intuitionmachine/building-agent-systems-that-compound-39554705c064). The process analyzer detects drift, the decision log accumulates records, strategy alignment annotates docs with evidence. Each run leaves the repo a little smarter than it found it.
+Good agentic systems compound. The process analyzer detects drift, the decision log accumulates records, strategy alignment annotates docs with evidence. Each run leaves the repo a little smarter than it found it.
 
 ## 📖 Documentation
 
