@@ -71,5 +71,20 @@ worth surfacing — it may mean the strategy needs updating.
 > it analyzes decisions from `/decisions/` and issue activity to find examples
 > of alignment, misalignment, and emerging strategic patterns.
 
-*No alignment evidence recorded yet. The Strategy Alignment workflow will
-populate this section on its next run.*
+### ✅ Alignment Examples
+
+| Date | Decision | Tradeoff | Source |
+|------|----------|----------|--------|
+| 2026-05-09 | Drop priority queuing from notifications sprint | #1: Ship to learn | `decisions/2026-05-09-drop-priority-queuing-from-notifications-sprint.md` |
+| 2026-05-09 | Automated decision log workflow records standup decisions to GitHub | #4: Automate the routine | PR #101 |
+
+### ⚠️ Misalignment Examples
+
+| Date | Decision | Tradeoff | Source | Status |
+|------|----------|----------|--------|--------|
+
+*No misalignment examples recorded yet.*
+
+### 🔄 Emerging Patterns
+
+*No emerging patterns detected yet. Patterns require 2+ signals pointing in the same direction.*
