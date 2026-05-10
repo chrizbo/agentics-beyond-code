@@ -431,13 +431,17 @@ but serve different purposes:
 | **Framing** | What happened | What to do about it |
 | **Sections** | Shipped, Learned, FYI, SOS | Kudos, Feedback, Get Involved |
 
-## Workflow Health Report
+---
+
+## Operations
+
+### Workflow Health Report
 
 The workflow health report gives the team visibility into how the agentic
 workflows themselves are performing — success rates, failure patterns, cost
 estimates, cross-workflow interaction analysis, and actionable recommendations.
 
-### How it works
+#### How it works
 
 The **Workflow Health workflow** (`workflow-health.md`) runs weekly and:
 
@@ -449,7 +453,7 @@ The **Workflow Health workflow** (`workflow-health.md`) runs weekly and:
 6. Analyzes cross-workflow interactions — temporal overlaps, shared resource conflicts, and cascade chains
 7. Generates recommendations for efficiency, reliability, cost optimization, and conflict resolution
 
-### Health status levels
+#### Health status levels
 
 | Status | Criteria |
 |--------|----------|
@@ -459,7 +463,7 @@ The **Workflow Health workflow** (`workflow-health.md`) runs weekly and:
 | 🔴 Critical | Success rate < 50%, or completely non-functional |
 | ⚪ Inactive | No runs in the last 7 days |
 
-### Report sections
+#### Report sections
 
 The discussion includes:
 - **Overall Health Summary** — table of all workflows with run counts, success rates, durations, and health status
@@ -468,7 +472,7 @@ The discussion includes:
 - **Cross-Workflow Interactions** — concurrent run detection, shared resource conflicts (issues/labels modified by multiple workflows), cascade chain mapping (one workflow triggering another), and risk assessment (🔴 high / 🟡 medium / 🟢 low)
 - **Recommendations** — specific, data-backed suggestions for efficiency, reliability, cost optimization, and cross-workflow conflict resolution
 
-### What it doesn't need
+#### What it doesn't need
 
 Unlike most other workflows in this repo, the Workflow Health report does **not**
 use the `fetch-launch-data.sh` pre-step or read from GitHub Projects. It works
@@ -618,7 +622,7 @@ All workflows share the same `fetch-launch-data.sh` pre-step for data fetching.
 | **Intake Request Triage** | On issue labeled `triage-needed` | RICE/Kano scores, strategy alignment, triage comment, project board update | PMs, DRIs |
 | **Decision Log** | Daily ~midnight PT · Manual | PR with individual markdown decision records in `/decisions/` | PMs, DRIs, leaders |
 | **Weekly Status** | Friday ~8 AM PT · Manual | Discussion with What Shipped, What We Learned, FYI, and SOS sections | Leaders, senior stakeholders |
-| **Workflow Health** | Friday ~8 AM PT · Manual | Discussion with success rates, failure patterns, cost estimates, cross-workflow interaction analysis, and recommendations for all agentic workflows | Leaders, ops |
+| **Workflow Health** | Friday ~8 AM PT · Manual | Discussion with success rates, failure patterns, cost estimates, cross-workflow interaction analysis, and recommendations for all agentic workflows | Ops, leaders |
 | **Transcript Processor** | On push to `/transcripts/` · Manual | Comments on matched issues with meeting context, decisions, action items | PMs, DRIs |
 | **Sample Data Simulator** | Daily ~11 PM PT · Manual | Creates launches, closes tasks, advances phases, adds comments | Demo only — not needed for production |
 

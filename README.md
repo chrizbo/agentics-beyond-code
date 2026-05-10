@@ -54,6 +54,11 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 |----------|-------------|----------------|
 | [📋 Weekly Status](.github/workflows/weekly-status.md) | Friday morning leadership status rollup — What Shipped, What We Learned, FYI, and SOS — across all initiatives and launches | [Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/86) |
 | [📋 Leadership Briefs](.github/workflows/leadership-brief.md) | Monday morning personalized briefs — one per leader policy file — with Give Kudos, Give Feedback, and Get Involved sections tailored to each leader's domain, goals, and management style | [Alex Chen — Week of 2026-05-11](https://github.com/chrizbo/agentics-beyond-code/discussions/112) |
+
+### 🔧 Operations
+
+| Workflow | Description | Example output |
+|----------|-------------|----------------|
 | [🩺 Workflow Health](.github/workflows/workflow-health.md) | Friday morning health report across all agentic workflows — success rates, failure patterns, cost estimates, cross-workflow interaction analysis (conflict detection, cascade chains, resource contention), and efficiency recommendations | [Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/106) |
 
 ### 🧪 Demo / Sample Data
