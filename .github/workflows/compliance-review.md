@@ -10,6 +10,7 @@ on:
   schedule: weekly on monday around 8am utc-7
   issues:
     types: [labeled]
+  labels: [launch, "needs:security", "needs:privacy", "needs:accessibility", "needs:responsible-ai"]
   workflow_dispatch:
 
 concurrency:

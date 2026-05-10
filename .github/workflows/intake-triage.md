@@ -8,6 +8,7 @@ description: |
 on:
   issues:
     types: [labeled]
+  labels: [triage-needed]
 
 concurrency:
   group: intake-triage-${{ github.event.issue.number }}
