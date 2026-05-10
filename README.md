@@ -107,3 +107,10 @@ This is an early-stage project. We'd love ideas for workflows that help non-engi
 - [GitHub Agentic Workflows docs](https://github.github.io/gh-aw/)
 - [The Agentics (engineering-focused)](https://github.com/githubnext/agentics)
 - [GitHub Next — Agentic Workflows](https://githubnext.com/projects/agentic-workflows/)
+
+## 📬 Contact
+
+Want to enable Agentics Beyond Code for your organization? Reach out to **Chris Butler**, the creator of this project:
+
+- **Email:** [chrizbo@gmail.com](mailto:chrizbo@gmail.com)
+- **LinkedIn:** [linkedin.com/in/chrisbu](https://www.linkedin.com/in/chrisbu/)
