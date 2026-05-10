@@ -17,6 +17,7 @@ Browse real artifacts produced by the workflows in this repo:
 | 🔍 Assumptions | [Assumptions comment](https://github.com/chrizbo/agentics-beyond-code/issues/93#issuecomment-4413916898) | Assumption Surfacer |
 | 📊 Launch readiness report | [Launch Readiness Report — 2026-05-09](https://github.com/chrizbo/agentics-beyond-code/discussions/76) | Launch Readiness |
 | 📊 Weekly status | [Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/86) | Weekly Status |
+| 📊 Leadership brief | _New — no output yet_ | Leadership Briefs |
 | 📊 Compliance team report | [Security Review Status — Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/88) | Compliance Team Reports |
 | 📊 GTM team report | [Go-to-Market Readiness — Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/105) | GTM Team Reports |
 | 📊 Workflow health | [Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/106) | Workflow Health |
@@ -117,6 +118,7 @@ Workflows define the **general pattern** (e.g., "assess readiness against a poli
     compliance-team-reports.md       ← Per-team compliance digests (weekly)
     gtm-content.md                   ← Changelog drafts + roadmap items (weekly)
     weekly-status.md                 ← Leadership status rollup (weekly)
+    leadership-brief.md              ← Personalized leadership briefs (weekly, one per leader)
     workflow-health.md               ← Agentic workflow health & cost report (weekly)
     decision-log.md                  ← Decision detection + PR creation (daily)
     transcript-processor.md          ← Transcript → issue comments (on push)
@@ -127,6 +129,8 @@ Workflows define the **general pattern** (e.g., "assess readiness against a poli
   policies/
     launch-readiness-policy.md       ← Readiness thresholds & risk scoring
     weekly-status-policy.md          ← Status sections, bullet format & audience
+    leadership-brief-alex-chen.md    ← Leadership brief persona (VP Platform Engineering)
+    leadership-brief-priya-sharma.md ← Leadership brief persona (GPM Growth & Monetization)
     security-review-policy.md        ← Security rubric & review questions
     privacy-review-policy.md         ← Privacy rubric & review questions
     accessibility-review-policy.md   ← Accessibility rubric & review questions
@@ -347,6 +351,86 @@ The policy at `.github/policies/weekly-status-policy.md` defines:
 Leaders can customize the policy to adjust what surfaces in each section
 without modifying the workflow itself.
 
+## Leadership Briefs
+
+The leadership brief system turns the weekly status **push** into a
+personalized **pull** — one brief per leader, tailored to their domain,
+quarterly goals, and management style.
+
+### How it works
+
+The **Leadership Brief workflow** (`leadership-brief.md`) runs Monday
+mornings and:
+
+1. Discovers all `.github/policies/leadership-brief-*.md` files at runtime
+2. Loads the shared portfolio data (same `launch-data.json` as other workflows)
+3. For each leader policy file, filters the portfolio to that leader's scope
+4. Evaluates activity against that leader's quarterly goals
+5. Generates one discussion per leader with personalized content
+
+### Three action sections
+
+| Section | Purpose | Example |
+|---------|---------|---------|
+| 🎉 **Give Kudos** | Recognition-worthy accomplishments — name the person, the achievement, and the goal it advances | "Platform Core squad shipped the auth migration 3 days early — directly advances the v3 API goal" |
+| 💬 **Give Feedback** | Items worth a coaching conversation — framed as curiosity, not criticism | "Scope on Launch X expanded by 4 sub-issues without an updated timeline — worth checking in on" |
+| 🚨 **Get Involved** | Pre-escalation — where the leader's intervention this week prevents a bigger problem | "Security review for billing launch is 5 days overdue — schedule 30 min with Security team to unblock" |
+
+Each brief also includes a **Quarterly Goal Tracker** (status per goal
+with weekly evidence) and a **Suggested Actions** checklist.
+
+### Policy-driven personalization
+
+Each leader gets a policy file that defines only what's unique to them:
+
+```
+.github/policies/
+  leadership-brief-alex-chen.md       ← VP Platform Engineering
+  leadership-brief-priya-sharma.md    ← GPM Growth & Monetization
+```
+
+A policy file contains:
+
+| Section | What it defines |
+|---------|----------------|
+| **Persona** | Role, scope, reporting structure, squads |
+| **Strategic Goals** | Quarterly goals with success metrics |
+| **Kudos criteria** | What this leader considers worth celebrating |
+| **Feedback criteria** | What patterns this leader wants to catch early |
+| **Pre-Escalation criteria** | What situations need this leader's involvement |
+| **Weekly Rhythm** | How the leader uses the brief in their week |
+| **Leader-specific sensitivity** | Additional sensitivity rules beyond defaults |
+
+General guidelines that apply to all leaders (tone, sensitivity defaults,
+reporting window) live in the workflow itself — not in policy files.
+
+### Adding a new leader
+
+To add a brief for a new leader:
+
+1. Create `.github/policies/leadership-brief-{name}.md` following the
+   pattern of existing policies
+2. Define their persona, squads, quarterly goals, and section criteria
+3. The next Monday run will automatically discover and include them
+
+No workflow changes or recompilation needed — the workflow discovers
+policies at runtime.
+
+### Relationship to Weekly Status
+
+The **Weekly Status** (Friday) is a portfolio-wide push: "here's what
+happened." The **Leadership Brief** (Monday) is a personalized pull:
+"here's what *you* should do about it." They share the same data source
+but serve different purposes:
+
+| | Weekly Status | Leadership Brief |
+|---|---|---|
+| **When** | Friday | Monday |
+| **Audience** | All leaders | One specific leader |
+| **Scope** | Entire portfolio | Filtered to leader's domain |
+| **Framing** | What happened | What to do about it |
+| **Sections** | Shipped, Learned, FYI, SOS | Kudos, Feedback, Get Involved |
+
 ## Workflow Health Report
 
 The workflow health report gives the team visibility into how the agentic
@@ -529,6 +613,7 @@ All workflows share the same `fetch-launch-data.sh` pre-step for data fetching.
 | **Compliance Team Reports** | Monday ~8:45 AM PT · Manual | 4 discussions (one per compliance team) with urgency-sorted launch lists | Security, Privacy, Accessibility, Responsible AI teams |
 | **GTM Content** | Monday ~8:15 AM PT · Manual | Changelog draft and roadmap item sub-issues per launch | DRIs, marketing, comms |
 | **GTM Team Reports** | Monday ~8 AM PT · Manual | Discussion summarizing launches needing GTM action | GTM team |
+| **Leadership Briefs** | Monday ~7:30 AM PT · Manual | One discussion per leader with kudos, feedback, and pre-escalation | Individual leaders |
 | **Assumption Surfacer** | On issue opened/edited · Manual | Comments surfacing implicit assumptions as explicit questions | PMs, DRIs |
 | **Intake Request Triage** | On issue labeled `triage-needed` | RICE/Kano scores, strategy alignment, triage comment, project board update | PMs, DRIs |
 | **Decision Log** | Daily ~midnight PT · Manual | PR with individual markdown decision records in `/decisions/` | PMs, DRIs, leaders |
@@ -539,39 +624,41 @@ All workflows share the same `fetch-launch-data.sh` pre-step for data fetching.
 
 ### Weekly cadence
 
-Most workflows run **Monday mornings staggered between 8:00–8:45 AM PT** to kick off the week with fresh data, spaced 15 minutes apart to respect data dependencies. The Weekly Status and Workflow Health run **Friday mornings around 8 AM PT** to close out the week.
+Most workflows run **Monday mornings staggered between 7:30–8:45 AM PT** to kick off the week with fresh data, spaced 15 minutes apart to respect data dependencies. The Weekly Status and Workflow Health run **Friday mornings around 8 AM PT** to close out the week.
 
 On a typical week:
 
-**Monday (staggered 15 min apart to respect data dependencies):**
-1. **Compliance Review** (~8:00 AM PT) — evaluates launches, updates labels, creates/updates
+**Monday (staggered to respect data dependencies):**
+1. **Leadership Briefs** (~7:30 AM PT) — personalized briefs for each leader
+   with kudos, feedback, and pre-escalation. One discussion per leader policy.
+2. **Compliance Review** (~8:00 AM PT) — evaluates launches, updates labels, creates/updates
    sub-issues. Runs first so that labels and sub-issues are current.
-2. **GTM Content** (~8:15 AM PT) — generates/refreshes changelog drafts and roadmap items.
-3. **Launch Readiness** (~8:30 AM PT) — assesses overall readiness including compliance
+3. **GTM Content** (~8:15 AM PT) — generates/refreshes changelog drafts and roadmap items.
+4. **Launch Readiness** (~8:30 AM PT) — assesses overall readiness including compliance
    sign-off status. References the labels set by the compliance review.
-4. **Compliance Team Reports** (~8:45 AM PT) — generates per-team digests reflecting the
+5. **Compliance Team Reports** (~8:45 AM PT) — generates per-team digests reflecting the
    latest label and sub-issue state.
 
 **Daily on weekdays (scattered time):**
-5. **Decision Log** — scans issue comments and transcripts for decisions,
+6. **Decision Log** — scans issue comments and transcripts for decisions,
    creates PRs with markdown decision records.
 
 **Friday (~8 AM PT):**
-6. **Weekly Status** — rolls up all activity into a single leadership status
+7. **Weekly Status** — rolls up all activity into a single leadership status
    post with What Shipped, What We Learned, FYI, and SOS sections.
-7. **Workflow Health** — analyzes all agentic workflow runs from the past week,
+8. **Workflow Health** — analyzes all agentic workflow runs from the past week,
    reports success rates, failure patterns, cost estimates, detects cross-workflow
    conflicts and cascade chains, and generates recommendations for efficiency,
    reliability, and conflict resolution.
 
 **On push to `/transcripts/`:**
-7. **Transcript Processor** — matches transcript content to open issues and
+9. **Transcript Processor** — matches transcript content to open issues and
    posts summary comments with meeting context.
 
 **On issue labeled `triage-needed`:**
-8. **Intake Request Triage** — scores the request with RICE and Kano,
-   checks strategy alignment, detects duplicates, flags incomplete submissions,
-   and adds the item to the Intake Triage project board (`projects/2`).
+10. **Intake Request Triage** — scores the request with RICE and Kano,
+    checks strategy alignment, detects duplicates, flags incomplete submissions,
+    and adds the item to the Intake Triage project board (`projects/2`).
 
 The Compliance Review workflow also runs **on-demand** whenever a `launch`
 label is added to an issue, so new launches get evaluated immediately.
