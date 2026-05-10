@@ -73,6 +73,20 @@ teams — **Security**, **Privacy**, **Accessibility**, and **Responsible AI** �
 then update labels, post a status table on the launch issue, and generate
 starter review content when a review is needed.
 
+## Activation Guard
+
+This workflow only applies to **launch** issues. When triggered by a label
+event, check whether the issue has the `launch` label:
+
+```bash
+gh issue view ${{ github.event.issue.number }} --repo ${{ github.repository }} \
+  --json labels --jq '[.labels[].name]'
+```
+
+If the issue does **not** have the `launch` label, call the `noop` safe output
+with "Skipped — issue is not a launch" and stop immediately. Do not process
+intake requests, initiatives, or other issue types.
+
 ## Pre-Fetched Data
 
 A deterministic pre-step has already fetched all project data:

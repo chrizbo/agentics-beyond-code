@@ -55,6 +55,19 @@ shared sensemaking.
 > behavior. A dependency assumes another team's priority. Surfacing these
 > isn't criticism — it's an invitation for the team to reason together.
 
+## Activation Guard
+
+Before analyzing, check whether this issue is an intake request awaiting
+triage. Intake requests are handled by the intake-triage workflow, not here.
+
+```bash
+gh issue view ${{ github.event.issue.number }} --repo ${{ github.repository }} \
+  --json labels --jq '[.labels[].name]'
+```
+
+If the issue has the `triage-needed` label, call the `noop` safe output
+with "Skipped — intake request awaiting triage" and stop immediately.
+
 ## What Triggered This Run
 
 {{#if github.event.comment}}
