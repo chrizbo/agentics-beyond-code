@@ -12,6 +12,7 @@ on:
     types: [created]
   pull_request:
     types: [opened, synchronize]
+  skip-bots: [github-actions]
   workflow_dispatch:
 
 permissions:
