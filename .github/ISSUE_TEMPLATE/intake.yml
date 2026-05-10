@@ -1,0 +1,90 @@
+name: Intake Request
+description: Submit a feature request or bug report for triage and prioritization
+title: "[Intake] "
+labels: ["triage-needed"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form to submit a new feature request or bug report. The triage
+        workflow will automatically evaluate your request against our strategy,
+        score it using RICE and Kano frameworks, and check for duplicates.
+
+  - type: dropdown
+    id: request-type
+    attributes:
+      label: Request Type
+      description: Is this a feature request or a bug report?
+      options:
+        - Feature Request
+        - Bug Report
+    validations:
+      required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What are you requesting or reporting? One clear paragraph.
+      placeholder: "e.g., Add dark mode support so users can reduce eye strain during nighttime use."
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or Pain Point
+      description: What problem does this solve, or what bug are you experiencing?
+      placeholder: |
+        - What is the current behavior?
+        - Who is affected and how often?
+        - What is the impact of not addressing this?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed Solution (Feature) / Steps to Reproduce (Bug)
+      description: For features, describe your ideal solution. For bugs, list steps to reproduce.
+      placeholder: |
+        Feature: Describe the solution you'd like to see.
+        Bug: Step 1, Step 2, ... Expected vs actual behavior.
+
+  - type: dropdown
+    id: urgency
+    attributes:
+      label: Urgency
+      description: How urgent is this request?
+      options:
+        - Low — nice to have, no deadline
+        - Medium — would like it soon, but not blocking
+        - High — blocking or significantly impacting work
+        - Critical — production issue or compliance risk
+    validations:
+      required: true
+
+  - type: textarea
+    id: user-segment
+    attributes:
+      label: Who is affected?
+      description: Which users or teams are impacted? How many people does this affect?
+      placeholder: |
+        - e.g., All enterprise customers (~500 users)
+        - e.g., Internal QA team (3 people)
+        - e.g., Unclear / not sure
+
+  - type: textarea
+    id: success-criteria
+    attributes:
+      label: Success Criteria
+      description: How would we know this request was successfully addressed?
+      placeholder: |
+        - e.g., Users can toggle dark mode from settings
+        - e.g., The error no longer appears when submitting the form
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Context
+      description: Links to related issues, screenshots, docs, or anything else relevant.

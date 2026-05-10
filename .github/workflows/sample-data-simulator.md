@@ -50,6 +50,10 @@ safe-outputs:
     max: 20
     discussions: false
     pull-requests: false
+  add-labels:
+    allowed:
+      - triage-needed
+    max: 5
   update-project:
     max: 20
     project: "https://github.com/users/chrizbo/projects/1"
@@ -369,6 +373,88 @@ Then call the `create_pull_request` safe output to push the file:
 }
 ```
 
+### 9. Generate Intake Requests (1-2 per run)
+
+Create **1-2 intake requests** using the intake issue template format. These
+feed the **intake-triage** workflow, which will automatically score and
+evaluate them.
+
+Each intake request must use the structured body format that matches the
+`.github/ISSUE_TEMPLATE/intake.yml` template. Apply the `triage-needed`
+label using `add_labels` after creating the issue.
+
+**Mix of request types each run:**
+- Alternate between **bug reports** and **feature requests**
+- **At least one bug per run** should relate to something the team is
+  currently working on (reference a real open launch or initiative)
+- **Feature requests** should occasionally propose something new that doesn't
+  align with any current initiative
+
+**Bug report examples** (relate to active launches):
+- "Form validation error when submitting with special characters" (if there's
+  an active frontend launch)
+- "API rate limiting returns 500 instead of 429" (if there's an API launch)
+- "Dark mode toggle doesn't persist across sessions" (if there's a dark mode launch)
+- "Search results don't update after applying filters" (if there's a search launch)
+
+**Feature request examples:**
+- "Add CSV export for analytics dashboard"
+- "Support two-factor authentication with hardware keys"
+- "Allow custom branding on customer-facing emails"
+- "Add a Gantt chart view for project timelines"
+
+**Issue body format** (must match the template):
+
+```markdown
+### Request Type
+
+<Feature Request or Bug Report>
+
+### Summary
+
+<Clear 1-2 sentence description>
+
+### Problem or Pain Point
+
+<Describe the actual problem, who's affected, how often>
+
+### Proposed Solution (Feature) / Steps to Reproduce (Bug)
+
+<For features: ideal solution. For bugs: repro steps with expected vs actual>
+
+### Urgency
+
+<Low — nice to have, no deadline / Medium — would like it soon, but not blocking / High — blocking or significantly impacting work / Critical — production issue or compliance risk>
+
+### Who is affected?
+
+<User segment and approximate reach>
+
+### Success Criteria
+
+<How we'd know this is fixed/delivered>
+
+### Additional Context
+
+<Links, screenshots, references to related issues>
+```
+
+**After creating each intake issue:**
+
+1. Apply the `triage-needed` label:
+   ```json
+   {"type": "add_labels", "issue_number": <number>, "labels": ["triage-needed"]}
+   ```
+
+The **intake-triage** workflow will automatically pick up the issue (triggered
+by the `triage-needed` label), score it, and add it to the Intake Triage
+project board at `https://github.com/users/chrizbo/projects/2`.
+
+**Vary completeness intentionally.** About 1 in 4 intake requests should be
+deliberately **incomplete** — missing the problem statement, no affected users,
+or vague success criteria. This gives the triage workflow something to flag
+as `needs-more-info`.
+
 ## Constraints
 
 - **Never create more than 1 new launch per run** — we want gradual growth
@@ -391,3 +477,4 @@ Process your actions in this order:
 7. Create new launch + epics + tasks (create-issue with parent field + update-project)
 8. Adjust risk levels (update-project)
 9. Generate and commit the standup transcript (bash: write file + git push)
+10. Create intake requests (create-issue + add-labels + update-project for triage board)
