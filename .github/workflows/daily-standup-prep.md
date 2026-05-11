@@ -136,6 +136,15 @@ Use this body structure:
 - 2 min: Decision needed
 - 2 min: Quality & reliability risk
 - 1 min: Cross-team coordination and owners
+
+### 🎲 Facilitation style of the day (pick one, rotate daily)
+- **Risk-first drill:** Start with the biggest risk, then only discuss topics that change delivery confidence.
+- **Decision-first sync:** Start with the decision needed, then cover only inputs required to make that decision.
+- **Dependency map:** Start with blockers/dependencies and trace unblock ownership across functions.
+- **Customer-impact pass:** Start with quality/reliability risk and frame each update as customer impact + mitigation.
+- **Coordination sprint:** Start with cross-team handoffs and end with explicit owner/date commitments.
+
+Avoid default round-robin updates unless there is no higher-signal facilitation option for the day.
 ```
 
 ## Guidelines
@@ -144,5 +153,6 @@ Use this body structure:
 - Keep each topic concise and grounded in real open issues.
 - Do not fabricate data; if evidence is thin, explicitly say so.
 - Keep prompts actionable and conversation-oriented.
+- Use a facilitation style that rotates day to day; avoid repetitive round-robin standups.
 - Escape all @mentions and GitHub references (handled by safe outputs).
 - End with clear ownership language in each topic where possible.
