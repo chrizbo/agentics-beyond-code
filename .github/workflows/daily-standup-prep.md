@@ -6,7 +6,7 @@ description: |
 
 on:
   schedule:
-    - cron: "0 15 * * 1-5"
+    - cron: "0 15 * * 1-5" # 15:00 UTC ≈ 8:00am PT weekdays
   workflow_dispatch:
 
 permissions:
@@ -28,6 +28,7 @@ steps:
       LAUNCH_DATA_TOKEN: ${{ secrets.AW_TOKEN }}
     run: |
       chmod +x .github/scripts/fetch-launch-data.sh
+      # Project number 1 is the sample Launch Tracker project in this repository.
       ./.github/scripts/fetch-launch-data.sh "${{ github.repository_owner }}" 1 launch-data.json
       echo "path=launch-data.json" >> "$GITHUB_OUTPUT"
 
@@ -55,7 +56,7 @@ a focused standup conversation.
 
 ## Pre-Fetched Data
 
-A deterministic pre-step has already fetched all project data:
+A deterministic pre-step has already fetched all project data and generated both:
 
 - **`launch-data-summary.json`** — Read this first with `cat launch-data-summary.json`.
 - **`launch-data.json`** — Full data with issue bodies. Use `jq` to extract only what you need.
@@ -99,6 +100,8 @@ Create exactly one discussion for today with this title format:
 ```
 [Standup Prep] YYYY-MM-DD
 ```
+
+Use today's date from the run environment (for example: `date +%Y-%m-%d`).
 
 Use this body structure:
 
