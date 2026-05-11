@@ -1,4 +1,5 @@
 ---
+name: "📥 Intake Request Triage"
 description: |
   Triages and prioritizes incoming intake requests (features and bugs).
   Reads the strategy doc, scores each request using RICE and Kano frameworks,
