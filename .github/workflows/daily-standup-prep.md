@@ -6,7 +6,7 @@ description: |
 
 on:
   schedule:
-    - cron: "0 15 * * 1-5" # 15:00 UTC ≈ 8:00am PT weekdays
+    - cron: "0 15 * * 1-5" # 15:00 UTC = 8:00am PDT / 7:00am PST on weekdays
   workflow_dispatch:
 
 permissions:
@@ -101,7 +101,7 @@ Create exactly one discussion for today with this title format:
 [Standup Prep] YYYY-MM-DD
 ```
 
-Use today's date from the run environment (for example: `date +%Y-%m-%d`).
+Use the current run date via shell command (for example: `date -u +%Y-%m-%d`).
 
 Use this body structure:
 
