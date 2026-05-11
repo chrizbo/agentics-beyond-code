@@ -1,5 +1,5 @@
 ---
-name: "🛡️ Compliance Review"
+name: "Compliance Review"
 description: |
   Compliance review workflow for launches. Evaluates each launch against
   rubrics for Security, Privacy, Accessibility, and Responsible AI teams.
