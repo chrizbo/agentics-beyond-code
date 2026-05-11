@@ -6,7 +6,7 @@ description: |
 
 on:
   schedule:
-    - cron: "0 15 * * 1-5" # 15:00 UTC = 8:00am PDT / 7:00am PST on weekdays
+    - cron: "0 15 * * 1-5" # 15:00 UTC = 8:00am PDT (daylight saving) / 7:00am PST
   workflow_dispatch:
 
 permissions:
