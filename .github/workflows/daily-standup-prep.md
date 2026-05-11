@@ -5,7 +5,8 @@ description: |
   blockers, decisions, quality risks, and coordination needs.
 
 on:
-  schedule: daily around 8am
+  schedule:
+    - cron: "0 15 * * 1-5"
   workflow_dispatch:
 
 permissions:
