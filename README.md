@@ -36,14 +36,14 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 
 | Workflow | Description | Example output |
 |----------|-------------|----------------|
-| [📥 Intake Request Triage](.github/workflows/intake-triage.md) | Scores incoming feature requests and bug reports using RICE and Kano frameworks, checks strategy alignment, detects duplicates, flags incomplete submissions, and adds items to the triage project board | [Triage comment](https://github.com/chrizbo/agentics-beyond-code/issues/109#issuecomment) |
+| [📥 Intake Request Triage](.github/workflows/intake-triage.md) | Scores incoming feature requests and bug reports using RICE and Kano frameworks, checks strategy alignment, detects duplicates, flags incomplete submissions, and adds items to the triage project board | [Triage comment](https://github.com/chrizbo/agentics-beyond-code/issues/109#issuecomment-4416252905) |
 
 ### 📋 Decision & Knowledge
 
 | Workflow | Description | Example output |
 |----------|-------------|----------------|
 | [🔍 Assumption Surfacer](.github/workflows/assumption-surfacer.md) | Scans issues and PRs for implicit assumptions (timelines, dependencies, user behavior, capacity) and posts them as explicit questions for the team to reason through together | [Assumptions comment](https://github.com/chrizbo/agentics-beyond-code/issues/93#issuecomment-4413916898) |
-| [😤 Adversarial PM](.github/workflows/adversarial-pm.md) | Wednesday morning grumpy challenge of the week's most consequential decisions — picks 2-3 from `/decisions/`, argues against them using non-deterministic lenses (pre-mortem, reversibility, opportunity cost, etc.), and posts sarcastic but specific counterarguments on the source issues | [ClickHouse challenge](https://github.com/chrizbo/agentics-beyond-code/issues/68#issuecomment) |
+| [😤 Adversarial PM](.github/workflows/adversarial-pm.md) | Wednesday morning grumpy challenge of the week's most consequential decisions — picks 2-3 from `/decisions/`, argues against them using non-deterministic lenses (pre-mortem, reversibility, opportunity cost, etc.), and posts sarcastic but specific counterarguments on the source issues | [ClickHouse challenge](https://github.com/chrizbo/agentics-beyond-code/issues/68#issuecomment-4416664720) |
 | [📋 Decision Log](.github/workflows/decision-log.md) | Daily scan of issue comments and meeting transcripts for decisions — creates a PR with individual decision record files in `/decisions/` | [Decision Log — 2026-05-09](https://github.com/chrizbo/agentics-beyond-code/issues/87) |
 | [🧭 Strategy Alignment](.github/workflows/strategy-alignment.md) | Wednesday morning analysis of team activity against `docs/strategy.md` tradeoffs — comments on clearly misaligned issues, annotates the strategy doc with alignment evidence and emerging patterns | [Strategy evidence PR](https://github.com/chrizbo/agentics-beyond-code/pull/107) |
 | [🎙️ Transcript Processor](.github/workflows/transcript-processor.md) | Triggered when `.txt` or `.vtt` files are pushed to `/transcripts/` — matches transcript content to open issues and posts summary comments | [Meeting notes comment](https://github.com/chrizbo/agentics-beyond-code/issues/14#issuecomment-4413622565) |
