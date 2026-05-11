@@ -1,4 +1,5 @@
 ---
+name: "Adversarial PM"
 description: |
   Adversarial PM. Weekly scan of recent decisions in /decisions/ — picks the
   2-3 most consequential and posts grumpy, sarcastic counterarguments on the
