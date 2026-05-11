@@ -64,11 +64,11 @@ A deterministic pre-step has already fetched all project data:
 
 Use these exact five topics in the report and tie each topic to current work:
 
-1. **Delivery confidence** — what can realistically ship soon and what is uncertain
-2. **Blockers & dependencies** — what is stuck and who needs to unblock it
-3. **Decision needed** — one decision or trade-off to resolve today
-4. **Quality & reliability risk** — testing, defects, or operational risk to watch
-5. **Cross-team coordination** — handoffs or collaboration needed across roles
+1. **Delivery confidence**: what can realistically ship soon and what is uncertain
+2. **Blockers & dependencies**: what is stuck and who needs to unblock it
+3. **Decision needed**: one decision or trade-off to resolve today
+4. **Quality & reliability risk**: testing, defects, or operational risk to watch
+5. **Cross-team coordination**: handoffs or collaboration needed across roles
 
 ## Process
 
