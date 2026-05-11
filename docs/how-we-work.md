@@ -149,7 +149,8 @@
 | Assumption surfacing | Assumption Surfacer workflow | On issue opened/edited |
 | Weekly status rollup | Weekly Status workflow | Weekly (Friday) |
 | Workflow health monitoring | Workflow Health workflow | Weekly (Friday) |
-| Strategy alignment analysis | Strategy Alignment workflow | Weekly (Monday) |
+| Strategy alignment analysis | Strategy Alignment workflow | Weekly (Wednesday ~8 AM) |
+| Decision challenge | Adversarial PM workflow | Weekly (Wednesday ~8:30 AM) |
 | Process analysis & retro | Process Analyzer workflow | Weekly |
 | Ritual cadence tracking | Process Analyzer workflow | Weekly (part of retro) |
 | Intake request triage | Intake Request Triage workflow | On issue labeled `triage-needed` |
