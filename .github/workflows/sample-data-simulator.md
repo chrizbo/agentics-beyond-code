@@ -311,6 +311,13 @@ Priya Patel: I'm still on the notification tray component, issue #63. Hit a snag
 **Key rules:**
 - Reference **3-5 real open issues** by number and title naturally in conversation
 - Include at least one blocker or risk mentioned by someone
+- Ensure **all five standup prep focus topics** from this list are covered in
+  the transcript:
+  - **Delivery confidence** (what can ship this week, what's uncertain)
+  - **Blockers & dependencies** (what is stuck, who is waiting on whom)
+  - **Decision needed** (trade-off or choice the team should make today)
+  - **Quality & reliability risk** (test gaps, regressions, operational concerns)
+  - **Cross-team coordination** (handoffs needed with design, infra, QA, or stakeholders)
 - **Include at least one decision** — have someone announce or confirm a decision
   made by the team. Examples:
   - "We talked it over and decided to use a polling approach instead of WebSockets for the dashboard."
