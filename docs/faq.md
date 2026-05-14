@@ -48,7 +48,7 @@ Edit `.github/policies/voice-and-tone-policy.md`. The GTM Content workflow reads
 | GTM Content | Monday ~8:15 AM PT | Yes |
 | GTM Team Reports | Monday ~8 AM PT | Yes |
 | Leadership Briefs | Monday ~7:30 AM PT | Yes |
-| Assumption Surfacer | On issue opened/edited, issue comments, and PR opened/synchronized | Yes |
+| Assumption Surfacer | On issue opened/edited | Yes |
 | Intake Request Triage | On issue labeled `triage-needed` | No |
 | Decision Log | Weeknights after each workday | Yes |
 | Daily Standup Prep | Monday and Wednesday ~8 AM PT | Yes |

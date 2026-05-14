@@ -1,6 +1,6 @@
 ---
 description: |
-  Multiplayer assumption surfacer. Scans issues and PRs for implicit
+  Multiplayer assumption surfacer. Scans issues for implicit
   assumptions — about timelines, user behavior, dependencies, capacity,
   and technical feasibility — and posts them as explicit questions for
   relevant people to interpret. Reasoning travels, not just data.
@@ -10,17 +10,12 @@ engine: codex
 on:
   issues:
     types: [opened, edited]
-  issue_comment:
-    types: [created]
-  pull_request:
-    types: [opened, synchronize]
   skip-bots: [github-actions]
   workflow_dispatch:
 
 permissions:
   contents: read
   issues: read
-  pull-requests: read
 
 strict: true
 timeout-minutes: 10
@@ -31,7 +26,7 @@ network:
 tools:
   github:
     mode: gh-proxy
-    toolsets: [default, issues, pull_requests]
+    toolsets: [issues]
     lockdown: false
     min-integrity: none
 
@@ -73,33 +68,8 @@ with "Skipped — intake request awaiting triage" and stop immediately.
 
 ## What Triggered This Run
 
-{{#if github.event.comment}}
-A new comment was posted on issue **#${{ github.event.issue.number }}**.
-
-Comment ID: ${{ github.event.comment.id }}
-Comment: "${{ steps.sanitized.outputs.text }}"
-
-Fetch the comment author and the full issue context:
-
-```bash
-gh api repos/${{ github.repository }}/issues/comments/${{ github.event.comment.id }} --jq '{author: .user.login, created_at: .created_at}'
-gh issue view ${{ github.event.issue.number }} --repo ${{ github.repository }} --json body,title,labels,assignees --jq '{title,body,labels:[.labels[].name],assignees:[.assignees[].login]}'
-```
-
-Focus your analysis on the **comment** content, but use the issue body for context.
-Skip comments from bots (author login ending in `[bot]`).
-{{/if}}
-
 {{#if github.event.issue}}
-{{#unless github.event.comment}}
 An issue was opened or edited: **#${{ github.event.issue.number }}**
-
-Content: "${{ steps.sanitized.outputs.text }}"
-{{/unless}}
-{{/if}}
-
-{{#if github.event.pull_request}}
-A pull request was opened or updated: **#${{ github.event.pull_request.number }}**
 
 Content: "${{ steps.sanitized.outputs.text }}"
 {{/if}}
@@ -161,17 +131,16 @@ categories:
 
 ### Step 1: Read the Content
 
-Read the full issue or PR body. If it's an issue, also check for linked
-sub-issues or parent issues to understand the broader context:
+Read the full issue body. Also check for linked sub-issues or parent issues
+to understand the broader context:
 
 ```bash
-# For issues — check for hierarchy
-gh issue view ${{ github.event.issue.number || github.event.pull_request.number }} --repo ${{ github.repository }} --json body,title,labels,assignees,author
+gh issue view ${{ github.event.issue.number }} --repo ${{ github.repository }} --json body,title,labels,assignees,author
 ```
 
 ### Step 2: Identify the Participants
 
-Determine who is involved in this issue/PR and who might have relevant
+Determine who is involved in this issue and who might have relevant
 context. Look at:
 
 - The author
@@ -226,12 +195,12 @@ Write a comment that is:
 ```markdown
 ## 🔍 Assumptions Worth Discussing
 
-I found **N high-risk assumption(s)** in this [issue/PR] that might be
+I found **N high-risk assumption(s)** in this issue that might be
 worth making explicit. These aren't criticisms — they're invitations to align.
 
 #### 1. <Assumption name>
 
-> "<quoted text from the issue/PR>"
+> "<quoted text from the issue>"
 
 **The assumption:** <what's being taken as given>
 
@@ -263,7 +232,7 @@ Also add the `assumptions-surfaced` label so the team can track which
 issues have been reviewed.
 
 **Use noop** if:
-- The issue/PR has no meaningful assumptions (e.g., a typo fix PR)
+- The issue has no meaningful assumptions
 - All assumptions are low-risk and trivial
 - The content is too short to contain substantive assumptions
 - The `assumptions-surfaced` label is already present (avoid duplicates)
@@ -271,7 +240,7 @@ issues have been reviewed.
 ```json
 {
   "type": "noop",
-  "reason": "No significant assumptions found in this [issue/PR]."
+  "reason": "No significant assumptions found in this issue."
 }
 ```
 

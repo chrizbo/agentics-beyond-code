@@ -146,7 +146,7 @@
 | Compliance team reports | Compliance Team Reports workflow | Weekly (Monday ~8:45 AM) |
 | GTM content drafts | GTM Content workflow | Weekly (Monday ~8:15 AM) |
 | GTM team reports | GTM Team Reports workflow | Weekly (Monday ~8 AM) |
-| Assumption surfacing | Assumption Surfacer workflow | On issue opened/edited, issue comment created, or PR opened/synchronized |
+| Assumption surfacing | Assumption Surfacer workflow | On issue opened/edited |
 | Weekly status rollup | Weekly Status workflow | Weekly (Friday) |
 | Workflow health monitoring | Workflow Health workflow | Weekly (Friday) |
 | Strategy alignment analysis | Strategy Alignment workflow | Weekly (Wednesday ~8 AM) |

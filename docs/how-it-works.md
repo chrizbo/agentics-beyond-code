@@ -628,7 +628,7 @@ actual GitHub Actions triggers.
 | **Workflow Health** | Friday ~8 AM PT (`6 14 * * 5`) · Manual | Discussion with success rates, failure patterns, cost estimates, cross-workflow interaction analysis, and recommendations | Ops, leaders |
 | **Weekly Status** | Friday ~8 AM PT (`49 15 * * 5`) · Manual | Discussion with What Shipped, What We Learned, FYI, and SOS sections | Leaders, senior stakeholders |
 | **Sample Data Simulator** | Sunday and Tuesday nights ~11 PM PT (`0 6 * * 1,3`) · Manual | Creates launches, closes tasks, advances phases, adds comments | Demo only — not needed for production |
-| **Assumption Surfacer** | Issue opened/edited · Issue comment created · PR opened/synchronized · Manual | Comments surfacing implicit assumptions as explicit questions | PMs, DRIs |
+| **Assumption Surfacer** | Issue opened/edited · Manual | Comments surfacing implicit assumptions as explicit questions | PMs, DRIs |
 | **Intake Request Triage** | Issue labeled `triage-needed` | RICE/Kano scores, strategy alignment, triage comment, project board update | PMs, DRIs |
 | **Transcript Processor** | Push to `transcripts/**/*.txt`, `transcripts/**/*.vtt`, `transcripts/*.txt`, or `transcripts/*.vtt` on `main` · Manual | Comments on matched issues with meeting context, decisions, action items | PMs, DRIs |
 
@@ -677,9 +677,8 @@ On a typical week:
 15. **Weekly Status** — rolls up all activity into a single leadership status
    post with What Shipped, What We Learned, FYI, and SOS sections.
 
-**On issues, PRs, and comments:**
-16. **Assumption Surfacer** — runs on issue opened/edited, issue comment created,
-    and PR opened/synchronized events.
+**On issues:**
+16. **Assumption Surfacer** — runs on issue opened/edited events.
 17. **Intake Request Triage** — scores requests when `triage-needed` is applied.
 18. **Compliance Review** — also runs when relevant launch/compliance labels are
     added to an issue, so new launches get evaluated immediately.
