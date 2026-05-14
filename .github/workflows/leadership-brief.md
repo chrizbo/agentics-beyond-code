@@ -7,6 +7,8 @@ description: |
   style with three action-oriented sections: Give Kudos, Give Feedback,
   and Get Involved (pre-escalation).
 
+engine: codex
+
 on:
   schedule: weekly on monday around 7:30am utc-7
   workflow_dispatch:

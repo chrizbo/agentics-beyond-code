@@ -5,6 +5,8 @@ description: |
   duration trends, cost estimates, and actionable recommendations for
   efficiency improvements and fixes.
 
+engine: codex
+
 on:
   schedule: weekly on friday around 8am utc-7
   workflow_dispatch:

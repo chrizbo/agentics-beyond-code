@@ -4,9 +4,11 @@ description: |
   topics and facilitation prompts so the standup covers delivery confidence,
   blockers, decisions, quality risks, and coordination needs.
 
+engine: codex
+
 on:
   schedule:
-    - cron: "0 15 * * 1-5" # Runs at 15:00 UTC (8:00am PDT / 7:00am PST depending on DST)
+    - cron: "0 15 * * 1,3" # Runs Monday and Wednesday at 15:00 UTC (8:00am PDT / 7:00am PST depending on DST)
   workflow_dispatch:
 
 permissions:

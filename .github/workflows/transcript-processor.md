@@ -5,6 +5,8 @@ description: |
   topics related to open issues (launches, epics, tasks), and posts summary
   comments on those issues with relevant excerpts from the meeting.
 
+engine: codex
+
 on:
   push:
     branches: [main]

@@ -6,6 +6,8 @@ description: |
   and creates a PR annotating the strategy doc with alignment evidence,
   misalignment examples, and emerging strategic patterns.
 
+engine: codex
+
 on:
   schedule: weekly on wednesday around 8am utc-7
   workflow_dispatch:

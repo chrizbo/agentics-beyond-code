@@ -5,6 +5,8 @@ description: |
   launches that need their review, ordered by urgency. Helps compliance
   reviewers prioritize their work without digging through individual issues.
 
+engine: codex
+
 on:
   schedule: weekly on monday around 8:45am utc-7
   workflow_dispatch:

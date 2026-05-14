@@ -140,21 +140,22 @@
 | Process | Tool | Trigger |
 |---------|------|---------|
 | Transcript → issue comments | Transcript Processor workflow | Push to `/transcripts/` |
-| Decision extraction | Decision Log workflow | Daily schedule |
+| Decision extraction | Decision Log workflow | Weeknights after each workday |
 | Launch readiness reports | Launch Readiness workflow | Weekly (Monday ~8:30 AM) |
 | Compliance reviews | Compliance Review workflow | Weekly (Monday ~8 AM) + on issue labeled |
 | Compliance team reports | Compliance Team Reports workflow | Weekly (Monday ~8:45 AM) |
 | GTM content drafts | GTM Content workflow | Weekly (Monday ~8:15 AM) |
 | GTM team reports | GTM Team Reports workflow | Weekly (Monday ~8 AM) |
-| Assumption surfacing | Assumption Surfacer workflow | On issue opened/edited |
+| Assumption surfacing | Assumption Surfacer workflow | On issue opened/edited, issue comment created, or PR opened/synchronized |
 | Weekly status rollup | Weekly Status workflow | Weekly (Friday) |
 | Workflow health monitoring | Workflow Health workflow | Weekly (Friday) |
 | Strategy alignment analysis | Strategy Alignment workflow | Weekly (Wednesday ~8 AM) |
 | Decision challenge | Adversarial PM workflow | Weekly (Wednesday ~8:30 AM) |
-| Process analysis & retro | Process Analyzer workflow | Weekly |
+| Process analysis & retro | Process Analyzer workflow | Weekly (Monday night / early Tuesday UTC) |
 | Ritual cadence tracking | Process Analyzer workflow | Weekly (part of retro) |
 | Intake request triage | Intake Request Triage workflow | On issue labeled `triage-needed` |
-| Sample data generation | Sample Data Simulator | Daily |
+| Standup preparation | Daily Standup Prep workflow | Monday/Wednesday |
+| Sample data generation | Sample Data Simulator | Sunday and Tuesday nights |
 
 ### Manual Processes (Candidates for Automation)
 | Process | Current Owner | Notes |

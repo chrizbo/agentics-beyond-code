@@ -5,6 +5,8 @@ description: |
   for decisions discussed in meetings. Creates a PR with individual markdown
   files in /decisions/ for each decision detected.
 
+engine: codex
+
 on:
   schedule: "0 7 * * 2-6"
   workflow_dispatch:

@@ -5,6 +5,8 @@ description: |
   content that needs refreshing, and upcoming launches that need GTM readiness.
   Helps the GTM team prioritize their work without digging through individual issues.
 
+engine: codex
+
 on:
   schedule: weekly on monday around 8am utc-7
   workflow_dispatch:

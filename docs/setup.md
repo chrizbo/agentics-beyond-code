@@ -24,7 +24,8 @@ gh auth refresh -s read:project,project
 | Secret | Required | Purpose |
 |--------|----------|---------|
 | `GITHUB_TOKEN` | Automatic | Default Actions token — used for issue/PR reads and safe-outputs writes |
-| `COPILOT_GITHUB_TOKEN` | Yes (for Copilot engine) | Token for the AI engine. Set up via `gh aw init` |
+| `OPENAI_API_KEY` | Yes | OpenAI API key used by the Codex engine |
+| `CODEX_API_KEY` | Optional | Alternative Codex engine secret. If present, gh-aw uses it before `OPENAI_API_KEY` |
 | `AW_TOKEN` | Yes | PAT with `read:project` scope — used by pre-steps to fetch project data via GraphQL |
 
 The `GITHUB_TOKEN` needs these permissions (configured in the workflow frontmatter):
@@ -34,6 +35,28 @@ The `GITHUB_TOKEN` needs these permissions (configured in the workflow frontmatt
 - `discussions: read` — read existing discussions
 
 Write operations (creating discussions) are handled by `safe-outputs` in a separate secured job — the agent job itself stays read-only.
+
+### Setting up OpenAI for Codex
+
+The workflows use the gh-aw Codex engine (`engine: codex`), so model usage is billed to the OpenAI account associated with the API key you store as a repository secret.
+
+1. Create an OpenAI API key from your OpenAI Platform account.
+2. Add it as a repository secret:
+
+```bash
+gh aw secrets set OPENAI_API_KEY --value "<your-openai-api-key>"
+```
+
+You can also use GitHub's standard secret command:
+
+```bash
+gh secret set OPENAI_API_KEY
+# Paste your OpenAI API key when prompted
+```
+
+If you prefer a Codex-specific secret name, set `CODEX_API_KEY` instead. The compiled workflows check `CODEX_API_KEY` first, then fall back to `OPENAI_API_KEY`.
+
+> **Security review note:** switching from Copilot to Codex adds `CODEX_API_KEY` and `OPENAI_API_KEY` as restricted secrets and allows outbound access to OpenAI domains such as `api.openai.com`. Review these generated lock-file changes in PRs before merging.
 
 ### Setting up `AW_TOKEN`
 

@@ -5,6 +5,8 @@ description: |
   We Learned, FYI, and SOS. Designed for leaders who need a fast read on
   portfolio health, wins, and where they need to get involved.
 
+engine: codex
+
 on:
   schedule: weekly on friday around 8am utc-7
   workflow_dispatch:

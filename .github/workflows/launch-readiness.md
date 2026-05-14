@@ -5,6 +5,8 @@ description: |
   a readiness assessment based on the policy at .github/policies/launch-readiness-policy.md.
   Reports per-launch status and an overall pipeline summary.
 
+engine: codex
+
 on:
   schedule: weekly on monday around 8:30am utc-7
   workflow_dispatch:

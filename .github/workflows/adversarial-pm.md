@@ -6,6 +6,8 @@ description: |
   source issues. Each run argues from different angles because the challenge
   lenses are chosen non-deterministically. The variance is the feature.
 
+engine: codex
+
 on:
   schedule: weekly on wednesday around 830am utc-7
   workflow_dispatch:

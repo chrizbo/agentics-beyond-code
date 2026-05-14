@@ -5,6 +5,8 @@ description: |
   and technical feasibility — and posts them as explicit questions for
   relevant people to interpret. Reasoning travels, not just data.
 
+engine: codex
+
 on:
   issues:
     types: [opened, edited]

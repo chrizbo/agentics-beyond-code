@@ -4,8 +4,10 @@ description: |
   Creates new launches weekly, closes completed work, and adds progress comments
   to epics and tasks — feeding the launch readiness report with fresh data.
 
+engine: codex
+
 on:
-  schedule: "0 6 * * 2-6"
+  schedule: "0 6 * * 1,3" # Sunday and Tuesday nights at ~11 PM PT
   workflow_dispatch:
 
 permissions:

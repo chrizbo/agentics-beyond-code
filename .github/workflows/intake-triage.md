@@ -6,10 +6,12 @@ description: |
   checks for missing information, detects duplicates, evaluates alignment
   with current initiatives, and adds the item to the triage project board.
 
+engine: codex
+
 on:
   issues:
     types: [labeled]
-  labels: [triage-needed]
+    names: [triage-needed]
 
 concurrency:
   group: intake-triage-${{ github.event.issue.number }}

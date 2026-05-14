@@ -6,6 +6,8 @@ description: |
   retrospective summary, and creates PRs to update docs/how-we-work.md when
   changes are detected.
 
+engine: codex
+
 on:
   schedule: weekly
   workflow_dispatch:

@@ -60,7 +60,7 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 |----------|-------------|----------------|
 | [🩺 Workflow Health](.github/workflows/workflow-health.md) | Friday morning health report across all agentic workflows — success rates, failure patterns, cost estimates, cross-workflow interaction analysis (conflict detection, cascade chains, resource contention), and efficiency recommendations | [Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/106) |
 | [🔄 Process Analyzer](.github/workflows/process-analyzer.md) | Weekly retro + process analysis — posts a team retrospective discussion, detects process drift in transcripts vs `docs/how-we-work.md`, identifies automation opportunities and gaps, and creates update PRs | [Retro — Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/104) |
-| [🔁 Daily Standup Prep](.github/workflows/daily-standup-prep.md) | Weekday standup preparation: posts a discussion with high-priority topics, blockers, and facilitation prompts to help run effective daily syncs | |
+| [🔁 Daily Standup Prep](.github/workflows/daily-standup-prep.md) | Monday/Wednesday standup preparation: posts a discussion with high-priority topics, blockers, and facilitation prompts to help run effective daily syncs | |
 
 ### 🧪 Demo / Sample Data
 
@@ -68,7 +68,7 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 
 | Workflow | Description |
 |----------|-------------|
-| [🎲 Sample Data Simulator](.github/workflows/sample-data-simulator.md) | Generates realistic project activity daily — creates launches, closes tasks, advances phases. Run manually anytime to add more content. |
+| [🎲 Sample Data Simulator](.github/workflows/sample-data-simulator.md) | Generates realistic project activity Sunday and Tuesday nights — creates launches, closes tasks, advances phases. Run manually anytime to add more content. |
 
 ## 💡 Philosophy
 
