@@ -26,7 +26,7 @@ gh auth refresh -s read:project,project
 | `GITHUB_TOKEN` | Automatic | Default Actions token — used for issue/PR reads and safe-outputs writes |
 | `OPENAI_API_KEY` | Yes | OpenAI API key used by the Codex engine |
 | `CODEX_API_KEY` | Optional | Alternative Codex engine secret. If present, gh-aw uses it before `OPENAI_API_KEY` |
-| `AW_TOKEN` | Yes | PAT with `read:project` scope — used by pre-steps to fetch project data via GraphQL |
+| `AW_TOKEN` | Yes | PAT with access to the Launch Tracker and Intake Triage projects — used by pre-steps and project updates |
 
 The `GITHUB_TOKEN` needs these permissions (configured in the workflow frontmatter):
 - `contents: read` — read repo files (policy files, scripts)
@@ -64,8 +64,9 @@ The pre-step script fetches data from GitHub Projects via GraphQL, which require
 
 1. Create a **fine-grained PAT** at [github.com/settings/tokens](https://github.com/settings/tokens?type=beta)
    - Repository access: your `agentics-beyond-code` repo
-   - Permissions: **Projects → Read-only**
-2. Or create a **classic PAT** with the `read:project` scope
+   - Permissions: **Projects → Read and write** if workflows should add or update project items, or **Read-only** if you only run reporting workflows
+   - The token owner must be able to access the user or organization project, not just the repository
+2. Or create a **classic PAT** with the `read:project` scope. Add `project` as well if workflows should update project items.
 3. Add it as a repository secret:
 
 ```bash
@@ -111,6 +112,15 @@ Create a GitHub Project (Projects V2) to track your launches. Add these custom f
 | **Target Date** | Date | — |
 | **Launch Type** | Single select | Major, Minor, Patch, Internal |
 | **Risk Level** | Single select | Low, Medium, High, Critical |
+
+By default, workflows read project `1` owned by the repository owner. If your
+Launch Tracker project has a different owner or number, set repository
+variables:
+
+```bash
+gh variable set LAUNCH_PROJECT_OWNER --body "<project-owner>"
+gh variable set LAUNCH_PROJECT_NUMBER --body "<project-number>"
+```
 
 ### 4. Create an Intake Triage project
 
@@ -233,13 +243,14 @@ Policy changes take effect on the next workflow run — no recompilation needed.
 
 ## Updating the Project Number
 
-The `fetch-launch-data.sh` script defaults to project number `1`. If your project has a different number, update the `steps:` section in the workflow file:
+The `fetch-launch-data.sh` script defaults to project number `1` owned by the
+repository owner. If your project has a different owner or number, set the
+repository variables instead of editing every workflow:
 
-```yaml
-steps:
-  - name: Fetch launch data
-    run: |
-      ./.github/scripts/fetch-launch-data.sh "${{ github.repository_owner }}" YOUR_NUMBER launch-data.json
+```bash
+gh variable set LAUNCH_PROJECT_OWNER --body "<project-owner>"
+gh variable set LAUNCH_PROJECT_NUMBER --body "<project-number>"
 ```
 
-Then recompile with `gh aw compile`.
+Then update any `safe-outputs.update-project.project` URLs that should write to
+that project and recompile with `gh aw compile`.

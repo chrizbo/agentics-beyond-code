@@ -68,7 +68,7 @@ graphql() {
 
 echo "::group::Fetching project metadata" >&2
 
-PROJECT_META=$(graphql '
+USER_PROJECT_META=$(graphql '
 query($owner: String!, $number: Int!) {
   user(login: $owner) {
     projectV2(number: $number) {
@@ -96,12 +96,13 @@ query($owner: String!, $number: Int!) {
       }
     }
   }
-}' -F owner="$OWNER" -F number="$PROJECT_NUMBER" 2>/dev/null)
+}' -F owner="$OWNER" -F number="$PROJECT_NUMBER" 2>/dev/null || true)
 
-PROJECT_ID=$(echo "$PROJECT_META" | jq -r '.data.user.projectV2.id // empty')
+PROJECT_META="$USER_PROJECT_META"
+PROJECT_ID=$(echo "$USER_PROJECT_META" | jq -r '.data.user.projectV2.id // empty' 2>/dev/null || true)
 if [ -z "$PROJECT_ID" ]; then
   # Try as org owner
-  PROJECT_META=$(graphql '
+  ORG_PROJECT_META=$(graphql '
   query($owner: String!, $number: Int!) {
     organization(login: $owner) {
       projectV2(number: $number) {
@@ -129,12 +130,28 @@ if [ -z "$PROJECT_ID" ]; then
         }
       }
     }
-  }' -F owner="$OWNER" -F number="$PROJECT_NUMBER" 2>/dev/null)
-  PROJECT_ID=$(echo "$PROJECT_META" | jq -r '.data.organization.projectV2.id // empty')
+  }' -F owner="$OWNER" -F number="$PROJECT_NUMBER" 2>/dev/null || true)
+  PROJECT_META="$ORG_PROJECT_META"
+  PROJECT_ID=$(echo "$ORG_PROJECT_META" | jq -r '.data.organization.projectV2.id // empty' 2>/dev/null || true)
 fi
 
 if [ -z "$PROJECT_ID" ]; then
   echo "Error: Could not find project $PROJECT_NUMBER for owner $OWNER" >&2
+  print_graphql_errors() {
+    local label="$1"
+    local response="$2"
+    local errors
+    errors=$(echo "$response" | jq -r '.errors[]?.message' 2>/dev/null | awk '!seen[$0]++' || true)
+    if [ -n "$errors" ]; then
+      echo "$label GraphQL errors:" >&2
+      echo "$errors" | sed 's/^/  - /' >&2
+    fi
+  }
+  print_graphql_errors "User project lookup" "$USER_PROJECT_META"
+  print_graphql_errors "Organization project lookup" "${ORG_PROJECT_META:-{}}"
+  echo "Check that AW_TOKEN can read this project and has the GitHub Projects scope." >&2
+  echo "For local testing, run: gh auth refresh -s read:project,project" >&2
+  echo "For Actions, update the AW_TOKEN repository secret with a PAT that can access the project." >&2
   exit 1
 fi
 
