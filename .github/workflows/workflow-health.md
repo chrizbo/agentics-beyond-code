@@ -7,7 +7,7 @@ description: |
 
 engine:
   id: codex
-  model: gpt-5-mini
+  model: openai/gpt-5-mini
 
 on:
   schedule: weekly on friday around 8am utc-7
@@ -126,7 +126,7 @@ Use the precomputed cost fields in the summary:
 
 Current OpenAI pricing used by the pre-step:
 - `gpt-5.4`: `$2.50 / 1M` input, `$0.25 / 1M` cached input, `$15.00 / 1M` output
-- `gpt-5-mini`: `$0.25 / 1M` input, `$0.025 / 1M` cached input, `$2.00 / 1M` output
+- `openai/gpt-5-mini`: `$0.25 / 1M` input, `$0.025 / 1M` cached input, `$2.00 / 1M` output
 - `gpt-5.4-nano`: `$0.20 / 1M` input, `$0.02 / 1M` cached input, `$1.25 / 1M` output
 
 Present costs as:

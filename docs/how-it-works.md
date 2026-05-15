@@ -638,15 +638,15 @@ actual GitHub Actions triggers.
 ### Model sizing
 
 Routine reporting workflows that mostly transform deterministic pre-fetched
-data use `gpt-5-mini` to keep OpenAI usage low: Daily Standup Prep, Launch
+data use `openai/gpt-5-mini` to keep OpenAI usage low: Daily Standup Prep, Launch
 Readiness, Compliance Team Reports, GTM Team Reports, Weekly Status, Workflow
 Health, and the demo-only Sample Data Simulator. Judgment-heavy workflows that
 score strategy, compliance risk, process drift, transcripts, or adversarial
 arguments currently use the Codex engine default so the model has more reasoning
 headroom where mistakes have higher product or organizational impact.
-`gpt-5-mini` is intentionally used instead of versioned mini model aliases so
-the current Agentic Workflows proxy routes the requested model instead of
-falling back to the Codex default.
+`openai/gpt-5-mini` uses the provider-scoped model alias form from the Agentic
+Workflows model alias specification so the proxy has an explicit OpenAI target
+instead of resolving a bare model alias.
 
 ### Weekly cadence
 
