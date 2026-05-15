@@ -5,7 +5,9 @@ description: |
   a readiness assessment based on the policy at .github/policies/launch-readiness-policy.md.
   Reports per-launch status and an overall pipeline summary.
 
-engine: codex
+engine:
+  id: codex
+  model: gpt-5.4-mini
 
 on:
   schedule: weekly on monday around 8:30am utc-7
@@ -274,33 +276,3 @@ title prefix), compare key metrics:
 - Use tables for scannable data; use prose only for risk explanations.
 - Escape all @mentions and issue references to avoid noisy notifications.
 - If no launches are found, create a brief report noting this.
-- At the bottom of every report, include a "Workflow Run Cost" section.
-
-## Workflow Run Cost Footer
-
-Every report MUST end with a cost transparency section. Use the token usage data
-available from your context to calculate approximate costs.
-
-Include this section at the very bottom of the discussion body:
-
-```markdown
----
-
-### 🧾 Workflow Run Cost
-
-| Metric | Value |
-|--------|-------|
-| Input tokens | X,XXX |
-| Output tokens | X,XXX |
-| Total tokens | X,XXX |
-| Premium requests | X |
-| Estimated cost | $X.XX |
-
-*Cost estimate based on current Copilot pricing. Actual billing may vary.*
-```
-
-To estimate cost:
-- Use the token counts from your usage context
-- For Copilot engine: estimate ~$0.01 per 1K input tokens, ~$0.03 per 1K output tokens (approximate)
-- Include the number of premium requests consumed (each agent invocation = 1 premium request)
-- Round to 2 decimal places

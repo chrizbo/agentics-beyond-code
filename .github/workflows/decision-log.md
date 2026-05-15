@@ -318,22 +318,3 @@ No new decisions detected. No PR created.
   more canonical) and note the transcript as additional context.
 - Escape all @mentions to avoid notifications.
 
-## Workflow Run Cost Footer
-
-Every PR body MUST end with:
-
-```markdown
----
-
-### 🧾 Workflow Run Cost
-
-| Metric | Value |
-|--------|-------|
-| Input tokens | X,XXX |
-| Output tokens | X,XXX |
-| Total tokens | X,XXX |
-| Premium requests | X |
-| Estimated cost | $X.XX |
-
-*Cost estimate based on current Copilot pricing. Actual billing may vary.*
-```

@@ -5,7 +5,9 @@ description: |
   launches that need their review, ordered by urgency. Helps compliance
   reviewers prioritize their work without digging through individual issues.
 
-engine: codex
+engine:
+  id: codex
+  model: gpt-5.4-mini
 
 on:
   schedule: weekly on monday around 8:45am utc-7
@@ -243,23 +245,3 @@ Discussions created: 4
 - Escape all @mentions to avoid noisy notifications.
 - If a previous week's report exists (same title prefix), the new one
   will be created alongside it — discussions are append-only history.
-
-## Workflow Run Cost Footer
-
-Every discussion body MUST end with:
-
-```markdown
----
-
-### 🧾 Workflow Run Cost
-
-| Metric | Value |
-|--------|-------|
-| Input tokens | X,XXX |
-| Output tokens | X,XXX |
-| Total tokens | X,XXX |
-| Premium requests | X |
-| Estimated cost | $X.XX |
-
-*Cost estimate based on current Copilot pricing. Actual billing may vary.*
-```

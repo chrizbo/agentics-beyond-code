@@ -446,9 +446,10 @@ estimates, cross-workflow interaction analysis, and actionable recommendations.
 The **Workflow Health workflow** (`workflow-health.md`) runs weekly and:
 
 1. Identifies all agentic workflows (`.md` files in `.github/workflows/`)
-2. Fetches run data from the last 7 days for each workflow via `gh run list`
+2. Runs a deterministic pre-step to fetch the last 7 days of Actions data for
+   each compiled `.lock.yml` workflow
 3. Calculates success rates, average durations, and trigger breakdowns
-4. Estimates costs based on runner minutes and premium request counts
+4. Estimates costs based on runner minutes and observed OpenAI token usage
 5. Assigns a health status to each workflow (🟢 Healthy → 🔴 Critical)
 6. Analyzes cross-workflow interactions — temporal overlaps, shared resource conflicts, and cascade chains
 7. Generates recommendations for efficiency, reliability, cost optimization, and conflict resolution
@@ -468,7 +469,7 @@ The **Workflow Health workflow** (`workflow-health.md`) runs weekly and:
 The discussion includes:
 - **Overall Health Summary** — table of all workflows with run counts, success rates, durations, and health status
 - **Critical & Degraded Workflows** — details on failing workflows with run links and investigation suggestions
-- **Cost Summary** — runner minutes and estimated premium requests per workflow
+- **Cost Summary** — runner minutes, observed token runs, and estimated OpenAI cost per workflow
 - **Cross-Workflow Interactions** — concurrent run detection, shared resource conflicts (issues/labels modified by multiple workflows), cascade chain mapping (one workflow triggering another), and risk assessment (🔴 high / 🟡 medium / 🟢 low)
 - **Recommendations** — specific, data-backed suggestions for efficiency, reliability, cost optimization, and cross-workflow conflict resolution
 
@@ -476,7 +477,9 @@ The discussion includes:
 
 Unlike most other workflows in this repo, the Workflow Health report does **not**
 use the `fetch-launch-data.sh` pre-step or read from GitHub Projects. It works
-entirely from GitHub Actions run data via the `gh` CLI.
+entirely from GitHub Actions run data via the `gh` CLI. The pre-step writes
+`workflow-health-data-summary.json` for the agent to read first and
+`workflow-health-data.json` for targeted drill-downs only.
 
 ## Decision Log System
 
@@ -631,6 +634,16 @@ actual GitHub Actions triggers.
 | **Assumption Surfacer** | Issue opened/edited · Manual | Comments surfacing implicit assumptions as explicit questions | PMs, DRIs |
 | **Intake Request Triage** | Issue labeled `triage-needed` | RICE/Kano scores, strategy alignment, triage comment, project board update | PMs, DRIs |
 | **Transcript Processor** | Push to `transcripts/**/*.txt`, `transcripts/**/*.vtt`, `transcripts/*.txt`, or `transcripts/*.vtt` on `main` · Manual | Comments on matched issues with meeting context, decisions, action items | PMs, DRIs |
+
+### Model sizing
+
+Routine reporting workflows that mostly transform deterministic pre-fetched
+data use `gpt-5.4-mini` to keep OpenAI usage low: Daily Standup Prep, Launch
+Readiness, Compliance Team Reports, GTM Team Reports, Weekly Status, Workflow
+Health, and the demo-only Sample Data Simulator. Judgment-heavy workflows that
+score strategy, compliance risk, process drift, transcripts, or adversarial
+arguments currently use the Codex engine default so the model has more reasoning
+headroom where mistakes have higher product or organizational impact.
 
 ### Weekly cadence
 

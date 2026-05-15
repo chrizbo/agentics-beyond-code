@@ -361,23 +361,3 @@ will tune this out if it's noisy.
 - **Skip bot-generated decisions.** If a decision was created by a workflow
   or bot, noop — don't argue with automation.
 
-## Workflow Run Cost Footer
-
-Every comment body MUST end with:
-
-```markdown
-<details>
-<summary>🧾 Workflow Run Cost</summary>
-
-| Metric | Value |
-|--------|-------|
-| Input tokens | X,XXX |
-| Output tokens | X,XXX |
-| Total tokens | X,XXX |
-| Premium requests | X |
-| Estimated cost | $X.XX |
-
-*Cost estimate based on current Copilot pricing. Actual billing may vary.*
-
-</details>
-```

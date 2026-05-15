@@ -4,7 +4,9 @@ description: |
   Creates new launches weekly, closes completed work, and adds progress comments
   to epics and tasks — feeding the launch readiness report with fresh data.
 
-engine: codex
+engine:
+  id: codex
+  model: gpt-5.4-mini
 
 on:
   schedule: "0 6 * * 1,3" # Sunday and Tuesday nights at ~11 PM PT

@@ -372,20 +372,3 @@ No alignment signals detected. No PR or comments created.
 - **Skip bot content.** Ignore bot-generated comments, automated PR bodies,
   and workflow outputs when scanning for signals.
 
-## Workflow Run Cost Footer
-
-Every PR body and issue comment MUST end with:
-
-```markdown
-### 🧾 Workflow Run Cost
-
-| Metric | Value |
-|--------|-------|
-| Input tokens | X,XXX |
-| Output tokens | X,XXX |
-| Total tokens | X,XXX |
-| Premium requests | X |
-| Estimated cost | $X.XX |
-
-*Cost estimate based on current Copilot pricing. Actual billing may vary.*
-```

@@ -4,7 +4,9 @@ description: |
   topics and facilitation prompts so the standup covers delivery confidence,
   blockers, decisions, quality risks, and coordination needs.
 
-engine: codex
+engine:
+  id: codex
+  model: gpt-5.4-mini
 
 on:
   schedule:

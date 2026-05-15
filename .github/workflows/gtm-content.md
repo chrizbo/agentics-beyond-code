@@ -290,20 +290,3 @@ Launch #Z — [Title] (GA, target 2026-06-01)
 - **Match the voice.** Re-read the voice & tone policy before writing.
   The content should sound like it comes from the same person every time.
 
-## Workflow Run Cost Footer
-
-Every summary MUST end with:
-
-```markdown
-### 🧾 Workflow Run Cost
-
-| Metric | Value |
-|--------|-------|
-| Input tokens | X,XXX |
-| Output tokens | X,XXX |
-| Total tokens | X,XXX |
-| Premium requests | X |
-| Estimated cost | $X.XX |
-
-*Cost estimate based on current Copilot pricing. Actual billing may vary.*
-```

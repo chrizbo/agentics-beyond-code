@@ -485,20 +485,3 @@ Do not create PRs or automation issues when no drift or candidates are found.
 - **No blame.** Never single out individuals negatively in the retro. If
   someone is blocked or struggling, frame it as a team challenge.
 
-## Workflow Run Cost Footer
-
-Every PR body, issue body, and discussion body MUST end with:
-
-```markdown
-### 🧾 Workflow Run Cost
-
-| Metric | Value |
-|--------|-------|
-| Input tokens | X,XXX |
-| Output tokens | X,XXX |
-| Total tokens | X,XXX |
-| Premium requests | X |
-| Estimated cost | $X.XX |
-
-*Cost estimate based on current Copilot pricing. Actual billing may vary.*
-```

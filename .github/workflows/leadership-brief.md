@@ -410,22 +410,3 @@ Discussions created: N
 - If a leader policy file is removed, their brief simply stops being
   generated — no cleanup needed.
 
-## Workflow Run Cost Footer
-
-Every discussion body MUST end with:
-
-```markdown
----
-
-### 🧾 Workflow Run Cost
-
-| Metric | Value |
-|--------|-------|
-| Input tokens | X,XXX |
-| Output tokens | X,XXX |
-| Total tokens | X,XXX |
-| Premium requests | X |
-| Estimated cost | $X.XX |
-
-*Cost estimate based on current Copilot pricing. Actual billing may vary.*
-```

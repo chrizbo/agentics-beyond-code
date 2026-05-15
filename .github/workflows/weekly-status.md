@@ -5,7 +5,9 @@ description: |
   We Learned, FYI, and SOS. Designed for leaders who need a fast read on
   portfolio health, wins, and where they need to get involved.
 
-engine: codex
+engine:
+  id: codex
+  model: gpt-5.4-mini
 
 on:
   schedule: weekly on friday around 8am utc-7
@@ -287,23 +289,3 @@ Discussion created: 1
   were detected.
 - If a previous week's report exists (same title prefix), the new one
   will be created alongside it — discussions are append-only history.
-
-## Workflow Run Cost Footer
-
-Every discussion body MUST end with:
-
-```markdown
----
-
-### 🧾 Workflow Run Cost
-
-| Metric | Value |
-|--------|-------|
-| Input tokens | X,XXX |
-| Output tokens | X,XXX |
-| Total tokens | X,XXX |
-| Premium requests | X |
-| Estimated cost | $X.XX |
-
-*Cost estimate based on current Copilot pricing. Actual billing may vary.*
-```

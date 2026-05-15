@@ -258,20 +258,3 @@ This is not an error — not every meeting discusses tracked issues.
 - VTT files may contain speaker labels (e.g., `<v Speaker Name>`).
   Use these to attribute statements when available.
 
-## Workflow Run Cost Footer
-
-Every summary MUST end with:
-
-```markdown
-### 🧾 Workflow Run Cost
-
-| Metric | Value |
-|--------|-------|
-| Input tokens | X,XXX |
-| Output tokens | X,XXX |
-| Total tokens | X,XXX |
-| Premium requests | X |
-| Estimated cost | $X.XX |
-
-*Cost estimate based on current Copilot pricing. Actual billing may vary.*
-```
