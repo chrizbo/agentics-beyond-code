@@ -7,7 +7,7 @@ description: |
 
 engine:
   id: codex
-  model: gpt-5.4-mini
+  model: gpt-5-mini
 
 on:
   schedule: weekly on friday around 8am utc-7

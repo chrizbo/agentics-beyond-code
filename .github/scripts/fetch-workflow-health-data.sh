@@ -44,7 +44,7 @@ PRICING_EFFECTIVE = "2026-05-15"
 OPENAI_PRICES = {
     "gpt-5.5": {"input": 5.00, "cached_input": 0.50, "output": 30.00},
     "gpt-5.4": {"input": 2.50, "cached_input": 0.25, "output": 15.00},
-    "gpt-5.4-mini": {"input": 0.75, "cached_input": 0.075, "output": 4.50},
+    "gpt-5-mini": {"input": 0.25, "cached_input": 0.025, "output": 2.00},
     "gpt-5.4-nano": {"input": 0.20, "cached_input": 0.02, "output": 1.25},
 }
 DEFAULT_PRICE_MODEL = "gpt-5.5"
@@ -219,8 +219,8 @@ def normalize_model(model):
         return "gpt-5.5"
     if "gpt-5.4-nano" in m or ("gpt-5" in m and "nano" in m):
         return "gpt-5.4-nano"
-    if "gpt-5.4-mini" in m or ("gpt-5" in m and "mini" in m):
-        return "gpt-5.4-mini"
+    if "gpt-5-mini" in m or ("gpt-5" in m and "mini" in m):
+        return "gpt-5-mini"
     if "gpt-5.4" in m:
         return "gpt-5.4"
     return DEFAULT_PRICE_MODEL
