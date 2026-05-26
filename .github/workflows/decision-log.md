@@ -5,7 +5,9 @@ description: |
   for decisions discussed in meetings. Creates a PR with individual markdown
   files in /decisions/ for each decision detected.
 
-engine: codex
+engine:
+  id: codex
+  model: gpt-5-mini
 
 on:
   schedule: "0 7 * * 2-6"
