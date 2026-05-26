@@ -1,0 +1,42 @@
+WEBVTT
+
+1
+00:00:01.000 --> 00:00:08.000
+Sarah Chen: Alright, quick standup. Marcus, you're up.
+
+2
+00:00:08.500 --> 00:00:26.000
+Marcus Johnson: Yesterday I wrapped up the token-bucket limiter prototype for rate limiting (see issue #96 "Implement token bucket rate limiter in Redis"). Tests pass locally; still need Redis cluster tuning. Today I'll add metrics and integrate with the billing tiers work (#97).
+
+3
+00:00:26.500 --> 00:00:45.000
+Priya Patel: I'm working on the time-series chart component (issue #70 "Build time-series chart component"). Kicked off design review and asked for feedback — blocked on a couple visual specs from Jordan.
+
+4
+00:00:45.500 --> 00:01:05.000
+David Kim: QA found an intermittent failure in the latency query endpoints (issue #69 "Implement latency query API endpoints"). Reproduced twice — probably related to a race in the cache warmup. I'm pairing with Marcus after standup.
+
+5
+00:01:05.500 --> 00:01:20.000
+Alex Rivera: Deployment runbooks need updates for the export feature; Support Runbook issue #8 is open. I can take a pass today and add incident steps.
+
+6
+00:01:20.500 --> 00:01:40.000
+Sarah Chen: Decision — after discussing with Marcus and Alex, we agreed to prioritize Redis-based token bucket as the initial rate limiter and iterate on global coordination later. This trades some strict fairness for faster delivery.
+
+7
+00:01:40.500 --> 00:02:00.000
+Priya Patel: Delivery confidence is medium — core UI pieces are moving but some infra dependencies are still blocking (role-based access, runbook updates). We should aim to stabilize the latency endpoints before the next milestone.
+
+8
+00:02:00.500 --> 00:02:20.000
+Marcus Johnson: Blockers & dependencies: need infra to expose role mapping schema for #72. Decision-needed: do we accept a temporary hardcoded mapping for the Beta cut? Sarah said yes for Beta with a TODO to replace with dynamic discovery.
+
+9
+00:02:20.500 --> 00:02:40.000
+David Kim: Quality risk: the export feature's security review (#7) is still open and marked blocker for GA. Recommend scheduling the pen test this week.
+
+10
+00:02:40.500 --> 00:03:00.000
+Sarah Chen: Cross-team coordination — Jordan, please finish the visual specs for the chart (#70). I'll follow up with infra on the role mapping and schedule the pen test with Security.
+
