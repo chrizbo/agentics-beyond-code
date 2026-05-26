@@ -5,6 +5,8 @@ description: |
   for decisions discussed in meetings. Creates a PR with individual markdown
   files in /decisions/ for each decision detected.
 
+engine: codex
+
 on:
   schedule: "0 7 * * 2-6"
   workflow_dispatch:
@@ -25,9 +27,11 @@ steps:
     id: launch-data
     env:
       LAUNCH_DATA_TOKEN: ${{ secrets.AW_TOKEN }}
+      LAUNCH_PROJECT_OWNER: ${{ vars.LAUNCH_PROJECT_OWNER || github.repository_owner }}
+      LAUNCH_PROJECT_NUMBER: ${{ vars.LAUNCH_PROJECT_NUMBER || '1' }}
     run: |
       chmod +x .github/scripts/fetch-launch-data.sh
-      ./.github/scripts/fetch-launch-data.sh "${{ github.repository_owner }}" 1 launch-data.json
+      ./.github/scripts/fetch-launch-data.sh "$LAUNCH_PROJECT_OWNER" "$LAUNCH_PROJECT_NUMBER" launch-data.json
       echo "path=launch-data.json" >> "$GITHUB_OUTPUT"
 
 tools:
@@ -315,23 +319,3 @@ No new decisions detected. No PR created.
   transcript, use the issue comment as the primary source (it's
   more canonical) and note the transcript as additional context.
 - Escape all @mentions to avoid notifications.
-
-## Workflow Run Cost Footer
-
-Every PR body MUST end with:
-
-```markdown
----
-
-### 🧾 Workflow Run Cost
-
-| Metric | Value |
-|--------|-------|
-| Input tokens | X,XXX |
-| Output tokens | X,XXX |
-| Total tokens | X,XXX |
-| Premium requests | X |
-| Estimated cost | $X.XX |
-
-*Cost estimate based on current Copilot pricing. Actual billing may vary.*
-```

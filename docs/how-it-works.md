@@ -446,9 +446,10 @@ estimates, cross-workflow interaction analysis, and actionable recommendations.
 The **Workflow Health workflow** (`workflow-health.md`) runs weekly and:
 
 1. Identifies all agentic workflows (`.md` files in `.github/workflows/`)
-2. Fetches run data from the last 7 days for each workflow via `gh run list`
+2. Runs a deterministic pre-step to fetch the last 7 days of Actions data for
+   each compiled `.lock.yml` workflow
 3. Calculates success rates, average durations, and trigger breakdowns
-4. Estimates costs based on runner minutes and premium request counts
+4. Estimates costs based on runner minutes and observed OpenAI token usage
 5. Assigns a health status to each workflow (🟢 Healthy → 🔴 Critical)
 6. Analyzes cross-workflow interactions — temporal overlaps, shared resource conflicts, and cascade chains
 7. Generates recommendations for efficiency, reliability, cost optimization, and conflict resolution
@@ -468,7 +469,7 @@ The **Workflow Health workflow** (`workflow-health.md`) runs weekly and:
 The discussion includes:
 - **Overall Health Summary** — table of all workflows with run counts, success rates, durations, and health status
 - **Critical & Degraded Workflows** — details on failing workflows with run links and investigation suggestions
-- **Cost Summary** — runner minutes and estimated premium requests per workflow
+- **Cost Summary** — runner minutes, observed token runs, and estimated OpenAI cost per workflow
 - **Cross-Workflow Interactions** — concurrent run detection, shared resource conflicts (issues/labels modified by multiple workflows), cascade chain mapping (one workflow triggering another), and risk assessment (🔴 high / 🟡 medium / 🟢 low)
 - **Recommendations** — specific, data-backed suggestions for efficiency, reliability, cost optimization, and cross-workflow conflict resolution
 
@@ -476,7 +477,9 @@ The discussion includes:
 
 Unlike most other workflows in this repo, the Workflow Health report does **not**
 use the `fetch-launch-data.sh` pre-step or read from GitHub Projects. It works
-entirely from GitHub Actions run data via the `gh` CLI.
+entirely from GitHub Actions run data via the `gh` CLI. The pre-step writes
+`workflow-health-data-summary.json` for the agent to read first and
+`workflow-health-data.json` for targeted drill-downs only.
 
 ## Decision Log System
 
@@ -608,61 +611,94 @@ The workflow applies `rice:high` (score ≥ 1000), `rice:medium` (100–999), or
 
 ## Workflow Schedule
 
-All workflows share the same `fetch-launch-data.sh` pre-step for data fetching.
+Most portfolio workflows share the same `fetch-launch-data.sh` pre-step for
+data fetching. The compiled `.lock.yml` files are the source of truth for the
+actual GitHub Actions triggers.
 
-| Workflow | Schedule | Output | Audience |
-|----------|----------|--------|----------|
-| **Launch Readiness** | Monday ~8:30 AM PT · Manual | Discussion with pipeline summary, risk breakdown, sign-off tracking | DRIs, leaders |
-| **Compliance Review** | Monday ~8 AM PT · On issue labeled · Manual | Labels on launches, status table comment, compliance review sub-issues | DRIs, compliance teams |
-| **Compliance Team Reports** | Monday ~8:45 AM PT · Manual | 4 discussions (one per compliance team) with urgency-sorted launch lists | Security, Privacy, Accessibility, Responsible AI teams |
-| **GTM Content** | Monday ~8:15 AM PT · Manual | Changelog draft and roadmap item sub-issues per launch | DRIs, marketing, comms |
-| **GTM Team Reports** | Monday ~8 AM PT · Manual | Discussion summarizing launches needing GTM action | GTM team |
-| **Leadership Briefs** | Monday ~7:30 AM PT · Manual | One discussion per leader with kudos, feedback, and pre-escalation | Individual leaders |
-| **Assumption Surfacer** | On issue opened/edited · Manual | Comments surfacing implicit assumptions as explicit questions | PMs, DRIs |
-| **Intake Request Triage** | On issue labeled `triage-needed` | RICE/Kano scores, strategy alignment, triage comment, project board update | PMs, DRIs |
-| **Decision Log** | Daily ~midnight PT · Manual | PR with individual markdown decision records in `/decisions/` | PMs, DRIs, leaders |
-| **Weekly Status** | Friday ~8 AM PT · Manual | Discussion with What Shipped, What We Learned, FYI, and SOS sections | Leaders, senior stakeholders |
-| **Workflow Health** | Friday ~8 AM PT · Manual | Discussion with success rates, failure patterns, cost estimates, cross-workflow interaction analysis, and recommendations for all agentic workflows | Ops, leaders |
-| **Transcript Processor** | On push to `/transcripts/` · Manual | Comments on matched issues with meeting context, decisions, action items | PMs, DRIs |
-| **Sample Data Simulator** | Daily ~11 PM PT · Manual | Creates launches, closes tasks, advances phases, adds comments | Demo only — not needed for production |
+| Workflow | Trigger | Output | Audience |
+|----------|---------|--------|----------|
+| **Leadership Briefs** | Monday ~7:30 AM PT (`54 14 * * 1`) · Manual | One discussion per leader with kudos, feedback, and pre-escalation | Individual leaders |
+| **GTM Team Reports** | Monday ~8 AM PT (`19 14 * * 1`) · Manual | Discussion summarizing launches needing GTM action | GTM team |
+| **Compliance Review** | Monday ~8 AM PT (`26 15 * * 1`) · Issue labeled `launch`, `needs:security`, `needs:privacy`, `needs:accessibility`, or `needs:responsible-ai` · Manual | Labels on launches, status table comment, compliance review sub-issues | DRIs, compliance teams |
+| **GTM Content** | Monday ~8:15 AM PT (`33 15 * * 1`) · Manual | Changelog draft and roadmap item sub-issues per launch | DRIs, marketing, comms |
+| **Launch Readiness** | Monday ~8:30 AM PT (`7 15 * * 1`) · Manual | Discussion with pipeline summary, risk breakdown, sign-off tracking | DRIs, leaders |
+| **Compliance Team Reports** | Monday ~8:45 AM PT (`8 16 * * 1`) · Manual | 4 discussions (one per compliance team) with urgency-sorted launch lists | Security, Privacy, Accessibility, Responsible AI teams |
+| **Process Analyzer** | Monday night / early Tuesday UTC (`5 6 * * 2`) · Manual | Weekly retro discussion, process drift analysis, automation candidate issues, process update PRs | PMs, ops, leaders |
+| **Decision Log** | Weeknights after each workday (`0 7 * * 2-6`) · Manual | PR with individual markdown decision records in `/decisions/` | PMs, DRIs, leaders |
+| **Daily Standup Prep** | Monday and Wednesday ~8 AM PT (`0 15 * * 1,3`) · Manual | Discussion with high-priority standup topics, blockers, and facilitation prompts | PMs, DRIs, facilitators |
+| **Strategy Alignment** | Wednesday ~8 AM PT (`19 15 * * 3`) · Manual | Strategy evidence PR plus comments on clear misalignment | PMs, leaders |
+| **Adversarial PM** | Wednesday ~8:30 AM PT (`20 23 * * 3`) · Manual | Counterargument comments on recent consequential decisions | PMs, DRIs, leaders |
+| **Workflow Health** | Friday ~8 AM PT (`6 14 * * 5`) · Manual | Discussion with success rates, failure patterns, cost estimates, cross-workflow interaction analysis, and recommendations | Ops, leaders |
+| **Weekly Status** | Friday ~8 AM PT (`49 15 * * 5`) · Manual | Discussion with What Shipped, What We Learned, FYI, and SOS sections | Leaders, senior stakeholders |
+| **Sample Data Simulator** | Sunday and Tuesday nights ~11 PM PT (`0 6 * * 1,3`) · Manual | Creates launches, closes tasks, advances phases, adds comments | Demo only — not needed for production |
+| **Assumption Surfacer** | Issue opened/edited · Manual | Comments surfacing implicit assumptions as explicit questions | PMs, DRIs |
+| **Intake Request Triage** | Issue labeled `triage-needed` | RICE/Kano scores, strategy alignment, triage comment, project board update | PMs, DRIs |
+| **Transcript Processor** | Push to `transcripts/**/*.txt`, `transcripts/**/*.vtt`, `transcripts/*.txt`, or `transcripts/*.vtt` on `main` · Manual | Comments on matched issues with meeting context, decisions, action items | PMs, DRIs |
+
+### Model sizing
+
+Routine reporting workflows that mostly transform deterministic pre-fetched
+data use `openai/gpt-5-mini` to keep OpenAI usage low: Daily Standup Prep, Launch
+Readiness, Compliance Team Reports, GTM Team Reports, Weekly Status, Workflow
+Health, and the demo-only Sample Data Simulator. Judgment-heavy workflows that
+score strategy, compliance risk, process drift, transcripts, or adversarial
+arguments currently use the Codex engine default so the model has more reasoning
+headroom where mistakes have higher product or organizational impact.
+`openai/gpt-5-mini` uses the provider-scoped model alias form from the Agentic
+Workflows model alias specification so the proxy has an explicit OpenAI target
+instead of resolving a bare model alias.
 
 ### Weekly cadence
 
-Most workflows run **Monday mornings staggered between 7:30–8:45 AM PT** to kick off the week with fresh data, spaced 15 minutes apart to respect data dependencies. The Weekly Status and Workflow Health run **Friday mornings around 8 AM PT** to close out the week.
+Most portfolio workflows run **Monday mornings staggered between 7:30–8:45 AM PT** to kick off the week with fresh data, spaced to respect data dependencies. Daily or event-driven workflows fill in decisions, standup prep, transcript processing, and intake triage as work happens.
 
 On a typical week:
 
-**Monday (staggered to respect data dependencies):**
-1. **Leadership Briefs** (~7:30 AM PT) — personalized briefs for each leader
-   with kudos, feedback, and pre-escalation. One discussion per leader policy.
-2. **Compliance Review** (~8:00 AM PT) — evaluates launches, updates labels, creates/updates
-   sub-issues. Runs first so that labels and sub-issues are current.
-3. **GTM Content** (~8:15 AM PT) — generates/refreshes changelog drafts and roadmap items.
-4. **Launch Readiness** (~8:30 AM PT) — assesses overall readiness including compliance
-   sign-off status. References the labels set by the compliance review.
-5. **Compliance Team Reports** (~8:45 AM PT) — generates per-team digests reflecting the
-   latest label and sub-issue state.
+**Sunday night / Tuesday night:**
+1. **Sample Data Simulator** — demo-only activity generation, scheduled ahead
+   of Monday and Wednesday workdays.
 
-**Daily on weekdays (scattered time):**
-6. **Decision Log** — scans issue comments and transcripts for decisions,
+**Monday (staggered to respect data dependencies):**
+2. **Leadership Briefs** (~7:30 AM PT) — personalized briefs for each leader
+   with kudos, feedback, and pre-escalation. One discussion per leader policy.
+3. **GTM Team Reports** (~8:00 AM PT) — summarizes launches needing GTM action.
+4. **Compliance Review** (~8:00 AM PT) — evaluates launches, updates labels, creates/updates
+   sub-issues. Runs first so that labels and sub-issues are current.
+5. **GTM Content** (~8:15 AM PT) — generates/refreshes changelog drafts and roadmap items.
+6. **Launch Readiness** (~8:30 AM PT) — assesses overall readiness including compliance
+   sign-off status. References the labels set by the compliance review.
+7. **Compliance Team Reports** (~8:45 AM PT) — generates per-team digests reflecting the
+   latest label and sub-issue state.
+8. **Daily Standup Prep** (~8:00 AM PT) — prepares the Monday standup.
+
+**Monday night / early Tuesday UTC:**
+9. **Process Analyzer** — posts the weekly retro, checks process drift, and
+   proposes process updates or automation candidates.
+
+**Weeknights after workdays:**
+10. **Decision Log** — scans issue comments and transcripts for decisions,
    creates PRs with markdown decision records.
 
+**Wednesday:**
+11. **Daily Standup Prep** (~8:00 AM PT) — prepares the Wednesday standup.
+12. **Strategy Alignment** (~8:00 AM PT) — checks decisions and activity
+    against the strategy doc.
+13. **Adversarial PM** (~8:30 AM PT) — challenges recent consequential decisions.
+
 **Friday (~8 AM PT):**
-7. **Weekly Status** — rolls up all activity into a single leadership status
+14. **Workflow Health** — analyzes all agentic workflow runs from the past week,
+    reports success rates, failure patterns, cost estimates, detects cross-workflow
+    conflicts and cascade chains, and generates recommendations for efficiency,
+    reliability, and conflict resolution.
+15. **Weekly Status** — rolls up all activity into a single leadership status
    post with What Shipped, What We Learned, FYI, and SOS sections.
-8. **Workflow Health** — analyzes all agentic workflow runs from the past week,
-   reports success rates, failure patterns, cost estimates, detects cross-workflow
-   conflicts and cascade chains, and generates recommendations for efficiency,
-   reliability, and conflict resolution.
+
+**On issues:**
+16. **Assumption Surfacer** — runs on issue opened/edited events.
+17. **Intake Request Triage** — scores requests when `triage-needed` is applied.
+18. **Compliance Review** — also runs when relevant launch/compliance labels are
+    added to an issue, so new launches get evaluated immediately.
 
 **On push to `/transcripts/`:**
-9. **Transcript Processor** — matches transcript content to open issues and
+19. **Transcript Processor** — matches transcript content to open issues and
    posts summary comments with meeting context.
-
-**On issue labeled `triage-needed`:**
-10. **Intake Request Triage** — scores the request with RICE and Kano,
-    checks strategy alignment, detects duplicates, flags incomplete submissions,
-    and adds the item to the Intake Triage project board (`projects/2`).
-
-The Compliance Review workflow also runs **on-demand** whenever a `launch`
-label is added to an issue, so new launches get evaluated immediately.

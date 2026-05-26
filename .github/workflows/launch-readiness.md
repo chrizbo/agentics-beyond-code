@@ -5,6 +5,10 @@ description: |
   a readiness assessment based on the policy at .github/policies/launch-readiness-policy.md.
   Reports per-launch status and an overall pipeline summary.
 
+engine:
+  id: codex
+  model: gpt-5-mini
+
 on:
   schedule: weekly on monday around 8:30am utc-7
   workflow_dispatch:
@@ -26,9 +30,11 @@ steps:
     id: launch-data
     env:
       LAUNCH_DATA_TOKEN: ${{ secrets.AW_TOKEN }}
+      LAUNCH_PROJECT_OWNER: ${{ vars.LAUNCH_PROJECT_OWNER || github.repository_owner }}
+      LAUNCH_PROJECT_NUMBER: ${{ vars.LAUNCH_PROJECT_NUMBER || '1' }}
     run: |
       chmod +x .github/scripts/fetch-launch-data.sh
-      ./.github/scripts/fetch-launch-data.sh "${{ github.repository_owner }}" 1 launch-data.json
+      ./.github/scripts/fetch-launch-data.sh "$LAUNCH_PROJECT_OWNER" "$LAUNCH_PROJECT_NUMBER" launch-data.json
       echo "path=launch-data.json" >> "$GITHUB_OUTPUT"
 
 tools:
@@ -272,33 +278,3 @@ title prefix), compare key metrics:
 - Use tables for scannable data; use prose only for risk explanations.
 - Escape all @mentions and issue references to avoid noisy notifications.
 - If no launches are found, create a brief report noting this.
-- At the bottom of every report, include a "Workflow Run Cost" section.
-
-## Workflow Run Cost Footer
-
-Every report MUST end with a cost transparency section. Use the token usage data
-available from your context to calculate approximate costs.
-
-Include this section at the very bottom of the discussion body:
-
-```markdown
----
-
-### 🧾 Workflow Run Cost
-
-| Metric | Value |
-|--------|-------|
-| Input tokens | X,XXX |
-| Output tokens | X,XXX |
-| Total tokens | X,XXX |
-| Premium requests | X |
-| Estimated cost | $X.XX |
-
-*Cost estimate based on current Copilot pricing. Actual billing may vary.*
-```
-
-To estimate cost:
-- Use the token counts from your usage context
-- For Copilot engine: estimate ~$0.01 per 1K input tokens, ~$0.03 per 1K output tokens (approximate)
-- Include the number of premium requests consumed (each agent invocation = 1 premium request)
-- Round to 2 decimal places

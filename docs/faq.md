@@ -43,18 +43,22 @@ Edit `.github/policies/voice-and-tone-policy.md`. The GTM Content workflow reads
 | Workflow | Schedule | Manual trigger? |
 |----------|----------|-----------------|
 | Launch Readiness Checker | Monday ~8:30 AM PT | Yes |
-| Compliance Review | Monday ~8 AM PT | Yes |
+| Compliance Review | Monday ~8 AM PT and relevant issue labels | Yes |
 | Compliance Team Reports | Monday ~8:45 AM PT | Yes |
 | GTM Content | Monday ~8:15 AM PT | Yes |
 | GTM Team Reports | Monday ~8 AM PT | Yes |
+| Leadership Briefs | Monday ~7:30 AM PT | Yes |
 | Assumption Surfacer | On issue opened/edited | Yes |
-| Decision Log | Daily on weekdays | Yes |
+| Intake Request Triage | On issue labeled `triage-needed` | No |
+| Decision Log | Weeknights after each workday | Yes |
+| Daily Standup Prep | Monday and Wednesday ~8 AM PT | Yes |
+| Strategy Alignment | Wednesday ~8 AM PT | Yes |
+| Adversarial PM | Wednesday ~8:30 AM PT | Yes |
 | Weekly Status | Friday ~8 AM PT | Yes |
 | Workflow Health | Friday ~8 AM PT | Yes |
 | Transcript Processor | On push to `/transcripts/` | Yes |
-| Strategy Alignment | Monday ~8 AM PT | Yes |
-| Process Analyzer | Weekly | Yes |
-| Sample Data Simulator | Daily on weekdays | Yes |
+| Process Analyzer | Monday night / early Tuesday UTC | Yes |
+| Sample Data Simulator | Sunday and Tuesday nights | Yes |
 
 The **Sample Data Simulator** is for demo purposes only — it generates fake project activity so the other workflows have realistic data. You don't need it for production use. Trigger it manually anytime with `gh aw run sample-data-simulator` to add more content.
 
@@ -190,7 +194,7 @@ No. The workflow comments on a maximum of 2 issues per run, and only for clear m
 
 ### Do workflows cost money to run?
 
-Workflows use GitHub Copilot via GitHub Actions, which consumes [Copilot premium requests](https://docs.github.com/en/copilot/managing-copilot/managing-copilot-as-an-individual-subscriber/monitoring-usage-and-spending/avoiding-unexpected-copilot-costs). Each workflow run includes a cost estimate in its output so you can track spend.
+Workflows currently use OpenAI Codex via GitHub Actions. Model usage is billed to the OpenAI account associated with the `OPENAI_API_KEY` or `CODEX_API_KEY` repository secret. Each workflow run includes token usage in the Actions artifacts so you can track spend.
 
 ### Can I control costs?
 

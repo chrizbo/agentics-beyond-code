@@ -6,6 +6,8 @@ description: |
   and creates a PR annotating the strategy doc with alignment evidence,
   misalignment examples, and emerging strategic patterns.
 
+engine: codex
+
 on:
   schedule: weekly on wednesday around 8am utc-7
   workflow_dispatch:
@@ -26,9 +28,11 @@ steps:
     id: launch-data
     env:
       LAUNCH_DATA_TOKEN: ${{ secrets.AW_TOKEN }}
+      LAUNCH_PROJECT_OWNER: ${{ vars.LAUNCH_PROJECT_OWNER || github.repository_owner }}
+      LAUNCH_PROJECT_NUMBER: ${{ vars.LAUNCH_PROJECT_NUMBER || '1' }}
     run: |
       chmod +x .github/scripts/fetch-launch-data.sh
-      ./.github/scripts/fetch-launch-data.sh "${{ github.repository_owner }}" 1 launch-data.json
+      ./.github/scripts/fetch-launch-data.sh "$LAUNCH_PROJECT_OWNER" "$LAUNCH_PROJECT_NUMBER" launch-data.json
       echo "path=launch-data.json" >> "$GITHUB_OUTPUT"
 
 tools:
@@ -369,21 +373,3 @@ No alignment signals detected. No PR or comments created.
 - **Escape all \@mentions** to avoid notifications.
 - **Skip bot content.** Ignore bot-generated comments, automated PR bodies,
   and workflow outputs when scanning for signals.
-
-## Workflow Run Cost Footer
-
-Every PR body and issue comment MUST end with:
-
-```markdown
-### 🧾 Workflow Run Cost
-
-| Metric | Value |
-|--------|-------|
-| Input tokens | X,XXX |
-| Output tokens | X,XXX |
-| Total tokens | X,XXX |
-| Premium requests | X |
-| Estimated cost | $X.XX |
-
-*Cost estimate based on current Copilot pricing. Actual billing may vary.*
-```

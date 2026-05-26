@@ -4,9 +4,13 @@ description: |
   topics and facilitation prompts so the standup covers delivery confidence,
   blockers, decisions, quality risks, and coordination needs.
 
+engine:
+  id: codex
+  model: gpt-5-mini
+
 on:
   schedule:
-    - cron: "0 15 * * 1-5" # Runs at 15:00 UTC (8:00am PDT / 7:00am PST depending on DST)
+    - cron: "0 15 * * 1,3" # Runs Monday and Wednesday at 15:00 UTC (8:00am PDT / 7:00am PST depending on DST)
   workflow_dispatch:
 
 permissions:
@@ -26,10 +30,11 @@ steps:
     id: launch-data
     env:
       LAUNCH_DATA_TOKEN: ${{ secrets.AW_TOKEN }}
+      LAUNCH_PROJECT_OWNER: ${{ vars.LAUNCH_PROJECT_OWNER || github.repository_owner }}
+      LAUNCH_PROJECT_NUMBER: ${{ vars.LAUNCH_PROJECT_NUMBER || '1' }}
     run: |
       chmod +x .github/scripts/fetch-launch-data.sh
-      # Project number 1 is the sample Launch Tracker project in this repository.
-      ./.github/scripts/fetch-launch-data.sh "${{ github.repository_owner }}" 1 launch-data.json
+      ./.github/scripts/fetch-launch-data.sh "$LAUNCH_PROJECT_OWNER" "$LAUNCH_PROJECT_NUMBER" launch-data.json
       echo "path=launch-data.json" >> "$GITHUB_OUTPUT"
 
 tools:

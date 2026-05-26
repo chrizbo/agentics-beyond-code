@@ -5,6 +5,8 @@ description: |
   launch. Refreshes weekly to reflect the latest launch status, phase,
   and scope. Content follows the voice & tone policy.
 
+engine: codex
+
 on:
   schedule: weekly on monday around 8:15am utc-7
   workflow_dispatch:
@@ -26,9 +28,11 @@ steps:
     id: launch-data
     env:
       LAUNCH_DATA_TOKEN: ${{ secrets.AW_TOKEN }}
+      LAUNCH_PROJECT_OWNER: ${{ vars.LAUNCH_PROJECT_OWNER || github.repository_owner }}
+      LAUNCH_PROJECT_NUMBER: ${{ vars.LAUNCH_PROJECT_NUMBER || '1' }}
     run: |
       chmod +x .github/scripts/fetch-launch-data.sh
-      ./.github/scripts/fetch-launch-data.sh "${{ github.repository_owner }}" 1 launch-data.json
+      ./.github/scripts/fetch-launch-data.sh "$LAUNCH_PROJECT_OWNER" "$LAUNCH_PROJECT_NUMBER" launch-data.json
       echo "path=launch-data.json" >> "$GITHUB_OUTPUT"
 
 tools:
@@ -287,21 +291,3 @@ Launch #Z — [Title] (GA, target 2026-06-01)
   launch and content type.
 - **Match the voice.** Re-read the voice & tone policy before writing.
   The content should sound like it comes from the same person every time.
-
-## Workflow Run Cost Footer
-
-Every summary MUST end with:
-
-```markdown
-### 🧾 Workflow Run Cost
-
-| Metric | Value |
-|--------|-------|
-| Input tokens | X,XXX |
-| Output tokens | X,XXX |
-| Total tokens | X,XXX |
-| Premium requests | X |
-| Estimated cost | $X.XX |
-
-*Cost estimate based on current Copilot pricing. Actual billing may vary.*
-```

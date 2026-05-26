@@ -5,6 +5,10 @@ description: |
   duration trends, cost estimates, and actionable recommendations for
   efficiency improvements and fixes.
 
+engine:
+  id: codex
+  model: gpt-5-mini
+
 on:
   schedule: weekly on friday around 8am utc-7
   workflow_dispatch:
@@ -20,6 +24,14 @@ timeout-minutes: 15
 
 network:
   allowed: [defaults, github]
+
+steps:
+  - name: Fetch workflow health data
+    id: workflow-health-data
+    run: |
+      chmod +x .github/scripts/fetch-workflow-health-data.sh
+      ./.github/scripts/fetch-workflow-health-data.sh "${{ github.repository }}" "${{ github.run_id }}" workflow-health-data.json
+      echo "path=workflow-health-data.json" >> "$GITHUB_OUTPUT"
 
 tools:
   github:
@@ -51,37 +63,41 @@ or by listing `.md` files in the workflows directory.
 
 ## Process
 
-### Step 1: Identify Agentic Workflows
+### Step 1: Load Pre-Fetched Workflow Health Data
 
 ```bash
-ls .github/workflows/*.md
+cat workflow-health-data-summary.json
 ```
 
-Build a list of all agentic workflow names from the `.md` filenames (strip the
-extension). These are the workflows you will analyze.
+A deterministic pre-step has already collected and summarized the workflow run
+data. Treat `workflow-health-data-summary.json` as the source of truth for:
 
-### Step 2: Gather Run Data (Last 7 Days)
+- Agentic workflow discovery from `.github/workflows/*.md`
+- Frontmatter trigger summaries and configured model names
+- Last 7 days of Actions runs per workflow
+- Job-level or fallback run-wall-clock durations
+- Failure patterns and recent failure snippets when logs were available
+- Temporal overlap and cascade examples
+- Observed Codex token usage from logs when available
+- Estimated GitHub runner and OpenAI model costs
 
-For each agentic workflow, fetch runs from the last 7 days using the
-corresponding `.lock.yml` filename:
+The full detail file is `workflow-health-data.json`. Only read it with `jq`
+for specific drill-downs. Do not re-run broad `gh run list` or `gh run view
+--log` sweeps unless the summary explicitly marks required data as missing.
+
+> **Token efficiency:** Read `workflow-health-data-summary.json` once. Use
+> targeted `jq` queries against `workflow-health-data.json` only when a
+> recommendation needs a specific failing step, token sample, or run detail.
+
+Useful summary queries:
 
 ```bash
-gh run list \
-  --repo "${{ github.repository }}" \
-  --workflow "<name>.lock.yml" \
-  --limit 50 \
-  --json databaseId,status,conclusion,createdAt,updatedAt,event \
-  --jq '[.[] | select(.createdAt >= "<7-days-ago-ISO>")]'
+jq '.totals' workflow-health-data-summary.json
+jq '.workflowSummaries[] | {workflow, runs, successRate, health, runnerMinutes, observedOpenAICostUsd, projectedOpenAICostUsd}' workflow-health-data-summary.json
+jq '.interactions | {concurrentCount, cascadeCount, concurrentExamples, cascadeExamples}' workflow-health-data-summary.json
 ```
 
-For each run, also collect timing and usage details:
-
-```bash
-gh run view <run-id> \
-  --repo "${{ github.repository }}" \
-  --json jobs \
-  --jq '.jobs[] | {name, startedAt, completedAt, conclusion}'
-```
+### Step 2: Verify and Interpret the Summary
 
 Collect for every workflow:
 - **Total runs** in the window
@@ -91,30 +107,39 @@ Collect for every workflow:
 - **Longest run** (minutes) and its run ID
 - **Failure patterns** — recurring error signals (if any)
 - **Trigger breakdown** — how many runs per trigger type (schedule, workflow_dispatch, etc.)
+- **Observed token usage** — only when available in Codex logs
+- **Projected OpenAI cost** — observed cost plus same-workflow average for runs
+  where token logs were unavailable
 
 ### Step 3: Estimate Costs
 
-For each workflow run, estimate cost using these heuristics:
+Use the precomputed cost fields in the summary:
 
-1. **Duration-based estimate**: Each minute of Actions runner time contributes
-   to compute cost. Use the job durations collected in Step 2.
-2. **Copilot premium request estimate**: Each agentic workflow run typically
-   consumes premium requests. Count the number of runs per workflow.
+1. **Runner cost**: runner minutes × `$0.008/min` for standard Linux
+   GitHub-hosted runners.
+2. **OpenAI model cost**: observed Codex token usage from logs, priced using
+   current OpenAI per-token rates stored in `.metadata.pricing`.
+3. **Projected OpenAI cost**: if some runs do not expose token usage, use the
+   same workflow's observed average token cost for those missing runs. If no
+   token data was observed for a workflow, mark the model cost as unavailable
+   rather than inventing a value.
 
-Use the following rates for dollar cost estimates:
-- **Runner cost**: $0.008 per minute for Linux runners (standard GitHub-hosted)
-- **Premium requests**: $0.04 per premium request (Copilot Business rate)
+Current OpenAI pricing used by the pre-step:
+- `gpt-5.4`: `$2.50 / 1M` input, `$0.25 / 1M` cached input, `$15.00 / 1M` output
+- `openai/gpt-5-mini`: `$0.25 / 1M` input, `$0.025 / 1M` cached input, `$2.00 / 1M` output
+- `gpt-5.4-nano`: `$0.20 / 1M` input, `$0.02 / 1M` cached input, `$1.25 / 1M` output
 
 Present costs as:
 - **Total runner minutes** per workflow (sum of job durations)
-- **Total premium requests** (estimated as 1 per run minimum)
-- **Estimated dollar cost** per workflow (runner cost + premium request cost)
+- **Observed token runs** and **missing token runs**
+- **Observed / projected OpenAI cost**
+- **Estimated dollar cost** per workflow (runner cost + projected OpenAI cost
+  when available)
 - **Combined totals** across all workflows
 
-> **Note:** These are estimates using standard GitHub-hosted Linux runner and
-> Copilot Business rates. Actual billing depends on runner type, Copilot plan,
-> and organization settings. Adjust rates if the repo uses larger runners or
-> a different Copilot tier.
+> **Note:** These are estimates using standard GitHub-hosted Linux runner rates
+> and current OpenAI API pricing. Actual billing depends on runner type, model,
+> cached-token behavior, and whether run logs exposed token usage.
 
 ### Step 4: Assess Health
 
@@ -130,8 +155,9 @@ For each workflow, assign a health status:
 
 ### Step 5: Analyze Cross-Workflow Interactions
 
-After gathering run data for all workflows, analyze how they interact with each
-other. This step detects conflicts, race conditions, and cascading effects.
+Use the precomputed `.interactions` section to analyze how workflows interact
+with each other. This step detects conflicts, race conditions, and cascading
+effects.
 
 #### 5a: Detect Temporal Overlaps
 
@@ -149,9 +175,8 @@ same day (e.g., multiple Monday-morning workflows).
 
 #### 5b: Detect Shared Resource Modifications
 
-For each workflow run, check the Actions run logs or timeline to identify which
-GitHub resources were modified (issues commented on, labels added/removed,
-discussions created, PRs opened). Then cross-reference:
+Use any resource signals that were pre-fetched from logs or safe-output data.
+Then cross-reference:
 
 - **Issues touched by multiple workflows** in the same 24-hour window — list
   the issue number and which workflows touched it.
@@ -161,13 +186,8 @@ discussions created, PRs opened). Then cross-reference:
 - **Discussions created in the same category** by multiple workflows on the same
   day — note if naming collisions or duplicate topics could occur.
 
-Use the run IDs from Step 2 to inspect job logs:
-
-```bash
-gh run view <run-id> \
-  --repo "${{ github.repository }}" \
-  --log 2>/dev/null | grep -iE "(label|comment|issue|discussion|created)" | head -30
-```
+If the summary says resource-level details were unavailable, say so clearly and
+base interaction risk on timing and trigger metadata only.
 
 #### 5c: Identify Cascade Chains
 
@@ -253,21 +273,21 @@ For each degraded/critical workflow:
 
 ### 💰 Cost Summary
 
-| Workflow | Runs | Runner Minutes | Est. Premium Requests | Est. Cost |
-|----------|------|---------------|----------------------|-----------|
-| workflow-name | N | Xm | N | $X.XX |
+| Workflow | Runs | Runner Minutes | Token Runs | OpenAI Cost | Est. Total |
+|----------|------|---------------|------------|-------------|------------|
+| workflow-name | N | Xm | X/Y observed | $X.XX | $X.XX |
 | ... | ... | ... | ... | ... |
-| **Total** | **N** | **Xm** | **N** | **$X.XX** |
+| **Total** | **N** | **Xm** | **X/Y observed** | **$X.XX** | **$X.XX** |
 
 <details>
 <summary>Cost Estimation Methodology</summary>
 
 - Runner minutes = sum of all job durations across runs
 - Runner cost = minutes × $0.008/min (standard GitHub-hosted Linux)
-- Premium requests = estimated at 1 per agentic workflow run
-- Premium request cost = requests × $0.04/request (Copilot Business)
-- Est. Cost = runner cost + premium request cost
-- Actual costs depend on your GitHub plan, runner type, and Copilot subscription
+- OpenAI model cost = observed Codex token usage × current OpenAI per-token rates
+- Projected OpenAI cost fills missing token logs using same-workflow observed average cost when available
+- Est. Total = runner cost + projected OpenAI model cost when available
+- Actual costs depend on runner type, model, cached-token behavior, and available token logs
 
 </details>
 
@@ -347,6 +367,8 @@ Per-workflow breakdown of every run with ID, trigger, conclusion, and duration.
   bill of health is valuable signal.
 - If the repository has **no agentic workflows**, create the discussion noting
   that no `.md` workflows were found.
+- Do not count the current workflow-health run against itself. The pre-step
+  excludes `${{ github.run_id }}` from the analysis window.
 
 ## Guidelines
 
@@ -358,3 +380,5 @@ Per-workflow breakdown of every run with ID, trigger, conclusion, and duration.
 - Order recommendations by impact (highest impact first).
 - Escape all @mentions to avoid noisy notifications.
 - Use `<details>` blocks for verbose data so the report stays scannable.
+- Do not mention legacy premium-request billing in the cost section. This
+  repository is currently using OpenAI via the Codex engine.

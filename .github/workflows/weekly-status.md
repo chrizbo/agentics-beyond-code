@@ -5,6 +5,10 @@ description: |
   We Learned, FYI, and SOS. Designed for leaders who need a fast read on
   portfolio health, wins, and where they need to get involved.
 
+engine:
+  id: codex
+  model: gpt-5-mini
+
 on:
   schedule: weekly on friday around 8am utc-7
   workflow_dispatch:
@@ -26,9 +30,11 @@ steps:
     id: launch-data
     env:
       LAUNCH_DATA_TOKEN: ${{ secrets.AW_TOKEN }}
+      LAUNCH_PROJECT_OWNER: ${{ vars.LAUNCH_PROJECT_OWNER || github.repository_owner }}
+      LAUNCH_PROJECT_NUMBER: ${{ vars.LAUNCH_PROJECT_NUMBER || '1' }}
     run: |
       chmod +x .github/scripts/fetch-launch-data.sh
-      ./.github/scripts/fetch-launch-data.sh "${{ github.repository_owner }}" 1 launch-data.json
+      ./.github/scripts/fetch-launch-data.sh "$LAUNCH_PROJECT_OWNER" "$LAUNCH_PROJECT_NUMBER" launch-data.json
       echo "path=launch-data.json" >> "$GITHUB_OUTPUT"
 
 tools:
@@ -285,23 +291,3 @@ Discussion created: 1
   were detected.
 - If a previous week's report exists (same title prefix), the new one
   will be created alongside it — discussions are append-only history.
-
-## Workflow Run Cost Footer
-
-Every discussion body MUST end with:
-
-```markdown
----
-
-### 🧾 Workflow Run Cost
-
-| Metric | Value |
-|--------|-------|
-| Input tokens | X,XXX |
-| Output tokens | X,XXX |
-| Total tokens | X,XXX |
-| Premium requests | X |
-| Estimated cost | $X.XX |
-
-*Cost estimate based on current Copilot pricing. Actual billing may vary.*
-```

@@ -4,8 +4,12 @@ description: |
   Creates new launches weekly, closes completed work, and adds progress comments
   to epics and tasks — feeding the launch readiness report with fresh data.
 
+engine:
+  id: codex
+  model: gpt-5-mini
+
 on:
-  schedule: "0 6 * * 2-6"
+  schedule: "0 6 * * 1,3" # Sunday and Tuesday nights at ~11 PM PT
   workflow_dispatch:
 
 permissions:
@@ -24,9 +28,11 @@ steps:
     id: launch-data
     env:
       LAUNCH_DATA_TOKEN: ${{ secrets.AW_TOKEN }}
+      LAUNCH_PROJECT_OWNER: ${{ vars.LAUNCH_PROJECT_OWNER || github.repository_owner }}
+      LAUNCH_PROJECT_NUMBER: ${{ vars.LAUNCH_PROJECT_NUMBER || '1' }}
     run: |
       chmod +x .github/scripts/fetch-launch-data.sh
-      ./.github/scripts/fetch-launch-data.sh "${{ github.repository_owner }}" 1 launch-data.json
+      ./.github/scripts/fetch-launch-data.sh "$LAUNCH_PROJECT_OWNER" "$LAUNCH_PROJECT_NUMBER" launch-data.json
       echo "path=launch-data.json" >> "$GITHUB_OUTPUT"
 
 tools:

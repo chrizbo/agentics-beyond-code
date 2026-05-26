@@ -5,6 +5,8 @@ description: |
   topics related to open issues (launches, epics, tasks), and posts summary
   comments on those issues with relevant excerpts from the meeting.
 
+engine: codex
+
 on:
   push:
     branches: [main]
@@ -31,9 +33,11 @@ steps:
     id: launch-data
     env:
       LAUNCH_DATA_TOKEN: ${{ secrets.AW_TOKEN }}
+      LAUNCH_PROJECT_OWNER: ${{ vars.LAUNCH_PROJECT_OWNER || github.repository_owner }}
+      LAUNCH_PROJECT_NUMBER: ${{ vars.LAUNCH_PROJECT_NUMBER || '1' }}
     run: |
       chmod +x .github/scripts/fetch-launch-data.sh
-      ./.github/scripts/fetch-launch-data.sh "${{ github.repository_owner }}" 1 launch-data.json
+      ./.github/scripts/fetch-launch-data.sh "$LAUNCH_PROJECT_OWNER" "$LAUNCH_PROJECT_NUMBER" launch-data.json
       echo "path=launch-data.json" >> "$GITHUB_OUTPUT"
 
 tools:
@@ -255,21 +259,3 @@ This is not an error — not every meeting discusses tracked issues.
 - Escape all @mentions to avoid noisy notifications.
 - VTT files may contain speaker labels (e.g., `<v Speaker Name>`).
   Use these to attribute statements when available.
-
-## Workflow Run Cost Footer
-
-Every summary MUST end with:
-
-```markdown
-### 🧾 Workflow Run Cost
-
-| Metric | Value |
-|--------|-------|
-| Input tokens | X,XXX |
-| Output tokens | X,XXX |
-| Total tokens | X,XXX |
-| Premium requests | X |
-| Estimated cost | $X.XX |
-
-*Cost estimate based on current Copilot pricing. Actual billing may vary.*
-```
