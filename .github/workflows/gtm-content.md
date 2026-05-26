@@ -5,7 +5,9 @@ description: |
   launch. Refreshes weekly to reflect the latest launch status, phase,
   and scope. Content follows the voice & tone policy.
 
-engine: codex
+engine:
+  id: codex
+  model: gpt-5-mini
 
 on:
   schedule: weekly on monday around 8:15am utc-7

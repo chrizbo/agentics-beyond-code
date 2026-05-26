@@ -6,7 +6,9 @@ description: |
   and creates a PR annotating the strategy doc with alignment evidence,
   misalignment examples, and emerging strategic patterns.
 
-engine: codex
+engine:
+  id: codex
+  model: gpt-5-mini
 
 on:
   schedule: weekly on wednesday around 8am utc-7

@@ -6,7 +6,9 @@ description: |
   checks for missing information, detects duplicates, evaluates alignment
   with current initiatives, and adds the item to the triage project board.
 
-engine: codex
+engine:
+  id: codex
+  model: gpt-5-mini
 
 on:
   issues:

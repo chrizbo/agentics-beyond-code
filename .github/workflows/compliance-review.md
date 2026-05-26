@@ -7,7 +7,9 @@ description: |
   compliance status table on the launch issue, and generates starter
   review artifacts so DRIs don't start from scratch.
 
-engine: codex
+engine:
+  id: codex
+  model: gpt-5-mini
 
 on:
   schedule: weekly on monday around 8am utc-7

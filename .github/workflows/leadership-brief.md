@@ -7,7 +7,9 @@ description: |
   style with three action-oriented sections: Give Kudos, Give Feedback,
   and Get Involved (pre-escalation).
 
-engine: codex
+engine:
+  id: codex
+  model: gpt-5-mini
 
 on:
   schedule: weekly on monday around 7:30am utc-7

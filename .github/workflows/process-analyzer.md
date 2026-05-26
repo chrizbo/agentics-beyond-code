@@ -6,7 +6,9 @@ description: |
   retrospective summary, and creates PRs to update docs/how-we-work.md when
   changes are detected.
 
-engine: codex
+engine:
+  id: codex
+  model: gpt-5-mini
 
 on:
   schedule: weekly
