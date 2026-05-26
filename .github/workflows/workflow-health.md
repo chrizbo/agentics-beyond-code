@@ -28,6 +28,8 @@ network:
 steps:
   - name: Fetch workflow health data
     id: workflow-health-data
+    env:
+      GH_TOKEN: ${{ github.token }}
     run: |
       chmod +x .github/scripts/fetch-workflow-health-data.sh
       ./.github/scripts/fetch-workflow-health-data.sh "${{ github.repository }}" "${{ github.run_id }}" workflow-health-data.json
