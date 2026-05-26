@@ -6,7 +6,7 @@ description: |
 
 engine:
   id: codex
-  model: openai/gpt-5-mini
+  model: gpt-5-mini
 
 on:
   schedule:
