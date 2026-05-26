@@ -6,7 +6,7 @@ description: |
 
 engine:
   id: codex
-  model: openai/gpt-5-mini
+  model: gpt-5-mini
 
 on:
   schedule: "0 6 * * 1,3" # Sunday and Tuesday nights at ~11 PM PT
