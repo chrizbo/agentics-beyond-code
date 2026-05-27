@@ -15,6 +15,10 @@ on:
   skip-bots: [github-actions]
   workflow_dispatch:
 
+concurrency:
+  group: assumption-surfacer-${{ github.event.issue.number || github.run_id }}
+  cancel-in-progress: true
+
 permissions:
   contents: read
   issues: read
@@ -281,4 +285,3 @@ issues have been reviewed.
 - **Don't respond to yourself.** If the comment that triggered this run
   was posted by this workflow (contains "Assumptions Worth Discussing"),
   use noop.
-

@@ -70,7 +70,8 @@ on:
 permissions: {}
 
 concurrency:
-  group: "gh-aw-${{ github.workflow }}-${{ github.event.issue.number || github.run_id }}"
+  cancel-in-progress: true
+  group: assumption-surfacer-${{ github.event.issue.number || github.run_id }}
 
 run-name: "Assumption Surfacer"
 
@@ -1541,4 +1542,3 @@ jobs:
             /tmp/gh-aw/safe-output-items.jsonl
             /tmp/gh-aw/temporary-id-map.json
           if-no-files-found: ignore
-
