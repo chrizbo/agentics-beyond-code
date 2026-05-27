@@ -1,0 +1,38 @@
+WEBVTT
+
+1
+00:00:01.000 --> 00:00:10.000
+Sarah Chen: Morning — quick updates. Marcus, you're up.
+
+2
+00:00:10.500 --> 00:00:25.000
+Marcus Johnson: Yesterday I finished the PoC for the token bucket limiter (issue #96). Integration tests are next. Delivery confidence: medium — tests need to land.
+
+3
+00:00:25.500 --> 00:00:40.000
+Priya Patel: I'm wiring the notification UI (issue #60). WIP, hit a design question about toast behavior that needs a decision from Alex.
+
+4
+00:00:40.500 --> 00:00:55.000
+David Kim: QA found a flaky case in the export flow tied to the background job queue. Referencing issue #10 and the security review epic #7 — blocking GA until pen test is complete.
+
+5
+00:00:55.500 --> 00:01:10.000
+Alex Rivera: I have the infra for WebSockets ready. After discussion we decided to use WebSockets over SSE for the real-time layer (see decision on issue #69).
+
+6
+00:01:10.500 --> 00:01:25.000
+Jordan Taylor: Design review scheduled for Thursday on the notification tray. Cross-team coordination: need Marcus for real-time events and Priya for UI.
+
+7
+00:01:25.500 --> 00:01:40.000
+Sarah Chen: Blockers & dependencies — security review epic #7 still open and compliance reviews #50 and #51 are pending. Decision needed: prioritize pen test vs. localization fixes.
+
+8
+00:01:40.500 --> 00:01:55.000
+Marcus Johnson: Quality risk: the export job handles large accounts; we should add extra monitoring and a slow-path fallback. I'll add a checklist to issue #8 (runbook).
+
+9
+00:01:55.500 --> 00:02:10.000
+Priya Patel: Process note: can we move design review to Thursday? Wednesday is too early for polished mocks.
+
