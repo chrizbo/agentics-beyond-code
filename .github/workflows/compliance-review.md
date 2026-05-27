@@ -9,7 +9,7 @@ description: |
 
 engine:
   id: codex
-  model: gpt-5-mini
+  model: gpt-5
 
 on:
   schedule: weekly on monday around 8am utc-7
@@ -340,6 +340,20 @@ Launch #X — [Title]
 Launch #Y — [Title]
   ...
 ```
+
+## Safe output calls
+
+Write body content to a temp file, then call with explicit flags (stdin redirection can silently fail in this environment):
+
+```bash
+cat > /tmp/gh-aw/agent/body.md << 'BODY'
+...content...
+BODY
+safeoutputs create_discussion --title "title" --body "$(cat /tmp/gh-aw/agent/body.md)"
+# or: safeoutputs create_issue / add_comment / create_pull_request — same pattern
+```
+
+Configured title prefixes are added automatically — omit them from `--title`. If a call fails, immediately call `safeoutputs noop --message "reason"` and stop — never ask for input.
 
 ## Guidelines
 

@@ -6,7 +6,7 @@ description: |
 
 engine:
   id: codex
-  model: gpt-5-mini
+  model: gpt-5
 
 on:
   schedule:
@@ -100,13 +100,22 @@ Build today's standup context from open work:
 
 ### Step 3: Create one discussion
 
-Create exactly one discussion for today with this title format:
+Get today's date and write the full discussion body to a file, then post it using explicit flags:
 
-```
-[Standup Prep] YYYY-MM-DD
+```bash
+DATE=$(date -u +%Y-%m-%d)
+
+# Write body to a file — safeoutputs does not support @filename expansion, so pass inline via $(cat ...)
+cat > /tmp/gh-aw/agent/standup_body.md << 'BODY'
+<full discussion body here>
+BODY
+
+safeoutputs create_discussion --title "$DATE" --body "$(cat /tmp/gh-aw/agent/standup_body.md)"
 ```
 
-Use the current run date via shell command (for example: `date -u +%Y-%m-%d`).
+Important:
+- Pass only the date (e.g. `2026-05-27`) as `--title`. The `[Standup Prep] ` prefix is added automatically — do not include it yourself.
+- If the `create_discussion` call fails for any reason, immediately call `safeoutputs noop --message "Could not create discussion: <brief reason>"` — never ask for human input.
 
 Use this body structure:
 
