@@ -94,6 +94,19 @@ The model is interchangeable — what makes these workflows effective is the **e
 
 Good agentic systems compound. The process analyzer detects drift, the decision log accumulates records, strategy alignment annotates docs with evidence. Each run leaves the repo a little smarter than it found it.
 
+## 🧰 Agent Skills
+
+This repo includes reusable agent skills for setting up and maintaining
+Agentics Beyond Code workflows:
+
+- **[Non-Coder Agentic Workflow Builder](.github/skills/non-coder-agentic-workflow-builder/SKILL.md)** — helps product, ops, compliance, GTM, design, research, support, customer success, program, and leadership users turn process problems into a repo setup with workflows, blank strategy/how-we-work docs, policies, and folders.
+- **[Agentic Workflows](.github/skills/agentic-workflows/SKILL.md)** — helps create, update, debug, compile, and validate GitHub Agentic Workflows.
+
+Skills are mirrored in two places:
+
+- `.github/skills/` follows the GitHub skill discovery convention.
+- `.claude/skills/` supports local Claude-style skill discovery.
+
 ## 📖 Documentation
 
 ### Getting Started

@@ -92,6 +92,28 @@ gh extension install github/gh-aw
 gh auth refresh -s read:project,project
 ```
 
+## Using Agent Skills
+
+This repo ships with reusable skills that help people set up and maintain
+Agentics Beyond Code without needing to start from workflow syntax.
+
+| Skill | Use it for | Canonical path | Local mirror |
+|-------|------------|----------------|--------------|
+| Non-Coder Agentic Workflow Builder | Turn team/process problems into a recommended workflow set, blank operating docs, policies, and repo folders | `.github/skills/non-coder-agentic-workflow-builder/SKILL.md` | `.claude/skills/non-coder-agentic-workflow-builder/SKILL.md` |
+| Agentic Workflows | Create, update, debug, compile, and validate GitHub Agentic Workflows | `.github/skills/agentic-workflows/SKILL.md` | `.claude/skills/agentic-workflows/SKILL.md` |
+
+The `.github/skills/` copy follows the GitHub skills convention used by
+`gh skill` and by repositories such as `github/gh-aw`. The `.claude/skills/`
+copy is kept in sync so local Claude-style agents can use the same guidance
+without extra installation steps.
+
+For a new non-coding team, start with the Non-Coder Agentic Workflow Builder.
+Give it the problems you want to solve, the artifacts you already use, and how
+aggressive you want automation to be. It will map those needs to this repo's
+workflow catalog and scaffold blank `docs/strategy.md`, `docs/how-we-work.md`,
+`decisions/`, `transcripts/`, `.github/policies/`, `.github/workflows/`, and
+`.github/ISSUE_TEMPLATE/` as needed.
+
 ## Setting Up Your Repository
 
 ### 1. Clone and initialize

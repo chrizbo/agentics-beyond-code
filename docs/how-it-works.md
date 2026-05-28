@@ -112,6 +112,11 @@ Workflows define the **general pattern** (e.g., "assess readiness against a poli
 
 ```
 .github/
+  skills/
+    non-coder-agentic-workflow-builder/
+      SKILL.md                         ← Skill for turning non-coder process problems into workflow setups
+    agentic-workflows/
+      SKILL.md                         ← Skill for creating, updating, debugging, and compiling gh-aw workflows
   workflows/
     launch-readiness.md              ← Readiness assessment (weekly)
     compliance-review.md             ← Compliance triage + sub-issues (weekly + on label)
@@ -142,6 +147,8 @@ decisions/                           ← Decision records (created by decision-l
 docs/
   how-we-work.md                     ← Team processes & norms (updated by process-analyzer workflow)
 transcripts/                         ← Meeting transcripts (.txt, .vtt) — drop files here
+.claude/
+  skills/                             ← Local mirrors of .github/skills for Claude-style agents
 ```
 
 This means:
@@ -149,6 +156,8 @@ This means:
 - Policy changes take effect immediately (no recompilation)
 - Compliance teams own their policy files independently
 - Auditors can review policies as plain markdown
+- Non-coders can ask an agent to use the skills to choose workflows and
+  scaffold the supporting documents before touching gh-aw syntax.
 
 ### 6. Deterministic pre-steps for structured data
 
