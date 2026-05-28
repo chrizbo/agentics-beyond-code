@@ -99,7 +99,7 @@ Good agentic systems compound. The process analyzer detects drift, the decision 
 This repo includes reusable agent skills for setting up and maintaining
 Agentics Beyond Code workflows:
 
-- **[Non-Coder Agentic Workflow Builder](.github/skills/non-coder-agentic-workflow-builder/SKILL.md)** — helps product, ops, compliance, GTM, design, research, support, customer success, program, and leadership users turn process problems into a repo setup with workflows, blank strategy/how-we-work docs, policies, and folders.
+- **[Non-Coder Agentic Workflow Builder](.github/skills/non-coder-agentic-workflow-builder/SKILL.md)** — helps product, ops, compliance, GTM, design, research, support, customer success, program, and leadership users turn process problems into a repo setup with workflows, project boards, issue templates, labels, blank strategy/how-we-work docs, policies, and folders.
 - **[Agentic Workflows](.github/skills/agentic-workflows/SKILL.md)** — helps create, update, debug, compile, and validate GitHub Agentic Workflows.
 
 Skills are mirrored in two places:

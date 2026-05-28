@@ -8,8 +8,8 @@ description: >
   policies, issue templates, or a starter setup derived from Agentics Beyond
   Code. Trigger on requests like "set up workflows for my team", "what agentic
   workflows do I need", "turn my process into agentic workflows", "bootstrap
-  Agentics Beyond Code", "create strategy and how-we-work docs", or "steal from
-  this repo for our team".
+  Agentics Beyond Code", "create strategy and how-we-work docs", "set up
+  project boards and issue templates", or "steal from this repo for our team".
 ---
 
 # Non-Coder Agentic Workflow Builder
@@ -23,8 +23,9 @@ documents, folder structure, policies, and adoption steps.
 1. Ask for, or infer from the user's message:
    - team type and operating context
    - recurring pain points
-   - existing artifacts and systems of record
-   - desired workflow outputs: comments, issues, PRs, discussions, reports
+  - existing artifacts and systems of record
+  - desired workflow outputs: comments, issues, PRs, discussions, reports
+   - whether they want GitHub Projects, labels, and issue templates set up
    - tolerance for automation creating work items or PRs
 2. Read `prompts/design-non-coder-workflow-system.md` for the full selection and
    scaffolding procedure.
@@ -41,6 +42,7 @@ documents, folder structure, policies, and adoption steps.
    - blank `docs/how-we-work.md`
    - folders for `decisions/`, `transcripts/`, `.github/policies/`,
      `.github/workflows/`, and `.github/ISSUE_TEMPLATE/`
+   - optional project board plan, label taxonomy, and generic issue templates
    - copied or adapted workflow `.md` files from Agentics Beyond Code
    - copied or adapted policy and issue-template files when the workflow needs
      them
@@ -56,6 +58,7 @@ When the user asks for a recommendation only, produce a concise setup plan with:
 - recommended workflows
 - documents and folders to create
 - workflow dependencies and required policies
+- optional project board, labels, and issue templates
 - rollout order
 
 When the user asks to set it up, make the files. Prefer real repo artifacts over
@@ -71,6 +74,9 @@ long explanations.
 - Keep the agent job read-only and use `safe-outputs` for writes.
 - Do not import fictional sample data from the repo into a user's real setup.
   Use the blank templates in `assets/blank-repo/` as the starting point.
+- Treat GitHub Projects and issue templates as optional operating-system setup.
+  Include them when the user's workflow needs structured work tracking,
+  launch/intake flow, status reporting, or project-field data.
 - If the user cannot name exact workflows, map pain points to the catalog in
   `docs/workflow-ideas.md` and the selection table in
   `prompts/design-non-coder-workflow-system.md`.
