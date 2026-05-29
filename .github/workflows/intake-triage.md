@@ -14,6 +14,7 @@ on:
   issues:
     types: [labeled]
     names: [triage-needed]
+  roles: all
 
 concurrency:
   group: intake-triage-${{ github.event.issue.number }}
@@ -35,7 +36,8 @@ tools:
     mode: gh-proxy
     toolsets: [default, issues]
     lockdown: false
-    min-integrity: none
+    allowed-repos: "all"
+    min-integrity: approved
 
 safe-outputs:
   mentions: false

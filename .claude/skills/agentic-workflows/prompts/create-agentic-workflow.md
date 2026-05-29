@@ -492,25 +492,38 @@ These resources contain workflow patterns, best practices, safe outputs, and per
 
    **Guard Policies (`repos` and `min-integrity`)**:
 
-   Guard policies restrict which repositories and content integrity levels the GitHub MCP server can access during agent execution. These are experimental features that apply fine-grained access control at the MCP gateway level.
+   Guard policies restrict which repositories and content integrity levels the GitHub MCP server can access during agent execution. They apply fine-grained access control at the MCP gateway level — filtering untrusted content **before it reaches the model**, which is the primary defense against prompt injection.
 
-   - **`repos`** - Restricts which repositories the agent can access:
+   - **`repos`** (`allowed-repos`) - Restricts which repositories the agent can access:
      - `"all"` — All repositories accessible by the token
      - `"public"` — Public repositories only
      - Array of patterns — Specific repos or wildcards (e.g., `["myorg/*", "myorg/api-*"]`)
-   - **`min-integrity`** - Sets the minimum integrity level for content:
-     - `approved` — Only content from owners, members, and collaborators (highest trust)
-     - `unapproved` — Include contributors and first-time contributors
-     - `none` — Include all content regardless of author association
+   - **`min-integrity`** - Sets the minimum integrity level for content. Content from authors below the threshold is withheld from the agent entirely:
+     - `approved` — Only content from owners, members, and collaborators (highest trust; recommended for public or external-facing workflows)
+     - `unapproved` — Include contributors and first-time contributors (semi-trusted communities)
+     - `none` — All content regardless of author (use only for fully internal repos where all contributors are trusted)
    - **Both fields are required** when either is specified (you cannot use one without the other)
-   - **Automatic protection** - When neither `allowed-repos` nor `min-integrity` is configured, public repositories automatically get `min-integrity: approved` applied at runtime
-   - **Example**:
+   - **Automatic protection** - When neither `allowed-repos` nor `min-integrity` is configured, public repositories automatically get `min-integrity: approved` applied at runtime. **Private repositories do not** — always be explicit for private repos.
+   - **Required when using `roles: all`**: If you open a workflow to any authenticated user (`roles: all`), pair it with `min-integrity: unapproved` or `approved` so untrusted input is filtered before reaching the agent.
+   - **Escape hatches**: Maintainers can whitelist specific contributors via approval labels or emoji reactions without changing the global `min-integrity` setting.
+
+   **When to use each level:**
+
+   | Scenario | Recommended `min-integrity` |
+   |---|---|
+   | Internal team repo (all contributors are teammates) | `none` (or omit if also private) |
+   | Semi-open repo with external contributors | `unapproved` |
+   | Public repo, issue triage, or `roles: all` workflow | `approved` |
+   | Public repo (no explicit setting) | Automatic `approved` at runtime |
+
+   - **Example** (external-facing issue triage):
      ```yaml
      tools:
        github:
          toolsets: [default]
          allowed-repos: "all"
          min-integrity: approved  # Only content from trusted collaborators
+     roles: all  # Any authenticated user can file issues — min-integrity limits what agent sees
      ```
    - **Documentation**: See https://github.github.com/gh-aw/reference/github-tools/#guard-policies for complete guidance
 
@@ -916,6 +929,15 @@ Based on the parsed requirements, determine:
    - **Default (when omitted)**: `roles: [admin, maintainer, write]` (only team members with write access)
    - **Issue triage workflows**: Use `roles: all` to allow any authenticated user (including non-team members) to file issues that trigger the workflow
    - For public repositories where you want community members to trigger workflows via issues/PRs, setting `roles: all` is recommended
+   - **When using `roles: all`, always pair with `min-integrity`**: Opening a workflow to any authenticated user also opens it to prompt injection attempts. Set `min-integrity: approved` (or `unapproved`) alongside `allowed-repos` so untrusted content is filtered before reaching the agent. Example:
+     ```yaml
+     roles: all
+     tools:
+       github:
+         toolsets: [default]
+         allowed-repos: "all"
+         min-integrity: approved
+     ```
 7. **Defaults to Omit**: Do NOT include fields with sensible defaults:
    - `engine: copilot` - Copilot is the default, only specify if user wants Claude/Codex/Custom
    - `tools: bash:` - Bash is enabled by default with all commands (`*`) since workflows are sandboxed

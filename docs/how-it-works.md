@@ -66,6 +66,52 @@ Browse real artifacts produced by the workflows in this repo:
 └─────────────────────────────────────────────────────────────┘
 ```
 
+## Security: Integrity Filtering
+
+GitHub Agentic Workflows supports **integrity filtering** (`min-integrity`), which controls what content the agent can see based on the trust level of the author. Content from authors below the threshold is withheld before it reaches the model — the primary defense against prompt injection.
+
+### Trust levels
+
+| Level | Who is included |
+|---|---|
+| `approved` | Repo owners, members, and collaborators |
+| `unapproved` | Also includes contributors and first-time contributors |
+| `none` | All content regardless of author |
+
+`min-integrity` must be set alongside `allowed-repos` (both together, or neither):
+
+```yaml
+tools:
+  github:
+    toolsets: [default]
+    allowed-repos: "all"
+    min-integrity: approved
+```
+
+### Default behavior
+
+- **Public repos** automatically get `min-integrity: approved` at runtime when neither field is set.
+- **Private repos do not** — you must be explicit.
+- All workflows in this repo currently use `min-integrity: none`, which is appropriate for **fully internal team repos** where all contributors are trusted teammates.
+
+### When to raise the threshold
+
+If your team adapts these workflows for a wider audience, consider the following:
+
+| Scenario | Recommended setting |
+|---|---|
+| Internal team repo (trusted contributors only) | `none` (current default) |
+| Semi-open repo with external contributors | `unapproved` |
+| Public repo or workflows using `roles: all` | `approved` |
+
+The workflows most exposed to prompt injection from external input are those that read user-supplied content: **intake-triage**, **assumption-surfacer**, **transcript-processor**, **compliance-review**, and **decision-log**. If you open these to external contributors, raise `min-integrity` and pair it with `roles: all`.
+
+### Escape hatches
+
+If you need to allow specific external contributors to trigger a `min-integrity: approved` workflow, maintainers can whitelist them using approval labels or emoji reactions without changing the global policy. See the [gh-aw guard policies reference](https://github.github.com/gh-aw/reference/github-tools/#guard-policies) for details.
+
+---
+
 ## Key Design Decisions
 
 ### 1. Issues as the source of truth
