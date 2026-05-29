@@ -1,0 +1,49 @@
+WEBVTT
+
+1
+00:00:01.000 --> 00:00:07.000
+Sarah Chen: Morning, everyone. Quick pass today: delivery confidence, blockers, and the Beta risks. Marcus, start us off.
+
+2
+00:00:07.500 --> 00:00:26.000
+Marcus Johnson: Yesterday I finished the plan tier work for issue #97, Define rate limit tiers per billing plan. Today I'm back on issue #96, Implement token bucket rate limiter in Redis. The core limiter is fine, but I want one more load test before I call it shippable this week.
+
+3
+00:00:26.500 --> 00:00:43.000
+Priya Patel: I picked up issue #98, Build API usage quota dashboard component. The layout is mostly there, but the mobile chart state needs polish. I'm also waiting on Marcus's header examples so the quota copy matches the API behavior.
+
+4
+00:00:43.500 --> 00:01:02.000
+Alex Rivera: On issue #69, Implement latency query API endpoints, the aggregation query is stable in staging. The quality risk is the real-time channel under burst traffic, so I'm setting up a soak test this afternoon and will pull David in if it starts dropping updates.
+
+5
+00:01:02.500 --> 00:01:21.000
+David Kim: For QA, I finished the chart pass on issue #70 and I'm moving to issue #72, Implement role-based dashboard access control. My blocker is the dynamic role schema from infra. The temporary mapping lets us test Beta, but GA sign-off still depends on that contract.
+
+6
+00:01:21.500 --> 00:01:42.000
+Jordan Taylor: I reviewed issue #60, Frontend Notification UI, especially the empty state and degraded delivery copy. Design can ship the first pass this week, but I need product to decide whether notification preferences live under Account or Workspace settings.
+
+7
+00:01:42.500 --> 00:02:05.000
+Sarah Chen: Decision for today: after the billing and gateway review, we're keeping Enterprise rate limits configurable at the plan level for v1 and deferring per-endpoint overrides. That should keep issue #96 moving and gives Priya a simpler story for issue #98.
+
+8
+00:02:05.500 --> 00:02:26.000
+Marcus Johnson: Works for me. Cross-team coordination is mainly infra on the role schema and product on the notification settings location. For delivery confidence, I think the limiter can land this week if the soak test is clean, but I would not promise the access-control GA path yet.
+
+9
+00:02:26.500 --> 00:02:45.000
+Priya Patel: One process note before we drop: the intake queue is getting noisy again. Can we rotate triage duty weekly instead of Sarah handling the first pass every day? I can take next week if that helps.
+
+10
+00:02:45.500 --> 00:03:05.000
+Sarah Chen: Yes, let's try rotating triage duty for the next sprint. Priya takes next week, David the week after. Keep PR review at the current SLA for now; the bigger problem is stale intake, not review latency.
+
+11
+00:03:05.500 --> 00:03:18.000
+David Kim: Sounds good. I'll document the QA handoff for issue #72 and add the remaining reliability checks after Alex has soak test numbers.
+
+12
+00:03:18.500 --> 00:03:27.000
+Sarah Chen: Thanks, everyone. Main risks are the infra role schema, burst testing for real-time updates, and product's settings-location decision. Let's sync async after lunch.
