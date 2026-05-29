@@ -75,8 +75,10 @@ worth surfacing — it may mean the strategy needs updating.
 
 | Date | Decision | Tradeoff | Source |
 |------|----------|----------|--------|
+| 2026-05-27 | Auto-generated standup transcript published to repository | #4: Automate the routine | PR #165 |
+| 2026-05-26 | Pin remaining Codex workflows to gpt-5-mini | #4: Automate the routine | PR #163 |
 | 2026-05-09 | Drop priority queuing from notifications sprint | #1: Ship to learn | `decisions/2026-05-09-drop-priority-queuing-from-notifications-sprint.md` |
-| 2026-05-09 | Automated decision log workflow records standup decisions to GitHub | #4: Automate the routine | PR #101 |
+| 2026-05-09 | Use ClickHouse over TimescaleDB for Metrics Backend | #4: Automate the routine | `decisions/2026-05-09-clickhouse-over-timescaledb-metrics-backend.md` |
 
 ### ⚠️ Misalignment Examples
 
