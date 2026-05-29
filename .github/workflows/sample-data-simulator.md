@@ -9,7 +9,7 @@ engine:
   model: gpt-5
 
 on:
-  schedule: "0 6 * * 1,3" # Sunday and Tuesday nights at ~11 PM PT
+  schedule: "0 6 * * 2-6" # Weeknights before downstream demo workflows
   workflow_dispatch:
 
 permissions:
@@ -162,8 +162,12 @@ read like real status updates from team members:
 - "Discovered edge case with timezone handling, investigating"
 - "Pairing with backend team on the integration layer"
 
-**Include at least one decision comment per run.** One of the progress comments
-should document a decision that was made. Use natural decision language:
+**Include at least one fresh decision comment per run.** One of the progress
+comments should document a decision that was made. Before choosing the decision
+topic, inspect existing files under `decisions/` and avoid reusing a decision
+that has already been recorded. Pick a decision tied to the issue you are
+commenting on so the Decision Log workflow can create a new decision record.
+Use natural decision language:
 - "After discussion with the team, we decided to go with WebSockets over SSE for the real-time layer."
 - "We evaluated Redis and Memcached — going with Redis because we need pub/sub."
 - "Agreed to descope the bulk export feature from this launch to hit the deadline."
