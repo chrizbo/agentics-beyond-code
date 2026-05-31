@@ -16,21 +16,21 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 
 | Workflow | Description | Example output |
 |----------|-------------|----------------|
-| [🚦 Launch Readiness Checker](.github/workflows/launch-readiness.md) | Monday morning readiness report across all launches — completeness, risk, blockers, sign-offs | [Report — 2026-05-09](https://github.com/chrizbo/agentics-beyond-code/discussions/76) |
+| [🚦 Launch Readiness Checker](.github/workflows/launch-readiness.md) | Monday morning readiness report across all launches — completeness, risk, blockers, sign-offs | [Report — 2026-05-09](https://github.com/chrizbo/agentics-beyond-code/discussions/76)<br>[Verified run — 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/actions/runs/26725384655) |
 
 ### ✅ Compliance
 
 | Workflow | Description | Example output |
 |----------|-------------|----------------|
-| [🛡️ Compliance Review](.github/workflows/compliance-review.md) | Evaluates launches against Security, Privacy, Accessibility, and Responsible AI rubrics — updates labels, posts status tables, creates review sub-issues (Monday mornings) | [Status table comment](https://github.com/chrizbo/agentics-beyond-code/issues/4#issuecomment-4411223864) |
-| [📊 Compliance Team Reports](.github/workflows/compliance-team-reports.md) | Monday morning per-team discussion showing launches needing review, sorted by urgency | [Security Status — Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/88) |
+| [🛡️ Compliance Review](.github/workflows/compliance-review.md) | Evaluates launches against Security, Privacy, Accessibility, and Responsible AI rubrics — updates labels, posts status tables, creates review sub-issues (Monday mornings) | [Status table comment](https://github.com/chrizbo/agentics-beyond-code/issues/4#issuecomment-4411223864)<br>[Verified run — 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/actions/runs/26725382113) |
+| [📊 Compliance Team Reports](.github/workflows/compliance-team-reports.md) | Monday morning per-team discussion showing launches needing review, sorted by urgency | [Security Status — Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/88)<br>[Verified run — 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/actions/runs/26725379861) |
 
 ### 📣 Go-to-Market
 
 | Workflow | Description | Example output |
 |----------|-------------|----------------|
-| [📣 GTM Content](.github/workflows/gtm-content.md) | Monday morning generation and refresh of changelog announcement drafts and public roadmap items as sub-issues, following the org's voice & tone policy | [Changelog draft — EU Payment Methods](https://github.com/chrizbo/agentics-beyond-code/issues/77) |
-| [📣 GTM Team Reports](.github/workflows/gtm-team-reports.md) | Monday morning report summarizing launches needing GTM action — missing changelog drafts, missing roadmap items, content needing refresh, and upcoming launches | [GTM Readiness — Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/105) |
+| [📣 GTM Content](.github/workflows/gtm-content.md) | Monday morning generation and refresh of changelog announcement drafts and public roadmap items as sub-issues, following the org's voice & tone policy | [Changelog draft — EU Payment Methods](https://github.com/chrizbo/agentics-beyond-code/issues/77)<br>[Verified run — 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/actions/runs/26725377345) |
+| [📣 GTM Team Reports](.github/workflows/gtm-team-reports.md) | Monday morning report summarizing launches needing GTM action — missing changelog drafts, missing roadmap items, content needing refresh, and upcoming launches | [GTM Readiness — Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/105)<br>[Verified run — 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/actions/runs/26725374284) |
 
 ### 📥 Intake & Triage
 
@@ -44,23 +44,23 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 |----------|-------------|----------------|
 | [🔍 Assumption Surfacer](.github/workflows/assumption-surfacer.md) | Scans issues for implicit assumptions (timelines, dependencies, user behavior, capacity) and posts them as explicit questions for the team to reason through together | [Assumptions comment](https://github.com/chrizbo/agentics-beyond-code/issues/93#issuecomment-4413916898) |
 | [😤 Adversarial PM](.github/workflows/adversarial-pm.md) | Wednesday morning grumpy challenge of the week's most consequential decisions — picks 2-3 from `/decisions/`, argues against them using non-deterministic lenses (pre-mortem, reversibility, opportunity cost, etc.), and posts sarcastic but specific counterarguments on the source issues | [ClickHouse challenge](https://github.com/chrizbo/agentics-beyond-code/issues/68#issuecomment-4416664720) |
-| [📋 Decision Log](.github/workflows/decision-log.md) | Daily scan of issue comments and meeting transcripts for decisions — creates a PR with individual decision record files in `/decisions/` | [Decision Log — 2026-05-09](https://github.com/chrizbo/agentics-beyond-code/issues/87) |
-| [🧭 Strategy Alignment](.github/workflows/strategy-alignment.md) | Wednesday morning analysis of team activity against `docs/strategy.md` tradeoffs — comments on clearly misaligned issues, annotates the strategy doc with alignment evidence and emerging patterns | [Strategy evidence PR](https://github.com/chrizbo/agentics-beyond-code/pull/107) |
+| [📋 Decision Log](.github/workflows/decision-log.md) | Daily scan of issue comments and meeting transcripts for decisions — creates a PR with individual decision record files in `/decisions/` | [Decision Log — 2026-05-09](https://github.com/chrizbo/agentics-beyond-code/issues/87)<br>[Verified run — 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/actions/runs/26725136288) |
+| [🧭 Strategy Alignment](.github/workflows/strategy-alignment.md) | Wednesday morning analysis of team activity against `docs/strategy.md` tradeoffs — comments on clearly misaligned issues, annotates the strategy doc with alignment evidence and emerging patterns | [Strategy evidence PR](https://github.com/chrizbo/agentics-beyond-code/pull/107)<br>[Verified run — 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/actions/runs/26725387321) |
 | [🎙️ Transcript Processor](.github/workflows/transcript-processor.md) | Triggered when `.txt` or `.vtt` files are pushed to `/transcripts/` — matches transcript content to open issues and posts summary comments | [Meeting notes comment](https://github.com/chrizbo/agentics-beyond-code/issues/14#issuecomment-4413622565) |
 ### 📊 Leadership
 
 | Workflow | Description | Example output |
 |----------|-------------|----------------|
-| [📋 Weekly Status](.github/workflows/weekly-status.md) | Friday morning leadership status rollup — What Shipped, What We Learned, FYI, and SOS — across all initiatives and launches | [Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/86) |
-| [📋 Leadership Briefs](.github/workflows/leadership-brief.md) | Monday morning personalized briefs — one per leader policy file — with Give Kudos, Give Feedback, and Get Involved sections tailored to each leader's domain, goals, and management style | [Alex Chen — Week of 2026-05-11](https://github.com/chrizbo/agentics-beyond-code/discussions/112) |
+| [📋 Weekly Status](.github/workflows/weekly-status.md) | Friday morning leadership status rollup — What Shipped, What We Learned, FYI, and SOS — across all initiatives and launches | [Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/86)<br>[Verified run — 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/actions/runs/26725363077) |
+| [📋 Leadership Briefs](.github/workflows/leadership-brief.md) | Monday morning personalized briefs — one per leader policy file — with Give Kudos, Give Feedback, and Get Involved sections tailored to each leader's domain, goals, and management style | [Alex Chen — Week of 2026-05-11](https://github.com/chrizbo/agentics-beyond-code/discussions/112)<br>[Verified run — 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/actions/runs/26725366718) |
 
 ### 🔧 Operations
 
 | Workflow | Description | Example output |
 |----------|-------------|----------------|
-| [🩺 Workflow Health](.github/workflows/workflow-health.md) | Friday morning health report across all agentic workflows — success rates, failure patterns, cost estimates, cross-workflow interaction analysis (conflict detection, cascade chains, resource contention), and efficiency recommendations | [Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/106) |
-| [🔄 Process Analyzer](.github/workflows/process-analyzer.md) | Weekly retro + process analysis — posts a team retrospective discussion, detects process drift in transcripts vs `docs/how-we-work.md`, identifies automation opportunities and gaps, and creates update PRs | [Retro — Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/104) |
-| [🔁 Daily Standup Prep](.github/workflows/daily-standup-prep.md) | Monday/Wednesday standup preparation: posts a discussion with high-priority topics, blockers, and facilitation prompts to help run effective daily syncs | |
+| [🩺 Workflow Health](.github/workflows/workflow-health.md) | Friday morning health report across all agentic workflows — success rates, failure patterns, cost estimates, cross-workflow interaction analysis (conflict detection, cascade chains, resource contention), and efficiency recommendations | [Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/106)<br>[Verified run — 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/actions/runs/26725360736) |
+| [🔄 Process Analyzer](.github/workflows/process-analyzer.md) | Weekly retro + process analysis — posts a team retrospective discussion, detects process drift in transcripts vs `docs/how-we-work.md`, identifies automation opportunities and gaps, and creates update PRs | [Retro — Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/104)<br>[Verified run — 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/actions/runs/26725369454) |
+| [🔁 Daily Standup Prep](.github/workflows/daily-standup-prep.md) | Monday/Wednesday standup preparation: posts a discussion with high-priority topics, blockers, and facilitation prompts to help run effective daily syncs | [Verified run — 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/actions/runs/26725372026) |
 
 ### 🧪 Demo / Sample Data
 
@@ -68,7 +68,7 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 
 | Workflow | Description |
 |----------|-------------|
-| [🎲 Sample Data Simulator](.github/workflows/sample-data-simulator.md) | Generates realistic project activity Sunday and Tuesday nights — creates launches, closes tasks, advances phases. Run manually anytime to add more content. |
+| [🎲 Sample Data Simulator](.github/workflows/sample-data-simulator.md) | Generates realistic project activity Sunday and Tuesday nights — creates launches, closes tasks, advances phases. Run manually anytime to add more content. [Verified run — 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/actions/runs/26725358345) |
 
 ## 💡 Philosophy
 

@@ -13,7 +13,7 @@ implementation as GitHub Agentic Workflows.
 | 9 | Funding/Investment Review Prep | Generates quarterly portfolio ROI report for finance stakeholders. |
 | 15 | Outcome vs Output Scorecard | Distinguishes shipping velocity from actual impact. Monthly scorecard. |
 | 25 | Tension Detector | Finds contradictions between stated strategy and active work. Posts a discussion inviting interpretation from multiple stakeholders — not a report, a prompt for shared sensemaking. |
-| 26 | ~~Decision Pre-Mortem Facilitator~~ | ~~When a decision is tagged, generates adversarial challenges and routes them to specific stakeholders for response before finalization. Extends Decision Log from recording → facilitating.~~ _Implemented as **[Adversarial PM](.github/workflows/adversarial-pm.md)** — weekly scan of recent decisions with grumpy, non-deterministic challenges posted on source issues._ |
+| 26 | ~~Decision Pre-Mortem Facilitator~~ | ~~When a decision is tagged, generates adversarial challenges and routes them to specific stakeholders for response before finalization. Extends Decision Log from recording → facilitating.~~ _Implemented as **[Adversarial PM](../.github/workflows/adversarial-pm.md)** — weekly scan of recent decisions with grumpy, non-deterministic challenges posted on source issues._ |
 | 27 | Shared Learning Loop | After a launch, synthesizes outcomes vs. predictions across multiple contributors' prior comments. Surfaces who saw what coming and why — building collective pattern recognition. |
 | 31 | Bet Lifecycle Tracker | Scans issues tagged as bets and checks lifecycle completeness — hypothesis, metrics, targeted actionable inputs, one-pager artifact, learning review. Flags stale or disconnected bets weekly. |
 | 32 | Actionable Input Review Prep | Before each biweekly review, gathers metric movement, related bet activity, new insights, and open questions per team. Posts a structured prep discussion so reviews focus on interpretation, not data assembly. |
@@ -61,9 +61,8 @@ implementation as GitHub Agentic Workflows.
 | # | Workflow | Description |
 |---|---------|-------------|
 | 11 | Competitive Intelligence Digest | Weekly market/competitor intel rollup. |
-| 18 | Stakeholder Narrative Generator | Data → audience-tailored status narratives. _Partially implemented by **[Leadership Briefs](.github/workflows/leadership-brief.md)** — generates per-leader briefs tailored to their domain and goals._ |
+| 18 | Stakeholder Narrative Generator | Data → audience-tailored status narratives. _Partially implemented by **[Leadership Briefs](../.github/workflows/leadership-brief.md)** — generates per-leader briefs tailored to their domain and goals._ |
 | 20 | Customer Value → Business Impact Linker | Connects shipping to revenue/cost signals. |
 | 23 | Customer Feedback Aggregator | Multi-source feedback monitor: pulls from issues, discussions, Discord, Slack, and social into normalized feedback issues in one repo. Enables dedup, trend detection, and cross-channel prioritization. |
 | 24 | Feedback → Work Item Converter | Slash command on a customer feedback issue that strips PII and customer-specific details, then creates a clean, agent-ready engineering issue. Bridges the PM interpretation gap. |
-| 30 | Cross-Frame Translator | Same work viewed through PM, engineering, finance, and leadership lenses simultaneously. Each frame links back to the others — multiple concurrent frames without forcing one official model. _See **[Leadership Briefs](.github/workflows/leadership-brief.md)** for an initial implementation — each leader policy file creates a different "frame" on the same portfolio data._ |
-
+| 30 | Cross-Frame Translator | Same work viewed through PM, engineering, finance, and leadership lenses simultaneously. Each frame links back to the others — multiple concurrent frames without forcing one official model. _See **[Leadership Briefs](../.github/workflows/leadership-brief.md)** for an initial implementation — each leader policy file creates a different "frame" on the same portfolio data._ |
