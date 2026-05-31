@@ -8,7 +8,7 @@ description: |
 
 engine:
   id: codex
-  model: gpt-5
+  model: gpt-5-codex
 
 on:
   schedule: weekly
@@ -500,4 +500,3 @@ Configured title prefixes are added automatically — omit them from `--title`. 
   and note collaboration patterns positively.
 - **No blame.** Never single out individuals negatively in the retro. If
   someone is blocked or struggling, frame it as a team challenge.
-

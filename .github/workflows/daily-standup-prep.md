@@ -6,7 +6,7 @@ description: |
 
 engine:
   id: codex
-  model: gpt-5
+  model: gpt-5-codex
 
 on:
   schedule:
