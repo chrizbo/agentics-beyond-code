@@ -14,10 +14,15 @@ on:
   issues:
     types: [labeled]
     names: [triage-needed]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: "Issue number to triage when invoked by another workflow."
+        required: true
   roles: all
 
 concurrency:
-  group: intake-triage-${{ github.event.issue.number }}
+  group: intake-triage-${{ github.event.issue.number || inputs.issue_number || github.run_id }}
   cancel-in-progress: true
 
 permissions:
@@ -72,13 +77,19 @@ Your job is to evaluate incoming intake requests (labeled `triage-needed`)
 against the team's strategy, score them, check for completeness, detect
 duplicates, and assess alignment with current work.
 
+Target issue number:
+
+```text
+${{ github.event.issue.number || inputs.issue_number }}
+```
+
 ## Activation Guard
 
 Only proceed if the issue has the `triage-needed` label. Check by reading
 the issue's current labels:
 
 ```bash
-gh issue view ${{ github.event.issue.number }} --repo ${{ github.repository }} \
+gh issue view ${{ github.event.issue.number || inputs.issue_number }} --repo ${{ github.repository }} \
   --json labels --jq '[.labels[].name]'
 ```
 
@@ -88,7 +99,7 @@ with "Skipped — issue does not have triage-needed label" and stop.
 Also check whether the issue has already been triaged:
 
 ```bash
-gh issue view ${{ github.event.issue.number }} --repo ${{ github.repository }} \
+gh issue view ${{ github.event.issue.number || inputs.issue_number }} --repo ${{ github.repository }} \
   --json labels --jq '.labels[].name' | grep -q '^triaged$' && echo "ALREADY_TRIAGED=true" || echo "ALREADY_TRIAGED=false"
 ```
 
@@ -99,7 +110,7 @@ If already triaged, call `noop` with "Issue already triaged" and stop.
 ### 1a: Read the intake request
 
 ```bash
-gh issue view ${{ github.event.issue.number }} --repo ${{ github.repository }} \
+gh issue view ${{ github.event.issue.number || inputs.issue_number }} --repo ${{ github.repository }} \
   --json number,title,body,labels,author,createdAt \
   --jq '{number, title, body, labels: [.labels[].name], author: .author.login, createdAt}'
 ```

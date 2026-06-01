@@ -338,6 +338,7 @@ type.
 Required for public channel context:
 
 - `channels:history` - read messages in public channels the app can access.
+- `users:read` - resolve message authors to Slack handles for copied context.
 
 Required for private channel context:
 
@@ -364,6 +365,7 @@ Often paired with:
   a public channel.
 - `groups:history` - fetch the original message in a private channel where the
   app is a member.
+- `users:read` - resolve the reacted message author to a readable `@handle`.
 
 Recommended MVP: `reactions:read` plus the matching history scope for each
 allowed channel type.
