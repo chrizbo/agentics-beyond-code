@@ -135,6 +135,10 @@ Internalize the team's strategic tradeoffs. You'll evaluate alignment later.
 
 ### 1c: Load current initiatives and launches
 
+This context is helpful but not required. If either command fails, note that
+the current-work context was unavailable and continue triage using the target
+issue plus `docs/strategy.md`.
+
 ```bash
 gh issue list --repo ${{ github.repository }} --label initiative --state open \
   --json number,title,body --jq '[.[] | {number, title, body: .body[0:1500]}]'
@@ -181,6 +185,10 @@ If the request is **incomplete**:
 ## Step 3: Check for Duplicates
 
 Search for potentially duplicate or closely related issues:
+
+Duplicate search is best-effort. If either search command fails, do not call
+`noop`; proceed with scoring and write "Duplicate search unavailable" in the
+triage comment.
 
 ```bash
 gh issue list --repo ${{ github.repository }} --state open --limit 100 \
