@@ -59,17 +59,20 @@ safe-outputs:
   add-labels:
     allowed:
       - triage-needed
+      - from-slack
     max: 5
   update-project:
     max: 20
     project: "https://github.com/users/chrizbo/projects/1"
     github-token: ${{ secrets.AW_TOKEN }}
   create-pull-request:
+    max: 2
     labels: [ai:transcript]
     draft: false
     auto-merge: true
     allowed-files:
       - "transcripts/**"
+      - "slack-fixtures/**"
     protected-files: allowed
 ---
 
@@ -472,6 +475,121 @@ deliberately **incomplete** — missing the problem statement, no affected users
 or vague success criteria. This gives the triage workflow something to flag
 as `needs-more-info`.
 
+### 10. Generate Synthetic Slack Conversations (best effort, every run)
+
+Generate one synthetic Slack fixture file that can be used to test future Slack
+Context Processor and Slack Reaction Intake workflows without connecting a real
+Slack workspace.
+
+This is an optional fixture-generation step. It must never block the rest of
+the sample data simulator:
+
+- Do not call the real Slack API.
+- Do not require Slack credentials or Slack network access.
+- Run this after the normal launch, transcript, and intake sample data actions.
+- If you cannot confidently create a valid fixture file, skip this step.
+- If matching GitHub intake issue creation would exceed safe-output limits, skip
+  only the Slack-derived intake issue.
+- Do not call `noop` just because the optional Slack fixture was skipped.
+
+Write the fixture to `slack-fixtures/` as JSON:
+
+```bash
+DATE=$(date +%Y-%m-%d)
+FILENAME="slack-fixtures/slack-${DATE}.json"
+mkdir -p slack-fixtures
+```
+
+Each fixture should include 3-5 realistic Slack messages across one or more
+threads. Use Slack-shaped fields that match `docs/slack-integration-plan.md`:
+
+- `channel_id`
+- `channel_name`
+- `thread_ts`
+- `message_ts`
+- `permalink`
+- `author_id`
+- `author_name`
+- `created_at`
+- `text`
+- `reactions`
+- `matched_by`
+
+Use synthetic channel names such as:
+
+- `proj-launch-readiness`
+- `triage-intake`
+- `gtm-readiness`
+- `compliance-review`
+
+Create a mix of these conversation types:
+
+1. **Artifact context thread**
+   - Mentions a real open GitHub issue number and title.
+   - Includes a blocker, owner/date commitment, or launch scope update.
+   - Uses the `memo` reaction to mark the message as relevant context.
+
+2. **Reaction intake candidate**
+   - A user describes a bug report or feature request in Slack.
+   - Another user adds the `inbox_tray` reaction.
+   - The fixture should include enough detail to create an intake issue.
+
+3. **Decision candidate**
+   - A thread captures a lightweight product or implementation decision.
+   - Someone adds the `pushpin` reaction.
+   - The text should mention why the decision was made and what changes next.
+
+4. **Risk or blocker signal**
+   - A message flags a risk for a launch or compliance review.
+   - Someone adds the `warning` reaction.
+   - The text should include a source issue link or issue number when possible.
+
+5. **Done signal**
+   - A user says work has shipped, been verified, or should be considered done.
+   - Someone adds the `white_check_mark` reaction.
+   - The text should be useful for a future Commitment Reconciler check, but
+     should not imply the workflow should auto-close the GitHub issue.
+
+Also include a top-level `events` array with synthetic `reaction_added` events
+for each reacted message:
+
+```json
+{
+  "event_id": "Ev-sample-YYYYMMDD-001",
+  "type": "reaction_added",
+  "reaction": "inbox_tray",
+  "user_id": "U-sample-priya",
+  "channel_id": "C-sample-triage",
+  "message_ts": "1710000000.000000",
+  "thread_ts": "1710000000.000000",
+  "permalink": "https://example.slack.com/archives/C-sample-triage/p1710000000000000",
+  "received_at": "YYYY-MM-DDT16:05:00Z"
+}
+```
+
+For reaction intake examples, optionally create a matching GitHub intake issue
+as though the Slack Reaction Intake workflow processed the event. Apply both
+`triage-needed` and `from-slack` labels. Include the Slack permalink in the
+issue body under `### Additional Context`. If creating this optional issue or
+labels would fail, skip only the Slack-derived intake issue and still preserve
+the fixture file when possible.
+
+Commit the fixture file with `create_pull_request`, using a title like:
+
+```json
+{
+  "type": "create_pull_request",
+  "title": "Synthetic Slack fixture for YYYY-MM-DD",
+  "body": "Auto-generated Slack fixture from the sample data simulator.",
+  "branch": "sample-data/slack-fixture-YYYY-MM-DD"
+}
+```
+
+If the standup transcript PR already exists for this run and safe-output limits
+make a second PR risky, add the Slack fixture file to the same sample-data PR
+when possible. Otherwise skip the Slack fixture PR; the main simulator output is
+still successful.
+
 ## Constraints
 
 - **Never create more than 1 new launch per run** — we want gradual growth
@@ -480,7 +598,8 @@ as `needs-more-info`.
 - **Use the current date** to make comments feel timely
 - **Don't repeat theme names** — check existing launches before creating new ones
 - **Keep it realistic** — a real team doesn't close everything in one day
-- **No labels** — other workflows handle labeling
+- **No labels except** `triage-needed` for intake and `from-slack` for synthetic
+  Slack reaction-intake examples — other workflows handle labeling
 
 ## Safe output calls
 
@@ -494,7 +613,11 @@ safeoutputs create_discussion --title "title" --body "$(cat /tmp/gh-aw/agent/bod
 # or: safeoutputs create_issue / add_comment / create_pull_request — same pattern
 ```
 
-Configured title prefixes are added automatically — omit them from `--title`. If a call fails, immediately call `safeoutputs noop --message "reason"` and stop — never ask for input.
+Configured title prefixes are added automatically — omit them from `--title`.
+If a required core sample-data safe-output call fails, immediately call
+`safeoutputs noop --message "reason"` and stop — never ask for input. Optional
+Slack fixture generation is best effort: prefer skipping the optional Slack
+fixture action before making a safe-output call that is likely to fail.
 
 ## Output Sequence
 
@@ -509,3 +632,6 @@ Process your actions in this order:
 8. Adjust risk levels (update-project)
 9. Generate and commit the standup transcript (bash: write file + git push)
 10. Create intake requests (create-issue + add-labels + update-project for triage board)
+11. Best effort: generate and commit synthetic Slack fixtures; optionally create
+    matching Slack intake issues when the fixture includes `inbox_tray`
+    reaction events. Skip this step if it would threaten the core simulator run.

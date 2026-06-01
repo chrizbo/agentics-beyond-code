@@ -19,6 +19,15 @@ Use this router when a user asks for a workflow architecture, strategy, operatin
 
 Pattern docs base path: `https://github.com/github/gh-aw/blob/main/docs/src/content/docs/patterns/`
 
+### ExternalToolOps
+- **Load when:** The user needs workflows that read context from or post updates
+  to tools outside GitHub, especially Slack, Jira, Confluence, Microsoft 365,
+  Google Workspace, Salesforce, ServiceNow, Notion, Asana, or Linear.
+- **Local docs:** `docs/external-integration-patterns.md` and, for Slack,
+  `docs/slack-integration-plan.md`
+- **Combine with:** DeterministicOps for API/MCP pre-steps, IssueOps for GitHub
+  artifact updates, and ChatOps or LabelOps for human-triggered automation.
+
 ### MonitorOps
 - **Load when:** The user needs repository-wide workflow observability, trend reporting, and escalation for recurring failures or token waste.
 - **Pattern doc:** https://github.com/github/gh-aw/blob/main/docs/src/content/docs/patterns/monitor-ops.md
