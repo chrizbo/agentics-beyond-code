@@ -510,6 +510,9 @@ Suggested secrets:
 - Add a deterministic Slack fetch script or Slack MCP configuration.
 - For the MVP, read synthetic `slack-fixtures/*.json` files before adding real
   Slack API access.
+- Use `.github/workflows/slack-fixture-fetcher.yml` to manually fetch recent
+  messages from allowlisted Slack channels into a `slack-fixtures/*.json` pull
+  request.
 - When real Slack access is added, fetch messages only from allowlisted
   channels.
 - Match on GitHub issue URLs, issue numbers, and exact artifact titles.

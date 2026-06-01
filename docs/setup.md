@@ -154,6 +154,11 @@ Slack channel IDs:
 gh variable set SLACK_ALLOWED_CHANNEL_IDS --body "C0123456789,C9876543210"
 ```
 
+If enabling the Slack Fixture Fetcher workflow, also set `SLACK_BOT_TOKEN` as a
+repository secret. The first read-only demo requires `channels:history` and
+`reactions:read` on the Slack app, plus `groups:history` if the allowlisted
+channel is private.
+
 ### 4. Create an Intake Triage project
 
 Create a second GitHub Project (Projects V2) to track incoming feature requests and bug reports. Add these custom fields:
