@@ -21,6 +21,9 @@ implementation as GitHub Agentic Workflows.
 | 34 | Learning Review Synthesizer | After bets complete, scans their learning review artifacts and synthesizes cross-bet patterns into a monthly Insight Brief. Identifies recurring themes so learnings don't stay siloed in individual bets. |
 | 35 | Funding Model Reality Check | Quarterly comparison of declared funding models and team stages against actual work patterns. Flags drift — e.g., a "Growth Accelerator" team with no bets targeting growth metrics, or a "New Offerings" team with no experiments. |
 | 44 | Consensus Brief | Before a major decision, synthesizes stakeholder positions, underlying interests, unresolved objections, and possible compromise paths. Produces a facilitation brief that helps the DRI converge the discussion without flattening disagreement. |
+| 46 | Decision Readiness Verifier | Before a decision is finalized, checks whether the issue or RFC includes the problem statement, options considered, constraints, stakeholders consulted, risks, reversibility, and explicit owner for follow-through. |
+| 47 | Tradeoff Translator | Converts a proposed plan into the team's stated "even over" tradeoff language, highlighting where the plan reinforces, bends, or contradicts documented strategy. |
+| 48 | Ambiguous Data Decision Helper | When metrics or evidence conflict, prepares a decision brief that separates facts, assumptions, confidence levels, missing data, and judgment calls so leaders can make the hard call explicitly. |
 
 ### Operations
 
@@ -44,6 +47,13 @@ implementation as GitHub Agentic Workflows.
 | 41 | Stakeholder Relationship Nudge | Maintains lightweight stakeholder context from issues, meetings, and prior briefs. Nudges DRIs when a stakeholder has not been updated after a material change, when a prior concern has no follow-up, or when a meeting would benefit from resurfaced context. |
 | 42 | Program Risk Early-Warning Radar | Combines stale issues/PRs, phase changes, missing sign-offs, date drift, blockers, dependency mentions, and transcript signals into an early-warning report before risks become obvious launch problems. |
 | 43 | Manual PM Work Detector | Finds recurring low-judgment PM chores in transcripts, issues, and docs — status assembly, spreadsheet reshaping, reminder loops, repeated copy/paste updates — and opens automation-candidate issues with evidence and estimated time saved. |
+| 49 | Board Reality Reconciler | Compares GitHub Project fields against recent comments, transcripts, labels, and child issue state to flag boards that have quietly drifted from reality. |
+| 50 | Meeting Note Cleanup | Turns raw meeting transcripts into clean issue-linked notes with decisions, action items, open questions, risks, and unresolved follow-ups, then suggests where each note should live. |
+| 51 | Dependency Map Inference | Infers cross-team and cross-launch dependencies from issue links, comments, transcripts, labels, and shared assignees. Posts a weekly map of hidden dependency chains and risky handoffs. |
+| 52 | Cognitive Load Balancer | Scans assignment patterns, meeting references, review requests, and blocker ownership to identify overloaded people or teams before their work becomes a program bottleneck. |
+| 53 | Escalation Timing Advisor | Flags situations where a PM should switch from async tracking to synchronous escalation because ambiguity, delay, or stakeholder tension is becoming expensive. |
+| 54 | Stakeholder Context Brief | Before stakeholder syncs, generates a short prep note with last interaction, open asks, recent changes, prior concerns, and recommended discussion focus. |
+| 55 | Social Capital Gap Detector | Looks for launches or dependencies that rely on teams with little recent interaction, then recommends relationship-building check-ins before a favor or escalation is needed. |
 
 ### AI Governance
 
@@ -52,6 +62,9 @@ implementation as GitHub Agentic Workflows.
 | 5 | AI Capability Maturity Tracker | Categorizes AI investments by speed/consistency/scale/skill. |
 | 13 | AI Decision Accountability Tracker | Requires accountability entry for AI features shipping. |
 | 16 | Expert Judgment Capture | Logs why humans override AI recommendations. |
+| 56 | AI Use Boundary Reviewer | Reviews proposed automation or AI-generated drafts for areas where human judgment, sensitive relationships, personnel context, or political nuance should remain explicitly human-owned. |
+| 57 | AI Output Verification Checklist | For AI-generated reports, briefs, and issue updates, checks whether claims are linked to source artifacts, flags unsupported assertions, and asks for human verification where evidence is thin. |
+| 58 | Prompt Quality Coach | Reviews workflow prompts, issue descriptions, and requirements docs for specificity, acceptance criteria, context, constraints, and verification instructions. |
 
 ### Compliance & Quality
 
@@ -60,6 +73,7 @@ implementation as GitHub Agentic Workflows.
 | 14 | Spec Completeness Gate | Blocks PRs without proper specs and acceptance criteria. |
 | 17 | Scaling Readiness Assessment | Pre-flight check before feature expansion. |
 | 22 | Cross-Team Intake Dispatcher | When a launch issue is created, auto-generates draft intake issues in downstream team repos (privacy, legal, GTM, responsible AI). Goes beyond reports by creating actual work items where compliance teams do their work. |
+| 59 | Evidence Coverage Auditor | Checks reports, decision records, compliance reviews, and status updates for claims that lack source links, dated evidence, or clear confidence levels. |
 
 ### GTM & Communication
 
@@ -72,3 +86,6 @@ implementation as GitHub Agentic Workflows.
 | 24 | Feedback → Work Item Converter | Slash command on a customer feedback issue that strips PII and customer-specific details, then creates a clean, agent-ready engineering issue. Bridges the PM interpretation gap. |
 | 30 | Cross-Frame Translator | Same work viewed through PM, engineering, finance, and leadership lenses simultaneously. Each frame links back to the others — multiple concurrent frames without forcing one official model. _See **[Leadership Briefs](../.github/workflows/leadership-brief.md)** for an initial implementation — each leader policy file creates a different "frame" on the same portfolio data._ |
 | 45 | Audience-Specific Narrative Rewriter | Takes one canonical status source and rewrites it for specific audiences such as executives, engineering, GTM, compliance, or customers while preserving links back to the same source artifacts. |
+| 60 | Executive Translation Draft | Converts engineering-heavy updates into executive-ready language focused on customer impact, risk, tradeoffs, timeline, and what leadership should do next. |
+| 61 | Weekly Status First Draft | Builds a first-draft weekly status narrative from commits, merged PRs, issue movement, comments, decisions, and transcripts so PMs edit for "so what" instead of assembling the "what." |
+| 62 | Message Tone Retargeter | Takes a single update and adapts it for different stakeholder relationships and channels while preserving factual consistency and avoiding over-automation of sensitive messages. |
