@@ -8,22 +8,12 @@ Browse real artifacts produced by the workflows in this repo:
 
 | Type | Example | Produced by |
 |------|---------|-------------|
-| 📋 Initiative | [Expand to EU Market](https://github.com/chrizbo/agentics-beyond-code/issues/1) | Sample Data Simulator |
-| 🚀 Launch | [API Rate Limiting & Throttling](https://github.com/chrizbo/agentics-beyond-code/issues/93) | Sample Data Simulator |
-| 🛡️ Compliance sub-issue | [Security Compliance Review — EU Payment Methods](https://github.com/chrizbo/agentics-beyond-code/issues/83) | Compliance Review |
-| 🛡️ Compliance status table | [Status table comment](https://github.com/chrizbo/agentics-beyond-code/issues/4#issuecomment-4411223864) | Compliance Review |
-| 📣 GTM sub-issue | [Changelog draft — EU Payment Methods](https://github.com/chrizbo/agentics-beyond-code/issues/77) | GTM Content |
-| 📋 Decision log | [Decision Log — 2026-05-09](https://github.com/chrizbo/agentics-beyond-code/issues/87) | Decision Log |
-| 🔍 Assumptions | [Assumptions comment](https://github.com/chrizbo/agentics-beyond-code/issues/93#issuecomment-4413916898) | Assumption Surfacer |
-| 📊 Launch readiness report | [Launch Readiness Report — 2026-05-09](https://github.com/chrizbo/agentics-beyond-code/discussions/76) | Launch Readiness |
-| 📊 Weekly status | [Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/86) | Weekly Status |
-| 📊 Leadership brief | [Alex Chen — Week of 2026-05-11](https://github.com/chrizbo/agentics-beyond-code/discussions/112) | Leadership Briefs |
-| 📊 Compliance team report | [Security Review Status — Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/88) | Compliance Team Reports |
-| 📊 GTM team report | [Go-to-Market Readiness — Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/105) | GTM Team Reports |
-| 📊 Workflow health | [Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/106) | Workflow Health |
-| 🔄 Weekly retro | [Week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/104) | Process Analyzer |
-| 🧭 Strategy evidence | [Strategy alignment PR](https://github.com/chrizbo/agentics-beyond-code/pull/107) | Strategy Alignment |
-| 🎙️ Transcript comment | [Meeting notes on issue](https://github.com/chrizbo/agentics-beyond-code/issues/14#issuecomment-4413622565) | Transcript Processor |
+| Sample task closures | [#72](https://github.com/chrizbo/agentics-beyond-code/issues/72), [#70](https://github.com/chrizbo/agentics-beyond-code/issues/70), [#71](https://github.com/chrizbo/agentics-beyond-code/issues/71), [#3](https://github.com/chrizbo/agentics-beyond-code/issues/3) | Sample Data Simulator |
+| Compliance status table | [Status table comment - 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/issues/3#issuecomment-4588202940) | Compliance Review |
+| Launch readiness report | [Readiness report - 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/discussions/196) | Launch Readiness |
+| GTM team report | [GTM readiness report - 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/discussions/194) | GTM Team Reports |
+| Daily standup prep | [Standup prep - 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/discussions/195) | Daily Standup Prep |
+| Workflow health | [Health report - 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/discussions/197) | Workflow Health |
 
 ## Architecture Overview
 
