@@ -39,12 +39,10 @@ safe-outputs:
   allowed-github-references: []
   create-issue:
     title-prefix: "[Slack Intake] "
-    max: 10
-  add-labels:
-    allowed:
-      - triage-needed
+    labels:
       - from-slack
-    max: 20
+      - triage-needed
+    max: 10
   noop:
 ---
 
@@ -77,23 +75,21 @@ workflows. Do not create issues for them in this workflow.
 
 ## Process
 
-### Step 1: Identify Slack Fixture Files
+### Step 1: Extract Intake Candidates
 
-Determine which fixture files triggered this run.
-
-If triggered by push:
+Run the deterministic extractor and use its JSON as the source of truth:
 
 ```bash
-git diff --name-only HEAD~1 HEAD 2>/dev/null | grep -E '^slack-fixtures/.*\.json$' || echo "No Slack fixture files in diff"
+node .github/scripts/slack-reaction-intake-candidates.mjs
 ```
 
-If triggered by `workflow_dispatch`, process all fixture files:
+Do not manually rediscover fixture files, parse raw fixture JSON, or call the
+Slack API. The extractor returns:
 
-```bash
-find slack-fixtures -name '*.json' 2>/dev/null
-```
+- `fixture_files`
+- `candidates`
 
-If no fixture files exist, call `noop` with:
+If `fixture_files` is empty, call `noop` with:
 
 ```text
 Skipped - no Slack fixture files found.
@@ -101,63 +97,23 @@ Skipped - no Slack fixture files found.
 
 Then stop.
 
-### Step 2: Read Fixtures
+If `candidates` is empty, call `noop` with:
 
-For each fixture file, read the JSON:
-
-```bash
-cat <fixture-file>
+```text
+No Slack inbox_tray reaction intake candidates found, or all candidates already had issues.
 ```
 
-Fixtures may contain:
+Then stop.
 
-- top-level `messages`
-- top-level `events`
-- channel or thread groupings with message-like objects
-
-Extract Slack messages with these fields when present:
-
-- `channel_id`
-- `channel_name`
-- `thread_ts`
-- `message_ts`
-- `permalink`
-- `author_name`
-- `created_at`
-- `text`
-- `reactions`
-
-Extract reaction events with these fields when present:
-
-- `event_id`
-- `type`
-- `reaction`
-- `user_id`
-- `channel_id`
-- `message_ts`
-- `thread_ts`
-- `permalink`
-- `received_at`
-
-### Step 3: Match Reaction Events to Messages
-
-Find messages that should create intake issues:
-
-- A message has `reactions` containing `inbox_tray`; or
-- A top-level `reaction_added` event has `reaction: "inbox_tray"` and can be
-  matched to a message by `channel_id` plus `message_ts`.
-
-When a matching event has no corresponding message text, skip it unless the
-event itself contains enough text to create a useful issue. Do not create empty
-or vague issues.
-
-### Step 4: Idempotency
+### Step 2: Idempotency
 
 Before creating an issue, compute an idempotency key:
 
 ```text
 slack-reaction-intake:<channel_id>:<message_ts>:inbox_tray
 ```
+
+Use the `idempotency_key` returned by the extractor.
 
 Check for existing open or closed issues that already contain this key:
 
@@ -172,42 +128,39 @@ If any issue already exists for the key, skip creating a duplicate.
 Also skip if an existing issue body contains the same Slack permalink and was
 created by Slack Reaction Intake.
 
-### Step 5: Create Intake Issues
+### Step 3: Create Intake Issues
 
 For each unique intake candidate, create one GitHub issue.
 
-The title should be short and actionable:
+Use the extractor-provided `title` as the issue title. The safe output handler
+will add the `[Slack Intake] ` prefix.
 
-```text
-<concise request summary from Slack>
-```
-
-The body should use this format:
+Use this body format:
 
 ```markdown
 ## Slack Intake
 
 ### Request
 
-<one-paragraph summary of the Slack request>
+<candidate.summary>
 
 ### Source
 
-- Channel: `#channel-name`
+- Channel: `<candidate.channel_name>`
 - Reaction: `:inbox_tray:`
-- Slack source: <permalink or "fixture permalink unavailable">
-- Fixture: `slack-fixtures/<filename>.json`
+- Slack source: <candidate.permalink or "fixture permalink unavailable">
+- Fixture: `<candidate.fixture>`
 
 ### Copied Slack Context
 
-> <short copied message excerpt>
+> <candidate.author_name>: <candidate.copied_context>
 
 ### Triage Notes
 
 - Created from a Slack reaction signal.
 - Needs product triage before commitment.
 
-<!-- slack-reaction-intake:<channel_id>:<message_ts>:inbox_tray -->
+<!-- <candidate.idempotency_key> -->
 ```
 
 For source links, use the raw `permalink` from the fixture only when it starts
@@ -219,12 +172,15 @@ human-readable display name. If it is missing, `unknown`, or looks like a Slack
 ID such as `U123...`, `W123...`, or `B123...`, omit the author label or use
 `Slack participant`. Do not expose raw Slack user IDs in GitHub issues.
 
-After creating the issue, add both labels:
+The safe-output handler automatically adds both labels:
 
 - `from-slack`
 - `triage-needed`
 
-### Step 6: No Intake
+After all create-issue safe-output calls have been made, stop. Do not keep
+analyzing the repository.
+
+### Step 4: No Intake
 
 If fixture files were processed but no new `inbox_tray` intake issues were
 created, call `noop` with:
