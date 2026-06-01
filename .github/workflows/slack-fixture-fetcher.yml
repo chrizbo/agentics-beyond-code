@@ -38,118 +38,125 @@ jobs:
           const fs = require("fs");
           const path = require("path");
 
-          const token = process.env.SLACK_BOT_TOKEN;
-          const configuredAllowed = (process.env.SLACK_ALLOWED_CHANNEL_IDS || "")
-            .split(",")
-            .map((value) => value.trim())
-            .filter(Boolean);
-          const requested = (process.env.INPUT_CHANNEL_IDS || "")
-            .split(",")
-            .map((value) => value.trim())
-            .filter(Boolean);
-          const allowed = new Set(configuredAllowed);
-          const channelIds = requested.length ? requested : configuredAllowed;
-          const lookbackHours = Number(process.env.LOOKBACK_HOURS || "24");
+          async function main() {
+            const token = process.env.SLACK_BOT_TOKEN;
+            const configuredAllowed = (process.env.SLACK_ALLOWED_CHANNEL_IDS || "")
+              .split(",")
+              .map((value) => value.trim())
+              .filter(Boolean);
+            const requested = (process.env.INPUT_CHANNEL_IDS || "")
+              .split(",")
+              .map((value) => value.trim())
+              .filter(Boolean);
+            const allowed = new Set(configuredAllowed);
+            const channelIds = requested.length ? requested : configuredAllowed;
+            const lookbackHours = Number(process.env.LOOKBACK_HOURS || "24");
 
-          if (!token) {
-            throw new Error("SLACK_BOT_TOKEN is not configured.");
-          }
-
-          if (!configuredAllowed.length) {
-            throw new Error("SLACK_ALLOWED_CHANNEL_IDS must contain at least one channel ID.");
-          }
-
-          if (!Number.isFinite(lookbackHours) || lookbackHours <= 0 || lookbackHours > 168) {
-            throw new Error("lookback_hours must be between 1 and 168.");
-          }
-
-          for (const channelId of channelIds) {
-            if (!allowed.has(channelId)) {
-              throw new Error(`Requested channel is not allowlisted: ${channelId}`);
+            if (!token) {
+              throw new Error("SLACK_BOT_TOKEN is not configured.");
             }
-          }
 
-          async function slack(method, params) {
-            const response = await fetch(`https://slack.com/api/${method}`, {
-              method: "POST",
-              headers: {
-                "Authorization": `Bearer ${token}`,
-                "Content-Type": "application/json; charset=utf-8"
-              },
-              body: JSON.stringify(params)
-            });
-            const json = await response.json();
-            if (!response.ok || !json.ok) {
-              throw new Error(`${method} failed: ${json.error || response.statusText}`);
+            if (!configuredAllowed.length) {
+              throw new Error("SLACK_ALLOWED_CHANNEL_IDS must contain at least one channel ID.");
             }
-            return json;
-          }
 
-          function isoFromTs(ts) {
-            const [seconds, micros = "0"] = String(ts).split(".");
-            const millis = Number(seconds) * 1000 + Math.floor(Number(micros.padEnd(6, "0")) / 1000);
-            return new Date(millis).toISOString();
-          }
+            if (!Number.isFinite(lookbackHours) || lookbackHours <= 0 || lookbackHours > 168) {
+              throw new Error("lookback_hours must be between 1 and 168.");
+            }
 
-          const oldest = Math.floor(Date.now() / 1000 - lookbackHours * 60 * 60).toString();
-          const fixture = {
-            fetched_at: new Date().toISOString(),
-            lookback_hours: lookbackHours,
-            channels: [],
-            messages: [],
-            events: []
-          };
+            for (const channelId of channelIds) {
+              if (!allowed.has(channelId)) {
+                throw new Error(`Requested channel is not allowlisted: ${channelId}`);
+              }
+            }
 
-          for (const channelId of channelIds) {
-            const channelName = channelId;
-
-            fixture.channels.push({ channel_id: channelId, channel_name: channelName });
-
-            let cursor;
-            do {
-              const history = await slack("conversations.history", {
-                channel: channelId,
-                oldest,
-                limit: 100,
-                cursor
+            async function slack(method, params) {
+              const response = await fetch(`https://slack.com/api/${method}`, {
+                method: "POST",
+                headers: {
+                  "Authorization": `Bearer ${token}`,
+                  "Content-Type": "application/json; charset=utf-8"
+                },
+                body: JSON.stringify(params)
               });
+              const json = await response.json();
+              if (!response.ok || !json.ok) {
+                throw new Error(`${method} failed: ${json.error || response.statusText}`);
+              }
+              return json;
+            }
 
-              for (const message of history.messages || []) {
-                if (!message.text || message.subtype) {
-                  continue;
+            function isoFromTs(ts) {
+              const [seconds, micros = "0"] = String(ts).split(".");
+              const millis = Number(seconds) * 1000 + Math.floor(Number(micros.padEnd(6, "0")) / 1000);
+              return new Date(millis).toISOString();
+            }
+
+            const oldest = Math.floor(Date.now() / 1000 - lookbackHours * 60 * 60).toString();
+            const fixture = {
+              fetched_at: new Date().toISOString(),
+              lookback_hours: lookbackHours,
+              channels: [],
+              messages: [],
+              events: []
+            };
+
+            for (const channelId of channelIds) {
+              const channelName = channelId;
+
+              fixture.channels.push({ channel_id: channelId, channel_name: channelName });
+
+              let cursor;
+              do {
+                const history = await slack("conversations.history", {
+                  channel: channelId,
+                  oldest,
+                  limit: 100,
+                  cursor
+                });
+
+                for (const message of history.messages || []) {
+                  if (!message.text || message.subtype) {
+                    continue;
+                  }
+
+                  const permalink = await slack("chat.getPermalink", {
+                    channel: channelId,
+                    message_ts: message.ts
+                  });
+
+                  fixture.messages.push({
+                    channel_id: channelId,
+                    channel_name: channelName,
+                    thread_ts: message.thread_ts || message.ts,
+                    message_ts: message.ts,
+                    permalink: permalink.permalink,
+                    author_id: message.user || message.bot_id || "unknown",
+                    author_name: message.username || message.user || message.bot_id || "unknown",
+                    created_at: isoFromTs(message.ts),
+                    text: message.text,
+                    reactions: (message.reactions || []).map((reaction) => reaction.name),
+                    matched_by: []
+                  });
                 }
 
-                const permalink = await slack("chat.getPermalink", {
-                  channel: channelId,
-                  message_ts: message.ts
-                });
+                cursor = history.response_metadata?.next_cursor || "";
+              } while (cursor);
+            }
 
-                fixture.messages.push({
-                  channel_id: channelId,
-                  channel_name: channelName,
-                  thread_ts: message.thread_ts || message.ts,
-                  message_ts: message.ts,
-                  permalink: permalink.permalink,
-                  author_id: message.user || message.bot_id || "unknown",
-                  author_name: message.username || message.user || message.bot_id || "unknown",
-                  created_at: isoFromTs(message.ts),
-                  text: message.text,
-                  reactions: (message.reactions || []).map((reaction) => reaction.name),
-                  matched_by: []
-                });
-              }
-
-              cursor = history.response_metadata?.next_cursor || "";
-            } while (cursor);
+            const date = new Date().toISOString().slice(0, 10);
+            const dir = path.join("slack-fixtures");
+            fs.mkdirSync(dir, { recursive: true });
+            fs.writeFileSync(
+              path.join(dir, `slack-${date}.json`),
+              JSON.stringify(fixture, null, 2) + "\n"
+            );
           }
 
-          const date = new Date().toISOString().slice(0, 10);
-          const dir = path.join("slack-fixtures");
-          fs.mkdirSync(dir, { recursive: true });
-          fs.writeFileSync(
-            path.join(dir, `slack-${date}.json`),
-            JSON.stringify(fixture, null, 2) + "\n"
-          );
+          main().catch((error) => {
+            console.error(error);
+            process.exit(1);
+          });
           NODE
 
       - name: Create pull request
