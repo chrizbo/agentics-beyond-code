@@ -217,8 +217,10 @@ gh issue view <number> --repo ${{ github.repository }} --json comments \
   --jq '.comments[] | {body: .body, createdAt: .createdAt, author: .author.login}'
 ```
 
-Do not post if an existing comment with `<!-- slack-context -->` already
-contains the same fixture filename or the same Slack permalink.
+Do not post if any existing comment contains the same fixture filename or the
+same Slack permalink. Prefer the `<!-- slack-context -->` marker when present,
+but do not require it for duplicate detection because downstream comment
+sanitization may omit hidden markers.
 
 ### Step 7: Post GitHub Comments
 
@@ -227,6 +229,10 @@ For each matched issue, post one comment. The comment must start with:
 ```markdown
 <!-- slack-context -->
 ```
+
+If the hidden marker is removed by downstream processing, the visible
+`Slack Context` or `Slack Update` heading plus the fixture filename is still the
+durable duplicate key.
 
 Use this default format for general context:
 
@@ -295,6 +301,11 @@ questions:
 ```
 
 Omit empty sections in the Decision/Action-Oriented format.
+
+For evidence links, use the raw `permalink` value from the fixture exactly when
+it starts with `http://` or `https://`. If the permalink is missing or has been
+redacted, write plain text such as `Slack thread - fixture permalink unavailable`
+instead of creating a markdown link.
 
 Keep copied Slack excerpts short. Prefer paraphrased summaries plus permalinks
 over copying long message history.
