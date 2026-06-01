@@ -23,7 +23,7 @@ on:
 
 concurrency:
   group: intake-triage-${{ github.event.issue.number || inputs.issue_number || github.run_id }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 permissions:
   contents: read
