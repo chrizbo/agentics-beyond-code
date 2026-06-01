@@ -23,6 +23,7 @@ Browse real artifacts produced by the workflows in this repo:
 | GTM team report | [GTM readiness report - 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/discussions/194) | GTM Team Reports |
 | Daily standup prep | [Standup prep - 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/discussions/195) | Daily Standup Prep |
 | Workflow health | [Health report - 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/discussions/197) | Workflow Health |
+| Commitment reconciliation | [Commitment reconciliation - week of 2026-06-01](https://github.com/chrizbo/agentics-beyond-code/issues/198) | Commitment Reconciler |
 | Weekly retro | [Retro - week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/104) | Process Analyzer |
 | Strategy evidence | [Strategy alignment PR](https://github.com/chrizbo/agentics-beyond-code/pull/107) | Strategy Alignment |
 | Transcript comment | [Meeting notes on issue](https://github.com/chrizbo/agentics-beyond-code/issues/14#issuecomment-4413622565) | Transcript Processor |
@@ -173,6 +174,7 @@ Workflows define the **general pattern** (e.g., "assess readiness against a poli
     weekly-status.md                 ← Leadership status rollup (weekly)
     leadership-brief.md              ← Personalized leadership briefs (weekly, one per leader)
     workflow-health.md               ← Agentic workflow health & cost report (weekly)
+    commitment-reconciler.md         ← Conversation commitments vs GitHub artifact reconciliation (weekly)
     decision-log.md                  ← Decision detection + PR creation (daily)
     transcript-processor.md          ← Transcript → issue comments (on push)
     process-analyzer.md              ← Weekly retro + process drift detection + automation candidates
