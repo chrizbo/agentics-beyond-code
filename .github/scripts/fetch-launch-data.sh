@@ -237,7 +237,7 @@ while [ "$HAS_NEXT" = "true" ]; do
   }" 2>/dev/null)
 
   # Extract items that have issue content (skip drafts)
-  echo "$PAGE" | jq '[.data.node.items.nodes[] | select(.content != null and .content.id != null)]' > "${ITEMS_FILE}.page"
+  echo "$PAGE" | jq '[(.data.node.items.nodes // [])[] | select(.content != null and .content.id != null)]' > "${ITEMS_FILE}.page"
   jq -s '.[0] + .[1]' "$ITEMS_FILE" "${ITEMS_FILE}.page" > "${ITEMS_FILE}.merged"
   mv "${ITEMS_FILE}.merged" "$ITEMS_FILE"
   rm -f "${ITEMS_FILE}.page"
@@ -311,7 +311,7 @@ fetch_sub_issues() {
 
     local page_file
     page_file=$(mktemp)
-    echo "$api_result" | jq '[.data.node.subIssues.nodes[] // empty]' > "$page_file"
+    echo "$api_result" | jq '[(.data.node.subIssues.nodes // [])[]]' > "$page_file"
     jq -s '.[0] + .[1]' "$subs_file" "$page_file" > "${subs_file}.merged"
     mv "${subs_file}.merged" "$subs_file"
     rm -f "$page_file"
@@ -368,7 +368,7 @@ for i in $(seq 0 $((TOTAL - 1))); do
   fetch_sub_issues "$ISSUE_ID" 0 "$SUB_FILE"
 
   # Flatten field values into a clean key-value object
-  FIELD_VALUES=$(jq ".[$i].fieldValues.nodes | map(
+  FIELD_VALUES=$(jq "(.[$i].fieldValues.nodes // []) | map(
     if .text then {(.field.name): .text}
     elif .number then {(.field.name): .number}
     elif .date then {(.field.name): .date}
