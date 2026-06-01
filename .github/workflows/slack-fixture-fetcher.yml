@@ -92,6 +92,10 @@ jobs:
               return new Date(millis).toISOString();
             }
 
+            function permalinkFor(channelId, ts) {
+              return `https://slack.com/archives/${channelId}/p${String(ts).replace(".", "")}`;
+            }
+
             const oldest = Math.floor(Date.now() / 1000 - lookbackHours * 60 * 60).toString();
             const fixture = {
               fetched_at: new Date().toISOString(),
@@ -120,17 +124,12 @@ jobs:
                     continue;
                   }
 
-                  const permalink = await slack("chat.getPermalink", {
-                    channel: channelId,
-                    message_ts: message.ts
-                  });
-
                   fixture.messages.push({
                     channel_id: channelId,
                     channel_name: channelName,
                     thread_ts: message.thread_ts || message.ts,
                     message_ts: message.ts,
-                    permalink: permalink.permalink,
+                    permalink: permalinkFor(channelId, message.ts),
                     author_id: message.user || message.bot_id || "unknown",
                     author_name: message.username || message.user || message.bot_id || "unknown",
                     created_at: isoFromTs(message.ts),
