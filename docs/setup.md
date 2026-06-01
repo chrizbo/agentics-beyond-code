@@ -27,6 +27,7 @@ gh auth refresh -s read:project,project
 | `OPENAI_API_KEY` | Yes | OpenAI API key used by the Codex engine |
 | `CODEX_API_KEY` | Optional | Alternative Codex engine secret. If present, gh-aw uses it before `OPENAI_API_KEY` |
 | `AW_TOKEN` | Yes | PAT with access to the Launch Tracker and Intake Triage projects — used by pre-steps and project updates |
+| `SLACK_BOT_TOKEN` | Optional | Bot token for Slack post-back custom safe outputs when Slack report-backs are enabled |
 
 The `GITHUB_TOKEN` needs these permissions (configured in the workflow frontmatter):
 - `contents: read` — read repo files (policy files, scripts)
@@ -146,6 +147,13 @@ gh variable set LAUNCH_PROJECT_OWNER --body "<project-owner>"
 gh variable set LAUNCH_PROJECT_NUMBER --body "<project-number>"
 ```
 
+If enabling Slack post-backs, set the channel allowlist as comma-separated
+Slack channel IDs:
+
+```bash
+gh variable set SLACK_ALLOWED_CHANNEL_IDS --body "C0123456789,C9876543210"
+```
+
 ### 4. Create an Intake Triage project
 
 Create a second GitHub Project (Projects V2) to track incoming feature requests and bug reports. Add these custom fields:
@@ -213,6 +221,10 @@ The following labels are used by workflows. Create them in your repository:
 - `kano:must-be`, `kano:one-dimensional`, `kano:attractive`, `kano:indifferent` — Kano category (added by workflow)
 - `aligns-with-current` — aligns with an active initiative or launch (added by workflow)
 
+**External-source labels:**
+- `from-slack` — marks issues or comments created from Slack context or Slack
+  reaction intake
+
 ### 6. Create issues using templates
 
 Use the built-in issue templates to create properly structured issues:
@@ -226,18 +238,20 @@ Link launches as sub-issues of initiatives, and epics/tasks as sub-issues of lau
 
 Add your initiative, launch, epic, and task issues to the Launch Tracker project. Set the Phase and Target Date custom fields on each launch.
 
-### 8. Create directories for decision log and transcript workflows
+### 8. Create directories for decision log, transcript, and Slack fixture workflows
 
 ```bash
 # Create the directories (with .gitkeep so they're tracked)
-mkdir -p decisions transcripts
-touch decisions/.gitkeep transcripts/.gitkeep
-git add decisions/.gitkeep transcripts/.gitkeep
-git commit -m "Add decisions and transcripts directories"
+mkdir -p decisions transcripts slack-fixtures
+touch decisions/.gitkeep transcripts/.gitkeep slack-fixtures/.gitkeep
+git add decisions/.gitkeep transcripts/.gitkeep slack-fixtures/.gitkeep
+git commit -m "Add workflow data directories"
 ```
 
 - **`/decisions/`** — Decision record markdown files are created here by the Decision Log workflow via PR
 - **`/transcripts/`** — Drop `.txt` or `.vtt` meeting transcripts here to trigger the Transcript Processor workflow
+- **`/slack-fixtures/`** — Drop Slack-shaped `.json` fixtures here to trigger
+  the fixture-first Slack Context Processor workflow
 
 ### 9. Compile and run workflows
 

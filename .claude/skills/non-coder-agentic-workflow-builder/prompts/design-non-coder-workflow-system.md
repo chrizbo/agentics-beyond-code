@@ -26,6 +26,8 @@ Useful inputs:
   compliance churn, unclear strategy, meeting follow-up, stakeholder reporting
 - source of truth: GitHub Issues, Projects, Discussions, transcripts, policy
   docs, release docs
+- external systems: Slack, Jira, Confluence, Microsoft 365, Google Workspace,
+  Salesforce, ServiceNow, Notion, Asana, Linear, or other team tools
 - desired output: report discussion, issue comment, new issue, PR updating docs,
   decision record, checklist, leadership brief
 - work tracking setup: GitHub Projects board, labels, issue templates, issue
@@ -48,6 +50,7 @@ Use existing workflows first:
 | Standups are unfocused | `daily-standup-prep.md` | `docs/how-we-work.md`, issue/project data |
 | Leaders need different views of the same work | `leadership-brief.md`, `weekly-status.md` | leadership brief policies, weekly status policy |
 | Workflow reliability and costs need monitoring | `workflow-health.md` | `.github/aw/logs/`, workflow files |
+| Slack contains important decisions, blockers, commitments, or intake requests | Slack Context Processor, Slack Reaction Intake | `docs/slack-integration-plan.md`, Slack app config, allowed channel map |
 
 For new workflow ideas, read `docs/workflow-ideas.md` and then route through
 the `agentic-workflows` skill.
@@ -193,6 +196,9 @@ Common dependencies:
 - transcript workflows need `transcripts/`
 - decision workflows need `decisions/`
 - process and strategy workflows need blank docs under `docs/`
+- Slack workflows need allowed channel IDs, standard reaction semantics, Slack
+  app credentials, and configurable emoji names matching
+  `docs/slack-integration-plan.md`
 
 ## Recommended Rollout
 

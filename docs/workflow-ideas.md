@@ -54,6 +54,9 @@ implementation as GitHub Agentic Workflows.
 | 53 | Escalation Timing Advisor | Flags situations where a PM should switch from async tracking to synchronous escalation because ambiguity, delay, or stakeholder tension is becoming expensive. |
 | 54 | Stakeholder Context Brief | Before stakeholder syncs, generates a short prep note with last interaction, open asks, recent changes, prior concerns, and recommended discussion focus. |
 | 55 | Social Capital Gap Detector | Looks for launches or dependencies that rely on teams with little recent interaction, then recommends relationship-building check-ins before a favor or escalation is needed. |
+| 63 | ~~Slack Context Processor~~ | ~~Pulls context from allowed Slack channels and threads for linked GitHub artifacts, then summarizes high-confidence decisions, blockers, commitments, and open questions back onto the relevant issue.~~ _Implemented as **[Slack Context Processor](../.github/workflows/slack-context-processor.md)** — fixture-first Slack integration MVP that matches Slack-shaped JSON fixtures to open issues and posts summarized context comments._ |
+| 64 | Slack Reaction Intake | Treats configured emoji reactions in allowed Slack channels as lightweight automation signals, such as creating intake issues, flagging blockers, or capturing decision candidates with source permalinks. See [Slack Integration Plan](slack-integration-plan.md). |
+| 65 | External Integration Health Monitor | Audits external tool integrations for stale credentials, noisy channels, duplicate post-backs, missed events, and unsafe write attempts. See [External Integration Patterns](external-integration-patterns.md). |
 
 ### AI Governance
 

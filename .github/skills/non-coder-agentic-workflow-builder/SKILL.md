@@ -23,8 +23,10 @@ documents, folder structure, policies, and adoption steps.
 1. Ask for, or infer from the user's message:
    - team type and operating context
    - recurring pain points
-  - existing artifacts and systems of record
-  - desired workflow outputs: comments, issues, PRs, discussions, reports
+   - existing artifacts and systems of record, including external tools such as
+     Slack, Jira, Confluence, Microsoft 365, Google Workspace, Salesforce,
+     ServiceNow, Notion, Asana, or Linear
+   - desired workflow outputs: comments, issues, PRs, discussions, reports
    - whether they want GitHub Projects, labels, and issue templates set up
    - tolerance for automation creating work items or PRs
 2. Read `prompts/design-non-coder-workflow-system.md` for the full selection and
@@ -80,3 +82,6 @@ long explanations.
 - If the user cannot name exact workflows, map pain points to the catalog in
   `docs/workflow-ideas.md` and the selection table in
   `prompts/design-non-coder-workflow-system.md`.
+- When adapting Slack-related workflows, start from the standard emoji meanings
+  in `docs/slack-integration-plan.md`, but expose the actual emoji names as
+  configuration so each workspace can substitute its own conventions.
