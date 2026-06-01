@@ -20,6 +20,7 @@ implementation as GitHub Agentic Workflows.
 | 33 | Goal Graph Health Monitor | Audits goals for orphaned goals (no linked bets or inputs), staleness (no updates in N weeks), missing metrics, and missing counterbalancing/guardrail companions. Periodic health report. |
 | 34 | Learning Review Synthesizer | After bets complete, scans their learning review artifacts and synthesizes cross-bet patterns into a monthly Insight Brief. Identifies recurring themes so learnings don't stay siloed in individual bets. |
 | 35 | Funding Model Reality Check | Quarterly comparison of declared funding models and team stages against actual work patterns. Flags drift — e.g., a "Growth Accelerator" team with no bets targeting growth metrics, or a "New Offerings" team with no experiments. |
+| 44 | Consensus Brief | Before a major decision, synthesizes stakeholder positions, underlying interests, unresolved objections, and possible compromise paths. Produces a facilitation brief that helps the DRI converge the discussion without flattening disagreement. |
 
 ### Operations
 
@@ -39,6 +40,10 @@ implementation as GitHub Agentic Workflows.
 | 37 | Scope Ownership Auditor | Scans the scope registry for orphaned scopes (no team assigned), overlapping ownership, stale scopes (not referenced in recent bets), and scopes missing linked capabilities or customer context. |
 | 38 | Cross-Team Collaboration Tracker | Analyzes cross-team mentions, shared labels, PR reviews across boundaries, and transcript references to surface actual collaboration patterns. Compares against declared Team Topology interaction modes and flags mismatches or friction. |
 | 39 | Artifact Freshness Tracker | Checks key artifacts (product vision, strategy docs, roadmaps, bet one-pagers) against their expected refresh cadence — strategy yearly, roadmap quarterly, bet one-pagers monthly. Flags stale artifacts and missing required types. |
+| 40 | ~~Commitment Reconciler~~ | ~~Scans transcripts, issue comments, and project state for commitments that are promised but untracked, tracked but stale, completed but still open, or drifting from the latest conversation.~~ _Implemented as **[Commitment Reconciler](../.github/workflows/commitment-reconciler.md)** — weekly report that reconciles conversation commitments against GitHub artifacts._ |
+| 41 | Stakeholder Relationship Nudge | Maintains lightweight stakeholder context from issues, meetings, and prior briefs. Nudges DRIs when a stakeholder has not been updated after a material change, when a prior concern has no follow-up, or when a meeting would benefit from resurfaced context. |
+| 42 | Program Risk Early-Warning Radar | Combines stale issues/PRs, phase changes, missing sign-offs, date drift, blockers, dependency mentions, and transcript signals into an early-warning report before risks become obvious launch problems. |
+| 43 | Manual PM Work Detector | Finds recurring low-judgment PM chores in transcripts, issues, and docs — status assembly, spreadsheet reshaping, reminder loops, repeated copy/paste updates — and opens automation-candidate issues with evidence and estimated time saved. |
 
 ### AI Governance
 
@@ -66,3 +71,4 @@ implementation as GitHub Agentic Workflows.
 | 23 | Customer Feedback Aggregator | Multi-source feedback monitor: pulls from issues, discussions, Discord, Slack, and social into normalized feedback issues in one repo. Enables dedup, trend detection, and cross-channel prioritization. |
 | 24 | Feedback → Work Item Converter | Slash command on a customer feedback issue that strips PII and customer-specific details, then creates a clean, agent-ready engineering issue. Bridges the PM interpretation gap. |
 | 30 | Cross-Frame Translator | Same work viewed through PM, engineering, finance, and leadership lenses simultaneously. Each frame links back to the others — multiple concurrent frames without forcing one official model. _See **[Leadership Briefs](../.github/workflows/leadership-brief.md)** for an initial implementation — each leader policy file creates a different "frame" on the same portfolio data._ |
+| 45 | Audience-Specific Narrative Rewriter | Takes one canonical status source and rewrites it for specific audiences such as executives, engineering, GTM, compliance, or customers while preserving links back to the same source artifacts. |

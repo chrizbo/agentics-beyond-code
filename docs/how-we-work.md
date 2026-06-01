@@ -149,6 +149,7 @@
 | Assumption surfacing | Assumption Surfacer workflow | On issue opened/edited |
 | Weekly status rollup | Weekly Status workflow | Weekly (Friday) |
 | Workflow health monitoring | Workflow Health workflow | Weekly (Friday) |
+| Commitment reconciliation | Commitment Reconciler workflow | Weekly (Monday) |
 | Strategy alignment analysis | Strategy Alignment workflow | Weekly (Wednesday ~8 AM) |
 | Decision challenge | Adversarial PM workflow | Weekly (Wednesday ~8:30 AM) |
 | Process analysis & retro | Process Analyzer workflow | Weekly (Monday night / early Tuesday UTC) |
