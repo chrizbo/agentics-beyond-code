@@ -47,7 +47,8 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 | [📋 Decision Log](.github/workflows/decision-log.md) | Daily scan of issue comments and meeting transcripts for decisions — creates a PR with individual decision record files in `/decisions/` | [Decision log - 2026-05-09](https://github.com/chrizbo/agentics-beyond-code/issues/87) |
 | [🧭 Strategy Alignment](.github/workflows/strategy-alignment.md) | Wednesday morning analysis of team activity against `docs/strategy.md` tradeoffs — comments on clearly misaligned issues, annotates the strategy doc with alignment evidence and emerging patterns | [Strategy evidence PR](https://github.com/chrizbo/agentics-beyond-code/pull/107) |
 | [🎙️ Transcript Processor](.github/workflows/transcript-processor.md) | Triggered when `.txt` or `.vtt` files are pushed to `/transcripts/` — matches transcript content to open issues and posts summary comments | [Meeting notes comment](https://github.com/chrizbo/agentics-beyond-code/issues/14#issuecomment-4413622565) |
-| [💬 Slack Context Processor](.github/workflows/slack-context-processor.md) | Fixture-first Slack integration MVP — matches Slack-shaped JSON fixtures to open issues and posts summary comments with copied context and source permalinks | _Planned_ |
+| [💬 Slack Context Processor](.github/workflows/slack-context-processor.md) | Fixture-first Slack integration MVP — matches Slack-shaped JSON fixtures to open issues and posts summary comments with copied context and source permalinks | [Slack update comment](https://github.com/chrizbo/agentics-beyond-code/issues/172#issuecomment-4596042385) |
+| [📥 Slack Reaction Intake](.github/workflows/slack-reaction-intake.md) | Converts approved Slack emoji reactions in fixture data into labeled GitHub intake issues for normal triage | _Fixture-first MVP_ |
 
 ### 📊 Leadership
 

@@ -256,7 +256,7 @@ git commit -m "Add workflow data directories"
 - **`/decisions/`** — Decision record markdown files are created here by the Decision Log workflow via PR
 - **`/transcripts/`** — Drop `.txt` or `.vtt` meeting transcripts here to trigger the Transcript Processor workflow
 - **`/slack-fixtures/`** — Drop Slack-shaped `.json` fixtures here to trigger
-  the fixture-first Slack Context Processor workflow
+  the fixture-first Slack Context Processor and Slack Reaction Intake workflows
 
 ### 9. Compile and run workflows
 
