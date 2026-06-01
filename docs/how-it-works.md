@@ -17,14 +17,14 @@ Browse real artifacts produced by the workflows in this repo:
 | Decision log | [Decision log - 2026-05-09](https://github.com/chrizbo/agentics-beyond-code/issues/87) | Decision Log |
 | Assumptions | [Assumptions comment](https://github.com/chrizbo/agentics-beyond-code/issues/93#issuecomment-4413916898) | Assumption Surfacer |
 | Launch readiness report | [Readiness report - 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/discussions/196) | Launch Readiness |
-| Weekly status | [Weekly status - week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/86) | Weekly Status |
-| Leadership brief | [Alex Chen brief - week of 2026-05-11](https://github.com/chrizbo/agentics-beyond-code/discussions/112) | Leadership Briefs |
-| Compliance team report | [Security status - week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/88) | Compliance Team Reports |
+| Weekly status | [Weekly status - week of 2026-06-01](https://github.com/chrizbo/agentics-beyond-code/discussions/200) | Weekly Status |
+| Leadership brief | [Alex Chen](https://github.com/chrizbo/agentics-beyond-code/discussions/201) and [Priya Sharma](https://github.com/chrizbo/agentics-beyond-code/discussions/202) - week of 2026-06-01 | Leadership Briefs |
+| Compliance team report | [Security](https://github.com/chrizbo/agentics-beyond-code/discussions/203), [Privacy](https://github.com/chrizbo/agentics-beyond-code/discussions/204), [Accessibility](https://github.com/chrizbo/agentics-beyond-code/discussions/205), and [Responsible AI](https://github.com/chrizbo/agentics-beyond-code/discussions/206) - week of 2026-06-01 | Compliance Team Reports |
 | GTM team report | [GTM readiness report - 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/discussions/194) | GTM Team Reports |
 | Daily standup prep | [Standup prep - 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/discussions/195) | Daily Standup Prep |
 | Workflow health | [Health report - 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/discussions/197) | Workflow Health |
 | Commitment reconciliation | [Commitment reconciliation - week of 2026-06-01](https://github.com/chrizbo/agentics-beyond-code/issues/198) | Commitment Reconciler |
-| Weekly retro | [Retro - week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/104) | Process Analyzer |
+| Weekly retro | [Retro - week of 2026-05-25](https://github.com/chrizbo/agentics-beyond-code/discussions/199) | Process Analyzer |
 | Strategy evidence | [Strategy alignment PR](https://github.com/chrizbo/agentics-beyond-code/pull/107) | Strategy Alignment |
 | Transcript comment | [Meeting notes on issue](https://github.com/chrizbo/agentics-beyond-code/issues/14#issuecomment-4413622565) | Transcript Processor |
 

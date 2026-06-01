@@ -23,7 +23,7 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 | Workflow | Description | Example output |
 |----------|-------------|----------------|
 | [🛡️ Compliance Review](.github/workflows/compliance-review.md) | Evaluates launches against Security, Privacy, Accessibility, and Responsible AI rubrics — updates labels, posts status tables, creates review sub-issues (Monday mornings) | [Status table comment - 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/issues/3#issuecomment-4588202940) |
-| [📊 Compliance Team Reports](.github/workflows/compliance-team-reports.md) | Monday morning per-team discussion showing launches needing review, sorted by urgency | [Security status - week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/88) |
+| [📊 Compliance Team Reports](.github/workflows/compliance-team-reports.md) | Monday morning per-team discussion showing launches needing review, sorted by urgency | [Security](https://github.com/chrizbo/agentics-beyond-code/discussions/203), [Privacy](https://github.com/chrizbo/agentics-beyond-code/discussions/204), [Accessibility](https://github.com/chrizbo/agentics-beyond-code/discussions/205), and [Responsible AI](https://github.com/chrizbo/agentics-beyond-code/discussions/206) - week of 2026-06-01 |
 
 ### 📣 Go-to-Market
 
@@ -52,16 +52,16 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 
 | Workflow | Description | Example output |
 |----------|-------------|----------------|
-| [📋 Weekly Status](.github/workflows/weekly-status.md) | Friday morning leadership status rollup — What Shipped, What We Learned, FYI, and SOS — across all initiatives and launches | [Weekly status - week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/86) |
-| [📋 Leadership Briefs](.github/workflows/leadership-brief.md) | Monday morning personalized briefs — one per leader policy file — with Give Kudos, Give Feedback, and Get Involved sections tailored to each leader's domain, goals, and management style | [Alex Chen brief - week of 2026-05-11](https://github.com/chrizbo/agentics-beyond-code/discussions/112) |
+| [📋 Weekly Status](.github/workflows/weekly-status.md) | Friday morning leadership status rollup — What Shipped, What We Learned, FYI, and SOS — across all initiatives and launches | [Weekly status - week of 2026-06-01](https://github.com/chrizbo/agentics-beyond-code/discussions/200) |
+| [📋 Leadership Briefs](.github/workflows/leadership-brief.md) | Monday morning personalized briefs — one per leader policy file — with Give Kudos, Give Feedback, and Get Involved sections tailored to each leader's domain, goals, and management style | [Alex Chen](https://github.com/chrizbo/agentics-beyond-code/discussions/201) and [Priya Sharma](https://github.com/chrizbo/agentics-beyond-code/discussions/202) - week of 2026-06-01 |
 
 ### 🔧 Operations
 
 | Workflow | Description | Example output |
 |----------|-------------|----------------|
 | [🩺 Workflow Health](.github/workflows/workflow-health.md) | Friday morning health report across all agentic workflows — success rates, failure patterns, cost estimates, cross-workflow interaction analysis (conflict detection, cascade chains, resource contention), and efficiency recommendations | [Health report - 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/discussions/197) |
-| [🧾 Commitment Reconciler](.github/workflows/commitment-reconciler.md) | Monday commitment audit that compares transcripts and issue comments against GitHub artifacts, surfacing promised-but-untracked work, stale commitments, artifact drift, and completion mismatches | [Week of 2026-06-01](https://github.com/chrizbo/agentics-beyond-code/issues/198)<br>[Verified run — 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/actions/runs/26728517245) |
-| [🔄 Process Analyzer](.github/workflows/process-analyzer.md) | Weekly retro + process analysis — posts a team retrospective discussion, detects process drift in transcripts vs `docs/how-we-work.md`, identifies automation opportunities and gaps, and creates update PRs | [Retro - week of 2026-05-04](https://github.com/chrizbo/agentics-beyond-code/discussions/104) |
+| [🧾 Commitment Reconciler](.github/workflows/commitment-reconciler.md) | Monday commitment audit that compares transcripts and issue comments against GitHub artifacts, surfacing promised-but-untracked work, stale commitments, artifact drift, and completion mismatches | [Commitment reconciliation - week of 2026-06-01](https://github.com/chrizbo/agentics-beyond-code/issues/198) |
+| [🔄 Process Analyzer](.github/workflows/process-analyzer.md) | Weekly retro + process analysis — posts a team retrospective discussion, detects process drift in transcripts vs `docs/how-we-work.md`, identifies automation opportunities and gaps, and creates update PRs | [Retro - week of 2026-05-25](https://github.com/chrizbo/agentics-beyond-code/discussions/199) |
 | [🔁 Daily Standup Prep](.github/workflows/daily-standup-prep.md) | Monday/Wednesday standup preparation: posts a discussion with high-priority topics, blockers, and facilitation prompts to help run effective daily syncs | [Standup prep - 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/discussions/195) |
 
 ### 🧪 Demo / Sample Data
