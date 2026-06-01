@@ -25,6 +25,17 @@ timeout-minutes: 20
 network:
   allowed: [defaults, github]
 
+post-steps:
+  - name: Require safe output
+    if: success()
+    env:
+      GH_AW_SAFE_OUTPUTS: ${{ runner.temp }}/gh-aw/safeoutputs/outputs.jsonl
+    run: |
+      if [ ! -s "$GH_AW_SAFE_OUTPUTS" ] || ! grep -q '[^[:space:]]' "$GH_AW_SAFE_OUTPUTS"; then
+        echo "::error::Agent completed without a safe output. Create the weekly retro discussion or call safeoutputs report_incomplete."
+        exit 1
+      fi
+
 tools:
   github:
     mode: gh-proxy
@@ -100,7 +111,8 @@ git log --since="7 days ago" --name-only --diff-filter=AM -- 'transcripts/*.vtt'
 ```
 
 If triggered by `workflow_dispatch`, process all transcripts from the past
-7 days. If no transcripts are found, print a summary and exit.
+7 days. If no transcripts are found, call `safeoutputs report_incomplete`
+with a clear reason and stop.
 
 ### Step 3: Parse Each Transcript
 
@@ -473,7 +485,7 @@ safeoutputs create_discussion --title "title" --body "$(cat /tmp/gh-aw/agent/bod
 # or: safeoutputs create_issue / add_comment / create_pull_request — same pattern
 ```
 
-Configured title prefixes are added automatically — omit them from `--title`. If a call fails, immediately call `safeoutputs noop --message "reason"` and stop — never ask for input.
+Configured title prefixes are added automatically — omit them from `--title`. If you cannot create the weekly retro discussion, immediately call `safeoutputs report_incomplete --reason "brief reason" --details "what prevented process analysis output"` and stop — never ask for input. Do not finish the run without a `safeoutputs` call.
 
 ## Guidelines
 

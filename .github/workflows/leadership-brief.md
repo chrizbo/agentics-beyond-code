@@ -39,6 +39,17 @@ steps:
       ./.github/scripts/fetch-launch-data.sh "$LAUNCH_PROJECT_OWNER" "$LAUNCH_PROJECT_NUMBER" launch-data.json
       echo "path=launch-data.json" >> "$GITHUB_OUTPUT"
 
+post-steps:
+  - name: Require safe output
+    if: success()
+    env:
+      GH_AW_SAFE_OUTPUTS: ${{ runner.temp }}/gh-aw/safeoutputs/outputs.jsonl
+    run: |
+      if [ ! -s "$GH_AW_SAFE_OUTPUTS" ] || ! grep -q '[^[:space:]]' "$GH_AW_SAFE_OUTPUTS"; then
+        echo "::error::Agent completed without a safe output. Create the required leadership brief discussions or call safeoutputs report_incomplete."
+        exit 1
+      fi
+
 tools:
   github:
     mode: gh-proxy
@@ -398,7 +409,7 @@ safeoutputs create_discussion --title "title" --body "$(cat /tmp/gh-aw/agent/bod
 # or: safeoutputs create_issue / add_comment / create_pull_request — same pattern
 ```
 
-Configured title prefixes are added automatically — omit them from `--title`. If a call fails, immediately call `safeoutputs noop --message "reason"` and stop — never ask for input.
+Configured title prefixes are added automatically — omit them from `--title`. If you cannot create the required leadership brief discussions, immediately call `safeoutputs report_incomplete --reason "brief reason" --details "what prevented leadership brief creation"` and stop — never ask for input. Do not finish the run without a `safeoutputs` call.
 
 ## Guidelines
 
