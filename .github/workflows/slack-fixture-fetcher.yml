@@ -96,6 +96,16 @@ jobs:
               return `https://slack.com/archives/${channelId}/p${String(ts).replace(".", "")}`;
             }
 
+            function authorNameFor(message) {
+              if (message.username && !/^[UW][A-Z0-9]+$/.test(message.username)) {
+                return message.username;
+              }
+              if (message.bot_id) {
+                return "Slack app";
+              }
+              return "Slack participant";
+            }
+
             const oldest = Math.floor(Date.now() / 1000 - lookbackHours * 60 * 60).toString();
             const fixture = {
               fetched_at: new Date().toISOString(),
@@ -131,7 +141,7 @@ jobs:
                     message_ts: message.ts,
                     permalink: permalinkFor(channelId, message.ts),
                     author_id: message.user || message.bot_id || "unknown",
-                    author_name: message.username || message.user || message.bot_id || "unknown",
+                    author_name: authorNameFor(message),
                     created_at: isoFromTs(message.ts),
                     text: message.text,
                     reactions: (message.reactions || []).map((reaction) => reaction.name),
