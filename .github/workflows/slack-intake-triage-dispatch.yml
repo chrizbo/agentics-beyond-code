@@ -1,0 +1,51 @@
+name: Slack Intake Triage Dispatch
+
+on:
+  workflow_run:
+    workflows: ["Slack Reaction Intake"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  issues: read
+  contents: read
+
+concurrency:
+  group: slack-intake-triage-dispatch
+  cancel-in-progress: false
+
+jobs:
+  dispatch:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - name: Dispatch intake triage for Slack issues
+        run: |
+          set -euo pipefail
+
+          mapfile -t issue_numbers < <(
+            gh issue list \
+              --repo "$GH_REPO" \
+              --state open \
+              --label from-slack \
+              --label triage-needed \
+              --limit 20 \
+              --json number,labels \
+              --jq '.[] | select((.labels | map(.name) | index("triaged")) | not) | .number'
+          )
+
+          if [ "${#issue_numbers[@]}" -eq 0 ]; then
+            echo "No untriaged Slack intake issues found."
+            exit 0
+          fi
+
+          for issue_number in "${issue_numbers[@]}"; do
+            echo "Dispatching Intake Request Triage for issue #${issue_number}"
+            gh workflow run "Intake Request Triage" \
+              --repo "$GH_REPO" \
+              --field "issue_number=${issue_number}"
+          done

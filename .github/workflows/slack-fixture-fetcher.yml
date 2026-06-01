@@ -86,6 +86,35 @@ jobs:
               return json;
             }
 
+            const users = new Map();
+
+            async function slackUserHandle(userId) {
+              if (!userId || !/^U[A-Z0-9]+$/.test(userId)) {
+                return "";
+              }
+              if (users.has(userId)) {
+                return users.get(userId);
+              }
+
+              try {
+                const user = await slack("users.info", { user: userId });
+                const profile = user.user?.profile || {};
+                const handle =
+                  user.user?.name ||
+                  profile.display_name_normalized ||
+                  profile.display_name ||
+                  profile.real_name_normalized ||
+                  profile.real_name ||
+                  "";
+                users.set(userId, handle);
+                return handle;
+              } catch (error) {
+                console.warn(`Could not resolve Slack user ${userId}: ${error.message}`);
+                users.set(userId, "");
+                return "";
+              }
+            }
+
             function isoFromTs(ts) {
               const [seconds, micros = "0"] = String(ts).split(".");
               const millis = Number(seconds) * 1000 + Math.floor(Number(micros.padEnd(6, "0")) / 1000);
@@ -96,7 +125,11 @@ jobs:
               return `https://slack.com/archives/${channelId}/p${String(ts).replace(".", "")}`;
             }
 
-            function authorNameFor(message) {
+            async function authorNameFor(message) {
+              const handle = await slackUserHandle(message.user);
+              if (handle) {
+                return `@${handle.replace(/^@/, "")}`;
+              }
               if (message.username && !/^[UW][A-Z0-9]+$/.test(message.username)) {
                 return message.username;
               }
@@ -141,7 +174,7 @@ jobs:
                     message_ts: message.ts,
                     permalink: permalinkFor(channelId, message.ts),
                     author_id: message.user || message.bot_id || "unknown",
-                    author_name: authorNameFor(message),
+                    author_name: await authorNameFor(message),
                     created_at: isoFromTs(message.ts),
                     text: message.text,
                     reactions: (message.reactions || []).map((reaction) => reaction.name),
