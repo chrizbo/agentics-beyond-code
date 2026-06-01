@@ -151,7 +151,8 @@ jq '[.launches[] | select(.state == "OPEN") | {number, title, url, state, type: 
   (.subIssues[]?.subIssues[]? | select(.state == "OPEN") | {number, title, url, state, type: "task"})]' launch-data-summary.json
 ```
 
-Also detect issue references inside Slack text and permalinks:
+Then detect explicit issue references inside Slack text and permalinks before
+doing title or keyword matching:
 
 - `#123`
 - `issue 123`
@@ -160,13 +161,28 @@ Also detect issue references inside Slack text and permalinks:
   `https://github.com/${{ github.repository }}/issues/123`
 - exact or near-exact issue titles
 
+Explicit same-repository issue references are authoritative. If a Slack message
+contains `https://github.com/${{ github.repository }}/issues/123`, `#123`,
+`issue 123`, or `ticket 123`, verify the issue directly even when it is absent
+from `launch-data-summary.json`:
+
+```bash
+gh issue view <number> --repo ${{ github.repository }} \
+  --json number,title,state,url,labels
+```
+
+Only post for verified open issues. Skip closed issues. Use the launch data as
+context and as the source for title/keyword matching, but do not use it as a
+gate that can exclude an explicit same-repository issue reference.
+
 ### Step 4: Match Slack Messages to Issues
 
 For each Slack message or thread, determine whether it relates to an open issue.
 
 Matching confidence:
 
-- **High:** Explicit GitHub issue URL, `#123`, `issue 123`, or exact title.
+- **High:** Verified explicit same-repository GitHub issue URL, `#123`,
+  `issue 123`, `ticket 123`, or exact title.
 - **Medium:** Strong title/keyword overlap plus a relevant reaction such as
   `memo`, `pushpin`, `warning`, or `white_check_mark`.
 - **Low:** Loose keyword overlap, generic project terms, or unclear references.
