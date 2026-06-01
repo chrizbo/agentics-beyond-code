@@ -256,8 +256,8 @@ Use this default format for general context:
 <details>
 <summary>Copied Slack context</summary>
 
-- <author_name>: "<short copied message excerpt>"
-- <author_name>: "<short copied message excerpt>"
+- <readable author>: "<short copied message excerpt>"
+- <readable author>: "<short copied message excerpt>"
 
 </details>
 ```
@@ -295,12 +295,18 @@ questions:
 <details>
 <summary>Copied Slack context</summary>
 
-- <author_name>: "<short copied message excerpt>"
+- <readable author>: "<short copied message excerpt>"
 
 </details>
 ```
 
 Omit empty sections in the Decision/Action-Oriented format.
+
+For copied Slack context author labels, prefer `author_name` only when it is a
+human-readable display name. If `author_name` is missing, `unknown`, or looks
+like a Slack ID such as `U123...`, `W123...`, or `B123...`, use a neutral label
+such as `Slack participant` or `Slack app`. Do not expose raw Slack user IDs in
+GitHub comments.
 
 For evidence links, use the raw `permalink` value from the fixture exactly when
 it starts with `http://` or `https://`. If the permalink is missing or has been
