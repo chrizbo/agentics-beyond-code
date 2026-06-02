@@ -154,11 +154,20 @@ Slack channel IDs:
 gh variable set SLACK_ALLOWED_CHANNEL_IDS --body "C0123456789,C9876543210"
 ```
 
+Then opt in to Slack post-backs:
+
+```bash
+gh variable set SLACK_POSTBACK_ENABLED --body "true"
+```
+
 If enabling the Slack Fixture Fetcher workflow, also set `SLACK_BOT_TOKEN` as a
 repository secret. The first read-only demo requires `channels:history` and
 `reactions:read` on the Slack app. Add `users:read` to resolve Slack user IDs
 to `@handle` labels in copied context. Also add `groups:history` if the
 allowlisted channel is private.
+
+If enabling Slack post-backs, add `chat:write` to the Slack app and invite the
+app to every allowlisted channel where it should reply.
 
 ### 4. Create an Intake Triage project
 

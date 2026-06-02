@@ -167,6 +167,13 @@ imports:
 Then the agent can call `slack_post_message` with an allowlisted `channel_id`,
 message `text`, required `github_source_url`, and optional `thread_ts`.
 
+Slack Reaction Intake uses a deterministic post-back dispatcher instead of a
+direct agent post-back because the `create_issue` safe output only resolves the
+final GitHub issue URL after the agent job completes. The dispatcher runs after
+Slack Reaction Intake, parses the Slack source thread from the created issue,
+and posts the GitHub issue link back to Slack when `SLACK_POSTBACK_ENABLED` is
+set to `true`.
+
 ## GitHub Comment Format Options
 
 Slack Context Processor should use one consistent GitHub issue comment format.
@@ -383,7 +390,8 @@ Avoid for MVP unless specifically needed:
 - `chat:write.customize` - post as another user or with customized identity.
 
 Recommended MVP: no Slack write scopes until report-back work starts. When it
-does, use `chat:write` only and invite the app to explicit channels.
+does, use `chat:write` only, invite the app to explicit channels, and set
+`SLACK_POSTBACK_ENABLED=true`.
 
 ## Data Model
 
