@@ -211,9 +211,10 @@ jobs:
             function tableToSlack(tableBlock) {
               const rows = tableBlock
                 .split("\n")
+                .filter((r) => r.trim().startsWith("|"))
                 .map((r) => r.split("|").map((c) => c.trim()).filter((_, i, a) => i > 0 && i < a.length - 1));
               const headers = rows[0];
-              const dataRows = rows.slice(2); // skip separator row
+              const dataRows = rows.slice(2).filter((cols) => cols.some((c) => c.trim())); // skip empty rows
 
               return dataRows.map((cols) => {
                 // Clean escaped backtick issue: \\`#2` → #2
