@@ -556,11 +556,26 @@ Suggested secrets:
   signals from Slack.
 - Keep all outputs in GitHub.
 
-### Phase 4: Focused Report-Back
+### Phase 4: Focused Report-Back ✅
 
-- Post short links to GitHub-generated artifacts in mapped Slack channels.
-- Start with manual opt-in per workflow.
-- Include duplicate suppression and per-run post limits.
+- Implemented as
+  `.github/workflows/slack-report-back-dispatch.yml` — a deterministic
+  dispatcher that triggers on `workflow_run` completion for all major
+  reporting workflows.
+- Opt-in per workflow via `SLACK_ARTIFACT_CHANNEL_MAP` repository variable
+  (JSON map of exact workflow name → Slack channel ID).
+- URL lookup reads the `safe-outputs-items` artifact from the completed
+  workflow run — direct and reliable, no title search or timing race.
+  Falls back to title-prefix search for manual dispatch runs.
+- Supported workflows: Weekly Leadership Status Update, Launch Readiness
+  Report, Weekly Agentic Workflow Health Report, Daily Standup Prep, Weekly
+  Compliance Team Reports, Weekly GTM Team Report, Weekly Leadership Brief,
+  Commitment Reconciler.
+- All channels validated against `SLACK_ALLOWED_CHANNEL_IDS` allowlist.
+- Next iteration: have individual workflows emit a curated Slack summary
+  via the `slack_post_message` safe output (imported from
+  `shared/slack-safe-outputs.md`) so the agent controls what context
+  appears in Slack rather than posting a bare title and link.
 
 ### Phase 5: Expanded Reaction Semantics
 

@@ -160,9 +160,14 @@ Then opt in to Slack post-backs:
 gh variable set SLACK_POSTBACK_ENABLED --body "true"
 ```
 
-To enable report-back for specific workflows, set `SLACK_ARTIFACT_CHANNEL_MAP`
-as a JSON object mapping workflow names to Slack channel IDs. Only the workflows
-listed here will post report-backs; omit any you don't want posted to Slack.
+To enable report-back for specific reporting workflows, set
+`SLACK_ARTIFACT_CHANNEL_MAP` as a JSON object mapping workflow names to Slack
+channel IDs. After each listed workflow completes successfully, the
+[Slack Report-Back Dispatch](.github/workflows/slack-report-back-dispatch.yml)
+posts a short message with the artifact title and URL to the mapped channel.
+
+Only workflows listed here will post report-backs; omit any you don't want
+posted to Slack.
 
 ```bash
 gh variable set SLACK_ARTIFACT_CHANNEL_MAP --body '{
@@ -177,8 +182,28 @@ gh variable set SLACK_ARTIFACT_CHANNEL_MAP --body '{
 }'
 ```
 
+The keys must be the exact compiled workflow names. Supported workflows and
+the artifact each one posts:
+
+| Workflow name (exact) | Creates | Default audience |
+|---|---|---|
+| `Weekly Leadership Status Update` | Discussion | Team channel |
+| `Launch Readiness Report` | Discussion | Launch/stakeholder channel |
+| `Weekly Agentic Workflow Health Report` | Discussion | Ops/automation channel |
+| `Daily Standup Prep` | Discussion | Team channel |
+| `Weekly Compliance Team Reports` | Discussion | Compliance channel |
+| `Weekly GTM Team Report` | Discussion | GTM channel |
+| `Weekly Leadership Brief` | Discussion | Leadership channel |
+| `Commitment Reconciler` | Issue | Program/ops channel |
+
 Every channel ID listed in `SLACK_ARTIFACT_CHANNEL_MAP` must also appear in
 `SLACK_ALLOWED_CHANNEL_IDS`.
+
+**How it works:** The dispatch reads the `safe-outputs-items` artifact from
+the completed workflow run to get the exact URL of the discussion or issue
+that was just created — no search or title matching required. For manual
+`workflow_dispatch` runs where no run ID is provided, it falls back to
+searching by title prefix within the last 24 hours.
 
 If enabling the Slack Fixture Fetcher workflow, also set `SLACK_BOT_TOKEN` as a
 repository secret. The first read-only demo requires `channels:history` and
