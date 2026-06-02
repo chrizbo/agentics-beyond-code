@@ -1,0 +1,207 @@
+name: Slack Report-Back Dispatch
+
+on:
+  workflow_run:
+    workflows:
+      - "Launch Readiness Checker"
+      - "Compliance Team Reports"
+      - "GTM Team Reports"
+      - "Weekly Status"
+      - "Leadership Briefs"
+      - "Workflow Health"
+      - "Daily Standup Prep"
+      - "Commitment Reconciler"
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      workflow_name:
+        description: "Workflow name to report back for (e.g. 'Weekly Status'). Searches for the most recent matching artifact."
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+  discussions: read
+
+concurrency:
+  group: slack-report-back-${{ github.event.workflow_run.id || inputs.workflow_name || github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  report-back:
+    if: |
+      vars.SLACK_POSTBACK_ENABLED == 'true' &&
+      vars.SLACK_ARTIFACT_CHANNEL_MAP != '' &&
+      (
+        github.event_name == 'workflow_dispatch' ||
+        github.event.workflow_run.conclusion == 'success'
+      )
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_ALLOWED_CHANNEL_IDS: ${{ vars.SLACK_ALLOWED_CHANNEL_IDS }}
+      SLACK_ARTIFACT_CHANNEL_MAP: ${{ vars.SLACK_ARTIFACT_CHANNEL_MAP }}
+      WORKFLOW_NAME: ${{ github.event.workflow_run.name || inputs.workflow_name }}
+    steps:
+      - name: Post Slack report-back
+        run: |
+          node <<'NODE'
+          const { execFileSync } = require("node:child_process");
+
+          // SLACK_ARTIFACT_CHANNEL_MAP is a JSON object mapping workflow names to Slack
+          // channel IDs. Only workflows listed here will post report-backs.
+          //
+          // Example variable value:
+          // {
+          //   "Weekly Status": "C0123456789",
+          //   "Launch Readiness Checker": "C9876543210",
+          //   "Workflow Health": "C1111111111"
+          // }
+          //
+          // Title prefixes used to find the artifact created by each workflow:
+          const TITLE_PREFIXES = {
+            "Launch Readiness Checker":  "[Launch Readiness] ",
+            "Compliance Team Reports":   "[Compliance] ",
+            "GTM Team Reports":          "[GTM] ",
+            "Weekly Status":             "[Weekly Status] ",
+            "Leadership Briefs":         "[Leadership Brief] ",
+            "Workflow Health":           "[Workflow Health] ",
+            "Daily Standup Prep":        "[Standup Prep] ",
+            "Commitment Reconciler":     "[Commitment Reconciliation] "
+          };
+
+          // Artifact types: most workflows create discussions; Commitment Reconciler creates an issue.
+          const ARTIFACT_TYPES = {
+            "Commitment Reconciler": "issue"
+          };
+
+          async function main() {
+            const token = process.env.SLACK_BOT_TOKEN;
+            const repo = process.env.GH_REPO;
+            const workflowName = String(process.env.WORKFLOW_NAME || "").trim();
+            const allowedChannels = new Set(
+              String(process.env.SLACK_ALLOWED_CHANNEL_IDS || "")
+                .split(",")
+                .map((v) => v.trim())
+                .filter(Boolean)
+            );
+
+            if (!token) throw new Error("SLACK_BOT_TOKEN is not configured.");
+            if (!allowedChannels.size) throw new Error("SLACK_ALLOWED_CHANNEL_IDS must contain at least one channel ID.");
+            if (!workflowName) throw new Error("WORKFLOW_NAME is required.");
+
+            let channelMap;
+            try {
+              channelMap = JSON.parse(process.env.SLACK_ARTIFACT_CHANNEL_MAP || "{}");
+            } catch {
+              throw new Error("SLACK_ARTIFACT_CHANNEL_MAP must be valid JSON.");
+            }
+
+            const channelId = channelMap[workflowName];
+            if (!channelId) {
+              console.log(`No Slack channel configured for workflow "${workflowName}". Skipping.`);
+              return;
+            }
+
+            if (!allowedChannels.has(channelId)) {
+              throw new Error(`Channel ${channelId} for "${workflowName}" is not in SLACK_ALLOWED_CHANNEL_IDS.`);
+            }
+
+            const titlePrefix = TITLE_PREFIXES[workflowName];
+            if (!titlePrefix) {
+              throw new Error(`No title prefix defined for workflow "${workflowName}".`);
+            }
+
+            const artifactType = ARTIFACT_TYPES[workflowName] || "discussion";
+
+            function gh(args) {
+              return execFileSync("gh", args, { encoding: "utf8" });
+            }
+
+            // Find the artifact created by this workflow run in the last 24 hours.
+            let artifactUrl, artifactTitle;
+
+            if (artifactType === "issue") {
+              const issues = JSON.parse(gh([
+                "issue", "list",
+                "--repo", repo,
+                "--state", "open",
+                "--search", `"${titlePrefix}" in:title`,
+                "--limit", "5",
+                "--json", "number,title,url,createdAt"
+              ]));
+              const recent = issues
+                .filter((i) => Date.now() - new Date(i.createdAt).getTime() < 24 * 60 * 60 * 1000)
+                .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))[0];
+              if (!recent) {
+                console.log(`No recent issue found with prefix "${titlePrefix}". Skipping.`);
+                return;
+              }
+              artifactUrl = recent.url;
+              artifactTitle = recent.title;
+            } else {
+              // Search discussions via GraphQL
+              const [owner, repoName] = repo.split("/");
+              const query = `
+                query($owner: String!, $repo: String!, $q: String!) {
+                  search(query: $q, type: DISCUSSION, first: 5) {
+                    nodes {
+                      ... on Discussion {
+                        title
+                        url
+                        createdAt
+                      }
+                    }
+                  }
+                }
+              `;
+              const result = JSON.parse(gh([
+                "api", "graphql",
+                "-f", `query=${query}`,
+                "-f", `owner=${owner}`,
+                "-f", `repo=${repoName}`,
+                "-f", `q=repo:${repo} in:title ${titlePrefix.trim()}`
+              ]));
+              const nodes = (result.data?.search?.nodes || [])
+                .filter((n) => n && n.title && n.title.startsWith(titlePrefix.trim()))
+                .filter((n) => Date.now() - new Date(n.createdAt).getTime() < 24 * 60 * 60 * 1000)
+                .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+              if (!nodes.length) {
+                console.log(`No recent discussion found with prefix "${titlePrefix}". Skipping.`);
+                return;
+              }
+              artifactUrl = nodes[0].url;
+              artifactTitle = nodes[0].title;
+            }
+
+            const text = `${artifactTitle}\n${artifactUrl}`;
+
+            const response = await fetch("https://slack.com/api/chat.postMessage", {
+              method: "POST",
+              headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json; charset=utf-8"
+              },
+              body: JSON.stringify({
+                channel: channelId,
+                text,
+                unfurl_links: false,
+                unfurl_media: false
+              })
+            });
+
+            const result = await response.json();
+            if (!response.ok || !result.ok) {
+              throw new Error(`Slack post failed for "${workflowName}": ${result.error || response.statusText}`);
+            }
+
+            console.log(`Posted report-back for "${workflowName}" to ${channelId}: ${artifactTitle}`);
+          }
+
+          main().catch((error) => {
+            console.error(error);
+            process.exit(1);
+          });
+          NODE

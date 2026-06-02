@@ -160,6 +160,26 @@ Then opt in to Slack post-backs:
 gh variable set SLACK_POSTBACK_ENABLED --body "true"
 ```
 
+To enable report-back for specific workflows, set `SLACK_ARTIFACT_CHANNEL_MAP`
+as a JSON object mapping workflow names to Slack channel IDs. Only the workflows
+listed here will post report-backs; omit any you don't want posted to Slack.
+
+```bash
+gh variable set SLACK_ARTIFACT_CHANNEL_MAP --body '{
+  "Weekly Status": "C0123456789",
+  "Launch Readiness Checker": "C9876543210",
+  "Workflow Health": "C1111111111",
+  "Daily Standup Prep": "C2222222222",
+  "Compliance Team Reports": "C3333333333",
+  "GTM Team Reports": "C4444444444",
+  "Leadership Briefs": "C5555555555",
+  "Commitment Reconciler": "C6666666666"
+}'
+```
+
+Every channel ID listed in `SLACK_ARTIFACT_CHANNEL_MAP` must also appear in
+`SLACK_ALLOWED_CHANNEL_IDS`.
+
 If enabling the Slack Fixture Fetcher workflow, also set `SLACK_BOT_TOKEN` as a
 repository secret. The first read-only demo requires `channels:history` and
 `reactions:read` on the Slack app. Add `users:read` to resolve Slack user IDs
