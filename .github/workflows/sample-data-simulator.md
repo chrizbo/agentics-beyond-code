@@ -6,7 +6,7 @@ description: |
 
 engine:
   id: codex
-  model: gpt-5-codex
+  model: gpt-4o
 
 on:
   schedule: "0 6 * * 2-6" # Weeknights before downstream demo workflows

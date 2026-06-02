@@ -9,7 +9,7 @@ description: |
 
 engine:
   id: codex
-  model: gpt-5-codex
+  model: gpt-4o
 
 on:
   schedule: weekly on monday around 7:30am utc-7

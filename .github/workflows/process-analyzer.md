@@ -8,7 +8,7 @@ description: |
 
 engine:
   id: codex
-  model: gpt-5-codex
+  model: gpt-4o
 
 on:
   schedule: weekly
