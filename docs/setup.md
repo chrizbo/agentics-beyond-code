@@ -166,13 +166,13 @@ listed here will post report-backs; omit any you don't want posted to Slack.
 
 ```bash
 gh variable set SLACK_ARTIFACT_CHANNEL_MAP --body '{
-  "Weekly Status": "C0123456789",
-  "Launch Readiness Checker": "C9876543210",
-  "Workflow Health": "C1111111111",
+  "Weekly Leadership Status Update": "C0123456789",
+  "Launch Readiness Report": "C9876543210",
+  "Weekly Agentic Workflow Health Report": "C1111111111",
   "Daily Standup Prep": "C2222222222",
-  "Compliance Team Reports": "C3333333333",
-  "GTM Team Reports": "C4444444444",
-  "Leadership Briefs": "C5555555555",
+  "Weekly Compliance Team Reports": "C3333333333",
+  "Weekly GTM Team Report": "C4444444444",
+  "Weekly Leadership Brief": "C5555555555",
   "Commitment Reconciler": "C6666666666"
 }'
 ```

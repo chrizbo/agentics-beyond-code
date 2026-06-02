@@ -3,19 +3,19 @@ name: Slack Report-Back Dispatch
 on:
   workflow_run:
     workflows:
-      - "Launch Readiness Checker"
-      - "Compliance Team Reports"
-      - "GTM Team Reports"
-      - "Weekly Status"
-      - "Leadership Briefs"
-      - "Workflow Health"
+      - "Launch Readiness Report"
+      - "Weekly Compliance Team Reports"
+      - "Weekly GTM Team Report"
+      - "Weekly Leadership Status Update"
+      - "Weekly Leadership Brief"
+      - "Weekly Agentic Workflow Health Report"
       - "Daily Standup Prep"
       - "Commitment Reconciler"
     types: [completed]
   workflow_dispatch:
     inputs:
       workflow_name:
-        description: "Workflow name to report back for (e.g. 'Weekly Status'). Searches for the most recent matching artifact."
+        description: "Workflow name to report back for (e.g. 'Weekly Leadership Status Update'). Searches for the most recent matching artifact."
         required: false
         default: ""
 
@@ -62,14 +62,14 @@ jobs:
           //
           // Title prefixes used to find the artifact created by each workflow:
           const TITLE_PREFIXES = {
-            "Launch Readiness Checker":  "[Launch Readiness] ",
-            "Compliance Team Reports":   "[Compliance] ",
-            "GTM Team Reports":          "[GTM] ",
-            "Weekly Status":             "[Weekly Status] ",
-            "Leadership Briefs":         "[Leadership Brief] ",
-            "Workflow Health":           "[Workflow Health] ",
-            "Daily Standup Prep":        "[Standup Prep] ",
-            "Commitment Reconciler":     "[Commitment Reconciliation] "
+            "Launch Readiness Report":             "[Launch Readiness] ",
+            "Weekly Compliance Team Reports":      "[Compliance] ",
+            "Weekly GTM Team Report":              "[GTM] ",
+            "Weekly Leadership Status Update":     "[Weekly Status] ",
+            "Weekly Leadership Brief":             "[Leadership Brief] ",
+            "Weekly Agentic Workflow Health Report": "[Workflow Health] ",
+            "Daily Standup Prep":                  "[Standup Prep] ",
+            "Commitment Reconciler":               "[Commitment Reconciliation] "
           };
 
           // Artifact types: most workflows create discussions; Commitment Reconciler creates an issue.
