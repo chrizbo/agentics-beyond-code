@@ -1,0 +1,58 @@
+{
+  "fetched_at": "2026-06-02T01:10:46.796Z",
+  "lookback_hours": 24,
+  "channels": [
+    {
+      "channel_id": "C0B7ER3RZ53",
+      "channel_name": "C0B7ER3RZ53"
+    }
+  ],
+  "messages": [
+    {
+      "channel_id": "C0B7ER3RZ53",
+      "channel_name": "C0B7ER3RZ53",
+      "thread_ts": "1780362185.469849",
+      "message_ts": "1780362185.469849",
+      "permalink": "https://slack.com/archives/C0B7ER3RZ53/p1780362185469849",
+      "author_id": "U0B7G54TZ54",
+      "author_name": "Slack participant",
+      "created_at": "2026-06-02T01:03:05.469Z",
+      "text": "Can we open an issue for the launch handoff checklist? We need a tracked follow-up to make sure support, GTM, and compliance owners confirm their readiness before the next launch review. Without that, the launch readiness report may show green while downstream teams still have open questions.",
+      "reactions": [
+        "inbox_tray"
+      ],
+      "matched_by": []
+    },
+    {
+      "channel_id": "C0B7ER3RZ53",
+      "channel_name": "C0B7ER3RZ53",
+      "thread_ts": "1780345438.463139",
+      "message_ts": "1780345438.463139",
+      "permalink": "https://slack.com/archives/C0B7ER3RZ53/p1780345438463139",
+      "author_id": "U0B7G54TZ54",
+      "author_name": "Slack participant",
+      "created_at": "2026-06-01T20:23:58.463Z",
+      "text": "Can we open an issue for the onboarding checklist? The launch readiness workflow is still missing owner confirmation for partner enablement, and I think we need a tracked follow-up before the next review.",
+      "reactions": [
+        "inbox_tray"
+      ],
+      "matched_by": []
+    },
+    {
+      "channel_id": "C0B7ER3RZ53",
+      "channel_name": "C0B7ER3RZ53",
+      "thread_ts": "1780341504.512589",
+      "message_ts": "1780341504.512589",
+      "permalink": "https://slack.com/archives/C0B7ER3RZ53/p1780341504512589",
+      "author_id": "U0B7G54TZ54",
+      "author_name": "Slack participant",
+      "created_at": "2026-06-01T19:18:24.512Z",
+      "text": "For <https://github.com/chrizbo/agentics-beyond-code/issues/172>, I think Localized Tax Invoice Support is at risk unless we get VAT validation provider confirmation by Thursday. Proposed path: keep the Beta date, but reduce the initial rollout to EU sandbox accounts only until invoice preview QA is complete.",
+      "reactions": [
+        "memo"
+      ],
+      "matched_by": []
+    }
+  ],
+  "events": []
+}
