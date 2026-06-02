@@ -26,7 +26,6 @@ jobs:
     env:
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       SLACK_ALLOWED_CHANNEL_IDS: ${{ vars.SLACK_ALLOWED_CHANNEL_IDS }}
-      SLACK_USER_ID_MAP: ${{ vars.SLACK_USER_ID_MAP }}
       INPUT_CHANNEL_IDS: ${{ inputs.channel_ids }}
       LOOKBACK_HOURS: ${{ inputs.lookback_hours }}
     steps:
@@ -52,7 +51,6 @@ jobs:
             const allowed = new Set(configuredAllowed);
             const channelIds = requested.length ? requested : configuredAllowed;
             const lookbackHours = Number(process.env.LOOKBACK_HOURS || "24");
-            const userIdMap = parseUserIdMap(process.env.SLACK_USER_ID_MAP || "");
 
             if (!token) {
               throw new Error("SLACK_BOT_TOKEN is not configured.");
@@ -88,21 +86,6 @@ jobs:
               return json;
             }
 
-            function parseUserIdMap(value) {
-              if (!value.trim()) {
-                return {};
-              }
-              try {
-                const parsed = JSON.parse(value);
-                if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
-                  throw new Error("expected a JSON object");
-                }
-                return parsed;
-              } catch (error) {
-                throw new Error(`SLACK_USER_ID_MAP must be a JSON object: ${error.message}`);
-              }
-            }
-
             function normalizeHandle(value) {
               if (!value || typeof value !== "string") {
                 return "";
@@ -128,12 +111,6 @@ jobs:
               }
               if (users.has(userId)) {
                 return users.get(userId);
-              }
-
-              const configuredHandle = normalizeHandle(userIdMap[userId]);
-              if (configuredHandle) {
-                users.set(userId, configuredHandle);
-                return configuredHandle;
               }
 
               const messageProfileHandle = handleFromProfile(message?.user_profile);
