@@ -239,6 +239,8 @@ The following labels are used by workflows. Create them in your repository:
 **External-source labels:**
 - `from-slack` — marks issues or comments created from Slack context or Slack
   reaction intake
+- `slack-postback-sent` — marks Slack-originated issues that already received a
+  Slack thread acknowledgement
 
 ### 6. Create issues using templates
 
