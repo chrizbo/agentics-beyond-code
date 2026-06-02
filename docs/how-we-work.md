@@ -72,7 +72,7 @@
 
 ### New Issue Triage
 - **When:** Daily, after standup
-- **Who:** Sarah (DRI), with input from relevant engineers
+- **Who:** rotation duty among engineers, with input from relevant engineers
 - **Process:**
   1. Review all unlabeled issues opened in the last 24 hours
   2. Classify by type: `bug`, `enhancement`, `question`, `documentation`
