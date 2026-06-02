@@ -1,0 +1,156 @@
+name: Slack Postback Dispatch
+
+on:
+  workflow_run:
+    workflows: ["Slack Reaction Intake"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "Slack Reaction Intake run ID to post back for. Defaults to latest matching issue when omitted."
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+  issues: read
+
+concurrency:
+  group: slack-postback-${{ github.event.workflow_run.id || inputs.run_id || github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  postback:
+    if: (github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success') && vars.SLACK_POSTBACK_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_ALLOWED_CHANNEL_IDS: ${{ vars.SLACK_ALLOWED_CHANNEL_IDS }}
+      SOURCE_RUN_ID: ${{ github.event.workflow_run.id || inputs.run_id }}
+    steps:
+      - name: Post Slack acknowledgements
+        run: |
+          node <<'NODE'
+          const { execFileSync } = require("node:child_process");
+
+          async function main() {
+            const token = process.env.SLACK_BOT_TOKEN;
+            const repo = process.env.GH_REPO;
+            const sourceRunId = String(process.env.SOURCE_RUN_ID || "").trim();
+            const allowedChannels = new Set(
+              String(process.env.SLACK_ALLOWED_CHANNEL_IDS || "")
+                .split(",")
+                .map((value) => value.trim())
+                .filter(Boolean)
+            );
+
+            if (!token) {
+              throw new Error("SLACK_BOT_TOKEN is not configured.");
+            }
+
+            if (!allowedChannels.size) {
+              throw new Error("SLACK_ALLOWED_CHANNEL_IDS must contain at least one channel ID.");
+            }
+
+            function gh(args) {
+              return execFileSync("gh", args, { encoding: "utf8" });
+            }
+
+            function parseThreadTs(body) {
+              const key = body.match(/slack-reaction-intake:([A-Z0-9]+):([0-9]+\.[0-9]+):inbox_tray/);
+              if (key) {
+                return { channel: key[1], threadTs: key[2] };
+              }
+
+              const permalink = body.match(/https:\/\/slack\.com\/archives\/([A-Z0-9]+)\/p([0-9]+)/);
+              if (!permalink) {
+                return null;
+              }
+
+              const rawTs = permalink[2];
+              if (rawTs.length <= 6) {
+                return null;
+              }
+
+              return {
+                channel: permalink[1],
+                threadTs: `${rawTs.slice(0, -6)}.${rawTs.slice(-6)}`
+              };
+            }
+
+            const issues = JSON.parse(gh([
+              "issue",
+              "list",
+              "--repo",
+              repo,
+              "--state",
+              "open",
+              "--label",
+              "from-slack",
+              "--limit",
+              "50",
+              "--json",
+              "number,title,body,url,labels"
+            ]));
+
+            const runNeedle = sourceRunId ? `/actions/runs/${sourceRunId}` : "";
+            const candidates = issues.filter((issue) => {
+              const labels = new Set((issue.labels || []).map((label) => label.name));
+              if (!labels.has("from-slack")) {
+                return false;
+              }
+              if (!issue.body || !issue.body.includes("slack-reaction-intake:")) {
+                return false;
+              }
+              return !runNeedle || issue.body.includes(runNeedle);
+            });
+
+            if (!candidates.length) {
+              console.log("No Slack intake issues found for post-back.");
+              return;
+            }
+
+            for (const issue of candidates.slice(0, 5)) {
+              const source = parseThreadTs(issue.body || "");
+              if (!source) {
+                console.log(`Skipping #${issue.number}: no Slack source found.`);
+                continue;
+              }
+
+              if (!allowedChannels.has(source.channel)) {
+                console.log(`Skipping #${issue.number}: channel ${source.channel} is not allowlisted.`);
+                continue;
+              }
+
+              const text = `Created GitHub intake issue #${issue.number}: ${issue.title}\n${issue.url}`;
+              const response = await fetch("https://slack.com/api/chat.postMessage", {
+                method: "POST",
+                headers: {
+                  "Authorization": `Bearer ${token}`,
+                  "Content-Type": "application/json; charset=utf-8"
+                },
+                body: JSON.stringify({
+                  channel: source.channel,
+                  thread_ts: source.threadTs,
+                  text,
+                  unfurl_links: false,
+                  unfurl_media: false
+                })
+              });
+
+              const result = await response.json();
+              if (!response.ok || !result.ok) {
+                throw new Error(`Slack post failed for #${issue.number}: ${result.error || response.statusText}`);
+              }
+
+              console.log(`Posted Slack acknowledgement for #${issue.number} to ${source.channel} at ${result.ts}.`);
+            }
+          }
+
+          main().catch((error) => {
+            console.error(error);
+            process.exit(1);
+          });
+          NODE
