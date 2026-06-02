@@ -150,6 +150,7 @@ Use this body format:
 - Reaction: `:inbox_tray:`
 - Slack source: <candidate.permalink or "fixture permalink unavailable">
 - Fixture: `<candidate.fixture>`
+- Slack intake key: `<candidate.idempotency_key>`
 
 ### Copied Slack Context
 
@@ -159,9 +160,11 @@ Use this body format:
 
 - Created from a Slack reaction signal.
 - Needs product triage before commitment.
-
-<!-- <candidate.idempotency_key> -->
 ```
+
+The issue body must include the exact `Slack intake key` line. Postback and
+idempotency workflows use that key to find the source Slack thread and prevent
+duplicate issues.
 
 For source links, use the raw `permalink` from the fixture only when it starts
 with `http://` or `https://`. If it is missing or redacted, write
