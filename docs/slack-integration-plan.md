@@ -538,6 +538,8 @@ Suggested secrets:
 - Create intake issues with Slack permalink evidence and the `from-slack`
   label.
 - Add idempotency so the same message cannot create repeated issues.
+- Mark issues with `slack-postback-sent` after a successful Slack
+  acknowledgement so reruns do not post duplicate replies.
 
 ### Phase 3: Commitment Reconciliation
 

@@ -13,7 +13,7 @@ on:
 
 permissions:
   contents: read
-  issues: read
+  issues: write
 
 concurrency:
   group: slack-postback-${{ github.event.workflow_run.id || inputs.run_id || github.run_id }}
@@ -56,6 +56,24 @@ jobs:
 
             function gh(args) {
               return execFileSync("gh", args, { encoding: "utf8" });
+            }
+
+            function ensurePostbackLabel() {
+              try {
+                gh([
+                  "label",
+                  "create",
+                  "slack-postback-sent",
+                  "--repo",
+                  repo,
+                  "--color",
+                  "6f42c1",
+                  "--description",
+                  "Slack acknowledgement has been posted for this issue"
+                ]);
+              } catch {
+                // Label already exists or cannot be created; issue edit below will surface real failures.
+              }
             }
 
             function parseThreadTs(body) {
@@ -101,6 +119,9 @@ jobs:
               if (!labels.has("from-slack")) {
                 return false;
               }
+              if (labels.has("slack-postback-sent")) {
+                return false;
+              }
               if (!issue.body || !issue.body.includes("slack-reaction-intake:")) {
                 return false;
               }
@@ -144,6 +165,17 @@ jobs:
               if (!response.ok || !result.ok) {
                 throw new Error(`Slack post failed for #${issue.number}: ${result.error || response.statusText}`);
               }
+
+              ensurePostbackLabel();
+              gh([
+                "issue",
+                "edit",
+                String(issue.number),
+                "--repo",
+                repo,
+                "--add-label",
+                "slack-postback-sent"
+              ]);
 
               console.log(`Posted Slack acknowledgement for #${issue.number} to ${source.channel} at ${result.ts}.`);
             }
