@@ -6,7 +6,7 @@ description: |
 
 engine:
   id: codex
-  model: gpt-4o
+  model: gpt-4o-mini
 
 on:
   schedule: "0 6 * * 2-6" # Weeknights before downstream demo workflows
@@ -46,7 +46,7 @@ safe-outputs:
   mentions: false
   allowed-github-references: []
   create-issue:
-    max: 15
+    max: 5
   close-issue:
     target: "*"
     max: 10
@@ -256,9 +256,9 @@ For the new launch:
    Phase rollout: Team → Alpha → Beta → GA
    ```
 
-3. **Create 2-3 epics** under the launch with realistic workstream names
+3. **Create 1-2 epics** under the launch with realistic workstream names
 
-4. **Create 3-5 tasks** spread across the epics
+4. **Create 1-2 tasks** spread across the epics
 
 5. **Wire the full hierarchy**: Use the `parent` field on `create_issue` to
    link initiatives → launches → epics → tasks. For example:
@@ -393,9 +393,9 @@ Then call the `create_pull_request` safe output to push the file:
 }
 ```
 
-### 9. Generate Intake Requests (1-2 per run)
+### 9. Generate Intake Requests (1 per run)
 
-Create **1-2 intake requests** using the intake issue template format. These
+Create **1 intake request** using the intake issue template format. These
 feed the **intake-triage** workflow, which will automatically score and
 evaluate them.
 
@@ -603,19 +603,18 @@ still successful.
 
 ## Safe output calls
 
-Write body content to a temp file, then call with explicit flags (stdin redirection can silently fail in this environment):
+Use the MCP tool interface to create safe outputs. Examples:
 
-```bash
-cat > /tmp/gh-aw/agent/body.md << 'BODY'
-...content...
-BODY
-safeoutputs create_discussion --title "title" --body "$(cat /tmp/gh-aw/agent/body.md)"
-# or: safeoutputs create_issue / add_comment / create_pull_request — same pattern
+```json
+{"type": "create_issue", "title": "Issue title", "body": "Issue body"}
+{"type": "add_comment", "issue_number": 42, "body": "Comment body"}
+{"type": "create_pull_request", "title": "PR title", "body": "PR body", "branch": "branch-name"}
+{"type": "noop", "message": "reason no action was taken"}
 ```
 
-Configured title prefixes are added automatically — omit them from `--title`.
+Configured title prefixes are added automatically — omit them from `title`.
 If a required core sample-data safe-output call fails, immediately call
-`safeoutputs noop --message "reason"` and stop — never ask for input. Optional
+`noop` with the reason and stop — never ask for input. Optional
 Slack fixture generation is best effort: prefer skipping the optional Slack
 fixture action before making a safe-output call that is likely to fail.
 
