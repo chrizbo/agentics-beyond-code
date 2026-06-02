@@ -139,7 +139,24 @@ jobs:
                   const item = JSON.parse(line);
                   if (item.type === artifactType && item.url) {
                     artifactUrl = item.url;
-                    artifactTitle = item.title || artifactUrl;
+                    // The artifact doesn't include a title — fetch it from the GitHub API.
+                    if (artifactType === "create_discussion" && item.number) {
+                      const [owner, repoName] = repo.split("/");
+                      const titleQuery = `query($owner:String!,$repo:String!,$num:Int!){repository(owner:$owner,name:$repo){discussion(number:$num){title}}}`;
+                      const titleResult = JSON.parse(gh([
+                        "api", "graphql",
+                        "-f", `query=${titleQuery}`,
+                        "-f", `owner=${owner}`,
+                        "-f", `repo=${repoName}`,
+                        "-F", `num=${item.number}`
+                      ]));
+                      artifactTitle = titleResult.data?.repository?.discussion?.title || artifactUrl;
+                    } else if (artifactType === "create_issue" && item.number) {
+                      const issueData = JSON.parse(gh(["issue", "view", String(item.number), "--repo", repo, "--json", "title"]));
+                      artifactTitle = issueData.title || artifactUrl;
+                    } else {
+                      artifactTitle = artifactUrl;
+                    }
                     break;
                   }
                 } catch { /* skip malformed lines */ }
