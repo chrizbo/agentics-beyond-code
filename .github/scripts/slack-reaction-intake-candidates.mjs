@@ -2,21 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 
-function listFixtureFiles() {
-  if (process.env.GITHUB_EVENT_NAME === "push") {
-    try {
-      const output = execFileSync("git", ["diff", "--name-only", "HEAD~1", "HEAD"], {
-        encoding: "utf8",
-        stdio: ["ignore", "pipe", "ignore"],
-      });
-      return output
-        .split(/\r?\n/)
-        .filter((file) => /^slack-fixtures\/.*\.json$/.test(file));
-    } catch {
-      return [];
-    }
-  }
-
+function listAllFixtureFiles() {
   const root = "slack-fixtures";
   if (!fs.existsSync(root)) {
     return [];
@@ -35,6 +21,31 @@ function listFixtureFiles() {
   };
   walk(root);
   return files.sort();
+}
+
+function listFixtureFilesFromPushDiff() {
+  try {
+    const output = execFileSync("git", ["diff", "--name-only", "HEAD~1", "HEAD"], {
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "ignore"],
+    });
+    return output
+      .split(/\r?\n/)
+      .filter((file) => /^slack-fixtures\/.*\.json$/.test(file));
+  } catch {
+    return [];
+  }
+}
+
+function listFixtureFiles() {
+  if (process.env.GITHUB_EVENT_NAME === "push") {
+    const changedFiles = listFixtureFilesFromPushDiff();
+    if (changedFiles.length) {
+      return changedFiles;
+    }
+  }
+
+  return listAllFixtureFiles();
 }
 
 function textFrom(value) {
