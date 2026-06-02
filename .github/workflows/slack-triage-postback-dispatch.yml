@@ -1,0 +1,237 @@
+name: Slack Triage Postback Dispatch
+
+on:
+  workflow_run:
+    workflows: ["Intake Request Triage"]
+    types: [completed]
+  issues:
+    types: [labeled]
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: "Optional issue number to inspect. Defaults to open Slack intake issues."
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: slack-triage-postback-${{ github.event.workflow_run.id || github.event.issue.number || inputs.issue_number || github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  postback:
+    if: |
+      vars.SLACK_POSTBACK_ENABLED == 'true' &&
+      (
+        github.event_name == 'workflow_dispatch' ||
+        (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success') ||
+        (github.event_name == 'issues' && (github.event.label.name == 'triaged' || github.event.label.name == 'needs-more-info'))
+      )
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_ALLOWED_CHANNEL_IDS: ${{ vars.SLACK_ALLOWED_CHANNEL_IDS }}
+      ISSUE_NUMBER: ${{ github.event.issue.number || inputs.issue_number }}
+    steps:
+      - name: Post Slack triage updates
+        run: |
+          node <<'NODE'
+          const { execFileSync } = require("node:child_process");
+
+          async function main() {
+            const token = process.env.SLACK_BOT_TOKEN;
+            const repo = process.env.GH_REPO;
+            const issueNumber = String(process.env.ISSUE_NUMBER || "").trim();
+            const allowedChannels = new Set(
+              String(process.env.SLACK_ALLOWED_CHANNEL_IDS || "")
+                .split(",")
+                .map((value) => value.trim())
+                .filter(Boolean)
+            );
+
+            if (!token) {
+              throw new Error("SLACK_BOT_TOKEN is not configured.");
+            }
+
+            if (!allowedChannels.size) {
+              throw new Error("SLACK_ALLOWED_CHANNEL_IDS must contain at least one channel ID.");
+            }
+
+            function gh(args) {
+              return execFileSync("gh", args, { encoding: "utf8" });
+            }
+
+            function ensureLabel(name, description) {
+              try {
+                gh([
+                  "label",
+                  "create",
+                  name,
+                  "--repo",
+                  repo,
+                  "--color",
+                  "6f42c1",
+                  "--description",
+                  description
+                ]);
+              } catch {
+                // Label already exists or cannot be created; issue edit below will surface real failures.
+              }
+            }
+
+            function parseThreadTs(body) {
+              const key = body.match(/slack-reaction-intake:([A-Z0-9]+):([0-9]+\.[0-9]+):inbox_tray/);
+              if (key) {
+                return { channel: key[1], threadTs: key[2] };
+              }
+
+              const permalink = body.match(/https:\/\/slack\.com\/archives\/([A-Z0-9]+)\/p([0-9]+)/);
+              if (!permalink) {
+                return null;
+              }
+
+              const rawTs = permalink[2];
+              if (rawTs.length <= 6) {
+                return null;
+              }
+
+              return {
+                channel: permalink[1],
+                threadTs: `${rawTs.slice(0, -6)}.${rawTs.slice(-6)}`
+              };
+            }
+
+            function listIssues() {
+              if (issueNumber) {
+                const issue = JSON.parse(gh([
+                  "issue",
+                  "view",
+                  issueNumber,
+                  "--repo",
+                  repo,
+                  "--json",
+                  "number,title,body,url,labels"
+                ]));
+                return [issue];
+              }
+
+              return JSON.parse(gh([
+                "issue",
+                "list",
+                "--repo",
+                repo,
+                "--state",
+                "open",
+                "--label",
+                "from-slack",
+                "--limit",
+                "50",
+                "--json",
+                "number,title,body,url,labels"
+              ]));
+            }
+
+            function labelSet(issue) {
+              return new Set((issue.labels || []).map((label) => label.name));
+            }
+
+            function stateFor(issue) {
+              const labels = labelSet(issue);
+              if (!labels.has("from-slack")) {
+                return null;
+              }
+              if (!issue.body || !issue.body.includes("slack-reaction-intake:")) {
+                return null;
+              }
+              if (labels.has("needs-more-info") && !labels.has("slack-needs-info-postback-sent")) {
+                return {
+                  marker: "slack-needs-info-postback-sent",
+                  description: "Slack triage needs-more-info update has been posted for this issue",
+                  text: `Triage update for #${issue.number}: needs more information before commitment.\n${issue.url}`
+                };
+              }
+              if (labels.has("triaged") && !labels.has("slack-triage-postback-sent")) {
+                const summaryLabels = [...labels]
+                  .filter((label) =>
+                    label === "triaged" ||
+                    label === "aligns-with-current" ||
+                    label.startsWith("rice:") ||
+                    label.startsWith("kano:")
+                  )
+                  .sort();
+                const summary = summaryLabels.length ? summaryLabels.join(", ") : "triaged";
+                return {
+                  marker: "slack-triage-postback-sent",
+                  description: "Slack triage completion update has been posted for this issue",
+                  text: `Triage update for #${issue.number}: marked ${summary}.\n${issue.url}`
+                };
+              }
+              return null;
+            }
+
+            const candidates = listIssues()
+              .map((issue) => ({ issue, state: stateFor(issue) }))
+              .filter((candidate) => candidate.state);
+
+            if (!candidates.length) {
+              console.log("No Slack triage postback candidates found.");
+              return;
+            }
+
+            for (const { issue, state } of candidates.slice(0, 10)) {
+              const source = parseThreadTs(issue.body || "");
+              if (!source) {
+                console.log(`Skipping #${issue.number}: no Slack source found.`);
+                continue;
+              }
+
+              if (!allowedChannels.has(source.channel)) {
+                console.log(`Skipping #${issue.number}: channel ${source.channel} is not allowlisted.`);
+                continue;
+              }
+
+              const response = await fetch("https://slack.com/api/chat.postMessage", {
+                method: "POST",
+                headers: {
+                  "Authorization": `Bearer ${token}`,
+                  "Content-Type": "application/json; charset=utf-8"
+                },
+                body: JSON.stringify({
+                  channel: source.channel,
+                  thread_ts: source.threadTs,
+                  text: state.text,
+                  unfurl_links: false,
+                  unfurl_media: false
+                })
+              });
+
+              const result = await response.json();
+              if (!response.ok || !result.ok) {
+                throw new Error(`Slack triage post failed for #${issue.number}: ${result.error || response.statusText}`);
+              }
+
+              ensureLabel(state.marker, state.description);
+              gh([
+                "issue",
+                "edit",
+                String(issue.number),
+                "--repo",
+                repo,
+                "--add-label",
+                state.marker
+              ]);
+
+              console.log(`Posted Slack triage update for #${issue.number} to ${source.channel} at ${result.ts}.`);
+            }
+          }
+
+          main().catch((error) => {
+            console.error(error);
+            process.exit(1);
+          });
+          NODE

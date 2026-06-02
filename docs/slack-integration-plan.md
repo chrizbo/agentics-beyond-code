@@ -174,6 +174,11 @@ Slack Reaction Intake, parses the Slack source thread from the created issue,
 and posts the GitHub issue link back to Slack when `SLACK_POSTBACK_ENABLED` is
 set to `true`.
 
+Slack Triage Postback Dispatch extends that deterministic pattern after intake
+triage. It listens for `triaged` and `needs-more-info` outcomes on
+Slack-originated issues, posts one concise thread update back to the source
+Slack message, and marks the issue with a state-specific idempotency label.
+
 ## GitHub Comment Format Options
 
 Slack Context Processor should use one consistent GitHub issue comment format.
@@ -540,6 +545,9 @@ Suggested secrets:
 - Add idempotency so the same message cannot create repeated issues.
 - Mark issues with `slack-postback-sent` after a successful Slack
   acknowledgement so reruns do not post duplicate replies.
+- Post one follow-up Slack thread update when the created issue is marked
+  `triaged` or `needs-more-info`, then mark the issue with a state-specific
+  Slack triage postback label.
 
 ### Phase 3: Commitment Reconciliation
 

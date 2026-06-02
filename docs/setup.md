@@ -241,6 +241,10 @@ The following labels are used by workflows. Create them in your repository:
   reaction intake
 - `slack-postback-sent` — marks Slack-originated issues that already received a
   Slack thread acknowledgement
+- `slack-triage-postback-sent` — marks Slack-originated issues that already
+  received a Slack thread triage-complete update
+- `slack-needs-info-postback-sent` — marks Slack-originated issues that already
+  received a Slack thread needs-more-info update
 
 ### 6. Create issues using templates
 
