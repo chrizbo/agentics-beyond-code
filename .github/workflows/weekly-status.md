@@ -299,17 +299,25 @@ Discussion created: 1
 
 ## Safe output calls
 
-Write body content to a temp file, then call with explicit flags (stdin redirection can silently fail in this environment):
+Use the MCP tool interface to create safe outputs. Examples:
 
-```bash
-cat > /tmp/gh-aw/agent/body.md << 'BODY'
-...content...
-BODY
-safeoutputs create_discussion --title "title" --body "$(cat /tmp/gh-aw/agent/body.md)"
-# or: safeoutputs create_issue / add_comment / create_pull_request — same pattern
+```json
+{
+  "type": "create_discussion",
+  "title": "Week of YYYY-MM-DD",
+  "body": "<discussion content>"
+}
 ```
 
-Configured title prefixes are added automatically — omit them from `--title`. If you cannot create the required discussion, immediately call `safeoutputs report_incomplete --reason "brief reason" --details "what prevented the weekly status discussion"` and stop — never ask for input. Do not finish the run without a `safeoutputs` call.
+```json
+{
+  "type": "report_incomplete",
+  "reason": "brief reason",
+  "details": "what prevented the weekly status discussion"
+}
+```
+
+Configured title prefixes are added automatically — omit them from `title`. If you cannot create the required discussion, immediately call `report_incomplete` and stop — never ask for input. Do not finish the run without a safe output call.
 
 ### Slack report-back
 
