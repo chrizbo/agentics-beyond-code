@@ -166,13 +166,6 @@ repository secret. The first read-only demo requires `channels:history` and
 to `@handle` labels in copied context. Also add `groups:history` if the
 allowlisted channel is private.
 
-If Slack can read messages but cannot resolve a demo workspace user through
-`users.info`, set an optional JSON fallback map:
-
-```bash
-gh variable set SLACK_USER_ID_MAP --body '{"U0123456789":"@handle"}'
-```
-
 If enabling Slack post-backs, add `chat:write` to the Slack app and invite the
 app to every allowlisted channel where it should reply.
 
