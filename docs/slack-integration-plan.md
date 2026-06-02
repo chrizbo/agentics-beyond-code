@@ -536,18 +536,23 @@ Suggested secrets:
 - Format GitHub comments with a short summary, Slack permalinks, and copied
   context in a collapsed `<details>` block.
 
-### Phase 2: Slack Reaction Intake
+### Phase 2: Slack Reaction Intake ✅
 
-- Add an event bridge for Slack `reaction_added` events.
-- Support one low-risk reaction such as `:inbox_tray:`.
-- Create intake issues with Slack permalink evidence and the `from-slack`
-  label.
-- Add idempotency so the same message cannot create repeated issues.
-- Mark issues with `slack-postback-sent` after a successful Slack
-  acknowledgement so reruns do not post duplicate replies.
-- Post one follow-up Slack thread update when the created issue is marked
-  `triaged` or `needs-more-info`, then mark the issue with a state-specific
-  Slack triage postback label.
+- Implemented as `.github/workflows/slack-reaction-intake.md` (fixture-first
+  MVP using Slack-shaped JSON files in `slack-fixtures/`).
+- Supports `:inbox_tray:` reaction to create labeled GitHub intake issues with
+  `from-slack` and `triage-needed` labels and Slack permalink in the body.
+- Idempotency enforced via `slack-reaction-intake:<channel>:<ts>:inbox_tray`
+  key embedded in issue body; duplicate reactions produce no new issue.
+- Immediate acknowledgement posted to source Slack thread via
+  `slack-postback-dispatch.yml` after issue is created; issue marked
+  `slack-postback-sent`.
+- Triage follow-up posted to source Slack thread via
+  `slack-triage-postback-dispatch.yml` when issue is labeled `triaged` or
+  `needs-more-info`; issue marked `slack-triage-postback-sent` or
+  `slack-needs-info-postback-sent` respectively to prevent duplicate posts.
+- Both postback labels documented in `docs/setup.md` under external-source
+  labels.
 
 ### Phase 3: Commitment Reconciliation
 

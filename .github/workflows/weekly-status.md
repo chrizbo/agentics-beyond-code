@@ -37,6 +37,15 @@ steps:
       ./.github/scripts/fetch-launch-data.sh "$LAUNCH_PROJECT_OWNER" "$LAUNCH_PROJECT_NUMBER" launch-data.json
       echo "path=launch-data.json" >> "$GITHUB_OUTPUT"
 
+  - name: Resolve Slack report-back channel
+    env:
+      SLACK_ARTIFACT_CHANNEL_MAP: ${{ vars.SLACK_ARTIFACT_CHANNEL_MAP }}
+    run: |
+      mkdir -p /tmp/gh-aw/agent
+      echo "$SLACK_ARTIFACT_CHANNEL_MAP" \
+        | node -e "const m=JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')||'{}'); process.stdout.write(m['Weekly Leadership Status Update']||'')" \
+        > /tmp/gh-aw/agent/slack-channel.txt
+
 post-steps:
   - name: Require safe output
     if: success()
@@ -47,6 +56,9 @@ post-steps:
         echo "::error::Agent completed without a safe output. Create the required discussion or call safeoutputs report_incomplete."
         exit 1
       fi
+
+imports:
+  - shared/slack-safe-outputs.md
 
 tools:
   github:
@@ -298,6 +310,42 @@ safeoutputs create_discussion --title "title" --body "$(cat /tmp/gh-aw/agent/bod
 ```
 
 Configured title prefixes are added automatically — omit them from `--title`. If you cannot create the required discussion, immediately call `safeoutputs report_incomplete --reason "brief reason" --details "what prevented the weekly status discussion"` and stop — never ask for input. Do not finish the run without a `safeoutputs` call.
+
+### Slack report-back
+
+After calling `create_discussion`, check if a Slack channel is configured:
+
+```bash
+SLACK_CHANNEL=$(cat /tmp/gh-aw/agent/slack-channel.txt 2>/dev/null || echo "")
+```
+
+If `SLACK_CHANNEL` is non-empty, call `slack_post_message` with a concise
+Slack-formatted summary. Use Slack mrkdwn — not GitHub markdown:
+
+- Bold: `*text*` (not `**text**`)
+- Bullet: `•` (not `*` or `-`)
+- Links: `<url|text>` (not `[text](url)`)
+- No markdown headings — use bold inline labels instead
+- No horizontal rules (`---`)
+
+Format the message as:
+
+```
+*🚀 What Shipped*
+• [item title linked] — one sentence
+
+*🧠 What We Learned*
+• [item title linked] — one sentence
+
+*📢 FYI*
+• [item title linked] — one sentence
+
+*🆘 SOS*
+• item or "No items this week."
+```
+
+Omit any section that has no items. Keep each bullet to one sentence.
+The `github_source_url` must be the discussion URL returned by `create_discussion`.
 
 ## Guidelines
 

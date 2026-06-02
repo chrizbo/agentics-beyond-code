@@ -37,6 +37,18 @@ steps:
       ./.github/scripts/fetch-launch-data.sh "$LAUNCH_PROJECT_OWNER" "$LAUNCH_PROJECT_NUMBER" launch-data.json
       echo "path=launch-data.json" >> "$GITHUB_OUTPUT"
 
+  - name: Resolve Slack report-back channel
+    env:
+      SLACK_ARTIFACT_CHANNEL_MAP: ${{ vars.SLACK_ARTIFACT_CHANNEL_MAP }}
+    run: |
+      mkdir -p /tmp/gh-aw/agent
+      echo "$SLACK_ARTIFACT_CHANNEL_MAP" \
+        | node -e "const m=JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')||'{}'); process.stdout.write(m['Launch Readiness Report']||'')" \
+        > /tmp/gh-aw/agent/slack-channel.txt
+
+imports:
+  - shared/slack-safe-outputs.md
+
 tools:
   github:
     mode: gh-proxy
@@ -282,6 +294,40 @@ safeoutputs create_discussion --title "title" --body "$(cat /tmp/gh-aw/agent/bod
 ```
 
 Configured title prefixes are added automatically — omit them from `--title`. If a call fails, immediately call `safeoutputs noop --message "reason"` and stop — never ask for input.
+
+### Slack report-back
+
+After calling `create_discussion`, check if a Slack channel is configured:
+
+```bash
+SLACK_CHANNEL=$(cat /tmp/gh-aw/agent/slack-channel.txt 2>/dev/null || echo "")
+```
+
+If `SLACK_CHANNEL` is non-empty, call `slack_post_message` with a concise
+Slack-formatted summary. Use Slack mrkdwn — not GitHub markdown:
+
+- Bold: `*text*` (not `**text**`)
+- Bullet: `•` (not `*` or `-`)
+- Links: `<url|text>` (not `[text](url)`)
+- No markdown headings — use bold inline labels instead
+- No horizontal rules (`---`)
+- No pipe tables — use bullets instead
+
+Format the message as one bullet per launch, with the most urgent launches first:
+
+```
+*📊 Launch Pipeline — [date]*
+
+• 🔴 *[Launch title](issue url)* — Phase · due date · completeness · DRI · key blocker
+• 🟡 *[Launch title](issue url)* — Phase · due date · completeness · DRI
+• 🟢 *[Launch title](issue url)* — Phase · due date · completeness
+
+N launches total · X on track · Y at risk
+```
+
+Use the risk emoji (🔴 🟠 🟡 🟢) at the start of each bullet.
+Omit DRI if unassigned. Keep each bullet to one line.
+The `github_source_url` must be the discussion URL returned by `create_discussion`.
 
 ## Guidelines
 
