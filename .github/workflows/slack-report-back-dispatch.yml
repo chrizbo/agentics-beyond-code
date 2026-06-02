@@ -145,7 +145,7 @@ jobs:
               // Search discussions via GraphQL
               const [owner, repoName] = repo.split("/");
               const query = `
-                query($owner: String!, $repo: String!, $q: String!) {
+                query($q: String!) {
                   search(query: $q, type: DISCUSSION, first: 5) {
                     nodes {
                       ... on Discussion {
@@ -157,12 +157,11 @@ jobs:
                   }
                 }
               `;
+              const searchQ = `repo:${repo} in:title "${titlePrefix.trim()}"`;
               const result = JSON.parse(gh([
                 "api", "graphql",
                 "-f", `query=${query}`,
-                "-f", `owner=${owner}`,
-                "-f", `repo=${repoName}`,
-                "-f", `q=repo:${repo} in:title ${titlePrefix.trim()}`
+                "-f", `q=${searchQ}`
               ]));
               const nodes = (result.data?.search?.nodes || [])
                 .filter((n) => n && n.title && n.title.startsWith(titlePrefix.trim()))
