@@ -171,15 +171,25 @@ posted to Slack.
 
 ```bash
 gh variable set SLACK_ARTIFACT_CHANNEL_MAP --body '{
-  "Weekly Leadership Status Update": "C0123456789",
-  "Launch Readiness Report": "C9876543210",
-  "Weekly Agentic Workflow Health Report": "C1111111111",
-  "Daily Standup Prep": "C2222222222",
-  "Weekly Compliance Team Reports": "C3333333333",
-  "Weekly GTM Team Report": "C4444444444",
-  "Weekly Leadership Brief": "C5555555555",
-  "Commitment Reconciler": "C6666666666"
+  "Weekly Leadership Status Update": "C_TEAM_CHANNEL",
+  "Launch Readiness Report": "C_TEAM_CHANNEL",
+  "Weekly Agentic Workflow Health Report": "C_OPS_CHANNEL",
+  "Daily Standup Prep": "C_TEAM_CHANNEL",
+  "Weekly Compliance Team Reports": "C_COMPLIANCE_CHANNEL",
+  "Weekly GTM Team Report": "C_GTM_CHANNEL",
+  "Weekly Leadership Brief": "C_LEADERSHIP_CHANNEL",
+  "Commitment Reconciler": "C_TEAM_CHANNEL"
 }'
+```
+
+Replace each `C_*` placeholder with a real Slack channel ID. All IDs used here
+must also appear in `SLACK_ALLOWED_CHANNEL_IDS`. If you are routing everything
+to one channel during setup, use the same ID for all entries — you can split
+them out later without changing anything else.
+
+```bash
+# Add all report-back channel IDs to the allowlist (comma-separated, no spaces)
+gh variable set SLACK_ALLOWED_CHANNEL_IDS --body "C_TEAM_CHANNEL,C_OPS_CHANNEL,C_COMPLIANCE_CHANNEL,C_GTM_CHANNEL,C_LEADERSHIP_CHANNEL"
 ```
 
 The keys must be the exact compiled workflow names. Supported workflows and
