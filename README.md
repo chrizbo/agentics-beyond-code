@@ -1,10 +1,10 @@
 # 🚀 Agentics Beyond Code
 
-> **⏸️ Scheduled workflows are currently paused** to reduce API costs while this repo is in demo/reference mode. Workflows triggered by human activity (issue creation, Slack reactions, transcript pushes) remain active. To run the full system, trigger the [Sample Data Simulator](.github/workflows/sample-data-simulator.md) manually first, then follow the [stage run order](#running-workflows-manually). To re-enable scheduled runs, uncomment the `schedule:` lines in each workflow's `.md` file and recompile with `gh aw compile`.
-
 Agentic Workflows for PMs, ops, compliance, and other non-engineering roles — built on [GitHub Agentic Workflows](https://githubnext.com/projects/agentic-workflows/).
 
 While [The Agentics](https://github.com/githubnext/agentics) focuses on engineering use cases (CI, code review, testing), **Agentics Beyond Code** brings the same power to the people who ship, govern, and operate products — without writing a line of code.
+
+> **⏸️ Scheduled workflows are currently paused** to reduce API costs while this repo is in demo/reference mode. Workflows triggered by human activity (issue creation, Slack reactions, transcript pushes) remain active. To run the full system, trigger the [Sample Data Simulator](.github/workflows/sample-data-simulator.md) manually first, then follow the [stage run order](#running-workflows-manually). To re-enable scheduled runs, uncomment the `schedule:` lines in each workflow's `.md` file and recompile with `gh aw compile`.
 
 ## 🎯 Who is this for?
 
