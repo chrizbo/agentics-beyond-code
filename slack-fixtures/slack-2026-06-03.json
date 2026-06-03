@@ -1,0 +1,54 @@
+{
+  "messages": [
+    {
+      "channel_id": "C-sample-triage",
+      "channel_name": "triage-intake",
+      "thread_ts": "1710000000.000000",
+      "message_ts": "1710000000.000000",
+      "permalink": "https://example.slack.com/archives/C-sample-triage/p1710000000000000",
+      "author_id": "U-sample-priya",
+      "author_name": "Priya Patel",
+      "created_at": "2026-06-03T10:56:57Z",
+      "text": "The dashboard freezes during performance checks — related to issue #15.",
+      "reactions": [{"name":"warning","count":1}],
+      "matched_by": "performance-monitoring"
+    },
+    {
+      "channel_id": "C-sample-triage",
+      "channel_name": "triage-intake",
+      "thread_ts": "1710000000.000000",
+      "message_ts": "1710000000.000000",
+      "permalink": "https://example.slack.com/archives/C-sample-triage/p1710000000000001",
+      "author_id": "U-sample-jordan",
+      "author_name": "Jordan Taylor",
+      "created_at": "2026-06-03T10:57:00Z",
+      "text": "Ready to kick off the design review. Don't forget to check the feedback for all designs!",
+      "reactions": [{"name":"memo","count":1}],
+      "matched_by": "design-review"
+    }
+  ],
+  "events": [
+    {
+      "event_id": "Ev-sample-20230603-001",
+      "type": "reaction_added",
+      "reaction": "warning",
+      "user_id": "U-sample-priya",
+      "channel_id": "C-sample-triage",
+      "message_ts": "1710000000.000000",
+      "thread_ts": "1710000000.000000",
+      "permalink": "https://example.slack.com/archives/C-sample-triage/p1710000000000000",
+      "received_at": "2026-06-03T10:57:01Z"
+    },
+    {
+      "event_id": "Ev-sample-20230603-002",
+      "type": "reaction_added",
+      "reaction": "memo",
+      "user_id": "U-sample-jordan",
+      "channel_id": "C-sample-triage",
+      "message_ts": "1710000000.000000",
+      "thread_ts": "1710000000.000000",
+      "permalink": "https://example.slack.com/archives/C-sample-triage/p1710000000000001",
+      "received_at": "2026-06-03T10:57:02Z"
+    }
+  ]
+}
