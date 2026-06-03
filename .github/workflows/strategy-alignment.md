@@ -11,7 +11,7 @@ engine:
   model: gpt-5-codex
 
 on:
-  schedule: weekly on wednesday around 8am utc-7
+#  schedule: (disabled — re-enable to run on a schedule) weekly on wednesday around 8am utc-7
   workflow_dispatch:
 
 permissions:
@@ -36,6 +36,9 @@ steps:
       chmod +x .github/scripts/fetch-launch-data.sh
       ./.github/scripts/fetch-launch-data.sh "$LAUNCH_PROJECT_OWNER" "$LAUNCH_PROJECT_NUMBER" launch-data.json
       echo "path=launch-data.json" >> "$GITHUB_OUTPUT"
+
+imports:
+  - shared/freshness-check.md
 
 tools:
   github:

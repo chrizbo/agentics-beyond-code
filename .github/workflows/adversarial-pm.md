@@ -11,7 +11,7 @@ engine:
   model: gpt-5-mini
 
 on:
-  schedule: weekly on wednesday around 830am utc-7
+#  schedule: (disabled — re-enable to run on a schedule) weekly on wednesday around 830am utc-7
   workflow_dispatch:
 
 permissions:
@@ -70,6 +70,9 @@ steps:
 
       echo "count=$COUNT" >> "$GITHUB_OUTPUT"
       echo "Collected $COUNT recent decisions"
+
+imports:
+  - shared/freshness-check.md
 
 tools:
   github:

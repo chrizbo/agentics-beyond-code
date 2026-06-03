@@ -10,7 +10,7 @@ engine:
   model: gpt-5-codex
 
 on:
-  schedule: weekly on monday around 8:30am utc-7
+#  schedule: (disabled — re-enable to run on a schedule) weekly on monday around 8:30am utc-7
   workflow_dispatch:
 
 permissions:
@@ -48,6 +48,7 @@ steps:
 
 imports:
   - shared/slack-safe-outputs.md
+  - shared/freshness-check.md
 
 tools:
   github:

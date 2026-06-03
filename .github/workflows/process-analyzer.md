@@ -11,7 +11,7 @@ engine:
   model: gpt-4o
 
 on:
-  schedule: weekly
+#  schedule: (disabled — re-enable to run on a schedule) weekly
   workflow_dispatch:
 
 permissions:

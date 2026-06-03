@@ -10,7 +10,7 @@ engine:
   model: gpt-4o
 
 on:
-  schedule: "0 7 * * 2-6"
+#  schedule: (disabled — re-enable to run on a schedule) "0 7 * * 2-6"
   workflow_dispatch:
 
 permissions:
@@ -35,6 +35,9 @@ steps:
       chmod +x .github/scripts/fetch-launch-data.sh
       ./.github/scripts/fetch-launch-data.sh "$LAUNCH_PROJECT_OWNER" "$LAUNCH_PROJECT_NUMBER" launch-data.json
       echo "path=launch-data.json" >> "$GITHUB_OUTPUT"
+
+imports:
+  - shared/freshness-check.md
 
 tools:
   github:

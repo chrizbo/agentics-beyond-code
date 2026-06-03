@@ -12,7 +12,7 @@ engine:
   model: gpt-5-codex
 
 on:
-  schedule: weekly on monday around 8am utc-7
+#  schedule: (disabled — re-enable to run on a schedule) weekly on monday around 8am utc-7
   issues:
     types: [labeled]
     names: [launch, "needs:security", "needs:privacy", "needs:accessibility", "needs:responsible-ai"]

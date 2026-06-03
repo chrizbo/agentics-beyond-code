@@ -1,5 +1,7 @@
 # 🚀 Agentics Beyond Code
 
+> **⏸️ Scheduled workflows are currently paused** to reduce API costs while this repo is in demo/reference mode. Workflows triggered by human activity (issue creation, Slack reactions, transcript pushes) remain active. To run the full system, trigger the [Sample Data Simulator](.github/workflows/sample-data-simulator.md) manually first, then follow the [stage run order](#running-workflows-manually). To re-enable scheduled runs, uncomment the `schedule:` lines in each workflow's `.md` file and recompile with `gh aw compile`.
+
 Agentic Workflows for PMs, ops, compliance, and other non-engineering roles — built on [GitHub Agentic Workflows](https://githubnext.com/projects/agentic-workflows/).
 
 While [The Agentics](https://github.com/githubnext/agentics) focuses on engineering use cases (CI, code review, testing), **Agentics Beyond Code** brings the same power to the people who ship, govern, and operate products — without writing a line of code.
@@ -70,7 +72,18 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 
 ### 🧪 Demo / Sample Data
 
-> **Note:** The sample data simulator is for **demo purposes only**. It generates fake project activity so the other workflows have realistic data to work with. You don't need it for production use.
+> **Note:** The sample data simulator is for **demo purposes only**. It generates fake project activity so the other workflows have realistic data to work with. You don't need it for production use. The schedule is currently **paused** — trigger it manually when you want to generate fresh data.
+
+#### Running workflows manually
+
+When triggering workflows by hand, run them in stages — parallel within each stage, but wait for each stage to complete before starting the next:
+
+| Stage | Workflows | Why |
+|-------|-----------|-----|
+| **1** | `sample-data-simulator` | Generates fresh project data — must run first |
+| **2** | `decision-log`, `daily-standup-prep`, `assumption-surfacer`, `process-analyzer`, `compliance-team-reports` | Analyze current data |
+| **3** | `weekly-status`, `leadership-brief` | Roll up stage 2 outputs |
+| **4** | `workflow-health` | Monitor everything — run last |
 
 | Workflow | Description | Example output |
 |----------|-------------|----------------|

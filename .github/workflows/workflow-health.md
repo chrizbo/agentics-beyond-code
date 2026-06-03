@@ -10,7 +10,7 @@ engine:
   model: gpt-4o
 
 on:
-  schedule: weekly on friday around 8am utc-7
+#  schedule: (disabled — re-enable to run on a schedule) weekly on friday around 8am utc-7
   workflow_dispatch:
 
 permissions:

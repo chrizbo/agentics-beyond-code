@@ -16,10 +16,44 @@ Apply these in order — each check can halve costs:
 - [ ] **Dynamic context**: Inject only required fields — `${{ github.event.issue.number }}` not the full event payload
 - [ ] **Prompt caching**: Put stable instructions before dynamic content to maximize cache hits
 - [ ] **Cadence**: If the result is not time-sensitive, schedule less often (`hourly` → `daily`, `daily` → `weekly`)
+- [ ] **Freshness check**: Add a data-age guard to reporting workflows so they `noop` instead of posting empty reports when upstream data is stale (e.g. simulator paused). Use a shared import — see pattern below.
+- [ ] **Strip closed items**: When fetching project data for a simulator or reporting workflow, strip `body` and sub-issues from closed items before passing to the agent — closed history is rarely needed and grows unboundedly.
 - [ ] **Batching**: Prefer scheduled batch processing over reactive events when delayed processing is acceptable
 - [ ] **Telemetry**: Configure `observability.otlp` so token usage and run phases are measurable outside individual run logs
 - [ ] **AgenticOps**: Add `copilot-token-audit` / `copilot-token-optimizer` workflows so the repository keeps finding waste automatically
 - [ ] **Measure first**: Back every change with an `experiments:` field and `metric: "effective_tokens"` before promoting
+
+---
+
+## Freshness Check Pattern
+
+Use this pattern to prevent reporting workflows from running (and posting empty reports) when upstream data is stale — for example, when a simulator is paused in a demo environment.
+
+Create a shared file at `.github/workflows/shared/freshness-check.md`:
+
+```markdown
+## Freshness Check
+
+> **Note for live deployments:** Remove this section when your team is actively generating data. In a live environment, an empty report is meaningful signal — you want to see it even if nothing changed.
+
+Before doing any analysis, check when the project data was last generated:
+
+​```bash
+jq -r '"Data generated: \(.generatedAt) | Launches: \(.launches | length)"' launch-data-summary.json
+​```
+
+If the `generatedAt` timestamp is more than 7 days ago, call `noop` with the message:
+"Skipping — project data is more than 7 days old. Trigger the data simulator manually to refresh before running this report."
+```
+
+Then add it to any reporting workflow that reads project data:
+
+```yaml
+imports:
+  - shared/freshness-check.md
+```
+
+**When to remove it:** Remove the import (or the shared file reference) when you go live with real team data. Empty reports in production are worth seeing — they tell you nothing happened, which is itself signal. The freshness check is a demo/paused-environment guard only.
 
 ---
 

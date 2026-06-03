@@ -9,7 +9,7 @@ engine:
   model: gpt-4o-mini
 
 on:
-  schedule: "0 6 * * 2-6" # Weeknights before downstream demo workflows
+#  schedule: (disabled — re-enable to run on a schedule) "0 6 * * 2-6" # Weeknights before downstream demo workflows
   workflow_dispatch:
 
 permissions:

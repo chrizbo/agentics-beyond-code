@@ -12,7 +12,7 @@ engine:
   model: gpt-4o
 
 on:
-  schedule: weekly on monday around 7:30am utc-7
+#  schedule: (disabled — re-enable to run on a schedule) weekly on monday around 7:30am utc-7
   workflow_dispatch:
 
 permissions:
@@ -49,6 +49,9 @@ post-steps:
         echo "::error::Agent completed without a safe output. Create the required leadership brief discussions or call safeoutputs report_incomplete."
         exit 1
       fi
+
+imports:
+  - shared/freshness-check.md
 
 tools:
   github:
