@@ -1,0 +1,26 @@
+WEBVTT
+
+1
+00:00:01.000 --> 00:00:05.500
+Sarah Chen: Alright, let's get started. Marcus, you're up first.
+
+2
+00:00:06.000 --> 00:00:18.000
+Marcus Johnson: Yesterday, I wrapped up the integration for the iDEAL system (issue #15). Today, I’ll focus on the next steps for testing.
+
+3
+00:00:18.500 --> 00:00:30.000
+Priya Patel: I’m finalizing the French translation tasks (issue #18) and am aiming to complete it by end of day.
+
+4
+00:00:30.500 --> 00:00:45.000
+David Kim: QA is currently blocked on the security review for the GDPR Data Export (issue #7). We should seek updates for any dependencies.
+
+5
+00:00:45.500 --> 00:00:58.000
+Jordan Taylor: I’m ready to kick off the design review for the Performance Monitoring Dashboard launch, feedback is due Thursday.
+
+6
+00:00:58.500 --> 00:01:10.000
+Sarah Chen: Remember that we decided to adjust our release cadence after the last retro, so let’s keep that in mind during planning today.
+
