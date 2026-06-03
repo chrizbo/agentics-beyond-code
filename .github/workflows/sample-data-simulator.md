@@ -32,7 +32,19 @@ steps:
       LAUNCH_PROJECT_NUMBER: ${{ vars.LAUNCH_PROJECT_NUMBER || '1' }}
     run: |
       chmod +x .github/scripts/fetch-launch-data.sh
-      ./.github/scripts/fetch-launch-data.sh "$LAUNCH_PROJECT_OWNER" "$LAUNCH_PROJECT_NUMBER" launch-data.json
+      ./.github/scripts/fetch-launch-data.sh "$LAUNCH_PROJECT_OWNER" "$LAUNCH_PROJECT_NUMBER" launch-data-full.json
+      # Strip body from closed items and closed sub-issues — simulator only needs open work
+      jq '
+        .items |= map(
+          if .state == "CLOSED" then
+            .body = "[closed]" | .subIssues = []
+          else
+            .subIssues |= map(
+              if .state == "CLOSED" then .body = "[closed]" else . end
+            )
+          end
+        )
+      ' launch-data-full.json > launch-data.json
       echo "path=launch-data.json" >> "$GITHUB_OUTPUT"
 
 tools:
@@ -603,20 +615,16 @@ still successful.
 
 ## Safe output calls
 
-Use the MCP tool interface to create safe outputs. Examples:
+**Use the MCP tool interface only. Do NOT use shell commands or `safeoutputs` CLI.**
 
-```json
-{"type": "create_issue", "title": "Issue title", "body": "Issue body"}
-{"type": "add_comment", "issue_number": 42, "body": "Comment body"}
-{"type": "create_pull_request", "title": "PR title", "body": "PR body", "branch": "branch-name"}
-{"type": "noop", "message": "reason no action was taken"}
-```
+Call safe output tools directly as MCP tool calls — the same way you call any other tool in this environment. Do not pipe JSON to shell commands. Do not run `safeoutputs` as a bash command.
+
+The available tools are: `create_issue`, `close_issue`, `add_comment`, `add_labels`, `update_project`, `create_pull_request`, `noop`.
+
+Call them like any other tool with their required parameters. For example, to create an issue call `create_issue` with `title` and `body` parameters. To add a comment call `add_comment` with `issue_number` and `body`.
 
 Configured title prefixes are added automatically — omit them from `title`.
-If a required core sample-data safe-output call fails, immediately call
-`noop` with the reason and stop — never ask for input. Optional
-Slack fixture generation is best effort: prefer skipping the optional Slack
-fixture action before making a safe-output call that is likely to fail.
+If a required core sample-data safe-output call fails, call `noop` with the reason and stop — never ask for input. Optional Slack fixture generation is best effort: skip it rather than risking a failed safe-output call.
 
 ## Output Sequence
 
