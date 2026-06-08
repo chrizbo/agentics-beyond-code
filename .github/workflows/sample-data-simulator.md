@@ -127,7 +127,7 @@ All GitHub writes must use safe-output JSON — emit one JSON object per action:
 
 | Action | Safe-output format |
 |--------|--------------------|
-| Add comment | `{"type": "add_comment", "issue_number": 6, "body": "..."}` |
+| Add comment | `{"type": "add_comment", "issue_number": 6, "body": "..."}` — **`issue_number` must be a real integer, never a `temporary_id`** |
 | Close issue | `{"type": "close_issue", "issue_number": 6}` |
 | Create issue | `{"type": "create_issue", "title": "...", "body": "..."}` |
 | Add labels | `{"type": "add_labels", "issue_number": 6, "labels": ["triage-needed"]}` |
