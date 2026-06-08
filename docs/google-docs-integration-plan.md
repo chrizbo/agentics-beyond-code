@@ -958,7 +958,9 @@ enable live publication. Live finalization requires either an allowlisted exact
 independent Drive app-property markers after publishing the Discussion and
 posting the final Slack notification, then marks the lifecycle finalized and
 moves the Doc to Archive. Replays resume incomplete steps and become a no-op
-after all markers and the archive move are present.
+after all markers and the archive move are present. The finalization workflows
+use the protected `AW_TOKEN` secret because the default Actions token cannot
+run the GitHub GraphQL `updateDiscussion` mutation in this repository.
 
 Because Google Drive comment resolution does not emit a GitHub Actions event,
 `.github/workflows/google-docs-status-finalization-resolved-gates.yml` polls

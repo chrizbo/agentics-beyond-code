@@ -26,7 +26,7 @@ jobs:
     environment: google-docs-demo
     env:
       GH_REPO: ${{ github.repository }}
-      GH_TOKEN: ${{ github.token }}
+      GH_TOKEN: ${{ secrets.AW_TOKEN }}
       DISCUSSION_URL: ${{ github.event_name == 'workflow_dispatch' && inputs.discussion_url || github.event.discussion.html_url }}
       DISCUSSION_TITLE_PREFIX: "[Weekly Status] "
       TRIGGER_KIND: ${{ github.event_name }}
