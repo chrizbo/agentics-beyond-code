@@ -297,45 +297,24 @@ Use creative but plausible product feature names. Examples of good themes:
 
 For the new launch:
 
-1. **Create or reuse an initiative.** If creating a new one, give it a
-   strategic theme name and a brief body with goals and success criteria:
-   ```json
-   {"type": "create_issue", "temporary_id": "aw_init1", "title": "[Initiative] Developer Platform Improvements", "body": "## Overview\n..."}
+1. **Create or reuse an initiative.** If creating a new one, use the safeoutputs CLI:
+   ```bash
+   printf '{"title":"[Initiative] Developer Platform Improvements","body":"## Overview\n..."}' \
+     | safeoutputs create_issue .
+   # Note the real issue number from the output — you will need it as `parent` below
    ```
 
-2. **Create the launch issue** under the initiative:
-   ```
-   ## Overview
-   Brief 2-3 sentence description of what this launch delivers.
-
-   ## Success Criteria
-   - [ ] Criterion 1
-   - [ ] Criterion 2
-   - [ ] Criterion 3
-
-   ## Dependencies
-   - List any dependencies
-
-   ## Rollout Plan
-   Phase rollout: Team → Alpha → Beta → GA
+2. **Create the launch issue** under the initiative (use the initiative's real issue number as `parent`):
+   ```bash
+   printf '{"title":"[Launch] Dark Mode Support","parent":74,"body":"## Overview\n...\n## Success Criteria\n- [ ] ..."}' \
+     | safeoutputs create_issue .
    ```
 
-3. **Create 1-2 epics** under the launch with realistic workstream names
+3. **Create 1-2 epics** under the launch (use launch's real issue number as `parent`)
 
-4. **Create 1-2 tasks** spread across the epics
+4. **Create 1-2 tasks** spread across the epics (use epic's real issue number as `parent`)
 
-5. **Wire the full hierarchy**: Use the `parent` field on `create_issue` to
-   link initiatives → launches → epics → tasks. For example:
-   ```json
-   {"type": "create_issue", "temporary_id": "aw_init1", "title": "[Initiative] Developer Platform", "body": "..."}
-   {"type": "create_issue", "parent": "aw_init1", "temporary_id": "aw_launch1", "title": "[Launch] Dark Mode Support", "body": "..."}
-   {"type": "create_issue", "parent": "aw_launch1", "temporary_id": "aw_epic1", "title": "Frontend Implementation", "body": "..."}
-   {"type": "create_issue", "parent": "aw_epic1", "title": "Add dark mode toggle", "body": "..."}
-   ```
-   If reusing an existing initiative, use its real issue number as the parent:
-   ```json
-   {"type": "create_issue", "parent": 74, "temporary_id": "aw_launch1", "title": "[Launch] Dark Mode Support", "body": "..."}
-   ```
+5. **Wire the full hierarchy** by capturing each created issue's number and using it as `parent` for the next level.
 
 6. **Add all new issues to the project** with appropriate field values:
    - Phase: Team (new launches start in Team)
@@ -447,14 +426,12 @@ cat > "${FILENAME}" << 'TRANSCRIPT_EOF'
 TRANSCRIPT_EOF
 ```
 
-Then call the `create_pull_request` safe output to push the file:
-```json
-{
-  "type": "create_pull_request",
-  "title": "Standup transcript for YYYY-MM-DD",
-  "body": "Auto-generated standup transcript from the sample data simulator.",
-  "branch": "transcript/standup-YYYY-MM-DD"
-}
+Then create the PR with the safeoutputs CLI:
+```bash
+safeoutputs create_pull_request \
+  --title "Standup transcript for $(date +%Y-%m-%d)" \
+  --body "Auto-generated standup transcript from the sample data simulator." \
+  --branch "$(git branch --show-current)"
 ```
 
 ### 9. Generate Intake Requests (1 per run)
@@ -526,8 +503,8 @@ label using `add_labels` after creating the issue.
 **After creating each intake issue:**
 
 1. Apply the `triage-needed` label:
-   ```json
-   {"type": "add_labels", "issue_number": <number>, "labels": ["triage-needed"]}
+   ```bash
+   safeoutputs add_labels --issue_number <number> --labels '["triage-needed"]'
    ```
 
 The **intake-triage** workflow will automatically pick up the issue (triggered
@@ -638,15 +615,13 @@ issue body under `### Additional Context`. If creating this optional issue or
 labels would fail, skip only the Slack-derived intake issue and still preserve
 the fixture file when possible.
 
-Commit the fixture file with `create_pull_request`, using a title like:
+Commit the fixture file with `create_pull_request`:
 
-```json
-{
-  "type": "create_pull_request",
-  "title": "Synthetic Slack fixture for YYYY-MM-DD",
-  "body": "Auto-generated Slack fixture from the sample data simulator.",
-  "branch": "sample-data/slack-fixture-YYYY-MM-DD"
-}
+```bash
+safeoutputs create_pull_request \
+  --title "Synthetic Slack fixture for $(date +%Y-%m-%d)" \
+  --body "Auto-generated Slack fixture from the sample data simulator." \
+  --branch "$(git branch --show-current)"
 ```
 
 If the standup transcript PR already exists for this run and safe-output limits
@@ -665,23 +640,10 @@ still successful.
 - **No labels except** `triage-needed` for intake and `from-slack` for synthetic
   Slack reaction-intake examples — other workflows handle labeling
 
-## Safe output calls
-
-**Use the MCP tool interface only. Do NOT use shell commands or `safeoutputs` CLI.**
-
-Call safe output tools directly as MCP tool calls — the same way you call any other tool in this environment. Do not pipe JSON to shell commands. Do not run `safeoutputs` as a bash command.
-
-The available tools are: `create_issue`, `close_issue`, `add_comment`, `add_labels`, `update_project`, `create_pull_request`, `noop`.
-
-Call them like any other tool with their required parameters. For example, to create an issue call `create_issue` with `title` and `body` parameters. To add a comment call `add_comment` with `issue_number` and `body`.
-
-Configured title prefixes are added automatically — omit them from `title`.
-If a required core sample-data safe-output call fails, call `noop` with the reason and stop — never ask for input. Optional Slack fixture generation is best effort: skip it rather than risking a failed safe-output call.
-
 ## Output Sequence
 
 Process your actions in this order:
-1. Read `launch-data-summary.json` and understand current state
+1. Run the Data Quick-Start queries once to understand current state
 2. Close completed tasks (close-issue + add-comment)
 3. Add progress comments to open work (add-comment)
 4. Close finished epics (close-issue)
