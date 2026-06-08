@@ -93,7 +93,7 @@ When triggering workflows by hand, run them in stages — parallel within each s
 
 ## 💡 Philosophy
 
-Seven ideas shaped this project:
+Six ideas shaped this project:
 
 ### Process as Code
 
