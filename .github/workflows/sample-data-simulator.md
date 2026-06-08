@@ -136,6 +136,26 @@ All GitHub writes must use safe-output JSON — emit one JSON object per action:
 
 You may use `gh` CLI for **read-only** operations only (e.g., `gh issue view`).
 
+## Data Quick-Start
+
+**Use these exact jq commands** — they are proven to work. Do not invent
+variations. Run them once, extract what you need, then immediately start
+emitting safe-output JSON. Do not explore the data further.
+
+```bash
+# All open tasks (deepest level) — pick 2-4 to close or comment on:
+jq -r '.launches[] | .number as $ln | .title as $lt | .subIssues[]? | .subIssues[]? | select(.state=="OPEN") | [$ln|tostring, $lt, (.number|tostring), .title] | @tsv' launch-data-full-summary.json
+
+# All open epics — pick 3-5 to add progress comments to:
+jq -r '.launches[] | .title as $lt | .subIssues[]? | select(.state=="OPEN") | [$lt, (.number|tostring), .title] | @tsv' launch-data-full-summary.json
+
+# All launches with phase and open task count:
+jq -r '.launches[] | [(.number|tostring), .title, (.phase//"none"), (.stats.totalTasks-.stats.closedTasks|tostring)] | @tsv' launch-data-full-summary.json
+
+# All open initiatives:
+jq -r '.initiatives[] | select(.state=="OPEN") | [(.number|tostring), .title] | @tsv' launch-data-full-summary.json
+```
+
 ## Project Context
 
 The Launch Tracker project is at: `https://github.com/users/chrizbo/projects/1`
@@ -170,6 +190,11 @@ When adding items to the project, set these fields:
 - Tasks: Descriptive task name (no prefix)
 
 ## Daily Simulation Rules
+
+> **⚠️ Act early.** You have a limited token budget. Run the Data Quick-Start
+> queries once, pick your targets, then immediately emit safe-output JSON.
+> Do not iterate or re-explore. Every extra jq attempt costs tokens you need
+> for actual actions.
 
 Each run, do ALL of the following that apply. Think of yourself as simulating
 a real engineering team making progress day by day.
