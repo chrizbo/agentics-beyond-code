@@ -363,8 +363,8 @@ feed the **intake-triage** workflow, which will automatically score and
 evaluate them.
 
 Each intake request must use the structured body format that matches the
-`.github/ISSUE_TEMPLATE/intake.yml` template. Apply the `triage-needed`
-label using `add_labels` after creating the issue.
+`.github/ISSUE_TEMPLATE/intake.yml` template. Include `"labels":["triage-needed"]`
+directly in the `create_issue` call — do **not** use a separate `add_labels` call.
 
 **Mix of request types each run:**
 - Alternate between **bug reports** and **feature requests**
@@ -422,12 +422,11 @@ label using `add_labels` after creating the issue.
 <Links, screenshots, references to related issues>
 ```
 
-**After creating each intake issue:**
-
-1. Apply the `triage-needed` label:
-   ```bash
-   safeoutputs add_labels --issue_number <number> --labels '["triage-needed"]'
-   ```
+Create the intake issue with the label included:
+```bash
+printf '{"title":"...","body":"...","labels":["triage-needed"]}' \
+  | safeoutputs create_issue .
+```
 
 The **intake-triage** workflow will automatically pick up the issue (triggered
 by the `triage-needed` label), score it, and add it to the Intake Triage
@@ -453,4 +452,4 @@ Process your actions in this order:
 3. Add 3-5 progress comments to open epics/tasks (safeoutputs add_comment)
 4. Close any epics where all tasks are done (safeoutputs close_issue)
 5. Generate and commit the standup transcript, then create PR (safeoutputs create_pull_request)
-6. Create 1 intake issue with triage-needed label (safeoutputs create_issue + add_labels)
+6. Create 1 intake issue with `"labels":["triage-needed"]` inline (safeoutputs create_issue)
