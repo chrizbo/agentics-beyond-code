@@ -58,9 +58,10 @@ Edit `.github/policies/voice-and-tone-policy.md`. The GTM Content workflow reads
 | Workflow Health | Friday ~8 AM PT | Yes |
 | Transcript Processor | On push to `/transcripts/` | Yes |
 | Process Analyzer | Monday night / early Tuesday UTC | Yes |
-| Sample Data Simulator | Sunday and Tuesday nights | Yes |
+| Sample Data Simulator | Daily (weeknights) | Yes |
+| Sample Data Launch Creator | Weekly (Mondays) | Yes |
 
-The **Sample Data Simulator** is for demo purposes only — it generates fake project activity so the other workflows have realistic data. You don't need it for production use. Trigger it manually anytime with `gh aw run sample-data-simulator` to add more content.
+The **sample data workflows** are for demo purposes only — they generate fake project activity so the other workflows have realistic data. You don't need them for production use. They're split by cadence: the daily simulator handles task closures, comments, standup transcripts, and intake issues; the weekly launch creator grows the project hierarchy by creating new launches, advancing phases, and adjusting risk levels. Trigger them manually anytime with `gh aw run sample-data-simulator` or `gh aw run sample-data-launch-creator`.
 
 All workflows can also be triggered on demand with `gh aw run <workflow-name>`.
 

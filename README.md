@@ -4,7 +4,7 @@ Agentic Workflows for PMs, ops, compliance, and other non-engineering roles — 
 
 While [The Agentics](https://github.com/githubnext/agentics) focuses on engineering use cases (CI, code review, testing), **Agentics Beyond Code** brings the same power to the people who ship, govern, and operate products — without writing a line of code.
 
-> **⏸️ Scheduled workflows are currently paused** to reduce API costs while this repo is in demo/reference mode. Workflows triggered by human activity (issue creation, Slack reactions, transcript pushes) remain active. To run the full system, trigger the [Sample Data Simulator](.github/workflows/sample-data-simulator.md) manually first, then follow the [stage run order](#running-workflows-manually). To re-enable scheduled runs, uncomment the `schedule:` lines in each workflow's `.md` file and recompile with `gh aw compile`.
+> **⏸️ Scheduled workflows are currently paused** to reduce API costs while this repo is in demo/reference mode. Workflows triggered by human activity (issue creation, Slack reactions, transcript pushes) remain active. To run the full system, trigger the [Sample Data Simulator](.github/workflows/sample-data-simulator.md) and [Sample Data Launch Creator](.github/workflows/sample-data-launch-creator.md) manually first, then follow the [stage run order](#running-workflows-manually). To re-enable scheduled runs, uncomment the `schedule:` lines in each workflow's `.md` file and recompile with `gh aw compile`.
 
 ## 🎯 Who is this for?
 
@@ -73,7 +73,7 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 
 ### 🧪 Demo / Sample Data
 
-> **Note:** The sample data simulator is for **demo purposes only**. It generates fake project activity so the other workflows have realistic data to work with. You don't need it for production use. The schedule is currently **paused** — trigger it manually when you want to generate fresh data.
+> **Note:** The sample data workflows are for **demo purposes only**. They generate fake project activity so the other workflows have realistic data to work with. You don't need them for production use. The schedules are currently **paused** — trigger them manually when you want to generate fresh data.
 
 #### Running workflows manually
 
@@ -81,14 +81,15 @@ When triggering workflows by hand, run them in stages — parallel within each s
 
 | Stage | Workflows | Why |
 |-------|-----------|-----|
-| **1** | `sample-data-simulator` | Generates fresh project data — must run first |
+| **1** | `sample-data-simulator`, `sample-data-launch-creator` | Generates fresh project data — must run first |
 | **2** | `decision-log`, `daily-standup-prep`, `assumption-surfacer`, `process-analyzer`, `compliance-team-reports` | Analyze current data |
 | **3** | `weekly-status`, `leadership-brief` | Roll up stage 2 outputs |
 | **4** | `workflow-health` | Monitor everything — run last |
 
-| Workflow | Description | Example output |
-|----------|-------------|----------------|
-| [🎲 Sample Data Simulator](.github/workflows/sample-data-simulator.md) | Generates realistic project activity Sunday and Tuesday nights — creates launches, closes tasks, advances phases. Run manually anytime to add more content. | Closed sample issues [#72](https://github.com/chrizbo/agentics-beyond-code/issues/72), [#70](https://github.com/chrizbo/agentics-beyond-code/issues/70), [#71](https://github.com/chrizbo/agentics-beyond-code/issues/71), and [#3](https://github.com/chrizbo/agentics-beyond-code/issues/3) |
+| Workflow | Cadence | Description | Example output |
+|----------|---------|-------------|----------------|
+| [🎲 Sample Data Simulator](.github/workflows/sample-data-simulator.md) | Daily | Closes tasks, adds progress comments, generates standup transcripts, and creates intake issues — keeps daily activity flowing. | Closed sample issues [#72](https://github.com/chrizbo/agentics-beyond-code/issues/72), [#70](https://github.com/chrizbo/agentics-beyond-code/issues/70), [#71](https://github.com/chrizbo/agentics-beyond-code/issues/71), and [#3](https://github.com/chrizbo/agentics-beyond-code/issues/3) |
+| [🏗️ Sample Data Launch Creator](.github/workflows/sample-data-launch-creator.md) | Weekly | Creates new launches with epics and tasks, advances launch phases, closes completed launches, and adjusts risk levels — grows the project hierarchy over time. | — |
 
 ## 💡 Philosophy
 
