@@ -5,6 +5,7 @@ import {
   finalizationGateHeading,
   finalizationGateMarker,
   findFinalizationGate,
+  lifecycleKeyFromFinalizationGate,
 } from "./status-finalization-gate.mjs";
 
 test("builds a lifecycle-scoped finalization gate comment", () => {
@@ -32,5 +33,14 @@ test("finds one gate and rejects duplicates", () => {
   assert.throws(
     () => findFinalizationGate([gate, { ...gate, id: "2" }], lifecycle),
     /Multiple finalization gate comments/,
+  );
+});
+
+test("extracts lifecycle identity from a gate comment", () => {
+  assert.equal(
+    lifecycleKeyFromFinalizationGate({
+      content: "[agentics-finalization-gate:weekly-status:2026-06-08]",
+    }),
+    "weekly-status:2026-06-08",
   );
 });

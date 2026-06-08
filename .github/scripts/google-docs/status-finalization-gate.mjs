@@ -27,3 +27,9 @@ export function findFinalizationGate(comments, lifecycleKey) {
   }
   return matches[0];
 }
+
+export function lifecycleKeyFromFinalizationGate(comment) {
+  return comment.content?.match(
+    /\[agentics-finalization-gate:(weekly-status:\d{4}-\d{2}-\d{2})\]/,
+  )?.[1];
+}

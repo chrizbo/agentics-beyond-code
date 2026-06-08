@@ -1,0 +1,45 @@
+name: Google Docs Status Finalization Resolved Gates
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  discussions: read
+
+concurrency:
+  group: google-docs-status-finalization-resolved-gates
+  cancel-in-progress: false
+
+jobs:
+  stage-resolved-gates:
+    runs-on: ubuntu-latest
+    environment: google-docs-demo
+    env:
+      GH_REPO: ${{ github.repository }}
+      GH_TOKEN: ${{ github.token }}
+      GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
+      GOOGLE_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
+      GOOGLE_OAUTH_REFRESH_TOKEN: ${{ secrets.GOOGLE_OAUTH_REFRESH_TOKEN }}
+      GOOGLE_DOCS_SCOPE_TYPE: ${{ vars.GOOGLE_DOCS_SCOPE_TYPE }}
+      GOOGLE_DOCS_SCOPE_ROOT_ID: ${{ vars.GOOGLE_DOCS_SCOPE_ROOT_ID }}
+      GOOGLE_DOCS_DRAFTS_FOLDER_ID: ${{ vars.GOOGLE_DOCS_DRAFTS_FOLDER_ID }}
+      OUTPUT_DIR: /tmp/google-docs-status-finalization-resolved
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Stage resolved Google Doc gates
+        run: node .github/scripts/google-docs/status-finalization-resolved-gates.mjs
+
+      - name: Upload staged resolved gates
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: google-docs-status-finalization-resolved-gates
+          path: /tmp/google-docs-status-finalization-resolved
+          if-no-files-found: error
+          retention-days: 7

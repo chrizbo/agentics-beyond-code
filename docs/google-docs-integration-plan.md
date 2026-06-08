@@ -935,6 +935,13 @@ instructions are not published. It can be invoked manually or by an allowlisted
 human posting exactly `/finalize-status` on the source Discussion. The slash
 command path remains staged and performs no writes.
 
+Because Google Drive comment resolution does not emit a GitHub Actions event,
+`.github/workflows/google-docs-status-finalization-resolved-gates.yml` polls
+the configured drafts folder hourly. When it finds a resolved lifecycle gate,
+it invokes the same staged finalizer and uploads the proposed Discussion body.
+Until live publication is implemented, repeated polls may produce repeated
+staged previews but cannot modify either system.
+
 The dispatcher fails closed when the source run has no `create_discussion`
 safe-output item. Manual staged validation may instead provide an explicit
 Discussion URL; the dispatcher resolves its number against the current
