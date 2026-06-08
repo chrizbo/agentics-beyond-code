@@ -1,0 +1,66 @@
+{
+  "fixture_version": 1,
+  "scope": {
+    "type": "folder",
+    "root_id": "1FakeAgenticsDemoFolder",
+    "name": "Agentics Beyond Code - Demo Docs",
+    "alternate_supported_type": "shared_drive"
+  },
+  "documents": [
+    {
+      "key": "audit-export-decision-brief",
+      "document_id": "1FakeAuditExportDecisionBrief",
+      "title": "Product Council - Audit Export Retention Decision Brief",
+      "artifact_type": "decision_brief",
+      "owner": "Product",
+      "allowed_uses": ["context", "comment"],
+      "modified_time": "2026-06-05T17:00:00Z",
+      "web_view_url": "https://docs.google.com/document/d/1FakeAuditExportDecisionBrief/edit",
+      "snapshot_path": "documents/product-council-audit-export-decision-brief.md"
+    },
+    {
+      "key": "atlas-bank-advisory-notes",
+      "document_id": "1FakeAtlasBankAdvisoryNotes",
+      "title": "Customer Advisory Notes - Atlas Bank",
+      "artifact_type": "customer_research",
+      "owner": "Customer Success",
+      "allowed_uses": ["context"],
+      "modified_time": "2026-06-04T20:30:00Z",
+      "web_view_url": "https://docs.google.com/document/d/1FakeAtlasBankAdvisoryNotes/edit",
+      "snapshot_path": "documents/customer-advisory-atlas-bank-notes.md"
+    },
+    {
+      "key": "security-retention-policy-draft",
+      "document_id": "1FakeSecurityRetentionPolicyDraft",
+      "title": "Security Data Retention Policy - Draft",
+      "artifact_type": "policy_draft",
+      "owner": "Security",
+      "allowed_uses": ["context"],
+      "modified_time": "2026-06-06T16:15:00Z",
+      "web_view_url": "https://docs.google.com/document/d/1FakeSecurityRetentionPolicyDraft/edit",
+      "snapshot_path": "documents/security-data-retention-policy-draft.md"
+    },
+    {
+      "key": "audit-export-launch-plan",
+      "document_id": "1FakeAuditExportLaunchPlan",
+      "title": "Audit Log Export - Cross-Functional Launch Plan",
+      "artifact_type": "launch_plan",
+      "owner": "Program Management",
+      "allowed_uses": ["context", "append_update"],
+      "modified_time": "2026-06-06T22:00:00Z",
+      "web_view_url": "https://docs.google.com/document/d/1FakeAuditExportLaunchPlan/edit",
+      "snapshot_path": "documents/audit-export-launch-plan.md"
+    },
+    {
+      "key": "weekly-program-brief",
+      "document_id": "1FakeWeeklyProgramBrief",
+      "title": "Weekly Product and Operations Brief",
+      "artifact_type": "weekly_brief",
+      "owner": "Program Management",
+      "allowed_uses": ["context", "append_update"],
+      "modified_time": "2026-06-05T23:45:00Z",
+      "web_view_url": "https://docs.google.com/document/d/1FakeWeeklyProgramBrief/edit",
+      "snapshot_path": "documents/weekly-program-brief.md"
+    }
+  ]
+}

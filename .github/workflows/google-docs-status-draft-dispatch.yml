@@ -1,0 +1,83 @@
+name: Google Docs Status Draft Dispatch
+
+on:
+  workflow_run:
+    workflows: ["Weekly Leadership Status Update"]
+    types: [completed]
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "Weekly Status workflow run containing safe-outputs-items."
+        required: false
+        default: ""
+      discussion_url:
+        description: "Existing Weekly Status Discussion URL for staged validation."
+        required: false
+        default: ""
+
+permissions:
+  actions: read
+  contents: read
+  discussions: read
+
+concurrency:
+  group: google-docs-status-draft-${{ github.event.workflow_run.id || inputs.run_id || inputs.discussion_url || github.run_id }}
+  cancel-in-progress: false
+
+jobs:
+  staged-dispatch:
+    if: |
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    environment: google-docs-demo
+    env:
+      GH_REPO: ${{ github.repository }}
+      GH_TOKEN: ${{ github.token }}
+      SOURCE_RUN_ID: ${{ github.event.workflow_run.id || inputs.run_id }}
+      DISCUSSION_URL: ${{ inputs.discussion_url }}
+      DISCUSSION_TITLE_PREFIX: "[Weekly Status] "
+      GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
+      GOOGLE_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
+      GOOGLE_OAUTH_REFRESH_TOKEN: ${{ secrets.GOOGLE_OAUTH_REFRESH_TOKEN }}
+      GOOGLE_DOCS_ENABLED: ${{ vars.GOOGLE_DOCS_ENABLED }}
+      GOOGLE_DOCS_SCOPE_TYPE: ${{ vars.GOOGLE_DOCS_SCOPE_TYPE }}
+      GOOGLE_DOCS_SCOPE_ROOT_ID: ${{ vars.GOOGLE_DOCS_SCOPE_ROOT_ID }}
+      GOOGLE_DOCS_DRAFTS_FOLDER_ID: ${{ vars.GOOGLE_DOCS_DRAFTS_FOLDER_ID }}
+      GOOGLE_DOCS_ARCHIVE_FOLDER_ID: ${{ vars.GOOGLE_DOCS_ARCHIVE_FOLDER_ID }}
+      GOOGLE_DOCS_DRAFT_TEMPLATE_ID: ${{ vars.GOOGLE_DOCS_DRAFT_TEMPLATE_ID }}
+      GOOGLE_DOCS_DRAFT_TITLE_PREFIX: ${{ vars.GOOGLE_DOCS_DRAFT_TITLE_PREFIX }}
+      PLAN_OUTPUT_PATH: /tmp/google-docs-status-draft-plan.json
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Download safe-outputs-items artifact
+        if: env.DISCUSSION_URL == '' && env.SOURCE_RUN_ID != ''
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: safe-outputs-items
+          run-id: ${{ env.SOURCE_RUN_ID }}
+          github-token: ${{ github.token }}
+          path: /tmp/safe-outputs-items
+
+      - name: Require source Discussion
+        run: |
+          if [ -z "$DISCUSSION_URL" ] && [ -z "$SOURCE_RUN_ID" ]; then
+            echo "::error::Provide discussion_url or run_id."
+            exit 1
+          fi
+
+      - name: Build and validate staged draft plan
+        run: node .github/scripts/google-docs/status-draft-dispatch.mjs
+
+      - name: Upload staged draft plan
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: google-docs-status-draft-plan
+          path: /tmp/google-docs-status-draft-plan.json
+          if-no-files-found: error
+          retention-days: 7
+
