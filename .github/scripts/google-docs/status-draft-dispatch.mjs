@@ -3,6 +3,10 @@
 import fs from "node:fs/promises";
 import { buildStatusDraftPlan } from "./status-draft-plan.mjs";
 import {
+  finalizationGateContent,
+  findFinalizationGate,
+} from "./status-finalization-gate.mjs";
+import {
   lifecycleSearchQuery,
   markdownLinkRequests,
   placeholderRequests,
@@ -158,6 +162,42 @@ async function docsDocument(token, id) {
   return response.json();
 }
 
+async function driveComments(token, id) {
+  const params = new URLSearchParams({
+    fields: "comments(id,content,resolved,createdTime,modifiedTime),nextPageToken",
+    pageSize: "100",
+  });
+  const result = await googleRequest(
+    `https://www.googleapis.com/drive/v3/files/${encodeURIComponent(id)}/comments?${params}`,
+    token,
+  );
+  if (result.nextPageToken) {
+    throw new Error("Draft has more than 100 comments; refusing incomplete gate validation.");
+  }
+  return result.comments || [];
+}
+
+async function ensureFinalizationGate(token, draft, plan) {
+  const existing = findFinalizationGate(
+    await driveComments(token, draft.id),
+    plan.lifecycle_key,
+  );
+  if (existing) {
+    return existing;
+  }
+
+  return googleRequest(
+    `https://www.googleapis.com/drive/v3/files/${encodeURIComponent(draft.id)}/comments?fields=id,content,resolved,createdTime,modifiedTime`,
+    token,
+    {
+      method: "POST",
+      body: JSON.stringify({
+        content: finalizationGateContent(plan.lifecycle_key, plan.github_source_url),
+      }),
+    },
+  );
+}
+
 async function verifyGoogleScope(replacements) {
   const token = await accessToken();
   const rootId = process.env.GOOGLE_DOCS_SCOPE_ROOT_ID;
@@ -277,8 +317,10 @@ async function fillDraft(token, draft, plan) {
 
   const after = await docsDocument(token, draft.id);
   verifyFilledDocument(after, plan);
+  const finalizationGate = await ensureFinalizationGate(token, draft, plan);
   return {
     draft: await driveMetadata(token, draft.id),
+    finalizationGate,
     result: placeholdersPresent.length
       ? "created_and_filled"
       : linkRequests.length
@@ -319,6 +361,7 @@ function summary(plan, google, liveResult) {
       ? [
           `- Write result: \`${liveResult.result}\``,
           `- Draft document: https://docs.google.com/document/d/${liveResult.draft.id}/edit`,
+          `- Finalization gate comment: \`${liveResult.finalizationGate.id}\` (${liveResult.finalizationGate.resolved ? "resolved" : "open"})`,
         ]
       : []),
     "",
@@ -369,6 +412,8 @@ async function main() {
           result: liveResult.result,
           document_id: liveResult.draft.id,
           document_url: `https://docs.google.com/document/d/${liveResult.draft.id}/edit`,
+          finalization_gate_comment_id: liveResult.finalizationGate.id,
+          finalization_gate_resolved: liveResult.finalizationGate.resolved,
         }
       : {}),
   };

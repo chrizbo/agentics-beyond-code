@@ -787,6 +787,19 @@ Use one explicit finalization trigger:
 
 on the draft Discussion.
 
+Also create one automation-owned document comment as a second explicit trigger:
+
+```text
+Resolve this comment when the status is ready to move to staged finalization.
+Alternatively, comment /finalize-status on the source Discussion.
+```
+
+The Drive API can create and inspect resolvable comments, but API-created
+anchors are treated as unanchored by Google Workspace editors. Keep the
+visible status header in the document and use a document-level comment rather
+than claiming it is reliably pinned to that header. The comment must explicitly
+quote its target heading, such as `Weekly Status — Week of 2026-06-08`.
+
 The finalization dispatcher should verify that the commenter is allowlisted,
 the Discussion is still a draft, the linked document belongs to the configured
 scope, and no final report is already recorded.
@@ -876,7 +889,7 @@ expiration, and other workflows until this loop works reliably.
 - [x] Decide the OAuth identity and GitHub environment used for Google writes.
 - [x] Create the shared folder, drafts subfolder, and fixed weekly-status
   template.
-- [ ] Define supported Docs-to-Markdown and Markdown-to-Docs formatting.
+- [x] Define supported Docs-to-Markdown and Markdown-to-Docs formatting.
 - [x] Add a stable lifecycle marker to the draft Discussion and Doc template.
 - [ ] Change Slack report-back so draft Weekly Status Discussions are not
   announced as final.
@@ -902,6 +915,25 @@ Drafts, records the lifecycle key in Drive `appProperties`, fills the known
 placeholders, and verifies the resulting document through Docs API readback.
 Replays reuse the lifecycle-marked draft. They complete an unfilled partial
 copy but do not overwrite a filled draft that humans may have edited.
+
+The staged finalization dispatcher is implemented in:
+
+```text
+.github/workflows/google-docs-status-finalization-staged.yml
+```
+
+It manually accepts a Weekly Status Discussion URL, resolves the single
+lifecycle-linked draft inside the configured drafts folder, validates the Doc
+contains the lifecycle and source markers, converts the publishable report to
+Markdown, and uploads the exact proposed Discussion body. It has read-only
+GitHub permissions and performs no Google or GitHub writes.
+
+The staged Docs-to-Markdown boundary supports headings, paragraphs, bullets,
+native hyperlinks, bold text, horizontal rules, and simple tables. Conversion
+starts at the `Weekly Status` heading so lifecycle metadata and shaping
+instructions are not published. It can be invoked manually or by an allowlisted
+human posting exactly `/finalize-status` on the source Discussion. The slash
+command path remains staged and performs no writes.
 
 The dispatcher fails closed when the source run has no `create_discussion`
 safe-output item. Manual staged validation may instead provide an explicit
