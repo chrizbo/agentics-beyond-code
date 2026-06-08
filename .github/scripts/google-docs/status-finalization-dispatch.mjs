@@ -3,7 +3,11 @@
 import fs from "node:fs/promises";
 import { documentToStatusMarkdown } from "./status-finalization-convert.mjs";
 import { findFinalizationGate } from "./status-finalization-gate.mjs";
-import { lifecycleSearchQuery } from "./status-draft-write.mjs";
+import {
+  canPublishFinalization,
+  finalSlackChannel,
+  finalSlackMessage,
+} from "./status-finalization-publish.mjs";
 
 const REQUIRED_ENV = [
   "GH_REPO",
@@ -15,6 +19,8 @@ const REQUIRED_ENV = [
   "GOOGLE_DOCS_SCOPE_TYPE",
   "GOOGLE_DOCS_SCOPE_ROOT_ID",
   "GOOGLE_DOCS_DRAFTS_FOLDER_ID",
+  "GOOGLE_DOCS_ARCHIVE_FOLDER_ID",
+  "GOOGLE_DOCS_FINALIZATION_ENABLED",
 ];
 
 function requireEnv() {
@@ -24,6 +30,9 @@ function requireEnv() {
   }
   if (process.env.GOOGLE_DOCS_SCOPE_TYPE !== "folder") {
     throw new Error("The staged MVP currently supports GOOGLE_DOCS_SCOPE_TYPE=folder.");
+  }
+  if (!["true", "false"].includes(process.env.GOOGLE_DOCS_FINALIZATION_ENABLED)) {
+    throw new Error("GOOGLE_DOCS_FINALIZATION_ENABLED must be exactly true or false.");
   }
   if (process.env.TRIGGER_KIND === "discussion_comment") {
     if (process.env.TRIGGER_COMMAND?.trim() !== "/finalize-status") {
@@ -66,7 +75,7 @@ async function discussionFromUrl(url) {
   const data = await githubGraphql(
     `query($owner:String!,$name:String!,$number:Int!){
       repository(owner:$owner,name:$name){
-        discussion(number:$number){number title body url}
+        discussion(number:$number){id number title body url}
       }
     }`,
     { owner, name, number: Number(match[1]) },
@@ -105,8 +114,15 @@ async function accessToken() {
   return result.access_token;
 }
 
-async function googleRequest(url, token) {
-  const response = await fetch(url, { headers: { authorization: `Bearer ${token}` } });
+async function googleRequest(url, token, options = {}) {
+  const response = await fetch(url, {
+    ...options,
+    headers: {
+      authorization: `Bearer ${token}`,
+      "content-type": "application/json",
+      ...options.headers,
+    },
+  });
   const result = await response.json();
   if (!response.ok) {
     throw new Error(`Google API request failed: HTTP ${response.status} ${JSON.stringify(result)}`);
@@ -133,17 +149,132 @@ async function verifyDescendant(token, id, rootId) {
   }
 }
 
-async function findLifecycleDraft(token, lifecycleKey) {
+async function findLifecycleDocument(token, lifecycleKey) {
   const params = new URLSearchParams({
-    q: lifecycleSearchQuery(process.env.GOOGLE_DOCS_DRAFTS_FOLDER_ID, lifecycleKey),
+    q: `trashed = false and appProperties has { key='agenticsLifecycleKey' and value='${lifecycleKey}' }`,
     fields: "files(id,name,mimeType,parents,webViewLink,appProperties,modifiedTime)",
     pageSize: "10",
   });
   const result = await googleRequest(`https://www.googleapis.com/drive/v3/files?${params}`, token);
   if (result.files.length !== 1) {
-    throw new Error(`Expected exactly one draft for lifecycle key ${lifecycleKey}.`);
+    throw new Error(`Expected exactly one document for lifecycle key ${lifecycleKey}.`);
   }
   return result.files[0];
+}
+
+async function updateDiscussion(discussion, title, body) {
+  await githubGraphql(
+    `mutation($id:ID!,$title:String!,$body:String!){
+      updateDiscussion(input:{discussionId:$id,title:$title,body:$body}){discussion{id url title body}}
+    }`,
+    { id: discussion.id, title, body },
+  );
+}
+
+async function patchDriveFile(token, draft, body) {
+  return googleRequest(
+    `https://www.googleapis.com/drive/v3/files/${encodeURIComponent(draft.id)}?fields=id,parents,appProperties`,
+    token,
+    { method: "PATCH", body: JSON.stringify(body) },
+  );
+}
+
+async function markProperty(token, draft, key, value = "true") {
+  return patchDriveFile(token, draft, {
+    appProperties: { ...(draft.appProperties || {}), [key]: value },
+  });
+}
+
+async function postFinalSlack(discussion, proposedBody) {
+  if (!process.env.SLACK_BOT_TOKEN) {
+    throw new Error("SLACK_BOT_TOKEN is required for live finalization.");
+  }
+  const channel = finalSlackChannel(
+    process.env.SLACK_ARTIFACT_CHANNEL_MAP,
+    process.env.SLACK_ALLOWED_CHANNEL_IDS,
+  );
+  const response = await fetch("https://slack.com/api/chat.postMessage", {
+    method: "POST",
+    headers: {
+      authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`,
+      "content-type": "application/json; charset=utf-8",
+    },
+    body: JSON.stringify({
+      channel,
+      text: finalSlackMessage({
+        discussionTitle: discussion.title,
+        discussionUrl: discussion.url,
+        discussionBody: proposedBody,
+      }),
+      unfurl_links: false,
+      unfurl_media: false,
+    }),
+  });
+  const result = await response.json();
+  if (!response.ok || !result.ok) {
+    throw new Error(`Final Slack notification failed: ${result.error || response.statusText}`);
+  }
+}
+
+async function finalizeDocStatus(token, draft) {
+  await googleRequest(
+    `https://docs.googleapis.com/v1/documents/${encodeURIComponent(draft.id)}:batchUpdate`,
+    token,
+    {
+      method: "POST",
+      body: JSON.stringify({
+        requests: [
+          {
+            replaceAllText: {
+              containsText: {
+                text: "Status: Needs team shaping",
+                matchCase: true,
+              },
+              replaceText: "Status: Finalized",
+            },
+          },
+        ],
+      }),
+    },
+  );
+}
+
+async function publish(token, discussion, draft, proposedBody) {
+  let current = draft;
+  const results = [];
+
+  if (current.appProperties?.agenticsDiscussionPublished !== "true") {
+    await updateDiscussion(discussion, discussion.title, proposedBody);
+    current = await markProperty(token, current, "agenticsDiscussionPublished");
+    results.push("discussion_published");
+  }
+  if (current.appProperties?.agenticsSlackFinalNotified !== "true") {
+    await postFinalSlack(discussion, proposedBody);
+    current = await markProperty(token, current, "agenticsSlackFinalNotified");
+    results.push("slack_notified");
+  }
+  if (current.appProperties?.agenticsDocFinalized !== "true") {
+    await finalizeDocStatus(token, current);
+    const finalizedDocument = await docsDocument(token, current.id);
+    if (!JSON.stringify(finalizedDocument).includes("Status: Finalized")) {
+      throw new Error("Google Doc readback did not confirm finalized status.");
+    }
+    current = await markProperty(token, current, "agenticsDocFinalized");
+    results.push("doc_finalized");
+  }
+  if (current.appProperties?.agenticsFinalized !== "true") {
+    current = await markProperty(token, current, "agenticsFinalized");
+    results.push("finalized");
+  }
+  if (!current.parents?.includes(process.env.GOOGLE_DOCS_ARCHIVE_FOLDER_ID)) {
+    current = await googleRequest(
+      `https://www.googleapis.com/drive/v3/files/${encodeURIComponent(current.id)}?addParents=${encodeURIComponent(process.env.GOOGLE_DOCS_ARCHIVE_FOLDER_ID)}&removeParents=${encodeURIComponent(process.env.GOOGLE_DOCS_DRAFTS_FOLDER_ID)}&fields=id,parents,appProperties`,
+      token,
+      { method: "PATCH", body: "{}" },
+    );
+    results.push("archived");
+  }
+  return results.length ? results.join(",") : "already_finalized";
 }
 
 async function docsDocument(token, id) {
@@ -169,20 +300,24 @@ async function driveComments(token, id) {
 }
 
 function summary(plan) {
+  const live = plan.staged === false;
   return [
-    "## Staged Google Docs Status Finalization",
+    `## ${live ? "Live" : "Staged"} Google Docs Status Finalization`,
     "",
     "- Validation: passed",
-    "- GitHub writes: disabled",
-    "- Google writes: disabled",
+    `- GitHub writes: ${live ? "enabled" : "disabled"}`,
+    `- Google writes: ${live ? "enabled" : "disabled"}`,
     `- Trigger: \`${plan.trigger_kind}\``,
     `- Lifecycle key: \`${plan.lifecycle_key}\``,
     `- Source Discussion: ${plan.github_source_url}`,
     `- Draft document: ${plan.document_url}`,
     `- Finalization gate: \`${plan.finalization_gate_status}\``,
     `- Proposed title: ${plan.proposed_title}`,
+    `- Result: \`${plan.result}\``,
     "",
-    "The exact proposed Discussion body is available in the uploaded artifact.",
+    live
+      ? "The final Discussion, Slack notification, and archived Doc state were verified."
+      : "The exact proposed Discussion body is available in the uploaded artifact.",
     "",
   ].join("\n");
 }
@@ -197,7 +332,7 @@ async function main() {
 
   const lifecycleKey = lifecycleFromDiscussion(discussion);
   const token = await accessToken();
-  const draft = await findLifecycleDraft(token, lifecycleKey);
+  const draft = await findLifecycleDocument(token, lifecycleKey);
   await verifyDescendant(token, draft.id, process.env.GOOGLE_DOCS_SCOPE_ROOT_ID);
   const document = await docsDocument(token, draft.id);
   const serialized = JSON.stringify(document);
@@ -213,9 +348,36 @@ async function main() {
   }
 
   const proposedBody = documentToStatusMarkdown(document);
+  const publishEnabled = canPublishFinalization({
+    enabled: process.env.GOOGLE_DOCS_FINALIZATION_ENABLED === "true",
+    triggerKind: process.env.TRIGGER_KIND || "workflow_dispatch",
+    gateResolved: finalizationGate.resolved === true,
+  });
+  const publishResult = publishEnabled
+    ? await publish(token, discussion, draft, proposedBody)
+    : "staged";
+  const finalDiscussion = publishEnabled
+    ? await discussionFromUrl(discussion.url)
+    : discussion;
+  if (
+    publishEnabled &&
+    finalDiscussion.body.trimEnd() !== proposedBody.trimEnd()
+  ) {
+    throw new Error("GitHub Discussion readback did not match the shaped Google Doc.");
+  }
+  const finalDraft = publishEnabled ? await driveMetadata(token, draft.id) : draft;
+  if (
+    publishEnabled &&
+    (!finalDraft.parents?.includes(process.env.GOOGLE_DOCS_ARCHIVE_FOLDER_ID) ||
+      finalDraft.appProperties?.agenticsFinalized !== "true")
+  ) {
+    throw new Error("Drive readback did not confirm finalized archive state.");
+  }
   const plan = {
-    operation: "google_docs_stage_status_finalization",
-    staged: true,
+    operation: publishEnabled
+      ? "google_docs_publish_status_finalization"
+      : "google_docs_stage_status_finalization",
+    staged: !publishEnabled,
     trigger_kind: process.env.TRIGGER_KIND || "workflow_dispatch",
     trigger_actor: process.env.TRIGGER_ACTOR || process.env.GITHUB_ACTOR,
     lifecycle_key: lifecycleKey,
@@ -227,6 +389,7 @@ async function main() {
     finalization_gate_status: finalizationGate.resolved ? "resolved" : "open",
     proposed_title: discussion.title,
     proposed_body: proposedBody,
+    result: publishResult,
   };
 
   const outputDir = process.env.OUTPUT_DIR || "/tmp/google-docs-status-finalization";

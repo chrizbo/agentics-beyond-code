@@ -1,4 +1,4 @@
-name: Google Docs Status Finalization Staged
+name: Google Docs Status Finalization
 
 on:
   discussion_comment:
@@ -11,7 +11,7 @@ on:
 
 permissions:
   contents: read
-  discussions: read
+  discussions: write
 
 concurrency:
   group: google-docs-status-finalization-staged-${{ inputs.discussion_url }}
@@ -39,6 +39,11 @@ jobs:
       GOOGLE_DOCS_SCOPE_TYPE: ${{ vars.GOOGLE_DOCS_SCOPE_TYPE }}
       GOOGLE_DOCS_SCOPE_ROOT_ID: ${{ vars.GOOGLE_DOCS_SCOPE_ROOT_ID }}
       GOOGLE_DOCS_DRAFTS_FOLDER_ID: ${{ vars.GOOGLE_DOCS_DRAFTS_FOLDER_ID }}
+      GOOGLE_DOCS_ARCHIVE_FOLDER_ID: ${{ vars.GOOGLE_DOCS_ARCHIVE_FOLDER_ID }}
+      GOOGLE_DOCS_FINALIZATION_ENABLED: ${{ vars.GOOGLE_DOCS_FINALIZATION_ENABLED || 'false' }}
+      SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      SLACK_ALLOWED_CHANNEL_IDS: ${{ vars.SLACK_ALLOWED_CHANNEL_IDS }}
+      SLACK_ARTIFACT_CHANNEL_MAP: ${{ vars.SLACK_ARTIFACT_CHANNEL_MAP }}
       OUTPUT_DIR: /tmp/google-docs-status-finalization
     steps:
       - name: Checkout repository

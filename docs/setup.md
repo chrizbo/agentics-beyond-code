@@ -221,6 +221,20 @@ invitations use the Weekly Leadership Status Update channel from
 `SLACK_ARTIFACT_CHANNEL_MAP`. The mapped channel remains the intended
 final-report audience.
 
+After staged finalization previews have been reviewed, enable the protected
+live publication path:
+
+```bash
+gh variable set GOOGLE_DOCS_FINALIZATION_ENABLED --body "true" --env google-docs-demo
+```
+
+When enabled, only an allowlisted exact `/finalize-status` Discussion comment
+or a resolved Google Doc lifecycle gate can publish. Live publication updates
+the Discussion from the shaped Doc, posts the final report to the mapped Weekly
+Leadership Status Slack channel, marks the Doc finalized, and moves it to the
+configured Archive folder. Leave this variable unset or set it to `false` to
+produce staged preview artifacts only.
+
 **How it works:** The dispatch reads the `safe-outputs-items` artifact from
 the completed workflow run to get the exact URL of the discussion or issue
 that was just created — no search or title matching required. For manual

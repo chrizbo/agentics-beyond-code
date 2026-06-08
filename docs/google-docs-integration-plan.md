@@ -893,10 +893,10 @@ expiration, and other workflows until this loop works reliably.
 - [x] Add a stable lifecycle marker to the draft Discussion and Doc template.
 - [x] Change Slack report-back so draft Weekly Status Discussions are not
   announced as final.
-- [ ] Choose the allowlisted GitHub users permitted to finalize.
-- [ ] Define behavior for reruns, partial failure, replay, and revision
+- [x] Choose the allowlisted GitHub users permitted to finalize.
+- [x] Define behavior for reruns, partial failure, replay, and revision
   conflicts.
-- [ ] Test the entire flow in staged mode before enabling Google writes.
+- [x] Test the entire flow in staged mode before enabling Google writes.
 
 The first staged dispatcher is implemented in:
 
@@ -951,6 +951,14 @@ starts at the `Weekly Status` heading so lifecycle metadata and shaping
 instructions are not published. It can be invoked manually or by an allowlisted
 human posting exactly `/finalize-status` on the source Discussion. The slash
 command path remains staged and performs no writes.
+
+Set `GOOGLE_DOCS_FINALIZATION_ENABLED=true` in the protected environment to
+enable live publication. Live finalization requires either an allowlisted exact
+`/finalize-status` Discussion comment or a resolved lifecycle gate. It records
+independent Drive app-property markers after publishing the Discussion and
+posting the final Slack notification, then marks the lifecycle finalized and
+moves the Doc to Archive. Replays resume incomplete steps and become a no-op
+after all markers and the archive move are present.
 
 Because Google Drive comment resolution does not emit a GitHub Actions event,
 `.github/workflows/google-docs-status-finalization-resolved-gates.yml` polls
