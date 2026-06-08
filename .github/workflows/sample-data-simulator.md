@@ -1,8 +1,8 @@
 ---
 description: |
   Daily simulator that generates realistic project activity for the Launch Tracker.
-  Creates new launches weekly, closes completed work, and adds progress comments
-  to epics and tasks — feeding the launch readiness report with fresh data.
+  Closes completed work, adds progress comments, generates standup transcripts,
+  and creates intake issues — feeding downstream workflows with fresh data.
 
 engine:
   id: codex
@@ -250,85 +250,7 @@ with a summary comment like:
 - "All tasks complete. Epic delivered! 🎉"
 - "Wrapping up — all sub-tasks shipped."
 
-### 4. Advance a Launch Phase (2-3 times per week)
-
-When a launch has made significant progress (e.g., >60% of tasks closed for
-current phase), advance it to the next phase by updating the project field:
-
-- Team → Alpha (when initial setup tasks are done)
-- Alpha → Beta (when core functionality tasks complete)
-- Beta → GA (when polish and release tasks complete)
-
-Use `update-project` to change the Phase field.
-
-### 5. Close a Launch (approximately weekly)
-
-If a launch is in GA phase and **all its epics are closed**, close the launch
-issue with a celebratory comment:
-- "🚀 Launch complete! All epics delivered and verified."
-
-### 6. Create a New Launch (approximately weekly)
-
-Create **one new launch** with a realistic product theme. Every launch must
-belong to an initiative.
-
-**Always reuse an existing initiative if possible.** Look at the project data
-for open `[Initiative]` issues and pick the best fit. Only create a new
-initiative if the launch truly doesn't fit any existing one — this should
-happen roughly once every 1-2 weeks at most, not every run.
-
-Use creative but plausible product feature names. Examples of good themes:
-
-- API Rate Limiting & Throttling
-- Dark Mode Support
-- SSO Integration (Okta/Azure AD)
-- Webhook Delivery Dashboard
-- Usage Analytics & Billing
-- Customer Onboarding Wizard
-- Audit Log Export & Compliance
-- Real-Time Notifications
-- Team Permissions & Roles
-- Search & Filtering Overhaul
-- Performance Monitoring Dashboard
-- Data Import/Export Pipeline
-- Multi-Region Deployment
-- Accessibility (WCAG 2.1 AA)
-- Email Template Builder
-
-For the new launch:
-
-1. **Create or reuse an initiative.** If creating a new one, use the safeoutputs CLI:
-   ```bash
-   printf '{"title":"[Initiative] Developer Platform Improvements","body":"## Overview\n..."}' \
-     | safeoutputs create_issue .
-   # Note the real issue number from the output — you will need it as `parent` below
-   ```
-
-2. **Create the launch issue** under the initiative (use the initiative's real issue number as `parent`):
-   ```bash
-   printf '{"title":"[Launch] Dark Mode Support","parent":74,"body":"## Overview\n...\n## Success Criteria\n- [ ] ..."}' \
-     | safeoutputs create_issue .
-   ```
-
-3. **Create 1-2 epics** under the launch (use launch's real issue number as `parent`)
-
-4. **Create 1-2 tasks** spread across the epics (use epic's real issue number as `parent`)
-
-5. **Wire the full hierarchy** by capturing each created issue's number and using it as `parent` for the next level.
-
-6. **Add all new issues to the project** with appropriate field values:
-   - Phase: Team (new launches start in Team)
-   - Target Date: 8-16 weeks from today
-   - Launch Type: randomly pick Major or Minor
-   - Risk Level: Low or Medium
-
-### 7. Vary Risk Levels (1-2 times per week)
-
-For launches in Alpha or Beta phase, occasionally update the Risk Level field:
-- If a launch has stale tasks (no comments in >5 days), bump risk to Medium or High
-- If a launch is making steady progress, keep or lower risk to Low
-
-### 8. Generate a Standup Transcript (every run)
+### 4. Generate a Standup Transcript (every run)
 
 Generate a fake WebVTT standup meeting transcript and commit it to the repo.
 This feeds the **transcript-processor** workflow, which will automatically
@@ -516,143 +438,19 @@ deliberately **incomplete** — missing the problem statement, no affected users
 or vague success criteria. This gives the triage workflow something to flag
 as `needs-more-info`.
 
-### 10. Generate Synthetic Slack Conversations (best effort, every run)
-
-Generate one synthetic Slack fixture file that can be used to test future Slack
-Context Processor and Slack Reaction Intake workflows without connecting a real
-Slack workspace.
-
-This is an optional fixture-generation step. It must never block the rest of
-the sample data simulator:
-
-- Do not call the real Slack API.
-- Do not require Slack credentials or Slack network access.
-- Run this after the normal launch, transcript, and intake sample data actions.
-- If you cannot confidently create a valid fixture file, skip this step.
-- If matching GitHub intake issue creation would exceed safe-output limits, skip
-  only the Slack-derived intake issue.
-- Do not call `noop` just because the optional Slack fixture was skipped.
-
-Write the fixture to `slack-fixtures/` as JSON:
-
-```bash
-DATE=$(date +%Y-%m-%d)
-FILENAME="slack-fixtures/slack-${DATE}.json"
-mkdir -p slack-fixtures
-```
-
-Each fixture should include 3-5 realistic Slack messages across one or more
-threads. Use Slack-shaped fields that match `docs/slack-integration-plan.md`:
-
-- `channel_id`
-- `channel_name`
-- `thread_ts`
-- `message_ts`
-- `permalink`
-- `author_id`
-- `author_name`
-- `created_at`
-- `text`
-- `reactions`
-- `matched_by`
-
-Use synthetic channel names such as:
-
-- `proj-launch-readiness`
-- `triage-intake`
-- `gtm-readiness`
-- `compliance-review`
-
-Create a mix of these conversation types:
-
-1. **Artifact context thread**
-   - Mentions a real open GitHub issue number and title.
-   - Includes a blocker, owner/date commitment, or launch scope update.
-   - Uses the `memo` reaction to mark the message as relevant context.
-
-2. **Reaction intake candidate**
-   - A user describes a bug report or feature request in Slack.
-   - Another user adds the `inbox_tray` reaction.
-   - The fixture should include enough detail to create an intake issue.
-
-3. **Decision candidate**
-   - A thread captures a lightweight product or implementation decision.
-   - Someone adds the `pushpin` reaction.
-   - The text should mention why the decision was made and what changes next.
-
-4. **Risk or blocker signal**
-   - A message flags a risk for a launch or compliance review.
-   - Someone adds the `warning` reaction.
-   - The text should include a source issue link or issue number when possible.
-
-5. **Done signal**
-   - A user says work has shipped, been verified, or should be considered done.
-   - Someone adds the `white_check_mark` reaction.
-   - The text should be useful for a future Commitment Reconciler check, but
-     should not imply the workflow should auto-close the GitHub issue.
-
-Also include a top-level `events` array with synthetic `reaction_added` events
-for each reacted message:
-
-```json
-{
-  "event_id": "Ev-sample-YYYYMMDD-001",
-  "type": "reaction_added",
-  "reaction": "inbox_tray",
-  "user_id": "U-sample-priya",
-  "channel_id": "C-sample-triage",
-  "message_ts": "1710000000.000000",
-  "thread_ts": "1710000000.000000",
-  "permalink": "https://example.slack.com/archives/C-sample-triage/p1710000000000000",
-  "received_at": "YYYY-MM-DDT16:05:00Z"
-}
-```
-
-For reaction intake examples, optionally create a matching GitHub intake issue
-as though the Slack Reaction Intake workflow processed the event. Apply both
-`triage-needed` and `from-slack` labels. Include the Slack permalink in the
-issue body under `### Additional Context`. If creating this optional issue or
-labels would fail, skip only the Slack-derived intake issue and still preserve
-the fixture file when possible.
-
-Commit the fixture file with `create_pull_request`:
-
-```bash
-safeoutputs create_pull_request \
-  --title "Synthetic Slack fixture for $(date +%Y-%m-%d)" \
-  --body "Auto-generated Slack fixture from the sample data simulator." \
-  --branch "$(git branch --show-current)"
-```
-
-If the standup transcript PR already exists for this run and safe-output limits
-make a second PR risky, add the Slack fixture file to the same sample-data PR
-when possible. Otherwise skip the Slack fixture PR; the main simulator output is
-still successful.
-
 ## Constraints
 
-- **Never create more than 1 new launch per run** — we want gradual growth
-- **Never close more than 1 launch per run**
 - **Vary your activity** — don't always pick the same launches or tasks
 - **Use the current date** to make comments feel timely
-- **Don't repeat theme names** — check existing launches before creating new ones
 - **Keep it realistic** — a real team doesn't close everything in one day
-- **No labels except** `triage-needed` for intake and `from-slack` for synthetic
-  Slack reaction-intake examples — other workflows handle labeling
+- **No labels except** `triage-needed` for intake — other workflows handle labeling
 
 ## Output Sequence
 
 Process your actions in this order:
 1. Run the Data Quick-Start queries once to understand current state
-2. Close completed tasks (close-issue + add-comment)
-3. Add progress comments to open work (add-comment)
-4. Close finished epics (close-issue)
-5. Advance launch phases if warranted (update-project)
-6. Close a GA launch if fully complete (close-issue)
-7. Create new launch + epics + tasks (create-issue with parent field + update-project)
-8. Adjust risk levels (update-project)
-9. Generate and commit the standup transcript (bash: write file + git push)
-10. Create intake requests (create-issue + add-labels + update-project for triage board)
-11. Best effort: generate and commit synthetic Slack fixtures; optionally create
-    matching Slack intake issues when the fixture includes `inbox_tray`
-    reaction events. Skip this step if it would threaten the core simulator run.
+2. Close 2-4 completed tasks (safeoutputs close_issue + add_comment)
+3. Add 3-5 progress comments to open epics/tasks (safeoutputs add_comment)
+4. Close any epics where all tasks are done (safeoutputs close_issue)
+5. Generate and commit the standup transcript, then create PR (safeoutputs create_pull_request)
+6. Create 1 intake issue with triage-needed label (safeoutputs create_issue + add_labels)
