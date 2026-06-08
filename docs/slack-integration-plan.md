@@ -167,6 +167,14 @@ imports:
 Then the agent can call `slack_post_message` with an allowlisted `channel_id`,
 message `text`, required `github_source_url`, and optional `thread_ts`.
 
+The instructional prose inside the shared safe-output file is wrapped in an
+HTML/XML comment so importing it adds the safe-output configuration without
+injecting maintainer-facing setup instructions into the agent prompt.
+
+Every Slack write records a human-readable audit table in the Actions step
+summary. If `SLACK_BOT_TOKEN` is missing, the safe-output job opens one
+deduplicated configuration issue and links it from the failed run summary.
+
 Slack Reaction Intake uses a deterministic post-back dispatcher instead of a
 direct agent post-back because the `create_issue` safe output only resolves the
 final GitHub issue URL after the agent job completes. The dispatcher runs after
