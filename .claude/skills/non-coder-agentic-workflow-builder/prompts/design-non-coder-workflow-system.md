@@ -23,7 +23,9 @@ Useful inputs:
   portfolio, product ops, design, research, support, customer success, program
   management, operations
 - process pain: stale docs, launch risk, slow triage, missing decisions,
-  compliance churn, unclear strategy, meeting follow-up, stakeholder reporting
+  compliance churn, unclear strategy, meeting follow-up, stakeholder reporting,
+  team feels stuck or too comfortable, same voices dominating decisions, groupthink,
+  rituals running on autopilot
 - source of truth: GitHub Issues, Projects, Discussions, transcripts, policy
   docs, release docs
 - external systems: Slack, Jira, Confluence, Microsoft 365, Google Workspace,
@@ -51,6 +53,7 @@ Use existing workflows first:
 | Leaders need different views of the same work | `leadership-brief.md`, `weekly-status.md` | leadership brief policies, weekly status policy |
 | Workflow reliability and costs need monitoring | `workflow-health.md` | `.github/aw/logs/`, workflow files |
 | Slack contains important decisions, blockers, commitments, or intake requests | Slack Context Processor, Slack Reaction Intake | `docs/slack-integration-plan.md`, Slack app config, allowed channel map |
+| Team feels stuck, keeps making the same decisions, same voices dominate, or process rituals run on autopilot | `chaos-monkey.md` | `decisions/`, `transcripts/`, `docs/strategy.md`, `docs/how-we-work.md` |
 
 For new workflow ideas, read `docs/workflow-ideas.md` and then route through
 the `agentic-workflows` skill.

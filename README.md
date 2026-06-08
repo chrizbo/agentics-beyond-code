@@ -145,7 +145,7 @@ Skills are mirrored in two places:
 
 - **[How We Work](docs/how-we-work.md)** — team processes, meeting cadence, triage, and communication norms
 - **[Strategic Tradeoffs](docs/strategy.md)** — the team's "even over" strategy statements, annotated with alignment evidence
-- **[Fake Google Shared Drive](google-docs-fixtures/README.md)** — synthetic external product, customer, security, launch, and program documents for Google Docs integration demos
+- **[Fake Google Docs Scope](google-docs-fixtures/README.md)** — synthetic external product, customer, security, launch, and program documents for folder- or shared-drive-based Google Docs demos
 - **[Launch Tracker Project](https://github.com/users/chrizbo/projects/1)** — the sample GitHub Project with issues, launches, and workflow-generated artifacts
 - **[Intake Triage Project](https://github.com/users/chrizbo/projects/2)** — project board for triaging incoming feature requests and bug reports
 
