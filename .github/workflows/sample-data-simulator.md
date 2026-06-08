@@ -6,7 +6,7 @@ description: |
 
 engine:
   id: codex
-  model: gpt-4o-mini
+  model: gpt-5-mini
 
 on:
 #  schedule: (disabled — re-enable to run on a schedule) "0 6 * * 2-6" # Weeknights before downstream demo workflows
@@ -98,18 +98,24 @@ to report on.
 ## Pre-Fetched Data
 
 A deterministic pre-step has already fetched all project data from the GitHub
-Projects GraphQL API and saved it to `launch-data.json`, plus a pre-computed
-summary at `launch-data-summary.json`.
+Projects GraphQL API and produced two files:
 
-**Read `launch-data-summary.json` first** — it's small and contains all launches
-with their sub-issue trees and rollup stats. Only read `launch-data.json` if you
-need additional details like issue bodies.
+| File | Root key | Use for |
+|------|----------|---------|
+| `launch-data-full-summary.json` | `.launches[]` | **Start here** — small summary with all launches, sub-issue trees, and rollup stats |
+| `launch-data.json` | `.items[]` | Detailed item data; only query specific fields when the summary isn't enough |
 
-> **⚠️ Token efficiency:** Never `cat` the full `launch-data.json`. Use `jq` to
-> extract specific fields:
+**Read `launch-data-full-summary.json` first** — it's small and contains everything
+you need for most decisions. Only query `launch-data.json` if you need issue body text
+or fields not present in the summary.
+
+> **⚠️ Token efficiency:** Never `cat` the full `launch-data.json` — it is large.
+> Read it once at most, and only when necessary. Use `jq` to extract specific fields:
 > ```bash
+> # Note: launch-data.json uses .items[], not .launches[]
 > jq '[.items[] | select(.number == 5) | {number, title, body}]' launch-data.json
 > ```
+> Do NOT re-read the file after you have already loaded it in this session.
 
 ## Project Context
 
