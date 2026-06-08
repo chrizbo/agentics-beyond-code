@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  FINALIZATION_GATE_ANCHOR_TEXT,
   finalizationGateContent,
   finalizationGateHeading,
   finalizationGateMarker,
@@ -22,7 +23,7 @@ test("builds a lifecycle-scoped finalization gate comment", () => {
       "weekly-status:2026-06-08",
       "https://github.com/example/repo/discussions/1",
     ),
-    /Target heading: “Weekly Status — Week of 2026-06-08”/,
+    /Target heading: "Weekly Status — Week of 2026-06-08"/,
   );
 });
 
@@ -34,6 +35,12 @@ test("finds one gate and rejects duplicates", () => {
     () => findFinalizationGate([gate, { ...gate, id: "2" }], lifecycle),
     /Multiple finalization gate comments/,
   );
+});
+
+test("anchor text mentions the comments panel and the date label", () => {
+  assert.match(FINALIZATION_GATE_ANCHOR_TEXT, /Comments panel/);
+  assert.match(FINALIZATION_GATE_ANCHOR_TEXT, /finalization gate comment/);
+  assert.match(FINALIZATION_GATE_ANCHOR_TEXT, /\/finalize-status/);
 });
 
 test("extracts lifecycle identity from a gate comment", () => {

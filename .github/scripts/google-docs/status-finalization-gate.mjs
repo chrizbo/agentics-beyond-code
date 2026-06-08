@@ -10,10 +10,14 @@ export function finalizationGateHeading(lifecycleKey) {
   return `Weekly Status — Week of ${week}`;
 }
 
+// This string must match the anchor text in the Google Doc template exactly.
+export const FINALIZATION_GATE_ANCHOR_TEXT =
+  'When the report is ready, find the finalization gate comment in the Comments panel and resolve it to trigger publishing. The gate comment is labeled with this status date. Alternatively, comment /finalize-status on the source Discussion.';
+
 export function finalizationGateContent(lifecycleKey, discussionUrl) {
   return [
     finalizationGateMarker(lifecycleKey),
-    `Target heading: “${finalizationGateHeading(lifecycleKey)}”`,
+    `Target heading: "${finalizationGateHeading(lifecycleKey)}"`,
     "Resolve this comment when the status is ready to move to staged finalization.",
     `Alternatively, comment /finalize-status on the source Discussion: ${discussionUrl}`,
   ].join("\n\n");

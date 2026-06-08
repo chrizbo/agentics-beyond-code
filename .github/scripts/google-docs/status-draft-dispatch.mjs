@@ -3,6 +3,7 @@
 import fs from "node:fs/promises";
 import { buildStatusDraftPlan } from "./status-draft-plan.mjs";
 import {
+  FINALIZATION_GATE_ANCHOR_TEXT,
   finalizationGateContent,
   findFinalizationGate,
 } from "./status-finalization-gate.mjs";
@@ -256,6 +257,10 @@ async function ensureFinalizationGate(token, draft, plan) {
       method: "POST",
       body: JSON.stringify({
         content: finalizationGateContent(plan.lifecycle_key, plan.github_source_url),
+        quotedFileContent: {
+          mimeType: "text/plain",
+          value: FINALIZATION_GATE_ANCHOR_TEXT,
+        },
       }),
     },
   );
