@@ -48,7 +48,7 @@ steps:
       for f in $DECISION_FILES; do
         [ -f "$f" ] || continue
         TOTAL=$((TOTAL + 1))
-        COUNT=$(grep -c '^- ' "$f" 2>/dev/null || echo 0)
+        COUNT=$(grep -c '^- ' "$f" 2>/dev/null) || COUNT=0
         [ "$COUNT" -gt 2 ] && MULTI_OPTION=$((MULTI_OPTION + 1))
       done
 
@@ -121,9 +121,6 @@ steps:
       echo "=== Stasis signals collected ==="
       cat /tmp/gh-aw/agent/chaos-monkey/signals.json
       echo "signals_ready=true" >> "$GITHUB_OUTPUT"
-
-imports:
-  - shared/freshness-check.md
 
 tools:
   github:
@@ -440,6 +437,5 @@ to show you what it's about to do.]
 - **Don't name individuals.** Refer to patterns and roles, not people. "One
   author dominates decision authorship" — not a name or email.
 
-- **Skip if data is stale.** If the freshness check (imported above) indicates
-  data is more than 7 days old, noop. A stasis report based on stale data is
-  worse than no report.
+- **If launch phase distribution is unavailable,** skip that signal — the
+  other five signals are sufficient for a stasis assessment.

@@ -1,4 +1,4 @@
-# gh-aw-metadata: {"schema_version":"v4","frontmatter_hash":"18a5c7ea5402d46c495c5b92fc11b3467c607b0bb54513ac7b5055740a2f45ef","body_hash":"cac7fa5634dfbba8139d2f9cc5fb67da79ebd980879edd17dbb79991825bcd2d","compiler_version":"v0.77.4","strict":true,"agent_id":"codex","agent_model":"gpt-4o"}
+# gh-aw-metadata: {"schema_version":"v4","frontmatter_hash":"b78cd6815cfee8dd135509ead9d2d6de7de6a1407b1e0998a4bec4e1fd2cc807","body_hash":"5a568c1d1f1719c9c949e7964147095d7c96a51e531e8145d32c6f47080a9023","compiler_version":"v0.77.4","strict":true,"agent_id":"codex","agent_model":"gpt-4o"}
 # gh-aw-manifest: {"version":1,"secrets":["CODEX_API_KEY","GH_AW_GITHUB_MCP_SERVER_TOKEN","GH_AW_GITHUB_TOKEN","GITHUB_TOKEN","OPENAI_API_KEY"],"actions":[{"repo":"actions/checkout","sha":"de0fac2e4500dabe0009e67214ff5f5447ce83dd","version":"v6.0.2"},{"repo":"actions/download-artifact","sha":"3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c","version":"v8.0.1"},{"repo":"actions/github-script","sha":"3a2844b7e9c422d3c10d287c895573f7108da1b3","version":"v9.0.0"},{"repo":"actions/setup-node","sha":"48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e","version":"v6.4.0"},{"repo":"actions/upload-artifact","sha":"043fb46d1a93c77aae656e7c1c64a875d1fc6a0a","version":"v7.0.1"},{"repo":"github/gh-aw-actions/setup","sha":"4c7307f890279fa5971acae8899475901fea9447","version":"v0.77.4"}],"containers":[{"image":"ghcr.io/github/gh-aw-firewall/agent:0.25.58"},{"image":"ghcr.io/github/gh-aw-firewall/api-proxy:0.25.58"},{"image":"ghcr.io/github/gh-aw-firewall/cli-proxy:0.25.58"},{"image":"ghcr.io/github/gh-aw-firewall/squid:0.25.58"},{"image":"ghcr.io/github/gh-aw-mcpg:v0.3.22"},{"image":"ghcr.io/github/github-mcp-server:v1.1.0"},{"image":"node:lts-alpine","digest":"sha256:2bdb65ed1dab192432bc31c95f94155ca5ad7fc1392fb7eb7526ab682fa5bf14","pinned_image":"node:lts-alpine@sha256:2bdb65ed1dab192432bc31c95f94155ca5ad7fc1392fb7eb7526ab682fa5bf14"}]}
 #    ___                   _   _      
 #   / _ \                 | | (_)     
@@ -31,10 +31,6 @@
 # 
 # Outputs a discussion post with a stasis score and 2-3 disruption
 # prescriptions. Purely advisory — no changes to issues or code.
-#
-# Resolved workflow manifest:
-#   Imports:
-#     - shared/freshness-check.md
 #
 # Secrets used:
 #   - CODEX_API_KEY
@@ -199,20 +195,20 @@ jobs:
         run: |
           bash "${RUNNER_TEMP}/gh-aw/actions/create_prompt_first.sh"
           {
-          cat << 'GH_AW_PROMPT_caa8164c003b79e2_EOF'
+          cat << 'GH_AW_PROMPT_ac24df1eae0ff5fa_EOF'
           <system>
-          GH_AW_PROMPT_caa8164c003b79e2_EOF
+          GH_AW_PROMPT_ac24df1eae0ff5fa_EOF
           cat "${RUNNER_TEMP}/gh-aw/prompts/xpia.md"
           cat "${RUNNER_TEMP}/gh-aw/prompts/temp_folder_prompt.md"
           cat "${RUNNER_TEMP}/gh-aw/prompts/markdown.md"
           cat "${RUNNER_TEMP}/gh-aw/prompts/safe_outputs_prompt.md"
-          cat << 'GH_AW_PROMPT_caa8164c003b79e2_EOF'
+          cat << 'GH_AW_PROMPT_ac24df1eae0ff5fa_EOF'
           <safe-output-tools>
           Tools: create_discussion, missing_tool, missing_data, noop
           </safe-output-tools>
-          GH_AW_PROMPT_caa8164c003b79e2_EOF
+          GH_AW_PROMPT_ac24df1eae0ff5fa_EOF
           cat "${RUNNER_TEMP}/gh-aw/prompts/mcp_cli_tools_prompt.md"
-          cat << 'GH_AW_PROMPT_caa8164c003b79e2_EOF'
+          cat << 'GH_AW_PROMPT_ac24df1eae0ff5fa_EOF'
           <github-context>
           The following GitHub context information is available for this workflow:
           {{#if github.actor}}
@@ -241,13 +237,12 @@ jobs:
           {{/if}}
           </github-context>
           
-          GH_AW_PROMPT_caa8164c003b79e2_EOF
+          GH_AW_PROMPT_ac24df1eae0ff5fa_EOF
           cat "${RUNNER_TEMP}/gh-aw/prompts/cli_proxy_with_safeoutputs_prompt.md"
-          cat << 'GH_AW_PROMPT_caa8164c003b79e2_EOF'
+          cat << 'GH_AW_PROMPT_ac24df1eae0ff5fa_EOF'
           </system>
-          {{#runtime-import .github/workflows/shared/freshness-check.md}}
           {{#runtime-import .github/workflows/chaos-monkey.md}}
-          GH_AW_PROMPT_caa8164c003b79e2_EOF
+          GH_AW_PROMPT_ac24df1eae0ff5fa_EOF
           } > "$GH_AW_PROMPT"
       - name: Interpolate variables and render templates
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
@@ -385,7 +380,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
       - id: stasis-signals
         name: Collect stasis signals
-        run: "mkdir -p /tmp/gh-aw/agent/chaos-monkey\n\n# --- Signal 1: Decision diversity (last 14 days) ---\n# Proxy: decisions with >2 list items under \"Options Considered\" vs. single-path\n# Grep only — no full file reads\nDECISION_FILES=$(git log --since=\"14 days ago\" --name-only --diff-filter=AM -- 'decisions/*.md' 2>/dev/null | grep '\\.md$' | sort -u)\nif [ -z \"$DECISION_FILES\" ]; then\n  DECISION_FILES=$(ls -t decisions/*.md 2>/dev/null | head -10)\nfi\nTOTAL=0; MULTI_OPTION=0\nfor f in $DECISION_FILES; do\n  [ -f \"$f\" ] || continue\n  TOTAL=$((TOTAL + 1))\n  COUNT=$(grep -c '^- ' \"$f\" 2>/dev/null || echo 0)\n  [ \"$COUNT\" -gt 2 ] && MULTI_OPTION=$((MULTI_OPTION + 1))\ndone\n\n# --- Signal 2: Participation entropy ---\n# Flag if one author dominates recent decision commits\nAUTHORS=$(git log --since=\"30 days ago\" --format='%ae' -- 'decisions/*.md' 2>/dev/null \\\n  | sort | uniq -c | sort -rn | head -5 | awk '{print $2\": \"$1}' | paste -sd ',' -)\n\n# --- Signal 3: Process doc staleness ---\nHOW_WE_WORK_AGE=$(git log -1 --format='%cr' -- docs/how-we-work.md 2>/dev/null || echo \"unknown\")\nSTRATEGY_AGE=$(git log -1 --format='%cr' -- docs/strategy.md 2>/dev/null || echo \"unknown\")\n\n# --- Signal 4: Transcript topic repetition ---\n# Cap at 3 most recent transcripts; extract words ≥5 chars; find high-frequency repeats\nTRANSCRIPT_LIST=$(ls -t transcripts/*.vtt 2>/dev/null | head -3 | tr '\\n' ' ')\nif [ -n \"$TRANSCRIPT_LIST\" ]; then\n  REPEATED_TOPICS=$(cat $TRANSCRIPT_LIST 2>/dev/null \\\n    | grep -oE '\\b[A-Za-z]{5,}\\b' \\\n    | grep -iv '\\b(which|there|their|about|would|could|should|being|having|after|before|other|where|these|those|think|right|going|doing|since|still|every|maybe|thing|things|really|great|well|okay|also|just|like|want|need|know|have|make|this|that|with|from|they|what|when|then|been|will|were|your|into|more|some|over|work)\\b' \\\n    | sort | uniq -c | sort -rn | head -15 | awk '$1 > 1 {print $2}' \\\n    | tr '\\n' ',' | sed 's/,$//' | cut -c1-300)\nelse\n  REPEATED_TOPICS=\"no_transcripts_found\"\nfi\n\n# --- Signal 5: Launch phase concentration ---\n# Read summary only — never the 107KB launch-data.json\nPHASE_DIST=$(jq -r '\n  [.[].phase // \"unknown\"] |\n  group_by(.) |\n  map(\"\\(.[0]):\\(length)\") |\n  join(\", \")\n' launch-data-summary.json 2>/dev/null | head -c 200 || echo \"unavailable\")\n\n# --- Signal 6: Slack participation diversity ---\n# Most recent fixture only\nSLACK_USERS=$(jq -r '\n  [.messages[].user_id // empty] |\n  group_by(.) |\n  map(\"\\(.[0]):\\(length)\") |\n  join(\", \")\n' slack-fixtures/slack-2026-06-03.json 2>/dev/null | head -c 200 || echo \"unavailable\")\n\n# Assemble compact JSON — targets < 2KB\njq -n \\\n  --argjson decision_total \"$TOTAL\" \\\n  --argjson multi_option \"$MULTI_OPTION\" \\\n  --arg authors \"$AUTHORS\" \\\n  --arg how_we_work_age \"$HOW_WE_WORK_AGE\" \\\n  --arg strategy_age \"$STRATEGY_AGE\" \\\n  --arg repeated_topics \"$REPEATED_TOPICS\" \\\n  --arg phase_dist \"$PHASE_DIST\" \\\n  --arg slack_users \"$SLACK_USERS\" \\\n  '{\n    decision_diversity: {\n      total: $decision_total,\n      multi_option: $multi_option,\n      ratio: (if $decision_total > 0 then ($multi_option / $decision_total * 100 | round) else 0 end)\n    },\n    participation: $authors,\n    staleness: {\n      how_we_work: $how_we_work_age,\n      strategy: $strategy_age\n    },\n    transcript_repeated_topics: $repeated_topics,\n    launch_phase_distribution: $phase_dist,\n    slack_user_distribution: $slack_users\n  }' > /tmp/gh-aw/agent/chaos-monkey/signals.json\n\necho \"=== Stasis signals collected ===\"\ncat /tmp/gh-aw/agent/chaos-monkey/signals.json\necho \"signals_ready=true\" >> \"$GITHUB_OUTPUT\"\n"
+        run: "mkdir -p /tmp/gh-aw/agent/chaos-monkey\n\n# --- Signal 1: Decision diversity (last 14 days) ---\n# Proxy: decisions with >2 list items under \"Options Considered\" vs. single-path\n# Grep only — no full file reads\nDECISION_FILES=$(git log --since=\"14 days ago\" --name-only --diff-filter=AM -- 'decisions/*.md' 2>/dev/null | grep '\\.md$' | sort -u)\nif [ -z \"$DECISION_FILES\" ]; then\n  DECISION_FILES=$(ls -t decisions/*.md 2>/dev/null | head -10)\nfi\nTOTAL=0; MULTI_OPTION=0\nfor f in $DECISION_FILES; do\n  [ -f \"$f\" ] || continue\n  TOTAL=$((TOTAL + 1))\n  COUNT=$(grep -c '^- ' \"$f\" 2>/dev/null) || COUNT=0\n  [ \"$COUNT\" -gt 2 ] && MULTI_OPTION=$((MULTI_OPTION + 1))\ndone\n\n# --- Signal 2: Participation entropy ---\n# Flag if one author dominates recent decision commits\nAUTHORS=$(git log --since=\"30 days ago\" --format='%ae' -- 'decisions/*.md' 2>/dev/null \\\n  | sort | uniq -c | sort -rn | head -5 | awk '{print $2\": \"$1}' | paste -sd ',' -)\n\n# --- Signal 3: Process doc staleness ---\nHOW_WE_WORK_AGE=$(git log -1 --format='%cr' -- docs/how-we-work.md 2>/dev/null || echo \"unknown\")\nSTRATEGY_AGE=$(git log -1 --format='%cr' -- docs/strategy.md 2>/dev/null || echo \"unknown\")\n\n# --- Signal 4: Transcript topic repetition ---\n# Cap at 3 most recent transcripts; extract words ≥5 chars; find high-frequency repeats\nTRANSCRIPT_LIST=$(ls -t transcripts/*.vtt 2>/dev/null | head -3 | tr '\\n' ' ')\nif [ -n \"$TRANSCRIPT_LIST\" ]; then\n  REPEATED_TOPICS=$(cat $TRANSCRIPT_LIST 2>/dev/null \\\n    | grep -oE '\\b[A-Za-z]{5,}\\b' \\\n    | grep -iv '\\b(which|there|their|about|would|could|should|being|having|after|before|other|where|these|those|think|right|going|doing|since|still|every|maybe|thing|things|really|great|well|okay|also|just|like|want|need|know|have|make|this|that|with|from|they|what|when|then|been|will|were|your|into|more|some|over|work)\\b' \\\n    | sort | uniq -c | sort -rn | head -15 | awk '$1 > 1 {print $2}' \\\n    | tr '\\n' ',' | sed 's/,$//' | cut -c1-300)\nelse\n  REPEATED_TOPICS=\"no_transcripts_found\"\nfi\n\n# --- Signal 5: Launch phase concentration ---\n# Read summary only — never the 107KB launch-data.json\nPHASE_DIST=$(jq -r '\n  [.[].phase // \"unknown\"] |\n  group_by(.) |\n  map(\"\\(.[0]):\\(length)\") |\n  join(\", \")\n' launch-data-summary.json 2>/dev/null | head -c 200 || echo \"unavailable\")\n\n# --- Signal 6: Slack participation diversity ---\n# Most recent fixture only\nSLACK_USERS=$(jq -r '\n  [.messages[].user_id // empty] |\n  group_by(.) |\n  map(\"\\(.[0]):\\(length)\") |\n  join(\", \")\n' slack-fixtures/slack-2026-06-03.json 2>/dev/null | head -c 200 || echo \"unavailable\")\n\n# Assemble compact JSON — targets < 2KB\njq -n \\\n  --argjson decision_total \"$TOTAL\" \\\n  --argjson multi_option \"$MULTI_OPTION\" \\\n  --arg authors \"$AUTHORS\" \\\n  --arg how_we_work_age \"$HOW_WE_WORK_AGE\" \\\n  --arg strategy_age \"$STRATEGY_AGE\" \\\n  --arg repeated_topics \"$REPEATED_TOPICS\" \\\n  --arg phase_dist \"$PHASE_DIST\" \\\n  --arg slack_users \"$SLACK_USERS\" \\\n  '{\n    decision_diversity: {\n      total: $decision_total,\n      multi_option: $multi_option,\n      ratio: (if $decision_total > 0 then ($multi_option / $decision_total * 100 | round) else 0 end)\n    },\n    participation: $authors,\n    staleness: {\n      how_we_work: $how_we_work_age,\n      strategy: $strategy_age\n    },\n    transcript_repeated_topics: $repeated_topics,\n    launch_phase_distribution: $phase_dist,\n    slack_user_distribution: $slack_users\n  }' > /tmp/gh-aw/agent/chaos-monkey/signals.json\n\necho \"=== Stasis signals collected ===\"\ncat /tmp/gh-aw/agent/chaos-monkey/signals.json\necho \"signals_ready=true\" >> \"$GITHUB_OUTPUT\"\n"
 
       - name: Configure Git credentials
         env:
@@ -457,9 +452,9 @@ jobs:
           mkdir -p "${RUNNER_TEMP}/gh-aw/safeoutputs"
           mkdir -p /tmp/gh-aw/safeoutputs
           mkdir -p /tmp/gh-aw/mcp-logs/safeoutputs
-          cat > "${RUNNER_TEMP}/gh-aw/safeoutputs/config.json" << 'GH_AW_SAFE_OUTPUTS_CONFIG_dfe563a7557e4d40_EOF'
+          cat > "${RUNNER_TEMP}/gh-aw/safeoutputs/config.json" << 'GH_AW_SAFE_OUTPUTS_CONFIG_94d387ae7e54be5e_EOF'
           {"create_discussion":{"category":"general","expires":168,"fallback_to_issue":true,"max":1,"title_prefix":"[Chaos] "},"create_report_incomplete_issue":{},"mentions":{"enabled":false},"missing_data":{},"missing_tool":{},"noop":{"max":1,"report-as-issue":"true"},"report_incomplete":{}}
-          GH_AW_SAFE_OUTPUTS_CONFIG_dfe563a7557e4d40_EOF
+          GH_AW_SAFE_OUTPUTS_CONFIG_94d387ae7e54be5e_EOF
       - name: Generate Safe Outputs Tools
         env:
           GH_AW_TOOLS_META_JSON: |
@@ -654,7 +649,7 @@ jobs:
           DOCKER_SOCK_GID=$(stat -c '%g' "$DOCKER_SOCK_PATH" 2>/dev/null || echo '0')
           export MCP_GATEWAY_DOCKER_COMMAND='docker run -i --rm --network host --add-host host.docker.internal:127.0.0.1 --user '"${MCP_GATEWAY_UID}"':'"${MCP_GATEWAY_GID}"' --group-add '"${DOCKER_SOCK_GID}"' -v '"${DOCKER_SOCK_PATH}"':/var/run/docker.sock -e MCP_GATEWAY_PORT -e MCP_GATEWAY_DOMAIN -e MCP_GATEWAY_API_KEY -e MCP_GATEWAY_PAYLOAD_DIR -e MCP_GATEWAY_PAYLOAD_SIZE_THRESHOLD -e DOCKER_HOST=unix:///var/run/docker.sock -e DEBUG -e MCP_GATEWAY_LOG_DIR -e GH_AW_MCP_LOG_DIR -e GH_AW_SAFE_OUTPUTS -e GH_AW_SAFE_OUTPUTS_CONFIG_PATH -e GH_AW_SAFE_OUTPUTS_TOOLS_PATH -e GH_AW_ASSETS_BRANCH -e GH_AW_ASSETS_MAX_SIZE_KB -e GH_AW_ASSETS_ALLOWED_EXTS -e DEFAULT_BRANCH -e GITHUB_MCP_SERVER_TOKEN -e GITHUB_MCP_GUARD_MIN_INTEGRITY -e GITHUB_MCP_GUARD_REPOS -e GITHUB_REPOSITORY -e GITHUB_SERVER_URL -e GITHUB_SHA -e GITHUB_WORKSPACE -e GITHUB_TOKEN -e GITHUB_RUN_ID -e GITHUB_RUN_NUMBER -e GITHUB_RUN_ATTEMPT -e GITHUB_JOB -e GITHUB_ACTION -e GITHUB_EVENT_NAME -e GITHUB_EVENT_PATH -e GITHUB_ACTOR -e GITHUB_ACTOR_ID -e GITHUB_TRIGGERING_ACTOR -e GITHUB_WORKFLOW -e GITHUB_WORKFLOW_REF -e GITHUB_WORKFLOW_SHA -e GITHUB_REF -e GITHUB_REF_NAME -e GITHUB_REF_TYPE -e GITHUB_HEAD_REF -e GITHUB_BASE_REF -e GH_AW_SAFE_OUTPUTS_PORT -e GH_AW_SAFE_OUTPUTS_API_KEY -e CODEX_HOME -v /tmp/gh-aw/mcp-payloads:/tmp/gh-aw/mcp-payloads:rw -v /opt:/opt:ro -v /tmp:/tmp:rw -v '"${GITHUB_WORKSPACE}"':'"${GITHUB_WORKSPACE}"':rw ghcr.io/github/gh-aw-mcpg:v0.3.22'
           
-          cat > "${RUNNER_TEMP}/gh-aw/mcp-config/config.toml" << GH_AW_MCP_CONFIG_3c8d8219f35e1aa9_EOF
+          cat > "${RUNNER_TEMP}/gh-aw/mcp-config/config.toml" << GH_AW_MCP_CONFIG_18bc31818b22131f_EOF
           [history]
           persistence = "none"
           
@@ -673,11 +668,11 @@ jobs:
           
           [mcp_servers.safeoutputs."guard-policies".write-sink]
           accept = ["*"]
-          GH_AW_MCP_CONFIG_3c8d8219f35e1aa9_EOF
+          GH_AW_MCP_CONFIG_18bc31818b22131f_EOF
           
           # Generate JSON config for MCP gateway
           GH_AW_NODE=$(which node 2>/dev/null || command -v node 2>/dev/null || echo node)
-          cat << GH_AW_MCP_CONFIG_3c8d8219f35e1aa9_EOF | "$GH_AW_NODE" "${RUNNER_TEMP}/gh-aw/actions/start_mcp_gateway.cjs"
+          cat << GH_AW_MCP_CONFIG_18bc31818b22131f_EOF | "$GH_AW_NODE" "${RUNNER_TEMP}/gh-aw/actions/start_mcp_gateway.cjs"
           {
             "mcpServers": {
               "safeoutputs": {
@@ -702,11 +697,11 @@ jobs:
               "payloadDir": "${MCP_GATEWAY_PAYLOAD_DIR}"
             }
           }
-          GH_AW_MCP_CONFIG_3c8d8219f35e1aa9_EOF
+          GH_AW_MCP_CONFIG_18bc31818b22131f_EOF
           
           # Sync converter output to writable CODEX_HOME for Codex
           mkdir -p /tmp/gh-aw/mcp-config
-          cat > "/tmp/gh-aw/mcp-config/config.toml" << GH_AW_CODEX_SHELL_POLICY_356f77b94fac8749_EOF
+          cat > "/tmp/gh-aw/mcp-config/config.toml" << GH_AW_CODEX_SHELL_POLICY_c86bf0cd531f7a89_EOF
 
           model_provider = "openai-proxy"
 
@@ -718,7 +713,7 @@ jobs:
           [shell_environment_policy]
           inherit = "core"
           include_only = ["^CODEX_API_KEY$", "^GH_AW_ASSETS_ALLOWED_EXTS$", "^GH_AW_ASSETS_BRANCH$", "^GH_AW_ASSETS_MAX_SIZE_KB$", "^GH_AW_SAFE_OUTPUTS$", "^GITHUB_REPOSITORY$", "^GITHUB_SERVER_URL$", "^HOME$", "^OPENAI_API_KEY$", "^PATH$"]
-          GH_AW_CODEX_SHELL_POLICY_356f77b94fac8749_EOF
+          GH_AW_CODEX_SHELL_POLICY_c86bf0cd531f7a89_EOF
           awk '
             BEGIN { skip_openai_proxy = 0 }
             /^[[:space:]]*model_provider[[:space:]]*=/ { next }
@@ -1274,18 +1269,18 @@ jobs:
           DOCKER_SOCK_GID=$(stat -c '%g' "$DOCKER_SOCK_PATH" 2>/dev/null || echo '0')
           export MCP_GATEWAY_DOCKER_COMMAND='docker run -i --rm --network host --add-host host.docker.internal:127.0.0.1 --user '"${MCP_GATEWAY_UID}"':'"${MCP_GATEWAY_GID}"' --group-add '"${DOCKER_SOCK_GID}"' -v '"${DOCKER_SOCK_PATH}"':/var/run/docker.sock -e MCP_GATEWAY_PORT -e MCP_GATEWAY_DOMAIN -e MCP_GATEWAY_API_KEY -e MCP_GATEWAY_PAYLOAD_DIR -e MCP_GATEWAY_PAYLOAD_SIZE_THRESHOLD -e DOCKER_HOST=unix:///var/run/docker.sock -e DEBUG -e MCP_GATEWAY_LOG_DIR -e GH_AW_MCP_LOG_DIR -e GH_AW_SAFE_OUTPUTS -e GH_AW_SAFE_OUTPUTS_CONFIG_PATH -e GH_AW_SAFE_OUTPUTS_TOOLS_PATH -e GH_AW_ASSETS_BRANCH -e GH_AW_ASSETS_MAX_SIZE_KB -e GH_AW_ASSETS_ALLOWED_EXTS -e DEFAULT_BRANCH -e GITHUB_MCP_SERVER_TOKEN -e GITHUB_MCP_GUARD_MIN_INTEGRITY -e GITHUB_MCP_GUARD_REPOS -e GITHUB_REPOSITORY -e GITHUB_SERVER_URL -e GITHUB_SHA -e GITHUB_WORKSPACE -e GITHUB_TOKEN -e GITHUB_RUN_ID -e GITHUB_RUN_NUMBER -e GITHUB_RUN_ATTEMPT -e GITHUB_JOB -e GITHUB_ACTION -e GITHUB_EVENT_NAME -e GITHUB_EVENT_PATH -e GITHUB_ACTOR -e GITHUB_ACTOR_ID -e GITHUB_TRIGGERING_ACTOR -e GITHUB_WORKFLOW -e GITHUB_WORKFLOW_REF -e GITHUB_WORKFLOW_SHA -e GITHUB_REF -e GITHUB_REF_NAME -e GITHUB_REF_TYPE -e GITHUB_HEAD_REF -e GITHUB_BASE_REF -e CODEX_HOME -v /tmp/gh-aw/mcp-payloads:/tmp/gh-aw/mcp-payloads:rw -v /opt:/opt:ro -v /tmp:/tmp:rw -v '"${GITHUB_WORKSPACE}"':'"${GITHUB_WORKSPACE}"':rw ghcr.io/github/gh-aw-mcpg:v0.3.22'
           
-          cat > "${RUNNER_TEMP}/gh-aw/mcp-config/config.toml" << GH_AW_MCP_CONFIG_61daf9547edd62f3_EOF
+          cat > "${RUNNER_TEMP}/gh-aw/mcp-config/config.toml" << GH_AW_MCP_CONFIG_c340b87f87a44939_EOF
           [history]
           persistence = "none"
           
           [shell_environment_policy]
           inherit = "core"
           include_only = ["^CODEX_API_KEY$", "^HOME$", "^OPENAI_API_KEY$", "^PATH$"]
-          GH_AW_MCP_CONFIG_61daf9547edd62f3_EOF
+          GH_AW_MCP_CONFIG_c340b87f87a44939_EOF
           
           # Generate JSON config for MCP gateway
           GH_AW_NODE=$(which node 2>/dev/null || command -v node 2>/dev/null || echo node)
-          cat << GH_AW_MCP_CONFIG_877bc81be20de3a9_EOF | "$GH_AW_NODE" "${RUNNER_TEMP}/gh-aw/actions/start_mcp_gateway.cjs"
+          cat << GH_AW_MCP_CONFIG_7edb1acd4aa939e0_EOF | "$GH_AW_NODE" "${RUNNER_TEMP}/gh-aw/actions/start_mcp_gateway.cjs"
           {
             "mcpServers": {
             },
@@ -1296,11 +1291,11 @@ jobs:
               "payloadDir": "${MCP_GATEWAY_PAYLOAD_DIR}"
             }
           }
-          GH_AW_MCP_CONFIG_877bc81be20de3a9_EOF
+          GH_AW_MCP_CONFIG_7edb1acd4aa939e0_EOF
           
           # Sync converter output to writable CODEX_HOME for Codex
           mkdir -p /tmp/gh-aw/mcp-config
-          cat > "/tmp/gh-aw/mcp-config/config.toml" << GH_AW_CODEX_SHELL_POLICY_052947c332b9c15e_EOF
+          cat > "/tmp/gh-aw/mcp-config/config.toml" << GH_AW_CODEX_SHELL_POLICY_bc2a8d028273d67a_EOF
           model_provider = "openai-proxy"
           [model_providers.openai-proxy]
           name = "OpenAI AWF proxy"
@@ -1310,7 +1305,7 @@ jobs:
           [shell_environment_policy]
           inherit = "core"
           include_only = ["^CODEX_API_KEY$", "^HOME$", "^OPENAI_API_KEY$", "^PATH$"]
-          GH_AW_CODEX_SHELL_POLICY_052947c332b9c15e_EOF
+          GH_AW_CODEX_SHELL_POLICY_bc2a8d028273d67a_EOF
           awk '
             BEGIN { skip_openai_proxy = 0 }
             /^[[:space:]]*model_provider[[:space:]]*=/ { next }
