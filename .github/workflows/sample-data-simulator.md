@@ -120,19 +120,21 @@ or fields not present in the summary.
 ## How to Write to GitHub
 
 **Never use `gh issue comment`, `gh issue close`, `gh issue create`, or any
-other `gh` write commands directly.** These are blocked by the firewall and
-will return 403 errors.
+other `gh` write commands directly.** These are blocked by the firewall.
 
-All GitHub writes must use safe-output JSON — emit one JSON object per action:
+All GitHub writes must use the **`safeoutputs` CLI**. Examples:
 
-| Action | Safe-output format |
-|--------|--------------------|
-| Add comment | `{"type": "add_comment", "issue_number": 6, "body": "..."}` — **`issue_number` must be a real integer, never a `temporary_id`** |
-| Close issue | `{"type": "close_issue", "issue_number": 6}` |
-| Create issue | `{"type": "create_issue", "title": "...", "body": "..."}` |
-| Add labels | `{"type": "add_labels", "issue_number": 6, "labels": ["triage-needed"]}` |
-| Update project | `{"type": "update_project", "issue_number": 6, "project": "...", "fields": {...}}` |
-| Create PR | `{"type": "create_pull_request", "title": "...", "body": "...", "branch": "..."}` |
+```bash
+safeoutputs add_comment --item_number 7 --body "QA passed — shipping it"
+safeoutputs close_issue --issue_number 7
+safeoutputs create_issue --title "Bug: ..." --body "..."
+safeoutputs add_labels --issue_number 42 --labels '["triage-needed"]'
+safeoutputs update_project --issue_number 7 --project "https://github.com/users/chrizbo/projects/1" --field Phase --value Beta
+safeoutputs create_pull_request --title "..." --body "..." --branch "$(git branch --show-current)"
+```
+
+> **`item_number` / `issue_number` must always be a real integer from the data** —
+> never a placeholder or temporary ID. Run `safeoutputs --help` to see all flags.
 
 You may use `gh` CLI for **read-only** operations only (e.g., `gh issue view`).
 
