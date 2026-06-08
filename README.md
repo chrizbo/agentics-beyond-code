@@ -93,7 +93,7 @@ When triggering workflows by hand, run them in stages — parallel within each s
 
 ## 💡 Philosophy
 
-Five ideas shaped this project:
+Seven ideas shaped this project:
 
 ### Process as Code
 
@@ -101,15 +101,19 @@ Team policies — how we triage, what "launch-ready" means, compliance rubrics �
 
 ### Living Documents
 
-Strategy docs, decision logs, and how-we-work guides go stale the moment someone merges a PR or wraps up a meeting. Agentic workflows close that gap by _connecting_ documents to the events that should update them — transcript pushes, issue closures, weekly cadences — so the document stays as current as the work itself.
+Strategy docs, decision logs, and how-we-work guides go stale the moment someone merges a PR or wraps up a meeting. Agentic workflows close that gap by _connecting_ documents to the events that should update them — transcript pushes, issue closures, weekly cadences — so the document stays as current as the work itself. The update always arrives as something reviewable — a PR, a comment, a draft discussion — so the team has a natural moment to push back before anything is final.
 
 ### Artifacts over Roles
 
-The scoping unit for each workflow is the **artifact** it produces (a readiness report, a compliance review, a decision record), not the role it replaces. When everyone agrees on the output artifact, the workflow has a natural boundary and the agent's constraints stay focused. Animate the artifact, not the job title.
+The scoping unit for each workflow is the **artifact** it produces (a readiness report, a compliance review, a decision record), not the role it replaces. When everyone agrees on the output artifact, the workflow has a natural boundary and the agent's constraints stay focused. Animate the artifact, not the job title. And because the artifact is always something a human can read and act on — not a silent action taken on your behalf — the agent drafts; the team decides.
 
 ### The Repo Is the Architecture
 
 The model is interchangeable — what makes these workflows effective is the **environment** they operate in: issues, labels, docs, transcripts, git history. Designing the repo topology well matters more than picking the right LLM.
+
+### Your Habits Are Already Triggers
+
+You don't need a new tool to work with agents — the habits you already have are enough. An emoji reaction captures a Slack message as a tracked request. A comment in a Google Doc kicks off a review cycle. A reaction in a thread closes the loop with the person who raised it. The integrations are designed to meet your workflow where it lives, not pull you into another system. When the trigger is something you were already going to do, adoption disappears.
 
 ### Every Run Improves the System
 
