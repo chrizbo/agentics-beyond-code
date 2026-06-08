@@ -4,6 +4,7 @@ import fs from "node:fs/promises";
 import { buildStatusDraftPlan } from "./status-draft-plan.mjs";
 import {
   lifecycleSearchQuery,
+  markdownLinkRequests,
   placeholderRequests,
   verifyFilledDocument,
 } from "./status-draft-write.mjs";
@@ -238,8 +239,8 @@ async function copyTemplate(token, plan) {
 }
 
 async function fillDraft(token, draft, plan) {
-  const before = await docsDocument(token, draft.id);
-  const serialized = JSON.stringify(before);
+  let current = await docsDocument(token, draft.id);
+  const serialized = JSON.stringify(current);
   const placeholdersPresent = Object.keys(plan.replacements).filter((placeholder) =>
     serialized.includes(placeholder),
   );
@@ -252,7 +253,23 @@ async function fillDraft(token, draft, plan) {
         method: "POST",
         body: JSON.stringify({
           requests: placeholderRequests(plan.replacements),
-          writeControl: { requiredRevisionId: before.revisionId },
+          writeControl: { requiredRevisionId: current.revisionId },
+        }),
+      },
+    );
+    current = await docsDocument(token, draft.id);
+  }
+
+  const linkRequests = markdownLinkRequests(current);
+  if (linkRequests.length) {
+    await googleRequest(
+      `https://docs.googleapis.com/v1/documents/${encodeURIComponent(draft.id)}:batchUpdate`,
+      token,
+      {
+        method: "POST",
+        body: JSON.stringify({
+          requests: linkRequests,
+          writeControl: { requiredRevisionId: current.revisionId },
         }),
       },
     );
@@ -262,7 +279,11 @@ async function fillDraft(token, draft, plan) {
   verifyFilledDocument(after, plan);
   return {
     draft: await driveMetadata(token, draft.id),
-    result: placeholdersPresent.length ? "created_and_filled" : "reused",
+    result: placeholdersPresent.length
+      ? "created_and_filled"
+      : linkRequests.length
+        ? "formatted"
+        : "reused",
   };
 }
 

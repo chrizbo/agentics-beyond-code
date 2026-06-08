@@ -769,6 +769,9 @@ direction before implementation.
 Recommended MVP:
 
 - Preserve headings, paragraphs, bullets, links, and one simple table.
+- Convert supported Markdown links into native Google Docs hyperlinks after
+  inserting safe-output text, and reject readback while literal Markdown links
+  remain.
 - Treat unsupported formatting as plain text.
 - Do not attempt pixel-perfect Markdown-to-Docs round-tripping.
 - Publish from a normalized Docs-to-Markdown conversion, then inspect the
