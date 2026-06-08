@@ -117,6 +117,25 @@ or fields not present in the summary.
 > ```
 > Do NOT re-read the file after you have already loaded it in this session.
 
+## How to Write to GitHub
+
+**Never use `gh issue comment`, `gh issue close`, `gh issue create`, or any
+other `gh` write commands directly.** These are blocked by the firewall and
+will return 403 errors.
+
+All GitHub writes must use safe-output JSON — emit one JSON object per action:
+
+| Action | Safe-output format |
+|--------|--------------------|
+| Add comment | `{"type": "add_comment", "issue_number": 6, "body": "..."}` |
+| Close issue | `{"type": "close_issue", "issue_number": 6}` |
+| Create issue | `{"type": "create_issue", "title": "...", "body": "..."}` |
+| Add labels | `{"type": "add_labels", "issue_number": 6, "labels": ["triage-needed"]}` |
+| Update project | `{"type": "update_project", "issue_number": 6, "project": "...", "fields": {...}}` |
+| Create PR | `{"type": "create_pull_request", "title": "...", "body": "...", "branch": "..."}` |
+
+You may use `gh` CLI for **read-only** operations only (e.g., `gh issue view`).
+
 ## Project Context
 
 The Launch Tracker project is at: `https://github.com/users/chrizbo/projects/1`
