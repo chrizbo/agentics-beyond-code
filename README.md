@@ -69,6 +69,7 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 | [🧾 Commitment Reconciler](.github/workflows/commitment-reconciler.md) | Monday commitment audit that compares transcripts and issue comments against GitHub artifacts, surfacing promised-but-untracked work, stale commitments, artifact drift, and completion mismatches | [Commitment reconciliation - week of 2026-06-01](https://github.com/chrizbo/agentics-beyond-code/issues/198) |
 | [🔄 Process Analyzer](.github/workflows/process-analyzer.md) | Weekly retro + process analysis — posts a team retrospective discussion, detects process drift in transcripts vs `docs/how-we-work.md`, identifies automation opportunities and gaps, and creates update PRs | [Retro - week of 2026-05-25](https://github.com/chrizbo/agentics-beyond-code/discussions/199) |
 | [🔁 Daily Standup Prep](.github/workflows/daily-standup-prep.md) | Monday/Wednesday standup preparation: posts a discussion with high-priority topics, blockers, and facilitation prompts to help run effective daily syncs | [Standup prep - 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/discussions/195) |
+| [🐒 Chaos Monkey](.github/workflows/chaos-monkey.md) | On-demand organizational chaos injection — scores the team's stasis across 6 signals (decision diversity, participation entropy, process staleness, topic homogeneity, launch concentration), and when things are too comfortable, posts a discussion with 2–3 calibrated disruption prescriptions. Stays silent when the team is healthy. | — |
 
 ### 🧪 Demo / Sample Data
 
@@ -136,6 +137,7 @@ Skills are mirrored in two places:
 - **[Workflow Ideas](docs/workflow-ideas.md)** — catalog of future workflow ideas for PM, ops, compliance, and GTM
 - **[External Integration Patterns](docs/external-integration-patterns.md)** — future work for integrating with Slack, Jira, Microsoft 365, Google Workspace, Salesforce, ServiceNow, Notion, Asana, and Linear
 - **[Slack Integration Plan](docs/slack-integration-plan.md)** — proposal for Slack context ingestion, emoji-driven automation, and Slack report-backs
+- **[Google Docs Integration Plan](docs/google-docs-integration-plan.md)** — fixture-first proposal for bounded Google Docs context reads and validated document updates
 
 ### Sample Team Context
 
@@ -143,6 +145,7 @@ Skills are mirrored in two places:
 
 - **[How We Work](docs/how-we-work.md)** — team processes, meeting cadence, triage, and communication norms
 - **[Strategic Tradeoffs](docs/strategy.md)** — the team's "even over" strategy statements, annotated with alignment evidence
+- **[Fake Google Shared Drive](google-docs-fixtures/README.md)** — synthetic external product, customer, security, launch, and program documents for Google Docs integration demos
 - **[Launch Tracker Project](https://github.com/users/chrizbo/projects/1)** — the sample GitHub Project with issues, launches, and workflow-generated artifacts
 - **[Intake Triage Project](https://github.com/users/chrizbo/projects/2)** — project board for triaging incoming feature requests and bug reports
 

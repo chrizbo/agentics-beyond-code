@@ -29,6 +29,7 @@ implementation as GitHub Agentic Workflows.
 
 | # | Workflow | Description |
 |---|---------|-------------|
+| 66 | ~~Chaos Monkey for Organizations~~ | ~~Detects organizational stasis and groupthink signals (participation concentration, process calcification, topic homogeneity, low alternatives analysis), then prescribes 2–3 calibrated disruptions to break the specific local maxima the team is stuck in. Purely advisory — outputs a discussion post.~~ _Implemented as **[Chaos Monkey](../.github/workflows/chaos-monkey.md)** — trigger manually when you want a stasis assessment; add a schedule once signal quality is validated._ |
 | 2 | Unplanned Work Tracker | Detects mid-sprint scope creep, tracks ratio over time. |
 | 6 | Stakeholder Feedback Synthesizer | Monthly synthesis of themes and sentiment from meeting notes. |
 | 7 | Process Retirement Auditor | Finds stale templates, unused labels, zero-engagement workflows. |
