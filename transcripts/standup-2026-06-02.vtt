@@ -1,0 +1,21 @@
+WEBVTT
+
+1
+00:00:01.000 --> 00:00:05.500
+Sarah Chen: Alright, let's get started. Marcus, you're up first.
+
+2
+00:00:06.000 --> 00:00:18.000
+Marcus Johnson: I've completed the WebSocket server for real-time notifications. Issue #261 is moving smoothly.
+
+3
+00:00:18.500 --> 00:00:30.000
+Priya Patel: Frontend components are ready, but we're blocked on finalizing the design for the notification panel. Still working on #260.
+
+4
+00:00:30.500 --> 00:00:45.000
+David Kim: Testing needs more time this week. We found some issues with message queuing but are confident they'll be resolved by Wednesday.
+
+5
+00:00:45.500 --> 00:01:00.000
+Alex Rivera: I've set up everything needed on the backend for secure WebSocket messaging. We'll need input from security on encryption settings.
