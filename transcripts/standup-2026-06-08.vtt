@@ -1,0 +1,41 @@
+WEBVTT
+
+1
+00:00:01.000 --> 00:00:10.000
+Sarah Chen: Alright team, quick sync. Marcus, you're first.
+
+2
+00:00:10.500 --> 00:00:30.000
+Marcus Johnson: Yesterday I finished the latency query API endpoints (issue #69 "Implement latency query API endpoints"). Tests look green on staging. Today I'll start integrating the token bucket limiter, which is tracked in issue #96 "Implement token bucket rate limiter in Redis". Blocker: Redis cluster quota needs a thumbs-up from Alex.
+
+3
+00:00:30.500 --> 00:00:50.000
+Priya Patel: I'm working on the notification settings UI (issue #262 "Add Notification Settings Panel"). I hit a snag with the responsive layout on mobile — David will pair on QA later. No blockers otherwise.
+
+4
+00:00:50.500 --> 00:01:10.000
+David Kim: QA noted a flaky case on WebSocket reconnects tied to #263 "Build WebSocket API". I'm adding regression tests. Risk: there's a reliability gap on reconnection backoff that could affect real-time delivery.
+
+5
+00:01:10.500 --> 00:01:30.000
+Alex Rivera: DevOps finished the Redis sizing for token buckets (issue #96). We're ready to provision for a canary. Cross-team: need Marcus to confirm the expected throughput numbers.
+
+6
+00:01:30.500 --> 00:01:50.000
+Priya Patel: Decision needed — do we ship the notification settings in this launch or roll it to a follow-up? We're missing a few design edge cases.
+
+7
+00:01:50.500 --> 00:02:10.000
+Sarah Chen: After discussion, we decided to descope the CSV export feature from this launch so we can focus on reliability and notifications. We'll add the export back in the next minor launch. That calls out a follow-up task for the GTM team.
+
+8
+00:02:10.500 --> 00:02:30.000
+Marcus Johnson: Delivery confidence is medium — core APIs are done but the real-time layer needs stabilization. With the descope, we increase confidence for this week's ship.
+
+9
+00:02:30.500 --> 00:02:50.000
+David Kim: Process note — I'm going to start a rotating triage schedule next week to speed up bug handling.
+
+10
+00:02:50.500 --> 00:03:10.000
+Sarah Chen: Cross-team coordination: Alex will work with Priya on the mobile layout and Marcus on throughput numbers. We'll reconvene tomorrow.
