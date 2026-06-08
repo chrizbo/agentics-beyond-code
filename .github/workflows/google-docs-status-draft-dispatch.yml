@@ -11,7 +11,7 @@ on:
         required: false
         default: ""
       discussion_url:
-        description: "Existing Weekly Status Discussion URL for staged validation."
+        description: "Existing Weekly Status Discussion URL for validation or live draft creation."
         required: false
         default: ""
 
@@ -25,7 +25,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  staged-dispatch:
+  dispatch:
     if: |
       github.event_name == 'workflow_dispatch' ||
       github.event.workflow_run.conclusion == 'success'
@@ -70,14 +70,13 @@ jobs:
             exit 1
           fi
 
-      - name: Build and validate staged draft plan
+      - name: Build, validate, and optionally create draft
         run: node .github/scripts/google-docs/status-draft-dispatch.mjs
 
-      - name: Upload staged draft plan
+      - name: Upload draft result
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: google-docs-status-draft-plan
           path: /tmp/google-docs-status-draft-plan.json
           if-no-files-found: error
           retention-days: 7
-

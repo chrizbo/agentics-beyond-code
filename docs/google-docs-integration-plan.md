@@ -891,8 +891,14 @@ The first staged dispatcher is implemented in:
 It reads the Weekly Status Discussion safe-output artifact, converts the
 Discussion body into deterministic template replacements, refreshes Google
 credentials, validates the configured root/folders/template, and uploads a
-staged plan artifact. It deliberately fails when `GOOGLE_DOCS_ENABLED=true`
-and performs no Google or GitHub writes.
+plan artifact.
+
+With `GOOGLE_DOCS_ENABLED=false`, it performs no Google or GitHub writes. With
+`GOOGLE_DOCS_ENABLED=true`, it copies the configured template into Status
+Drafts, records the lifecycle key in Drive `appProperties`, fills the known
+placeholders, and verifies the resulting document through Docs API readback.
+Replays reuse the lifecycle-marked draft. They complete an unfilled partial
+copy but do not overwrite a filled draft that humans may have edited.
 
 The dispatcher fails closed when the source run has no `create_discussion`
 safe-output item. Manual staged validation may instead provide an explicit
