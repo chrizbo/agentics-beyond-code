@@ -193,24 +193,44 @@ async function postFinalSlack(discussion, proposedBody) {
     process.env.SLACK_ARTIFACT_CHANNEL_MAP,
     process.env.SLACK_ALLOWED_CHANNEL_IDS,
   );
-  const response = await fetch("https://slack.com/api/chat.postMessage", {
-    method: "POST",
-    headers: {
-      authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`,
-      "content-type": "application/json; charset=utf-8",
-    },
-    body: JSON.stringify({
-      channel,
-      text: finalSlackMessage({
-        discussionTitle: discussion.title,
-        discussionUrl: discussion.url,
-        discussionBody: proposedBody,
-      }),
-      unfurl_links: false,
-      unfurl_media: false,
+  const headers = {
+    authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`,
+    "content-type": "application/json; charset=utf-8",
+  };
+  const body = {
+    channel,
+    text: finalSlackMessage({
+      discussionTitle: discussion.title,
+      discussionUrl: discussion.url,
+      discussionBody: proposedBody,
     }),
-  });
-  const result = await response.json();
+    unfurl_links: false,
+    unfurl_media: false,
+  };
+  async function post() {
+    const response = await fetch("https://slack.com/api/chat.postMessage", {
+      method: "POST",
+      headers,
+      body: JSON.stringify(body),
+    });
+    return { response, result: await response.json() };
+  }
+
+  let { response, result } = await post();
+  if (result.error === "not_in_channel") {
+    const joinResponse = await fetch("https://slack.com/api/conversations.join", {
+      method: "POST",
+      headers,
+      body: JSON.stringify({ channel }),
+    });
+    const joinResult = await joinResponse.json();
+    if (!joinResponse.ok || !joinResult.ok) {
+      throw new Error(
+        `Final Slack channel requires the app to join or be invited: ${joinResult.error || joinResponse.statusText}`,
+      );
+    }
+    ({ response, result } = await post());
+  }
   if (!response.ok || !result.ok) {
     throw new Error(`Final Slack notification failed: ${result.error || response.statusText}`);
   }
