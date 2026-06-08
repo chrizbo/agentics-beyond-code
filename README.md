@@ -88,8 +88,8 @@ When triggering workflows by hand, run them in stages — parallel within each s
 
 | Workflow | Cadence | Description | Example output |
 |----------|---------|-------------|----------------|
-| [🎲 Sample Data Simulator](.github/workflows/sample-data-simulator.md) | Daily | Closes tasks, adds progress comments, generates standup transcripts, and creates intake issues — keeps daily activity flowing. | Closed sample issues [#72](https://github.com/chrizbo/agentics-beyond-code/issues/72), [#70](https://github.com/chrizbo/agentics-beyond-code/issues/70), [#71](https://github.com/chrizbo/agentics-beyond-code/issues/71), and [#3](https://github.com/chrizbo/agentics-beyond-code/issues/3) |
-| [🏗️ Sample Data Launch Creator](.github/workflows/sample-data-launch-creator.md) | Weekly | Creates new launches with epics and tasks, advances launch phases, closes completed launches, and adjusts risk levels — grows the project hierarchy over time. | — |
+| [🎲 Sample Data Simulator](.github/workflows/sample-data-simulator.md) | Daily | Closes tasks, adds progress comments, generates standup transcripts, and creates intake issues — keeps daily activity flowing. | Closed [#69](https://github.com/chrizbo/agentics-beyond-code/issues/69) and [#176](https://github.com/chrizbo/agentics-beyond-code/issues/176), progress comments on [#96](https://github.com/chrizbo/agentics-beyond-code/issues/96) and [#262](https://github.com/chrizbo/agentics-beyond-code/issues/262), standup transcript [PR #286](https://github.com/chrizbo/agentics-beyond-code/pull/286), intake issue [#287](https://github.com/chrizbo/agentics-beyond-code/issues/287) |
+| [🏗️ Sample Data Launch Creator](.github/workflows/sample-data-launch-creator.md) | Weekly | Creates new launches with epics and tasks, advances launch phases, closes completed launches, and adjusts risk levels — grows the project hierarchy over time. | Created [[Launch] Real-Time Notifications #280](https://github.com/chrizbo/agentics-beyond-code/issues/280) with epics [#281](https://github.com/chrizbo/agentics-beyond-code/issues/281) and [#282](https://github.com/chrizbo/agentics-beyond-code/issues/282) |
 
 ## 💡 Philosophy
 
