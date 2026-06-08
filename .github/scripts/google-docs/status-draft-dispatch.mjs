@@ -7,6 +7,10 @@ import {
   findFinalizationGate,
 } from "./status-finalization-gate.mjs";
 import {
+  draftSlackMessage,
+  slackDraftChannel,
+} from "./status-draft-slack.mjs";
+import {
   lifecycleSearchQuery,
   markdownLinkRequests,
   placeholderRequests,
@@ -111,13 +115,72 @@ async function accessToken() {
 
 async function driveMetadata(token, id) {
   const response = await fetch(
-    `https://www.googleapis.com/drive/v3/files/${encodeURIComponent(id)}?fields=id,name,mimeType,parents`,
+    `https://www.googleapis.com/drive/v3/files/${encodeURIComponent(id)}?fields=id,name,mimeType,parents,appProperties`,
     { headers: { authorization: `Bearer ${token}` } },
   );
   if (!response.ok) {
     throw new Error(`Drive metadata read failed for ${id}: HTTP ${response.status}`);
   }
   return response.json();
+}
+
+async function markSlackDraftNotified(token, draft) {
+  return googleRequest(
+    `https://www.googleapis.com/drive/v3/files/${encodeURIComponent(draft.id)}?fields=id,appProperties`,
+    token,
+    {
+      method: "PATCH",
+      body: JSON.stringify({
+        appProperties: {
+          ...(draft.appProperties || {}),
+          agenticsSlackDraftNotified: "true",
+        },
+      }),
+    },
+  );
+}
+
+async function postDraftSlackNotification(token, discussion, liveResult) {
+  if (!liveResult || liveResult.draft.appProperties?.agenticsSlackDraftNotified === "true") {
+    return "already_notified";
+  }
+
+  const channel = slackDraftChannel(
+    process.env.GOOGLE_DOCS_DRAFT_SLACK_CHANNEL_ID,
+    process.env.SLACK_ARTIFACT_CHANNEL_MAP,
+    process.env.SLACK_ALLOWED_CHANNEL_IDS,
+  );
+  if (!channel) {
+    return "not_configured";
+  }
+  if (!process.env.SLACK_BOT_TOKEN) {
+    throw new Error("Weekly Status draft Slack channel is configured but SLACK_BOT_TOKEN is missing.");
+  }
+
+  const documentUrl = `https://docs.google.com/document/d/${liveResult.draft.id}/edit`;
+  const response = await fetch("https://slack.com/api/chat.postMessage", {
+    method: "POST",
+    headers: {
+      authorization: `Bearer ${process.env.SLACK_BOT_TOKEN}`,
+      "content-type": "application/json; charset=utf-8",
+    },
+    body: JSON.stringify({
+      channel,
+      text: draftSlackMessage({
+        discussionTitle: discussion.title,
+        discussionUrl: discussion.url,
+        documentUrl,
+      }),
+      unfurl_links: false,
+      unfurl_media: false,
+    }),
+  });
+  const result = await response.json();
+  if (!response.ok || !result.ok) {
+    throw new Error(`Slack draft notification failed: ${result.error || response.statusText}`);
+  }
+  await markSlackDraftNotified(token, liveResult.draft);
+  return "posted";
 }
 
 async function googleRequest(url, token, options = {}) {
@@ -342,7 +405,7 @@ async function executeLiveWrite(google, plan) {
   return fillDraft(google.token, draft, plan);
 }
 
-function summary(plan, google, liveResult) {
+function summary(plan, google, liveResult, slackResult) {
   const writesEnabled = process.env.GOOGLE_DOCS_ENABLED === "true";
   return [
     `## ${writesEnabled ? "Live" : "Staged"} Google Docs Status Draft`,
@@ -362,6 +425,7 @@ function summary(plan, google, liveResult) {
           `- Write result: \`${liveResult.result}\``,
           `- Draft document: https://docs.google.com/document/d/${liveResult.draft.id}/edit`,
           `- Finalization gate comment: \`${liveResult.finalizationGate.id}\` (${liveResult.finalizationGate.resolved ? "resolved" : "open"})`,
+          `- Slack draft notification: \`${slackResult}\``,
         ]
       : []),
     "",
@@ -402,6 +466,10 @@ async function main() {
     process.env.GOOGLE_DOCS_ENABLED === "true"
       ? await executeLiveWrite(google, plan)
       : undefined;
+  const slackResult =
+    process.env.GOOGLE_DOCS_ENABLED === "true"
+      ? await postDraftSlackNotification(google.token, discussion, liveResult)
+      : "staged";
   const outputPath = process.env.PLAN_OUTPUT_PATH || "/tmp/google-docs-status-draft-plan.json";
 
   const output = {
@@ -414,11 +482,12 @@ async function main() {
           document_url: `https://docs.google.com/document/d/${liveResult.draft.id}/edit`,
           finalization_gate_comment_id: liveResult.finalizationGate.id,
           finalization_gate_resolved: liveResult.finalizationGate.resolved,
+          slack_draft_notification: slackResult,
         }
       : {}),
   };
   await fs.writeFile(outputPath, `${JSON.stringify(output, null, 2)}\n`);
-  const markdown = summary(output, google, liveResult);
+  const markdown = summary(output, google, liveResult, slackResult);
   if (process.env.GITHUB_STEP_SUMMARY) {
     await fs.appendFile(process.env.GITHUB_STEP_SUMMARY, markdown);
   }

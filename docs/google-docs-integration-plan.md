@@ -891,7 +891,7 @@ expiration, and other workflows until this loop works reliably.
   template.
 - [x] Define supported Docs-to-Markdown and Markdown-to-Docs formatting.
 - [x] Add a stable lifecycle marker to the draft Discussion and Doc template.
-- [ ] Change Slack report-back so draft Weekly Status Discussions are not
+- [x] Change Slack report-back so draft Weekly Status Discussions are not
   announced as final.
 - [ ] Choose the allowlisted GitHub users permitted to finalize.
 - [ ] Define behavior for reruns, partial failure, replay, and revision
@@ -915,6 +915,23 @@ Drafts, records the lifecycle key in Drive `appProperties`, fills the known
 placeholders, and verifies the resulting document through Docs API readback.
 Replays reuse the lifecycle-marked draft. They complete an unfilled partial
 copy but do not overwrite a filled draft that humans may have edited.
+
+When Google Docs writes are enabled, the Docs dispatcher owns the Weekly Status
+Slack handoff. After the lifecycle draft exists and passes readback, it posts
+one explicitly labeled draft invitation containing both the collaborative Doc
+link and source Discussion link. The generic Slack report-back dispatcher and
+Weekly Status agent do not announce the initial Discussion as a final report.
+The draft notification is deduplicated with a Drive `appProperties` marker.
+
+Use separate Slack audiences when available:
+
+- `GOOGLE_DOCS_DRAFT_SLACK_CHANNEL_ID` targets the team shaping channel.
+- The existing `SLACK_ARTIFACT_CHANNEL_MAP["Weekly Leadership Status Update"]`
+  remains the final-report channel for leadership or the broader audience.
+
+If `GOOGLE_DOCS_DRAFT_SLACK_CHANNEL_ID` is unset, draft invitations fall back
+to the existing Weekly Status channel. This supports one-channel demos while
+allowing teams to split draft and final audiences through configuration.
 
 The staged finalization dispatcher is implemented in:
 

@@ -48,6 +48,7 @@ jobs:
       SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
       SLACK_ALLOWED_CHANNEL_IDS: ${{ vars.SLACK_ALLOWED_CHANNEL_IDS }}
       SLACK_ARTIFACT_CHANNEL_MAP: ${{ vars.SLACK_ARTIFACT_CHANNEL_MAP }}
+      GOOGLE_DOCS_ENABLED: ${{ vars.GOOGLE_DOCS_ENABLED }}
       WORKFLOW_NAME: ${{ github.event.workflow_run.name || inputs.workflow_name }}
       SOURCE_RUN_ID: ${{ github.event.workflow_run.id || inputs.run_id }}
     steps:
@@ -105,6 +106,13 @@ jobs:
             if (!token) throw new Error("SLACK_BOT_TOKEN is not configured.");
             if (!allowedChannels.size) throw new Error("SLACK_ALLOWED_CHANNEL_IDS must contain at least one channel ID.");
             if (!workflowName) throw new Error("WORKFLOW_NAME is required.");
+            if (
+              workflowName === "Weekly Leadership Status Update" &&
+              process.env.GOOGLE_DOCS_ENABLED === "true"
+            ) {
+              console.log("Weekly Status is in the Google Docs draft cycle. The Docs dispatcher owns the draft Slack invitation.");
+              return;
+            }
 
             let channelMap;
             try {

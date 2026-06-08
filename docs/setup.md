@@ -209,6 +209,18 @@ the artifact each one posts:
 Every channel ID listed in `SLACK_ARTIFACT_CHANNEL_MAP` must also appear in
 `SLACK_ALLOWED_CHANNEL_IDS`.
 
+For the Google Docs Weekly Status draft cycle, optionally set a separate team
+shaping channel:
+
+```bash
+gh variable set GOOGLE_DOCS_DRAFT_SLACK_CHANNEL_ID --body "C0123456789" --env google-docs-demo
+```
+
+It must also appear in `SLACK_ALLOWED_CHANNEL_IDS`. When unset, draft
+invitations use the Weekly Leadership Status Update channel from
+`SLACK_ARTIFACT_CHANNEL_MAP`. The mapped channel remains the intended
+final-report audience.
+
 **How it works:** The dispatch reads the `safe-outputs-items` artifact from
 the completed workflow run to get the exact URL of the discussion or issue
 that was just created — no search or title matching required. For manual

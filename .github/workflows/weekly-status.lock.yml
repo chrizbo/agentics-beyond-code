@@ -1,5 +1,5 @@
-# gh-aw-metadata: {"schema_version":"v4","frontmatter_hash":"aa661d5b91b0fd54529eba427a62320748b98f6321c108a0a8eed348d8a0dd31","body_hash":"eadf06774490de3ab245d27c0337860763f5a2cee50f3b5ff4b1fd49208fd2ae","compiler_version":"v0.77.4","strict":true,"agent_id":"codex","agent_model":"gpt-5-mini"}
-# gh-aw-manifest: {"version":1,"secrets":["AW_TOKEN","CODEX_API_KEY","GH_AW_GITHUB_MCP_SERVER_TOKEN","GH_AW_GITHUB_TOKEN","GITHUB_TOKEN","OPENAI_API_KEY","SLACK_BOT_TOKEN"],"actions":[{"repo":"actions/checkout","sha":"de0fac2e4500dabe0009e67214ff5f5447ce83dd","version":"v6.0.2"},{"repo":"actions/download-artifact","sha":"3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c","version":"v8.0.1"},{"repo":"actions/github-script","sha":"3a2844b7e9c422d3c10d287c895573f7108da1b3","version":"v9.0.0"},{"repo":"actions/github-script","sha":"ed597411d8f924073f98dfc5c65a23a2325f34cd","version":"v8"},{"repo":"actions/setup-node","sha":"48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e","version":"v6.4.0"},{"repo":"actions/upload-artifact","sha":"043fb46d1a93c77aae656e7c1c64a875d1fc6a0a","version":"v7.0.1"},{"repo":"github/gh-aw-actions/setup","sha":"4c7307f890279fa5971acae8899475901fea9447","version":"v0.77.4"}],"containers":[{"image":"ghcr.io/github/gh-aw-firewall/agent:0.25.58"},{"image":"ghcr.io/github/gh-aw-firewall/api-proxy:0.25.58"},{"image":"ghcr.io/github/gh-aw-firewall/cli-proxy:0.25.58"},{"image":"ghcr.io/github/gh-aw-firewall/squid:0.25.58"},{"image":"ghcr.io/github/gh-aw-mcpg:v0.3.22"},{"image":"ghcr.io/github/github-mcp-server:v1.1.0"},{"image":"node:lts-alpine","digest":"sha256:2bdb65ed1dab192432bc31c95f94155ca5ad7fc1392fb7eb7526ab682fa5bf14","pinned_image":"node:lts-alpine@sha256:2bdb65ed1dab192432bc31c95f94155ca5ad7fc1392fb7eb7526ab682fa5bf14"}]}
+# gh-aw-metadata: {"schema_version":"v4","frontmatter_hash":"a6593c826dc44bef9335bc476a6877456e3a9f31a3350ab5745971d01586ec72","body_hash":"2cb13a0f6b532631169e89e912ca95e9f8576135fea2ebaf2ea33eaffaba9fea","compiler_version":"v0.77.4","strict":true,"agent_id":"codex","agent_model":"gpt-5-mini"}
+# gh-aw-manifest: {"version":1,"secrets":["AW_TOKEN","CODEX_API_KEY","GH_AW_GITHUB_MCP_SERVER_TOKEN","GH_AW_GITHUB_TOKEN","GITHUB_TOKEN","OPENAI_API_KEY"],"actions":[{"repo":"actions/checkout","sha":"de0fac2e4500dabe0009e67214ff5f5447ce83dd","version":"v6.0.2"},{"repo":"actions/download-artifact","sha":"3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c","version":"v8.0.1"},{"repo":"actions/github-script","sha":"3a2844b7e9c422d3c10d287c895573f7108da1b3","version":"v9.0.0"},{"repo":"actions/setup-node","sha":"48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e","version":"v6.4.0"},{"repo":"actions/upload-artifact","sha":"043fb46d1a93c77aae656e7c1c64a875d1fc6a0a","version":"v7.0.1"},{"repo":"github/gh-aw-actions/setup","sha":"4c7307f890279fa5971acae8899475901fea9447","version":"v0.77.4"}],"containers":[{"image":"ghcr.io/github/gh-aw-firewall/agent:0.25.58"},{"image":"ghcr.io/github/gh-aw-firewall/api-proxy:0.25.58"},{"image":"ghcr.io/github/gh-aw-firewall/cli-proxy:0.25.58"},{"image":"ghcr.io/github/gh-aw-firewall/squid:0.25.58"},{"image":"ghcr.io/github/gh-aw-mcpg:v0.3.22"},{"image":"ghcr.io/github/github-mcp-server:v1.1.0"},{"image":"node:lts-alpine","digest":"sha256:2bdb65ed1dab192432bc31c95f94155ca5ad7fc1392fb7eb7526ab682fa5bf14","pinned_image":"node:lts-alpine@sha256:2bdb65ed1dab192432bc31c95f94155ca5ad7fc1392fb7eb7526ab682fa5bf14"}]}
 #    ___                   _   _      
 #   / _ \                 | | (_)     
 #  | |_| | __ _  ___ _ __ | |_ _  ___ 
@@ -30,7 +30,6 @@
 # Resolved workflow manifest:
 #   Imports:
 #     - shared/freshness-check.md
-#     - shared/slack-safe-outputs.md
 #
 # Secrets used:
 #   - AW_TOKEN
@@ -39,13 +38,11 @@
 #   - GH_AW_GITHUB_TOKEN
 #   - GITHUB_TOKEN
 #   - OPENAI_API_KEY
-#   - SLACK_BOT_TOKEN
 #
 # Custom actions used:
 #   - actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 #   - actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
 #   - actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
-#   - actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
 #   - actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
 #   - actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
 #   - github/gh-aw-actions/setup@4c7307f890279fa5971acae8899475901fea9447 # v0.77.4
@@ -198,20 +195,20 @@ jobs:
         run: |
           bash "${RUNNER_TEMP}/gh-aw/actions/create_prompt_first.sh"
           {
-          cat << 'GH_AW_PROMPT_8cee4c74de82022f_EOF'
+          cat << 'GH_AW_PROMPT_1c4782a3011c40cc_EOF'
           <system>
-          GH_AW_PROMPT_8cee4c74de82022f_EOF
+          GH_AW_PROMPT_1c4782a3011c40cc_EOF
           cat "${RUNNER_TEMP}/gh-aw/prompts/xpia.md"
           cat "${RUNNER_TEMP}/gh-aw/prompts/temp_folder_prompt.md"
           cat "${RUNNER_TEMP}/gh-aw/prompts/markdown.md"
           cat "${RUNNER_TEMP}/gh-aw/prompts/safe_outputs_prompt.md"
-          cat << 'GH_AW_PROMPT_8cee4c74de82022f_EOF'
+          cat << 'GH_AW_PROMPT_1c4782a3011c40cc_EOF'
           <safe-output-tools>
-          Tools: create_discussion, missing_tool, missing_data, noop, slack_post_message
+          Tools: create_discussion, missing_tool, missing_data, noop
           </safe-output-tools>
-          GH_AW_PROMPT_8cee4c74de82022f_EOF
+          GH_AW_PROMPT_1c4782a3011c40cc_EOF
           cat "${RUNNER_TEMP}/gh-aw/prompts/mcp_cli_tools_prompt.md"
-          cat << 'GH_AW_PROMPT_8cee4c74de82022f_EOF'
+          cat << 'GH_AW_PROMPT_1c4782a3011c40cc_EOF'
           <github-context>
           The following GitHub context information is available for this workflow:
           {{#if github.actor}}
@@ -240,14 +237,13 @@ jobs:
           {{/if}}
           </github-context>
           
-          GH_AW_PROMPT_8cee4c74de82022f_EOF
+          GH_AW_PROMPT_1c4782a3011c40cc_EOF
           cat "${RUNNER_TEMP}/gh-aw/prompts/cli_proxy_with_safeoutputs_prompt.md"
-          cat << 'GH_AW_PROMPT_8cee4c74de82022f_EOF'
+          cat << 'GH_AW_PROMPT_1c4782a3011c40cc_EOF'
           </system>
-          {{#runtime-import .github/workflows/shared/slack-safe-outputs.md}}
           {{#runtime-import .github/workflows/shared/freshness-check.md}}
           {{#runtime-import .github/workflows/weekly-status.md}}
-          GH_AW_PROMPT_8cee4c74de82022f_EOF
+          GH_AW_PROMPT_1c4782a3011c40cc_EOF
           } > "$GH_AW_PROMPT"
       - name: Interpolate variables and render templates
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
@@ -378,11 +374,6 @@ jobs:
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
-      - name: Setup Node.js
-        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
-        with:
-          node-version: '24'
-          package-manager-cache: false
       - name: Create gh-aw temp directory
         run: bash "${RUNNER_TEMP}/gh-aw/actions/create_gh_aw_tmp_dir.sh"
       - name: Configure gh CLI for GitHub Enterprise
@@ -395,14 +386,10 @@ jobs:
           LAUNCH_PROJECT_OWNER: ${{ vars.LAUNCH_PROJECT_OWNER || github.repository_owner }}
         id: launch-data
         name: Fetch launch data
-        run: |
+        run: |-
           chmod +x .github/scripts/fetch-launch-data.sh
           ./.github/scripts/fetch-launch-data.sh "$LAUNCH_PROJECT_OWNER" "$LAUNCH_PROJECT_NUMBER" launch-data.json
           echo "path=launch-data.json" >> "$GITHUB_OUTPUT"
-      - env:
-          SLACK_ARTIFACT_CHANNEL_MAP: ${{ vars.SLACK_ARTIFACT_CHANNEL_MAP }}
-        name: Resolve Slack report-back channel
-        run: "mkdir -p /tmp/gh-aw/agent\necho \"$SLACK_ARTIFACT_CHANNEL_MAP\" \\\n  | node -e \"const m=JSON.parse(require('fs').readFileSync('/dev/stdin','utf8')||'{}'); process.stdout.write(m['Weekly Leadership Status Update']||'')\" \\\n  > /tmp/gh-aw/agent/slack-channel.txt\n"
 
       - name: Configure Git credentials
         env:
@@ -474,9 +461,9 @@ jobs:
           mkdir -p "${RUNNER_TEMP}/gh-aw/safeoutputs"
           mkdir -p /tmp/gh-aw/safeoutputs
           mkdir -p /tmp/gh-aw/mcp-logs/safeoutputs
-          cat > "${RUNNER_TEMP}/gh-aw/safeoutputs/config.json" << 'GH_AW_SAFE_OUTPUTS_CONFIG_a20223ec44f5c372_EOF'
-          {"create_discussion":{"category":"reports","expires":168,"fallback_to_issue":true,"max":1,"title_prefix":"[Weekly Status] "},"create_report_incomplete_issue":{},"mentions":{"enabled":false},"missing_data":{},"missing_tool":{},"noop":{"max":1,"report-as-issue":"true"},"report_incomplete":{},"slack-post-message":{"description":"Post a short, validated message to an allowlisted Slack channel or thread","inputs":{"channel_id":{"default":null,"description":"Slack channel ID to post to. Must be allowlisted in SLACK_ALLOWED_CHANNEL_IDS.","required":true,"type":"string"},"github_source_url":{"default":null,"description":"GitHub issue, discussion, pull request, or run URL that is the durable source of truth.","required":true,"type":"string"},"text":{"default":null,"description":"Plain-text fallback and message body. Must include a GitHub source URL.","required":true,"type":"string"},"thread_ts":{"default":null,"description":"Optional Slack thread timestamp for threaded replies.","required":false,"type":"string"}},"output":"Slack message posted"}}
-          GH_AW_SAFE_OUTPUTS_CONFIG_a20223ec44f5c372_EOF
+          cat > "${RUNNER_TEMP}/gh-aw/safeoutputs/config.json" << 'GH_AW_SAFE_OUTPUTS_CONFIG_e385a937808f7062_EOF'
+          {"create_discussion":{"category":"reports","expires":168,"fallback_to_issue":true,"max":1,"title_prefix":"[Weekly Status] "},"create_report_incomplete_issue":{},"mentions":{"enabled":false},"missing_data":{},"missing_tool":{},"noop":{"max":1,"report-as-issue":"true"},"report_incomplete":{}}
+          GH_AW_SAFE_OUTPUTS_CONFIG_e385a937808f7062_EOF
       - name: Generate Safe Outputs Tools
         env:
           GH_AW_TOOLS_META_JSON: |
@@ -485,39 +472,7 @@ jobs:
                 "create_discussion": " CONSTRAINTS: Maximum 1 discussion(s) can be created. Title will be prefixed with \"[Weekly Status] \". Discussions will be created in category \"reports\"."
               },
               "repo_params": {},
-              "dynamic_tools": [
-                {
-                  "description": "Post a short, validated message to an allowlisted Slack channel or thread",
-                  "inputSchema": {
-                    "additionalProperties": false,
-                    "properties": {
-                      "channel_id": {
-                        "description": "Slack channel ID to post to. Must be allowlisted in SLACK_ALLOWED_CHANNEL_IDS.",
-                        "type": "string"
-                      },
-                      "github_source_url": {
-                        "description": "GitHub issue, discussion, pull request, or run URL that is the durable source of truth.",
-                        "type": "string"
-                      },
-                      "text": {
-                        "description": "Plain-text fallback and message body. Must include a GitHub source URL.",
-                        "type": "string"
-                      },
-                      "thread_ts": {
-                        "description": "Optional Slack thread timestamp for threaded replies.",
-                        "type": "string"
-                      }
-                    },
-                    "required": [
-                      "channel_id",
-                      "github_source_url",
-                      "text"
-                    ],
-                    "type": "object"
-                  },
-                  "name": "slack_post_message"
-                }
-              ]
+              "dynamic_tools": []
             }
           GH_AW_VALIDATION_JSON: |
             {
@@ -703,7 +658,7 @@ jobs:
           DOCKER_SOCK_GID=$(stat -c '%g' "$DOCKER_SOCK_PATH" 2>/dev/null || echo '0')
           export MCP_GATEWAY_DOCKER_COMMAND='docker run -i --rm --network host --add-host host.docker.internal:127.0.0.1 --user '"${MCP_GATEWAY_UID}"':'"${MCP_GATEWAY_GID}"' --group-add '"${DOCKER_SOCK_GID}"' -v '"${DOCKER_SOCK_PATH}"':/var/run/docker.sock -e MCP_GATEWAY_PORT -e MCP_GATEWAY_DOMAIN -e MCP_GATEWAY_API_KEY -e MCP_GATEWAY_PAYLOAD_DIR -e MCP_GATEWAY_PAYLOAD_SIZE_THRESHOLD -e DOCKER_HOST=unix:///var/run/docker.sock -e DEBUG -e MCP_GATEWAY_LOG_DIR -e GH_AW_MCP_LOG_DIR -e GH_AW_SAFE_OUTPUTS -e GH_AW_SAFE_OUTPUTS_CONFIG_PATH -e GH_AW_SAFE_OUTPUTS_TOOLS_PATH -e GH_AW_ASSETS_BRANCH -e GH_AW_ASSETS_MAX_SIZE_KB -e GH_AW_ASSETS_ALLOWED_EXTS -e DEFAULT_BRANCH -e GITHUB_MCP_SERVER_TOKEN -e GITHUB_MCP_GUARD_MIN_INTEGRITY -e GITHUB_MCP_GUARD_REPOS -e GITHUB_REPOSITORY -e GITHUB_SERVER_URL -e GITHUB_SHA -e GITHUB_WORKSPACE -e GITHUB_TOKEN -e GITHUB_RUN_ID -e GITHUB_RUN_NUMBER -e GITHUB_RUN_ATTEMPT -e GITHUB_JOB -e GITHUB_ACTION -e GITHUB_EVENT_NAME -e GITHUB_EVENT_PATH -e GITHUB_ACTOR -e GITHUB_ACTOR_ID -e GITHUB_TRIGGERING_ACTOR -e GITHUB_WORKFLOW -e GITHUB_WORKFLOW_REF -e GITHUB_WORKFLOW_SHA -e GITHUB_REF -e GITHUB_REF_NAME -e GITHUB_REF_TYPE -e GITHUB_HEAD_REF -e GITHUB_BASE_REF -e GH_AW_SAFE_OUTPUTS_PORT -e GH_AW_SAFE_OUTPUTS_API_KEY -e CODEX_HOME -v /tmp/gh-aw/mcp-payloads:/tmp/gh-aw/mcp-payloads:rw -v /opt:/opt:ro -v /tmp:/tmp:rw -v '"${GITHUB_WORKSPACE}"':'"${GITHUB_WORKSPACE}"':rw ghcr.io/github/gh-aw-mcpg:v0.3.22'
           
-          cat > "${RUNNER_TEMP}/gh-aw/mcp-config/config.toml" << GH_AW_MCP_CONFIG_c3797fa3731142e7_EOF
+          cat > "${RUNNER_TEMP}/gh-aw/mcp-config/config.toml" << GH_AW_MCP_CONFIG_b56c56ffad6dffc2_EOF
           [history]
           persistence = "none"
           
@@ -722,11 +677,11 @@ jobs:
           
           [mcp_servers.safeoutputs."guard-policies".write-sink]
           accept = ["*"]
-          GH_AW_MCP_CONFIG_c3797fa3731142e7_EOF
+          GH_AW_MCP_CONFIG_b56c56ffad6dffc2_EOF
           
           # Generate JSON config for MCP gateway
           GH_AW_NODE=$(which node 2>/dev/null || command -v node 2>/dev/null || echo node)
-          cat << GH_AW_MCP_CONFIG_c3797fa3731142e7_EOF | "$GH_AW_NODE" "${RUNNER_TEMP}/gh-aw/actions/start_mcp_gateway.cjs"
+          cat << GH_AW_MCP_CONFIG_b56c56ffad6dffc2_EOF | "$GH_AW_NODE" "${RUNNER_TEMP}/gh-aw/actions/start_mcp_gateway.cjs"
           {
             "mcpServers": {
               "safeoutputs": {
@@ -751,11 +706,11 @@ jobs:
               "payloadDir": "${MCP_GATEWAY_PAYLOAD_DIR}"
             }
           }
-          GH_AW_MCP_CONFIG_c3797fa3731142e7_EOF
+          GH_AW_MCP_CONFIG_b56c56ffad6dffc2_EOF
           
           # Sync converter output to writable CODEX_HOME for Codex
           mkdir -p /tmp/gh-aw/mcp-config
-          cat > "/tmp/gh-aw/mcp-config/config.toml" << GH_AW_CODEX_SHELL_POLICY_3de6d0b8c5eea2a6_EOF
+          cat > "/tmp/gh-aw/mcp-config/config.toml" << GH_AW_CODEX_SHELL_POLICY_f2d75382ee56e5b3_EOF
 
           model_provider = "openai-proxy"
 
@@ -767,7 +722,7 @@ jobs:
           [shell_environment_policy]
           inherit = "core"
           include_only = ["^CODEX_API_KEY$", "^GH_AW_ASSETS_ALLOWED_EXTS$", "^GH_AW_ASSETS_BRANCH$", "^GH_AW_ASSETS_MAX_SIZE_KB$", "^GH_AW_SAFE_OUTPUTS$", "^GITHUB_REPOSITORY$", "^GITHUB_SERVER_URL$", "^HOME$", "^OPENAI_API_KEY$", "^PATH$"]
-          GH_AW_CODEX_SHELL_POLICY_3de6d0b8c5eea2a6_EOF
+          GH_AW_CODEX_SHELL_POLICY_f2d75382ee56e5b3_EOF
           awk '
             BEGIN { skip_openai_proxy = 0 }
             /^[[:space:]]*model_provider[[:space:]]*=/ { next }
@@ -1028,7 +983,6 @@ jobs:
       - agent
       - detection
       - safe_outputs
-      - slack_post_message
     if: >
       always() && (needs.agent.result != 'skipped' || needs.activation.outputs.lockdown_check_failed == 'true' ||
       needs.activation.outputs.stale_lock_file_failed == 'true')
@@ -1325,18 +1279,18 @@ jobs:
           DOCKER_SOCK_GID=$(stat -c '%g' "$DOCKER_SOCK_PATH" 2>/dev/null || echo '0')
           export MCP_GATEWAY_DOCKER_COMMAND='docker run -i --rm --network host --add-host host.docker.internal:127.0.0.1 --user '"${MCP_GATEWAY_UID}"':'"${MCP_GATEWAY_GID}"' --group-add '"${DOCKER_SOCK_GID}"' -v '"${DOCKER_SOCK_PATH}"':/var/run/docker.sock -e MCP_GATEWAY_PORT -e MCP_GATEWAY_DOMAIN -e MCP_GATEWAY_API_KEY -e MCP_GATEWAY_PAYLOAD_DIR -e MCP_GATEWAY_PAYLOAD_SIZE_THRESHOLD -e DOCKER_HOST=unix:///var/run/docker.sock -e DEBUG -e MCP_GATEWAY_LOG_DIR -e GH_AW_MCP_LOG_DIR -e GH_AW_SAFE_OUTPUTS -e GH_AW_SAFE_OUTPUTS_CONFIG_PATH -e GH_AW_SAFE_OUTPUTS_TOOLS_PATH -e GH_AW_ASSETS_BRANCH -e GH_AW_ASSETS_MAX_SIZE_KB -e GH_AW_ASSETS_ALLOWED_EXTS -e DEFAULT_BRANCH -e GITHUB_MCP_SERVER_TOKEN -e GITHUB_MCP_GUARD_MIN_INTEGRITY -e GITHUB_MCP_GUARD_REPOS -e GITHUB_REPOSITORY -e GITHUB_SERVER_URL -e GITHUB_SHA -e GITHUB_WORKSPACE -e GITHUB_TOKEN -e GITHUB_RUN_ID -e GITHUB_RUN_NUMBER -e GITHUB_RUN_ATTEMPT -e GITHUB_JOB -e GITHUB_ACTION -e GITHUB_EVENT_NAME -e GITHUB_EVENT_PATH -e GITHUB_ACTOR -e GITHUB_ACTOR_ID -e GITHUB_TRIGGERING_ACTOR -e GITHUB_WORKFLOW -e GITHUB_WORKFLOW_REF -e GITHUB_WORKFLOW_SHA -e GITHUB_REF -e GITHUB_REF_NAME -e GITHUB_REF_TYPE -e GITHUB_HEAD_REF -e GITHUB_BASE_REF -e CODEX_HOME -v /tmp/gh-aw/mcp-payloads:/tmp/gh-aw/mcp-payloads:rw -v /opt:/opt:ro -v /tmp:/tmp:rw -v '"${GITHUB_WORKSPACE}"':'"${GITHUB_WORKSPACE}"':rw ghcr.io/github/gh-aw-mcpg:v0.3.22'
           
-          cat > "${RUNNER_TEMP}/gh-aw/mcp-config/config.toml" << GH_AW_MCP_CONFIG_29f77129c039b66b_EOF
+          cat > "${RUNNER_TEMP}/gh-aw/mcp-config/config.toml" << GH_AW_MCP_CONFIG_51591bf732b28d6d_EOF
           [history]
           persistence = "none"
           
           [shell_environment_policy]
           inherit = "core"
           include_only = ["^CODEX_API_KEY$", "^HOME$", "^OPENAI_API_KEY$", "^PATH$"]
-          GH_AW_MCP_CONFIG_29f77129c039b66b_EOF
+          GH_AW_MCP_CONFIG_51591bf732b28d6d_EOF
           
           # Generate JSON config for MCP gateway
           GH_AW_NODE=$(which node 2>/dev/null || command -v node 2>/dev/null || echo node)
-          cat << GH_AW_MCP_CONFIG_080f86c84ddd01b7_EOF | "$GH_AW_NODE" "${RUNNER_TEMP}/gh-aw/actions/start_mcp_gateway.cjs"
+          cat << GH_AW_MCP_CONFIG_3325f34cb27875d5_EOF | "$GH_AW_NODE" "${RUNNER_TEMP}/gh-aw/actions/start_mcp_gateway.cjs"
           {
             "mcpServers": {
             },
@@ -1347,11 +1301,11 @@ jobs:
               "payloadDir": "${MCP_GATEWAY_PAYLOAD_DIR}"
             }
           }
-          GH_AW_MCP_CONFIG_080f86c84ddd01b7_EOF
+          GH_AW_MCP_CONFIG_3325f34cb27875d5_EOF
           
           # Sync converter output to writable CODEX_HOME for Codex
           mkdir -p /tmp/gh-aw/mcp-config
-          cat > "/tmp/gh-aw/mcp-config/config.toml" << GH_AW_CODEX_SHELL_POLICY_a19f30f6c5fb6903_EOF
+          cat > "/tmp/gh-aw/mcp-config/config.toml" << GH_AW_CODEX_SHELL_POLICY_a12a74f72fef5d17_EOF
           model_provider = "openai-proxy"
           [model_providers.openai-proxy]
           name = "OpenAI AWF proxy"
@@ -1361,7 +1315,7 @@ jobs:
           [shell_environment_policy]
           inherit = "core"
           include_only = ["^CODEX_API_KEY$", "^HOME$", "^OPENAI_API_KEY$", "^PATH$"]
-          GH_AW_CODEX_SHELL_POLICY_a19f30f6c5fb6903_EOF
+          GH_AW_CODEX_SHELL_POLICY_a12a74f72fef5d17_EOF
           awk '
             BEGIN { skip_openai_proxy = 0 }
             /^[[:space:]]*model_provider[[:space:]]*=/ { next }
@@ -1534,7 +1488,6 @@ jobs:
           GH_AW_ALLOWED_DOMAINS: "*.githubusercontent.com,172.30.0.1,api.openai.com,api.snapcraft.io,archive.ubuntu.com,azure.archive.ubuntu.com,chatgpt.com,codeload.github.com,crl.geotrust.com,crl.globalsign.com,crl.identrust.com,crl.sectigo.com,crl.thawte.com,crl.usertrust.com,crl.verisign.com,crl3.digicert.com,crl4.digicert.com,crls.ssl.com,docs.github.com,github-cloud.githubusercontent.com,github-cloud.s3.amazonaws.com,github.blog,github.com,github.githubassets.com,host.docker.internal,json-schema.org,json.schemastore.org,keyserver.ubuntu.com,lfs.github.com,objects.githubusercontent.com,ocsp.digicert.com,ocsp.geotrust.com,ocsp.globalsign.com,ocsp.identrust.com,ocsp.sectigo.com,ocsp.ssl.com,ocsp.thawte.com,ocsp.usertrust.com,ocsp.verisign.com,openai.com,packagecloud.io,packages.cloud.google.com,packages.microsoft.com,patch-diff.githubusercontent.com,ppa.launchpad.net,raw.githubusercontent.com,s.symcb.com,s.symcd.com,security.ubuntu.com,ts-crl.ws.symantec.com,ts-ocsp.ws.symantec.com,www.googleapis.com"
           GITHUB_SERVER_URL: ${{ github.server_url }}
           GITHUB_API_URL: ${{ github.api_url }}
-          GH_AW_SAFE_OUTPUT_JOBS: "{\"slack_post_message\":\"\"}"
           GH_AW_SAFE_OUTPUTS_HANDLER_CONFIG: "{\"create_discussion\":{\"category\":\"reports\",\"expires\":168,\"fallback_to_issue\":true,\"max\":1,\"title_prefix\":\"[Weekly Status] \"},\"create_report_incomplete_issue\":{},\"mentions\":{\"enabled\":false},\"missing_data\":{},\"missing_tool\":{},\"noop\":{\"max\":1,\"report-as-issue\":\"true\"},\"report_incomplete\":{}}"
         with:
           github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
@@ -1552,183 +1505,4 @@ jobs:
             /tmp/gh-aw/safe-output-items.jsonl
             /tmp/gh-aw/temporary-id-map.json
           if-no-files-found: ignore
-
-  slack_post_message:
-    needs:
-      - agent
-      - detection
-    if: (!cancelled()) && needs.agent.result != 'skipped' && contains(needs.agent.outputs.output_types, 'slack_post_message')
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      issues: write
-    steps:
-      - name: Download agent output artifact
-        continue-on-error: true
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
-        with:
-          name: agent
-          path: ${{ runner.temp }}/gh-aw/safe-jobs/
-      - name: Post validated Slack messages
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8
-        env:
-          GH_AW_AGENT_OUTPUT: ${{ runner.temp }}/gh-aw/safe-jobs/agent_output.json
-          SLACK_ALLOWED_CHANNEL_IDS: ${{ vars.SLACK_ALLOWED_CHANNEL_IDS }}
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-        with:
-          script: |
-            const fs = require("fs");
-            const outputFile = process.env.GH_AW_AGENT_OUTPUT;
-            const token = process.env.SLACK_BOT_TOKEN;
-            const issueTitle = "[Slack Integration] Configure SLACK_BOT_TOKEN";
-            const allowedChannels = new Set(
-              (process.env.SLACK_ALLOWED_CHANNEL_IDS || "")
-                .split(",")
-                .map((value) => value.trim())
-                .filter(Boolean)
-            );
-
-            async function fileMissingTokenIssue() {
-              const { owner, repo } = context.repo;
-              const existing = await github.rest.issues.listForRepo({
-                owner,
-                repo,
-                state: "open",
-                per_page: 100
-              });
-              const match = existing.data.find((issue) => issue.title === issueTitle);
-              if (match) {
-                core.info(`Configuration issue already open: ${match.html_url}`);
-                return match.html_url;
-              }
-
-              const created = await github.rest.issues.create({
-                owner,
-                repo,
-                title: issueTitle,
-                body: [
-                  "Slack output is enabled, but the `SLACK_BOT_TOKEN` repository secret is missing.",
-                  "",
-                  "Add a Slack bot token with the scopes required by the enabled Slack workflows, then rerun the failed workflow.",
-                  "",
-                  `Detected by: ${context.workflow}`,
-                  `Run: https://github.com/${owner}/${repo}/actions/runs/${context.runId}`
-                ].join("\n")
-              });
-              core.info(`Created configuration issue: ${created.data.html_url}`);
-              return created.data.html_url;
-            }
-
-            async function writeFailureSummary(message) {
-              await core.summary
-                .addHeading("Slack safe output")
-                .addRaw(`❌ ${message}\n`)
-                .write();
-            }
-
-            if (!token) {
-              const issueUrl = await fileMissingTokenIssue();
-              await core.summary
-                .addHeading("Slack safe output")
-                .addRaw(`❌ Slack message not posted: \`SLACK_BOT_TOKEN\` is missing.\n\n`)
-                .addLink("Configuration issue", issueUrl)
-                .write();
-              core.setFailed("SLACK_BOT_TOKEN is not configured.");
-              return;
-            }
-
-            if (!allowedChannels.size) {
-              await writeFailureSummary("No message posted because `SLACK_ALLOWED_CHANNEL_IDS` is empty.");
-              core.setFailed("SLACK_ALLOWED_CHANNEL_IDS must contain at least one channel ID.");
-              return;
-            }
-
-            if (!outputFile || !fs.existsSync(outputFile)) {
-              core.info("No agent output found; nothing to post to Slack.");
-              await core.summary
-                .addHeading("Slack safe output")
-                .addRaw("ℹ️ No agent output found; nothing was posted to Slack.\n")
-                .write();
-              return;
-            }
-
-            const payload = JSON.parse(fs.readFileSync(outputFile, "utf8"));
-            const items = (payload.items || []).filter((item) => item.type === "slack_post_message");
-            const maxPosts = 3;
-            const posted = [];
-
-            if (items.length > maxPosts) {
-              await writeFailureSummary(`Rejected ${items.length} Slack post requests; the maximum is ${maxPosts}.`);
-              core.setFailed(`Too many Slack post requests: ${items.length}. Max is ${maxPosts}.`);
-              return;
-            }
-
-            for (const item of items) {
-              const channel = String(item.channel_id || "").trim();
-              const text = String(item.text || "").trim();
-              const sourceUrl = String(item.github_source_url || "").trim();
-              const threadTs = String(item.thread_ts || "").trim();
-
-              if (!allowedChannels.has(channel)) {
-                await writeFailureSummary(`Rejected a post to non-allowlisted channel \`${channel}\`.`);
-                core.setFailed(`Slack channel is not allowlisted: ${channel}`);
-                return;
-              }
-
-              if (!sourceUrl.startsWith("https://github.com/")) {
-                await writeFailureSummary("Rejected a post whose `github_source_url` is not a GitHub URL.");
-                core.setFailed("github_source_url must be a https://github.com/ URL.");
-                return;
-              }
-
-              if (!text || text.length > 3000) {
-                await writeFailureSummary("Rejected a post whose message body was empty or exceeded 3000 characters.");
-                core.setFailed("Slack message text is required and must be 3000 characters or fewer.");
-                return;
-              }
-
-              if (!text.includes(sourceUrl)) {
-                await writeFailureSummary("Rejected a post whose message did not include its GitHub source URL.");
-                core.setFailed("Slack message text must include the GitHub source URL.");
-                return;
-              }
-
-              const body = {
-                channel,
-                text,
-                unfurl_links: false,
-                unfurl_media: false
-              };
-
-              if (threadTs) {
-                body.thread_ts = threadTs;
-              }
-
-              const response = await fetch("https://slack.com/api/chat.postMessage", {
-                method: "POST",
-                headers: {
-                  "Authorization": `Bearer ${token}`,
-                  "Content-Type": "application/json; charset=utf-8"
-                },
-                body: JSON.stringify(body)
-              });
-
-              const result = await response.json();
-              if (!response.ok || !result.ok) {
-                await writeFailureSummary(`Slack API rejected a post to \`${channel}\`: ${result.error || response.statusText}.`);
-                core.setFailed(`Slack post failed: ${result.error || response.statusText}`);
-                return;
-              }
-
-              core.info(`Posted Slack message to ${channel} at ${result.ts}`);
-              posted.push({ channel, ts: result.ts, sourceUrl });
-            }
-
-            await core.summary
-              .addHeading("Slack safe output")
-              .addTable([
-                [{ data: "Channel", header: true }, { data: "Slack timestamp", header: true }, { data: "GitHub source", header: true }],
-                ...posted.map((item) => [item.channel, item.ts, item.sourceUrl])
-              ])
-              .write();
 
