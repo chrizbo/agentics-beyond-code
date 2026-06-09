@@ -58,7 +58,7 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 
 | Workflow | Description | Example output |
 |----------|-------------|----------------|
-| [📋 Weekly Status](.github/workflows/weekly-status.md) | Friday morning leadership status rollup — What Shipped, What We Learned, FYI, and SOS — across all initiatives and launches | [Weekly status - week of 2026-06-01](https://github.com/chrizbo/agentics-beyond-code/discussions/200) |
+| [📋 Weekly Status](.github/workflows/weekly-status.md) | Friday morning leadership status rollup — What Shipped, What We Learned, FYI, and SOS — across all initiatives and launches. Automatically generates a collaborative Google Doc draft from the Discussion, posts a finalization gate comment on the Doc, and notifies the team in Slack. Resolving the gate comment triggers staged publishing. | [Weekly status - week of 2026-06-01](https://github.com/chrizbo/agentics-beyond-code/discussions/200) |
 | [📋 Leadership Briefs](.github/workflows/leadership-brief.md) | Monday morning personalized briefs — one per leader policy file — with Give Kudos, Give Feedback, and Get Involved sections tailored to each leader's domain, goals, and management style | [Alex Chen](https://github.com/chrizbo/agentics-beyond-code/discussions/201) and [Priya Sharma](https://github.com/chrizbo/agentics-beyond-code/discussions/202) - week of 2026-06-01 |
 
 ### 🔧 Operations
