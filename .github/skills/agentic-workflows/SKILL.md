@@ -1,43 +1,75 @@
 ---
 name: agentic-workflows
-description: >
-  Use this skill whenever the user asks about GitHub Agentic Workflows (gh-aw) in any form —
-  creating new workflows, updating or improving existing ones, debugging failed runs, upgrading
-  to new gh-aw versions, understanding safe-outputs, or choosing workflow architecture patterns.
-  Trigger on: "create a workflow", "update the workflow", "why did this workflow fail", "debug
-  this run", "upgrade workflows", "gh aw", "safe-outputs", "safeoutputs", ".github/workflows/*.md",
-  "agentic workflow", "lock.yml", "gh aw compile", "gh aw run", or any question about workflow
-  models, prompts, permissions, engines, or token costs. Also trigger when the user shares a
-  workflow run URL or log and asks what went wrong.
+description: Route gh-aw workflow create/debug/upgrade requests to the right prompts.
 ---
 
-# Agentic Workflows Skill
+# Agentic Workflows Router
 
-This skill routes GitHub Agentic Workflow (gh-aw) requests to the right specialized prompt.
+Use this skill when a user asks to create, update, debug, or upgrade GitHub Agentic Workflows in this repository.
 
-## How to use this skill
+This skill is a dispatcher: identify the task type, load the matching `.github/aw/*.md` file, and follow it directly. Keep responses concise and ask a clarifying question if the correct prompt is unclear.
 
-1. Read the dispatcher at `prompts/` directory of this skill — specifically `agentic-workflows.agent.md` — for the full routing table.
-2. Based on the user's intent, load and follow the matching prompt file from the `prompts/` directory below.
-3. Keep responses concise and action-oriented.
+Read only the files you need:
+Load these files from `github/gh-aw` (they are not available locally).
+- `.github/aw/agentic-chat.md`
+- `.github/aw/asciicharts.md`
+- `.github/aw/campaign.md`
+- `.github/aw/charts-trending.md`
+- `.github/aw/charts.md`
+- `.github/aw/cli-commands.md`
+- `.github/aw/context.md`
+- `.github/aw/create-agentic-workflow.md`
+- `.github/aw/create-shared-agentic-workflow.md`
+- `.github/aw/debug-agentic-workflow.md`
+- `.github/aw/dependabot.md`
+- `.github/aw/deployment-status.md`
+- `.github/aw/experiments.md`
+- `.github/aw/github-agentic-workflows.md`
+- `.github/aw/github-mcp-server.md`
+- `.github/aw/llms.md`
+- `.github/aw/memory.md`
+- `.github/aw/messages.md`
+- `.github/aw/network.md`
+- `.github/aw/patterns.md`
+- `.github/aw/pr-reviewer.md`
+- `.github/aw/report.md`
+- `.github/aw/reuse.md`
+- `.github/aw/safe-outputs-automation.md`
+- `.github/aw/safe-outputs-content.md`
+- `.github/aw/safe-outputs-management.md`
+- `.github/aw/safe-outputs-runtime.md`
+- `.github/aw/safe-outputs.md`
+- `.github/aw/serena-tool.md`
+- `.github/aw/shared-safe-jobs.md`
+- `.github/aw/skills.md`
+- `.github/aw/subagents.md`
+- `.github/aw/syntax-agentic.md`
+- `.github/aw/syntax-core.md`
+- `.github/aw/syntax-tools-imports.md`
+- `.github/aw/syntax.md`
+- `.github/aw/test-coverage.md`
+- `.github/aw/test-expression.md`
+- `.github/aw/token-optimization.md`
+- `.github/aw/triggers.md`
+- `.github/aw/update-agentic-workflow.md`
+- `.github/aw/upgrade-agentic-workflows.md`
+- `.github/aw/visual-regression.md`
+- `.github/aw/workflow-constraints.md`
+- `.github/aw/workflow-editing.md`
+- `.github/aw/workflow-patterns.md`
 
-## Routing quick-reference
+After loading the matching workflow prompt, follow it directly:
+- Create new workflows: `.github/aw/create-agentic-workflow.md`
+- Update existing workflows: `.github/aw/update-agentic-workflow.md`
+- Debug, audit, or investigate workflows: `.github/aw/debug-agentic-workflow.md`
+- Upgrade workflows and fix deprecations: `.github/aw/upgrade-agentic-workflows.md`
+- Create shared components or MCP wrappers: `.github/aw/create-shared-agentic-workflow.md`
+- Create report-generating workflows: `.github/aw/report.md`
+- Fix Dependabot manifest PRs: `.github/aw/dependabot.md`
+- Analyze coverage workflows: `.github/aw/test-coverage.md`
+- Render compact markdown charts: `.github/aw/asciicharts.md`
+- Map CLI commands to MCP usage: `.github/aw/cli-commands.md`
+- Choose workflow architecture and patterns: `.github/aw/patterns.md`
+- Optimize token usage and cost: `.github/aw/token-optimization.md`
 
-| User intent | Prompt file |
-|---|---|
-| Create a new workflow | `prompts/create-agentic-workflow.md` |
-| Update / improve an existing workflow | `prompts/update-agentic-workflow.md` |
-| Debug a failed or misbehaving run | `prompts/debug-agentic-workflow.md` |
-| Upgrade to a new gh-aw version | `prompts/upgrade-agentic-workflows.md` |
-| Build a report-generating workflow | `prompts/report.md` |
-| Create a shared/reusable component | `prompts/create-shared-agentic-workflow.md` |
-| Fix Dependabot PRs on lock files | `prompts/dependabot.md` |
-| Analyze or report on test coverage | `prompts/test-coverage.md` |
-| Render ASCII charts in markdown | `prompts/asciicharts.md` |
-| Run / compile / trigger via CLI | `prompts/cli-commands.md` |
-| Reduce token costs / optimize | `prompts/token-optimization.md` |
-| Choose workflow architecture/pattern | `prompts/patterns.md` |
-| Understand safe-outputs options | `prompts/safe-outputs.md` |
-| General gh-aw reference | `prompts/github-agentic-workflows.md` |
-
-Read the full dispatcher (`agentic-workflows.agent.md`) for richer routing logic and combinations (e.g. report + OTEL, update + token-optimization).
+When the task involves OTEL, OTLP, traces, observability backends, or telemetry-driven analysis, also read and follow `skills/otel-queries/SKILL.md` after loading the matching workflow prompt.

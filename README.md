@@ -127,10 +127,15 @@ Agentics Beyond Code workflows:
 - **[Non-Coder Agentic Workflow Builder](.github/skills/non-coder-agentic-workflow-builder/SKILL.md)** — helps product, ops, compliance, GTM, design, research, support, customer success, program, and leadership users turn process problems into a repo setup with workflows, project boards, issue templates, labels, blank strategy/how-we-work docs, policies, and folders.
 - **[Agentic Workflows](.github/skills/agentic-workflows/SKILL.md)** — helps create, update, debug, compile, and validate GitHub Agentic Workflows. Bundled from the [gh-aw framework](https://github.github.io/gh-aw/).
 
-Skills are mirrored in two places:
+Skills have one canonical copy and several discovery views:
 
-- `.github/skills/` follows the GitHub skill discovery convention.
-- `.claude/skills/` supports local Claude-style skill discovery.
+- `.github/skills/` contains the canonical skills and supports GitHub/Copilot discovery.
+- `.agents/skills/` links to the canonical skills for Codex and open Agent Skills-compatible tools.
+- `.claude/skills/` links to the canonical skills for Claude-style discovery.
+- [`AGENTS.md`](AGENTS.md) provides portable repository guidance for coding agents.
+
+The `agentic-workflows` skill is maintained upstream by GitHub Next. See
+[`docs/skills.md`](docs/skills.md) for ownership, refresh, and validation guidance.
 
 ## 📖 Documentation
 
