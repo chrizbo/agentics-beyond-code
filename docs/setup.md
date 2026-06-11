@@ -37,6 +37,10 @@ The `GITHUB_TOKEN` needs these permissions (configured in the workflow frontmatt
 
 Write operations (creating discussions) are handled by `safe-outputs` in a separate secured job — the agent job itself stays read-only.
 
+Each workflow also sets `max-ai-credits` to cap inference usage per run.
+Threat detection runs automatically when safe outputs are configured and uses
+its own separate AI-credit budget.
+
 ### Setting up OpenAI for Codex
 
 The workflows use the gh-aw Codex engine (`engine: codex`), so model usage is billed to the OpenAI account associated with the API key you store as a repository secret.
@@ -58,6 +62,11 @@ gh secret set OPENAI_API_KEY
 If you prefer a Codex-specific secret name, set `CODEX_API_KEY` instead. The compiled workflows check `CODEX_API_KEY` first, then fall back to `OPENAI_API_KEY`.
 
 > **Security review note:** switching from Copilot to Codex adds `CODEX_API_KEY` and `OPENAI_API_KEY` as restricted secrets and allows outbound access to OpenAI domains such as `api.openai.com`. Review these generated lock-file changes in PRs before merging.
+
+Copilot-engine workflows can instead use the built-in `GITHUB_TOKEN` and bill
+AI credits to an organization by granting `copilot-requests: write`. This repo
+uses Codex, so it still requires an OpenAI API key. The separate `AW_TOKEN`
+remains necessary for GitHub Projects V2 access.
 
 ### Setting up `AW_TOKEN`
 

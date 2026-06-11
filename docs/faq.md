@@ -199,4 +199,7 @@ Workflows currently use OpenAI Codex via GitHub Actions. Model usage is billed t
 
 ### Can I control costs?
 
-Yes. Workflows run on a weekly schedule (Monday/Friday mornings PT) — you can adjust the schedule or run them only on demand. Each workflow also has a `timeout-minutes` setting to cap execution time.
+Yes. Each workflow has both a `max-ai-credits` budget and a `timeout-minutes`
+limit. Lighter workflows are capped at 1,000 AI credits per run and broader
+portfolio analyses at 2,000. Adjust schedules, budgets, and timeouts to match
+your organization; threat detection uses a separate budget.

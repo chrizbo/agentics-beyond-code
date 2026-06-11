@@ -21,6 +21,7 @@ permissions:
 
 strict: true
 timeout-minutes: 20
+max-ai-credits: 2000
 
 network:
   allowed: [defaults, github]
@@ -55,7 +56,7 @@ safe-outputs:
     title-prefix: "[Commitment Reconciliation] "
     labels: [ai:commitment-reconciliation]
     close-older-issues: true
-    expires: 14
+    expires: 14d
     max: 1
 ---
 

@@ -1,6 +1,6 @@
 # 🚀 Agentics Beyond Code
 
-Agentic Workflows for PMs, ops, compliance, and other non-engineering roles — built on [GitHub Agentic Workflows](https://githubnext.com/projects/agentic-workflows/).
+Agentic Workflows for PMs, ops, compliance, and other non-engineering roles — built on [GitHub Agentic Workflows](https://github.github.com/gh-aw/), now in public preview.
 
 While [The Agentics](https://github.com/githubnext/agentics) focuses on engineering use cases (CI, code review, testing), **Agentics Beyond Code** brings the same power to the people who ship, govern, and operate products — without writing a line of code.
 
@@ -166,8 +166,8 @@ This is an early-stage project. We'd love ideas for workflows that help non-engi
 ## 📖 Learn More
 
 - [GitHub Agentic Workflows docs](https://github.github.io/gh-aw/)
+- [Public preview announcement](https://github.blog/changelog/2026-06-11-github-agentic-workflows-is-now-in-public-preview/)
 - [The Agentics (engineering-focused)](https://github.com/githubnext/agentics)
-- [GitHub Next — Agentic Workflows](https://githubnext.com/projects/agentic-workflows/)
 
 ## 📬 Contact
 

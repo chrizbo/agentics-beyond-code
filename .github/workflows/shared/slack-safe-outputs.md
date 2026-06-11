@@ -28,7 +28,7 @@ safe-outputs:
           type: string
       steps:
         - name: Post validated Slack messages
-          uses: actions/github-script@v8
+          uses: actions/github-script@v9.0.0
           env:
             SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
             SLACK_ALLOWED_CHANNEL_IDS: ${{ vars.SLACK_ALLOWED_CHANNEL_IDS }}

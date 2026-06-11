@@ -21,6 +21,7 @@ permissions:
 
 strict: true
 timeout-minutes: 15
+max-ai-credits: 1000
 
 network:
   allowed: [defaults, github]
@@ -29,20 +30,20 @@ steps:
   - name: Collect recent decisions
     id: recent-decisions
     run: |
-      mkdir -p /tmp/adversarial-pm
+      mkdir -p /tmp/gh-aw/agent/adversarial-pm
 
       # Find decisions added or modified in the last 7 days via git history
       SINCE=$(date -u -v-7d '+%Y-%m-%dT%H:%M:%SZ' 2>/dev/null || date -u -d '7 days ago' '+%Y-%m-%dT%H:%M:%SZ')
       DECISION_FILES=$(git log --since="7 days ago" --name-only --diff-filter=AM -- 'decisions/*.md' 2>/dev/null | grep '\.md$' | sort -u)
 
       if [ -z "$DECISION_FILES" ]; then
-        echo '{"count":0,"decisions":[]}' > /tmp/adversarial-pm/recent-decisions.json
+        echo '{"count":0,"decisions":[]}' > /tmp/gh-aw/agent/adversarial-pm/recent-decisions.json
         echo "count=0" >> "$GITHUB_OUTPUT"
         exit 0
       fi
 
       # Build a JSON array of decision contents
-      jq --null-input '{"decisions":[]}' > /tmp/adversarial-pm/recent-decisions.json
+      jq --null-input '{"decisions":[]}' > /tmp/gh-aw/agent/adversarial-pm/recent-decisions.json
       COUNT=0
       for f in $DECISION_FILES; do
         if [ -f "$f" ]; then
@@ -60,13 +61,13 @@ steps:
           jq --arg file "$FILENAME" --arg path "$f" --arg content "$CONTENT" \
              --arg source "$SOURCE_ISSUE" --arg impact "$IMPACT_ISSUES" \
             '.decisions += [{"file": $file, "path": $path, "source_issue": $source, "impact_issues": $impact, "content": $content}]' \
-            /tmp/adversarial-pm/recent-decisions.json > /tmp/adversarial-pm/tmp.json
-          mv /tmp/adversarial-pm/tmp.json /tmp/adversarial-pm/recent-decisions.json
+            /tmp/gh-aw/agent/adversarial-pm/recent-decisions.json > /tmp/gh-aw/agent/adversarial-pm/tmp.json
+          mv /tmp/gh-aw/agent/adversarial-pm/tmp.json /tmp/gh-aw/agent/adversarial-pm/recent-decisions.json
         fi
       done
 
-      jq --arg count "$COUNT" '.count = ($count | tonumber)' /tmp/adversarial-pm/recent-decisions.json > /tmp/adversarial-pm/tmp.json
-      mv /tmp/adversarial-pm/tmp.json /tmp/adversarial-pm/recent-decisions.json
+      jq --arg count "$COUNT" '.count = ($count | tonumber)' /tmp/gh-aw/agent/adversarial-pm/recent-decisions.json > /tmp/gh-aw/agent/adversarial-pm/tmp.json
+      mv /tmp/gh-aw/agent/adversarial-pm/tmp.json /tmp/gh-aw/agent/adversarial-pm/recent-decisions.json
 
       echo "count=$COUNT" >> "$GITHUB_OUTPUT"
       echo "Collected $COUNT recent decisions"
@@ -188,11 +189,11 @@ migration tooling, monitoring... did anyone budget for the aftermath?"*
 
 A deterministic pre-step has already collected recent decisions:
 
-- **`/tmp/adversarial-pm/recent-decisions.json`** — All decision files added
+- **`/tmp/gh-aw/agent/adversarial-pm/recent-decisions.json`** — All decision files added
   or modified in the last 7 days, with their content and source issue numbers.
 
 ```bash
-cat /tmp/adversarial-pm/recent-decisions.json | jq '.count'
+cat /tmp/gh-aw/agent/adversarial-pm/recent-decisions.json | jq '.count'
 ```
 
 > **⚠️ Token efficiency:** Read the summary count first. If count is 0,
@@ -210,7 +211,7 @@ If the count is 0, noop with a grumpy message:
 Read the full decision contents:
 
 ```bash
-cat /tmp/adversarial-pm/recent-decisions.json | jq -r '.decisions[] | "=== \(.file) (source: #\(.source_issue)) ===\n\(.content)\n"'
+cat /tmp/gh-aw/agent/adversarial-pm/recent-decisions.json | jq -r '.decisions[] | "=== \(.file) (source: #\(.source_issue)) ===\n\(.content)\n"'
 ```
 
 ### Step 2: Rank by Consequence
@@ -276,7 +277,7 @@ issue, skip it (you can't challenge a decision nobody can discuss).
 Extract the source issue number from the pre-fetched data:
 
 ```bash
-cat /tmp/adversarial-pm/recent-decisions.json | jq -r '.decisions[] | "\(.file): source=#\(.source_issue) impact=\(.impact_issues)"'
+cat /tmp/gh-aw/agent/adversarial-pm/recent-decisions.json | jq -r '.decisions[] | "\(.file): source=#\(.source_issue) impact=\(.impact_issues)"'
 ```
 
 The pre-step extracts issue numbers from both **Source** and **Impact** fields.
@@ -365,4 +366,3 @@ will tune this out if it's noisy.
 
 - **Skip bot-generated decisions.** If a decision was created by a workflow
   or bot, noop — don't argue with automation.
-

@@ -21,6 +21,7 @@ permissions:
 
 strict: true
 timeout-minutes: 15
+max-ai-credits: 1000
 
 network:
   allowed: [defaults, github]
@@ -30,9 +31,11 @@ steps:
     id: workflow-health-data
     env:
       GH_TOKEN: ${{ github.token }}
+      EXPR_GITHUB_REPOSITORY: ${{ github.repository }}
+      EXPR_GITHUB_RUN_ID: ${{ github.run_id }}
     run: |
       chmod +x .github/scripts/fetch-workflow-health-data.sh
-      ./.github/scripts/fetch-workflow-health-data.sh "${{ github.repository }}" "${{ github.run_id }}" workflow-health-data.json
+      ./.github/scripts/fetch-workflow-health-data.sh "$EXPR_GITHUB_REPOSITORY" "$EXPR_GITHUB_RUN_ID" workflow-health-data.json
       echo "path=workflow-health-data.json" >> "$GITHUB_OUTPUT"
 
 tools:

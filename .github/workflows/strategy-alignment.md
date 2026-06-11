@@ -21,6 +21,7 @@ permissions:
 
 strict: true
 timeout-minutes: 20
+max-ai-credits: 2000
 
 network:
   allowed: [defaults, github]
@@ -55,7 +56,7 @@ safe-outputs:
     title-prefix: "[Strategy Alignment] "
     labels: [ai:strategy-alignment]
     draft: false
-    expires: 14
+    expires: 14d
     allowed-files:
       - "docs/strategy.md"
     protected-files: allowed

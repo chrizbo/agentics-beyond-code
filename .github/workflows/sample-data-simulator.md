@@ -19,6 +19,7 @@ permissions:
 
 strict: true
 timeout-minutes: 15
+max-ai-credits: 1000
 
 network:
   allowed: [defaults, github]

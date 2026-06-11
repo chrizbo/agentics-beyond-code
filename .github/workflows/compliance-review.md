@@ -30,6 +30,7 @@ permissions:
 
 strict: true
 timeout-minutes: 20
+max-ai-credits: 2000
 
 network:
   allowed: [defaults, github]
@@ -51,7 +52,8 @@ tools:
     mode: gh-proxy
     toolsets: [default]
     lockdown: false
-    min-integrity: none
+    allowed-repos: "all"
+    min-integrity: approved
 
 safe-outputs:
   mentions: false

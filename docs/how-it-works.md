@@ -1,6 +1,6 @@
 # How It Works
 
-Agentics Beyond Code uses [GitHub Agentic Workflows](https://githubnext.com/projects/agentic-workflows/) to automate launch tracking, health monitoring, and compliance checks for non-engineering roles. Here's how the system fits together.
+Agentics Beyond Code uses [GitHub Agentic Workflows](https://github.github.com/gh-aw/), available in public preview, to automate launch tracking, health monitoring, and compliance checks for non-engineering roles. Here's how the system fits together.
 
 ## Sample Output
 
@@ -95,7 +95,12 @@ tools:
 
 - **Public repos** automatically get `min-integrity: approved` at runtime when neither field is set.
 - **Private repos do not** — you must be explicit.
-- All workflows in this repo currently use `min-integrity: none`, which is appropriate for **fully internal team repos** where all contributors are trusted teammates.
+- Public issue-triggered workflows use `min-integrity: approved` so untrusted issue
+  content is withheld from the model.
+- Scheduled and manually dispatched workflows that reconcile agent-generated or
+  cross-team artifacts use `min-integrity: none` intentionally. Those workflows
+  depend on bot-authored content and should only be enabled where that input is
+  trusted.
 
 ### When to raise the threshold
 
@@ -103,11 +108,15 @@ If your team adapts these workflows for a wider audience, consider the following
 
 | Scenario | Recommended setting |
 |---|---|
-| Internal team repo (trusted contributors only) | `none` (current default) |
+| Internal team repo (trusted contributors only) | `none` |
 | Semi-open repo with external contributors | `unapproved` |
 | Public repo or workflows using `roles: all` | `approved` |
 
-The workflows most exposed to prompt injection from external input are those that read user-supplied content: **intake-triage**, **assumption-surfacer**, **transcript-processor**, **compliance-review**, and **decision-log**. If you open these to external contributors, raise `min-integrity` and pair it with `roles: all`.
+The issue-triggered workflows most exposed to prompt injection from external
+input — **intake-triage**, **assumption-surfacer**, and **compliance-review** —
+use `approved`. Workflows processing merged transcripts, fixtures, comments, or
+agent-created artifacts retain `none`; protect their triggering paths and only
+enable them when those sources are trusted.
 
 ### Escape hatches
 
