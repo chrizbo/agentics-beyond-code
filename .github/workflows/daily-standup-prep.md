@@ -52,6 +52,7 @@ steps:
 
 imports:
   - shared/freshness-check.md
+  - shared/calendar-safe-outputs.md
 
 tools:
   github:
@@ -153,14 +154,15 @@ Include the URL of today's standup discussion (will be created in Step 3 — use
 <!-- meeting-brief-end -->
 ```
 
-After generating each brief, call the write script for Google Meet events:
+After generating each brief, submit it via the calendar safe output for Google Meet events:
 ```bash
-chmod +x .github/scripts/write-meeting-brief.sh
-# CALENDAR_WRITE_ENABLED defaults to false (dry-run) unless set in environment
-./.github/scripts/write-meeting-brief.sh "<event-id>" "<brief-content>" 2>&1
+safeoutputs calendar_update_event_brief \
+  --event_id "<event-id>" \
+  --brief_content "<brief-content>" \
+  --github_source_url "https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
 ```
 
-Skip write for non-Google-Meet events (Zoom, Teams) — detect by checking `conferenceData.conferenceSolution.name`.
+Skip non-Google-Meet events (Zoom, Teams) — detect by checking `conferenceData.conferenceSolution.name`. The safe output enforces the `CALENDAR_WRITE_ENABLED` gate and validates all inputs before writing; it is a dry-run by default.
 
 ### Step 3: Identify high-signal standup inputs
 

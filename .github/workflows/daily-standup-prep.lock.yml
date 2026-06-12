@@ -1,4 +1,4 @@
-# gh-aw-metadata: {"schema_version":"v4","frontmatter_hash":"7f0dec200f4775c48b13d533cd0ae7e3907ece554661c6049d04e24d4aa4dc72","body_hash":"83bfc87f0672c4fc37ce174a3ceee7aad6e83bc59febcb1683b6b1c097dbd9bf","compiler_version":"v0.79.6","strict":true,"agent_id":"codex","agent_model":"gpt-4o","engine_versions":{"codex":"0.137.0"}}
+# gh-aw-metadata: {"schema_version":"v4","frontmatter_hash":"70aa932490b35f592acb870f74160d04f17107cda10e0b4c86c1132cd9c8bc02","body_hash":"31f719136bdbf60b9bdd606c3a74261c2076370830538b01d6d27be80acbda2d","compiler_version":"v0.79.6","strict":true,"agent_id":"codex","agent_model":"gpt-4o","engine_versions":{"codex":"0.137.0"}}
 # gh-aw-manifest: {"version":1,"secrets":["AW_TOKEN","CODEX_API_KEY","GH_AW_GITHUB_MCP_SERVER_TOKEN","GH_AW_GITHUB_TOKEN","GITHUB_TOKEN","GOOGLE_OAUTH_CLIENT_ID","GOOGLE_OAUTH_CLIENT_SECRET","GOOGLE_OAUTH_REFRESH_TOKEN","OPENAI_API_KEY"],"actions":[{"repo":"actions/checkout","sha":"df4cb1c069e1874edd31b4311f1884172cec0e10","version":"v6.0.3"},{"repo":"actions/download-artifact","sha":"3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c","version":"v8.0.1"},{"repo":"actions/github-script","sha":"3a2844b7e9c422d3c10d287c895573f7108da1b3","version":"v9.0.0"},{"repo":"actions/setup-node","sha":"48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e","version":"v6.4.0"},{"repo":"actions/upload-artifact","sha":"043fb46d1a93c77aae656e7c1c64a875d1fc6a0a","version":"v7.0.1"},{"repo":"github/gh-aw-actions/setup","sha":"5c2fe865bb4dc46e1450f6ee0d0541d759aea73a","version":"v0.79.6"}],"containers":[{"image":"ghcr.io/github/gh-aw-firewall/agent:0.27.2","digest":"sha256:f88e5b17b6b7a600117bc121114d6ce2155c88c983c0c939c5df884f730fa1d6","pinned_image":"ghcr.io/github/gh-aw-firewall/agent:0.27.2@sha256:f88e5b17b6b7a600117bc121114d6ce2155c88c983c0c939c5df884f730fa1d6"},{"image":"ghcr.io/github/gh-aw-firewall/api-proxy:0.27.2","digest":"sha256:ee39841d980878ebbb87592903b06d31a1af500c71525c9616f7e8e2a27041a4","pinned_image":"ghcr.io/github/gh-aw-firewall/api-proxy:0.27.2@sha256:ee39841d980878ebbb87592903b06d31a1af500c71525c9616f7e8e2a27041a4"},{"image":"ghcr.io/github/gh-aw-firewall/cli-proxy:0.27.2","digest":"sha256:02f3ec08f32dc26c5427920c6a2e2f3036238fce44802f2f11ef49ed8621b5d0","pinned_image":"ghcr.io/github/gh-aw-firewall/cli-proxy:0.27.2@sha256:02f3ec08f32dc26c5427920c6a2e2f3036238fce44802f2f11ef49ed8621b5d0"},{"image":"ghcr.io/github/gh-aw-firewall/squid:0.27.2","digest":"sha256:2e3a717e5f19a654cd9a2263beb52012b56bcb68562ec5ae2e42f9d156b49591","pinned_image":"ghcr.io/github/gh-aw-firewall/squid:0.27.2@sha256:2e3a717e5f19a654cd9a2263beb52012b56bcb68562ec5ae2e42f9d156b49591"},{"image":"ghcr.io/github/gh-aw-mcpg:v0.3.25","digest":"sha256:c10331ad17668ef89f38f5e356678788a40b0cd5fef96e8f92e1d9c1de47cbaa","pinned_image":"ghcr.io/github/gh-aw-mcpg:v0.3.25@sha256:c10331ad17668ef89f38f5e356678788a40b0cd5fef96e8f92e1d9c1de47cbaa"},{"image":"ghcr.io/github/github-mcp-server:v1.1.2","digest":"sha256:30197479d8036c7811892bc07e06f9a05c9ef3cdd79bc59f256d50647f95788c","pinned_image":"ghcr.io/github/github-mcp-server:v1.1.2@sha256:30197479d8036c7811892bc07e06f9a05c9ef3cdd79bc59f256d50647f95788c"}]}
 #    ___                   _   _      
 #   / _ \                 | | (_)     
@@ -28,6 +28,7 @@
 #
 # Resolved workflow manifest:
 #   Imports:
+#     - shared/calendar-safe-outputs.md
 #     - shared/freshness-check.md
 #
 # Secrets used:
@@ -220,20 +221,20 @@ jobs:
         run: |
           bash "${RUNNER_TEMP}/gh-aw/actions/create_prompt_first.sh"
           {
-          cat << 'GH_AW_PROMPT_f077e5100165303b_EOF'
+          cat << 'GH_AW_PROMPT_ca09641eab4d71a3_EOF'
           <system>
-          GH_AW_PROMPT_f077e5100165303b_EOF
+          GH_AW_PROMPT_ca09641eab4d71a3_EOF
           cat "${RUNNER_TEMP}/gh-aw/prompts/xpia.md"
           cat "${RUNNER_TEMP}/gh-aw/prompts/temp_folder_prompt.md"
           cat "${RUNNER_TEMP}/gh-aw/prompts/markdown.md"
           cat "${RUNNER_TEMP}/gh-aw/prompts/safe_outputs_prompt.md"
-          cat << 'GH_AW_PROMPT_f077e5100165303b_EOF'
+          cat << 'GH_AW_PROMPT_ca09641eab4d71a3_EOF'
           <safe-output-tools>
-          Tools: create_discussion, missing_tool, missing_data, noop
+          Tools: create_discussion, missing_tool, missing_data, noop, calendar_update_event_brief
           </safe-output-tools>
-          GH_AW_PROMPT_f077e5100165303b_EOF
+          GH_AW_PROMPT_ca09641eab4d71a3_EOF
           cat "${RUNNER_TEMP}/gh-aw/prompts/mcp_cli_tools_prompt.md"
-          cat << 'GH_AW_PROMPT_f077e5100165303b_EOF'
+          cat << 'GH_AW_PROMPT_ca09641eab4d71a3_EOF'
           <github-context>
           The following GitHub context information is available for this workflow:
           {{#if github.actor}}
@@ -262,13 +263,14 @@ jobs:
           {{/if}}
           </github-context>
           
-          GH_AW_PROMPT_f077e5100165303b_EOF
+          GH_AW_PROMPT_ca09641eab4d71a3_EOF
           cat "${RUNNER_TEMP}/gh-aw/prompts/cli_proxy_with_safeoutputs_prompt.md"
-          cat << 'GH_AW_PROMPT_f077e5100165303b_EOF'
+          cat << 'GH_AW_PROMPT_ca09641eab4d71a3_EOF'
           </system>
           {{#runtime-import .github/workflows/shared/freshness-check.md}}
+          {{#runtime-import .github/workflows/shared/calendar-safe-outputs.md}}
           {{#runtime-import .github/workflows/daily-standup-prep.md}}
-          GH_AW_PROMPT_f077e5100165303b_EOF
+          GH_AW_PROMPT_ca09641eab4d71a3_EOF
           } > "$GH_AW_PROMPT"
       - name: Interpolate variables and render templates
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
@@ -276,6 +278,7 @@ jobs:
           GH_AW_PROMPT: /tmp/gh-aw/aw-prompts/prompt.txt
           GH_AW_ENGINE_ID: "codex"
           GH_AW_GITHUB_REPOSITORY: ${{ github.repository }}
+          GH_AW_GITHUB_RUN_ID: ${{ github.run_id }}
         with:
           script: |
             const { setupGlobals } = require('${{ runner.temp }}/gh-aw/actions/setup_globals.cjs');
@@ -506,9 +509,9 @@ jobs:
           mkdir -p "${RUNNER_TEMP}/gh-aw/safeoutputs"
           mkdir -p /tmp/gh-aw/safeoutputs
           mkdir -p /tmp/gh-aw/mcp-logs/safeoutputs
-          cat > "${RUNNER_TEMP}/gh-aw/safeoutputs/config.json" << 'GH_AW_SAFE_OUTPUTS_CONFIG_ac8d1d95e3b42c5d_EOF'
-          {"create_discussion":{"category":"reports","expires":168,"fallback_to_issue":true,"max":1,"title_prefix":"[Standup Prep] "},"create_report_incomplete_issue":{},"mentions":{"enabled":false},"missing_data":{},"missing_tool":{},"noop":{"max":1,"report-as-issue":"true"},"report_incomplete":{}}
-          GH_AW_SAFE_OUTPUTS_CONFIG_ac8d1d95e3b42c5d_EOF
+          cat > "${RUNNER_TEMP}/gh-aw/safeoutputs/config.json" << 'GH_AW_SAFE_OUTPUTS_CONFIG_976f43a6ca175757_EOF'
+          {"calendar-update-event-brief":{"description":"Append a meeting brief to a Google Calendar event description. Dry-run by default; set CALENDAR_WRITE_ENABLED=true to enable writes.","inputs":{"brief_content":{"default":null,"description":"Meeting brief to append. Must fit between meeting-brief-start and meeting-brief-end markers.","required":true,"type":"string"},"calendar_id":{"default":null,"description":"Google Calendar ID (email address of the calendar). Defaults to the GOOGLE_CALENDAR_ID variable.","required":false,"type":"string"},"event_id":{"default":null,"description":"Google Calendar event ID to update.","required":true,"type":"string"},"github_source_url":{"default":null,"description":"GitHub issue, discussion, pull request, or run URL that is the durable source of this brief.","required":true,"type":"string"}},"output":"Calendar event brief written"},"create_discussion":{"category":"reports","expires":168,"fallback_to_issue":true,"max":1,"title_prefix":"[Standup Prep] "},"create_report_incomplete_issue":{},"mentions":{"enabled":false},"missing_data":{},"missing_tool":{},"noop":{"max":1,"report-as-issue":"true"},"report_incomplete":{}}
+          GH_AW_SAFE_OUTPUTS_CONFIG_976f43a6ca175757_EOF
       - name: Generate Safe Outputs Tools
         env:
           GH_AW_TOOLS_META_JSON: |
@@ -517,7 +520,39 @@ jobs:
                 "create_discussion": " CONSTRAINTS: Maximum 1 discussion(s) can be created. Title will be prefixed with \"[Standup Prep] \". Discussions will be created in category \"reports\"."
               },
               "repo_params": {},
-              "dynamic_tools": []
+              "dynamic_tools": [
+                {
+                  "description": "Append a meeting brief to a Google Calendar event description. Dry-run by default; set CALENDAR_WRITE_ENABLED=true to enable writes.",
+                  "inputSchema": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "brief_content": {
+                        "description": "Meeting brief to append. Must fit between meeting-brief-start and meeting-brief-end markers.",
+                        "type": "string"
+                      },
+                      "calendar_id": {
+                        "description": "Google Calendar ID (email address of the calendar). Defaults to the GOOGLE_CALENDAR_ID variable.",
+                        "type": "string"
+                      },
+                      "event_id": {
+                        "description": "Google Calendar event ID to update.",
+                        "type": "string"
+                      },
+                      "github_source_url": {
+                        "description": "GitHub issue, discussion, pull request, or run URL that is the durable source of this brief.",
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "brief_content",
+                      "event_id",
+                      "github_source_url"
+                    ],
+                    "type": "object"
+                  },
+                  "name": "calendar_update_event_brief"
+                }
+              ]
             }
           GH_AW_VALIDATION_JSON: |
             {
@@ -1025,10 +1060,224 @@ jobs:
             /tmp/gh-aw/sandbox/firewall/awf-reflect.json
           if-no-files-found: ignore
 
+  calendar_update_event_brief:
+    needs:
+      - agent
+      - detection
+    if: >
+      (!cancelled()) && needs.agent.result != 'skipped' && contains(needs.agent.outputs.output_types, 'calendar_update_event_brief')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - name: Download agent output artifact
+        continue-on-error: true
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: agent
+          path: ${{ runner.temp }}/gh-aw/safe-jobs/
+      - name: Write validated calendar event brief
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        env:
+          CALENDAR_WRITE_ENABLED: ${{ vars.CALENDAR_WRITE_ENABLED }}
+          GH_AW_AGENT_OUTPUT: ${{ runner.temp }}/gh-aw/safe-jobs/agent_output.json
+          GOOGLE_CALENDAR_ID: ${{ vars.GOOGLE_CALENDAR_ID }}
+          GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
+          GOOGLE_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
+          GOOGLE_OAUTH_REFRESH_TOKEN: ${{ secrets.GOOGLE_OAUTH_REFRESH_TOKEN }}
+        with:
+          script: |
+            const fs = require("fs");
+            const outputFile = process.env.GH_AW_AGENT_OUTPUT;
+            const issueTitle = "[Calendar Integration] Configure GOOGLE_OAUTH_REFRESH_TOKEN";
+            const writesEnabled = process.env.CALENDAR_WRITE_ENABLED === "true";
+            const defaultCalendarId = process.env.GOOGLE_CALENDAR_ID || "";
+
+            async function fileMissingCredentialIssue() {
+              const { owner, repo } = context.repo;
+              const existing = await github.rest.issues.listForRepo({
+                owner,
+                repo,
+                state: "open",
+                per_page: 100
+              });
+              const match = existing.data.find((issue) => issue.title === issueTitle);
+              if (match) {
+                core.info(`Configuration issue already open: ${match.html_url}`);
+                return match.html_url;
+              }
+              const created = await github.rest.issues.create({
+                owner,
+                repo,
+                title: issueTitle,
+                body: [
+                  "Calendar write output is enabled, but `GOOGLE_OAUTH_REFRESH_TOKEN` is not configured.",
+                  "",
+                  "Add `GOOGLE_OAUTH_CLIENT_ID`, `GOOGLE_OAUTH_CLIENT_SECRET`, and `GOOGLE_OAUTH_REFRESH_TOKEN` to the `google-docs-demo` GitHub environment.",
+                  "The refresh token needs `calendar.readonly` and `calendar.events` scopes.",
+                  "",
+                  "Also set `GOOGLE_CALENDAR_ID` to a shared team calendar address (not `primary`) to avoid",
+                  "personal events appearing in GitHub artifacts.",
+                  "",
+                  `Detected by: ${context.workflow}`,
+                  `Run: https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`
+                ].join("\n")
+              });
+              core.info(`Created configuration issue: ${created.data.html_url}`);
+              return created.data.html_url;
+            }
+
+            async function getAccessToken() {
+              const response = await fetch("https://oauth2.googleapis.com/token", {
+                method: "POST",
+                headers: { "content-type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams({
+                  client_id: process.env.GOOGLE_OAUTH_CLIENT_ID,
+                  client_secret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
+                  refresh_token: process.env.GOOGLE_OAUTH_REFRESH_TOKEN,
+                  grant_type: "refresh_token"
+                })
+              });
+              const result = await response.json();
+              if (!response.ok || !result.access_token) {
+                throw new Error(`Google token refresh failed: ${result.error_description || result.error}`);
+              }
+              return result.access_token;
+            }
+
+            async function patchEventDescription(token, calendarId, eventId, briefContent) {
+              const MARKER_START = "<!-- meeting-brief-start -->";
+              const MARKER_END = "<!-- meeting-brief-end -->";
+
+              const getResp = await fetch(
+                `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calendarId)}/events/${encodeURIComponent(eventId)}?fields=description`,
+                { headers: { authorization: `Bearer ${token}` } }
+              );
+              if (!getResp.ok) {
+                throw new Error(`Failed to read event ${eventId}: HTTP ${getResp.status}`);
+              }
+              const event = await getResp.json();
+              const existing = event.description || "";
+
+              let newDescription;
+              const markedSection = `${MARKER_START}\n${briefContent}\n${MARKER_END}`;
+              if (existing.includes(MARKER_START) && existing.includes(MARKER_END)) {
+                const before = existing.substring(0, existing.indexOf(MARKER_START));
+                const after = existing.substring(existing.indexOf(MARKER_END) + MARKER_END.length);
+                newDescription = `${before}${markedSection}${after}`;
+              } else {
+                newDescription = existing ? `${existing}\n\n${markedSection}` : markedSection;
+              }
+
+              const patchResp = await fetch(
+                `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calendarId)}/events/${encodeURIComponent(eventId)}`,
+                {
+                  method: "PATCH",
+                  headers: {
+                    authorization: `Bearer ${token}`,
+                    "content-type": "application/json"
+                  },
+                  body: JSON.stringify({ description: newDescription })
+                }
+              );
+              if (!patchResp.ok) {
+                const err = await patchResp.json().catch(() => ({}));
+                throw new Error(`Failed to patch event ${eventId}: HTTP ${patchResp.status} ${JSON.stringify(err)}`);
+              }
+            }
+
+            if (!outputFile || !fs.existsSync(outputFile)) {
+              core.info("No agent output found; nothing to write to calendar.");
+              await core.summary
+                .addHeading("Calendar safe output")
+                .addRaw("No agent output found; nothing was written to Google Calendar.\n")
+                .write();
+              return;
+            }
+
+            const payload = JSON.parse(fs.readFileSync(outputFile, "utf8"));
+            const items = (payload.items || []).filter((item) => item.type === "calendar_update_event_brief");
+            const maxUpdates = 10;
+
+            if (items.length > maxUpdates) {
+              core.setFailed(`Too many calendar update requests: ${items.length}. Max is ${maxUpdates}.`);
+              return;
+            }
+
+            if (!writesEnabled) {
+              const dryRunRows = items.map((item) => [
+                String(item.event_id || ""),
+                String(item.calendar_id || defaultCalendarId || "(not set)"),
+                String(item.github_source_url || "")
+              ]);
+              await core.summary
+                .addHeading("Calendar safe output — dry run")
+                .addRaw(`CALENDAR_WRITE_ENABLED is not set to true. ${items.length} update(s) skipped.\n\n`)
+                .addTable([
+                  [{ data: "Event ID", header: true }, { data: "Calendar ID", header: true }, { data: "GitHub source", header: true }],
+                  ...dryRunRows
+                ])
+                .write();
+              core.info(`Dry-run: ${items.length} calendar update(s) not written. Set CALENDAR_WRITE_ENABLED=true to enable.`);
+              return;
+            }
+
+            if (!process.env.GOOGLE_OAUTH_REFRESH_TOKEN) {
+              const issueUrl = await fileMissingCredentialIssue();
+              await core.summary
+                .addHeading("Calendar safe output")
+                .addRaw("GOOGLE_OAUTH_REFRESH_TOKEN is not configured. No events were updated.\n\n")
+                .addLink("Configuration issue", issueUrl)
+                .write();
+              core.setFailed("GOOGLE_OAUTH_REFRESH_TOKEN is not configured.");
+              return;
+            }
+
+            const token = await getAccessToken();
+            const written = [];
+
+            for (const item of items) {
+              const eventId = String(item.event_id || "").trim();
+              const briefContent = String(item.brief_content || "").trim();
+              const calendarId = String(item.calendar_id || defaultCalendarId || "").trim();
+              const sourceUrl = String(item.github_source_url || "").trim();
+
+              if (!eventId) {
+                core.setFailed("calendar_update_event_brief: event_id is required.");
+                return;
+              }
+              if (!briefContent) {
+                core.setFailed("calendar_update_event_brief: brief_content is required.");
+                return;
+              }
+              if (!calendarId) {
+                core.setFailed("calendar_update_event_brief: calendar_id or GOOGLE_CALENDAR_ID must be set.");
+                return;
+              }
+              if (!sourceUrl.startsWith("https://github.com/")) {
+                core.setFailed("calendar_update_event_brief: github_source_url must be a https://github.com/ URL.");
+                return;
+              }
+
+              await patchEventDescription(token, calendarId, eventId, briefContent);
+              core.info(`Updated calendar event ${eventId} on calendar ${calendarId}`);
+              written.push({ eventId, calendarId, sourceUrl });
+            }
+
+            await core.summary
+              .addHeading("Calendar safe output")
+              .addTable([
+                [{ data: "Event ID", header: true }, { data: "Calendar ID", header: true }, { data: "GitHub source", header: true }],
+                ...written.map((item) => [item.eventId, item.calendarId, item.sourceUrl])
+              ])
+              .write();
+
   conclusion:
     needs:
       - activation
       - agent
+      - calendar_update_event_brief
       - detection
       - safe_outputs
     if: >
@@ -1607,6 +1856,7 @@ jobs:
           GH_AW_ALLOWED_DOMAINS: "*.githubusercontent.com,172.30.0.1,api.openai.com,api.snapcraft.io,archive.ubuntu.com,azure.archive.ubuntu.com,chatgpt.com,codeload.github.com,crl.geotrust.com,crl.globalsign.com,crl.identrust.com,crl.sectigo.com,crl.thawte.com,crl.usertrust.com,crl.verisign.com,crl3.digicert.com,crl4.digicert.com,crls.ssl.com,docs.github.com,github-cloud.githubusercontent.com,github-cloud.s3.amazonaws.com,github.blog,github.com,github.githubassets.com,host.docker.internal,json-schema.org,json.schemastore.org,keyserver.ubuntu.com,lfs.github.com,objects.githubusercontent.com,ocsp.digicert.com,ocsp.geotrust.com,ocsp.globalsign.com,ocsp.identrust.com,ocsp.sectigo.com,ocsp.ssl.com,ocsp.thawte.com,ocsp.usertrust.com,ocsp.verisign.com,openai.com,packagecloud.io,packages.cloud.google.com,packages.microsoft.com,patch-diff.githubusercontent.com,ppa.launchpad.net,raw.githubusercontent.com,s.symcb.com,s.symcd.com,security.ubuntu.com,ts-crl.ws.symantec.com,ts-ocsp.ws.symantec.com,www.googleapis.com"
           GITHUB_SERVER_URL: ${{ github.server_url }}
           GITHUB_API_URL: ${{ github.api_url }}
+          GH_AW_SAFE_OUTPUT_JOBS: "{\"calendar_update_event_brief\":\"\"}"
           GH_AW_SAFE_OUTPUTS_HANDLER_CONFIG: "{\"create_discussion\":{\"category\":\"reports\",\"expires\":168,\"fallback_to_issue\":true,\"max\":1,\"title_prefix\":\"[Standup Prep] \"},\"create_report_incomplete_issue\":{},\"mentions\":{\"enabled\":false},\"missing_data\":{},\"missing_tool\":{},\"noop\":{\"max\":1,\"report-as-issue\":\"true\"},\"report_incomplete\":{}}"
         with:
           github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
