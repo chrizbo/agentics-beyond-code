@@ -61,6 +61,16 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 | [📋 Weekly Status](.github/workflows/weekly-status.md) | Friday morning leadership status rollup — What Shipped, What We Learned, FYI, and SOS — across all initiatives and launches. Automatically generates a collaborative Google Doc draft from the Discussion, posts a finalization gate comment on the Doc, and notifies the team in Slack. Resolving the gate comment triggers staged publishing. | [Weekly status - week of 2026-06-01](https://github.com/chrizbo/agentics-beyond-code/discussions/200) |
 | [📋 Leadership Briefs](.github/workflows/leadership-brief.md) | Monday morning personalized briefs — one per leader policy file — with Give Kudos, Give Feedback, and Get Involved sections tailored to each leader's domain, goals, and management style | [Alex Chen](https://github.com/chrizbo/agentics-beyond-code/discussions/201) and [Priya Sharma](https://github.com/chrizbo/agentics-beyond-code/discussions/202) - week of 2026-06-01 |
 
+### 📅 Calendar Intelligence
+
+> Fixture-first: all three workflows run against `google-calendar-fixtures/` without any credentials configured. Connect a shared team Google Calendar to go live — see [`google-calendar-fixtures/README.md`](google-calendar-fixtures/README.md).
+
+| Workflow | Description | Example output |
+|----------|-------------|----------------|
+| [📅 Calendar Load Report](.github/workflows/calendar-load-report.md) | Friday fragmentation score and deep work block analysis per contributor — flags high meeting dispersion and days with zero 90-minute uninterrupted blocks | [Calendar Load — week of 2026-06-09](https://github.com/chrizbo/agentics-beyond-code/discussions/291) |
+| [🧭 Calendar Strategy Audit](.github/workflows/calendar-strategy-audit.md) | Wednesday audit classifying team calendar time against `docs/strategy.md` priorities — surfaces which stated priorities have zero calendar coverage and whether async GitHub activity fills those gaps | [Calendar Audit — week of 2026-06-09](https://github.com/chrizbo/agentics-beyond-code/discussions/293) |
+| [🔁 Daily Standup Prep](.github/workflows/daily-standup-prep.md) | Monday/Wednesday standup prep — posts a discussion with high-priority topics, blockers, and facilitation prompts, enriched with Mode A/B meeting briefs from today's calendar events | [Standup prep - 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/discussions/195) |
+
 ### 🔧 Operations
 
 | Workflow | Description | Example output |
@@ -68,7 +78,6 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 | [🩺 Workflow Health](.github/workflows/workflow-health.md) | Friday morning health report across all agentic workflows — success rates, failure patterns, cost estimates, cross-workflow interaction analysis (conflict detection, cascade chains, resource contention), and efficiency recommendations | [Health report - 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/discussions/197) |
 | [🧾 Commitment Reconciler](.github/workflows/commitment-reconciler.md) | Monday commitment audit that compares transcripts and issue comments against GitHub artifacts, surfacing promised-but-untracked work, stale commitments, artifact drift, and completion mismatches | [Commitment reconciliation - week of 2026-06-01](https://github.com/chrizbo/agentics-beyond-code/issues/198) |
 | [🔄 Process Analyzer](.github/workflows/process-analyzer.md) | Weekly retro + process analysis — posts a team retrospective discussion, detects process drift in transcripts vs `docs/how-we-work.md`, identifies automation opportunities and gaps, and creates update PRs | [Retro - week of 2026-05-25](https://github.com/chrizbo/agentics-beyond-code/discussions/199) |
-| [🔁 Daily Standup Prep](.github/workflows/daily-standup-prep.md) | Monday/Wednesday standup preparation: posts a discussion with high-priority topics, blockers, and facilitation prompts to help run effective daily syncs | [Standup prep - 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/discussions/195) |
 | [🐒 Chaos Monkey](.github/workflows/chaos-monkey.md) | On-demand organizational chaos injection — scores the team's stasis across 6 signals (decision diversity, participation entropy, process staleness, topic homogeneity, launch concentration), and when things are too comfortable, posts a discussion with 2–3 calibrated disruption prescriptions. Stays silent when the team is healthy. | [Stasis Report — 2026-06-08](https://github.com/chrizbo/agentics-beyond-code/discussions/275) |
 
 ### 🧪 Demo / Sample Data

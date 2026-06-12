@@ -1,5 +1,5 @@
-# gh-aw-metadata: {"schema_version":"v4","frontmatter_hash":"833ae719d9b8ee948dcf601e187b0c15812c657ea0666bb1ade9f06495e67125","body_hash":"2ac7950308ebf2b8610cd338f165acb49f445f6c72178e0d5a68af4e1561935f","compiler_version":"v0.79.6","strict":true,"agent_id":"codex","agent_model":"gpt-5-codex","engine_versions":{"codex":"0.137.0"}}
-# gh-aw-manifest: {"version":1,"secrets":["CODEX_API_KEY","GH_AW_CI_TRIGGER_TOKEN","GH_AW_GITHUB_MCP_SERVER_TOKEN","GH_AW_GITHUB_TOKEN","GITHUB_TOKEN","GOOGLE_OAUTH_CLIENT_ID","GOOGLE_OAUTH_CLIENT_SECRET","GOOGLE_OAUTH_REFRESH_TOKEN","OPENAI_API_KEY"],"actions":[{"repo":"actions/checkout","sha":"df4cb1c069e1874edd31b4311f1884172cec0e10","version":"v6.0.3"},{"repo":"actions/download-artifact","sha":"3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c","version":"v8.0.1"},{"repo":"actions/github-script","sha":"3a2844b7e9c422d3c10d287c895573f7108da1b3","version":"v9.0.0"},{"repo":"actions/setup-node","sha":"48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e","version":"v6.4.0"},{"repo":"actions/upload-artifact","sha":"043fb46d1a93c77aae656e7c1c64a875d1fc6a0a","version":"v7.0.1"},{"repo":"github/gh-aw-actions/setup","sha":"5c2fe865bb4dc46e1450f6ee0d0541d759aea73a","version":"v0.79.6"}],"containers":[{"image":"ghcr.io/github/gh-aw-firewall/agent:0.27.2","digest":"sha256:f88e5b17b6b7a600117bc121114d6ce2155c88c983c0c939c5df884f730fa1d6","pinned_image":"ghcr.io/github/gh-aw-firewall/agent:0.27.2@sha256:f88e5b17b6b7a600117bc121114d6ce2155c88c983c0c939c5df884f730fa1d6"},{"image":"ghcr.io/github/gh-aw-firewall/api-proxy:0.27.2","digest":"sha256:ee39841d980878ebbb87592903b06d31a1af500c71525c9616f7e8e2a27041a4","pinned_image":"ghcr.io/github/gh-aw-firewall/api-proxy:0.27.2@sha256:ee39841d980878ebbb87592903b06d31a1af500c71525c9616f7e8e2a27041a4"},{"image":"ghcr.io/github/gh-aw-firewall/cli-proxy:0.27.2","digest":"sha256:02f3ec08f32dc26c5427920c6a2e2f3036238fce44802f2f11ef49ed8621b5d0","pinned_image":"ghcr.io/github/gh-aw-firewall/cli-proxy:0.27.2@sha256:02f3ec08f32dc26c5427920c6a2e2f3036238fce44802f2f11ef49ed8621b5d0"},{"image":"ghcr.io/github/gh-aw-firewall/squid:0.27.2","digest":"sha256:2e3a717e5f19a654cd9a2263beb52012b56bcb68562ec5ae2e42f9d156b49591","pinned_image":"ghcr.io/github/gh-aw-firewall/squid:0.27.2@sha256:2e3a717e5f19a654cd9a2263beb52012b56bcb68562ec5ae2e42f9d156b49591"},{"image":"ghcr.io/github/gh-aw-mcpg:v0.3.25","digest":"sha256:c10331ad17668ef89f38f5e356678788a40b0cd5fef96e8f92e1d9c1de47cbaa","pinned_image":"ghcr.io/github/gh-aw-mcpg:v0.3.25@sha256:c10331ad17668ef89f38f5e356678788a40b0cd5fef96e8f92e1d9c1de47cbaa"},{"image":"ghcr.io/github/github-mcp-server:v1.1.2","digest":"sha256:30197479d8036c7811892bc07e06f9a05c9ef3cdd79bc59f256d50647f95788c","pinned_image":"ghcr.io/github/github-mcp-server:v1.1.2@sha256:30197479d8036c7811892bc07e06f9a05c9ef3cdd79bc59f256d50647f95788c"}]}
+# gh-aw-metadata: {"schema_version":"v4","frontmatter_hash":"a6f3e718b395c48c5880ea25e5be3986575ae57c5c19e5bfcc183224736bf8de","body_hash":"9e6e9b601cae28131020a1e35a0cbe59b73c82bdf7a19bbda5c601f5c2435f50","compiler_version":"v0.79.6","strict":true,"agent_id":"codex","agent_model":"gpt-5-codex","engine_versions":{"codex":"0.137.0"}}
+# gh-aw-manifest: {"version":1,"secrets":["CODEX_API_KEY","GH_AW_GITHUB_MCP_SERVER_TOKEN","GH_AW_GITHUB_TOKEN","GITHUB_TOKEN","GOOGLE_OAUTH_CLIENT_ID","GOOGLE_OAUTH_CLIENT_SECRET","GOOGLE_OAUTH_REFRESH_TOKEN","OPENAI_API_KEY"],"actions":[{"repo":"actions/checkout","sha":"df4cb1c069e1874edd31b4311f1884172cec0e10","version":"v6.0.3"},{"repo":"actions/download-artifact","sha":"3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c","version":"v8.0.1"},{"repo":"actions/github-script","sha":"3a2844b7e9c422d3c10d287c895573f7108da1b3","version":"v9.0.0"},{"repo":"actions/setup-node","sha":"48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e","version":"v6.4.0"},{"repo":"actions/upload-artifact","sha":"043fb46d1a93c77aae656e7c1c64a875d1fc6a0a","version":"v7.0.1"},{"repo":"github/gh-aw-actions/setup","sha":"5c2fe865bb4dc46e1450f6ee0d0541d759aea73a","version":"v0.79.6"}],"containers":[{"image":"ghcr.io/github/gh-aw-firewall/agent:0.27.2","digest":"sha256:f88e5b17b6b7a600117bc121114d6ce2155c88c983c0c939c5df884f730fa1d6","pinned_image":"ghcr.io/github/gh-aw-firewall/agent:0.27.2@sha256:f88e5b17b6b7a600117bc121114d6ce2155c88c983c0c939c5df884f730fa1d6"},{"image":"ghcr.io/github/gh-aw-firewall/api-proxy:0.27.2","digest":"sha256:ee39841d980878ebbb87592903b06d31a1af500c71525c9616f7e8e2a27041a4","pinned_image":"ghcr.io/github/gh-aw-firewall/api-proxy:0.27.2@sha256:ee39841d980878ebbb87592903b06d31a1af500c71525c9616f7e8e2a27041a4"},{"image":"ghcr.io/github/gh-aw-firewall/cli-proxy:0.27.2","digest":"sha256:02f3ec08f32dc26c5427920c6a2e2f3036238fce44802f2f11ef49ed8621b5d0","pinned_image":"ghcr.io/github/gh-aw-firewall/cli-proxy:0.27.2@sha256:02f3ec08f32dc26c5427920c6a2e2f3036238fce44802f2f11ef49ed8621b5d0"},{"image":"ghcr.io/github/gh-aw-firewall/squid:0.27.2","digest":"sha256:2e3a717e5f19a654cd9a2263beb52012b56bcb68562ec5ae2e42f9d156b49591","pinned_image":"ghcr.io/github/gh-aw-firewall/squid:0.27.2@sha256:2e3a717e5f19a654cd9a2263beb52012b56bcb68562ec5ae2e42f9d156b49591"},{"image":"ghcr.io/github/gh-aw-mcpg:v0.3.25","digest":"sha256:c10331ad17668ef89f38f5e356678788a40b0cd5fef96e8f92e1d9c1de47cbaa","pinned_image":"ghcr.io/github/gh-aw-mcpg:v0.3.25@sha256:c10331ad17668ef89f38f5e356678788a40b0cd5fef96e8f92e1d9c1de47cbaa"},{"image":"ghcr.io/github/github-mcp-server:v1.1.2","digest":"sha256:30197479d8036c7811892bc07e06f9a05c9ef3cdd79bc59f256d50647f95788c","pinned_image":"ghcr.io/github/github-mcp-server:v1.1.2@sha256:30197479d8036c7811892bc07e06f9a05c9ef3cdd79bc59f256d50647f95788c"}]}
 #    ___                   _   _      
 #   / _ \                 | | (_)     
 #  | |_| | __ _  ___ _ __ | |_ _  ___ 
@@ -29,7 +29,6 @@
 #
 # Secrets used:
 #   - CODEX_API_KEY
-#   - GH_AW_CI_TRIGGER_TOKEN
 #   - GH_AW_GITHUB_MCP_SERVER_TOKEN
 #   - GH_AW_GITHUB_TOKEN
 #   - GITHUB_TOKEN
@@ -217,23 +216,20 @@ jobs:
         run: |
           bash "${RUNNER_TEMP}/gh-aw/actions/create_prompt_first.sh"
           {
-          cat << 'GH_AW_PROMPT_4ecde0264535d272_EOF'
+          cat << 'GH_AW_PROMPT_b40f72fcadfcc037_EOF'
           <system>
-          GH_AW_PROMPT_4ecde0264535d272_EOF
+          GH_AW_PROMPT_b40f72fcadfcc037_EOF
           cat "${RUNNER_TEMP}/gh-aw/prompts/xpia.md"
           cat "${RUNNER_TEMP}/gh-aw/prompts/temp_folder_prompt.md"
           cat "${RUNNER_TEMP}/gh-aw/prompts/markdown.md"
           cat "${RUNNER_TEMP}/gh-aw/prompts/safe_outputs_prompt.md"
-          cat << 'GH_AW_PROMPT_4ecde0264535d272_EOF'
+          cat << 'GH_AW_PROMPT_b40f72fcadfcc037_EOF'
           <safe-output-tools>
-          Tools: create_discussion, create_pull_request, missing_tool, missing_data, noop
-          GH_AW_PROMPT_4ecde0264535d272_EOF
-          cat "${RUNNER_TEMP}/gh-aw/prompts/safe_outputs_create_pull_request.md"
-          cat << 'GH_AW_PROMPT_4ecde0264535d272_EOF'
+          Tools: create_discussion, missing_tool, missing_data, noop
           </safe-output-tools>
-          GH_AW_PROMPT_4ecde0264535d272_EOF
+          GH_AW_PROMPT_b40f72fcadfcc037_EOF
           cat "${RUNNER_TEMP}/gh-aw/prompts/mcp_cli_tools_prompt.md"
-          cat << 'GH_AW_PROMPT_4ecde0264535d272_EOF'
+          cat << 'GH_AW_PROMPT_b40f72fcadfcc037_EOF'
           <github-context>
           The following GitHub context information is available for this workflow:
           {{#if github.actor}}
@@ -262,12 +258,12 @@ jobs:
           {{/if}}
           </github-context>
           
-          GH_AW_PROMPT_4ecde0264535d272_EOF
+          GH_AW_PROMPT_b40f72fcadfcc037_EOF
           cat "${RUNNER_TEMP}/gh-aw/prompts/cli_proxy_with_safeoutputs_prompt.md"
-          cat << 'GH_AW_PROMPT_4ecde0264535d272_EOF'
+          cat << 'GH_AW_PROMPT_b40f72fcadfcc037_EOF'
           </system>
           {{#runtime-import .github/workflows/calendar-strategy-audit.md}}
-          GH_AW_PROMPT_4ecde0264535d272_EOF
+          GH_AW_PROMPT_b40f72fcadfcc037_EOF
           } > "$GH_AW_PROMPT"
       - name: Interpolate variables and render templates
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
@@ -494,16 +490,15 @@ jobs:
           mkdir -p "${RUNNER_TEMP}/gh-aw/safeoutputs"
           mkdir -p /tmp/gh-aw/safeoutputs
           mkdir -p /tmp/gh-aw/mcp-logs/safeoutputs
-          cat > "${RUNNER_TEMP}/gh-aw/safeoutputs/config.json" << 'GH_AW_SAFE_OUTPUTS_CONFIG_bc6cd04727c5c9c6_EOF'
-          {"create_discussion":{"category":"reports","expires":168,"fallback_to_issue":true,"max":1,"title_prefix":"[Calendar Audit] "},"create_pull_request":{"allowed_files":["docs/calendar-audit.md"],"draft":false,"expires":336,"labels":["ai:calendar-audit"],"max":1,"max_patch_files":100,"max_patch_size":1024,"protect_top_level_dot_folders":true,"protected_files":["package.json","bun.lockb","bunfig.toml","deno.json","deno.jsonc","deno.lock","global.json","NuGet.Config","Directory.Packages.props","mix.exs","mix.lock","go.mod","go.sum","stack.yaml","stack.yaml.lock","pom.xml","build.gradle","build.gradle.kts","settings.gradle","settings.gradle.kts","gradle.properties","package-lock.json","yarn.lock","pnpm-lock.yaml","npm-shrinkwrap.json","requirements.txt","Pipfile","Pipfile.lock","pyproject.toml","setup.py","setup.cfg","Gemfile","Gemfile.lock","uv.lock","CODEOWNERS","DESIGN.md","README.md","CONTRIBUTING.md","CHANGELOG.md","SECURITY.md","CODE_OF_CONDUCT.md","AGENTS.md","CLAUDE.md","GEMINI.md"],"protected_files_policy":"allowed","title_prefix":"[Calendar Audit] "},"create_report_incomplete_issue":{},"mentions":{"enabled":false},"missing_data":{},"missing_tool":{},"noop":{"max":1,"report-as-issue":"true"},"report_incomplete":{}}
-          GH_AW_SAFE_OUTPUTS_CONFIG_bc6cd04727c5c9c6_EOF
+          cat > "${RUNNER_TEMP}/gh-aw/safeoutputs/config.json" << 'GH_AW_SAFE_OUTPUTS_CONFIG_c6e2a53d494e1c8f_EOF'
+          {"create_discussion":{"category":"reports","expires":168,"fallback_to_issue":true,"max":1,"title_prefix":"[Calendar Audit] "},"create_report_incomplete_issue":{},"mentions":{"enabled":false},"missing_data":{},"missing_tool":{},"noop":{"max":1,"report-as-issue":"true"},"report_incomplete":{}}
+          GH_AW_SAFE_OUTPUTS_CONFIG_c6e2a53d494e1c8f_EOF
       - name: Generate Safe Outputs Tools
         env:
           GH_AW_TOOLS_META_JSON: |
             {
               "description_suffixes": {
-                "create_discussion": " CONSTRAINTS: Maximum 1 discussion(s) can be created. Title will be prefixed with \"[Calendar Audit] \". Discussions will be created in category \"reports\".",
-                "create_pull_request": " CONSTRAINTS: Maximum 1 pull request(s) can be created. Title will be prefixed with \"[Calendar Audit] \". Labels [\"ai:calendar-audit\"] will be automatically added."
+                "create_discussion": " CONSTRAINTS: Maximum 1 discussion(s) can be created. Title will be prefixed with \"[Calendar Audit] \". Discussions will be created in category \"reports\"."
               },
               "repo_params": {},
               "dynamic_tools": []
@@ -524,47 +519,6 @@ jobs:
                     "type": "string",
                     "sanitize": true,
                     "maxLength": 128
-                  },
-                  "repo": {
-                    "type": "string",
-                    "maxLength": 256
-                  },
-                  "title": {
-                    "required": true,
-                    "type": "string",
-                    "sanitize": true,
-                    "maxLength": 128
-                  }
-                }
-              },
-              "create_pull_request": {
-                "defaultMax": 1,
-                "fields": {
-                  "base": {
-                    "type": "string",
-                    "sanitize": true,
-                    "maxLength": 128
-                  },
-                  "body": {
-                    "required": true,
-                    "type": "string",
-                    "sanitize": true,
-                    "maxLength": 65000
-                  },
-                  "branch": {
-                    "required": true,
-                    "type": "string",
-                    "sanitize": true,
-                    "maxLength": 256
-                  },
-                  "draft": {
-                    "type": "boolean"
-                  },
-                  "labels": {
-                    "type": "array",
-                    "itemType": "string",
-                    "itemSanitize": true,
-                    "itemMaxLength": 128
                   },
                   "repo": {
                     "type": "string",
@@ -1065,10 +1019,9 @@ jobs:
       needs.activation.outputs.stale_lock_file_failed == 'true' || needs.activation.outputs.daily_effective_workflow_exceeded == 'true')
     runs-on: ubuntu-slim
     permissions:
-      contents: write
+      contents: read
       discussions: write
       issues: write
-      pull-requests: write
     concurrency:
       group: "gh-aw-conclusion-calendar-strategy-audit"
       cancel-in-progress: false
@@ -1238,8 +1191,6 @@ jobs:
           GH_AW_ENGINE_API_HOSTS: "api.openai.com"
           GH_AW_CREATE_DISCUSSION_ERRORS: ${{ needs.safe_outputs.outputs.create_discussion_errors }}
           GH_AW_CREATE_DISCUSSION_ERROR_COUNT: ${{ needs.safe_outputs.outputs.create_discussion_error_count }}
-          GH_AW_CODE_PUSH_FAILURE_ERRORS: ${{ needs.safe_outputs.outputs.code_push_failure_errors }}
-          GH_AW_CODE_PUSH_FAILURE_COUNT: ${{ needs.safe_outputs.outputs.code_push_failure_count }}
           GH_AW_LOCKDOWN_CHECK_FAILED: ${{ needs.activation.outputs.lockdown_check_failed }}
           GH_AW_STALE_LOCK_FILE_FAILED: ${{ needs.activation.outputs.stale_lock_file_failed }}
           GH_AW_DAILY_EFFECTIVE_WORKFLOW_EXCEEDED: ${{ needs.activation.outputs.daily_effective_workflow_exceeded }}
@@ -1566,10 +1517,9 @@ jobs:
     if: (!cancelled()) && needs.agent.result != 'skipped' && needs.detection.result == 'success'
     runs-on: ubuntu-slim
     permissions:
-      contents: write
+      contents: read
       discussions: write
       issues: write
-      pull-requests: write
     timeout-minutes: 45
     env:
       GH_AW_AGENT_AIC: ${{ needs.agent.outputs.aic }}
@@ -1590,8 +1540,6 @@ jobs:
       code_push_failure_errors: ${{ steps.process_safe_outputs.outputs.code_push_failure_errors }}
       create_discussion_error_count: ${{ steps.process_safe_outputs.outputs.create_discussion_error_count }}
       create_discussion_errors: ${{ steps.process_safe_outputs.outputs.create_discussion_errors }}
-      created_pr_number: ${{ steps.process_safe_outputs.outputs.created_pr_number }}
-      created_pr_url: ${{ steps.process_safe_outputs.outputs.created_pr_url }}
       process_safe_outputs_processed_count: ${{ steps.process_safe_outputs.outputs.processed_count }}
       process_safe_outputs_temporary_id_map: ${{ steps.process_safe_outputs.outputs.temporary_id_map }}
     steps:
@@ -1623,52 +1571,6 @@ jobs:
           mkdir -p /tmp/gh-aw/
           find "/tmp/gh-aw/" -type f -print
           echo "GH_AW_AGENT_OUTPUT=/tmp/gh-aw/agent_output.json" >> "$GITHUB_OUTPUT"
-      - name: Download patch artifact
-        continue-on-error: true
-        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
-        with:
-          name: agent
-          path: /tmp/gh-aw/
-      - name: Extract base branch from agent output
-        id: extract-base-branch
-        if: steps.download-agent-output.outcome == 'success'
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
-        with:
-          script: |
-            const { setupGlobals } = require('${{ runner.temp }}/gh-aw/actions/setup_globals.cjs');
-            setupGlobals(core, github, context, exec, io, getOctokit);
-            const { main } = require('${{ runner.temp }}/gh-aw/actions/extract_base_branch_from_agent_output.cjs');
-            await main();
-      - name: Checkout repository (trusted default branch for comment events)
-        if: (!cancelled()) && needs.agent.result != 'skipped' && contains(needs.agent.outputs.output_types, 'create_pull_request') && (github.event_name == 'issue_comment' || github.event_name == 'pull_request_review_comment')
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
-        with:
-          ref: ${{ github.event.repository.default_branch }}
-          token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
-          persist-credentials: false
-          fetch-depth: 1
-      - name: Checkout repository
-        if: (!cancelled()) && needs.agent.result != 'skipped' && contains(needs.agent.outputs.output_types, 'create_pull_request') && github.event_name != 'issue_comment' && github.event_name != 'pull_request_review_comment'
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
-        with:
-          ref: ${{ steps.extract-base-branch.outputs.base-branch || github.base_ref || github.event.pull_request.base.ref || github.ref_name || github.event.repository.default_branch }}
-          token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
-          persist-credentials: false
-          fetch-depth: 1
-      - name: Configure Git credentials
-        if: (!cancelled()) && needs.agent.result != 'skipped' && contains(needs.agent.outputs.output_types, 'create_pull_request')
-        env:
-          REPO_NAME: ${{ github.repository }}
-          SERVER_URL: ${{ github.server_url }}
-          GIT_TOKEN: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
-        run: |
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
-          git config --global am.keepcr true
-          # Re-authenticate git with GitHub token
-          SERVER_URL_STRIPPED="${SERVER_URL#https://}"
-          git remote set-url origin "https://x-access-token:${GIT_TOKEN}@${SERVER_URL_STRIPPED}/${REPO_NAME}.git"
-          echo "Git configured with standard GitHub Actions identity"
       - name: Configure GH_HOST for enterprise compatibility
         id: ghes-host-config
         shell: bash
@@ -1688,8 +1590,7 @@ jobs:
           GH_AW_ALLOWED_DOMAINS: "*.githubusercontent.com,172.30.0.1,api.openai.com,api.snapcraft.io,archive.ubuntu.com,azure.archive.ubuntu.com,chatgpt.com,codeload.github.com,crl.geotrust.com,crl.globalsign.com,crl.identrust.com,crl.sectigo.com,crl.thawte.com,crl.usertrust.com,crl.verisign.com,crl3.digicert.com,crl4.digicert.com,crls.ssl.com,docs.github.com,github-cloud.githubusercontent.com,github-cloud.s3.amazonaws.com,github.blog,github.com,github.githubassets.com,host.docker.internal,json-schema.org,json.schemastore.org,keyserver.ubuntu.com,lfs.github.com,objects.githubusercontent.com,ocsp.digicert.com,ocsp.geotrust.com,ocsp.globalsign.com,ocsp.identrust.com,ocsp.sectigo.com,ocsp.ssl.com,ocsp.thawte.com,ocsp.usertrust.com,ocsp.verisign.com,openai.com,packagecloud.io,packages.cloud.google.com,packages.microsoft.com,patch-diff.githubusercontent.com,ppa.launchpad.net,raw.githubusercontent.com,s.symcb.com,s.symcd.com,security.ubuntu.com,ts-crl.ws.symantec.com,ts-ocsp.ws.symantec.com,www.googleapis.com"
           GITHUB_SERVER_URL: ${{ github.server_url }}
           GITHUB_API_URL: ${{ github.api_url }}
-          GH_AW_SAFE_OUTPUTS_HANDLER_CONFIG: "{\"create_discussion\":{\"category\":\"reports\",\"expires\":168,\"fallback_to_issue\":true,\"max\":1,\"title_prefix\":\"[Calendar Audit] \"},\"create_pull_request\":{\"allowed_files\":[\"docs/calendar-audit.md\"],\"draft\":false,\"expires\":336,\"labels\":[\"ai:calendar-audit\"],\"max\":1,\"max_patch_files\":100,\"max_patch_size\":1024,\"protect_top_level_dot_folders\":true,\"protected_files\":[\"package.json\",\"bun.lockb\",\"bunfig.toml\",\"deno.json\",\"deno.jsonc\",\"deno.lock\",\"global.json\",\"NuGet.Config\",\"Directory.Packages.props\",\"mix.exs\",\"mix.lock\",\"go.mod\",\"go.sum\",\"stack.yaml\",\"stack.yaml.lock\",\"pom.xml\",\"build.gradle\",\"build.gradle.kts\",\"settings.gradle\",\"settings.gradle.kts\",\"gradle.properties\",\"package-lock.json\",\"yarn.lock\",\"pnpm-lock.yaml\",\"npm-shrinkwrap.json\",\"requirements.txt\",\"Pipfile\",\"Pipfile.lock\",\"pyproject.toml\",\"setup.py\",\"setup.cfg\",\"Gemfile\",\"Gemfile.lock\",\"uv.lock\",\"CODEOWNERS\",\"DESIGN.md\",\"README.md\",\"CONTRIBUTING.md\",\"CHANGELOG.md\",\"SECURITY.md\",\"CODE_OF_CONDUCT.md\",\"AGENTS.md\",\"CLAUDE.md\",\"GEMINI.md\"],\"protected_files_policy\":\"allowed\",\"title_prefix\":\"[Calendar Audit] \"},\"create_report_incomplete_issue\":{},\"mentions\":{\"enabled\":false},\"missing_data\":{},\"missing_tool\":{},\"noop\":{\"max\":1,\"report-as-issue\":\"true\"},\"report_incomplete\":{}}"
-          GH_AW_CI_TRIGGER_TOKEN: ${{ secrets.GH_AW_CI_TRIGGER_TOKEN }}
+          GH_AW_SAFE_OUTPUTS_HANDLER_CONFIG: "{\"create_discussion\":{\"category\":\"reports\",\"expires\":168,\"fallback_to_issue\":true,\"max\":1,\"title_prefix\":\"[Calendar Audit] \"},\"create_report_incomplete_issue\":{},\"mentions\":{\"enabled\":false},\"missing_data\":{},\"missing_tool\":{},\"noop\":{\"max\":1,\"report-as-issue\":\"true\"},\"report_incomplete\":{}}"
         with:
           github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
