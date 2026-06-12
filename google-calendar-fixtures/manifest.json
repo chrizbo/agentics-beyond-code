@@ -1,0 +1,30 @@
+{
+  "fixture_version": 1,
+  "scope": {
+    "type": "calendar",
+    "description": "Team Google Calendar — sample events for fixture-first testing",
+    "note": "All calendar IDs, event IDs, and email addresses are synthetic. Replace with real values when enabling live Calendar API access."
+  },
+  "team": {
+    "calendar_id": "team@example.com",
+    "members": [
+      { "email": "alex@example.com", "github": "alex-dev", "display_name": "Alex Chen" },
+      { "email": "priya@example.com", "github": "priya-pm", "display_name": "Priya Nair" },
+      { "email": "sam@example.com", "github": "samuelw", "display_name": "Sam Wilson" },
+      { "email": "jordan@example.com", "github": "jordanm", "display_name": "Jordan Mills" },
+      { "email": "casey@example.com", "github": "casey-eng", "display_name": "Casey Rivera" }
+    ]
+  },
+  "fixtures": [
+    {
+      "key": "today-sample",
+      "description": "A realistic team day — mix of Google Meet events, a sparse 1:1, and an external Zoom call",
+      "path": "today-sample.json"
+    },
+    {
+      "key": "week-sample",
+      "description": "Full team week — varied fragmentation patterns across 5 contributors, useful for load report and strategy audit testing",
+      "path": "week-sample.json"
+    }
+  ]
+}

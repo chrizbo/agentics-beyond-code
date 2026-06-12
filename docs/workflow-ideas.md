@@ -25,6 +25,16 @@ implementation as GitHub Agentic Workflows.
 | 47 | Tradeoff Translator | Converts a proposed plan into the team's stated "even over" tradeoff language, highlighting where the plan reinforces, bends, or contradicts documented strategy. |
 | 48 | Ambiguous Data Decision Helper | When metrics or evidence conflict, prepares a decision brief that separates facts, assumptions, confidence levels, missing data, and judgment calls so leaders can make the hard call explicitly. |
 
+### Calendar Intelligence
+
+| # | Workflow | Description |
+|---|---------|-------------|
+| 67 | ~~Calendar Load Report~~ | ~~Weekly fragmentation score and deep work block analysis per contributor. Flags high meeting dispersion and days with zero 90-minute uninterrupted blocks.~~ _Implemented as **[Calendar Load Report](../.github/workflows/calendar-load-report.md)** — runs Friday alongside weekly-status; fixture-first, reads from `google-calendar-fixtures/week-sample.json` until `GOOGLE_OAUTH_REFRESH_TOKEN` is configured._ |
+| 68 | ~~Calendar Strategy Audit~~ | ~~Classifies team calendar time against docs/strategy.md priorities, flags zero-coverage priorities, and surfaces drift between stated strategy and where time actually goes.~~ _Implemented as **[Calendar Strategy Audit](../.github/workflows/calendar-strategy-audit.md)** — runs Wednesday alongside strategy-alignment; updates `docs/calendar-audit.md` each week._ |
+| 69 | ~~Meeting Prep Enrichment~~ | ~~Per-meeting briefs generated from GitHub artifacts and injected into Google Calendar event descriptions before meetings. Mode A uses explicit agenda; Mode B infers purpose from attendee activity when events are sparse.~~ _Implemented as an additional step in **[Daily Standup Prep](../.github/workflows/daily-standup-prep.md)** — generates briefs and writes them to Google Meet event descriptions (dry-run by default; set `CALENDAR_WRITE_ENABLED=true` to enable writes)._ |
+| 70 | Post-Meeting Capture | After meetings, extract decisions, action items, and learnings from transcripts and route them to the right GitHub artifacts. Based on Meeting Bridges research (Wang et al. 2024) — five use cases: archive, task reminders, onboarding absent members, group sensemaking, and launching follow-on collaboration. |
+| 71 | Passive Goal Reflection | Ambient AI signal during meetings showing whether discussion is on-track with the stated meeting goal. Based on arxiv 2025 paper — passive (non-intrusive) beats active (interruptive) for maintaining flow while improving focus. |
+
 ### Operations
 
 | # | Workflow | Description |

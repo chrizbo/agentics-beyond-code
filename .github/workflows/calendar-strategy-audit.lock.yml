@@ -1,5 +1,5 @@
-# gh-aw-metadata: {"schema_version":"v4","frontmatter_hash":"7f0dec200f4775c48b13d533cd0ae7e3907ece554661c6049d04e24d4aa4dc72","body_hash":"83bfc87f0672c4fc37ce174a3ceee7aad6e83bc59febcb1683b6b1c097dbd9bf","compiler_version":"v0.79.6","strict":true,"agent_id":"codex","agent_model":"gpt-4o","engine_versions":{"codex":"0.137.0"}}
-# gh-aw-manifest: {"version":1,"secrets":["AW_TOKEN","CODEX_API_KEY","GH_AW_GITHUB_MCP_SERVER_TOKEN","GH_AW_GITHUB_TOKEN","GITHUB_TOKEN","GOOGLE_OAUTH_CLIENT_ID","GOOGLE_OAUTH_CLIENT_SECRET","GOOGLE_OAUTH_REFRESH_TOKEN","OPENAI_API_KEY"],"actions":[{"repo":"actions/checkout","sha":"df4cb1c069e1874edd31b4311f1884172cec0e10","version":"v6.0.3"},{"repo":"actions/download-artifact","sha":"3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c","version":"v8.0.1"},{"repo":"actions/github-script","sha":"3a2844b7e9c422d3c10d287c895573f7108da1b3","version":"v9.0.0"},{"repo":"actions/setup-node","sha":"48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e","version":"v6.4.0"},{"repo":"actions/upload-artifact","sha":"043fb46d1a93c77aae656e7c1c64a875d1fc6a0a","version":"v7.0.1"},{"repo":"github/gh-aw-actions/setup","sha":"5c2fe865bb4dc46e1450f6ee0d0541d759aea73a","version":"v0.79.6"}],"containers":[{"image":"ghcr.io/github/gh-aw-firewall/agent:0.27.2","digest":"sha256:f88e5b17b6b7a600117bc121114d6ce2155c88c983c0c939c5df884f730fa1d6","pinned_image":"ghcr.io/github/gh-aw-firewall/agent:0.27.2@sha256:f88e5b17b6b7a600117bc121114d6ce2155c88c983c0c939c5df884f730fa1d6"},{"image":"ghcr.io/github/gh-aw-firewall/api-proxy:0.27.2","digest":"sha256:ee39841d980878ebbb87592903b06d31a1af500c71525c9616f7e8e2a27041a4","pinned_image":"ghcr.io/github/gh-aw-firewall/api-proxy:0.27.2@sha256:ee39841d980878ebbb87592903b06d31a1af500c71525c9616f7e8e2a27041a4"},{"image":"ghcr.io/github/gh-aw-firewall/cli-proxy:0.27.2","digest":"sha256:02f3ec08f32dc26c5427920c6a2e2f3036238fce44802f2f11ef49ed8621b5d0","pinned_image":"ghcr.io/github/gh-aw-firewall/cli-proxy:0.27.2@sha256:02f3ec08f32dc26c5427920c6a2e2f3036238fce44802f2f11ef49ed8621b5d0"},{"image":"ghcr.io/github/gh-aw-firewall/squid:0.27.2","digest":"sha256:2e3a717e5f19a654cd9a2263beb52012b56bcb68562ec5ae2e42f9d156b49591","pinned_image":"ghcr.io/github/gh-aw-firewall/squid:0.27.2@sha256:2e3a717e5f19a654cd9a2263beb52012b56bcb68562ec5ae2e42f9d156b49591"},{"image":"ghcr.io/github/gh-aw-mcpg:v0.3.25","digest":"sha256:c10331ad17668ef89f38f5e356678788a40b0cd5fef96e8f92e1d9c1de47cbaa","pinned_image":"ghcr.io/github/gh-aw-mcpg:v0.3.25@sha256:c10331ad17668ef89f38f5e356678788a40b0cd5fef96e8f92e1d9c1de47cbaa"},{"image":"ghcr.io/github/github-mcp-server:v1.1.2","digest":"sha256:30197479d8036c7811892bc07e06f9a05c9ef3cdd79bc59f256d50647f95788c","pinned_image":"ghcr.io/github/github-mcp-server:v1.1.2@sha256:30197479d8036c7811892bc07e06f9a05c9ef3cdd79bc59f256d50647f95788c"}]}
+# gh-aw-metadata: {"schema_version":"v4","frontmatter_hash":"833ae719d9b8ee948dcf601e187b0c15812c657ea0666bb1ade9f06495e67125","body_hash":"2ac7950308ebf2b8610cd338f165acb49f445f6c72178e0d5a68af4e1561935f","compiler_version":"v0.79.6","strict":true,"agent_id":"codex","agent_model":"gpt-5-codex","engine_versions":{"codex":"0.137.0"}}
+# gh-aw-manifest: {"version":1,"secrets":["CODEX_API_KEY","GH_AW_CI_TRIGGER_TOKEN","GH_AW_GITHUB_MCP_SERVER_TOKEN","GH_AW_GITHUB_TOKEN","GITHUB_TOKEN","GOOGLE_OAUTH_CLIENT_ID","GOOGLE_OAUTH_CLIENT_SECRET","GOOGLE_OAUTH_REFRESH_TOKEN","OPENAI_API_KEY"],"actions":[{"repo":"actions/checkout","sha":"df4cb1c069e1874edd31b4311f1884172cec0e10","version":"v6.0.3"},{"repo":"actions/download-artifact","sha":"3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c","version":"v8.0.1"},{"repo":"actions/github-script","sha":"3a2844b7e9c422d3c10d287c895573f7108da1b3","version":"v9.0.0"},{"repo":"actions/setup-node","sha":"48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e","version":"v6.4.0"},{"repo":"actions/upload-artifact","sha":"043fb46d1a93c77aae656e7c1c64a875d1fc6a0a","version":"v7.0.1"},{"repo":"github/gh-aw-actions/setup","sha":"5c2fe865bb4dc46e1450f6ee0d0541d759aea73a","version":"v0.79.6"}],"containers":[{"image":"ghcr.io/github/gh-aw-firewall/agent:0.27.2","digest":"sha256:f88e5b17b6b7a600117bc121114d6ce2155c88c983c0c939c5df884f730fa1d6","pinned_image":"ghcr.io/github/gh-aw-firewall/agent:0.27.2@sha256:f88e5b17b6b7a600117bc121114d6ce2155c88c983c0c939c5df884f730fa1d6"},{"image":"ghcr.io/github/gh-aw-firewall/api-proxy:0.27.2","digest":"sha256:ee39841d980878ebbb87592903b06d31a1af500c71525c9616f7e8e2a27041a4","pinned_image":"ghcr.io/github/gh-aw-firewall/api-proxy:0.27.2@sha256:ee39841d980878ebbb87592903b06d31a1af500c71525c9616f7e8e2a27041a4"},{"image":"ghcr.io/github/gh-aw-firewall/cli-proxy:0.27.2","digest":"sha256:02f3ec08f32dc26c5427920c6a2e2f3036238fce44802f2f11ef49ed8621b5d0","pinned_image":"ghcr.io/github/gh-aw-firewall/cli-proxy:0.27.2@sha256:02f3ec08f32dc26c5427920c6a2e2f3036238fce44802f2f11ef49ed8621b5d0"},{"image":"ghcr.io/github/gh-aw-firewall/squid:0.27.2","digest":"sha256:2e3a717e5f19a654cd9a2263beb52012b56bcb68562ec5ae2e42f9d156b49591","pinned_image":"ghcr.io/github/gh-aw-firewall/squid:0.27.2@sha256:2e3a717e5f19a654cd9a2263beb52012b56bcb68562ec5ae2e42f9d156b49591"},{"image":"ghcr.io/github/gh-aw-mcpg:v0.3.25","digest":"sha256:c10331ad17668ef89f38f5e356678788a40b0cd5fef96e8f92e1d9c1de47cbaa","pinned_image":"ghcr.io/github/gh-aw-mcpg:v0.3.25@sha256:c10331ad17668ef89f38f5e356678788a40b0cd5fef96e8f92e1d9c1de47cbaa"},{"image":"ghcr.io/github/github-mcp-server:v1.1.2","digest":"sha256:30197479d8036c7811892bc07e06f9a05c9ef3cdd79bc59f256d50647f95788c","pinned_image":"ghcr.io/github/github-mcp-server:v1.1.2@sha256:30197479d8036c7811892bc07e06f9a05c9ef3cdd79bc59f256d50647f95788c"}]}
 #    ___                   _   _      
 #   / _ \                 | | (_)     
 #  | |_| | __ _  ___ _ __ | |_ _  ___ 
@@ -22,17 +22,14 @@
 #
 # For more information: https://github.github.com/gh-aw/introduction/overview/
 #
-# Daily standup prep report for the team. Posts a discussion with high-priority
-# topics and facilitation prompts so the standup covers delivery confidence,
-# blockers, decisions, quality risks, and coordination needs.
-#
-# Resolved workflow manifest:
-#   Imports:
-#     - shared/freshness-check.md
+# Weekly calendar-strategy audit. Reads the team calendar and classifies meeting
+# time against the strategic tradeoffs in docs/strategy.md. Flags priorities with
+# zero calendar coverage and surfaces drift between stated strategy and where time
+# actually goes. Posts a GitHub Discussion and updates docs/calendar-audit.md.
 #
 # Secrets used:
-#   - AW_TOKEN
 #   - CODEX_API_KEY
+#   - GH_AW_CI_TRIGGER_TOKEN
 #   - GH_AW_GITHUB_MCP_SERVER_TOKEN
 #   - GH_AW_GITHUB_TOKEN
 #   - GITHUB_TOKEN
@@ -57,7 +54,7 @@
 #   - ghcr.io/github/gh-aw-mcpg:v0.3.25@sha256:c10331ad17668ef89f38f5e356678788a40b0cd5fef96e8f92e1d9c1de47cbaa
 #   - ghcr.io/github/github-mcp-server:v1.1.2@sha256:30197479d8036c7811892bc07e06f9a05c9ef3cdd79bc59f256d50647f95788c
 
-name: "Daily Standup Prep"
+name: "Calendar Strategy Audit"
 on:
   workflow_dispatch:
     inputs:
@@ -72,7 +69,7 @@ permissions: {}
 concurrency:
   group: "gh-aw-${{ github.workflow }}"
 
-run-name: "Daily Standup Prep"
+run-name: "Calendar Strategy Audit"
 
 jobs:
   activation:
@@ -105,8 +102,8 @@ jobs:
           job-name: ${{ github.job }}
           safe-output-artifact-client: ${{ env.GH_AW_MAX_DAILY_AI_CREDITS != '' }}
         env:
-          GH_AW_SETUP_WORKFLOW_NAME: "Daily Standup Prep"
-          GH_AW_CURRENT_WORKFLOW_REF: ${{ github.repository }}/.github/workflows/daily-standup-prep.lock.yml@${{ github.ref }}
+          GH_AW_SETUP_WORKFLOW_NAME: "Calendar Strategy Audit"
+          GH_AW_CURRENT_WORKFLOW_REF: ${{ github.repository }}/.github/workflows/calendar-strategy-audit.lock.yml@${{ github.ref }}
           GH_AW_INFO_VERSION: "0.137.0"
           GH_AW_INFO_AWF_VERSION: "v0.27.2"
           GH_AW_INFO_ENGINE_ID: "codex"
@@ -115,11 +112,11 @@ jobs:
         env:
           GH_AW_INFO_ENGINE_ID: "codex"
           GH_AW_INFO_ENGINE_NAME: "Codex"
-          GH_AW_INFO_MODEL: "gpt-4o"
+          GH_AW_INFO_MODEL: "gpt-5-codex"
           GH_AW_INFO_VERSION: "0.137.0"
           GH_AW_INFO_AGENT_VERSION: "0.137.0"
           GH_AW_INFO_CLI_VERSION: "v0.79.6"
-          GH_AW_INFO_WORKFLOW_NAME: "Daily Standup Prep"
+          GH_AW_INFO_WORKFLOW_NAME: "Calendar Strategy Audit"
           GH_AW_INFO_EXPERIMENTAL: "false"
           GH_AW_INFO_SUPPORTS_TOOLS_ALLOWLIST: "true"
           GH_AW_INFO_STAGED: "false"
@@ -141,8 +138,8 @@ jobs:
         if: ${{ env.GH_AW_MAX_DAILY_AI_CREDITS != '' }}
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
-          GH_AW_WORKFLOW_NAME: "Daily Standup Prep"
-          GH_AW_WORKFLOW_ID: "daily-standup-prep"
+          GH_AW_WORKFLOW_NAME: "Calendar Strategy Audit"
+          GH_AW_WORKFLOW_ID: "calendar-strategy-audit"
           GH_AW_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           GH_AW_WORKFLOW_DISPATCH_AW_CONTEXT: ${{ github.event.inputs.aw_context || '' }}
           GH_AW_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -186,7 +183,7 @@ jobs:
         id: check-lock-file
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
-          GH_AW_WORKFLOW_FILE: "daily-standup-prep.lock.yml"
+          GH_AW_WORKFLOW_FILE: "calendar-strategy-audit.lock.yml"
           GH_AW_CONTEXT_WORKFLOW_REF: "${{ github.workflow_ref }}"
         with:
           script: |
@@ -220,20 +217,23 @@ jobs:
         run: |
           bash "${RUNNER_TEMP}/gh-aw/actions/create_prompt_first.sh"
           {
-          cat << 'GH_AW_PROMPT_f077e5100165303b_EOF'
+          cat << 'GH_AW_PROMPT_4ecde0264535d272_EOF'
           <system>
-          GH_AW_PROMPT_f077e5100165303b_EOF
+          GH_AW_PROMPT_4ecde0264535d272_EOF
           cat "${RUNNER_TEMP}/gh-aw/prompts/xpia.md"
           cat "${RUNNER_TEMP}/gh-aw/prompts/temp_folder_prompt.md"
           cat "${RUNNER_TEMP}/gh-aw/prompts/markdown.md"
           cat "${RUNNER_TEMP}/gh-aw/prompts/safe_outputs_prompt.md"
-          cat << 'GH_AW_PROMPT_f077e5100165303b_EOF'
+          cat << 'GH_AW_PROMPT_4ecde0264535d272_EOF'
           <safe-output-tools>
-          Tools: create_discussion, missing_tool, missing_data, noop
+          Tools: create_discussion, create_pull_request, missing_tool, missing_data, noop
+          GH_AW_PROMPT_4ecde0264535d272_EOF
+          cat "${RUNNER_TEMP}/gh-aw/prompts/safe_outputs_create_pull_request.md"
+          cat << 'GH_AW_PROMPT_4ecde0264535d272_EOF'
           </safe-output-tools>
-          GH_AW_PROMPT_f077e5100165303b_EOF
+          GH_AW_PROMPT_4ecde0264535d272_EOF
           cat "${RUNNER_TEMP}/gh-aw/prompts/mcp_cli_tools_prompt.md"
-          cat << 'GH_AW_PROMPT_f077e5100165303b_EOF'
+          cat << 'GH_AW_PROMPT_4ecde0264535d272_EOF'
           <github-context>
           The following GitHub context information is available for this workflow:
           {{#if github.actor}}
@@ -262,13 +262,12 @@ jobs:
           {{/if}}
           </github-context>
           
-          GH_AW_PROMPT_f077e5100165303b_EOF
+          GH_AW_PROMPT_4ecde0264535d272_EOF
           cat "${RUNNER_TEMP}/gh-aw/prompts/cli_proxy_with_safeoutputs_prompt.md"
-          cat << 'GH_AW_PROMPT_f077e5100165303b_EOF'
+          cat << 'GH_AW_PROMPT_4ecde0264535d272_EOF'
           </system>
-          {{#runtime-import .github/workflows/shared/freshness-check.md}}
-          {{#runtime-import .github/workflows/daily-standup-prep.md}}
-          GH_AW_PROMPT_f077e5100165303b_EOF
+          {{#runtime-import .github/workflows/calendar-strategy-audit.md}}
+          GH_AW_PROMPT_4ecde0264535d272_EOF
           } > "$GH_AW_PROMPT"
       - name: Interpolate variables and render templates
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
@@ -353,7 +352,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      discussions: read
       issues: read
       pull-requests: read
     env:
@@ -362,7 +360,7 @@ jobs:
       GH_AW_ASSETS_BRANCH: ""
       GH_AW_ASSETS_MAX_SIZE_KB: 0
       GH_AW_MCP_LOG_DIR: /tmp/gh-aw/mcp-logs/safeoutputs
-      GH_AW_WORKFLOW_ID_SANITIZED: dailystandupprep
+      GH_AW_WORKFLOW_ID_SANITIZED: calendarstrategyaudit
     outputs:
       agentic_engine_timeout: ${{ steps.detect-agent-errors.outputs.agentic_engine_timeout || 'false' }}
       ai_credits_rate_limit_error: ${{ steps.parse-mcp-gateway.outputs.ai_credits_rate_limit_error || 'false' }}
@@ -391,8 +389,8 @@ jobs:
           trace-id: ${{ needs.activation.outputs.setup-trace-id }}
           parent-span-id: ${{ needs.activation.outputs.setup-parent-span-id || needs.activation.outputs.setup-span-id }}
         env:
-          GH_AW_SETUP_WORKFLOW_NAME: "Daily Standup Prep"
-          GH_AW_CURRENT_WORKFLOW_REF: ${{ github.repository }}/.github/workflows/daily-standup-prep.lock.yml@${{ github.ref }}
+          GH_AW_SETUP_WORKFLOW_NAME: "Calendar Strategy Audit"
+          GH_AW_CURRENT_WORKFLOW_REF: ${{ github.repository }}/.github/workflows/calendar-strategy-audit.lock.yml@${{ github.ref }}
           GH_AW_INFO_VERSION: "0.137.0"
           GH_AW_INFO_AWF_VERSION: "v0.27.2"
           GH_AW_INFO_ENGINE_ID: "codex"
@@ -415,26 +413,16 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
       - env:
-          LAUNCH_DATA_TOKEN: ${{ secrets.AW_TOKEN }}
-          LAUNCH_PROJECT_NUMBER: ${{ vars.LAUNCH_PROJECT_NUMBER || '1' }}
-          LAUNCH_PROJECT_OWNER: ${{ vars.LAUNCH_PROJECT_OWNER || github.repository_owner }}
-        id: launch-data
-        name: Fetch launch data
-        run: |
-          chmod +x .github/scripts/fetch-launch-data.sh
-          ./.github/scripts/fetch-launch-data.sh "$LAUNCH_PROJECT_OWNER" "$LAUNCH_PROJECT_NUMBER" launch-data.json
-          echo "path=launch-data.json" >> "$GITHUB_OUTPUT"
-      - env:
           GOOGLE_CALENDAR_ID: ${{ vars.GOOGLE_CALENDAR_ID || 'primary' }}
           GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
           GOOGLE_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
           GOOGLE_OAUTH_REFRESH_TOKEN: ${{ secrets.GOOGLE_OAUTH_REFRESH_TOKEN }}
         id: calendar-data
-        name: Fetch today's calendar events
+        name: Fetch week calendar data
         run: |-
-          chmod +x .github/scripts/fetch-calendar-data.sh .github/scripts/google-oauth-token.sh
-          ./.github/scripts/fetch-calendar-data.sh calendar-data-today.json
-          echo "path=calendar-data-today.json" >> "$GITHUB_OUTPUT"
+          chmod +x .github/scripts/fetch-calendar-week.sh .github/scripts/google-oauth-token.sh
+          ./.github/scripts/fetch-calendar-week.sh calendar-data-week.json
+          echo "path=calendar-data-week.json" >> "$GITHUB_OUTPUT"
 
       - name: Configure Git credentials
         env:
@@ -506,15 +494,16 @@ jobs:
           mkdir -p "${RUNNER_TEMP}/gh-aw/safeoutputs"
           mkdir -p /tmp/gh-aw/safeoutputs
           mkdir -p /tmp/gh-aw/mcp-logs/safeoutputs
-          cat > "${RUNNER_TEMP}/gh-aw/safeoutputs/config.json" << 'GH_AW_SAFE_OUTPUTS_CONFIG_ac8d1d95e3b42c5d_EOF'
-          {"create_discussion":{"category":"reports","expires":168,"fallback_to_issue":true,"max":1,"title_prefix":"[Standup Prep] "},"create_report_incomplete_issue":{},"mentions":{"enabled":false},"missing_data":{},"missing_tool":{},"noop":{"max":1,"report-as-issue":"true"},"report_incomplete":{}}
-          GH_AW_SAFE_OUTPUTS_CONFIG_ac8d1d95e3b42c5d_EOF
+          cat > "${RUNNER_TEMP}/gh-aw/safeoutputs/config.json" << 'GH_AW_SAFE_OUTPUTS_CONFIG_bc6cd04727c5c9c6_EOF'
+          {"create_discussion":{"category":"reports","expires":168,"fallback_to_issue":true,"max":1,"title_prefix":"[Calendar Audit] "},"create_pull_request":{"allowed_files":["docs/calendar-audit.md"],"draft":false,"expires":336,"labels":["ai:calendar-audit"],"max":1,"max_patch_files":100,"max_patch_size":1024,"protect_top_level_dot_folders":true,"protected_files":["package.json","bun.lockb","bunfig.toml","deno.json","deno.jsonc","deno.lock","global.json","NuGet.Config","Directory.Packages.props","mix.exs","mix.lock","go.mod","go.sum","stack.yaml","stack.yaml.lock","pom.xml","build.gradle","build.gradle.kts","settings.gradle","settings.gradle.kts","gradle.properties","package-lock.json","yarn.lock","pnpm-lock.yaml","npm-shrinkwrap.json","requirements.txt","Pipfile","Pipfile.lock","pyproject.toml","setup.py","setup.cfg","Gemfile","Gemfile.lock","uv.lock","CODEOWNERS","DESIGN.md","README.md","CONTRIBUTING.md","CHANGELOG.md","SECURITY.md","CODE_OF_CONDUCT.md","AGENTS.md","CLAUDE.md","GEMINI.md"],"protected_files_policy":"allowed","title_prefix":"[Calendar Audit] "},"create_report_incomplete_issue":{},"mentions":{"enabled":false},"missing_data":{},"missing_tool":{},"noop":{"max":1,"report-as-issue":"true"},"report_incomplete":{}}
+          GH_AW_SAFE_OUTPUTS_CONFIG_bc6cd04727c5c9c6_EOF
       - name: Generate Safe Outputs Tools
         env:
           GH_AW_TOOLS_META_JSON: |
             {
               "description_suffixes": {
-                "create_discussion": " CONSTRAINTS: Maximum 1 discussion(s) can be created. Title will be prefixed with \"[Standup Prep] \". Discussions will be created in category \"reports\"."
+                "create_discussion": " CONSTRAINTS: Maximum 1 discussion(s) can be created. Title will be prefixed with \"[Calendar Audit] \". Discussions will be created in category \"reports\".",
+                "create_pull_request": " CONSTRAINTS: Maximum 1 pull request(s) can be created. Title will be prefixed with \"[Calendar Audit] \". Labels [\"ai:calendar-audit\"] will be automatically added."
               },
               "repo_params": {},
               "dynamic_tools": []
@@ -535,6 +524,47 @@ jobs:
                     "type": "string",
                     "sanitize": true,
                     "maxLength": 128
+                  },
+                  "repo": {
+                    "type": "string",
+                    "maxLength": 256
+                  },
+                  "title": {
+                    "required": true,
+                    "type": "string",
+                    "sanitize": true,
+                    "maxLength": 128
+                  }
+                }
+              },
+              "create_pull_request": {
+                "defaultMax": 1,
+                "fields": {
+                  "base": {
+                    "type": "string",
+                    "sanitize": true,
+                    "maxLength": 128
+                  },
+                  "body": {
+                    "required": true,
+                    "type": "string",
+                    "sanitize": true,
+                    "maxLength": 65000
+                  },
+                  "branch": {
+                    "required": true,
+                    "type": "string",
+                    "sanitize": true,
+                    "maxLength": 256
+                  },
+                  "draft": {
+                    "type": "boolean"
+                  },
+                  "labels": {
+                    "type": "array",
+                    "itemType": "string",
+                    "itemSanitize": true,
+                    "itemMaxLength": 128
                   },
                   "repo": {
                     "type": "string",
@@ -843,7 +873,7 @@ jobs:
           CODEX_HOME: /tmp/gh-aw/mcp-config
           GH_AW_MAX_TURNS: ${{ vars.GH_AW_DEFAULT_MAX_TURNS || '' }}
           GH_AW_MCP_CONFIG: ${{ runner.temp }}/gh-aw/mcp-config/config.toml
-          GH_AW_MODEL_AGENT_CODEX: gpt-4o
+          GH_AW_MODEL_AGENT_CODEX: gpt-5-codex
           GH_AW_PHASE: agent
           GH_AW_PROMPT: /tmp/gh-aw/aw-prompts/prompt.txt
           GH_AW_SAFE_OUTPUTS: ${{ steps.set-runtime-paths.outputs.GH_AW_SAFE_OUTPUTS }}
@@ -899,8 +929,7 @@ jobs:
             const { main } = require('${{ runner.temp }}/gh-aw/actions/redact_secrets.cjs');
             await main();
         env:
-          GH_AW_SECRET_NAMES: 'AW_TOKEN,CODEX_API_KEY,GH_AW_GITHUB_MCP_SERVER_TOKEN,GH_AW_GITHUB_TOKEN,GITHUB_TOKEN,GOOGLE_OAUTH_CLIENT_ID,GOOGLE_OAUTH_CLIENT_SECRET,GOOGLE_OAUTH_REFRESH_TOKEN,OPENAI_API_KEY'
-          SECRET_AW_TOKEN: ${{ secrets.AW_TOKEN }}
+          GH_AW_SECRET_NAMES: 'CODEX_API_KEY,GH_AW_GITHUB_MCP_SERVER_TOKEN,GH_AW_GITHUB_TOKEN,GITHUB_TOKEN,GOOGLE_OAUTH_CLIENT_ID,GOOGLE_OAUTH_CLIENT_SECRET,GOOGLE_OAUTH_REFRESH_TOKEN,OPENAI_API_KEY'
           SECRET_CODEX_API_KEY: ${{ secrets.CODEX_API_KEY }}
           SECRET_GH_AW_GITHUB_MCP_SERVER_TOKEN: ${{ secrets.GH_AW_GITHUB_MCP_SERVER_TOKEN }}
           SECRET_GH_AW_GITHUB_TOKEN: ${{ secrets.GH_AW_GITHUB_TOKEN }}
@@ -1036,11 +1065,12 @@ jobs:
       needs.activation.outputs.stale_lock_file_failed == 'true' || needs.activation.outputs.daily_effective_workflow_exceeded == 'true')
     runs-on: ubuntu-slim
     permissions:
-      contents: read
+      contents: write
       discussions: write
       issues: write
+      pull-requests: write
     concurrency:
-      group: "gh-aw-conclusion-daily-standup-prep"
+      group: "gh-aw-conclusion-calendar-strategy-audit"
       cancel-in-progress: false
       queue: max
     outputs:
@@ -1058,8 +1088,8 @@ jobs:
           trace-id: ${{ needs.activation.outputs.setup-trace-id }}
           parent-span-id: ${{ needs.activation.outputs.setup-parent-span-id || needs.activation.outputs.setup-span-id }}
         env:
-          GH_AW_SETUP_WORKFLOW_NAME: "Daily Standup Prep"
-          GH_AW_CURRENT_WORKFLOW_REF: ${{ github.repository }}/.github/workflows/daily-standup-prep.lock.yml@${{ github.ref }}
+          GH_AW_SETUP_WORKFLOW_NAME: "Calendar Strategy Audit"
+          GH_AW_CURRENT_WORKFLOW_REF: ${{ github.repository }}/.github/workflows/calendar-strategy-audit.lock.yml@${{ github.ref }}
           GH_AW_INFO_VERSION: "0.137.0"
           GH_AW_INFO_AWF_VERSION: "v0.27.2"
           GH_AW_INFO_ENGINE_ID: "codex"
@@ -1117,15 +1147,15 @@ jobs:
         env:
           GH_AW_AGENT_OUTPUT: ${{ steps.setup-agent-output-env.outputs.GH_AW_AGENT_OUTPUT }}
           GH_AW_NOOP_MAX: "1"
-          GH_AW_WORKFLOW_NAME: "Daily Standup Prep"
-          GH_AW_WORKFLOW_SOURCE_URL: "${{ github.server_url }}/${{ github.repository }}/blob/${{ github.ref_name }}/.github/workflows/daily-standup-prep.md"
+          GH_AW_WORKFLOW_NAME: "Calendar Strategy Audit"
+          GH_AW_WORKFLOW_SOURCE_URL: "${{ github.server_url }}/${{ github.repository }}/blob/${{ github.ref_name }}/.github/workflows/calendar-strategy-audit.md"
           GH_AW_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           GH_AW_AGENT_CONCLUSION: ${{ needs.agent.result }}
           GH_AW_NOOP_REPORT_AS_ISSUE: "true"
           GH_AW_AIC: ${{ needs.agent.outputs.aic }}
           GH_AW_THREAT_DETECTION_AIC: ${{ needs.detection.outputs.aic }}
           GH_AW_AMBIENT_CONTEXT: ${{ needs.agent.outputs.ambient_context }}
-          GH_AW_WORKFLOW_ID: "daily-standup-prep"
+          GH_AW_WORKFLOW_ID: "calendar-strategy-audit"
         with:
           github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
@@ -1138,8 +1168,8 @@ jobs:
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           GH_AW_AGENT_OUTPUT: ${{ steps.setup-agent-output-env.outputs.GH_AW_AGENT_OUTPUT }}
-          GH_AW_WORKFLOW_NAME: "Daily Standup Prep"
-          GH_AW_WORKFLOW_SOURCE_URL: "${{ github.server_url }}/${{ github.repository }}/blob/${{ github.ref_name }}/.github/workflows/daily-standup-prep.md"
+          GH_AW_WORKFLOW_NAME: "Calendar Strategy Audit"
+          GH_AW_WORKFLOW_SOURCE_URL: "${{ github.server_url }}/${{ github.repository }}/blob/${{ github.ref_name }}/.github/workflows/calendar-strategy-audit.md"
           GH_AW_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           GH_AW_DETECTION_CONCLUSION: ${{ needs.detection.outputs.detection_conclusion }}
           GH_AW_DETECTION_REASON: ${{ needs.detection.outputs.detection_reason }}
@@ -1156,8 +1186,8 @@ jobs:
         env:
           GH_AW_AGENT_OUTPUT: ${{ steps.setup-agent-output-env.outputs.GH_AW_AGENT_OUTPUT }}
           GH_AW_MISSING_TOOL_CREATE_ISSUE: "true"
-          GH_AW_WORKFLOW_NAME: "Daily Standup Prep"
-          GH_AW_WORKFLOW_SOURCE_URL: "${{ github.server_url }}/${{ github.repository }}/blob/${{ github.ref_name }}/.github/workflows/daily-standup-prep.md"
+          GH_AW_WORKFLOW_NAME: "Calendar Strategy Audit"
+          GH_AW_WORKFLOW_SOURCE_URL: "${{ github.server_url }}/${{ github.repository }}/blob/${{ github.ref_name }}/.github/workflows/calendar-strategy-audit.md"
         with:
           github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
@@ -1171,8 +1201,8 @@ jobs:
         env:
           GH_AW_AGENT_OUTPUT: ${{ steps.setup-agent-output-env.outputs.GH_AW_AGENT_OUTPUT }}
           GH_AW_REPORT_INCOMPLETE_CREATE_ISSUE: "true"
-          GH_AW_WORKFLOW_NAME: "Daily Standup Prep"
-          GH_AW_WORKFLOW_SOURCE_URL: "${{ github.server_url }}/${{ github.repository }}/blob/${{ github.ref_name }}/.github/workflows/daily-standup-prep.md"
+          GH_AW_WORKFLOW_NAME: "Calendar Strategy Audit"
+          GH_AW_WORKFLOW_SOURCE_URL: "${{ github.server_url }}/${{ github.repository }}/blob/${{ github.ref_name }}/.github/workflows/calendar-strategy-audit.md"
         with:
           github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
           script: |
@@ -1186,11 +1216,11 @@ jobs:
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           GH_AW_AGENT_OUTPUT: ${{ steps.setup-agent-output-env.outputs.GH_AW_AGENT_OUTPUT }}
-          GH_AW_WORKFLOW_NAME: "Daily Standup Prep"
-          GH_AW_WORKFLOW_SOURCE_URL: "${{ github.server_url }}/${{ github.repository }}/blob/${{ github.ref_name }}/.github/workflows/daily-standup-prep.md"
+          GH_AW_WORKFLOW_NAME: "Calendar Strategy Audit"
+          GH_AW_WORKFLOW_SOURCE_URL: "${{ github.server_url }}/${{ github.repository }}/blob/${{ github.ref_name }}/.github/workflows/calendar-strategy-audit.md"
           GH_AW_RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
           GH_AW_AGENT_CONCLUSION: ${{ needs.agent.result }}
-          GH_AW_WORKFLOW_ID: "daily-standup-prep"
+          GH_AW_WORKFLOW_ID: "calendar-strategy-audit"
           GH_AW_ACTION_FAILURE_ISSUE_EXPIRES_HOURS: "168"
           GH_AW_ENGINE_ID: "codex"
           GH_AW_SECRET_VERIFICATION_RESULT: ${{ needs.activation.outputs.secret_verification_result }}
@@ -1208,6 +1238,8 @@ jobs:
           GH_AW_ENGINE_API_HOSTS: "api.openai.com"
           GH_AW_CREATE_DISCUSSION_ERRORS: ${{ needs.safe_outputs.outputs.create_discussion_errors }}
           GH_AW_CREATE_DISCUSSION_ERROR_COUNT: ${{ needs.safe_outputs.outputs.create_discussion_error_count }}
+          GH_AW_CODE_PUSH_FAILURE_ERRORS: ${{ needs.safe_outputs.outputs.code_push_failure_errors }}
+          GH_AW_CODE_PUSH_FAILURE_COUNT: ${{ needs.safe_outputs.outputs.code_push_failure_count }}
           GH_AW_LOCKDOWN_CHECK_FAILED: ${{ needs.activation.outputs.lockdown_check_failed }}
           GH_AW_STALE_LOCK_FILE_FAILED: ${{ needs.activation.outputs.stale_lock_file_failed }}
           GH_AW_DAILY_EFFECTIVE_WORKFLOW_EXCEEDED: ${{ needs.activation.outputs.daily_effective_workflow_exceeded }}
@@ -1250,8 +1282,8 @@ jobs:
           trace-id: ${{ needs.activation.outputs.setup-trace-id }}
           parent-span-id: ${{ needs.activation.outputs.setup-parent-span-id || needs.activation.outputs.setup-span-id }}
         env:
-          GH_AW_SETUP_WORKFLOW_NAME: "Daily Standup Prep"
-          GH_AW_CURRENT_WORKFLOW_REF: ${{ github.repository }}/.github/workflows/daily-standup-prep.lock.yml@${{ github.ref }}
+          GH_AW_SETUP_WORKFLOW_NAME: "Calendar Strategy Audit"
+          GH_AW_CURRENT_WORKFLOW_REF: ${{ github.repository }}/.github/workflows/calendar-strategy-audit.lock.yml@${{ github.ref }}
           GH_AW_INFO_VERSION: "0.137.0"
           GH_AW_INFO_AWF_VERSION: "v0.27.2"
           GH_AW_INFO_ENGINE_ID: "codex"
@@ -1321,8 +1353,8 @@ jobs:
         if: always() && steps.detection_guard.outputs.run_detection == 'true'
         uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
-          WORKFLOW_NAME: "Daily Standup Prep"
-          WORKFLOW_DESCRIPTION: "Daily standup prep report for the team. Posts a discussion with high-priority\ntopics and facilitation prompts so the standup covers delivery confidence,\nblockers, decisions, quality risks, and coordination needs."
+          WORKFLOW_NAME: "Calendar Strategy Audit"
+          WORKFLOW_DESCRIPTION: "Weekly calendar-strategy audit. Reads the team calendar and classifies meeting\ntime against the strategic tradeoffs in docs/strategy.md. Flags priorities with\nzero calendar coverage and surfaces drift between stated strategy and where time\nactually goes. Posts a GitHub Discussion and updates docs/calendar-audit.md."
           HAS_PATCH: ${{ needs.agent.outputs.has_patch }}
         with:
           script: |
@@ -1460,7 +1492,7 @@ jobs:
           CODEX_HOME: /tmp/gh-aw/mcp-config
           GH_AW_MAX_TURNS: ${{ vars.GH_AW_DEFAULT_MAX_TURNS || '' }}
           GH_AW_MCP_CONFIG: ${{ runner.temp }}/gh-aw/mcp-config/config.toml
-          GH_AW_MODEL_DETECTION_CODEX: gpt-4o
+          GH_AW_MODEL_DETECTION_CODEX: gpt-5-codex
           GH_AW_PHASE: detection
           GH_AW_PROMPT: /tmp/gh-aw/aw-prompts/prompt.txt
           GH_AW_VERSION: v0.79.6
@@ -1534,29 +1566,32 @@ jobs:
     if: (!cancelled()) && needs.agent.result != 'skipped' && needs.detection.result == 'success'
     runs-on: ubuntu-slim
     permissions:
-      contents: read
+      contents: write
       discussions: write
       issues: write
+      pull-requests: write
     timeout-minutes: 45
     env:
       GH_AW_AGENT_AIC: ${{ needs.agent.outputs.aic }}
       GH_AW_AIC: ${{ needs.agent.outputs.aic }}
       GH_AW_AMBIENT_CONTEXT: ${{ needs.agent.outputs.ambient_context }}
-      GH_AW_CALLER_WORKFLOW_ID: "${{ github.repository }}/daily-standup-prep"
+      GH_AW_CALLER_WORKFLOW_ID: "${{ github.repository }}/calendar-strategy-audit"
       GH_AW_DETECTION_CONCLUSION: ${{ needs.detection.outputs.detection_conclusion }}
       GH_AW_DETECTION_REASON: ${{ needs.detection.outputs.detection_reason }}
       GH_AW_EFFECTIVE_TOKENS: ${{ needs.agent.outputs.effective_tokens }}
       GH_AW_ENGINE_ID: "codex"
-      GH_AW_ENGINE_MODEL: "gpt-4o"
+      GH_AW_ENGINE_MODEL: "gpt-5-codex"
       GH_AW_THREAT_DETECTION_AIC: ${{ needs.detection.outputs.aic }}
-      GH_AW_WORKFLOW_ID: "daily-standup-prep"
-      GH_AW_WORKFLOW_NAME: "Daily Standup Prep"
-      GH_AW_WORKFLOW_SOURCE_URL: "${{ github.server_url }}/${{ github.repository }}/blob/${{ github.ref_name }}/.github/workflows/daily-standup-prep.md"
+      GH_AW_WORKFLOW_ID: "calendar-strategy-audit"
+      GH_AW_WORKFLOW_NAME: "Calendar Strategy Audit"
+      GH_AW_WORKFLOW_SOURCE_URL: "${{ github.server_url }}/${{ github.repository }}/blob/${{ github.ref_name }}/.github/workflows/calendar-strategy-audit.md"
     outputs:
       code_push_failure_count: ${{ steps.process_safe_outputs.outputs.code_push_failure_count }}
       code_push_failure_errors: ${{ steps.process_safe_outputs.outputs.code_push_failure_errors }}
       create_discussion_error_count: ${{ steps.process_safe_outputs.outputs.create_discussion_error_count }}
       create_discussion_errors: ${{ steps.process_safe_outputs.outputs.create_discussion_errors }}
+      created_pr_number: ${{ steps.process_safe_outputs.outputs.created_pr_number }}
+      created_pr_url: ${{ steps.process_safe_outputs.outputs.created_pr_url }}
       process_safe_outputs_processed_count: ${{ steps.process_safe_outputs.outputs.processed_count }}
       process_safe_outputs_temporary_id_map: ${{ steps.process_safe_outputs.outputs.temporary_id_map }}
     steps:
@@ -1569,8 +1604,8 @@ jobs:
           trace-id: ${{ needs.activation.outputs.setup-trace-id }}
           parent-span-id: ${{ needs.activation.outputs.setup-parent-span-id || needs.activation.outputs.setup-span-id }}
         env:
-          GH_AW_SETUP_WORKFLOW_NAME: "Daily Standup Prep"
-          GH_AW_CURRENT_WORKFLOW_REF: ${{ github.repository }}/.github/workflows/daily-standup-prep.lock.yml@${{ github.ref }}
+          GH_AW_SETUP_WORKFLOW_NAME: "Calendar Strategy Audit"
+          GH_AW_CURRENT_WORKFLOW_REF: ${{ github.repository }}/.github/workflows/calendar-strategy-audit.lock.yml@${{ github.ref }}
           GH_AW_INFO_VERSION: "0.137.0"
           GH_AW_INFO_AWF_VERSION: "v0.27.2"
           GH_AW_INFO_ENGINE_ID: "codex"
@@ -1588,6 +1623,52 @@ jobs:
           mkdir -p /tmp/gh-aw/
           find "/tmp/gh-aw/" -type f -print
           echo "GH_AW_AGENT_OUTPUT=/tmp/gh-aw/agent_output.json" >> "$GITHUB_OUTPUT"
+      - name: Download patch artifact
+        continue-on-error: true
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: agent
+          path: /tmp/gh-aw/
+      - name: Extract base branch from agent output
+        id: extract-base-branch
+        if: steps.download-agent-output.outcome == 'success'
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        with:
+          script: |
+            const { setupGlobals } = require('${{ runner.temp }}/gh-aw/actions/setup_globals.cjs');
+            setupGlobals(core, github, context, exec, io, getOctokit);
+            const { main } = require('${{ runner.temp }}/gh-aw/actions/extract_base_branch_from_agent_output.cjs');
+            await main();
+      - name: Checkout repository (trusted default branch for comment events)
+        if: (!cancelled()) && needs.agent.result != 'skipped' && contains(needs.agent.outputs.output_types, 'create_pull_request') && (github.event_name == 'issue_comment' || github.event_name == 'pull_request_review_comment')
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+          token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Checkout repository
+        if: (!cancelled()) && needs.agent.result != 'skipped' && contains(needs.agent.outputs.output_types, 'create_pull_request') && github.event_name != 'issue_comment' && github.event_name != 'pull_request_review_comment'
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          ref: ${{ steps.extract-base-branch.outputs.base-branch || github.base_ref || github.event.pull_request.base.ref || github.ref_name || github.event.repository.default_branch }}
+          token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Configure Git credentials
+        if: (!cancelled()) && needs.agent.result != 'skipped' && contains(needs.agent.outputs.output_types, 'create_pull_request')
+        env:
+          REPO_NAME: ${{ github.repository }}
+          SERVER_URL: ${{ github.server_url }}
+          GIT_TOKEN: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global am.keepcr true
+          # Re-authenticate git with GitHub token
+          SERVER_URL_STRIPPED="${SERVER_URL#https://}"
+          git remote set-url origin "https://x-access-token:${GIT_TOKEN}@${SERVER_URL_STRIPPED}/${REPO_NAME}.git"
+          echo "Git configured with standard GitHub Actions identity"
       - name: Configure GH_HOST for enterprise compatibility
         id: ghes-host-config
         shell: bash
@@ -1607,7 +1688,8 @@ jobs:
           GH_AW_ALLOWED_DOMAINS: "*.githubusercontent.com,172.30.0.1,api.openai.com,api.snapcraft.io,archive.ubuntu.com,azure.archive.ubuntu.com,chatgpt.com,codeload.github.com,crl.geotrust.com,crl.globalsign.com,crl.identrust.com,crl.sectigo.com,crl.thawte.com,crl.usertrust.com,crl.verisign.com,crl3.digicert.com,crl4.digicert.com,crls.ssl.com,docs.github.com,github-cloud.githubusercontent.com,github-cloud.s3.amazonaws.com,github.blog,github.com,github.githubassets.com,host.docker.internal,json-schema.org,json.schemastore.org,keyserver.ubuntu.com,lfs.github.com,objects.githubusercontent.com,ocsp.digicert.com,ocsp.geotrust.com,ocsp.globalsign.com,ocsp.identrust.com,ocsp.sectigo.com,ocsp.ssl.com,ocsp.thawte.com,ocsp.usertrust.com,ocsp.verisign.com,openai.com,packagecloud.io,packages.cloud.google.com,packages.microsoft.com,patch-diff.githubusercontent.com,ppa.launchpad.net,raw.githubusercontent.com,s.symcb.com,s.symcd.com,security.ubuntu.com,ts-crl.ws.symantec.com,ts-ocsp.ws.symantec.com,www.googleapis.com"
           GITHUB_SERVER_URL: ${{ github.server_url }}
           GITHUB_API_URL: ${{ github.api_url }}
-          GH_AW_SAFE_OUTPUTS_HANDLER_CONFIG: "{\"create_discussion\":{\"category\":\"reports\",\"expires\":168,\"fallback_to_issue\":true,\"max\":1,\"title_prefix\":\"[Standup Prep] \"},\"create_report_incomplete_issue\":{},\"mentions\":{\"enabled\":false},\"missing_data\":{},\"missing_tool\":{},\"noop\":{\"max\":1,\"report-as-issue\":\"true\"},\"report_incomplete\":{}}"
+          GH_AW_SAFE_OUTPUTS_HANDLER_CONFIG: "{\"create_discussion\":{\"category\":\"reports\",\"expires\":168,\"fallback_to_issue\":true,\"max\":1,\"title_prefix\":\"[Calendar Audit] \"},\"create_pull_request\":{\"allowed_files\":[\"docs/calendar-audit.md\"],\"draft\":false,\"expires\":336,\"labels\":[\"ai:calendar-audit\"],\"max\":1,\"max_patch_files\":100,\"max_patch_size\":1024,\"protect_top_level_dot_folders\":true,\"protected_files\":[\"package.json\",\"bun.lockb\",\"bunfig.toml\",\"deno.json\",\"deno.jsonc\",\"deno.lock\",\"global.json\",\"NuGet.Config\",\"Directory.Packages.props\",\"mix.exs\",\"mix.lock\",\"go.mod\",\"go.sum\",\"stack.yaml\",\"stack.yaml.lock\",\"pom.xml\",\"build.gradle\",\"build.gradle.kts\",\"settings.gradle\",\"settings.gradle.kts\",\"gradle.properties\",\"package-lock.json\",\"yarn.lock\",\"pnpm-lock.yaml\",\"npm-shrinkwrap.json\",\"requirements.txt\",\"Pipfile\",\"Pipfile.lock\",\"pyproject.toml\",\"setup.py\",\"setup.cfg\",\"Gemfile\",\"Gemfile.lock\",\"uv.lock\",\"CODEOWNERS\",\"DESIGN.md\",\"README.md\",\"CONTRIBUTING.md\",\"CHANGELOG.md\",\"SECURITY.md\",\"CODE_OF_CONDUCT.md\",\"AGENTS.md\",\"CLAUDE.md\",\"GEMINI.md\"],\"protected_files_policy\":\"allowed\",\"title_prefix\":\"[Calendar Audit] \"},\"create_report_incomplete_issue\":{},\"mentions\":{\"enabled\":false},\"missing_data\":{},\"missing_tool\":{},\"noop\":{\"max\":1,\"report-as-issue\":\"true\"},\"report_incomplete\":{}}"
+          GH_AW_CI_TRIGGER_TOKEN: ${{ secrets.GH_AW_CI_TRIGGER_TOKEN }}
         with:
           github-token: ${{ secrets.GH_AW_GITHUB_TOKEN || secrets.GITHUB_TOKEN }}
           script: |

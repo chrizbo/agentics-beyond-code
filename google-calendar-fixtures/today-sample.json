@@ -1,0 +1,84 @@
+{
+  "metadata": {
+    "fixture_date": "2026-06-12",
+    "generated_at": "2026-06-12T00:00:00Z",
+    "calendar_id": "team@example.com",
+    "is_fixture": true
+  },
+  "events": [
+    {
+      "id": "evt_standup_20260612",
+      "summary": "Engineering Standup",
+      "description": "Daily sync — use the standup prep discussion for agenda.",
+      "start": { "dateTime": "2026-06-12T09:00:00-07:00" },
+      "end": { "dateTime": "2026-06-12T09:15:00-07:00" },
+      "attendees": [
+        { "email": "alex@example.com", "displayName": "Alex Chen", "responseStatus": "accepted" },
+        { "email": "priya@example.com", "displayName": "Priya Nair", "responseStatus": "accepted" },
+        { "email": "sam@example.com", "displayName": "Sam Wilson", "responseStatus": "accepted" },
+        { "email": "jordan@example.com", "displayName": "Jordan Mills", "responseStatus": "accepted" },
+        { "email": "casey@example.com", "displayName": "Casey Rivera", "responseStatus": "accepted" }
+      ],
+      "conferenceData": {
+        "conferenceSolution": { "name": "Google Meet" },
+        "entryPoints": [{ "uri": "https://meet.google.com/abc-defg-hij", "entryPointType": "video" }]
+      },
+      "recurrence": ["RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR"],
+      "organizer": { "email": "priya@example.com" }
+    },
+    {
+      "id": "evt_1on1_alex_priya_20260612",
+      "summary": "1:1 Alex / Priya",
+      "description": "",
+      "start": { "dateTime": "2026-06-12T10:00:00-07:00" },
+      "end": { "dateTime": "2026-06-12T10:30:00-07:00" },
+      "attendees": [
+        { "email": "alex@example.com", "displayName": "Alex Chen", "responseStatus": "accepted" },
+        { "email": "priya@example.com", "displayName": "Priya Nair", "responseStatus": "accepted" }
+      ],
+      "conferenceData": {
+        "conferenceSolution": { "name": "Google Meet" },
+        "entryPoints": [{ "uri": "https://meet.google.com/klm-nopq-rst", "entryPointType": "video" }]
+      },
+      "recurrence": ["RRULE:FREQ=WEEKLY;BYDAY=FR"],
+      "organizer": { "email": "priya@example.com" },
+      "_fixture_note": "Sparse event — no agenda. Mode B inference should fire: map attendees to GitHub activity to infer likely topics."
+    },
+    {
+      "id": "evt_design_review_20260612",
+      "summary": "Audit Export — Design Review",
+      "description": "Review the updated IA for the audit log export feature before the eng sprint starts Monday.\n\nAgenda:\n1. Walk through the new filter UX (Alex presenting)\n2. Discuss the bulk export cap decision (see #234)\n3. Sign off on the API contract or flag blockers\n\nContext: Launch is targeting end of Q2. See launch plan doc for latest.",
+      "start": { "dateTime": "2026-06-12T14:00:00-07:00" },
+      "end": { "dateTime": "2026-06-12T15:00:00-07:00" },
+      "attendees": [
+        { "email": "alex@example.com", "displayName": "Alex Chen", "responseStatus": "accepted" },
+        { "email": "priya@example.com", "displayName": "Priya Nair", "responseStatus": "accepted" },
+        { "email": "jordan@example.com", "displayName": "Jordan Mills", "responseStatus": "accepted" },
+        { "email": "casey@example.com", "displayName": "Casey Rivera", "responseStatus": "accepted" }
+      ],
+      "conferenceData": {
+        "conferenceSolution": { "name": "Google Meet" },
+        "entryPoints": [{ "uri": "https://meet.google.com/uvw-xyz1-234", "entryPointType": "video" }]
+      },
+      "organizer": { "email": "priya@example.com" },
+      "_fixture_note": "Rich event — Mode A inference. Should surface decision #234, open PR or issue for audit export, and link to standup prep discussion."
+    },
+    {
+      "id": "evt_vendor_call_20260612",
+      "summary": "Observability vendor sync",
+      "description": "Quarterly check-in with DataStream. Agenda sent by vendor.",
+      "start": { "dateTime": "2026-06-12T16:00:00-07:00" },
+      "end": { "dateTime": "2026-06-12T16:30:00-07:00" },
+      "attendees": [
+        { "email": "sam@example.com", "displayName": "Sam Wilson", "responseStatus": "accepted" },
+        { "email": "vendor-contact@datastream.io", "displayName": "DataStream Contact", "responseStatus": "accepted" }
+      ],
+      "conferenceData": {
+        "conferenceSolution": { "name": "Zoom" },
+        "entryPoints": [{ "uri": "https://zoom.us/j/99988877766", "entryPointType": "video" }]
+      },
+      "organizer": { "email": "vendor-contact@datastream.io" },
+      "_fixture_note": "Zoom event with external attendee — platform detection should identify Zoom. Deferred for v1 (Google Meet only). Brief still generated but write step skipped."
+    }
+  ]
+}

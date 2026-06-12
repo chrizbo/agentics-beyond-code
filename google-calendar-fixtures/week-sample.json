@@ -1,0 +1,261 @@
+{
+  "metadata": {
+    "fixture_week": "2026-06-09",
+    "fixture_week_end": "2026-06-13",
+    "generated_at": "2026-06-12T00:00:00Z",
+    "calendar_id": "team@example.com",
+    "is_fixture": true
+  },
+  "events": [
+    {
+      "id": "evt_standup_mon",
+      "summary": "Engineering Standup",
+      "start": { "dateTime": "2026-06-09T09:00:00-07:00" },
+      "end": { "dateTime": "2026-06-09T09:15:00-07:00" },
+      "attendees": [
+        { "email": "alex@example.com" }, { "email": "priya@example.com" },
+        { "email": "sam@example.com" }, { "email": "jordan@example.com" },
+        { "email": "casey@example.com" }
+      ],
+      "conferenceData": { "conferenceSolution": { "name": "Google Meet" } },
+      "recurrence": ["RRULE:FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR"]
+    },
+    {
+      "id": "evt_planning_mon",
+      "summary": "Sprint Planning — Q2 Sprint 6",
+      "description": "Plan the sprint for the audit export launch. Engineering + PM required.",
+      "start": { "dateTime": "2026-06-09T10:00:00-07:00" },
+      "end": { "dateTime": "2026-06-09T12:00:00-07:00" },
+      "attendees": [
+        { "email": "alex@example.com" }, { "email": "priya@example.com" },
+        { "email": "sam@example.com" }, { "email": "casey@example.com" }
+      ],
+      "conferenceData": { "conferenceSolution": { "name": "Google Meet" } },
+      "_strategy_tags": ["ship to learn", "team-local decisions"],
+      "_fragmentation_note": "2-hour block — good deep work adjacency before standup"
+    },
+    {
+      "id": "evt_compliance_review_mon",
+      "summary": "Compliance Review — Audit Log Retention",
+      "description": "Monthly compliance review of audit log retention policies with security team.",
+      "start": { "dateTime": "2026-06-09T14:00:00-07:00" },
+      "end": { "dateTime": "2026-06-09T15:00:00-07:00" },
+      "attendees": [
+        { "email": "priya@example.com" }, { "email": "jordan@example.com" },
+        { "email": "security@example.com" }
+      ],
+      "conferenceData": { "conferenceSolution": { "name": "Google Meet" } },
+      "_strategy_tags": ["automate the routine"],
+      "_fragmentation_note": "Creates a gap from 12pm–2pm — 2 hours free for deep work on Monday afternoon"
+    },
+    {
+      "id": "evt_alex_onboarding_mon",
+      "summary": "New hire onboarding — infrastructure walkthrough",
+      "description": "",
+      "start": { "dateTime": "2026-06-09T15:30:00-07:00" },
+      "end": { "dateTime": "2026-06-09T16:00:00-07:00" },
+      "attendees": [
+        { "email": "alex@example.com" }, { "email": "newhire@example.com" }
+      ],
+      "conferenceData": { "conferenceSolution": { "name": "Google Meet" } },
+      "_fragmentation_note": "Alex: standup 9-9:15, planning 10-12, this at 3:30 — high dispersion, short gap before EOD"
+    },
+
+    {
+      "id": "evt_standup_tue",
+      "summary": "Engineering Standup",
+      "start": { "dateTime": "2026-06-10T09:00:00-07:00" },
+      "end": { "dateTime": "2026-06-10T09:15:00-07:00" },
+      "attendees": [
+        { "email": "alex@example.com" }, { "email": "priya@example.com" },
+        { "email": "sam@example.com" }, { "email": "jordan@example.com" },
+        { "email": "casey@example.com" }
+      ],
+      "conferenceData": { "conferenceSolution": { "name": "Google Meet" } }
+    },
+    {
+      "id": "evt_deep_work_tue",
+      "summary": "Focus time — API implementation [blocked]",
+      "description": "Protected focus block for Casey — audit export API work.",
+      "start": { "dateTime": "2026-06-10T09:30:00-07:00" },
+      "end": { "dateTime": "2026-06-10T12:00:00-07:00" },
+      "attendees": [{ "email": "casey@example.com" }],
+      "_is_focus_block": true,
+      "_fragmentation_note": "Casey: 2.5 hour uninterrupted block after standup — good"
+    },
+    {
+      "id": "evt_sam_crisis_tue",
+      "summary": "Incident post-mortem",
+      "description": "Post-mortem for the June 8 latency spike. 30min review of timeline and action items.",
+      "start": { "dateTime": "2026-06-10T11:00:00-07:00" },
+      "end": { "dateTime": "2026-06-10T11:30:00-07:00" },
+      "attendees": [
+        { "email": "sam@example.com" }, { "email": "jordan@example.com" }
+      ],
+      "conferenceData": { "conferenceSolution": { "name": "Google Meet" } },
+      "_strategy_tags": ["transparency by default"]
+    },
+    {
+      "id": "evt_1on1_priya_jordan_tue",
+      "summary": "1:1 Priya / Jordan",
+      "description": "",
+      "start": { "dateTime": "2026-06-10T13:00:00-07:00" },
+      "end": { "dateTime": "2026-06-10T13:30:00-07:00" },
+      "attendees": [
+        { "email": "priya@example.com" }, { "email": "jordan@example.com" }
+      ],
+      "conferenceData": { "conferenceSolution": { "name": "Google Meet" } }
+    },
+    {
+      "id": "evt_sam_vendor_tue",
+      "summary": "DataStream quarterly review",
+      "description": "Infrastructure vendor check-in.",
+      "start": { "dateTime": "2026-06-10T14:00:00-07:00" },
+      "end": { "dateTime": "2026-06-10T14:30:00-07:00" },
+      "attendees": [
+        { "email": "sam@example.com" }, { "email": "vendor@datastream.io" }
+      ],
+      "conferenceData": {
+        "conferenceSolution": { "name": "Zoom" },
+        "entryPoints": [{ "uri": "https://zoom.us/j/99988877766", "entryPointType": "video" }]
+      },
+      "_fragmentation_note": "Sam on Tuesday: standup 9-9:15, post-mortem 11-11:30, vendor 2-2:30 — HIGH DISPERSION, longest gap is 105 min (9:15-11:00), meets 90-min threshold but barely"
+    },
+
+    {
+      "id": "evt_standup_wed",
+      "summary": "Engineering Standup",
+      "start": { "dateTime": "2026-06-11T09:00:00-07:00" },
+      "end": { "dateTime": "2026-06-11T09:15:00-07:00" },
+      "attendees": [
+        { "email": "alex@example.com" }, { "email": "priya@example.com" },
+        { "email": "sam@example.com" }, { "email": "jordan@example.com" },
+        { "email": "casey@example.com" }
+      ],
+      "conferenceData": { "conferenceSolution": { "name": "Google Meet" } }
+    },
+    {
+      "id": "evt_strategy_alignment_wed",
+      "summary": "Strategy alignment working session",
+      "description": "Review Q2 strategic tradeoffs against what we shipped in Sprint 5. Inform the weekly strategy alignment workflow.",
+      "start": { "dateTime": "2026-06-11T10:00:00-07:00" },
+      "end": { "dateTime": "2026-06-11T11:00:00-07:00" },
+      "attendees": [
+        { "email": "priya@example.com" }, { "email": "jordan@example.com" }
+      ],
+      "conferenceData": { "conferenceSolution": { "name": "Google Meet" } },
+      "_strategy_tags": ["transparency by default", "team-local decisions"]
+    },
+    {
+      "id": "evt_jordan_fragmented_wed_1",
+      "summary": "Quick sync — metrics dashboard",
+      "description": "",
+      "start": { "dateTime": "2026-06-11T13:00:00-07:00" },
+      "end": { "dateTime": "2026-06-11T13:30:00-07:00" },
+      "attendees": [
+        { "email": "jordan@example.com" }, { "email": "casey@example.com" }
+      ],
+      "conferenceData": { "conferenceSolution": { "name": "Google Meet" } }
+    },
+    {
+      "id": "evt_jordan_fragmented_wed_2",
+      "summary": "Design feedback — mobile notifications",
+      "description": "",
+      "start": { "dateTime": "2026-06-11T14:30:00-07:00" },
+      "end": { "dateTime": "2026-06-11T15:00:00-07:00" },
+      "attendees": [
+        { "email": "jordan@example.com" }, { "email": "alex@example.com" }
+      ],
+      "conferenceData": { "conferenceSolution": { "name": "Google Meet" } }
+    },
+    {
+      "id": "evt_jordan_fragmented_wed_3",
+      "summary": "Cross-team sync — platform team",
+      "description": "",
+      "start": { "dateTime": "2026-06-11T16:00:00-07:00" },
+      "end": { "dateTime": "2026-06-11T16:30:00-07:00" },
+      "attendees": [
+        { "email": "jordan@example.com" }, { "email": "platform-team@example.com" }
+      ],
+      "conferenceData": { "conferenceSolution": { "name": "Google Meet" } },
+      "_fragmentation_note": "Jordan on Wednesday: standup 9-9:15, strategy 10-11, quick sync 1-1:30, design feedback 2:30-3, cross-team 4-4:30 — 5 meetings, HIGH DISPERSION, no 90-min block after 11am"
+    },
+
+    {
+      "id": "evt_standup_thu",
+      "summary": "Engineering Standup",
+      "start": { "dateTime": "2026-06-12T09:00:00-07:00" },
+      "end": { "dateTime": "2026-06-12T09:15:00-07:00" },
+      "attendees": [
+        { "email": "alex@example.com" }, { "email": "priya@example.com" },
+        { "email": "sam@example.com" }, { "email": "jordan@example.com" },
+        { "email": "casey@example.com" }
+      ],
+      "conferenceData": { "conferenceSolution": { "name": "Google Meet" } }
+    },
+    {
+      "id": "evt_1on1_alex_priya_thu",
+      "summary": "1:1 Alex / Priya",
+      "description": "",
+      "start": { "dateTime": "2026-06-12T10:00:00-07:00" },
+      "end": { "dateTime": "2026-06-12T10:30:00-07:00" },
+      "attendees": [
+        { "email": "alex@example.com" }, { "email": "priya@example.com" }
+      ],
+      "conferenceData": { "conferenceSolution": { "name": "Google Meet" } }
+    },
+    {
+      "id": "evt_design_review_thu",
+      "summary": "Audit Export — Design Review",
+      "description": "Review updated IA before eng sprint Monday. Agenda: filter UX, bulk export cap (#234), API contract.",
+      "start": { "dateTime": "2026-06-12T14:00:00-07:00" },
+      "end": { "dateTime": "2026-06-12T15:00:00-07:00" },
+      "attendees": [
+        { "email": "alex@example.com" }, { "email": "priya@example.com" },
+        { "email": "jordan@example.com" }, { "email": "casey@example.com" }
+      ],
+      "conferenceData": { "conferenceSolution": { "name": "Google Meet" } },
+      "_strategy_tags": ["ship to learn", "platform leverage"]
+    },
+
+    {
+      "id": "evt_standup_fri",
+      "summary": "Engineering Standup",
+      "start": { "dateTime": "2026-06-13T09:00:00-07:00" },
+      "end": { "dateTime": "2026-06-13T09:15:00-07:00" },
+      "attendees": [
+        { "email": "alex@example.com" }, { "email": "priya@example.com" },
+        { "email": "sam@example.com" }, { "email": "jordan@example.com" },
+        { "email": "casey@example.com" }
+      ],
+      "conferenceData": { "conferenceSolution": { "name": "Google Meet" } }
+    },
+    {
+      "id": "evt_weekly_status_fri",
+      "summary": "Weekly team status review",
+      "description": "Review weekly status report and discuss priorities for next week.",
+      "start": { "dateTime": "2026-06-13T10:00:00-07:00" },
+      "end": { "dateTime": "2026-06-13T10:30:00-07:00" },
+      "attendees": [
+        { "email": "priya@example.com" }, { "email": "sam@example.com" },
+        { "email": "jordan@example.com" }
+      ],
+      "conferenceData": { "conferenceSolution": { "name": "Google Meet" } }
+    },
+    {
+      "id": "evt_retro_fri",
+      "summary": "Sprint 5 Retrospective",
+      "description": "Full team retro — what went well, what to improve, specific action items for Sprint 6.",
+      "start": { "dateTime": "2026-06-13T14:00:00-07:00" },
+      "end": { "dateTime": "2026-06-13T15:00:00-07:00" },
+      "attendees": [
+        { "email": "alex@example.com" }, { "email": "priya@example.com" },
+        { "email": "sam@example.com" }, { "email": "jordan@example.com" },
+        { "email": "casey@example.com" }
+      ],
+      "conferenceData": { "conferenceSolution": { "name": "Google Meet" } },
+      "_strategy_tags": ["transparency by default"],
+      "_fragmentation_note": "Friday: standup 9-9:15, status 10-10:30, then retro 2-3 — 3.5 hour free block from 10:30-2pm for deep work"
+    }
+  ]
+}

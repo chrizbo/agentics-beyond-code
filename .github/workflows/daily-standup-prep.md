@@ -38,6 +38,18 @@ steps:
       ./.github/scripts/fetch-launch-data.sh "$LAUNCH_PROJECT_OWNER" "$LAUNCH_PROJECT_NUMBER" launch-data.json
       echo "path=launch-data.json" >> "$GITHUB_OUTPUT"
 
+  - name: Fetch today's calendar events
+    id: calendar-data
+    env:
+      GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
+      GOOGLE_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}
+      GOOGLE_OAUTH_REFRESH_TOKEN: ${{ secrets.GOOGLE_OAUTH_REFRESH_TOKEN }}
+      GOOGLE_CALENDAR_ID: ${{ vars.GOOGLE_CALENDAR_ID || 'primary' }}
+    run: |
+      chmod +x .github/scripts/fetch-calendar-data.sh .github/scripts/google-oauth-token.sh
+      ./.github/scripts/fetch-calendar-data.sh calendar-data-today.json
+      echo "path=calendar-data-today.json" >> "$GITHUB_OUTPUT"
+
 imports:
   - shared/freshness-check.md
 
@@ -65,10 +77,11 @@ a focused standup conversation.
 
 ## Pre-Fetched Data
 
-A deterministic pre-step has already fetched all project data and generated both:
+A deterministic pre-step has already fetched all project data and generated:
 
 - **`launch-data-summary.json`** — Read this first with `cat launch-data-summary.json`.
 - **`launch-data.json`** — Full data with issue bodies. Use `jq` to extract only what you need.
+- **`calendar-data-today.json`** — Today's calendar events with attendee lists and conference links.
 
 ## Focus Topics (must appear every day)
 
@@ -86,6 +99,7 @@ Use these exact five topics in the report and tie each topic to current work:
 
 ```bash
 cat launch-data-summary.json
+cat calendar-data-today.json
 ```
 
 Extract launches, epics, and tasks with current status:
@@ -94,7 +108,61 @@ Extract launches, epics, and tasks with current status:
 jq '[.items[] | select(.labels.nodes[]?.name == "launch") | {number, title, url, state, labels: [.labels.nodes[].name], body}]' launch-data.json
 ```
 
-### Step 2: Identify high-signal standup inputs
+### Step 2: Generate meeting briefs for today's calendar events
+
+Read `calendar-data-today.json` and produce a brief for each event with team members as attendees. Skip events with only external attendees.
+
+For each meeting, use **Mode A** if the event has a title + description + agenda, or **Mode B** if sparse (title only or title + attendees).
+
+**Mode A — explicit content:** Summarize the stated goal. Surface prior decision records mentioning the topic:
+```bash
+grep -rl "<keyword from event title>" decisions/ 2>/dev/null | head -5
+```
+List open GitHub issues assigned to attendees:
+```bash
+jq '[.items[] | select(.assignees.nodes[]?.login | IN("github-handle-1", "github-handle-2")) | {number, title, state}]' launch-data.json
+```
+Include the URL of today's standup discussion (will be created in Step 3 — use a placeholder `[standup-discussion-link]` and substitute after creation).
+
+**Mode B — infer from sparse event:** When the event has no description or agenda:
+1. **Classify by title pattern** — match against: `1:1`, `standup`, `planning`, `review`, `retro`, `design`, `demo`, `sync`, `all-hands`. Each type has a default expected purpose.
+2. **Map attendees → GitHub activity:** Use `team_member_map` from `calendar-data-today.json` to get GitHub handles. Find issues/PRs they've been active on:
+   ```bash
+   gh issue list --repo ${{ github.repository }} --assignee <handle> --state open --json number,title,updatedAt --jq '[.[] | select(.updatedAt >= "'$(date -u -d '7 days ago' +%Y-%m-%dT%H:%M:%SZ 2>/dev/null || date -u -v -7d +%Y-%m-%dT%H:%M:%SZ)'")]'
+   ```
+   The intersection of active issues across attendees is the most likely meeting topic.
+3. **Check recurrence history:** If the event has a `recurrence` field, search decision records for prior instances:
+   ```bash
+   grep -rl "<attendee names>" decisions/ 2>/dev/null | sort -r | head -3
+   ```
+4. Frame the brief as a proposal: *"Based on what's active for [names] this week, this meeting may be about: [topic]. Relevant context if so: [links]."*
+
+**Meeting brief format** (append to each event's Google Calendar description via the write script):
+```
+<!-- meeting-brief-start -->
+📋 Meeting Brief — [Date]
+
+[One sentence: stated goal OR inferred purpose (Mode B: mark as "Inferred")]
+
+**Context:**
+- [Decision record or issue most relevant to this meeting, with link]
+- [Any open action items from prior related meetings]
+- [Link to today's standup discussion]
+
+**Attendees active on:** [list of open issues/PRs the attendees share]
+<!-- meeting-brief-end -->
+```
+
+After generating each brief, call the write script for Google Meet events:
+```bash
+chmod +x .github/scripts/write-meeting-brief.sh
+# CALENDAR_WRITE_ENABLED defaults to false (dry-run) unless set in environment
+./.github/scripts/write-meeting-brief.sh "<event-id>" "<brief-content>" 2>&1
+```
+
+Skip write for non-Google-Meet events (Zoom, Teams) — detect by checking `conferenceData.conferenceSolution.name`.
+
+### Step 3: Identify high-signal standup inputs
 
 Build today's standup context from open work:
 - Recently updated open launches, epics, and tasks
@@ -102,7 +170,7 @@ Build today's standup context from open work:
 - Items close to target dates or phase transitions
 - Any explicit decision language in issue bodies/comments
 
-### Step 3: Create one discussion
+### Step 4: Create one discussion
 
 Get today's date and write the full discussion body to a file, then post it using explicit flags:
 

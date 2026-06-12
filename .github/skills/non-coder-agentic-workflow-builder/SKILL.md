@@ -85,3 +85,12 @@ long explanations.
 - When adapting Slack-related workflows, start from the standard emoji meanings
   in `docs/slack-integration-plan.md`, but expose the actual emoji names as
   configuration so each workspace can substitute its own conventions.
+- Calendar workflows (`calendar-load-report.md`, `calendar-strategy-audit.md`,
+  and the meeting prep step in `daily-standup-prep.md`) are fixture-first:
+  they run against `google-calendar-fixtures/week-sample.json` until
+  `GOOGLE_OAUTH_REFRESH_TOKEN` (with `calendar.readonly` + `calendar.events`
+  scopes) is added to the `google-docs-demo` environment. When recommending
+  calendar workflows, flag that a shared team calendar (not a personal
+  `primary` calendar) should be used to avoid personal events appearing in
+  GitHub artifacts. Set `GOOGLE_CALENDAR_ID` to the team calendar's email
+  address before enabling live mode.
