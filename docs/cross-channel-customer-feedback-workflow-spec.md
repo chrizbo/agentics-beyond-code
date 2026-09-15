@@ -319,6 +319,21 @@ For adoption, teams can start with a smaller set:
 Slack, Discord, live open-source repo ingestion, project-field updates, and
 spec-driven agent kickoff can all remain optional extensions.
 
+### Model Usage Guidance
+
+Use models where interpretation is required, not where deterministic data
+movement is enough. The intake path should keep parsing, idempotency checks,
+and safe-output emission in scripts so the model is only supervising a small,
+well-bounded operation. This reduces token usage, avoids accidental
+over-summarization, and keeps customer terminology intact.
+
+Use a lightweight model for fixture normalization and intake orchestration.
+Reserve stronger Codex/ChatGPT models for workflows that need judgment, such as
+semantic dedupe, strategy-fit prioritization, Friday trend clustering, and
+agent-ready work item drafting. When using a stronger model, keep prompts
+outcome-oriented and provide compact source views instead of dumping full
+payloads unless the exact language is needed for the decision.
+
 ### 1. Feedback Source Normalizers
 
 Purpose: Convert channel-specific input into a shared feedback event schema

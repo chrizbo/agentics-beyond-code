@@ -31,6 +31,7 @@ steps:
       node .github/scripts/normalize-feedback-fixtures.mjs --write > feedback-normalizer-output.json
 
 tools:
+  bash: ["*"]
   github:
     mode: gh-proxy
     toolsets: [default, issues]
@@ -81,65 +82,40 @@ Use this full URL when calling `update_project`.
 Read the generated normalized events file:
 
 ```bash
-jq '{event_count: (.events | length), fixture_files, events: [.events[] | {source_system, source_type, source_id, idempotency_key: .ingestion.idempotency_key, title: .intake.title, labels: .intake.labels, project_fields: .intake.project_fields}]}' feedback-events/normalized-feedback-events.json
+jq '{event_count: (.events | length), fixture_files}' feedback-events/normalized-feedback-events.json
 ```
 
 If the file is missing, malformed, or contains zero events, call `noop` with a
 brief explanation and stop.
 
-## Step 2: Idempotency
+## Step 2: Emit Safe Outputs
 
-For each event, use the exact idempotency key at:
-
-```text
-event.ingestion.idempotency_key
-```
-
-Before creating an issue, search all open and closed issues for that exact key:
+Run the deterministic safe-output emitter:
 
 ```bash
-gh issue list --repo ${{ github.repository }} --state all \
-  --search "<idempotency-key>" \
-  --json number,title,state,url
+node .github/scripts/emit-feedback-safeoutputs.mjs
 ```
 
-If any existing issue contains that key, skip creating a duplicate. If it is
-open and not obviously in the project, you may call `update_project` for that
-existing issue with the event's project fields.
+The script:
 
-## Step 3: Create Feedback Intake Issues
-
-For each unique event without an existing issue:
-
-1. Create one issue using `event.intake.title`, `event.intake.body`, and
-   `event.intake.labels`.
-2. After the issue is created, note the returned issue number.
-3. Add the created issue to the Customer Feedback Queue project using
-   `update_project` and `event.intake.project_fields`.
-
-Use JSON safe-output calls for complex payloads:
-
-```bash
-printf '{"title":"...","body":"...","labels":["feedback:intake","feedback:needs-pm-review","from-open-source-repo"]}' \
-  | safeoutputs create_issue .
-```
-
-Then:
-
-```bash
-printf '{"issue_number":123,"project":"https://github.com/users/chrizbo/projects/3","fields":{"Source":"Open Source Repo","Product Area":"Setup","Feedback Type":"Bug","Severity":"High","Reach":"Multiple Users"}}' \
-  | safeoutputs update_project .
-```
+- Loads `feedback-events/normalized-feedback-events.json`.
+- Checks existing open and closed issue bodies for each exact
+  `event.ingestion.idempotency_key`.
+- Emits `safeoutputs create_issue .` for events without an existing issue.
+- Uses a deterministic `temporary_id` on each created issue.
+- Emits `safeoutputs update_project .` with `content_type: "issue"` and
+  `content_number` set to the same temporary id so created issues are added to
+  the Customer Feedback Queue project with the event's project fields.
+- Emits `safeoutputs noop .` when all normalized fixture events already have
+  issues.
 
 Do not manually summarize over the customer language. Use the preformatted body
 from the normalized event so exact phrases and terminology are preserved.
 
-## Step 4: Completion
+Do not call Codex goal-management tools. Do not print the full normalized event
+bodies unless you are diagnosing a failure. Keep the run focused on the emitter
+script and safe outputs.
 
-When all unique events have either been skipped as existing or emitted as
-safe-output issue creations, stop. If no new issues were needed, call `noop`
-with:
+## Step 3: Completion
 
-```text
-No new customer feedback intake issues found; all normalized fixture events already have issues.
-```
+When the emitter finishes, report the count it printed and stop.

@@ -200,7 +200,7 @@ created.
 | Standup preparation | Daily Standup Prep workflow | Monday/Wednesday |
 | Sample data generation | Sample Data Simulator | Sunday and Tuesday nights |
 | Customer feedback fixture generation | Customer Feedback Fixture Simulator | Before feedback demo/report runs |
-| Customer feedback intake | Customer Feedback Intake Creator | On feedback fixture or source update |
+| Customer feedback intake | Customer Feedback Intake Creator | Manual for demo; source triggers are a future adoption option |
 | Customer feedback dedupe, strategy triage, and priority suggestion | Feedback Dedupe, Strategy Triage, and Priority Suggestion workflow | On feedback intake or manual dispatch |
 | Customer feedback trends report | Friday Feedback Trends Report | Weekly (Friday) |
 | Feedback work-item conversion | Feedback-to-Work-Item Converter | On `/create-work-item` |
