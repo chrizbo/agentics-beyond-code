@@ -1,0 +1,1074 @@
+{
+  "generated_at": "fixture-normalizer",
+  "fixture_files": [
+    "feedback-fixtures/discord/community-feedback.json",
+    "feedback-fixtures/open-source-repos/agentics-beyond-code-test/github-feedback.json",
+    "feedback-fixtures/slack/field-feedback.json"
+  ],
+  "events": [
+    {
+      "source_system": "open-source-repo",
+      "source_type": "issue",
+      "source_id": "agentics-beyond-code-test:issue:41",
+      "source_url": "https://github.com/chrizbo/agentics-beyond-code-test/issues/41",
+      "observed_at": "2026-09-12T16:20:00Z",
+      "author": {
+        "display_name": "public-user-alex",
+        "role": "community member",
+        "is_internal": false
+      },
+      "channel_or_repo": {
+        "id": "agentics-beyond-code-test",
+        "name": "agentics-beyond-code-test",
+        "kind": "github-repository",
+        "allowlisted": true
+      },
+      "content": {
+        "text": "Setup just hangs after GitHub auth\n\nAfter I approve GitHub auth, the setup just hangs after auth. There is no visible progress and I don't know if it is still working or stuck. I waited ten minutes and then killed it.",
+        "verbatim_excerpts": [
+          "just hangs after auth",
+          "no visible progress",
+          "still working or stuck"
+        ],
+        "terminology": [
+          "setup",
+          "GitHub auth",
+          "visible progress"
+        ],
+        "error_strings": [],
+        "redacted": false,
+        "language": "en"
+      },
+      "product": {
+        "area": "Setup",
+        "feature": "unknown"
+      },
+      "customer_context": {
+        "segment": "unknown",
+        "account": "omitted",
+        "plan": "unknown"
+      },
+      "signals": {
+        "feedback_type": "Bug",
+        "sentiment": "unknown",
+        "urgency": "high",
+        "severity": "High",
+        "reach": "Multiple Users",
+        "reaction_count": 0,
+        "thread_reply_count": 0
+      },
+      "ingestion": {
+        "fixture_file": "feedback-fixtures/open-source-repos/agentics-beyond-code-test/github-feedback.json",
+        "idempotency_key": "feedback:open-source-repo:agentics-beyond-code-test:issue:41"
+      },
+      "intake": {
+        "title": "[Feedback] Setup just hangs after GitHub auth",
+        "labels": [
+          "feedback:intake",
+          "feedback:needs-pm-review",
+          "from-open-source-repo"
+        ],
+        "body": "## Customer Language\n\n### Exact Phrases\n\n- \"just hangs after auth\"\n- \"no visible progress\"\n- \"still working or stuck\"\n\n### Terminology\n\n- `setup`\n- `GitHub auth`\n- `visible progress`\n\n### Error Messages / Commands / Product Names\n\n- _None captured_\n\n## Source Evidence\n\n- Source link: https://github.com/chrizbo/agentics-beyond-code-test/issues/41\n- Source context: Setup just hangs after GitHub auth After I approve GitHub auth, the setup just hangs after auth. There is no visible progress and I don't know if it is still working or stuck. I waited ten minutes and then killed it.\n\n## Agent Triage Notes\n\nThis item came from Open Source Repo and preserves the source wording for PM review. Triage should compare the exact phrases above against duplicates before relying on any summary.\n\n## Strategy Triage\n\n- Relevant strategy excerpt:\n- Priority rationale:\n- Why this might matter now:\n\n## Duplicate / Related Signals\n\n- Potential canonical feedback issue:\n\n## PM Review\n\n- Interpretation:\n- Rationale:\n- Safe-to-share customer context:\n- Converted work item:\n\n<!-- workflow-metadata\nfeedback_key: feedback:open-source-repo:agentics-beyond-code-test:issue:41\nsource_type: issue\ndedupe_key_candidates:\n  - just hangs after auth\n  - no visible progress\n  - still working or stuck\n-->",
+        "project_fields": {
+          "Source": "Open Source Repo",
+          "Product Area": "Setup",
+          "Feedback Type": "Bug",
+          "Severity": "High",
+          "Reach": "Multiple Users"
+        }
+      }
+    },
+    {
+      "source_system": "open-source-repo",
+      "source_type": "issue",
+      "source_id": "agentics-beyond-code-test:issue:43",
+      "source_url": "https://github.com/chrizbo/agentics-beyond-code-test/issues/43",
+      "observed_at": "2026-09-12T19:05:00Z",
+      "author": {
+        "display_name": "public-user-mika",
+        "role": "community member",
+        "is_internal": false
+      },
+      "channel_or_repo": {
+        "id": "agentics-beyond-code-test",
+        "name": "agentics-beyond-code-test",
+        "kind": "github-repository",
+        "allowlisted": true
+      },
+      "content": {
+        "text": "Show which GitHub Project fields are missing before workflows fail\n\nThe launch readiness workflow failed because my project did not have the expected fields. It would help if the app said exactly which project fields are missing before the workflow runs.",
+        "verbatim_excerpts": [
+          "which project fields are missing",
+          "before the workflow runs"
+        ],
+        "terminology": [
+          "launch readiness workflow",
+          "project fields"
+        ],
+        "error_strings": [],
+        "redacted": false,
+        "language": "en"
+      },
+      "product": {
+        "area": "GitHub Projects",
+        "feature": "unknown"
+      },
+      "customer_context": {
+        "segment": "unknown",
+        "account": "omitted",
+        "plan": "unknown"
+      },
+      "signals": {
+        "feedback_type": "Feature Request",
+        "sentiment": "unknown",
+        "urgency": "medium",
+        "severity": "Medium",
+        "reach": "Multiple Users",
+        "reaction_count": 0,
+        "thread_reply_count": 0
+      },
+      "ingestion": {
+        "fixture_file": "feedback-fixtures/open-source-repos/agentics-beyond-code-test/github-feedback.json",
+        "idempotency_key": "feedback:open-source-repo:agentics-beyond-code-test:issue:43"
+      },
+      "intake": {
+        "title": "[Feedback] Show which GitHub Project fields are missing before workflows fail",
+        "labels": [
+          "feedback:intake",
+          "feedback:needs-pm-review",
+          "from-open-source-repo"
+        ],
+        "body": "## Customer Language\n\n### Exact Phrases\n\n- \"which project fields are missing\"\n- \"before the workflow runs\"\n\n### Terminology\n\n- `launch readiness workflow`\n- `project fields`\n\n### Error Messages / Commands / Product Names\n\n- _None captured_\n\n## Source Evidence\n\n- Source link: https://github.com/chrizbo/agentics-beyond-code-test/issues/43\n- Source context: Show which GitHub Project fields are missing before workflows fail The launch readiness workflow failed because my project did not have the expected fields. It would help if the app said exactly which project fields are missing before the workflow runs.\n\n## Agent Triage Notes\n\nThis item came from Open Source Repo and preserves the source wording for PM review. Triage should compare the exact phrases above against duplicates before relying on any summary.\n\n## Strategy Triage\n\n- Relevant strategy excerpt:\n- Priority rationale:\n- Why this might matter now:\n\n## Duplicate / Related Signals\n\n- Potential canonical feedback issue:\n\n## PM Review\n\n- Interpretation:\n- Rationale:\n- Safe-to-share customer context:\n- Converted work item:\n\n<!-- workflow-metadata\nfeedback_key: feedback:open-source-repo:agentics-beyond-code-test:issue:43\nsource_type: issue\ndedupe_key_candidates:\n  - which project fields are missing\n  - before the workflow runs\n-->",
+        "project_fields": {
+          "Source": "Open Source Repo",
+          "Product Area": "GitHub Projects",
+          "Feedback Type": "Feature Request",
+          "Severity": "Medium",
+          "Reach": "Multiple Users"
+        }
+      }
+    },
+    {
+      "source_system": "open-source-repo",
+      "source_type": "discussion",
+      "source_id": "agentics-beyond-code-test:discussion:12",
+      "source_url": "https://github.com/chrizbo/agentics-beyond-code-test/discussions/12",
+      "observed_at": "2026-09-12T21:40:00Z",
+      "author": {
+        "display_name": "public-user-nora",
+        "role": "community member",
+        "is_internal": false
+      },
+      "channel_or_repo": {
+        "id": "agentics-beyond-code-test",
+        "name": "agentics-beyond-code-test",
+        "kind": "github-repository",
+        "allowlisted": true
+      },
+      "content": {
+        "text": "Can setup show progress steps?\n\nSetup needs a progress checklist. Right now it feels like a black box between GitHub auth and the first project sync.",
+        "verbatim_excerpts": [
+          "progress checklist",
+          "black box",
+          "first project sync"
+        ],
+        "terminology": [
+          "setup",
+          "GitHub auth",
+          "project sync"
+        ],
+        "error_strings": [],
+        "redacted": false,
+        "language": "en"
+      },
+      "product": {
+        "area": "Setup",
+        "feature": "unknown"
+      },
+      "customer_context": {
+        "segment": "unknown",
+        "account": "omitted",
+        "plan": "unknown"
+      },
+      "signals": {
+        "feedback_type": "Usability",
+        "sentiment": "unknown",
+        "urgency": "medium",
+        "severity": "Medium",
+        "reach": "Multiple Users",
+        "reaction_count": 0,
+        "thread_reply_count": 0
+      },
+      "ingestion": {
+        "fixture_file": "feedback-fixtures/open-source-repos/agentics-beyond-code-test/github-feedback.json",
+        "idempotency_key": "feedback:open-source-repo:agentics-beyond-code-test:discussion:12"
+      },
+      "intake": {
+        "title": "[Feedback] Can setup show progress steps?",
+        "labels": [
+          "feedback:intake",
+          "feedback:needs-pm-review",
+          "from-open-source-repo"
+        ],
+        "body": "## Customer Language\n\n### Exact Phrases\n\n- \"progress checklist\"\n- \"black box\"\n- \"first project sync\"\n\n### Terminology\n\n- `setup`\n- `GitHub auth`\n- `project sync`\n\n### Error Messages / Commands / Product Names\n\n- _None captured_\n\n## Source Evidence\n\n- Source link: https://github.com/chrizbo/agentics-beyond-code-test/discussions/12\n- Source context: Can setup show progress steps? Setup needs a progress checklist. Right now it feels like a black box between GitHub auth and the first project sync.\n\n## Agent Triage Notes\n\nThis item came from Open Source Repo and preserves the source wording for PM review. Triage should compare the exact phrases above against duplicates before relying on any summary.\n\n## Strategy Triage\n\n- Relevant strategy excerpt:\n- Priority rationale:\n- Why this might matter now:\n\n## Duplicate / Related Signals\n\n- Potential canonical feedback issue:\n\n## PM Review\n\n- Interpretation:\n- Rationale:\n- Safe-to-share customer context:\n- Converted work item:\n\n<!-- workflow-metadata\nfeedback_key: feedback:open-source-repo:agentics-beyond-code-test:discussion:12\nsource_type: discussion\ndedupe_key_candidates:\n  - progress checklist\n  - black box\n  - first project sync\n-->",
+        "project_fields": {
+          "Source": "Open Source Repo",
+          "Product Area": "Setup",
+          "Feedback Type": "Usability",
+          "Severity": "Medium",
+          "Reach": "Multiple Users"
+        }
+      }
+    },
+    {
+      "source_system": "open-source-repo",
+      "source_type": "issue",
+      "source_id": "agentics-beyond-code-test:issue:44",
+      "source_url": "https://github.com/chrizbo/agentics-beyond-code-test/issues/44",
+      "observed_at": "2026-09-13T08:32:00Z",
+      "author": {
+        "display_name": "public-user-camille",
+        "role": "community member",
+        "is_internal": false
+      },
+      "channel_or_repo": {
+        "id": "agentics-beyond-code-test",
+        "name": "agentics-beyond-code-test",
+        "kind": "github-repository",
+        "allowlisted": true
+      },
+      "content": {
+        "text": "EU payment launch needs Klarna in the readiness checklist\n\nFor EU Payment Methods, Klarna is the payment method our beta customers keep asking about. The readiness checklist talks about cards and SEPA but not Klarna.",
+        "verbatim_excerpts": [
+          "Klarna is the payment method",
+          "beta customers keep asking about",
+          "cards and SEPA but not Klarna"
+        ],
+        "terminology": [
+          "EU Payment Methods",
+          "Klarna",
+          "SEPA",
+          "readiness checklist"
+        ],
+        "error_strings": [],
+        "redacted": false,
+        "language": "en"
+      },
+      "product": {
+        "area": "EU Payments",
+        "feature": "unknown"
+      },
+      "customer_context": {
+        "segment": "unknown",
+        "account": "omitted",
+        "plan": "unknown"
+      },
+      "signals": {
+        "feedback_type": "Feature Request",
+        "sentiment": "unknown",
+        "urgency": "medium",
+        "severity": "Medium",
+        "reach": "Segment",
+        "reaction_count": 0,
+        "thread_reply_count": 0
+      },
+      "ingestion": {
+        "fixture_file": "feedback-fixtures/open-source-repos/agentics-beyond-code-test/github-feedback.json",
+        "idempotency_key": "feedback:open-source-repo:agentics-beyond-code-test:issue:44"
+      },
+      "intake": {
+        "title": "[Feedback] EU payment launch needs Klarna in the readiness checklist",
+        "labels": [
+          "feedback:intake",
+          "feedback:needs-pm-review",
+          "from-open-source-repo"
+        ],
+        "body": "## Customer Language\n\n### Exact Phrases\n\n- \"Klarna is the payment method\"\n- \"beta customers keep asking about\"\n- \"cards and SEPA but not Klarna\"\n\n### Terminology\n\n- `EU Payment Methods`\n- `Klarna`\n- `SEPA`\n- `readiness checklist`\n\n### Error Messages / Commands / Product Names\n\n- _None captured_\n\n## Source Evidence\n\n- Source link: https://github.com/chrizbo/agentics-beyond-code-test/issues/44\n- Source context: EU payment launch needs Klarna in the readiness checklist For EU Payment Methods, Klarna is the payment method our beta customers keep asking about. The readiness checklist talks about cards and SEPA but not Klarna.\n\n## Agent Triage Notes\n\nThis item came from Open Source Repo and preserves the source wording for PM review. Triage should compare the exact phrases above against duplicates before relying on any summary.\n\n## Strategy Triage\n\n- Relevant strategy excerpt:\n- Priority rationale:\n- Why this might matter now:\n\n## Duplicate / Related Signals\n\n- Potential canonical feedback issue:\n\n## PM Review\n\n- Interpretation:\n- Rationale:\n- Safe-to-share customer context:\n- Converted work item:\n\n<!-- workflow-metadata\nfeedback_key: feedback:open-source-repo:agentics-beyond-code-test:issue:44\nsource_type: issue\ndedupe_key_candidates:\n  - Klarna is the payment method\n  - beta customers keep asking about\n  - cards and SEPA but not Klarna\n-->",
+        "project_fields": {
+          "Source": "Open Source Repo",
+          "Product Area": "EU Payments",
+          "Feedback Type": "Feature Request",
+          "Severity": "Medium",
+          "Reach": "Segment"
+        }
+      }
+    },
+    {
+      "source_system": "open-source-repo",
+      "source_type": "issue",
+      "source_id": "agentics-beyond-code-test:issue:45",
+      "source_url": "https://github.com/chrizbo/agentics-beyond-code-test/issues/45",
+      "observed_at": "2026-09-13T11:14:00Z",
+      "author": {
+        "display_name": "public-user-jonas",
+        "role": "community member",
+        "is_internal": false
+      },
+      "channel_or_repo": {
+        "id": "agentics-beyond-code-test",
+        "name": "agentics-beyond-code-test",
+        "kind": "github-repository",
+        "allowlisted": true
+      },
+      "content": {
+        "text": "German screenshots still show English fallback text\n\nIn the German beta screenshots, the export screen still shows English fallback text for 'download history' and 'request export'. It makes the localization feel half done.",
+        "verbatim_excerpts": [
+          "English fallback text",
+          "download history",
+          "request export",
+          "half done"
+        ],
+        "terminology": [
+          "German beta",
+          "export screen",
+          "localization"
+        ],
+        "error_strings": [],
+        "redacted": false,
+        "language": "en"
+      },
+      "product": {
+        "area": "Localization",
+        "feature": "unknown"
+      },
+      "customer_context": {
+        "segment": "unknown",
+        "account": "omitted",
+        "plan": "unknown"
+      },
+      "signals": {
+        "feedback_type": "Bug",
+        "sentiment": "unknown",
+        "urgency": "medium",
+        "severity": "Medium",
+        "reach": "Segment",
+        "reaction_count": 0,
+        "thread_reply_count": 0
+      },
+      "ingestion": {
+        "fixture_file": "feedback-fixtures/open-source-repos/agentics-beyond-code-test/github-feedback.json",
+        "idempotency_key": "feedback:open-source-repo:agentics-beyond-code-test:issue:45"
+      },
+      "intake": {
+        "title": "[Feedback] German screenshots still show English fallback text",
+        "labels": [
+          "feedback:intake",
+          "feedback:needs-pm-review",
+          "from-open-source-repo"
+        ],
+        "body": "## Customer Language\n\n### Exact Phrases\n\n- \"English fallback text\"\n- \"download history\"\n- \"request export\"\n- \"half done\"\n\n### Terminology\n\n- `German beta`\n- `export screen`\n- `localization`\n\n### Error Messages / Commands / Product Names\n\n- _None captured_\n\n## Source Evidence\n\n- Source link: https://github.com/chrizbo/agentics-beyond-code-test/issues/45\n- Source context: German screenshots still show English fallback text In the German beta screenshots, the export screen still shows English fallback text for 'download history' and 'request export'. It makes the localization feel half done.\n\n## Agent Triage Notes\n\nThis item came from Open Source Repo and preserves the source wording for PM review. Triage should compare the exact phrases above against duplicates before relying on any summary.\n\n## Strategy Triage\n\n- Relevant strategy excerpt:\n- Priority rationale:\n- Why this might matter now:\n\n## Duplicate / Related Signals\n\n- Potential canonical feedback issue:\n\n## PM Review\n\n- Interpretation:\n- Rationale:\n- Safe-to-share customer context:\n- Converted work item:\n\n<!-- workflow-metadata\nfeedback_key: feedback:open-source-repo:agentics-beyond-code-test:issue:45\nsource_type: issue\ndedupe_key_candidates:\n  - English fallback text\n  - download history\n  - request export\n  - half done\n-->",
+        "project_fields": {
+          "Source": "Open Source Repo",
+          "Product Area": "Localization",
+          "Feedback Type": "Bug",
+          "Severity": "Medium",
+          "Reach": "Segment"
+        }
+      }
+    },
+    {
+      "source_system": "discord",
+      "source_type": "discord-message",
+      "source_id": "G_abc_demo:C_setup_help:M1001",
+      "source_url": "https://discord.com/channels/G_abc_demo/C_setup_help/M1001",
+      "observed_at": "2026-09-13T17:45:00Z",
+      "author": {
+        "display_name": "Riley",
+        "role": "community member",
+        "is_internal": false
+      },
+      "channel_or_repo": {
+        "id": "C_setup_help",
+        "name": "setup-help",
+        "kind": "discord-channel",
+        "allowlisted": true
+      },
+      "content": {
+        "text": "Mine gets stuck after login too. It says GitHub connected, then there is no spinner, no checklist, nothing.",
+        "verbatim_excerpts": [
+          "gets stuck after login",
+          "no spinner, no checklist, nothing"
+        ],
+        "terminology": [
+          "GitHub connected",
+          "checklist"
+        ],
+        "error_strings": [],
+        "redacted": false,
+        "language": "en"
+      },
+      "product": {
+        "area": "Setup",
+        "feature": "unknown"
+      },
+      "customer_context": {
+        "segment": "unknown",
+        "account": "omitted",
+        "plan": "unknown"
+      },
+      "signals": {
+        "feedback_type": "Bug",
+        "sentiment": "unknown",
+        "urgency": "high",
+        "severity": "High",
+        "reach": "Multiple Users",
+        "reaction_count": 4,
+        "thread_reply_count": 0
+      },
+      "ingestion": {
+        "fixture_file": "feedback-fixtures/discord/community-feedback.json",
+        "idempotency_key": "feedback:discord:G_abc_demo:C_setup_help:M1001"
+      },
+      "intake": {
+        "title": "[Feedback] Mine gets stuck after login too. It says GitHub connected, then there is no spi...",
+        "labels": [
+          "feedback:intake",
+          "feedback:needs-pm-review",
+          "from-discord"
+        ],
+        "body": "## Customer Language\n\n### Exact Phrases\n\n- \"gets stuck after login\"\n- \"no spinner, no checklist, nothing\"\n\n### Terminology\n\n- `GitHub connected`\n- `checklist`\n\n### Error Messages / Commands / Product Names\n\n- _None captured_\n\n## Source Evidence\n\n- Source link: https://discord.com/channels/G_abc_demo/C_setup_help/M1001\n- Source context: Mine gets stuck after login too. It says GitHub connected, then there is no spinner, no checklist, nothing.\n\n## Agent Triage Notes\n\nThis item came from Discord and preserves the source wording for PM review. Triage should compare the exact phrases above against duplicates before relying on any summary.\n\n## Strategy Triage\n\n- Relevant strategy excerpt:\n- Priority rationale:\n- Why this might matter now:\n\n## Duplicate / Related Signals\n\n- Potential canonical feedback issue:\n\n## PM Review\n\n- Interpretation:\n- Rationale:\n- Safe-to-share customer context:\n- Converted work item:\n\n<!-- workflow-metadata\nfeedback_key: feedback:discord:G_abc_demo:C_setup_help:M1001\nsource_type: discord-message\ndedupe_key_candidates:\n  - gets stuck after login\n  - no spinner, no checklist, nothing\n-->",
+        "project_fields": {
+          "Source": "Discord",
+          "Product Area": "Setup",
+          "Feedback Type": "Bug",
+          "Severity": "High",
+          "Reach": "Multiple Users"
+        }
+      }
+    },
+    {
+      "source_system": "discord",
+      "source_type": "discord-message",
+      "source_id": "G_abc_demo:C_setup_help:M1002",
+      "source_url": "https://discord.com/channels/G_abc_demo/C_setup_help/M1002",
+      "observed_at": "2026-09-14T09:18:00Z",
+      "author": {
+        "display_name": "Priya-beta",
+        "role": "community member",
+        "is_internal": false
+      },
+      "channel_or_repo": {
+        "id": "C_setup_help",
+        "name": "setup-help",
+        "kind": "discord-channel",
+        "allowlisted": true
+      },
+      "content": {
+        "text": "Can the sample data generator make customer feedback too? I want to demo the Friday report without manually creating a bunch of fake issues.",
+        "verbatim_excerpts": [
+          "make customer feedback too",
+          "without manually creating a bunch of fake issues"
+        ],
+        "terminology": [
+          "sample data generator",
+          "Friday report",
+          "fake issues"
+        ],
+        "error_strings": [],
+        "redacted": false,
+        "language": "en"
+      },
+      "product": {
+        "area": "Demo Data",
+        "feature": "unknown"
+      },
+      "customer_context": {
+        "segment": "unknown",
+        "account": "omitted",
+        "plan": "unknown"
+      },
+      "signals": {
+        "feedback_type": "Feature Request",
+        "sentiment": "unknown",
+        "urgency": "medium",
+        "severity": "Medium",
+        "reach": "Multiple Users",
+        "reaction_count": 3,
+        "thread_reply_count": 0
+      },
+      "ingestion": {
+        "fixture_file": "feedback-fixtures/discord/community-feedback.json",
+        "idempotency_key": "feedback:discord:G_abc_demo:C_setup_help:M1002"
+      },
+      "intake": {
+        "title": "[Feedback] Can the sample data generator make customer feedback too? I want to demo the Fr...",
+        "labels": [
+          "feedback:intake",
+          "feedback:needs-pm-review",
+          "from-discord"
+        ],
+        "body": "## Customer Language\n\n### Exact Phrases\n\n- \"make customer feedback too\"\n- \"without manually creating a bunch of fake issues\"\n\n### Terminology\n\n- `sample data generator`\n- `Friday report`\n- `fake issues`\n\n### Error Messages / Commands / Product Names\n\n- _None captured_\n\n## Source Evidence\n\n- Source link: https://discord.com/channels/G_abc_demo/C_setup_help/M1002\n- Source context: Can the sample data generator make customer feedback too? I want to demo the Friday report without manually creating a bunch of fake issues.\n\n## Agent Triage Notes\n\nThis item came from Discord and preserves the source wording for PM review. Triage should compare the exact phrases above against duplicates before relying on any summary.\n\n## Strategy Triage\n\n- Relevant strategy excerpt:\n- Priority rationale:\n- Why this might matter now:\n\n## Duplicate / Related Signals\n\n- Potential canonical feedback issue:\n\n## PM Review\n\n- Interpretation:\n- Rationale:\n- Safe-to-share customer context:\n- Converted work item:\n\n<!-- workflow-metadata\nfeedback_key: feedback:discord:G_abc_demo:C_setup_help:M1002\nsource_type: discord-message\ndedupe_key_candidates:\n  - make customer feedback too\n  - without manually creating a bunch of fake issues\n-->",
+        "project_fields": {
+          "Source": "Discord",
+          "Product Area": "Demo Data",
+          "Feedback Type": "Feature Request",
+          "Severity": "Medium",
+          "Reach": "Multiple Users"
+        }
+      }
+    },
+    {
+      "source_system": "open-source-repo",
+      "source_type": "discussion",
+      "source_id": "agentics-beyond-code-test:discussion:13",
+      "source_url": "https://github.com/chrizbo/agentics-beyond-code-test/discussions/13",
+      "observed_at": "2026-09-14T10:10:00Z",
+      "author": {
+        "display_name": "public-user-sam",
+        "role": "community member",
+        "is_internal": false
+      },
+      "channel_or_repo": {
+        "id": "agentics-beyond-code-test",
+        "name": "agentics-beyond-code-test",
+        "kind": "github-repository",
+        "allowlisted": true
+      },
+      "content": {
+        "text": "Weekly report should say what changed since last Friday\n\nThe Friday report is useful, but I want a 'what changed since last Friday' section so I do not re-read the whole thing.",
+        "verbatim_excerpts": [
+          "what changed since last Friday",
+          "do not re-read the whole thing"
+        ],
+        "terminology": [
+          "Friday report"
+        ],
+        "error_strings": [],
+        "redacted": false,
+        "language": "en"
+      },
+      "product": {
+        "area": "Reporting",
+        "feature": "unknown"
+      },
+      "customer_context": {
+        "segment": "unknown",
+        "account": "omitted",
+        "plan": "unknown"
+      },
+      "signals": {
+        "feedback_type": "Feature Request",
+        "sentiment": "unknown",
+        "urgency": "low",
+        "severity": "Low",
+        "reach": "One User",
+        "reaction_count": 0,
+        "thread_reply_count": 0
+      },
+      "ingestion": {
+        "fixture_file": "feedback-fixtures/open-source-repos/agentics-beyond-code-test/github-feedback.json",
+        "idempotency_key": "feedback:open-source-repo:agentics-beyond-code-test:discussion:13"
+      },
+      "intake": {
+        "title": "[Feedback] Weekly report should say what changed since last Friday",
+        "labels": [
+          "feedback:intake",
+          "feedback:needs-pm-review",
+          "from-open-source-repo"
+        ],
+        "body": "## Customer Language\n\n### Exact Phrases\n\n- \"what changed since last Friday\"\n- \"do not re-read the whole thing\"\n\n### Terminology\n\n- `Friday report`\n\n### Error Messages / Commands / Product Names\n\n- _None captured_\n\n## Source Evidence\n\n- Source link: https://github.com/chrizbo/agentics-beyond-code-test/discussions/13\n- Source context: Weekly report should say what changed since last Friday The Friday report is useful, but I want a 'what changed since last Friday' section so I do not re-read the whole thing.\n\n## Agent Triage Notes\n\nThis item came from Open Source Repo and preserves the source wording for PM review. Triage should compare the exact phrases above against duplicates before relying on any summary.\n\n## Strategy Triage\n\n- Relevant strategy excerpt:\n- Priority rationale:\n- Why this might matter now:\n\n## Duplicate / Related Signals\n\n- Potential canonical feedback issue:\n\n## PM Review\n\n- Interpretation:\n- Rationale:\n- Safe-to-share customer context:\n- Converted work item:\n\n<!-- workflow-metadata\nfeedback_key: feedback:open-source-repo:agentics-beyond-code-test:discussion:13\nsource_type: discussion\ndedupe_key_candidates:\n  - what changed since last Friday\n  - do not re-read the whole thing\n-->",
+        "project_fields": {
+          "Source": "Open Source Repo",
+          "Product Area": "Reporting",
+          "Feedback Type": "Feature Request",
+          "Severity": "Low",
+          "Reach": "One User"
+        }
+      }
+    },
+    {
+      "source_system": "discord",
+      "source_type": "discord-message",
+      "source_id": "G_abc_demo:C_setup_help:M1003",
+      "source_url": "https://discord.com/channels/G_abc_demo/C_setup_help/M1003",
+      "observed_at": "2026-09-14T13:35:00Z",
+      "author": {
+        "display_name": "Casey",
+        "role": "community member",
+        "is_internal": false
+      },
+      "channel_or_repo": {
+        "id": "C_setup_help",
+        "name": "setup-help",
+        "kind": "discord-channel",
+        "allowlisted": true
+      },
+      "content": {
+        "text": "Tiny thing: the README says launch tracker but the UI says delivery tracker. I got confused for like 30 seconds.",
+        "verbatim_excerpts": [
+          "launch tracker",
+          "delivery tracker",
+          "confused for like 30 seconds"
+        ],
+        "terminology": [
+          "README",
+          "launch tracker",
+          "delivery tracker"
+        ],
+        "error_strings": [],
+        "redacted": false,
+        "language": "en"
+      },
+      "product": {
+        "area": "Docs",
+        "feature": "unknown"
+      },
+      "customer_context": {
+        "segment": "unknown",
+        "account": "omitted",
+        "plan": "unknown"
+      },
+      "signals": {
+        "feedback_type": "Usability",
+        "sentiment": "unknown",
+        "urgency": "low",
+        "severity": "Low",
+        "reach": "One User",
+        "reaction_count": 1,
+        "thread_reply_count": 0
+      },
+      "ingestion": {
+        "fixture_file": "feedback-fixtures/discord/community-feedback.json",
+        "idempotency_key": "feedback:discord:G_abc_demo:C_setup_help:M1003"
+      },
+      "intake": {
+        "title": "[Feedback] Tiny thing: the README says launch tracker but the UI says delivery tracker. I...",
+        "labels": [
+          "feedback:intake",
+          "feedback:needs-pm-review",
+          "from-discord"
+        ],
+        "body": "## Customer Language\n\n### Exact Phrases\n\n- \"launch tracker\"\n- \"delivery tracker\"\n- \"confused for like 30 seconds\"\n\n### Terminology\n\n- `README`\n- `launch tracker`\n- `delivery tracker`\n\n### Error Messages / Commands / Product Names\n\n- _None captured_\n\n## Source Evidence\n\n- Source link: https://discord.com/channels/G_abc_demo/C_setup_help/M1003\n- Source context: Tiny thing: the README says launch tracker but the UI says delivery tracker. I got confused for like 30 seconds.\n\n## Agent Triage Notes\n\nThis item came from Discord and preserves the source wording for PM review. Triage should compare the exact phrases above against duplicates before relying on any summary.\n\n## Strategy Triage\n\n- Relevant strategy excerpt:\n- Priority rationale:\n- Why this might matter now:\n\n## Duplicate / Related Signals\n\n- Potential canonical feedback issue:\n\n## PM Review\n\n- Interpretation:\n- Rationale:\n- Safe-to-share customer context:\n- Converted work item:\n\n<!-- workflow-metadata\nfeedback_key: feedback:discord:G_abc_demo:C_setup_help:M1003\nsource_type: discord-message\ndedupe_key_candidates:\n  - launch tracker\n  - delivery tracker\n  - confused for like 30 seconds\n-->",
+        "project_fields": {
+          "Source": "Discord",
+          "Product Area": "Docs",
+          "Feedback Type": "Usability",
+          "Severity": "Low",
+          "Reach": "One User"
+        }
+      }
+    },
+    {
+      "source_system": "open-source-repo",
+      "source_type": "pull-request",
+      "source_id": "agentics-beyond-code-test:pull-request:9",
+      "source_url": "https://github.com/chrizbo/agentics-beyond-code-test/pull/9",
+      "observed_at": "2026-09-14T15:25:00Z",
+      "author": {
+        "display_name": "public-user-lee",
+        "role": "community member",
+        "is_internal": false
+      },
+      "channel_or_repo": {
+        "id": "agentics-beyond-code-test",
+        "name": "agentics-beyond-code-test",
+        "kind": "github-repository",
+        "allowlisted": true
+      },
+      "content": {
+        "text": "Docs: add workaround for setup stuck after auth\n\nThis PR documents a workaround for when setup gets stuck after login. The workaround is to refresh the browser and rerun project sync.",
+        "verbatim_excerpts": [
+          "setup gets stuck after login",
+          "rerun project sync"
+        ],
+        "terminology": [
+          "workaround",
+          "project sync"
+        ],
+        "error_strings": [],
+        "redacted": false,
+        "language": "en"
+      },
+      "product": {
+        "area": "Setup",
+        "feature": "unknown"
+      },
+      "customer_context": {
+        "segment": "unknown",
+        "account": "omitted",
+        "plan": "unknown"
+      },
+      "signals": {
+        "feedback_type": "Docs",
+        "sentiment": "unknown",
+        "urgency": "medium",
+        "severity": "Medium",
+        "reach": "Multiple Users",
+        "reaction_count": 0,
+        "thread_reply_count": 0
+      },
+      "ingestion": {
+        "fixture_file": "feedback-fixtures/open-source-repos/agentics-beyond-code-test/github-feedback.json",
+        "idempotency_key": "feedback:open-source-repo:agentics-beyond-code-test:pull-request:9"
+      },
+      "intake": {
+        "title": "[Feedback] Docs: add workaround for setup stuck after auth",
+        "labels": [
+          "feedback:intake",
+          "feedback:needs-pm-review",
+          "from-open-source-repo"
+        ],
+        "body": "## Customer Language\n\n### Exact Phrases\n\n- \"setup gets stuck after login\"\n- \"rerun project sync\"\n\n### Terminology\n\n- `workaround`\n- `project sync`\n\n### Error Messages / Commands / Product Names\n\n- _None captured_\n\n## Source Evidence\n\n- Source link: https://github.com/chrizbo/agentics-beyond-code-test/pull/9\n- Source context: Docs: add workaround for setup stuck after auth This PR documents a workaround for when setup gets stuck after login. The workaround is to refresh the browser and rerun project sync.\n\n## Agent Triage Notes\n\nThis item came from Open Source Repo and preserves the source wording for PM review. Triage should compare the exact phrases above against duplicates before relying on any summary.\n\n## Strategy Triage\n\n- Relevant strategy excerpt:\n- Priority rationale:\n- Why this might matter now:\n\n## Duplicate / Related Signals\n\n- Potential canonical feedback issue:\n\n## PM Review\n\n- Interpretation:\n- Rationale:\n- Safe-to-share customer context:\n- Converted work item:\n\n<!-- workflow-metadata\nfeedback_key: feedback:open-source-repo:agentics-beyond-code-test:pull-request:9\nsource_type: pull-request\ndedupe_key_candidates:\n  - setup gets stuck after login\n  - rerun project sync\n-->",
+        "project_fields": {
+          "Source": "Open Source Repo",
+          "Product Area": "Setup",
+          "Feedback Type": "Docs",
+          "Severity": "Medium",
+          "Reach": "Multiple Users"
+        }
+      }
+    },
+    {
+      "source_system": "discord",
+      "source_type": "discord-message",
+      "source_id": "G_abc_demo:C_setup_help:M1004",
+      "source_url": "https://discord.com/channels/G_abc_demo/C_setup_help/M1004",
+      "observed_at": "2026-09-15T08:05:00Z",
+      "author": {
+        "display_name": "Morgan",
+        "role": "community member",
+        "is_internal": false
+      },
+      "channel_or_repo": {
+        "id": "C_setup_help",
+        "name": "setup-help",
+        "kind": "discord-channel",
+        "allowlisted": true
+      },
+      "content": {
+        "text": "Random idea: can it export all my dashboards as animated GIFs? Not urgent, just thought it would be fun.",
+        "verbatim_excerpts": [
+          "export all my dashboards as animated GIFs",
+          "not urgent"
+        ],
+        "terminology": [
+          "dashboards",
+          "animated GIFs"
+        ],
+        "error_strings": [],
+        "redacted": false,
+        "language": "en"
+      },
+      "product": {
+        "area": "Reporting",
+        "feature": "unknown"
+      },
+      "customer_context": {
+        "segment": "unknown",
+        "account": "omitted",
+        "plan": "unknown"
+      },
+      "signals": {
+        "feedback_type": "Feature Request",
+        "sentiment": "unknown",
+        "urgency": "low",
+        "severity": "Low",
+        "reach": "One User",
+        "reaction_count": 1,
+        "thread_reply_count": 0
+      },
+      "ingestion": {
+        "fixture_file": "feedback-fixtures/discord/community-feedback.json",
+        "idempotency_key": "feedback:discord:G_abc_demo:C_setup_help:M1004"
+      },
+      "intake": {
+        "title": "[Feedback] Random idea: can it export all my dashboards as animated GIFs? Not urgent, just...",
+        "labels": [
+          "feedback:intake",
+          "feedback:needs-pm-review",
+          "from-discord"
+        ],
+        "body": "## Customer Language\n\n### Exact Phrases\n\n- \"export all my dashboards as animated GIFs\"\n- \"not urgent\"\n\n### Terminology\n\n- `dashboards`\n- `animated GIFs`\n\n### Error Messages / Commands / Product Names\n\n- _None captured_\n\n## Source Evidence\n\n- Source link: https://discord.com/channels/G_abc_demo/C_setup_help/M1004\n- Source context: Random idea: can it export all my dashboards as animated GIFs? Not urgent, just thought it would be fun.\n\n## Agent Triage Notes\n\nThis item came from Discord and preserves the source wording for PM review. Triage should compare the exact phrases above against duplicates before relying on any summary.\n\n## Strategy Triage\n\n- Relevant strategy excerpt:\n- Priority rationale:\n- Why this might matter now:\n\n## Duplicate / Related Signals\n\n- Potential canonical feedback issue:\n\n## PM Review\n\n- Interpretation:\n- Rationale:\n- Safe-to-share customer context:\n- Converted work item:\n\n<!-- workflow-metadata\nfeedback_key: feedback:discord:G_abc_demo:C_setup_help:M1004\nsource_type: discord-message\ndedupe_key_candidates:\n  - export all my dashboards as animated GIFs\n  - not urgent\n-->",
+        "project_fields": {
+          "Source": "Discord",
+          "Product Area": "Reporting",
+          "Feedback Type": "Feature Request",
+          "Severity": "Low",
+          "Reach": "One User"
+        }
+      }
+    },
+    {
+      "source_system": "slack",
+      "source_type": "slack-message",
+      "source_id": "T_abc_demo:C_customer_signals:1789452300.000100",
+      "source_url": "https://slack.com/archives/C_customer_signals/p1789452300000100",
+      "observed_at": "2026-09-15T12:00:00Z",
+      "author": {
+        "display_name": "Avery - Solutions",
+        "role": "field team",
+        "is_internal": false
+      },
+      "channel_or_repo": {
+        "id": "C_customer_signals",
+        "name": "customer-signals",
+        "kind": "slack-channel",
+        "allowlisted": true
+      },
+      "content": {
+        "text": "Customer beta call: setup felt like a black box after auth. Their exact words were 'I cannot tell if it is syncing or dead.'",
+        "verbatim_excerpts": [
+          "black box after auth",
+          "I cannot tell if it is syncing or dead"
+        ],
+        "terminology": [
+          "customer beta call",
+          "syncing"
+        ],
+        "error_strings": [],
+        "redacted": false,
+        "language": "en"
+      },
+      "product": {
+        "area": "Setup",
+        "feature": "unknown"
+      },
+      "customer_context": {
+        "segment": "unknown",
+        "account": "omitted",
+        "plan": "unknown"
+      },
+      "signals": {
+        "feedback_type": "Bug",
+        "sentiment": "unknown",
+        "urgency": "high",
+        "severity": "High",
+        "reach": "Account",
+        "reaction_count": 2,
+        "thread_reply_count": 0
+      },
+      "ingestion": {
+        "fixture_file": "feedback-fixtures/slack/field-feedback.json",
+        "idempotency_key": "feedback:slack:T_abc_demo:C_customer_signals:1789452300.000100"
+      },
+      "intake": {
+        "title": "[Feedback] Customer beta call: setup felt like a black box after auth. Their exact words w...",
+        "labels": [
+          "feedback:intake",
+          "feedback:needs-pm-review",
+          "from-slack"
+        ],
+        "body": "## Customer Language\n\n### Exact Phrases\n\n- \"black box after auth\"\n- \"I cannot tell if it is syncing or dead\"\n\n### Terminology\n\n- `customer beta call`\n- `syncing`\n\n### Error Messages / Commands / Product Names\n\n- _None captured_\n\n## Source Evidence\n\n- Source link: https://slack.com/archives/C_customer_signals/p1789452300000100\n- Source context: Customer beta call: setup felt like a black box after auth. Their exact words were 'I cannot tell if it is syncing or dead.'\n\n## Agent Triage Notes\n\nThis item came from Slack and preserves the source wording for PM review. Triage should compare the exact phrases above against duplicates before relying on any summary.\n\n## Strategy Triage\n\n- Relevant strategy excerpt:\n- Priority rationale:\n- Why this might matter now:\n\n## Duplicate / Related Signals\n\n- Potential canonical feedback issue:\n\n## PM Review\n\n- Interpretation:\n- Rationale:\n- Safe-to-share customer context:\n- Converted work item:\n\n<!-- workflow-metadata\nfeedback_key: feedback:slack:T_abc_demo:C_customer_signals:1789452300.000100\nsource_type: slack-message\ndedupe_key_candidates:\n  - black box after auth\n  - I cannot tell if it is syncing or dead\n-->",
+        "project_fields": {
+          "Source": "Slack",
+          "Product Area": "Setup",
+          "Feedback Type": "Bug",
+          "Severity": "High",
+          "Reach": "Account"
+        }
+      }
+    },
+    {
+      "source_system": "slack",
+      "source_type": "slack-message",
+      "source_id": "T_abc_demo:C_customer_signals:1789455900.000200",
+      "source_url": "https://slack.com/archives/C_customer_signals/p1789455900000200",
+      "observed_at": "2026-09-15T12:00:00Z",
+      "author": {
+        "display_name": "Jules - CS",
+        "role": "field team",
+        "is_internal": false
+      },
+      "channel_or_repo": {
+        "id": "C_customer_signals",
+        "name": "customer-signals",
+        "kind": "slack-channel",
+        "allowlisted": true
+      },
+      "content": {
+        "text": "Two EU prospects asked whether EU Payment Methods includes Klarna. One said 'cards plus SEPA is not enough for our checkout'.",
+        "verbatim_excerpts": [
+          "includes Klarna",
+          "cards plus SEPA is not enough for our checkout"
+        ],
+        "terminology": [
+          "EU prospects",
+          "EU Payment Methods",
+          "Klarna",
+          "SEPA"
+        ],
+        "error_strings": [],
+        "redacted": false,
+        "language": "en"
+      },
+      "product": {
+        "area": "EU Payments",
+        "feature": "unknown"
+      },
+      "customer_context": {
+        "segment": "unknown",
+        "account": "omitted",
+        "plan": "unknown"
+      },
+      "signals": {
+        "feedback_type": "Feature Request",
+        "sentiment": "unknown",
+        "urgency": "medium",
+        "severity": "Medium",
+        "reach": "Segment",
+        "reaction_count": 1,
+        "thread_reply_count": 0
+      },
+      "ingestion": {
+        "fixture_file": "feedback-fixtures/slack/field-feedback.json",
+        "idempotency_key": "feedback:slack:T_abc_demo:C_customer_signals:1789455900.000200"
+      },
+      "intake": {
+        "title": "[Feedback] Two EU prospects asked whether EU Payment Methods includes Klarna. One said 'ca...",
+        "labels": [
+          "feedback:intake",
+          "feedback:needs-pm-review",
+          "from-slack"
+        ],
+        "body": "## Customer Language\n\n### Exact Phrases\n\n- \"includes Klarna\"\n- \"cards plus SEPA is not enough for our checkout\"\n\n### Terminology\n\n- `EU prospects`\n- `EU Payment Methods`\n- `Klarna`\n- `SEPA`\n\n### Error Messages / Commands / Product Names\n\n- _None captured_\n\n## Source Evidence\n\n- Source link: https://slack.com/archives/C_customer_signals/p1789455900000200\n- Source context: Two EU prospects asked whether EU Payment Methods includes Klarna. One said 'cards plus SEPA is not enough for our checkout'.\n\n## Agent Triage Notes\n\nThis item came from Slack and preserves the source wording for PM review. Triage should compare the exact phrases above against duplicates before relying on any summary.\n\n## Strategy Triage\n\n- Relevant strategy excerpt:\n- Priority rationale:\n- Why this might matter now:\n\n## Duplicate / Related Signals\n\n- Potential canonical feedback issue:\n\n## PM Review\n\n- Interpretation:\n- Rationale:\n- Safe-to-share customer context:\n- Converted work item:\n\n<!-- workflow-metadata\nfeedback_key: feedback:slack:T_abc_demo:C_customer_signals:1789455900.000200\nsource_type: slack-message\ndedupe_key_candidates:\n  - includes Klarna\n  - cards plus SEPA is not enough for our checkout\n-->",
+        "project_fields": {
+          "Source": "Slack",
+          "Product Area": "EU Payments",
+          "Feedback Type": "Feature Request",
+          "Severity": "Medium",
+          "Reach": "Segment"
+        }
+      }
+    },
+    {
+      "source_system": "slack",
+      "source_type": "slack-message",
+      "source_id": "T_abc_demo:C_customer_signals:1789460100.000300",
+      "source_url": "https://slack.com/archives/C_customer_signals/p1789460100000300",
+      "observed_at": "2026-09-15T12:00:00Z",
+      "author": {
+        "display_name": "Nina - Support",
+        "role": "field team",
+        "is_internal": false
+      },
+      "channel_or_repo": {
+        "id": "C_customer_signals",
+        "name": "customer-signals",
+        "kind": "slack-channel",
+        "allowlisted": true
+      },
+      "content": {
+        "text": "A German beta user noticed 'download history' stayed in English. They called it 'the one untranslated thing on the export page'.",
+        "verbatim_excerpts": [
+          "download history",
+          "the one untranslated thing on the export page"
+        ],
+        "terminology": [
+          "German beta",
+          "export page"
+        ],
+        "error_strings": [],
+        "redacted": false,
+        "language": "en"
+      },
+      "product": {
+        "area": "Localization",
+        "feature": "unknown"
+      },
+      "customer_context": {
+        "segment": "unknown",
+        "account": "omitted",
+        "plan": "unknown"
+      },
+      "signals": {
+        "feedback_type": "Bug",
+        "sentiment": "unknown",
+        "urgency": "medium",
+        "severity": "Medium",
+        "reach": "Segment",
+        "reaction_count": 1,
+        "thread_reply_count": 0
+      },
+      "ingestion": {
+        "fixture_file": "feedback-fixtures/slack/field-feedback.json",
+        "idempotency_key": "feedback:slack:T_abc_demo:C_customer_signals:1789460100.000300"
+      },
+      "intake": {
+        "title": "[Feedback] A German beta user noticed 'download history' stayed in English. They called it...",
+        "labels": [
+          "feedback:intake",
+          "feedback:needs-pm-review",
+          "from-slack"
+        ],
+        "body": "## Customer Language\n\n### Exact Phrases\n\n- \"download history\"\n- \"the one untranslated thing on the export page\"\n\n### Terminology\n\n- `German beta`\n- `export page`\n\n### Error Messages / Commands / Product Names\n\n- _None captured_\n\n## Source Evidence\n\n- Source link: https://slack.com/archives/C_customer_signals/p1789460100000300\n- Source context: A German beta user noticed 'download history' stayed in English. They called it 'the one untranslated thing on the export page'.\n\n## Agent Triage Notes\n\nThis item came from Slack and preserves the source wording for PM review. Triage should compare the exact phrases above against duplicates before relying on any summary.\n\n## Strategy Triage\n\n- Relevant strategy excerpt:\n- Priority rationale:\n- Why this might matter now:\n\n## Duplicate / Related Signals\n\n- Potential canonical feedback issue:\n\n## PM Review\n\n- Interpretation:\n- Rationale:\n- Safe-to-share customer context:\n- Converted work item:\n\n<!-- workflow-metadata\nfeedback_key: feedback:slack:T_abc_demo:C_customer_signals:1789460100.000300\nsource_type: slack-message\ndedupe_key_candidates:\n  - download history\n  - the one untranslated thing on the export page\n-->",
+        "project_fields": {
+          "Source": "Slack",
+          "Product Area": "Localization",
+          "Feedback Type": "Bug",
+          "Severity": "Medium",
+          "Reach": "Segment"
+        }
+      }
+    },
+    {
+      "source_system": "slack",
+      "source_type": "slack-message",
+      "source_id": "T_abc_demo:C_customer_signals:1789463700.000400",
+      "source_url": "https://slack.com/archives/C_customer_signals/p1789463700000400",
+      "observed_at": "2026-09-15T12:00:00Z",
+      "author": {
+        "display_name": "Owen - PMM",
+        "role": "field team",
+        "is_internal": false
+      },
+      "channel_or_repo": {
+        "id": "C_customer_signals",
+        "name": "customer-signals",
+        "kind": "slack-channel",
+        "allowlisted": true
+      },
+      "content": {
+        "text": "Minor report feedback: stakeholders want the Friday report to start with 'what changed' before the full status rollup.",
+        "verbatim_excerpts": [
+          "start with 'what changed'",
+          "before the full status rollup"
+        ],
+        "terminology": [
+          "Friday report",
+          "status rollup"
+        ],
+        "error_strings": [],
+        "redacted": false,
+        "language": "en"
+      },
+      "product": {
+        "area": "Reporting",
+        "feature": "unknown"
+      },
+      "customer_context": {
+        "segment": "unknown",
+        "account": "omitted",
+        "plan": "unknown"
+      },
+      "signals": {
+        "feedback_type": "Feature Request",
+        "sentiment": "unknown",
+        "urgency": "low",
+        "severity": "Low",
+        "reach": "Multiple Users",
+        "reaction_count": 1,
+        "thread_reply_count": 0
+      },
+      "ingestion": {
+        "fixture_file": "feedback-fixtures/slack/field-feedback.json",
+        "idempotency_key": "feedback:slack:T_abc_demo:C_customer_signals:1789463700.000400"
+      },
+      "intake": {
+        "title": "[Feedback] Minor report feedback: stakeholders want the Friday report to start with 'what...",
+        "labels": [
+          "feedback:intake",
+          "feedback:needs-pm-review",
+          "from-slack"
+        ],
+        "body": "## Customer Language\n\n### Exact Phrases\n\n- \"start with 'what changed'\"\n- \"before the full status rollup\"\n\n### Terminology\n\n- `Friday report`\n- `status rollup`\n\n### Error Messages / Commands / Product Names\n\n- _None captured_\n\n## Source Evidence\n\n- Source link: https://slack.com/archives/C_customer_signals/p1789463700000400\n- Source context: Minor report feedback: stakeholders want the Friday report to start with 'what changed' before the full status rollup.\n\n## Agent Triage Notes\n\nThis item came from Slack and preserves the source wording for PM review. Triage should compare the exact phrases above against duplicates before relying on any summary.\n\n## Strategy Triage\n\n- Relevant strategy excerpt:\n- Priority rationale:\n- Why this might matter now:\n\n## Duplicate / Related Signals\n\n- Potential canonical feedback issue:\n\n## PM Review\n\n- Interpretation:\n- Rationale:\n- Safe-to-share customer context:\n- Converted work item:\n\n<!-- workflow-metadata\nfeedback_key: feedback:slack:T_abc_demo:C_customer_signals:1789463700.000400\nsource_type: slack-message\ndedupe_key_candidates:\n  - start with 'what changed'\n  - before the full status rollup\n-->",
+        "project_fields": {
+          "Source": "Slack",
+          "Product Area": "Reporting",
+          "Feedback Type": "Feature Request",
+          "Severity": "Low",
+          "Reach": "Multiple Users"
+        }
+      }
+    }
+  ]
+}

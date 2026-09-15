@@ -1,0 +1,65 @@
+{
+  "workspace_id": "T_abc_demo",
+  "workspace_name": "ABC Field Demo",
+  "captured_at": "2026-09-15T12:00:00Z",
+  "channels": [
+    {
+      "id": "C_customer_signals",
+      "name": "customer-signals",
+      "messages": [
+        {
+          "ts": "1789452300.000100",
+          "author_name": "Avery - Solutions",
+          "permalink": "https://slack.com/archives/C_customer_signals/p1789452300000100",
+          "text": "Customer beta call: setup felt like a black box after auth. Their exact words were 'I cannot tell if it is syncing or dead.'",
+          "reactions": [{"name": "inbox_tray", "count": 2}],
+          "exact_phrases": ["black box after auth", "I cannot tell if it is syncing or dead"],
+          "terminology": ["customer beta call", "syncing"],
+          "product_area": "Setup",
+          "feedback_type": "Bug",
+          "severity": "High",
+          "reach": "Account"
+        },
+        {
+          "ts": "1789455900.000200",
+          "author_name": "Jules - CS",
+          "permalink": "https://slack.com/archives/C_customer_signals/p1789455900000200",
+          "text": "Two EU prospects asked whether EU Payment Methods includes Klarna. One said 'cards plus SEPA is not enough for our checkout'.",
+          "reactions": [{"name": "inbox_tray", "count": 1}],
+          "exact_phrases": ["includes Klarna", "cards plus SEPA is not enough for our checkout"],
+          "terminology": ["EU prospects", "EU Payment Methods", "Klarna", "SEPA"],
+          "product_area": "EU Payments",
+          "feedback_type": "Feature Request",
+          "severity": "Medium",
+          "reach": "Segment"
+        },
+        {
+          "ts": "1789460100.000300",
+          "author_name": "Nina - Support",
+          "permalink": "https://slack.com/archives/C_customer_signals/p1789460100000300",
+          "text": "A German beta user noticed 'download history' stayed in English. They called it 'the one untranslated thing on the export page'.",
+          "reactions": [{"name": "inbox_tray", "count": 1}],
+          "exact_phrases": ["download history", "the one untranslated thing on the export page"],
+          "terminology": ["German beta", "export page"],
+          "product_area": "Localization",
+          "feedback_type": "Bug",
+          "severity": "Medium",
+          "reach": "Segment"
+        },
+        {
+          "ts": "1789463700.000400",
+          "author_name": "Owen - PMM",
+          "permalink": "https://slack.com/archives/C_customer_signals/p1789463700000400",
+          "text": "Minor report feedback: stakeholders want the Friday report to start with 'what changed' before the full status rollup.",
+          "reactions": [{"name": "inbox_tray", "count": 1}],
+          "exact_phrases": ["start with 'what changed'", "before the full status rollup"],
+          "terminology": ["Friday report", "status rollup"],
+          "product_area": "Reporting",
+          "feedback_type": "Feature Request",
+          "severity": "Low",
+          "reach": "Multiple Users"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "guild_id": "G_abc_demo",
+  "guild_name": "Agentics Beyond Code Community",
+  "captured_at": "2026-09-15T12:00:00Z",
+  "channels": [
+    {
+      "id": "C_setup_help",
+      "name": "setup-help",
+      "messages": [
+        {
+          "id": "M1001",
+          "author_display_name": "Riley",
+          "timestamp": "2026-09-13T17:45:00Z",
+          "permalink": "https://discord.com/channels/G_abc_demo/C_setup_help/M1001",
+          "content": "Mine gets stuck after login too. It says GitHub connected, then there is no spinner, no checklist, nothing.",
+          "reactions": [{"name": "same", "count": 4}],
+          "exact_phrases": ["gets stuck after login", "no spinner, no checklist, nothing"],
+          "terminology": ["GitHub connected", "checklist"],
+          "product_area": "Setup",
+          "feedback_type": "Bug",
+          "severity": "High",
+          "reach": "Multiple Users"
+        },
+        {
+          "id": "M1002",
+          "author_display_name": "Priya-beta",
+          "timestamp": "2026-09-14T09:18:00Z",
+          "permalink": "https://discord.com/channels/G_abc_demo/C_setup_help/M1002",
+          "content": "Can the sample data generator make customer feedback too? I want to demo the Friday report without manually creating a bunch of fake issues.",
+          "reactions": [{"name": "plus_one", "count": 3}],
+          "exact_phrases": ["make customer feedback too", "without manually creating a bunch of fake issues"],
+          "terminology": ["sample data generator", "Friday report", "fake issues"],
+          "product_area": "Demo Data",
+          "feedback_type": "Feature Request",
+          "severity": "Medium",
+          "reach": "Multiple Users"
+        },
+        {
+          "id": "M1003",
+          "author_display_name": "Casey",
+          "timestamp": "2026-09-14T13:35:00Z",
+          "permalink": "https://discord.com/channels/G_abc_demo/C_setup_help/M1003",
+          "content": "Tiny thing: the README says launch tracker but the UI says delivery tracker. I got confused for like 30 seconds.",
+          "reactions": [{"name": "eyes", "count": 1}],
+          "exact_phrases": ["launch tracker", "delivery tracker", "confused for like 30 seconds"],
+          "terminology": ["README", "launch tracker", "delivery tracker"],
+          "product_area": "Docs",
+          "feedback_type": "Usability",
+          "severity": "Low",
+          "reach": "One User"
+        },
+        {
+          "id": "M1004",
+          "author_display_name": "Morgan",
+          "timestamp": "2026-09-15T08:05:00Z",
+          "permalink": "https://discord.com/channels/G_abc_demo/C_setup_help/M1004",
+          "content": "Random idea: can it export all my dashboards as animated GIFs? Not urgent, just thought it would be fun.",
+          "reactions": [{"name": "sparkles", "count": 1}],
+          "exact_phrases": ["export all my dashboards as animated GIFs", "not urgent"],
+          "terminology": ["dashboards", "animated GIFs"],
+          "product_area": "Reporting",
+          "feedback_type": "Feature Request",
+          "severity": "Low",
+          "reach": "One User"
+        }
+      ]
+    }
+  ]
+}

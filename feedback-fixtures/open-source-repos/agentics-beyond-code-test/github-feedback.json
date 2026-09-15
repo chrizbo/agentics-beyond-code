@@ -1,0 +1,115 @@
+{
+  "repository": "agentics-beyond-code-test",
+  "repository_url": "https://github.com/chrizbo/agentics-beyond-code-test",
+  "captured_at": "2026-09-15T12:00:00Z",
+  "issues": [
+    {
+      "number": 41,
+      "title": "Setup just hangs after GitHub auth",
+      "url": "https://github.com/chrizbo/agentics-beyond-code-test/issues/41",
+      "author": "public-user-alex",
+      "created_at": "2026-09-12T16:20:00Z",
+      "labels": ["bug", "setup"],
+      "body": "After I approve GitHub auth, the setup just hangs after auth. There is no visible progress and I don't know if it is still working or stuck. I waited ten minutes and then killed it.",
+      "exact_phrases": ["just hangs after auth", "no visible progress", "still working or stuck"],
+      "terminology": ["setup", "GitHub auth", "visible progress"],
+      "product_area": "Setup",
+      "feedback_type": "Bug",
+      "severity": "High",
+      "reach": "Multiple Users"
+    },
+    {
+      "number": 43,
+      "title": "Show which GitHub Project fields are missing before workflows fail",
+      "url": "https://github.com/chrizbo/agentics-beyond-code-test/issues/43",
+      "author": "public-user-mika",
+      "created_at": "2026-09-12T19:05:00Z",
+      "labels": ["feature", "projects"],
+      "body": "The launch readiness workflow failed because my project did not have the expected fields. It would help if the app said exactly which project fields are missing before the workflow runs.",
+      "exact_phrases": ["which project fields are missing", "before the workflow runs"],
+      "terminology": ["launch readiness workflow", "project fields"],
+      "product_area": "GitHub Projects",
+      "feedback_type": "Feature Request",
+      "severity": "Medium",
+      "reach": "Multiple Users"
+    },
+    {
+      "number": 44,
+      "title": "EU payment launch needs Klarna in the readiness checklist",
+      "url": "https://github.com/chrizbo/agentics-beyond-code-test/issues/44",
+      "author": "public-user-camille",
+      "created_at": "2026-09-13T08:32:00Z",
+      "labels": ["feedback", "payments", "eu"],
+      "body": "For EU Payment Methods, Klarna is the payment method our beta customers keep asking about. The readiness checklist talks about cards and SEPA but not Klarna.",
+      "exact_phrases": ["Klarna is the payment method", "beta customers keep asking about", "cards and SEPA but not Klarna"],
+      "terminology": ["EU Payment Methods", "Klarna", "SEPA", "readiness checklist"],
+      "product_area": "EU Payments",
+      "feedback_type": "Feature Request",
+      "severity": "Medium",
+      "reach": "Segment"
+    },
+    {
+      "number": 45,
+      "title": "German screenshots still show English fallback text",
+      "url": "https://github.com/chrizbo/agentics-beyond-code-test/issues/45",
+      "author": "public-user-jonas",
+      "created_at": "2026-09-13T11:14:00Z",
+      "labels": ["bug", "localization"],
+      "body": "In the German beta screenshots, the export screen still shows English fallback text for 'download history' and 'request export'. It makes the localization feel half done.",
+      "exact_phrases": ["English fallback text", "download history", "request export", "half done"],
+      "terminology": ["German beta", "export screen", "localization"],
+      "product_area": "Localization",
+      "feedback_type": "Bug",
+      "severity": "Medium",
+      "reach": "Segment"
+    }
+  ],
+  "discussions": [
+    {
+      "number": 12,
+      "title": "Can setup show progress steps?",
+      "url": "https://github.com/chrizbo/agentics-beyond-code-test/discussions/12",
+      "author": "public-user-nora",
+      "created_at": "2026-09-12T21:40:00Z",
+      "category": "Ideas",
+      "body": "Setup needs a progress checklist. Right now it feels like a black box between GitHub auth and the first project sync.",
+      "exact_phrases": ["progress checklist", "black box", "first project sync"],
+      "terminology": ["setup", "GitHub auth", "project sync"],
+      "product_area": "Setup",
+      "feedback_type": "Usability",
+      "severity": "Medium",
+      "reach": "Multiple Users"
+    },
+    {
+      "number": 13,
+      "title": "Weekly report should say what changed since last Friday",
+      "url": "https://github.com/chrizbo/agentics-beyond-code-test/discussions/13",
+      "author": "public-user-sam",
+      "created_at": "2026-09-14T10:10:00Z",
+      "category": "Ideas",
+      "body": "The Friday report is useful, but I want a 'what changed since last Friday' section so I do not re-read the whole thing.",
+      "exact_phrases": ["what changed since last Friday", "do not re-read the whole thing"],
+      "terminology": ["Friday report"],
+      "product_area": "Reporting",
+      "feedback_type": "Feature Request",
+      "severity": "Low",
+      "reach": "One User"
+    }
+  ],
+  "pull_requests": [
+    {
+      "number": 9,
+      "title": "Docs: add workaround for setup stuck after auth",
+      "url": "https://github.com/chrizbo/agentics-beyond-code-test/pull/9",
+      "author": "public-user-lee",
+      "created_at": "2026-09-14T15:25:00Z",
+      "body": "This PR documents a workaround for when setup gets stuck after login. The workaround is to refresh the browser and rerun project sync.",
+      "exact_phrases": ["setup gets stuck after login", "rerun project sync"],
+      "terminology": ["workaround", "project sync"],
+      "product_area": "Setup",
+      "feedback_type": "Docs",
+      "severity": "Medium",
+      "reach": "Multiple Users"
+    }
+  ]
+}

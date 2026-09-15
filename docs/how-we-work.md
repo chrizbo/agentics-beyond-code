@@ -66,6 +66,7 @@
 | Sprint Retrospective | Biweekly (Friday) | transcript filename contains `retro` | 3 days |
 | Design Review | Weekly (Wednesday) | transcript filename contains `design-review` or `design` | 5 days |
 | Stakeholder Sync | Weekly (Friday) | transcript filename contains `stakeholder` | 5 days |
+| Customer Feedback Review | Weekly (Friday) | customer feedback trends report or feedback project activity | 5 days |
 | Stale Issue Review | Monthly (1st Monday) | issue with `stale-review` label or transcript mention | 10 days |
 
 ## Issue Triage
@@ -88,6 +89,47 @@
 ### Stale Issue Review
 - **When:** Monthly (first Monday)
 - **Process:** Close issues with no activity in 60+ days after confirming with assignee
+
+## Customer Feedback Review
+
+Customer feedback is considered in parallel with planned delivery work. Feedback
+does not automatically become roadmap work; it is collected, deduplicated,
+compared with strategy, and then interpreted by a PM before any work item is
+created.
+
+### Feedback Sources
+- Issues, discussions, and PRs from the hypothetical `agentics-beyond-code-test`
+  open-source repository
+- Discord customer or community channels
+- Slack customer, field-facing, or internal escalation channels
+- Fixture data in demo and test environments
+
+### Weekly Feedback Review
+- **When:** Fridays, after weekly status context is available
+- **Who:** Product DRI, with engineering/design input as needed
+- **Inputs:**
+  - Customer Feedback Queue project
+  - Friday customer feedback trends report
+  - `docs/strategy.md`
+  - Active work in the existing delivery project
+- **Process:**
+  1. Review new feedback intake issues and potential duplicates.
+  2. Preserve and inspect the exact customer language before relying on summaries.
+  3. Compare emerging bugs and requests with current strategy.
+  4. Review the workflow's suggested priority for each item or cluster.
+  5. Identify feedback trends that are high-priority and not represented in active work.
+  6. Decide which items need more information, should be watched, deferred, marked as duplicates, or converted into work.
+  7. Select the most important feedback-driven work for the team to consider next week.
+  8. Convert only PM-approved feedback into agent-ready work items.
+
+### Demo Data
+- Demo runs should seed a realistic set of feedback issues into the Customer
+  Feedback Queue project before the Friday report runs.
+- Demo feedback should include at least one duplicate cluster, one bug trend,
+  one repeated feature request, one noisy item that should not become work, and
+  one item that aligns strongly with `docs/strategy.md`.
+- Demo feedback must preserve exact customer phrases so the Friday report can
+  show trends without flattening the language into generic summaries.
 
 ## Sprint / Iteration Cadence
 
@@ -157,6 +199,11 @@
 | Intake request triage | Intake Request Triage workflow | On issue labeled `triage-needed` |
 | Standup preparation | Daily Standup Prep workflow | Monday/Wednesday |
 | Sample data generation | Sample Data Simulator | Sunday and Tuesday nights |
+| Customer feedback fixture generation | Customer Feedback Fixture Simulator | Before feedback demo/report runs |
+| Customer feedback intake | Customer Feedback Intake Creator | On feedback fixture or source update |
+| Customer feedback dedupe, strategy triage, and priority suggestion | Feedback Dedupe, Strategy Triage, and Priority Suggestion workflow | On feedback intake or manual dispatch |
+| Customer feedback trends report | Friday Feedback Trends Report | Weekly (Friday) |
+| Feedback work-item conversion | Feedback-to-Work-Item Converter | On `/create-work-item` |
 
 ### Manual Processes (Candidates for Automation)
 | Process | Current Owner | Notes |
@@ -164,6 +211,7 @@
 | ~~Issue triage & labeling~~ | ~~Sarah~~ | **Automated** — see Intake Request Triage workflow below |
 | Sprint velocity reporting | Sarah | Manual spreadsheet export; could use a scheduled workflow |
 | Stale issue cleanup | Sarah | Monthly manual review; could be a scheduled workflow |
+| Customer feedback interpretation | Product DRI | Human PM call before feedback becomes work |
 | On-call rotation scheduling | Alex | Manual Google Calendar updates |
 | Release notes compilation | Priya | Manual before each GA launch |
 | Dependency update review | Marcus | Manual Dependabot PR review |
