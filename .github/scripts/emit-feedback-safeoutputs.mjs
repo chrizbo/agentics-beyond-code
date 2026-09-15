@@ -9,9 +9,10 @@ const args = new Set(process.argv.slice(2));
 const dryRun = args.has("--dry-run");
 
 function run(command, commandArgs, options = {}) {
+  const stdio = options.stdio ?? (options.input === undefined ? ["ignore", "pipe", "pipe"] : ["pipe", "pipe", "pipe"]);
   const result = spawnSync(command, commandArgs, {
     encoding: "utf8",
-    stdio: options.stdio ?? ["ignore", "pipe", "pipe"],
+    stdio,
     input: options.input,
   });
 
