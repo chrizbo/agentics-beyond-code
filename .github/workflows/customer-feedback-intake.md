@@ -10,11 +10,6 @@ engine:
   model: gpt-5-mini
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'feedback-fixtures/**/*.json'
-      - '.github/scripts/normalize-feedback-fixtures.mjs'
   workflow_dispatch:
 
 permissions:
