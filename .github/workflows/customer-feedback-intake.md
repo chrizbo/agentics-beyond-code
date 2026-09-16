@@ -46,9 +46,12 @@ safe-outputs:
     labels:
       - feedback:intake
       - feedback:needs-pm-review
+  add-labels:
+    allowed:
       - from-open-source-repo
       - from-discord
       - from-slack
+    max: 20
   update-project:
     max: 20
     project: "https://github.com/users/chrizbo/projects/3"
@@ -103,6 +106,8 @@ The script:
   `event.ingestion.idempotency_key`.
 - Emits `safeoutputs create_issue .` for events without an existing issue.
 - Uses a deterministic `temporary_id` on each created issue.
+- Emits `safeoutputs add_labels .` to apply only the source label for the
+  event, such as `from-open-source-repo`, `from-discord`, or `from-slack`.
 - Emits `safeoutputs update_project .` with `content_type: "issue"` and
   `content_number` set to the same temporary id so created issues are added to
   the Customer Feedback Queue project with the event's project fields.

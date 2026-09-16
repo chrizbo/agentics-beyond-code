@@ -68,13 +68,17 @@ try {
   throw new Error(`Unable to load existing issues for idempotency check: ${error.message}`);
 }
 
-const existingBodies = existingIssues
-  .map((issue) => issue.body)
-  .filter((body) => typeof body === "string");
-
 const missingEvents = events.filter((event) => {
   const key = event?.ingestion?.idempotency_key;
-  return typeof key === "string" && !existingBodies.some((body) => body.includes(key));
+  const sourceUrl = event?.source_url;
+  const title = event?.intake?.title;
+  return !existingIssues.some((issue) => {
+    const body = typeof issue.body === "string" ? issue.body : "";
+    const hasKey = typeof key === "string" && body.includes(key);
+    const hasSourceUrl = typeof sourceUrl === "string" && body.includes(sourceUrl);
+    const hasTitle = typeof title === "string" && issue.title === title;
+    return hasKey || hasSourceUrl || hasTitle;
+  });
 });
 
 if (missingEvents.length === 0) {
@@ -93,8 +97,15 @@ for (const [index, event] of missingEvents.entries()) {
     temporary_id: id,
     title: event.intake.title,
     body: event.intake.body,
-    labels: event.intake.labels,
   });
+
+  const sourceLabels = (event.intake.labels ?? []).filter((label) => label.startsWith("from-"));
+  if (sourceLabels.length > 0) {
+    safeOutput("add_labels", {
+      issue_number: id,
+      labels: sourceLabels,
+    });
+  }
 
   safeOutput("update_project", {
     project: PROJECT_URL,
