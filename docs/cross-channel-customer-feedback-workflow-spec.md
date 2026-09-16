@@ -378,6 +378,12 @@ Writes:
 Purpose: Group related intake items, compare them with current strategy, and
 prepare PM review with a suggested priority.
 
+Implementation: an agentic workflow,
+`.github/workflows/feedback-dedupe-triage.md`, runs manually for the demo. A
+deterministic pre-step writes compact queue context with
+`.github/scripts/fetch-feedback-queue.mjs`; the agent then adds review comments,
+labels, and Project field updates.
+
 Behavior:
 
 - Scans open `feedback:intake` issues.
@@ -844,7 +850,7 @@ separate operating system.
 
 ### Slice 4: Dedupe, Strategy Triage, and PM Review Workflow
 
-- Add a scheduled or manual workflow that reviews open feedback intake issues,
+- Add a manual workflow that reviews open feedback intake issues,
   proposes duplicate candidates, links duplicates as sub-issues, and labels
   items for PM review.
 - Check feedback against `docs/strategy.md`.

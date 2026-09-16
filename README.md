@@ -40,6 +40,7 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 |----------|-------------|----------------|
 | [📥 Intake Request Triage](.github/workflows/intake-triage.md) | Scores incoming feature requests and bug reports using RICE and Kano frameworks, checks strategy alignment, detects duplicates, flags incomplete submissions, and adds items to the triage project board | [Triage comment](https://github.com/chrizbo/agentics-beyond-code/issues/109#issuecomment-4416252905) |
 | [🗣️ Customer Feedback Intake](.github/workflows/customer-feedback-intake.yml) | Manual deterministic fixture intake — normalizes OSS repo, Discord, and Slack feedback fixtures, preserves exact customer language, creates feedback intake issues, and adds them to the Customer Feedback Queue project | Fixture-first workflow; demo output pending |
+| [🔎 Feedback Dedupe & Strategy Triage](.github/workflows/feedback-dedupe-triage.md) | Reviews feedback intake issues, proposes duplicate clusters, compares exact customer language against strategy, suggests priority, comments on issues, labels the queue, and updates Customer Feedback Queue fields | Reviewer comments pending |
 
 ### 📋 Decision & Knowledge
 
