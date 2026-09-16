@@ -165,6 +165,7 @@ function shouldRefreshGeneratedBody(issue) {
   return (
     body.includes("<!-- gh-aw-agentic-workflow: Customer Feedback Intake") ||
     body.includes("Firewall blocked") ||
+    body.includes("## Agent Triage Notes") ||
     body.includes("## Strategy Triage") ||
     body.includes("## Duplicate / Related Signals") ||
     body.includes("## PM Review")

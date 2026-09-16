@@ -174,12 +174,6 @@ Suggested issue body:
 - Source link: <source permalink or fixture reference>
 - Source context: <short copied excerpt with private identifiers redacted when needed>
 
-## Agent Triage Notes
-
-<agent commentary that helps the PM triage the item. Do not repeat fields that
-already live in labels or the Customer Feedback Queue project. Focus on why the
-feedback may matter, what is ambiguous, and what wording should not be lost.>
-
 <!-- workflow-metadata
 feedback_key: <source-system>:<source-id>
 source_type: <issue | discussion | pull-request | discord-message | slack-message>
@@ -192,8 +186,8 @@ dedupe_key_candidates:
 The issue body intentionally avoids repeating project fields and labels such as
 source, feedback type, product area, severity, reach, strategy fit, suggested
 priority, and PM decision. Those values belong in the `Customer Feedback Queue`
-project or labels. The body should preserve language, evidence, and agent
-commentary that makes triage easier.
+project or labels. The body should preserve customer language and source
+evidence only.
 
 Reviewer workflows should add comments rather than pre-allocating empty
 sections in the issue body. Dedupe, strategy triage, priority suggestion, PM

@@ -191,10 +191,6 @@ ${terminologyList(event.content.error_strings)}
 - Source link: ${event.source_url}
 - Source context: ${truncate(event.content.text, 600)}
 
-## Agent Triage Notes
-
-This item came from ${sourceName(event.source_system)} and preserves the source wording for PM review. Triage should compare the exact phrases above against duplicates before relying on any summary.
-
 <!-- workflow-metadata
 feedback_key: ${event.ingestion.idempotency_key}
 source_type: ${event.source_type}
