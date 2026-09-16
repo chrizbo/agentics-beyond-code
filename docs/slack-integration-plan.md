@@ -3,6 +3,17 @@
 Future work proposal for adding Slack as a context source, lightweight trigger
 surface, and update target for Agentics Beyond Code workflows.
 
+> **Status:** Three phases have shipped and are live — [Phase 1: Slack Context
+> Processor ✅](#phase-1-slack-context-processor-), [Phase 2: Slack Reaction
+> Intake ✅](#phase-2-slack-reaction-intake-), and [Phase 4: Focused
+> Report-Back ✅](#phase-4-focused-report-back-). Phase 3 (Commitment
+> Reconciliation from Slack) and Phase 5 (expanded reaction semantics) are
+> still proposal. See [Phased Rollout](#phased-rollout) for the full
+> breakdown, and [Two Slack Surfaces](#two-slack-surfaces-internal-team-channel-vs-external-customer-channels)
+> below for how this plan's internal-team-channel scope differs from the
+> customer-facing Slack ingestion covered by the
+> [Cross-Channel Customer Feedback Workflow Spec](cross-channel-customer-feedback-workflow-spec.md).
+
 ## Goals
 
 - Pull Slack context into artifact-centered workflows the way transcript files
@@ -42,6 +53,33 @@ surface, and update target for Agentics Beyond Code workflows.
 - Use Option A as the default GitHub issue comment format for Slack Context
   Processor, use Option B when the Slack context contains decisions or action
   items, and reserve Option C for Commitment Reconciler.
+
+## Two Slack Surfaces: Internal Team Channel vs. External Customer Channels
+
+This plan and its three built workflows cover exactly one Slack surface:
+**the team's own internal workspace**, where teammates already talk to each
+other. That's a deliberately narrow scope, and it's easy to conflate with a
+different, separately-specced Slack surface — **external, customer-facing
+Slack channels** — so the distinction is worth stating explicitly:
+
+| | This plan (internal) | Customer Feedback Intake (external) |
+|---|---|---|
+| Workflows | Slack Context Processor, Slack Reaction Intake, Slack Report-Back, Slack Triage Postback | `customer-feedback-intake.yml` (part of the [Cross-Channel Customer Feedback Workflow Spec](cross-channel-customer-feedback-workflow-spec.md)) |
+| Who is talking | The org's own team, in its own workspace | Customers, prospects, and field/CS reps relaying what customers said |
+| Fixture source | `slack-fixtures/*.json` — one internal workspace/channel | `feedback-fixtures/slack/*.json` — a separate simulated workspace (field/CS channels like `customer-signals`), alongside Discord and OSS-repo fixtures |
+| What it asks of the team | "Can we open an issue for X?" — a teammate asking the team for something | "A customer said X" — signal *about* customers, routed into the feedback queue |
+| Trigger model | Emoji reactions on messages the team already sent | Bulk periodic normalization of channels the team doesn't post in |
+| Destination | A GitHub intake issue or comment, triaged like any other team request | The Customer Feedback Queue project, deduped and triaged against strategy |
+| Audience visibility | Assumes a trusted, internal-only workspace | Assumes the channel may carry externally-sourced or semi-public signal and should be handled like other customer feedback (see that spec's Privacy and Safety Boundaries) |
+
+Practically: if you're wiring up a new Slack channel, ask whether it's a
+channel *of* the team (internal coordination, requests, decisions — this
+plan) or a channel *about* customers (field/CS relaying external voice,
+however that channel is otherwise scoped — the feedback spec). The two use
+different fixture shapes, different safe-output destinations, and different
+trust assumptions, and the workflows in this plan should not be pointed at
+customer-facing channels without going through the feedback spec's dedupe,
+redaction, and privacy handling instead.
 
 ## Core Use Cases
 
@@ -528,8 +566,11 @@ Suggested secrets:
 - Confirm app permissions, event delivery, idempotency, and GitHub output shape
   before connecting real team channels.
 
-### Phase 1: Slack Context Processor
+### Phase 1: Slack Context Processor ✅
 
+- Implemented as `.github/workflows/slack-context-processor.md` (fixture-first
+  MVP that matches `slack-fixtures/*.json` messages to open issues and posts
+  summarized context comments).
 - Add a deterministic Slack fetch script or Slack MCP configuration.
 - For the MVP, read synthetic `slack-fixtures/*.json` files before adding real
   Slack API access.

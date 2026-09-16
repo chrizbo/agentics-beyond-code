@@ -23,7 +23,11 @@ Customer feedback arrives through too many doors:
 - A hypothetical open-source repository, `agentics-beyond-code-test`, where
   external users file issues, start discussions, and sometimes open PRs.
 - Discord community channels.
-- Slack customer, field-facing, or internal escalation channels.
+- Slack customer, field-facing, or internal escalation channels — channels
+  *about* customers (field/CS relaying what a customer said), not the team's
+  own internal coordination workspace. See
+  [Two Slack Surfaces](slack-integration-plan.md#two-slack-surfaces-internal-team-channel-vs-external-customer-channels)
+  for how this differs from `slack-reaction-intake.md`'s scope.
 
 That feedback is often duplicated, incomplete, emotional, channel-specific, and
 phrased in language the team should not lose. PMs need a reliable queue that

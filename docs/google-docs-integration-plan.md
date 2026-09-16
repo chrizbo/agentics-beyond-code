@@ -3,6 +3,22 @@
 Future work proposal for using Google Docs as a bounded context source and a
 validated update target for Agentics Beyond Code workflows.
 
+> **Status:** One slice of this plan has shipped and is live: the **Weekly
+> Status collaborative Google Doc flow** — generate a draft Doc from the
+> Weekly Status Discussion, notify the team in Slack to shape it, gate on a
+> `/finalize-status` comment, then publish the finalized content back to the
+> Discussion and post the official Slack notification. That flow is real,
+> tested end-to-end in staged mode, and documented below in
+> [Collaborative Weekly Status Draft](#5-collaborative-weekly-status-draft),
+> [Draft-to-Shaping Handoff](#draft-to-shaping-handoff),
+> [Weekly Status MVP Decisions](#weekly-status-mvp-decisions), and
+> [Google-Side Setup](#google-side-setup), each marked **✅ Implemented**
+> below. Everything else in this document — decision context packs, review
+> comments, append-only updates, a generic Google Docs safe-output surface,
+> and the other workflow candidates — is still **🚧 Proposal**, not yet
+> built. See the [Implementation Readiness Checklist](#implementation-readiness-checklist)
+> for exactly what's live versus what's still design.
+
 ## Why Google Docs
 
 The repository currently demonstrates how agentic workflows reason over
@@ -115,6 +131,10 @@ compact normalized representation.
 
 ## Initial Demo Scenarios
 
+> Scenarios 1–4 below are still 🚧 proposal. Scenario 5 (Collaborative Weekly
+> Status Draft) is ✅ implemented and live — it's the one piece of this plan
+> that shipped.
+
 ### 1. Decision Context Pack
 
 **Question:** Should the Audit Log Export launch ship with 30-day retention or
@@ -166,7 +186,7 @@ requires the GitHub discussion URL as the durable source.
 This demonstrates report-back to an audience that works in Docs while keeping
 the full reasoning and history in GitHub.
 
-### 5. Collaborative Weekly Status Draft
+### 5. Collaborative Weekly Status Draft ✅ Implemented
 
 The Weekly Status workflow creates a short-lived Google Doc from an allowlisted
 template instead of publishing its first synthesis as the final report.
@@ -188,7 +208,7 @@ The handoff from agent draft to human shaping is explicit:
 This demonstrates Google Docs as a temporary collaborative draft layer between
 agent synthesis and durable publication.
 
-## Draft-to-Shaping Handoff
+## Draft-to-Shaping Handoff ✅ Implemented
 
 The transition from agent-generated draft to human collaboration should not be
 implicit. Creating a document is insufficient; the workflow must create a
@@ -313,7 +333,7 @@ Before finalizing, the workflow should verify:
 - **Google Doc owns:** the temporary collaboratively shaped narrative.
 - **Published report owns:** the official status communicated to its audience.
 
-## Real Read Path
+## Real Read Path 🚧 Proposal
 
 ### Authentication
 
@@ -389,7 +409,7 @@ Responsibilities:
 
 The agent receives the normalized snapshots, not Google credentials.
 
-## Choosing the Write Mode
+## Choosing the Write Mode 🚧 Proposal
 
 Google Docs writes should reflect the type of artifact and the human
 expectation around it. There should not be one general-purpose edit tool.
@@ -447,7 +467,7 @@ The key design rule is:
 An agent should request "create a weekly status collaboration draft," not
 "create file, move file, grant permission, insert text, and add comments."
 
-## Reference Safe-Output Surface
+## Reference Safe-Output Surface 🚧 Proposal
 
 A reusable Google Docs adapter should expose a small semantic toolset. Each tool
 should have a narrow collaboration purpose and its own policy.
@@ -520,7 +540,7 @@ Moves or marks an expired workflow-created draft as archived. This is analogous
 to discussion expiration or closing older recurring issues. It should operate
 only on documents created by the workflow and identified by a lifecycle marker.
 
-## Reference Adapter Policy
+## Reference Adapter Policy 🚧 Proposal
 
 The shared adapter should make policy visible in configuration rather than
 embedding it in prompts. A useful conceptual configuration is:
@@ -655,7 +675,7 @@ Failures should be explicit and actionable. Missing credentials, inaccessible
 documents, out-of-scope targets, revision conflicts, or invalid content should
 fail the safe-output job without exposing secrets.
 
-## Reference Implementation Package
+## Reference Implementation Package 🚧 Proposal
 
 To make this useful beyond this repository, ship the integration as a small
 adaptable package rather than a one-off workflow:
@@ -693,7 +713,7 @@ focused on tool contracts, job permissions, environment access, and audit
 summaries. This makes it easier for adopters to inspect and replace
 authentication without weakening validation behavior.
 
-## Weekly Status MVP Decisions
+## Weekly Status MVP Decisions ✅ Implemented
 
 Before implementing the first collaborative status cycle, make these choices
 explicit. They affect artifact ownership, authentication, dispatch behavior,
@@ -974,7 +994,7 @@ safe-output item. Manual staged validation may instead provide an explicit
 Discussion URL; the dispatcher resolves its number against the current
 repository rather than trusting an arbitrary URL.
 
-## Google-Side Setup
+## Google-Side Setup ✅ Implemented
 
 The first live status-cycle demo uses a shared folder in a personal Google
 account. That requires OAuth acting as the human account that owns the folder
@@ -1229,7 +1249,7 @@ For Workspace adopters using a shared drive:
 The higher-level safe-output contracts and weekly-status lifecycle remain the
 same.
 
-## Custom Safe Output Contracts
+## Custom Safe Output Contracts 🚧 Proposal
 
 Add a reusable shared component:
 
@@ -1301,7 +1321,7 @@ Only add these after comments and append-only updates are proven:
 
 Do not add arbitrary full-document replacement.
 
-## Workflow Candidates
+## Workflow Candidates 🚧 Proposal
 
 | Workflow | Google Docs read | Google Docs write |
 |---|---|---|
