@@ -74,7 +74,12 @@ when GitHub Issues/Projects/Discussions are the team's actual home.
    the prompt text to use there; it does not fabricate a live routine by
    writing repo files, because there is no file-based equivalent of a Routine
    or Scheduled Task the way a `.md` workflow file is the source of truth for
-   gh-aw.
+   gh-aw. Hand over the prompt text as a copy-paste block in the response
+   itself (see Output standard) — do not write it to a new file in this repo.
+   Nothing in this repo executes it, so a checked-in copy just becomes a second
+   version to keep in sync with whatever actually gets pasted into the
+   product. If the user wants a durable, reviewable copy anyway, ask first and
+   say where it will go before creating it.
 8. If the user's actual system of record is GitHub and they have no objection
    to GitHub Actions, say so and route to `agentic-workflows` and
    `non-coder-agentic-workflow-builder` instead — don't force the non-GitHub
@@ -96,10 +101,13 @@ with, per step:
 Then a rollout order: which steps to stand up first, and what needs to exist
 (a channel, a sheet, a connector) before that step can run.
 
-When the user asks to actually build it, help them write the exact prompt text
-for the Routine or Scheduled Task (what to read, what judgment to apply, what
-to write and where, what never to do without a human saying so), then point
-them at the real setup surface from step 7 above.
+When the user asks to actually build it, write the exact prompt text for the
+Routine or Scheduled Task (what to read, what judgment to apply, what to write
+and where, what never to do without a human saying so) directly into the
+response, in a fenced code block labeled with its destination — e.g.
+"Routine prompt — paste into `/schedule` or claude.ai/code" — so it can be
+copied straight into the setup surface from step 7 above. Do not create a new
+file in the repo for this by default.
 
 ## Important defaults
 
@@ -124,3 +132,7 @@ them at the real setup surface from step 7 above.
 - Never let the automation itself decide that something is ready to become
   committed work, spend money, or go out externally — that step stays an
   explicit human trigger, regardless of which engine runs the automation.
+- Default to handing over Routine/Scheduled Task prompt text inline, in the
+  response, not as a new repo file. It's product configuration to paste
+  elsewhere, not something this repo runs — treat it like an answer, not a
+  deliverable that belongs in version control, unless the user says otherwise.
