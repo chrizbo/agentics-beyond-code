@@ -82,6 +82,8 @@ safe-outputs:
     max: 20
     project: "https://github.com/users/chrizbo/projects/3"
     github-token: ${{ secrets.AW_TOKEN }}
+  link-sub-issue:
+    max: 10
   noop:
 ---
 
@@ -107,7 +109,13 @@ ${{ inputs.issue_number }}
 
 If a target issue number is provided, review that issue in the context of the
 rest of the queue. If it is blank, review every open `feedback:intake` issue in
-the queue.
+the queue that does not already have the `feedback:triaged` label.
+
+Issues that already have `feedback:triaged` stay in the queue context so you
+can still compare new issues against them for duplicates, but do not add a new
+review comment, labels, or project update for an already-triaged issue unless
+it is the explicitly requested issue number above. This keeps reruns cheap and
+avoids duplicate comments.
 
 ## Pre-Fetched Queue Data
 
@@ -140,6 +148,18 @@ For each target issue, evaluate:
    - Call out differences in wording when two items appear related.
    - Do not declare final duplicates. Say `Potential duplicate` and leave the
      PM decision open.
+   - When a likely duplicate cluster exists, choose one canonical issue using
+     this order: (1) the issue sharing the same `feedback_key` source system
+     in its hidden metadata, (2) otherwise the oldest open issue in the
+     cluster by issue number, (3) otherwise the issue with the richest source
+     evidence.
+   - For every non-canonical issue in the cluster, call `link_sub_issue` with
+     `parent_issue_number` set to the canonical issue's number and
+     `sub_issue_number` set to the non-canonical issue's number. Skip a pair
+     if that sub-issue link already exists.
+   - A sub-issue link records a likely relationship for the PM to review. It
+     is not a final merge decision, and it does not replace the
+     `Potential duplicate` note in the review comment.
 
 2. **Strategy fit**
    - Read `docs/strategy.md`.
@@ -179,6 +199,15 @@ Add one comment per reviewed issue. Keep it concise and useful. Use this shape:
 Use full issue URLs instead of bare `#123` references.
 
 ## Labels
+
+Always pass `"suggest": false` explicitly in every label object you send to
+`add_labels`, regardless of your confidence level. This workflow's review
+comment is already the human-review step; a label held back for a separate
+review queue because of a `MEDIUM` or `LOW` confidence score will not show up
+on the issue, will not be visible to the PM, and will silently diverge from
+what the comment and Project fields say. Keep including `confidence` and
+`rationale` for transparency, but do not let confidence gate whether the label
+is actually applied.
 
 For each reviewed issue, add:
 

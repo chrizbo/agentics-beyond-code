@@ -153,7 +153,7 @@ const issues = (project.items?.nodes ?? [])
       body: item.content.body,
     };
   })
-  .filter((issue) => issue.labels.includes("feedback:intake"))
+  .filter((issue) => issue.labels.includes("feedback:intake") && issue.state === "OPEN")
   .sort((a, b) => a.number - b.number);
 
 const payload = {
@@ -174,6 +174,7 @@ const summary = {
     number: issue.number,
     title: issue.title,
     url: issue.url,
+    state: issue.state,
     labels: issue.labels,
     project_fields: issue.project_fields,
     excerpts: excerptSection(issue.body, "### Exact Phrases"),
