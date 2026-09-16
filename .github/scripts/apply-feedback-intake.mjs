@@ -50,6 +50,16 @@ function tempFile(prefix, contents) {
   return file;
 }
 
+function graphql(query, variables = {}, options = {}) {
+  if (dryRun && options.write) {
+    console.log(`[dry-run] graphql ${options.name ?? "mutation"} ${JSON.stringify(variables)}`);
+    return options.dryRunOutput ?? {};
+  }
+
+  const inputFile = tempFile("graphql.json", JSON.stringify({ query, variables }));
+  return parseJson(gh(["api", "graphql", "--input", inputFile]), {});
+}
+
 function loadEvents() {
   const normalized = JSON.parse(readFileSync(EVENTS_PATH, "utf8"));
   return Array.isArray(normalized.events) ? normalized.events : [];
@@ -67,7 +77,7 @@ function loadIssues() {
       "--limit",
       "500",
       "--json",
-      "number,title,state,url,body,labels",
+      "id,number,title,state,url,body,labels",
     ]),
     [],
   );
@@ -114,7 +124,21 @@ function createIssue(event) {
   );
   const url = String(output).trim();
   const number = dryRun ? dryRunIssueNumber-- : Number(url.split("/").pop());
-  return { number, title: event.intake.title, url, body: event.intake.body, labels: labels.map((name) => ({ name })) };
+  if (dryRun) {
+    return {
+      id: `dry-run-issue-${Math.abs(number)}`,
+      number,
+      title: event.intake.title,
+      url,
+      body: event.intake.body,
+      labels: labels.map((name) => ({ name })),
+    };
+  }
+
+  return parseJson(
+    gh(["issue", "view", String(number), "--repo", REPO, "--json", "id,number,title,url,body,labels"]),
+    { number, title: event.intake.title, url, body: event.intake.body, labels: labels.map((name) => ({ name })) },
+  );
 }
 
 function syncLabels(issue, event) {
@@ -149,23 +173,71 @@ function refreshGeneratedBody(issue, event) {
 }
 
 function loadProject() {
-  return parseJson(gh(["project", "view", PROJECT_NUMBER, "--owner", PROJECT_OWNER, "--format", "json"]), {});
-}
+  if (PROJECT_OWNER !== "@me") {
+    throw new Error("Only FEEDBACK_PROJECT_OWNER=@me is currently supported by the deterministic intake script.");
+  }
 
-function loadProjectFields() {
-  const result = parseJson(gh(["project", "field-list", PROJECT_NUMBER, "--owner", PROJECT_OWNER, "--format", "json"]), {
-    fields: [],
-  });
-  return new Map((result.fields ?? []).map((field) => [field.name, field]));
-}
-
-function loadProjectItems() {
-  const result = parseJson(
-    gh(["project", "item-list", PROJECT_NUMBER, "--owner", PROJECT_OWNER, "--limit", "200", "--format", "json"]),
-    { items: [] },
+  const result = graphql(
+    `query($number: Int!) {
+      viewer {
+        projectV2(number: $number) {
+          id
+          fields(first: 100) {
+            nodes {
+              __typename
+              ... on ProjectV2Field {
+                id
+                name
+                dataType
+              }
+              ... on ProjectV2SingleSelectField {
+                id
+                name
+                dataType
+                options {
+                  id
+                  name
+                }
+              }
+            }
+          }
+          items(first: 100) {
+            nodes {
+              id
+              content {
+                __typename
+                ... on Issue {
+                  id
+                  number
+                  url
+                }
+              }
+            }
+          }
+        }
+      }
+    }`,
+    { number: Number(PROJECT_NUMBER) },
   );
+
+  const project = result?.data?.viewer?.projectV2;
+  if (!project?.id) {
+    throw new Error(`Unable to load feedback project ${PROJECT_OWNER}/${PROJECT_NUMBER}`);
+  }
+  return project;
+}
+
+function projectFields(project) {
+  return new Map(
+    (project.fields?.nodes ?? [])
+      .filter((field) => field?.name)
+      .map((field) => [field.name, { ...field, type: field.__typename }]),
+  );
+}
+
+function projectItems(project) {
   const items = new Map();
-  for (const item of result.items ?? []) {
+  for (const item of project.items?.nodes ?? []) {
     const number = item?.content?.number;
     if (number) items.set(Number(number), item);
   }
@@ -173,14 +245,22 @@ function loadProjectItems() {
 }
 
 function addProjectItem(issue) {
-  const output = gh(
-    ["project", "item-add", PROJECT_NUMBER, "--owner", PROJECT_OWNER, "--url", issue.url, "--format", "json"],
+  const result = graphql(
+    `mutation($projectId: ID!, $contentId: ID!) {
+      addProjectV2ItemById(input: {projectId: $projectId, contentId: $contentId}) {
+        item {
+          id
+        }
+      }
+    }`,
+    { projectId: issue.projectId, contentId: issue.id },
     {
       write: true,
-      dryRunOutput: JSON.stringify({ id: `dry-run-${issue.number}` }),
+      name: "addProjectV2ItemById",
+      dryRunOutput: { data: { addProjectV2ItemById: { item: { id: `dry-run-${issue.number}` } } } },
     },
   );
-  return parseJson(output, {});
+  return result?.data?.addProjectV2ItemById?.item ?? {};
 }
 
 function optionIdFor(field, value) {
@@ -195,29 +275,34 @@ function setProjectField(project, fields, item, name, value) {
     return false;
   }
 
-  const baseArgs = [
-    "project",
-    "item-edit",
-    "--id",
-    item.id,
-    "--project-id",
-    project.id,
-    "--field-id",
-    field.id,
-  ];
-
   if (field.type === "ProjectV2SingleSelectField") {
     const optionId = optionIdFor(field, value);
     if (!optionId) {
       console.log(`Skipping ${name}: no project option named ${value}`);
       return false;
     }
-    gh([...baseArgs, "--single-select-option-id", optionId], { write: true });
+    updateProjectField(project, item, field, { singleSelectOptionId: optionId });
     return true;
   }
 
-  gh([...baseArgs, "--text", value], { write: true });
+  updateProjectField(project, item, field, { text: value });
   return true;
+}
+
+function updateProjectField(project, item, field, value) {
+  graphql(
+    `mutation($projectId: ID!, $itemId: ID!, $fieldId: ID!, $value: ProjectV2FieldValue!) {
+      updateProjectV2ItemFieldValue(
+        input: {projectId: $projectId, itemId: $itemId, fieldId: $fieldId, value: $value}
+      ) {
+        projectV2Item {
+          id
+        }
+      }
+    }`,
+    { projectId: project.id, itemId: item.id, fieldId: field.id, value },
+    { write: true, name: "updateProjectV2ItemFieldValue" },
+  );
 }
 
 function syncProjectFields(project, fields, item, event) {
@@ -236,8 +321,8 @@ if (events.length === 0) {
 
 let issues = loadIssues();
 const project = loadProject();
-const fields = loadProjectFields();
-let projectItems = loadProjectItems();
+const fields = projectFields(project);
+let items = projectItems(project);
 
 const stats = {
   created: 0,
@@ -264,10 +349,11 @@ for (const event of events) {
     if (refreshGeneratedBody(issue, event)) stats.bodiesRefreshed += 1;
   }
 
-  let item = projectItems.get(Number(issue.number));
+  let item = items.get(Number(issue.number));
   if (!item) {
+    issue.projectId = project.id;
     item = addProjectItem(issue);
-    projectItems.set(Number(issue.number), item);
+    items.set(Number(issue.number), item);
     stats.projectItemsAdded += 1;
   }
 
