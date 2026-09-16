@@ -1,0 +1,36 @@
+name: Customer Feedback Intake
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: customer-feedback-intake
+  cancel-in-progress: false
+
+jobs:
+  intake:
+    name: Normalize fixtures and update feedback queue
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.AW_TOKEN || github.token }}
+      FEEDBACK_PROJECT_OWNER: "@me"
+      FEEDBACK_PROJECT_NUMBER: "3"
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Normalize feedback fixtures
+        run: node .github/scripts/normalize-feedback-fixtures.mjs --write > feedback-normalizer-output.json
+
+      - name: Create or refresh feedback intake issues
+        run: node .github/scripts/apply-feedback-intake.mjs

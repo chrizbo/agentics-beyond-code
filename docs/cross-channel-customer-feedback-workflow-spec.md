@@ -306,7 +306,9 @@ Agent-ready GitHub issue in the existing work project
 ## Proposed Automations
 
 These are the automations this feature should eventually document like the
-existing workflows in `.github/workflows/`.
+existing workflows in `.github/workflows/`. Not every automation needs an
+agentic workflow: deterministic movement of already-structured data should stay
+in normal GitHub Actions, while interpretation-heavy work can use an agent.
 
 For adoption, teams can start with a smaller set:
 
@@ -323,9 +325,9 @@ spec-driven agent kickoff can all remain optional extensions.
 
 Use models where interpretation is required, not where deterministic data
 movement is enough. The intake path should keep parsing, idempotency checks,
-and safe-output emission in scripts so the model is only supervising a small,
-well-bounded operation. This reduces token usage, avoids accidental
-over-summarization, and keeps customer terminology intact.
+issue creation, labels, and project-field writes in a normal GitHub Action.
+This reduces token usage, avoids accidental over-summarization, and keeps
+customer terminology intact.
 
 Use a lightweight model for fixture normalization and intake orchestration.
 Reserve stronger Codex/ChatGPT models for workflows that need judgment, such as
@@ -364,6 +366,11 @@ keeps parsing, idempotency, redaction, and fixture handling testable.
 Purpose: Create or update one GitHub feedback intake issue per unique source
 signal.
 
+Implementation: a deterministic GitHub Actions workflow,
+`.github/workflows/customer-feedback-intake.yml`, runs manually for the demo.
+It calls `.github/scripts/normalize-feedback-fixtures.mjs` and
+`.github/scripts/apply-feedback-intake.mjs`.
+
 Behavior:
 
 - Reads normalized feedback event JSON.
@@ -375,12 +382,14 @@ Behavior:
 - Adds source labels such as `from-discord` or `from-open-source-repo`.
 - Adds `feedback:needs-pm-review`.
 - Adds the issue to the `Customer Feedback Queue` project.
+- Refreshes generated fixture issue bodies when the old demo run left runtime
+  footer text or warning text behind.
 
-Safe outputs:
+Writes:
 
 - Create GitHub issue.
-- Add labels.
-- Update project.
+- Add or remove labels.
+- Update the Customer Feedback Queue project.
 - No external writes.
 
 ### 3. Feedback Dedupe, Strategy Triage, and Priority Suggestion
@@ -769,7 +778,8 @@ Every live adapter should have:
 - Do not expose raw Slack or Discord user IDs unless needed for audit.
 - Treat community feedback as untrusted content; do not let it directly control
   workflow instructions.
-- Use GitHub safe outputs for writes.
+- Use deterministic GitHub API or CLI writes for the intake Action.
+- Use GitHub safe outputs for agentic workflows that need bounded write tools.
 - Use external safe outputs only for optional post-backs, never for free-form
   agent messages.
 
