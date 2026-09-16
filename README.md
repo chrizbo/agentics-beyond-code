@@ -39,8 +39,10 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 | Workflow | Description | Example output |
 |----------|-------------|----------------|
 | [📥 Intake Request Triage](.github/workflows/intake-triage.md) | Scores incoming feature requests and bug reports using RICE and Kano frameworks, checks strategy alignment, detects duplicates, flags incomplete submissions, and adds items to the triage project board | [Triage comment](https://github.com/chrizbo/agentics-beyond-code/issues/109#issuecomment-4416252905) |
-| [🗣️ Customer Feedback Intake](.github/workflows/customer-feedback-intake.yml) | Manual deterministic fixture intake — normalizes OSS repo, Discord, and Slack feedback fixtures, preserves exact customer language, creates feedback intake issues, and adds them to the Customer Feedback Queue project | Fixture-first workflow; demo output pending |
-| [🔎 Feedback Dedupe & Strategy Triage](.github/workflows/feedback-dedupe-triage.md) | Reviews feedback intake issues, proposes duplicate clusters, compares exact customer language against strategy, suggests priority, comments on issues, labels the queue, and updates Customer Feedback Queue fields | Reviewer comments pending |
+| [🗣️ Customer Feedback Intake](.github/workflows/customer-feedback-intake.yml) | Manual deterministic fixture intake — normalizes OSS repo, Discord, and Slack feedback fixtures, preserves exact customer language, creates feedback intake issues, and adds them to the Customer Feedback Queue project | [Feedback intake issue #311](https://github.com/chrizbo/agentics-beyond-code/issues/311) |
+| [🔎 Feedback Dedupe & Strategy Triage](.github/workflows/feedback-dedupe-triage.md) | Reviews feedback intake issues, proposes duplicate clusters (linked as GitHub sub-issues of a canonical issue), compares exact customer language against strategy, suggests priority, comments on issues, labels the queue, and updates Customer Feedback Queue fields | [Triage comment - #311](https://github.com/chrizbo/agentics-beyond-code/issues/311#issuecomment-5691385756) |
+| [📈 Friday Feedback Trends Report](.github/workflows/friday-feedback-trends-report.md) | Friday morning discussion recommending which feedback-driven work to consider accepting next week — ranked by suggested priority, confidence, and strategy fit, cross-referenced against active launches/initiatives so it never recommends duplicate work | [Feedback Trends - week of 2026-09-14](https://github.com/chrizbo/agentics-beyond-code/discussions/329) |
+| [🏗️ Feedback Work Item Converter](.github/workflows/create-work-item.md) | Comment `/create-work-item` on a PM-approved feedback issue to convert it into a clean, agent-ready work item in the Launch Tracker project — redacts customer identity while preserving exact language, links back to every issue in the duplicate cluster | [Work item #328](https://github.com/chrizbo/agentics-beyond-code/issues/328), converted from [feedback #319](https://github.com/chrizbo/agentics-beyond-code/issues/319) |
 
 ### 📋 Decision & Knowledge
 
@@ -93,15 +95,18 @@ When triggering workflows by hand, run them in stages — parallel within each s
 | Stage | Workflows | Why |
 |-------|-----------|-----|
 | **1** | `sample-data-simulator`, `sample-data-launch-creator`, `customer-feedback-intake` | Generates fresh project and feedback data — must run first |
-| **2** | `decision-log`, `daily-standup-prep`, `assumption-surfacer`, `process-analyzer`, `compliance-team-reports` | Analyze current data |
-| **3** | `weekly-status`, `leadership-brief` | Roll up stage 2 outputs |
+| **2** | `decision-log`, `daily-standup-prep`, `assumption-surfacer`, `process-analyzer`, `compliance-team-reports`, `feedback-dedupe-triage` | Analyze current data |
+| **3** | `weekly-status`, `leadership-brief`, `friday-feedback-trends-report` | Roll up stage 2 outputs |
 | **4** | `workflow-health` | Monitor everything — run last |
+
+`create-work-item` isn't part of this staged run — it's triggered on demand by
+commenting `/create-work-item` on a PM-approved feedback issue, not run in bulk.
 
 | Workflow | Cadence | Description | Example output |
 |----------|---------|-------------|----------------|
 | [🎲 Sample Data Simulator](.github/workflows/sample-data-simulator.md) | Daily | Closes tasks, adds progress comments, generates standup transcripts, and creates intake issues — keeps daily activity flowing. | Closed [#69](https://github.com/chrizbo/agentics-beyond-code/issues/69) and [#176](https://github.com/chrizbo/agentics-beyond-code/issues/176), progress comments on [#96](https://github.com/chrizbo/agentics-beyond-code/issues/96) and [#262](https://github.com/chrizbo/agentics-beyond-code/issues/262), standup transcript [PR #286](https://github.com/chrizbo/agentics-beyond-code/pull/286), intake issue [#287](https://github.com/chrizbo/agentics-beyond-code/issues/287) |
 | [🏗️ Sample Data Launch Creator](.github/workflows/sample-data-launch-creator.md) | Weekly | Creates new launches with epics and tasks, advances launch phases, closes completed launches, and adjusts risk levels — grows the project hierarchy over time. | Created [[Launch] Real-Time Notifications #280](https://github.com/chrizbo/agentics-beyond-code/issues/280) with epics [#281](https://github.com/chrizbo/agentics-beyond-code/issues/281) and [#282](https://github.com/chrizbo/agentics-beyond-code/issues/282) |
-| [🗣️ Customer Feedback Intake](.github/workflows/customer-feedback-intake.yml) | Manual | Creates Customer Feedback Queue issues from fixture data so feedback triage and Friday reports have realistic cross-channel signals. | Fixture-first workflow; demo output pending |
+| [🗣️ Customer Feedback Intake](.github/workflows/customer-feedback-intake.yml) | Manual | Creates Customer Feedback Queue issues from fixture data so feedback triage and Friday reports have realistic cross-channel signals. | [Feedback intake issue #311](https://github.com/chrizbo/agentics-beyond-code/issues/311) |
 
 ## 💡 Philosophy
 
@@ -170,6 +175,7 @@ The `agentic-workflows` skill is maintained upstream by GitHub Next. See
 - **[Fake Google Docs Scope](google-docs-fixtures/README.md)** — synthetic external product, customer, security, launch, and program documents for folder- or shared-drive-based Google Docs demos
 - **[Launch Tracker Project](https://github.com/users/chrizbo/projects/1)** — the sample GitHub Project with issues, launches, and workflow-generated artifacts
 - **[Intake Triage Project](https://github.com/users/chrizbo/projects/2)** — project board for triaging incoming feature requests and bug reports
+- **[Customer Feedback Queue Project](https://github.com/users/chrizbo/projects/3)** — project board for cross-channel customer feedback, dedupe clusters, and strategy/priority triage
 
 ## 🤝 Contributing
 
