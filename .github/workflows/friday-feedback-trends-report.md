@@ -121,13 +121,19 @@ If `feedback-queue-summary.json` contains zero issues, call `noop` with
 
 ## Process
 
-### Step 1: Separate triaged from untriaged feedback
+### Step 1: Separate triaged, converted, and untriaged feedback
 
 Only issues with the `feedback:triaged` label have a `Strategy Fit`,
 `Suggested Priority`, and `Confidence` you can trust — those came from the
 Feedback Dedupe and Strategy Triage workflow. If any open intake issues are
 missing `feedback:triaged`, note the count once in the report (they haven't
 been reviewed yet) but do not rank or recommend them.
+
+Issues labeled `feedback:converted` already became a work item — they stay
+open in the queue by design, as evidence, but they are done. Exclude them
+entirely from both "Recommended to Accept" and "Not Recommended": don't
+re-recommend work that's already been accepted. Count them once in the
+snapshot instead.
 
 ### Step 2: Find duplicate clusters and reach
 
@@ -168,13 +174,16 @@ than any single issue in it.
 
 ### Step 5: Compare against active work
 
-Using `launch-data-summary.json`, check whether an open launch, epic, or task
+Using `launch-data-summary.json`, check **both** the `initiatives` array and
+the `launches` array (with their nested epics/tasks) for whether active work
 already addresses each trend (matching on title, body keywords, or product
-area). Classify each trend as:
+area). An initiative is often broader than any single launch — check it
+first, since it can cover a trend even when no individual launch does.
+Classify each trend as:
 
-- **Already covered** — an active launch/epic/task addresses it. Name it and
-  link it. Do not recommend accepting new work here; note the overlap so the
-  PM can decide whether the existing work is sufficient.
+- **Already covered** — an active initiative, launch, epic, or task addresses
+  it. Name it and link it. Do not recommend accepting new work here; note the
+  overlap so the PM can decide whether the existing work is sufficient.
 - **High-volume, not represented** — a real trend with no matching active
   work. This is where new work should be considered.
 
@@ -241,7 +250,7 @@ prefix is added automatically.
 
 ## 🔗 Active Work Already Addressing Feedback
 
-* [Launch/Epic Title](url) — which feedback trend it addresses.
+* [Initiative/Launch/Epic Title](url) — which feedback trend it addresses.
 
 ---
 
@@ -252,6 +261,7 @@ prefix is added automatically.
 | Open feedback intake issues | N |
 | Reviewed (`feedback:triaged`) | N |
 | Awaiting triage | N |
+| Already converted (`feedback:converted`) | N |
 | Duplicate clusters | N |
 | Recommended candidates | N |
 | Not recommended | N |
