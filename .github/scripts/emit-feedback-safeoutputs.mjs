@@ -68,24 +68,46 @@ try {
   throw new Error(`Unable to load existing issues for idempotency check: ${error.message}`);
 }
 
-const missingEvents = events.filter((event) => {
+function matchingIssueFor(event) {
   const key = event?.ingestion?.idempotency_key;
   const sourceUrl = event?.source_url;
   const title = event?.intake?.title;
-  return !existingIssues.some((issue) => {
+  return existingIssues.find((issue) => {
     const body = typeof issue.body === "string" ? issue.body : "";
     const hasKey = typeof key === "string" && body.includes(key);
     const hasSourceUrl = typeof sourceUrl === "string" && body.includes(sourceUrl);
     const hasTitle = typeof title === "string" && issue.title === title;
     return hasKey || hasSourceUrl || hasTitle;
   });
-});
+}
+
+const eventMatches = events.map((event) => ({
+  event,
+  issue: matchingIssueFor(event),
+}));
+
+const missingEvents = eventMatches.filter((match) => !match.issue).map((match) => match.event);
+const existingEventMatches = eventMatches.filter((match) => match.issue);
+
+for (const { event, issue } of existingEventMatches) {
+  const fields = event.intake.project_fields ?? {};
+
+  safeOutput("update_project", {
+    project: PROJECT_URL,
+    content_type: "issue",
+    issue_number: issue.number,
+    fields,
+  });
+}
 
 if (missingEvents.length === 0) {
   safeOutput("noop", {
     message:
-      "No new customer feedback intake issues found; all normalized fixture events already have issues.",
+      "No new customer feedback intake issues found; refreshed project fields for existing feedback issues.",
   });
+  console.log(
+    `Prepared project refreshes for ${existingEventMatches.length} existing feedback issue(s) from ${events.length} normalized event(s).`,
+  );
   process.exit(0);
 }
 
@@ -116,5 +138,5 @@ for (const [index, event] of missingEvents.entries()) {
 }
 
 console.log(
-  `Prepared ${missingEvents.length} feedback intake issue(s) and project update(s) from ${events.length} normalized event(s).`,
+  `Prepared ${missingEvents.length} feedback intake issue(s), ${missingEvents.length} project update(s), and ${existingEventMatches.length} project refresh(es) from ${events.length} normalized event(s).`,
 );

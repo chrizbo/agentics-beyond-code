@@ -103,7 +103,10 @@ The script:
 
 - Loads `feedback-events/normalized-feedback-events.json`.
 - Checks existing open and closed issue bodies for each exact
-  `event.ingestion.idempotency_key`.
+  `event.ingestion.idempotency_key`, source link, or deterministic intake title.
+- Emits `safeoutputs update_project .` for existing feedback issues so the
+  Customer Feedback Queue project remains current and token/project access can
+  be verified without creating duplicate issues.
 - Emits `safeoutputs create_issue .` for events without an existing issue.
 - Uses a deterministic `temporary_id` on each created issue.
 - Emits `safeoutputs add_labels .` to apply only the source label for the
