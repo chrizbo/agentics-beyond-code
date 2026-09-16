@@ -11,7 +11,7 @@ engine:
 
 on:
   issues:
-    types: [opened, edited]
+    types: [opened]
   skip-bots: [github-actions]
   workflow_dispatch:
 
@@ -64,7 +64,8 @@ shared sensemaking.
 ## Activation Guard
 
 Before analyzing, check whether this issue is an intake request awaiting
-triage. Intake requests are handled by the intake-triage workflow, not here.
+triage or a customer feedback intake issue. Those are handled by dedicated
+triage workflows, not here.
 
 ```bash
 gh issue view ${{ github.event.issue.number }} --repo ${{ github.repository }} \
@@ -74,10 +75,13 @@ gh issue view ${{ github.event.issue.number }} --repo ${{ github.repository }} \
 If the issue has the `triage-needed` label, call the `noop` safe output
 with "Skipped — intake request awaiting triage" and stop immediately.
 
+If the issue has the `feedback:intake` label, call the `noop` safe output
+with "Skipped — customer feedback intake issue" and stop immediately.
+
 ## What Triggered This Run
 
 {{#if github.event.issue}}
-An issue was opened or edited: **#${{ github.event.issue.number }}**
+An issue was opened: **#${{ github.event.issue.number }}**
 
 Content: "${{ steps.sanitized.outputs.text }}"
 {{/if}}
