@@ -162,8 +162,23 @@ for this by default.
 
 When porting an existing repo workflow (path A), produce one labeled block per
 workflow: name the source file it came from, the trigger to configure, and
-restate every `safe-outputs:` constraint from that file as explicit prompt
-instructions, since a Routine has no structural equivalent that enforces them.
+restate every write limit from that file as explicit prompt instructions,
+since a Routine has no structural equivalent that enforces them.
+
+**Write every user-facing explanation in plain language, not gh-aw
+terminology.** Someone asking for this may have no gh-aw background at all —
+don't assume they know what `safe-outputs:`, `workflow_dispatch`,
+`on.issues`, or "the agent's token" mean. `references/porting-a-workflow.md`'s
+field-mapping table uses exact frontmatter names because that's what makes it
+useful as an internal lookup — but translate before it reaches the response.
+Describe *behavior*, not *config syntax*: instead of "the original had
+`safe-outputs.add-comment: max 15`," say "the original limited it to 15
+comments per run and checked every write in a separate step before it went
+out." Instead of "`on: workflow_dispatch`," say "the original only ran when
+someone triggered it manually." Use Claude-side product terms freely (Routine,
+Scheduled Task, connector, trigger, environment) since those are what the
+person will actually click on — the plain-language rule is specifically about
+not requiring gh-aw fluency to understand what changed and why it matters.
 
 ## Important defaults
 

@@ -82,6 +82,13 @@ for. When porting:
 
 ## Field mapping (starting checklist — verify volatile rows live)
 
+This table names exact gh-aw frontmatter fields because that's what makes it
+useful as a lookup. **Don't carry those field names into anything shown to
+the user.** Someone asking to port a workflow may have never heard of gh-aw —
+translate each row into what the original automation actually did and why it
+mattered, not its config syntax. See the plain-language rule in `SKILL.md`'s
+Output standard for examples of the translation.
+
 | gh-aw frontmatter field | Routine / Scheduled Task equivalent |
 |---|---|
 | `on: workflow_dispatch` | Manual — no trigger needed, or an **API** trigger if something else should fire it on demand |
@@ -103,9 +110,11 @@ for. When porting:
 
 One labeled block per ported workflow (see `SKILL.md`'s Output standard):
 which source file it came from, the trigger to configure, the model to
-select, and the full prompt text with every safe-outputs constraint and scope
-limitation restated. Include a short **Capability gaps** note listing
-anything the original workflow could do that the port can't do the same way —
-the `safe-outputs:` enforcement gap if relevant, plus anything else found by
-checking live docs per the section above. Don't present a port as a clean
-equivalent when it isn't one.
+select, and the full prompt text with every write limit and scope restated in
+plain language. Include a short **Capability gaps** note listing anything the
+original workflow could do that the port can't do the same way — the
+enforced-writes gap if relevant, plus anything else found by checking live
+docs per the section above. Don't present a port as a clean equivalent when it
+isn't one, and don't make understanding the gap depend on already knowing
+gh-aw — describe what could go wrong now that couldn't before, in behavior
+terms a first-time reader can follow.
