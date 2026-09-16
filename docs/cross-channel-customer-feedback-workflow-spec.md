@@ -11,10 +11,13 @@ the sorting and preparation work without flattening customer language or
 pretending it understands customer intent better than the PM.
 
 > For teams whose system of record isn't GitHub, or who want this same pattern
-> without a GitHub Actions/gh-aw dependency, see the companion
-> [Claude-native variant](cross-channel-customer-feedback-workflow-claude-native-spec.md),
-> which ports this workflow stage-by-stage onto Claude Routines and Scheduled
-> Tasks.
+> without a GitHub Actions/gh-aw dependency, use the
+> [`claude-native-workflow-builder`](../.github/skills/claude-native-workflow-builder/SKILL.md)
+> skill to port the workflows this spec describes — `customer-feedback-intake.yml`,
+> `feedback-dedupe-triage.md`, `create-work-item.md`,
+> `friday-feedback-trends-report.md` — onto Claude Routines and Scheduled
+> Tasks. It reads those files directly, so the port always matches their
+> current behavior rather than a separately maintained snapshot.
 
 ## Problem
 

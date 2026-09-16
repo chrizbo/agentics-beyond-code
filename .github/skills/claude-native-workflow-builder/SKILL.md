@@ -3,11 +3,13 @@ name: claude-native-workflow-builder
 description: >
   Use this skill when a user wants an always-on, org-owned automation built on
   Claude's own product surfaces — Claude Routines and Claude Scheduled Tasks —
-  instead of GitHub Agentic Workflows, and wants it whether or not GitHub is
-  the team's system of record. Trigger on requests like "set this up without
-  GitHub", "build this as a Claude Routine", "schedule this with Claude",
-  "make this work in Slack/Notion/Jira instead of GitHub", "show me the same
-  pattern but not GitHub-specific", "turn this process into a Routine or
+  instead of GitHub Agentic Workflows, whether that means porting one or more
+  of this repo's existing workflows or designing a new one from scratch, and
+  whether or not GitHub is the team's system of record. Trigger on requests
+  like "set this up without GitHub", "build this as a Claude Routine",
+  "schedule this with Claude", "I only want this one workflow, not the whole
+  repo", "make this work in Slack/Notion/Jira instead of GitHub", "show me the
+  same pattern but not GitHub-specific", "turn this process into a Routine or
   Scheduled Task", or "I don't want to learn gh-aw, what are my options".
 ---
 
@@ -29,6 +31,57 @@ when GitHub Issues/Projects/Discussions are the team's actual home.
 
 ## Core workflow
 
+First find out which of these two conversations this is — most requests are
+the first one, so check it before assuming a from-scratch design is needed:
+
+**A. Port one or more of this repo's existing workflows.** Someone who wants
+"the compliance review thing, but as a Routine" or "just the Friday trends
+report, I don't want the rest of the repo" is adopting a slice of an existing,
+already-designed system, not describing a new process. Don't make them
+re-describe something this repo already implements.
+
+**B. Design a new always-on automation from scratch**, for a process that
+doesn't exist as a workflow here yet.
+
+### A. Porting an existing workflow
+
+1. Inventory the live catalog rather than recalling it from memory or from any
+   previously-written example: list `.github/workflows/*.md` (agentic) and
+   `.github/workflows/*.yml` (deterministic), or use the README's workflow
+   tables as an index. Ask which workflow(s) they want — one, a related
+   cluster (e.g. the whole customer-feedback pipeline), or "what's related to
+   X problem." Adopting just one or two is a completely normal outcome; don't
+   push the rest of the repo's scaffolding on someone who didn't ask for it.
+2. For each selected workflow, read its **current** file directly out of the
+   repo. Do not reuse a cached summary from earlier in the conversation or any
+   static example doc — the whole point of reading live is that these files
+   are gh-aw's real source of truth and change as the team maintains them.
+3. Read `references/porting-a-workflow.md` for the field-by-field mapping from
+   a gh-aw workflow's frontmatter (`on:`, `engine:`, `steps:`, `tools:`,
+   `safe-outputs:`, `permissions:`, `network:`) to a Routine or Scheduled
+   Task's trigger, model, prompt, and connector scope — and critically, the
+   caveat about `safe-outputs:` having no structural equivalent in a Routine.
+4. Before finalizing, verify the specific capabilities this workflow actually
+   uses against **live docs**, not just that reference file's table — fetch
+   the current [Claude Routines docs](https://code.claude.com/docs/en/routines)
+   and, for whichever gh-aw features this workflow relies on, the matching
+   upstream doc the `agentic-workflows` skill already routes to. Both products
+   change independently of this repo (Routines is an explicitly-labeled
+   research preview; gh-aw is on a pinned, upgradeable version) — treat the
+   reference file as a starting checklist, not the final word.
+5. Produce the ported prompt text per workflow (see Output standard) —
+   labeled with which repo workflow it came from, the trigger to configure,
+   and every safe-outputs constraint restated explicitly since nothing
+   enforces it automatically the way gh-aw does. Include a **Capability gaps**
+   note: anything the original workflow could do that this port can't do the
+   same way, whether or not it's one of the gaps already named in
+   `porting-a-workflow.md`. Don't present a port as equivalent when it isn't.
+6. If the requested workflow doesn't exist yet in this repo, say so and either
+   route to `B` below or point at `docs/workflow-ideas.md` if it's a known
+   future idea.
+
+### B. Designing a new automation
+
 1. Ask for, or infer from the user's message:
    - the recurring process problem and its current manual steps
    - which steps need judgment (dedupe, scoring, drafting) versus which are
@@ -47,27 +100,25 @@ when GitHub Issues/Projects/Discussions are the team's actual home.
      others, and what's safe to happen automatically
 2. Read `references/routine-vs-scheduled-task.md` for the full decision
    framework, trigger mechanics, and org-governance details.
-3. For a concrete worked example of this exact porting exercise, read
-   [`docs/cross-channel-customer-feedback-workflow-claude-native-spec.md`](../../../docs/cross-channel-customer-feedback-workflow-claude-native-spec.md),
-   which takes this repo's GitHub-based cross-channel customer feedback
-   workflow and rebuilds it stage-by-stage on Routines and Scheduled Tasks,
-   including a variant with no GitHub artifacts at all.
-4. Classify each step as a **Routine** (needs repo/file access, connectors, or
-   multi-step tool use; triggered on a schedule, an API call, or a repo event)
-   or a **Scheduled Task** (a recurring prompt against connectors that reads
-   and posts a result; cadence-only, no repo needed). See the decision table
-   in step 2's reference file.
-5. Design the human interpretation gate explicitly. It should live wherever
+3. Design the human interpretation gate explicitly. It should live wherever
    the team already reacts to things (a Slack thread, a doc comment, a status
    column), and only an explicit human action should trigger any step that
    commits the team to work, spends money, or becomes visible outside the
    automation's own draft surface.
-6. Produce a setup plan, not vague advice: per step, name the trigger type,
+
+### Both paths
+
+1. Classify each step as a **Routine** (needs repo/file access, connectors, or
+   multi-step tool use; triggered on a schedule, an API call, or a repo event)
+   or a **Scheduled Task** (a recurring prompt against connectors that reads
+   and posts a result; cadence-only, no repo needed). See the decision table
+   in `references/routine-vs-scheduled-task.md`.
+2. Produce a setup plan, not vague advice: per step, name the trigger type,
    the connectors/access it needs, the destination it writes to, the human
    gate before anything durable happens, and the org-governance control that
    applies (Team/Enterprise Owner routine toggle, or workspace-level Scheduled
    Task admin controls).
-7. If the user wants it actually created, point them at the real mechanism
+3. If the user wants it actually created, point them at the real mechanism
    rather than editing files on their behalf: the `/schedule` command or
    `claude.ai/code` web UI for Routines, and the Claude Cowork UI or
    scheduled-tasks tools for Scheduled Tasks. This skill produces the plan and
@@ -80,7 +131,7 @@ when GitHub Issues/Projects/Discussions are the team's actual home.
    version to keep in sync with whatever actually gets pasted into the
    product. If the user wants a durable, reviewable copy anyway, ask first and
    say where it will go before creating it.
-8. If the user's actual system of record is GitHub and they have no objection
+4. If the user's actual system of record is GitHub and they have no objection
    to GitHub Actions, say so and route to `agentic-workflows` and
    `non-coder-agentic-workflow-builder` instead — don't force the non-GitHub
    answer on a team for whom GitHub already works.
@@ -106,8 +157,13 @@ Routine or Scheduled Task (what to read, what judgment to apply, what to write
 and where, what never to do without a human saying so) directly into the
 response, in a fenced code block labeled with its destination — e.g.
 "Routine prompt — paste into `/schedule` or claude.ai/code" — so it can be
-copied straight into the setup surface from step 7 above. Do not create a new
-file in the repo for this by default.
+copied straight into the setup surface. Do not create a new file in the repo
+for this by default.
+
+When porting an existing repo workflow (path A), produce one labeled block per
+workflow: name the source file it came from, the trigger to configure, and
+restate every `safe-outputs:` constraint from that file as explicit prompt
+instructions, since a Routine has no structural equivalent that enforces them.
 
 ## Important defaults
 
@@ -136,3 +192,26 @@ file in the repo for this by default.
   response, not as a new repo file. It's product configuration to paste
   elsewhere, not something this repo runs — treat it like an answer, not a
   deliverable that belongs in version control, unless the user says otherwise.
+- Always read a workflow's current file when porting it, never a memorized or
+  previously-written description of it. A written example goes stale the
+  moment the source workflow changes and nothing regenerates it — this repo's
+  own ["Living Documents"](../../../README.md#living-documents) philosophy is
+  the argument against keeping one. The live `.github/workflows/*.md`/`.yml`
+  files are already the thing the team keeps current; read those instead of
+  reproducing them elsewhere.
+- Reactive triggers (a GitHub event, an API call fired by something else) are
+  not free just because they're not on a clock — they still draw down the
+  daily routine run cap every time they fire. When designing a demo or a
+  not-yet-production setup, default to creating the trigger disabled/paused
+  and only enabling it while actively demoing, the same discipline this repo
+  already applies to its scheduled gh-aw workflows (see the README's pause
+  notice). Say this explicitly in the setup plan rather than assuming it's
+  obvious.
+- Never present a port as a clean, capability-equivalent swap. gh-aw and
+  Claude Routines/Scheduled Tasks are different products built by different
+  teams on different release cadences, so there will always be things one can
+  do that the other can't yet, in both directions. Actively check for these
+  gaps against live docs — this skill's own reference material is a starting
+  point, not a permanent source of truth, exactly like the frozen example doc
+  this skill used to lean on before it was replaced with reading live repo
+  files. Name every gap found, not just the ones already documented.

@@ -51,10 +51,16 @@ one attached:
   is the right trigger for "fire when something happens" without waiting for
   the next scheduled run — e.g., a Slack slash command or a webhook relay
   calling the endpoint the moment a PM approves something.
-- **GitHub** — runs automatically in response to repository events (PRs,
-  releases, etc.). Useful even in a "not GitHub-specific" design if the only
-  GitHub-shaped thing left in the pipeline is a repo event worth reacting to;
-  it doesn't require the rest of the pipeline to be GitHub-based.
+- **GitHub** — runs automatically in response to repository events. As of this
+  writing the product supports Pull request and Release event categories per
+  its docs, plus Issue opened, which is selectable in the routine editor even
+  though the docs page hasn't caught up yet — check the current UI rather than
+  assuming the docs list is exhaustive. A generic "Custom" event option is
+  visible but greyed out; it's a reserved slot for broader webhook/event
+  support, not something gated by plan or permissions. Useful even in a "not
+  GitHub-specific" design if the only GitHub-shaped thing left in the pipeline
+  is a repo event worth reacting to; it doesn't require the rest of the
+  pipeline to be GitHub-based.
 
 **Scheduled Tasks** support cadence (daily, weekly, weekdays, hourly) and
 on-demand runs. There is no API-trigger equivalent — if a step genuinely needs

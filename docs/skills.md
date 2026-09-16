@@ -38,7 +38,7 @@ The repository's installed CLI or generated workflow action versions can differ.
 
 `.github/skills/org-work-sensing/` is maintained in this repository. Use it for current-state assessment, readiness gap analysis, and work-signal review before recommending agentic workflow setup.
 
-`.github/skills/claude-native-workflow-builder/` is maintained in this repository. Use it to design always-on, org-owned automations on Claude Routines and Claude Scheduled Tasks instead of GitHub Agentic Workflows — the non-GitHub sibling of `non-coder-agentic-workflow-builder`. See [`docs/cross-channel-customer-feedback-workflow-claude-native-spec.md`](cross-channel-customer-feedback-workflow-claude-native-spec.md) for a worked example.
+`.github/skills/claude-native-workflow-builder/` is maintained in this repository. Use it to port this repo's existing workflows (one, several, or a whole pipeline) — or design a new always-on automation from scratch — onto Claude Routines and Claude Scheduled Tasks instead of GitHub Agentic Workflows. It reads the current `.github/workflows/*.md`/`.yml` files directly rather than working from a separately maintained example, so the port stays current as those workflows change. The non-GitHub sibling of `non-coder-agentic-workflow-builder`.
 
 ## Validation
 
