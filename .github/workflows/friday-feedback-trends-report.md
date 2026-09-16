@@ -216,14 +216,15 @@ prefix is added automatically.
 
 ## ✅ Recommended to Accept Next Week
 
-* **#{canonical issue number} · [Trend or Issue Title](url)** — `{Suggested Priority}` · `{Confidence}` · `{Strategy Fit}`
-  One-sentence rationale citing severity, reach, recurrence, and the strategy
-  tradeoff. Link every source issue in the cluster, not just the canonical one.
+* **[#{canonical issue number}](url) · Trend or Issue Title** — `{Suggested Priority}` · `{Confidence}` · `{Strategy Fit}`
+  One sentence citing severity, reach, recurrence, and the strategy tradeoff.
+  Linked sources: [#N](url), [#N](url) — every issue in the cluster, not just
+  the canonical one.
 
 ## ⏸️ Not Recommended Right Now
 
-* **[Trend or Issue Title](url)** — reason: conflicts with strategy tradeoff
-  #N, low confidence with no corroborating signal, or already covered by
+* **[#N](url) · Trend or Issue Title** — conflicts with strategy tradeoff #N,
+  low confidence with no corroborating signal, or already covered by
   [active launch](url).
 
 ## 🐛 Emerging Bug Trends
@@ -233,10 +234,6 @@ prefix is added automatically.
 ## 💡 Emerging Request Trends
 
 * Trend description, quoting exact customer language, with linked source issues.
-
-## 🗣️ Customer Language This Week
-
-* Repeated exact phrases or terminology customers used, with counts and links.
 
 ## 📈 High-Volume, Not Represented in Active Work
 
@@ -318,14 +315,18 @@ ask for input. Do not finish the run without a safe output call.
 - Preserve exact customer language. Do not replace it with generic summaries.
 - Cite specific `docs/strategy.md` tradeoffs by number, not just "aligns with
   strategy."
-- Link every issue you reference, including every issue in a duplicate
-  cluster, not just the canonical one.
+- Every issue reference must be a markdown link to the issue —
+  `[#123](https://github.com/${{ github.repository }}/issues/123)` — never a
+  bare `#123` or a backtick-wrapped `` `#123` ``. This applies everywhere:
+  recommended items, not-recommended items, trend bullets, and the snapshot.
+- Write rationale and reasons as plain sentences. Do not prefix them with
+  labels like "One-sentence rationale:" or "reason:" — just state it.
 - Escape all @mentions to avoid noisy notifications.
 - This workflow does not label issues, comment on them, update the Customer
   Feedback Queue project, close issues, or create work items. It only
   produces the discussion. Feedback interpretation and conversion into work
   items stay with the PM.
-- Lead every recommended item with its canonical issue number (`#123`), not
-  just a link. A PM deciding to run `/create-work-item` on a feedback issue
-  should be able to point back to this report by issue number as the reason
-  the item was worth considering.
+- Lead every recommended item with its canonical issue number as a link
+  (`[#123](url)`). A PM deciding to run `/create-work-item` on a feedback
+  issue should be able to point back to this report by issue number as the
+  reason the item was worth considering.
