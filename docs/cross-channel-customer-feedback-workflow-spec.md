@@ -180,24 +180,6 @@ Suggested issue body:
 already live in labels or the Customer Feedback Queue project. Focus on why the
 feedback may matter, what is ambiguous, and what wording should not be lost.>
 
-## Strategy Triage
-
-- Relevant strategy excerpt:
-- Priority rationale:
-- Why this might matter now:
-
-## Duplicate / Related Signals
-
-- <links to related feedback intake issues>
-- Potential canonical feedback issue:
-
-## PM Review
-
-- Interpretation:
-- Rationale:
-- Safe-to-share customer context:
-- Converted work item:
-
 <!-- workflow-metadata
 feedback_key: <source-system>:<source-id>
 source_type: <issue | discussion | pull-request | discord-message | slack-message>
@@ -212,6 +194,11 @@ source, feedback type, product area, severity, reach, strategy fit, suggested
 priority, and PM decision. Those values belong in the `Customer Feedback Queue`
 project or labels. The body should preserve language, evidence, and agent
 commentary that makes triage easier.
+
+Reviewer workflows should add comments rather than pre-allocating empty
+sections in the issue body. Dedupe, strategy triage, priority suggestion, PM
+review, and conversion comments should each be timestamped artifacts on the
+issue timeline so the team can see what changed and when.
 
 ### Duplicate Handling
 
@@ -442,9 +429,9 @@ Useful labels:
 
 Purpose: Give the PM a clean place to make the product call.
 
-This can start as an issue template section and label transition rather than a
-separate automation. The PM updates the `PM Review` section on an intake issue,
-then applies one of these labels:
+This can start as comments and label transitions rather than a separate
+automation. The PM records interpretation in a comment or slash-command
+request, then applies one of these labels:
 
 - `feedback:accepted`
 - `feedback:deferred`
@@ -469,9 +456,9 @@ work item, triggered by the PM's explicit slash command.
 Behavior:
 
 - Runs when a PM posts `/create-work-item` on a feedback issue.
-- Verifies that the PM Review section has an interpretation, decision, and
-  safe-to-share context.
-- Drafts a work item from the PM-reviewed feedback, not from raw feedback alone.
+- Reads PM review comments and slash-command context when present.
+- Drafts a work item from PM-reviewed feedback when available, not from raw
+  feedback alone.
 - Carries forward customer terminology that should shape the spec.
 - Redacts or omits sensitive customer details.
 - Links back to all source feedback issues and duplicate sub-issues.
@@ -855,9 +842,9 @@ separate operating system.
 
 ### Slice 3: Intake Creator Workflow
 
-- Add a fixture-first GitHub Agentic Workflow that creates feedback intake
+- Add a fixture-first deterministic GitHub Action that creates feedback intake
   issues from normalized events.
-- Use GitHub safe outputs only.
+- Use direct GitHub issue and Project v2 API writes.
 - Add issues to the `Customer Feedback Queue` project.
 - Validate with duplicate source IDs.
 

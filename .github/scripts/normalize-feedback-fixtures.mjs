@@ -195,23 +195,6 @@ ${terminologyList(event.content.error_strings)}
 
 This item came from ${sourceName(event.source_system)} and preserves the source wording for PM review. Triage should compare the exact phrases above against duplicates before relying on any summary.
 
-## Strategy Triage
-
-- Relevant strategy excerpt:
-- Priority rationale:
-- Why this might matter now:
-
-## Duplicate / Related Signals
-
-- Potential canonical feedback issue:
-
-## PM Review
-
-- Interpretation:
-- Rationale:
-- Safe-to-share customer context:
-- Converted work item:
-
 <!-- workflow-metadata
 feedback_key: ${event.ingestion.idempotency_key}
 source_type: ${event.source_type}

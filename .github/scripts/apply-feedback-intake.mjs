@@ -162,7 +162,13 @@ function syncLabels(issue, event) {
 
 function shouldRefreshGeneratedBody(issue) {
   const body = typeof issue.body === "string" ? issue.body : "";
-  return body.includes("<!-- gh-aw-agentic-workflow: Customer Feedback Intake") || body.includes("Firewall blocked");
+  return (
+    body.includes("<!-- gh-aw-agentic-workflow: Customer Feedback Intake") ||
+    body.includes("Firewall blocked") ||
+    body.includes("## Strategy Triage") ||
+    body.includes("## Duplicate / Related Signals") ||
+    body.includes("## PM Review")
+  );
 }
 
 function refreshGeneratedBody(issue, event) {
