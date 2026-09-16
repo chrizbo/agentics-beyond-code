@@ -10,6 +10,12 @@ durable operating layer, external channels provide signal, and automation does
 the sorting and preparation work without flattening customer language or
 pretending it understands customer intent better than the PM.
 
+> For teams whose system of record isn't GitHub, or who want this same pattern
+> without a GitHub Actions/gh-aw dependency, see the companion
+> [Claude-native variant](cross-channel-customer-feedback-workflow-claude-native-spec.md),
+> which ports this workflow stage-by-stage onto Claude Routines and Scheduled
+> Tasks.
+
 ## Problem
 
 Customer feedback arrives through too many doors:

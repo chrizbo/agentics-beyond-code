@@ -7,6 +7,8 @@ cd "$repo_root"
 skills=(
   "agentic-workflows"
   "non-coder-agentic-workflow-builder"
+  "org-work-sensing"
+  "claude-native-workflow-builder"
 )
 
 check_link() {

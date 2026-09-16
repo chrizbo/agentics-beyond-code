@@ -143,6 +143,8 @@ Agentics Beyond Code workflows:
 
 - **[Non-Coder Agentic Workflow Builder](.github/skills/non-coder-agentic-workflow-builder/SKILL.md)** — helps product, ops, compliance, GTM, design, research, support, customer success, program, and leadership users turn process problems into a repo setup with workflows, project boards, issue templates, labels, blank strategy/how-we-work docs, policies, and folders.
 - **[Agentic Workflows](.github/skills/agentic-workflows/SKILL.md)** — helps create, update, debug, compile, and validate GitHub Agentic Workflows. Bundled from the [gh-aw framework](https://github.github.io/gh-aw/).
+- **[Org Work Sensing](.github/skills/org-work-sensing/SKILL.md)** — assesses current-state work signals (GitHub, Jira, Linear, docs) and readiness gaps before recommending an agentic workflow setup.
+- **[Claude-Native Workflow Builder](.github/skills/claude-native-workflow-builder/SKILL.md)** — the non-GitHub sibling: designs the same always-on, org-owned automation pattern using Claude Routines and Claude Scheduled Tasks instead of GitHub Agentic Workflows, for teams whose system of record isn't GitHub. See [`docs/cross-channel-customer-feedback-workflow-claude-native-spec.md`](docs/cross-channel-customer-feedback-workflow-claude-native-spec.md) for a worked example that ports this repo's own feedback workflow.
 
 Skills have one canonical copy and several discovery views:
 
@@ -165,6 +167,7 @@ The `agentic-workflows` skill is maintained upstream by GitHub Next. See
 - **[External Integration Patterns](docs/external-integration-patterns.md)** — future work for integrating with Slack, Jira, Microsoft 365, Google Workspace, Salesforce, ServiceNow, Notion, Asana, and Linear
 - **[Slack Integration Plan](docs/slack-integration-plan.md)** — proposal for Slack context ingestion, emoji-driven automation, and Slack report-backs
 - **[Google Docs Integration Plan](docs/google-docs-integration-plan.md)** — fixture-first proposal for bounded Google Docs context reads and validated document updates
+- **[Cross-Channel Customer Feedback Workflow Spec (Claude-Native Variant)](docs/cross-channel-customer-feedback-workflow-claude-native-spec.md)** — the same feedback workflow rebuilt on Claude Routines and Scheduled Tasks instead of GitHub Actions/gh-aw, including a fully non-GitHub variant
 
 ### Sample Team Context
 

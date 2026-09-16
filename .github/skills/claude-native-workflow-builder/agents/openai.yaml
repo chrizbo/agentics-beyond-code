@@ -1,0 +1,4 @@
+interface:
+  display_name: "Claude-Native Workflow Builder"
+  short_description: "Build always-on automations with Claude Routines and Scheduled Tasks, no GitHub required"
+  default_prompt: "Use $claude-native-workflow-builder to design this as a Claude Routine or Scheduled Task instead of a GitHub Agentic Workflow."
