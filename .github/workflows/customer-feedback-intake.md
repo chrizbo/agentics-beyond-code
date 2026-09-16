@@ -56,74 +56,17 @@ safe-outputs:
     max: 20
     project: "https://github.com/users/chrizbo/projects/3"
     github-token: ${{ secrets.AW_TOKEN }}
-  noop:
 ---
 
 # Customer Feedback Intake
 
-You are a customer feedback intake analyst for the repository
-`${{ github.repository }}`. Your job is to create GitHub feedback intake issues
-from normalized fixture events and add those issues to the Customer Feedback
-Queue project.
+Run the deterministic customer feedback safe-output emitter:
 
-This MVP is fixture-first. Do **not** call Slack, Discord, or the source repo
-APIs. Treat `feedback-events/normalized-feedback-events.json`, created by the
-deterministic pre-step, as the source of truth.
-
-## Project
-
-Customer Feedback Queue:
-
-```text
-https://github.com/users/chrizbo/projects/3
-```
-
-Use this full URL when calling `update_project`.
-
-## Step 1: Load Normalized Feedback Events
-
-Read the generated normalized events file:
-
-```bash
-jq '{event_count: (.events | length), fixture_files}' feedback-events/normalized-feedback-events.json
-```
-
-If the file is missing, malformed, or contains zero events, call `noop` with a
-brief explanation and stop.
-
-## Step 2: Emit Safe Outputs
-
-Run the deterministic safe-output emitter:
-
-```bash
+```sh
 node .github/scripts/emit-feedback-safeoutputs.mjs
 ```
 
-The script:
-
-- Loads `feedback-events/normalized-feedback-events.json`.
-- Checks existing open and closed issue bodies for each exact
-  `event.ingestion.idempotency_key`, source link, or deterministic intake title.
-- Emits `safeoutputs update_project .` for existing feedback issues so the
-  Customer Feedback Queue project remains current and token/project access can
-  be verified without creating duplicate issues.
-- Emits `safeoutputs create_issue .` for events without an existing issue.
-- Uses a deterministic `temporary_id` on each created issue.
-- Emits `safeoutputs add_labels .` to apply only the source label for the
-  event, such as `from-open-source-repo`, `from-discord`, or `from-slack`.
-- Emits `safeoutputs update_project .` with `content_type: "issue"` and
-  `content_number` set to the same temporary id so created issues are added to
-  the Customer Feedback Queue project with the event's project fields.
-- Emits `safeoutputs noop .` when all normalized fixture events already have
-  issues.
-
-Do not manually summarize over the customer language. Use the preformatted body
-from the normalized event so exact phrases and terminology are preserved.
-
-Do not call Codex goal-management tools. Do not print the full normalized event
-bodies unless you are diagnosing a failure. Keep the run focused on the emitter
-script and safe outputs.
-
-## Step 3: Completion
-
-When the emitter finishes, report the count it printed and stop.
+The pre-step already normalized fixture feedback into
+`feedback-events/normalized-feedback-events.json`. Do not inspect raw fixture
+files, call Slack/Discord/source repository APIs, summarize customer language,
+or emit safe outputs manually. Report the script's final count and stop.

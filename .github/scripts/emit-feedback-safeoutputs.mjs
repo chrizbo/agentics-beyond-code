@@ -44,9 +44,7 @@ const normalized = JSON.parse(readFileSync(EVENTS_PATH, "utf8"));
 const events = Array.isArray(normalized.events) ? normalized.events : [];
 
 if (events.length === 0) {
-  safeOutput("noop", {
-    message: "No normalized customer feedback events found.",
-  });
+  console.log("No normalized customer feedback events found.");
   process.exit(0);
 }
 
@@ -101,10 +99,6 @@ for (const { event, issue } of existingEventMatches) {
 }
 
 if (missingEvents.length === 0) {
-  safeOutput("noop", {
-    message:
-      "No new customer feedback intake issues found; refreshed project fields for existing feedback issues.",
-  });
   console.log(
     `Prepared project refreshes for ${existingEventMatches.length} existing feedback issue(s) from ${events.length} normalized event(s).`,
   );
