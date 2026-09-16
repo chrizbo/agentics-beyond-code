@@ -172,7 +172,7 @@ The `agentic-workflows` skill is maintained upstream by GitHub Next. See
 - **[Workflow Ideas](docs/workflow-ideas.md)** — catalog of future workflow ideas for PM, ops, compliance, and GTM
 - **[External Integration Patterns](docs/external-integration-patterns.md)** — future work for integrating with Slack, Jira, Microsoft 365, Google Workspace, Salesforce, ServiceNow, Notion, Asana, and Linear
 - **[Slack Integration Plan](docs/slack-integration-plan.md)** — Slack context ingestion, emoji-driven automation, and Slack report-backs for the team's own internal workspace; three of five phases are built and live, the rest still proposal
-- **[Google Docs Integration Plan](docs/google-docs-integration-plan.md)** — fixture-first proposal for bounded Google Docs context reads and validated document updates; the Weekly Status collaborative Google Doc flow (draft → shape → finalize → Slack) is built and live, the broader plan is still proposal
+- **[Google Docs Integration Plan](docs/google-docs-integration-plan.md)** — fixture-first proposal for bounded Google Docs context reads and validated document updates; the Weekly Status collaborative Google Doc flow (draft → shape → finalize → Slack) is built and was proven live on 2026-06-08 ([writeup](https://github.com/chrizbo/agentics-beyond-code/discussions/290)), currently paused pending an expired Google OAuth token refresh — the broader plan beyond that flow is still proposal
 - **[Cross-Channel Customer Feedback Workflow Spec (Claude-Native Variant)](docs/cross-channel-customer-feedback-workflow-claude-native-spec.md)** — the same feedback workflow rebuilt on Claude Routines and Scheduled Tasks instead of GitHub Actions/gh-aw, including a fully non-GitHub variant
 
 ### Sample Team Context

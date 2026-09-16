@@ -3,17 +3,34 @@
 Future work proposal for using Google Docs as a bounded context source and a
 validated update target for Agentics Beyond Code workflows.
 
-> **Status:** One slice of this plan has shipped and is live: the **Weekly
-> Status collaborative Google Doc flow** — generate a draft Doc from the
-> Weekly Status Discussion, notify the team in Slack to shape it, gate on a
-> `/finalize-status` comment, then publish the finalized content back to the
-> Discussion and post the official Slack notification. That flow is real,
-> tested end-to-end in staged mode, and documented below in
+> **Status:** One slice of this plan has actually been built and proven live:
+> the **Weekly Status collaborative Google Doc flow** — generate a draft Doc
+> from the Weekly Status Discussion, notify the team in Slack to shape it,
+> gate on a resolved comment (or a `/finalize-status` Discussion comment),
+> then publish the finalized content back to the Discussion and post the
+> official Slack notification. This is not just written up in this plan —
+> it ran for real on 2026-06-08 with live Google write credentials enabled
+> (`GOOGLE_DOCS_ENABLED=true`, `GOOGLE_DOCS_FINALIZATION_ENABLED=true` in the
+> `google-docs-demo` environment), successfully created and finalized a real
+> Google Doc, and is written up with screenshots in
+> [Discussion #290](https://github.com/chrizbo/agentics-beyond-code/discussions/290).
+> It's documented below in
 > [Collaborative Weekly Status Draft](#5-collaborative-weekly-status-draft),
 > [Draft-to-Shaping Handoff](#draft-to-shaping-handoff),
 > [Weekly Status MVP Decisions](#weekly-status-mvp-decisions), and
 > [Google-Side Setup](#google-side-setup), each marked **✅ Implemented**
-> below. Everything else in this document — decision context packs, review
+> below.
+>
+> **Currently non-functional:** the configured Google OAuth refresh token has
+> since expired — the scheduled gate-resolution checker
+> (`google-docs-status-finalization-resolved-gates.yml`) has failed every run
+> with `Google token refresh failed: Bad Request`, and neither the draft nor
+> finalization dispatcher has run since 2026-06-08. The code and
+> configuration are intact; re-authorizing the Google OAuth client and
+> updating `GOOGLE_OAUTH_REFRESH_TOKEN` in the `google-docs-demo` environment
+> is the only thing needed to resume live runs.
+>
+> Everything else in this document — decision context packs, review
 > comments, append-only updates, a generic Google Docs safe-output surface,
 > and the other workflow candidates — is still **🚧 Proposal**, not yet
 > built. See the [Implementation Readiness Checklist](#implementation-readiness-checklist)
