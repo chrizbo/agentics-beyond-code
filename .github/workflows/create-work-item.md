@@ -185,11 +185,12 @@ approach — cite the tradeoff by number.
 
 ## Source Evidence
 
-- Feedback: #<issue> — <redacted one-line context>
-- Feedback: #<issue> — <redacted one-line context>
+- Feedback: [#<issue>](https://github.com/${{ github.repository }}/issues/<issue>) — <redacted one-line context>
+- Feedback: [#<issue>](https://github.com/${{ github.repository }}/issues/<issue>) — <redacted one-line context>
 
-(Every issue in the cluster from Step 2, each linked, not just the canonical
-one.)
+(Every issue in the cluster from Step 2, each a real markdown link, not just
+the canonical one. This is the durable link back to the source feedback —
+the work item does not need a formal sub-issue relationship for that.)
 
 ## Test / Verification Notes
 
