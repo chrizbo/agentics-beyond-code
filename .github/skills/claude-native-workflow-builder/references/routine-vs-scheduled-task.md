@@ -93,13 +93,38 @@ to fire on an external event rather than a clock, it needs a Routine instead.
 These are the actual places a user goes to create these, once the plan from
 `claude-native-workflow-builder` is ready:
 
-- Routines: the `/schedule` command in Claude Code, or the `claude.ai/code`
-  web UI.
+- Routines: the `/schedule` command in Claude Code, the `claude.ai/code` web
+  UI, or the Desktop app's Routines panel (choose **Cloud**, not **Local** —
+  see the warning below).
 - Scheduled Tasks: the Claude Cowork UI, or the scheduled-tasks tools/API
   where available in a session.
+
+All surfaces write to the same account, so which one you use to create a
+routine doesn't lock you out of managing it from another later. But they
+don't have equal *creation* capability — pick the surface based on the
+trigger the workflow being ported actually needs, not by default:
+
+| What the port needs | Use | Why |
+|---|---|---|
+| A **Scheduled** trigger only (a cadence, like the original's `schedule:`) | `/schedule` in the CLI | Purpose-built for this — describe it in plain language, Claude asks follow-ups, done. Fastest path, no web UI needed |
+| An **API** trigger, at all, even alongside a schedule | Finish on the web UI | The CLI cannot create or revoke an API trigger's token under any circumstance — this step always needs the web form, regardless of where the routine itself was created |
+| A **GitHub** trigger, and the Claude GitHub App isn't installed on the repo yet | Web UI | The web form prompts you to install the app when it's missing. The CLI path requires the app to already be installed separately first |
+| A **GitHub** trigger, added to a routine that already exists, app already installed | Either — `/schedule` can do this without leaving the terminal (Claude Code v2.1.225+) | Pure convenience once the one-time app install is done |
+| **No trigger at all** — the original was manual-only (gh-aw's `workflow_dispatch`), and the routine should only ever run via "Run now" | Web UI | `/schedule`'s natural mode assumes you want a cadence; the web form lets you skip the trigger section entirely and leave the routine trigger-less on purpose |
+| Reviewing or trimming which connectors are included (the original had a narrow, specific integration footprint you want to match exactly) | Web UI | The Connectors step is a visual checklist — easier to audit than describing exclusions conversationally |
+| Any combination of the above, or uncertainty about which applies | Web UI | It's the only surface with full creation capability across all three trigger types plus connector review in one place; `/schedule` is the shortcut for the common single-schedule-trigger case, not the general-purpose tool |
+
+**Desktop app warning**: in the Code tab's Routines panel, **Cloud** creates a
+real Routine (same object as the CLI/web paths above); **Local** creates a
+different feature — a Desktop scheduled task that runs on that one machine,
+not Anthropic's cloud infrastructure. It isn't org-owned or always-on in the
+sense this skill is designed around (it stops if that machine is off), so
+don't recommend Local for anything this skill just spent effort designing as
+an always-on, org-visible automation, even though it looks like the
+lower-friction option in the same panel.
 
 This skill helps design the plan and write the prompt text. It does not
 create a live Routine or Scheduled Task by writing files to a repo — unlike a
 gh-aw workflow, there is no `.md`/`.yml` source-of-truth file that defines
-one. Hand the user the finished prompt text and point them at the real setup
-surface.
+one. Hand the user the finished prompt text and name the specific surface
+from the table above, not just "Routines" generically.

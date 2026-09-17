@@ -115,9 +115,14 @@ doesn't exist as a workflow here yet.
    in `references/routine-vs-scheduled-task.md`.
 2. Produce a setup plan, not vague advice: per step, name the trigger type,
    the connectors/access it needs, the destination it writes to, the human
-   gate before anything durable happens, and the org-governance control that
+   gate before anything durable happens, the org-governance control that
    applies (Team/Enterprise Owner routine toggle, or workspace-level Scheduled
-   Task admin controls).
+   Task admin controls), **and which specific surface to create it on** — see
+   the surface-selection table in `references/routine-vs-scheduled-task.md`.
+   Don't just say "create a Routine"; say "`/schedule` in the CLI" or "the web
+   UI at claude.ai/code/routines" based on what that step's trigger actually
+   requires, since they don't have equal creation capability (the CLI, for
+   example, can never generate an API trigger's token).
 3. If the user wants it actually created, default to handing over the plan and
    the prompt text as a copy-paste block (see Output standard) rather than
    writing repo files — there is no file-based equivalent of a Routine or
@@ -194,12 +199,16 @@ expressed that.
 Structure the setup plan so it's usable by someone who has never opened the
 Routines UI before:
 
-- **A numbered "do this" sequence**, not just a facts table: open
-  claude.ai/code/routines (or the Desktop app's Routines panel) → New routine
-  → paste the prompt into Instructions → add the named repo(s) → set the
-  model → add/remove the named connectors → set the trigger → add any named
-  environment variables → Create. Someone should be able to follow it top to
-  bottom without translating a table into clicks themselves.
+- **A numbered "do this" sequence**, not just a facts table, starting from the
+  specific surface named in step 2 above (`/schedule` vs. the web UI — they
+  produce different first steps). Web UI: open claude.ai/code/routines → New
+  routine → paste the prompt into Instructions → add the named repo(s) → set
+  the model → add/remove the named connectors → set the trigger → add any
+  named environment variables → Create. CLI: run `/schedule`, describe the
+  cadence and prompt when asked, confirm the repo Claude selects → if an API
+  or GitHub trigger is also needed, finish that specific step on the web
+  (name the exact page). Someone should be able to follow it top to bottom
+  without translating a table into clicks themselves.
 - **A safe first test**, stated explicitly, before "point this at everything
   in production": e.g. "first click Run now and, if the routine accepts
   optional input, target one low-stakes item you don't mind it touching,
