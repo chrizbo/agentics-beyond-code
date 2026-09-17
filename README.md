@@ -201,3 +201,7 @@ Want to enable Agentics Beyond Code for your organization? Reach out to **Chris 
 
 - **Email:** [chrizbo@gmail.com](mailto:chrizbo@gmail.com)
 - **LinkedIn:** [linkedin.com/in/chrisbu](https://www.linkedin.com/in/chrisbu/)
+
+## 📄 License
+
+[MIT](LICENSE)
