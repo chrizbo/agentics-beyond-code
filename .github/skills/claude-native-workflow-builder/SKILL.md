@@ -118,19 +118,25 @@ doesn't exist as a workflow here yet.
    gate before anything durable happens, and the org-governance control that
    applies (Team/Enterprise Owner routine toggle, or workspace-level Scheduled
    Task admin controls).
-3. If the user wants it actually created, point them at the real mechanism
-   rather than editing files on their behalf: the `/schedule` command or
-   `claude.ai/code` web UI for Routines, and the Claude Cowork UI or
-   scheduled-tasks tools for Scheduled Tasks. This skill produces the plan and
-   the prompt text to use there; it does not fabricate a live routine by
-   writing repo files, because there is no file-based equivalent of a Routine
-   or Scheduled Task the way a `.md` workflow file is the source of truth for
-   gh-aw. Hand over the prompt text as a copy-paste block in the response
-   itself (see Output standard) — do not write it to a new file in this repo.
-   Nothing in this repo executes it, so a checked-in copy just becomes a second
-   version to keep in sync with whatever actually gets pasted into the
-   product. If the user wants a durable, reviewable copy anyway, ask first and
-   say where it will go before creating it.
+3. If the user wants it actually created, default to handing over the plan and
+   the prompt text as a copy-paste block (see Output standard) rather than
+   writing repo files — there is no file-based equivalent of a Routine or
+   Scheduled Task the way a `.md` workflow file is the source of truth for
+   gh-aw, and a checked-in copy just becomes a second version to keep in sync
+   with whatever actually gets pasted into the product. If the user wants a
+   durable, reviewable repo copy anyway, ask first and say where it will go.
+
+   Separately, if a `schedule` skill/command is available in this session
+   (it creates real cloud routines conversationally — this is what `/schedule`
+   does), **offer** to invoke it directly with the finished plan instead of
+   making the user paste it in themselves. Always ask before doing this rather
+   than doing it automatically: a routine is persistent, org-visible
+   configuration the moment it's created, not a reversible local edit, so it
+   belongs in the same "ask first" category as any other standing automation
+   this skill designs. If no such skill/command is available, point at the
+   real setup surfaces instead: the `/schedule` command or `claude.ai/code`
+   web UI for Routines, the Claude Cowork UI or scheduled-tasks tools for
+   Scheduled Tasks.
 4. If the user's actual system of record is GitHub and they have no objection
    to GitHub Actions, say so and route to `agentic-workflows` and
    `non-coder-agentic-workflow-builder` instead — don't force the non-GitHub
@@ -179,6 +185,31 @@ someone triggered it manually." Use Claude-side product terms freely (Routine,
 Scheduled Task, connector, trigger, environment) since those are what the
 person will actually click on — the plain-language rule is specifically about
 not requiring gh-aw fluency to understand what changed and why it matters.
+This includes the **Connectors**/**Tools** row of the setup plan, which is an
+easy place for it to slip back in — say what the original could access and
+how (e.g. "everything here was plain command-line GitHub access, not a
+separate integration"), not the literal config field names for how gh-aw
+expressed that.
+
+Structure the setup plan so it's usable by someone who has never opened the
+Routines UI before:
+
+- **A numbered "do this" sequence**, not just a facts table: open
+  claude.ai/code/routines (or the Desktop app's Routines panel) → New routine
+  → paste the prompt into Instructions → add the named repo(s) → set the
+  model → add/remove the named connectors → set the trigger → add any named
+  environment variables → Create. Someone should be able to follow it top to
+  bottom without translating a table into clicks themselves.
+- **A safe first test**, stated explicitly, before "point this at everything
+  in production": e.g. "first click Run now and, if the routine accepts
+  optional input, target one low-stakes item you don't mind it touching,
+  before running it unscoped."
+- **Capability gaps split into two tiers**, not one flat list: "Before this
+  will work" (missing credentials/scopes, anything that blocks the routine
+  from running at all — put these first, they're not optional reading) versus
+  "Things to be aware of" (reduced enforcement, missing concurrency
+  protection, cost-model differences — real, but not blockers). Don't bury a
+  blocking prerequisite in a list of nice-to-know caveats.
 
 ## Important defaults
 

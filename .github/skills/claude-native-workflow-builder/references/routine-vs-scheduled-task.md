@@ -51,11 +51,14 @@ one attached:
   is the right trigger for "fire when something happens" without waiting for
   the next scheduled run — e.g., a Slack slash command or a webhook relay
   calling the endpoint the moment a PM approves something.
-- **GitHub** — runs automatically in response to repository events. As of this
-  writing the product supports Pull request and Release event categories per
-  its docs, plus Issue opened, which is selectable in the routine editor even
-  though the docs page hasn't caught up yet — check the current UI rather than
-  assuming the docs list is exhaustive. A generic "Custom" event option is
+- **GitHub** — runs automatically in response to repository events. Exactly
+  which event categories are selectable has been observed to disagree between
+  the docs page and the live routine editor, and even between two checks of
+  the live docs in the same week — treat "Pull request" and "Release" as the
+  only ones you can count on, and confirm anything else (an "Issue opened"
+  category has been seen selectable in the UI at least once) against the
+  current UI at the moment you're setting this up, not against this file or
+  any prior conversation's finding. A generic "Custom" event option is
   visible but greyed out; it's a reserved slot for broader webhook/event
   support, not something gated by plan or permissions. Useful even in a "not
   GitHub-specific" design if the only GitHub-shaped thing left in the pipeline
