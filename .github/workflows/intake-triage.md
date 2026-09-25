@@ -1,5 +1,5 @@
 ---
-name: "Intake Request Triage"
+name: "ABC Smoke intake-triage"
 description: |
   Triages and prioritizes incoming intake requests (features and bugs).
   Reads the strategy doc, scores each request using RICE and Kano frameworks,
@@ -23,6 +23,7 @@ on:
 
 concurrency:
   group: intake-triage-${{ github.event.issue.number || inputs.issue_number || github.run_id }}
+  job-discriminator: ${{ github.event.issue.number || inputs.issue_number || github.run_id }}
   cancel-in-progress: false
 
 permissions:
@@ -38,6 +39,8 @@ network:
   allowed: [defaults, github]
 
 tools:
+  # Required for local evidence, policies, and gh reads; see docs/codex-workflows.md.
+  bash: ["*"]
   github:
     mode: gh-proxy
     toolsets: [default, issues]
@@ -46,6 +49,7 @@ tools:
     min-integrity: approved
 
 safe-outputs:
+  staged: true
   mentions: false
   allowed-github-references: []
   add-comment:

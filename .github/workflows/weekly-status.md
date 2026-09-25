@@ -1,4 +1,5 @@
 ---
+name: "ABC Smoke weekly-status"
 description: |
   Weekly leadership status update. Rolls up initiatives, launches, epics,
   and tasks into a single discussion post organized by What Shipped, What
@@ -53,6 +54,8 @@ imports:
   - shared/freshness-check.md
 
 tools:
+  # Required for local evidence, policies, and gh reads; see docs/codex-workflows.md.
+  bash: ["*"]
   github:
     mode: gh-proxy
     toolsets: [default]
@@ -60,6 +63,7 @@ tools:
     min-integrity: none
 
 safe-outputs:
+  staged: true
   mentions: false
   allowed-github-references: []
   create-discussion:

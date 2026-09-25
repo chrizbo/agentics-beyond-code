@@ -4,7 +4,6 @@ safe-outputs:
     slack-post-message:
       description: "Post a short, validated message to an allowlisted Slack channel or thread"
       runs-on: ubuntu-latest
-      timeout-minutes: 5
       output: "Slack message posted"
       permissions:
         contents: read
@@ -29,6 +28,7 @@ safe-outputs:
       steps:
         - name: Post validated Slack messages
           uses: actions/github-script@v9.0.0
+          timeout-minutes: 5
           env:
             SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
             SLACK_ALLOWED_CHANNEL_IDS: ${{ vars.SLACK_ALLOWED_CHANNEL_IDS }}

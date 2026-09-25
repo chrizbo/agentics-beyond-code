@@ -4,7 +4,6 @@ safe-outputs:
     calendar-update-event-brief:
       description: "Append a meeting brief to a Google Calendar event description. Dry-run by default; set CALENDAR_WRITE_ENABLED=true to enable writes."
       runs-on: ubuntu-latest
-      timeout-minutes: 5
       output: "Calendar event brief written"
       permissions:
         contents: read
@@ -29,6 +28,7 @@ safe-outputs:
       steps:
         - name: Write validated calendar event brief
           uses: actions/github-script@v9.0.0
+          timeout-minutes: 5
           env:
             GOOGLE_OAUTH_CLIENT_ID: ${{ secrets.GOOGLE_OAUTH_CLIENT_ID }}
             GOOGLE_OAUTH_CLIENT_SECRET: ${{ secrets.GOOGLE_OAUTH_CLIENT_SECRET }}

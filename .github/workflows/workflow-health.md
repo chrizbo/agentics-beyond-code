@@ -1,4 +1,5 @@
 ---
+name: "ABC Smoke workflow-health"
 description: |
   Weekly agentic workflow health report. Analyzes all .md-based agentic
   workflows in the repository — run success rates, failure patterns,
@@ -39,11 +40,14 @@ steps:
       echo "path=workflow-health-data.json" >> "$GITHUB_OUTPUT"
 
 tools:
+  # Required for local evidence, policies, and gh reads; see docs/codex-workflows.md.
+  bash: ["*"]
   github:
     mode: gh-proxy
     toolsets: [default, actions]
 
 safe-outputs:
+  staged: true
   mentions: false
   allowed-github-references: []
   max-bot-mentions: 1
@@ -123,28 +127,35 @@ Use the precomputed cost fields in the summary:
 1. **Runner cost**: runner minutes × `$0.008/min` for standard Linux
    GitHub-hosted runners.
 2. **OpenAI model cost**: observed Codex token usage from logs, priced using
-   current OpenAI per-token rates stored in `.metadata.pricing`.
-3. **Projected OpenAI cost**: if some runs do not expose token usage, use the
-   same workflow's observed average token cost for those missing runs. If no
-   token data was observed for a workflow, mark the model cost as unavailable
-   rather than inventing a value.
-
-Current OpenAI pricing used by the pre-step:
-- `gpt-5.4`: `$2.50 / 1M` input, `$0.25 / 1M` cached input, `$15.00 / 1M` output
-- `openai/gpt-5-mini`: `$0.25 / 1M` input, `$0.025 / 1M` cached input, `$2.00 / 1M` output
-- `gpt-5.4-nano`: `$0.20 / 1M` input, `$0.02 / 1M` cached input, `$1.25 / 1M` output
+   the dated rate table in `.metadata.pricing`. State its effective date; do
+   not describe the table as current pricing without verifying it.
+3. **Projected OpenAI cost**: use the pre-step's projection only when present.
+   It requires priced observations, one observed model, and no unpriced token
+   runs. Missing token runs are estimated from the workflow's priced average.
 
 Present costs as:
 - **Total runner minutes** per workflow (sum of job durations)
 - **Observed token runs** and **missing token runs**
-- **Observed / projected OpenAI cost**
+- **Priced runs** (`costRunsPriced`) and **unpriced token runs** (`costRunsUnpriced`)
+- **Observed / projected OpenAI cost**; null means unavailable, never zero
 - **Estimated dollar cost** per workflow (runner cost + projected OpenAI cost
-  when available)
-- **Combined totals** across all workflows
+  when available); otherwise show runner cost and unavailable inference cost
+- **Combined totals**, explicitly labeled partial when workflows lack pricing
+  or projections; include `workflowsWithProjectedCost` as coverage
 
-> **Note:** These are estimates using standard GitHub-hosted Linux runner rates
-> and current OpenAI API pricing. Actual billing depends on runner type, model,
-> cached-token behavior, and whether run logs exposed token usage.
+Unknown models, missing model telemetry, mixed-model usage without per-model
+token totals, and Copilot-backed usage must not inherit another model's OpenAI
+price. In particular, a configured model is not proof of the model used by an
+older run. Keep the observed model name visible even when its cost is unknown.
+
+> **Note:** These are estimates using a dated rate table and standard Linux
+> runner rates. Actual billing depends on provider, runner type, cached tokens,
+> and usage coverage. Copilot charges require provider-specific billing data.
+
+When recommending a model change, follow
+`docs/codex-workflows.md#evaluating-a-model-or-provider-change`: compare output
+quality as well as success, duration, and tokens. Compilation alone does not
+prove runtime/model compatibility, and lower token use is not a quality pass.
 
 ### Step 4: Assess Health
 
@@ -289,8 +300,8 @@ For each degraded/critical workflow:
 
 - Runner minutes = sum of all job durations across runs
 - Runner cost = minutes × $0.008/min (standard GitHub-hosted Linux)
-- OpenAI model cost = observed Codex token usage × current OpenAI per-token rates
-- Projected OpenAI cost fills missing token logs using same-workflow observed average cost when available
+- OpenAI model cost = priced Codex token usage × the dated rates in metadata; unpriced usage is unavailable
+- Projected OpenAI cost uses the pre-step projection only; report pricing coverage and partial totals
 - Est. Total = runner cost + projected OpenAI model cost when available
 - Actual costs depend on runner type, model, cached-token behavior, and available token logs
 

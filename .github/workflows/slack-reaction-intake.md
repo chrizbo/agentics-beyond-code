@@ -29,6 +29,8 @@ network:
   allowed: [defaults, github]
 
 tools:
+  # Required for local evidence, policies, and gh reads; see docs/codex-workflows.md.
+  bash: ["*"]
   github:
     mode: gh-proxy
     toolsets: [default, issues]

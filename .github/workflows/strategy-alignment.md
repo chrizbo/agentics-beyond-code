@@ -1,4 +1,5 @@
 ---
+name: "ABC Smoke strategy-alignment"
 description: |
   Weekly strategy alignment analyzer. Reads decisions from /decisions/ and
   issue comments, evaluates them against the team's strategic tradeoffs in
@@ -42,6 +43,8 @@ imports:
   - shared/freshness-check.md
 
 tools:
+  # Required for local evidence, policies, and gh reads; see docs/codex-workflows.md.
+  bash: ["*"]
   github:
     mode: gh-proxy
     toolsets: [default, issues]
@@ -49,6 +52,7 @@ tools:
     min-integrity: none
 
 safe-outputs:
+  staged: true
   mentions: false
   allowed-github-references: []
   add-comment:

@@ -47,7 +47,6 @@ OPENAI_PRICES = {
     "gpt-5-mini": {"input": 0.25, "cached_input": 0.025, "output": 2.00},
     "gpt-5.4-nano": {"input": 0.20, "cached_input": 0.02, "output": 1.25},
 }
-DEFAULT_PRICE_MODEL = "gpt-5.5"
 
 
 def gh(args, timeout=90):
@@ -176,15 +175,18 @@ def run_jobs(run_id):
 def parse_token_usage(log_text):
     usages = set()
     models = Counter()
+    model_coverage_complete = True
     for line in log_text.splitlines():
         if "codex.turn.token_usage" not in line:
             continue
         pairs = dict(re.findall(r"codex\.turn\.token_usage\.([a-z_]+)=([0-9]+)", line))
         if not pairs or "total_tokens" not in pairs:
             continue
-        model_match = re.search(r"\bmodel=([A-Za-z0-9_.:-]+)", line)
+        model_match = re.search(r"\bmodel=([A-Za-z0-9_./:-]+)", line)
         if model_match:
             models[model_match.group(1)] += 1
+        else:
+            model_coverage_complete = False
         usage = (
             int(pairs.get("input_tokens", 0)),
             int(pairs.get("cached_input_tokens", 0)),
@@ -205,6 +207,7 @@ def parse_token_usage(log_text):
         "totalTokens": sum(u[5] for u in usages),
         "turnsObserved": len(usages),
         "models": dict(models),
+        "modelCoverageComplete": model_coverage_complete,
     }
     if summed["nonCachedInputTokens"] == 0 and summed["inputTokens"] >= summed["cachedInputTokens"]:
         summed["nonCachedInputTokens"] = summed["inputTokens"] - summed["cachedInputTokens"]
@@ -212,27 +215,30 @@ def parse_token_usage(log_text):
 
 
 def normalize_model(model):
-    if not model:
-        return DEFAULT_PRICE_MODEL
-    m = model.lower()
-    if "gpt-5.5" in m:
-        return "gpt-5.5"
-    if "gpt-5.4-nano" in m or ("gpt-5" in m and "nano" in m):
-        return "gpt-5.4-nano"
-    if "gpt-5-mini" in m or ("gpt-5" in m and "mini" in m):
-        return "gpt-5-mini"
-    if "gpt-5.4" in m:
-        return "gpt-5.4"
-    return DEFAULT_PRICE_MODEL
+    # Only exact OpenAI names (or their dated snapshots) have known prices.
+    # Never charge a Copilot/other provider model at an OpenAI API rate.
+    m = (model or "").lower().removeprefix("openai/")
+    for known in OPENAI_PRICES:
+        if m == known or re.fullmatch(re.escape(known) + r"-\d{4}-\d{2}-\d{2}", m):
+            return known
+    return None
 
 
 def token_cost(usage, configured_model=None):
-    if not usage:
+    if not usage or not usage.get("modelCoverageComplete", False):
         return None
+    if "/" in (configured_model or "") and not configured_model.startswith("openai/"):
+        return None
+    # Logs may include both agent and detection models. Without per-model token
+    # totals, a majority vote would misprice the combined usage. Missing log
+    # models also cannot be inferred from today's workflow configuration.
     model_counts = usage.get("models") or {}
-    model = normalize_model(configured_model)
-    if isinstance(model_counts, dict) and model_counts:
-        model = normalize_model(max(model_counts.items(), key=lambda item: item[1])[0])
+    if not isinstance(model_counts, dict) or not model_counts:
+        return None
+    models = {normalize_model(name) for name in model_counts}
+    if None in models or len(models) != 1:
+        return None
+    model = models.pop()
     prices = OPENAI_PRICES[model]
     cost = (
         usage["nonCachedInputTokens"] / 1_000_000 * prices["input"]
@@ -400,6 +406,7 @@ for name, wf in workflows.items():
     minutes = sum(r.get("durationMinutes") or 0 for r in runs)
     observed_costs = [r["openAICost"]["usd"] for r in runs if r.get("openAICost")]
     missing_token_runs = sum(1 for r in runs if r.get("status") == "completed" and not r.get("tokenUsage"))
+    unpriced_token_runs = sum(1 for r in runs if r.get("tokenUsage") and not r.get("openAICost"))
     avg_observed_cost = sum(observed_costs) / len(observed_costs) if observed_costs else None
     projected_openai = sum(observed_costs) + ((avg_observed_cost or 0) * missing_token_runs)
     token_totals = Counter()
@@ -425,9 +432,11 @@ for name, wf in workflows.items():
         "runnerMinutes": round(minutes, 3),
         "avgDurationMinutes": round(minutes / len(runs), 3) if runs else 0,
         "runnerCostUsd": money(minutes * RUNNER_PRICE_PER_MINUTE),
-        "observedOpenAICostUsd": money(sum(observed_costs)),
-        "projectedOpenAICostUsd": money(projected_openai) if observed_costs else None,
-        "tokenRunsObserved": len(observed_costs),
+        "observedOpenAICostUsd": money(sum(observed_costs)) if observed_costs else None,
+        "projectedOpenAICostUsd": money(projected_openai) if observed_costs and not unpriced_token_runs and len(models) == 1 else None,
+        "tokenRunsObserved": sum(1 for r in runs if r.get("tokenUsage")),
+        "costRunsPriced": len(observed_costs),
+        "costRunsUnpriced": unpriced_token_runs,
         "tokenRunsMissing": missing_token_runs,
         "tokenTotals": dict(token_totals),
         "modelsObserved": dict(models),
@@ -495,7 +504,8 @@ for a in all_runs:
             })
 
 total_runner_minutes = sum(s["runnerMinutes"] for s in summaries)
-observed_openai_cost = sum(s["observedOpenAICostUsd"] for s in summaries)
+priced_summaries = [s for s in summaries if s["observedOpenAICostUsd"] is not None]
+observed_openai_cost = sum(s["observedOpenAICostUsd"] for s in priced_summaries)
 projectable = [s for s in summaries if s["projectedOpenAICostUsd"] is not None]
 projected_openai_cost = sum(s["projectedOpenAICostUsd"] for s in projectable) if projectable else None
 
@@ -512,7 +522,7 @@ summary_doc = {
             "effectiveDate": PRICING_EFFECTIVE,
             "runnerUsdPerMinute": RUNNER_PRICE_PER_MINUTE,
             "openaiUsdPerMillionTokens": OPENAI_PRICES,
-            "defaultModelForMissingLogModel": DEFAULT_PRICE_MODEL,
+            "unknownModelPolicy": "unavailable; no substitute model or provider pricing",
         },
         "tokenLogScan": {
             "limit": token_scan_limit,
@@ -530,7 +540,10 @@ summary_doc = {
         "active": sum(s["active"] for s in summaries),
         "runnerMinutes": round(total_runner_minutes, 3),
         "runnerCostUsd": money(total_runner_minutes * RUNNER_PRICE_PER_MINUTE),
-        "observedOpenAICostUsd": money(observed_openai_cost),
+        "observedOpenAICostUsd": money(observed_openai_cost) if priced_summaries else None,
+        "costRunsPriced": sum(s["costRunsPriced"] for s in summaries),
+        "costRunsUnpriced": sum(s["costRunsUnpriced"] for s in summaries),
+        "workflowsWithProjectedCost": len(projectable),
         "projectedOpenAICostUsd": money(projected_openai_cost) if projected_openai_cost is not None else None,
     },
     "workflowSummaries": sorted(summaries, key=lambda s: s["workflow"]),

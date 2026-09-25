@@ -195,7 +195,12 @@ No. The workflow comments on a maximum of 2 issues per run, and only for clear m
 
 ### Do workflows cost money to run?
 
-Workflows currently use OpenAI Codex via GitHub Actions. Model usage is billed to the OpenAI account associated with the `OPENAI_API_KEY` or `CODEX_API_KEY` repository secret. Each workflow run includes token usage in the Actions artifacts so you can track spend.
+Workflows currently use OpenAI Codex via GitHub Actions. Model usage is billed to the OpenAI account associated with the `OPENAI_API_KEY` or `CODEX_API_KEY` repository secret. Usage artifacts and logs can help track spend, but coverage may be incomplete.
+Workflow Health reports missing or unpriced usage instead of substituting a
+different model's price. Its rate table is dated; estimates are not invoices.
+
+Codex can also use Copilot-backed inference with a compatible gh-aw release and
+model. See [the optional billing route](setup.md#optional-codex-with-github-copilot-inference).
 
 ### Can I control costs?
 

@@ -45,6 +45,8 @@ steps:
       echo "full_path=feedback-queue.json" >> "$GITHUB_OUTPUT"
 
 tools:
+  # Shell is needed to read feedback JSON and the strategy document.
+  # Codex has no per-command allowlist; see docs/codex-workflows.md.
   bash: ["*"]
   github:
     mode: gh-proxy
