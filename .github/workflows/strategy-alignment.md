@@ -9,7 +9,7 @@ description: |
 
 engine:
   id: codex
-  model: gpt-5-codex
+  model: gpt-5.3-codex
 
 on:
 #  schedule: (disabled — re-enable to run on a schedule) weekly on wednesday around 8am utc-7
