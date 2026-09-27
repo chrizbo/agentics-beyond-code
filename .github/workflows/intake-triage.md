@@ -8,7 +8,7 @@ description: |
 
 engine:
   id: codex
-  model: gpt-5-codex
+  model: gpt-5.3-codex
 
 on:
   issues:
@@ -23,6 +23,7 @@ on:
 
 concurrency:
   group: intake-triage-${{ github.event.issue.number || inputs.issue_number || github.run_id }}
+  job-discriminator: ${{ github.event.issue.number || inputs.issue_number || github.run_id }}
   cancel-in-progress: false
 
 permissions:
@@ -38,6 +39,8 @@ network:
   allowed: [defaults, github]
 
 tools:
+  # Required for local evidence, policies, and gh reads; see docs/codex-workflows.md.
+  bash: ["*"]
   github:
     mode: gh-proxy
     toolsets: [default, issues]

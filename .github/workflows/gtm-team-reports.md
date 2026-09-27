@@ -7,7 +7,7 @@ description: |
 
 engine:
   id: codex
-  model: gpt-5-codex
+  model: gpt-5.3-codex
 
 on:
 #  schedule: (disabled — re-enable to run on a schedule) weekly on monday around 8am utc-7
@@ -42,6 +42,8 @@ imports:
   - shared/freshness-check.md
 
 tools:
+  # Required for local evidence, policies, and gh reads; see docs/codex-workflows.md.
+  bash: ["*"]
   github:
     mode: gh-proxy
     toolsets: [default]

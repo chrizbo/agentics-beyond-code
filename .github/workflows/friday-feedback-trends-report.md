@@ -59,6 +59,8 @@ post-steps:
       fi
 
 tools:
+  # Shell is needed to query pre-fetched feedback and launch JSON.
+  # Codex has no per-command allowlist; see docs/codex-workflows.md.
   bash: ["*"]
   github:
     mode: gh-proxy
