@@ -132,7 +132,7 @@ The scoping unit for each workflow is the **artifact** it produces (a readiness 
 
 ### The Repo Is the Architecture
 
-The model is interchangeable — what makes these workflows effective is the **environment** they operate in: issues, labels, docs, transcripts, git history. Designing the repo topology well matters more than picking the right LLM.
+The model is interchangeable — what makes these workflows effective is the **environment** they operate in: issues, labels, docs, transcripts, git history. Designing the repo topology well matters more than picking the right LLM. Model changes still need runtime compatibility and output-quality checks; see [Codex workflow configuration](docs/codex-workflows.md) for the current inventory and evaluation procedure.
 
 ### Your Habits Are Already Triggers
 

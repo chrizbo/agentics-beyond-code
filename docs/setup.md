@@ -24,7 +24,7 @@ gh auth refresh -s read:project,project
 | Secret | Required | Purpose |
 |--------|----------|---------|
 | `GITHUB_TOKEN` | Automatic | Default Actions token — used for issue/PR reads and safe-outputs writes |
-| `OPENAI_API_KEY` | Yes | OpenAI API key used by the Codex engine |
+| `OPENAI_API_KEY` | Default route: one OpenAI key required | OpenAI API key used by the committed Codex workflows; `CODEX_API_KEY` can replace it |
 | `CODEX_API_KEY` | Optional | Alternative Codex engine secret. If present, gh-aw uses it before `OPENAI_API_KEY` |
 | `AW_TOKEN` | Yes | PAT with access to the Launch Tracker and Intake Triage projects — used by pre-steps and project updates |
 | `SLACK_BOT_TOKEN` | Optional | Bot token for Slack post-back custom safe outputs when Slack report-backs are enabled |
@@ -63,10 +63,49 @@ If you prefer a Codex-specific secret name, set `CODEX_API_KEY` instead. The com
 
 > **Security review note:** switching from Copilot to Codex adds `CODEX_API_KEY` and `OPENAI_API_KEY` as restricted secrets and allows outbound access to OpenAI domains such as `api.openai.com`. Review these generated lock-file changes in PRs before merging.
 
-Copilot-engine workflows can instead use the built-in `GITHUB_TOKEN` and bill
-AI credits to an organization by granting `copilot-requests: write`. This repo
-uses Codex, so it still requires an OpenAI API key. The separate `AW_TOKEN`
-remains necessary for GitHub Projects V2 access.
+### Optional: Codex with GitHub Copilot inference
+
+The Codex runtime and the inference billing provider are separate choices.
+Current gh-aw documentation supports retaining `id: codex` while selecting a
+`copilot/` model. This is an alternative adoption path, not the configuration
+of the committed workflows.
+
+**Version baseline:** all ABC workflows, setup tooling, and the upstream skill
+now use gh-aw **v0.89.21**. The Copilot inference route remains optional; the
+committed workflows still use OpenAI. Before switching a workflow, inspect its
+compiled provider, credentials, network policy, and threat-detection job and
+validate a staged run. Future compiler upgrades should follow
+[the skill update procedure](skills.md).
+
+The upstream example is:
+
+```yaml
+engine:
+  id: codex
+  model: copilot/gpt-5.3-codex
+```
+
+This is the article's example, not a recommendation about current model access.
+Choose a Codex-compatible model available through your organization's Copilot
+inference service. General-purpose model availability does not establish Codex
+runtime compatibility.
+
+- For organization billing, the current documentation specifies
+  `permissions: copilot-requests: write` (in addition to the workflow's existing
+  read permissions).
+- Otherwise, configure `COPILOT_GITHUB_TOKEN` with a fine-grained PAT granting
+  Copilot Requests access.
+- Keep GitHub data permissions and safe outputs in place. `AW_TOKEN` is still
+  needed for the existing Projects V2 operations; inference credentials do not
+  replace it.
+- Recompile the selected workflow with `gh aw compile <workflow-id> --strict`,
+  review its `.lock.yml`, and validate a staged run before adopting the route.
+  Check threat-detection inference separately before removing OpenAI secrets.
+- OpenAI API dollar estimates in Workflow Health do not represent Copilot
+  billing. Use provider usage records and gh-aw audit data for that comparison.
+
+Sources: [gh-aw Codex engine and authentication](https://github.github.com/gh-aw/engines/codex/)
+and [ABC's evaluation procedure](codex-workflows.md#evaluating-a-model-or-provider-change).
 
 ### Setting up `AW_TOKEN`
 
@@ -96,7 +135,7 @@ gh auth login
 gh auth refresh -s read:project,project
 
 # Install the Agentic Workflows extension
-gh extension install github/gh-aw
+gh extension install github/gh-aw --pin v0.89.21
 
 # Add project scopes (needed for launch tracker integration)
 gh auth refresh -s read:project,project
@@ -172,7 +211,7 @@ gh variable set SLACK_POSTBACK_ENABLED --body "true"
 To enable report-back for specific reporting workflows, set
 `SLACK_ARTIFACT_CHANNEL_MAP` as a JSON object mapping workflow names to Slack
 channel IDs. After each listed workflow completes successfully, the
-[Slack Report-Back Dispatch](.github/workflows/slack-report-back-dispatch.yml)
+[Slack Report-Back Dispatch](../.github/workflows/slack-report-back-dispatch.yml)
 posts a short message with the artifact title and URL to the mapped channel.
 
 Only workflows listed here will post report-backs; omit any you don't want

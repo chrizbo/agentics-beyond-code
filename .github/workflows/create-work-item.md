@@ -31,6 +31,8 @@ network:
   allowed: [defaults, github, codex]
 
 tools:
+  # Shell is needed for policy files and read-only issue/project context.
+  # Codex has no per-command allowlist; see docs/codex-workflows.md.
   bash: ["*"]
   github:
     mode: gh-proxy
