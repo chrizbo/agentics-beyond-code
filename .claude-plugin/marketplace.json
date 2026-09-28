@@ -6,7 +6,7 @@
   "plugins": [
     {
       "name": "agentics-beyond-code",
-      "source": "./",
+      "source": "./plugins/agentics-beyond-code",
       "description": "Assess team workflows, build an operating repo, and design GitHub or Claude-native automations."
     }
   ]

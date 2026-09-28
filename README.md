@@ -10,8 +10,8 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 
 The **Agentics Beyond Code** plugin bundles four skills for assessing team work,
 creating blank operating documents, designing GitHub Agentic Workflows, and
-planning Claude-native automations. It includes the templates and source
-examples those skills need. Installing it does not activate the workflows in
+planning Claude-native automations. It includes templates and references, plus an index for retrieving selected
+workflow sources from a pinned public repository revision. Installing it does not activate the workflows in
 this repository or connect any services.
 
 In Claude, add the repository marketplace `chrizbo/agentics-beyond-code` through
@@ -24,6 +24,9 @@ The plugin has no hosted backend, analytics, or bundled connectors. Depending on
 your request, skills can read supplied files or connected work systems and produce
 files or draft automations. Data stays subject to the Claude environment and any
 services you authorize; see [data handling and submission notes](docs/anthropic-submission.md).
+
+The installable package is generated under [`plugins/agentics-beyond-code/`](plugins/agentics-beyond-code/).
+Runtime workflow files and integration scripts remain outside that package.
 
 ## 🎯 Who is this for?
 

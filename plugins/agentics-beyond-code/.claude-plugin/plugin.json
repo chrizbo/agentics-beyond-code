@@ -1,0 +1,13 @@
+{
+  "name": "agentics-beyond-code",
+  "version": "0.2.0",
+  "description": "Assess team workflows, build an operating repo, and design GitHub or Claude-native automations.",
+  "author": {
+    "name": "Chris Butler"
+  },
+  "homepage": "https://github.com/chrizbo/agentics-beyond-code",
+  "repository": "https://github.com/chrizbo/agentics-beyond-code",
+  "license": "MIT",
+  "skills": "./.github/skills/",
+  "icon": "./.claude-plugin/icon.png"
+}

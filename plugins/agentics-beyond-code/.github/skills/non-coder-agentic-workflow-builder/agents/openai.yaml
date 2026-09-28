@@ -1,0 +1,4 @@
+interface:
+  display_name: "Non-Coder Agentic Workflow Builder"
+  short_description: "Turn team process problems into agentic workflows"
+  default_prompt: "Use $non-coder-agentic-workflow-builder to adapt this repo's workflows for my team."

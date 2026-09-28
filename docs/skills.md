@@ -52,7 +52,17 @@ The check verifies the discovery links, validates each `SKILL.md`, and reports g
 
 ## Claude plugin distribution
 
-The root `.claude-plugin/plugin.json` loads `.github/skills/` directly.
-The marketplace catalog and ZIP builder package the same canonical files;
-see [Claude Cowork plugin](claude-cowork-plugin.md) for installation, builds,
-release versioning, and client smoke tests.
+Canonical skills remain here under `.github/skills/`. The directory plugin in
+`plugins/agentics-beyond-code/` is generated from them and packaging inputs under
+`packaging/claude/`. Do not edit generated copies or discovery links separately.
+The root marketplace points to this generated package. After skill edits, run:
+
+```bash
+python3 .github/scripts/build-claude-plugin.py --sync
+.github/scripts/sync-agent-skills.sh --check
+python3 .github/scripts/build-claude-plugin.py --check
+python3 -B .github/scripts/test-claude-plugin.py
+```
+
+See [Claude Cowork plugin](claude-cowork-plugin.md) for source-access differences,
+versioning, release builds, and behavioral smoke tests.

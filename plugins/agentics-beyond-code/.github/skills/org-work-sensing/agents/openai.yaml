@@ -1,0 +1,4 @@
+interface:
+  display_name: "Org Work Sensing"
+  short_description: "Assess current state and readiness from work artifacts"
+  default_prompt: "Use $org-work-sensing to assess what is happening in this org from GitHub, Jira, and related work artifacts, then recommend practical changes."

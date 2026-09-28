@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agentic Workflows"
+  short_description: "Create, update, debug, and upgrade gh-aw workflows"
+  default_prompt: "Use $agentic-workflows to help with this GitHub Agentic Workflows task."

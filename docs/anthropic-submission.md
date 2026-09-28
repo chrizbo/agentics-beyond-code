@@ -1,110 +1,90 @@
 # Anthropic directory submission preparation
 
-Prepared September 28, 2026 for plugin v0.1.5. This document is preparation,
-not evidence of acceptance or a completed submission.
+Updated for v0.2.0. This is preparation, not an accepted listing.
 
 ## Source fields
 
 | Portal field | Value |
 |---|---|
-| Submission type | Plugin bundle |
+| Type | Plugin bundle |
 | Repository | `chrizbo/agentics-beyond-code` |
-| Plugin path | Leave blank: `.claude-plugin/plugin.json` is at the repository root |
-| Tracked branch | `main` |
+| Plugin path | **`plugins/agentics-beyond-code`** |
+| Branch | `main` |
 | Name | `agentics-beyond-code` |
 | Author | Chris Butler |
 | License | MIT |
-| Short description | Assess team workflows, build an operating repo, and design GitHub or Claude-native automations. |
 | Support | https://github.com/chrizbo/agentics-beyond-code/issues |
 
-The listing description is read from the root README. Submit from the Claude
-account/organization that should own the listing long term. Confirm the contact
-email in the portal; no contact address is assumed here.
+Use the account or organization intended to own the listing long term. Confirm
+the contact email and compliance declarations as the submitting owner.
 
-## What this plugin contains
+## Response to root-package validation
 
-Four canonical skills under `.github/skills/`, supporting references, blank
-operating templates, and repository examples. The manifest explicitly loads
-that canonical directory. The `.agents/skills` and `.claude/skills` symlinks are
-repository discovery conveniences, not the manifest's component paths. ZIP
-builds omit these links. The directory scans the Git repository, not our ZIP.
+Validation of `main@a34e86b` with an empty plugin path found a valid manifest,
+four skills, acceptable size, and a valid name/publisher. It also found 44
+credential policy holds, a missing icon, and eight unneeded symlink warnings.
 
-No MCP servers, hooks, startup commands, telemetry, or hosted backend are
-registered by the plugin. Bundled GitHub workflows and helper scripts are
-reference material; installing the plugin does not activate them. Skills may
-read or run relevant helpers when users request implementation. The upstream
-GitHub skill retrieves additional instructions from `github/gh-aw`; porting
-skills consult official product documentation for current capabilities.
+The new package changes the actual distribution boundary: it includes only
+regular skill/reference/template files, a PNG icon, a README/license, and a
+public source index. It does not distribute integration scripts, Actions source
+or compiled workflows, demo data, or discovery links. The canonical repository
+retains those files for GitHub use. We have not renamed token variables, hidden
+URLs, or obfuscated examples to bypass review.
 
-## Draft data-handling answers to review in the portal
+Some earlier findings concerned first-party credentials sent to their own service
+(e.g. Google Calendar or GitHub). One flagged TOKEN_SCAN_LIMIT, a numeric setting
+in the workflow-health script. The cross-file finding combined a calendar helper
+with a porting skill; neither that helper nor any executable integration code is
+in the new plugin. If a finding remains, inspect its exact source and disclose the
+behavior rather than asserting that every earlier finding was a false positive.
 
-- **Reads personal data:** potentially yes. User-requested assessments can read
-  work artifacts containing names, customer feedback, communications, or other
-  personal information supplied locally or through authorized tools. Do not
-  answer “no” merely because this is a skills-only plugin.
-- **Stores data:** the plugin operates no storage service. Requested reports,
-  drafts, and scaffolding can persist in user-selected files or work services.
-  Claude conversation and tool retention follow the user's Claude arrangement;
-  do not promise zero retention or a plugin-controlled deletion period.
-- **External services:** there are no declared connectors. Instructions can
-  fetch public documentation from GitHub and Anthropic. User-requested work can
-  call GitHub APIs and other authorized work systems through available tools.
-  Bundled integration examples also cover Slack and Google services. These
-  destinations and credential needs must be disclosed for the selected task;
-  “no declared connectors” does not mean “no external data transfers.”
-- **Credentials:** none are bundled. Some reference scripts expect environment
-  credentials such as GH_TOKEN when deliberately run. Do not put actual tokens
-  in prompts, submission notes, or this repository.
-- **Audience:** workplace operators and team leads; not designed for children.
-  Confirm the portal's under-18 question and all compliance declarations as the
-  submitting owner rather than treating this draft as an attestation.
+The plugin retrieves selected public reference files from GitHub when needed for
+an explicitly requested port/setup. The index pins their revision and hashes.
+Those files may describe credential-using runtimes; retrieval does not execute
+them. Implementing and activating those runtimes requires separate user-directed
+configuration. This external dependency is disclosed in the package README and
+source-access guide and must remain disclosed in the submission.
 
-## Validation and known review considerations
+## Draft data-handling answers
 
-The local skill-link check, reproducible ZIP build, archive integrity, canonical
-resource equality, and provenance hash checks have passed during development.
-User-run Cowork tests verified GitHub skill loading, assessment behavior,
-conditional port planning, and exact template copies outside the repository.
-The v0.1.4 port remained conditional: future-run credentials and executable
-integration behavior were not tested. These skills draft implementations;
-they do not guarantee that generated automations are production-ready.
+- **Personal data:** potentially yes. Work artifacts supplied by users or
+  authorized tools may contain names, messages, or customer feedback.
+- **Storage:** no plugin-operated backend or analytics. Generated documents can
+  persist in the chosen workspace; Claude and connected services govern their
+  own retention. Do not promise zero retention.
+- **External destinations:** public reference reads go to GitHub (including
+  raw.githubusercontent.com); official capability documentation reads go to
+  Anthropic. No credentials or private work data are needed for those requests.
+  Further work-system access depends on the user task and authorized tools.
+- **Credentials:** none are bundled, requested by plugin configuration, or
+  automatically read. No hooks or MCP servers are registered. Reference code is
+  not a reason to collect a credential. Implementation requires explicit setup
+  for the selected external runtime.
+- **Audience:** workplace operators and team leads, not designed for children.
+  Confirm all portal answers and terms rather than treating this draft as an
+  attestation on the owner's behalf.
 
-Claude Code's optional `claude plugin validate .` was not run because its CLI
-was unavailable. The portal's Validate step is required and has not run.
-Name availability, scanning, and directory compatibility remain unverified.
+## Remaining steps
 
-The plugin root is the entire repository to preserve relative resource paths.
-Review considerations include environment-token references in helper scripts
-and discovery symlinks outside the declared skill path. The directory checklist
-can hold credential-related content for review and warn on unused symlinks.
-If validation identifies a loaded symlink or another blocker, resolve the finding
-before submission; do not claim the ZIP's exclusions apply to repository scans.
-The manifest loads regular canonical skill files. No OS metadata or ZIPs are
-tracked; `.gitattributes` only marks compiled workflows as generated for GitHub.
+1. Publish this package and use the source fields above in the existing draft
+   if the portal permits editing its path. If it does not, follow the portal's
+   draft-management controls before creating a corrected submission. Do not
+   submit the repository root again.
+2. Select Validate. Review the new commit and path shown in the result, and fix
+   any blocking findings. New policy holds still require reviewer consideration.
+3. Review listing details from the dedicated package README. Run the 0.2.0 smoke
+   tests in [the plugin guide](claude-cowork-plugin.md), particularly external
+   source retrieval and missing-network behavior.
+4. Confirm contact, data handling, and compliance declarations. Submit for review
+   when ready. Neither submission nor acceptance is implied by this document.
+5. Keep automatic publishing off initially. A passing version still follows the
+   listing's reviewer/publication controls. Publish only the version tested.
 
-## Portal steps still required
+Local tests cover canonical-copy equality, absent runtime/discovery paths,
+provenance, generated-file drift and symlink rejection, and reproducible ZIPs.
+Claude CLI validation and renewed portal validation are separate checks and have
+not yet run for this package.
 
-1. Open https://claude.ai/directory/manage using the intended owner account and
-   connect a GitHub identity with push access to the repository.
-2. Select Submit new → Plugin bundle. Enter the source fields above and Validate.
-3. Review each finding. Fix blocking findings in the repository, push, and
-   revalidate the resulting commit. Review listing details from the README.
-4. Review the data-handling answers, supply the contact email, and personally
-   confirm the directory terms and compliance acknowledgements.
-5. Choose update delivery. Scheduled checking avoids adding a GitHub webhook;
-   a push webhook is optional and requires repository admin access. Keep
-   auto-publish off initially so new releases can be reviewed deliberately.
-6. Submit for review. After approval, follow the portal's publication step.
-   Neither submission nor publication has been performed by this preparation.
-
-Every future commit on tracked `main` may trigger a directory scan. Increase the
-plugin version for released changes, including changes to bundled workflows.
-A passing scan does not necessarily publish automatically: reviewer controls
-and the listing's publication settings apply. Keep the existing listing rather
-than creating duplicate submissions for updates.
-
-## Official references
-
-- [Submission procedure](https://claude.com/docs/plugins/submit)
-- [Pre-submission checklist](https://claude.com/docs/plugins/pre-submission-checklist)
-- [Eligibility and listing ownership](https://claude.com/docs/directory/publish)
+[Submission process](https://claude.com/docs/plugins/submit) ·
+[Checklist](https://claude.com/docs/plugins/pre-submission-checklist) ·
+[Ownership](https://claude.com/docs/directory/publish)
