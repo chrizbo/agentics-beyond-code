@@ -7,8 +7,10 @@ disable-model-invocation: true
 
 Use this after `claude-native-workflow-builder` has read the current
 `.github/workflows/<name>.md` or `.yml` file for the workflow being ported.
-Always read the live file — see the "read live, not frozen" default in
-`SKILL.md`. This reference explains what to do with what you find in it.
+Read the actual source file for this task: the user-provided checkout when
+available, otherwise the installed plugin snapshot as described in `SKILL.md`.
+Do not describe a bundled file as current upstream. This reference explains
+what to do with the source you find.
 
 ## Verify against live docs before finalizing a port — this file goes stale too
 
@@ -36,6 +38,14 @@ Before finalizing a port, especially for anything below marked as
   `github-agentic-workflows.md`) or [github.github.io/gh-aw](https://github.github.io/gh-aw/),
   not just this table's one-line summary of it.
 
+Keep research bounded to decisions that affect this port. Start with the
+selected surface's official documentation and available tool schemas; consult
+another surface only when evaluating a relevant alternative. Reuse current
+sources already read in this task. Stop when a capability is verified or a
+specific unresolved prerequisite can be stated. Issue reports can identify
+possible limitations but do not establish supported behavior; do not pursue
+unrelated issues or broad product surveys for a draft plan.
+
 Don't treat the table as exhaustive, either. gh-aw adds new `safe-outputs:`
 types, new `on:` triggers, and new tool integrations over time, and Routines'
 own feature set changes independently. If the workflow being ported uses
@@ -45,6 +55,131 @@ that Routines/Scheduled Tasks can't currently do — not just the ones
 enumerated here — name it explicitly to the user the same way the
 `safe-outputs:` gap is named below, rather than silently dropping or
 approximating the behavior.
+
+## Source, access, and plan consistency
+
+### Identify the source without inventing a compatibility failure
+
+Name the source path and whether it came from a checkout or installed package.
+For a ZIP installation, read `.claude-plugin/build-info.json` at the package
+root when present. Report its plugin version and base commit, and use the source
+file's recorded hash if needed. The base commit does not identify local edits;
+the file hashes identify the packaged bytes. If that metadata is absent, report
+only the provenance available. An installed folder lacking `.git` does not mean
+there is no recorded base commit. Do not infer freshness from hashes or source
+dates from deterministic ZIP timestamps.
+This repository tracks its upstream skill snapshot separately from its installed
+CLI, setup version, and generated workflow action versions (see `docs/skills.md`).
+Different version numbers alone do not establish incompatibility or a stale
+compiled workflow. Report a mismatch as a defect only when a relevant check or
+specific unsupported feature demonstrates it. Keep incidental version details
+out of the user-facing plan unless they affect implementation. Say versions
+"can differ," not that drift is required or proof of compatibility. For a
+version-explanation request, answer that question without proposing upgrades or
+downgrades unless there is a demonstrated defect or the user requests migration.
+Before giving migration commands, verify the selected release, supported flags,
+and compatibility; an unpinned upgrade does not promise a particular version.
+Do not recommend recompiling newer workflow syntax with an older CLI without
+checking that it supports the features used.
+
+### Verify capabilities at the operation level
+
+Check the available tools and current official documentation for the selected
+surface. A connector's name does not establish that it can create a Google Doc,
+read project fields, or publish a GitHub Discussion. Missing access in the
+current session does not prove that the product cannot support the operation.
+If the needed operation cannot be verified, mark it unresolved and describe
+what must be checked before activation. Do not infer a user's complete account
+configuration from tools visible in one session. Report "no GitHub connector
+was available in this session" when that is all the evidence establishes.
+Use that same bounded wording in the summary, recommendation, and prerequisites,
+not only the capability table. A directory search with no results does not establish absence from the account
+or platform. Current-session shell access or credentials also do not establish
+what a future scheduled run will have; verify persistence separately.
+Cite capability evidence actually inspected in this task (or already available
+in its context). Merely appending documentation links is not verification. If
+live lookup is unavailable or the user prohibits it, mark volatile claims as
+unverified rather than presenting remembered product behavior as established.
+
+Verify timezone and daylight-saving behavior, permission controls, and task
+ownership for the actual creation surface. Do not translate a local-time request
+to fixed UTC cron unless that surface requires it; when it does, explain the
+seasonal difference. Distinguish connector scope enforced by the service from
+prompt-only restrictions, and verify the former rather than assuming it exists.
+
+### Preserve the workflow's contract
+
+- Name the original input sources, output destination, allowed writes, human
+  decision gate, and active trigger. A commented-out schedule is not active.
+- If the requested surface lacks an operation, describe the missing access and
+  offer the smallest viable alternatives. Moving a report to another service
+  or retaining GitHub Actions for exports is an architectural choice, not an
+  automatic consequence of requesting a port.
+- Identify new policy choices (such as freshness limits and duplicate handling)
+  as proposed defaults. Do not describe them as constraints inherited from the
+  original workflow.
+- Check success, empty-input, and incomplete outcomes in the source. A check
+  for an output record is not necessarily a check that a report was published;
+  valid no-op or incomplete records can also satisfy it. Distinguish producing
+  a record, passing an individual check, and the final job result. Do not claim
+  an incomplete result succeeds or fails the run without inspecting the relevant
+  generated handling or version-specific documentation; otherwise leave the
+  final run status unverified.
+
+### Reconcile setup steps with the final prompt
+
+Before handing over a runnable prompt, check that every consumed file or field
+has a producer or a named prerequisite. Use the same names in export steps,
+setup instructions, and the prompt; include relationship data such as duplicate
+clusters, not just the main records. If an export step is new, label it as work
+still to implement rather than suggesting the original scripts already do it.
+
+Replace demo repository URLs, project numbers, and folder names with supplied
+targets or clearly marked placeholders. Retain original record URLs when
+available rather than reconstructing them against the example repository.
+Do not invent sample exports or imply that raw fixtures already match a fetched
+project-data schema. State any transformation needed for a meaningful first test.
+
+### Review the final prompt as an executable procedure
+
+Choose one implementation path for each prompt and name its prerequisites.
+A connector-based plan must use verified connector operations; it cannot quietly
+require a shell token, cloning, or `gh`. If the path is undecided, label the
+prompt conditional on a specific path or give separate alternatives. Do not
+present a mixture as ready to run.
+
+For shell-based prompts, define editable values once using named variables,
+such as REPO_OWNER, REPO_NAME, FEEDBACK_PROJECT_NUMBER, and LAUNCH_PROJECT_NUMBER.
+Derive combined values such as REPO from those variables and reference them in
+every command. Export variables when child scripts consume them. Do not scatter
+repeated numeric placeholders or alternate spellings of the same target through
+the prompt. A dry review that changes only the configuration block must redirect
+all reads and writes to the intended sandbox targets. Keep local scratch-file
+writes distinct from external publication when reporting outcomes.
+
+Keep the product name consistent in the recommendation, creation steps, prompt
+heading, and prerequisites. If the requested surface's capabilities remain
+unknown, provide a conditional procedure and the checks needed to finish it;
+do not describe it as ready to execute. Check that pause/activation instructions
+match the verified creation controls before promising it can be created paused.
+
+Walk through the instructions in order before delivering them:
+
+- Every placeholder has one consistent name and a configuration source. Account
+  for script dependencies, working directories, arguments, and credential
+  environment variables. Read the scripts to establish their actual interfaces.
+- Commands contain valid shell syntax. Put explanatory prose outside command
+  lines or in shell comments. Check syntax locally when feasible, without
+  executing network calls, installing tools, or publishing anything for a
+  draft-only request. State which runtime prerequisites remain untested.
+- Empty-input checks occur immediately after the required read, before analysis
+  or any write. Duplicate checks stop before publishing. Ensure each branch
+  terminates with a defined outcome, including any newly proposed duplicate skip.
+- Success, empty input, duplicate skip (if present), and incomplete paths agree
+  with the final outcome list. A failure after an attempted write must report
+  whether the write happened or is uncertain, not claim nothing was created.
+- A search-before-create duplicate check is best effort, not an enforced
+  concurrency guarantee. Do not describe prompt rules as mechanical limits.
 
 ## The gap that matters most: `safe-outputs:`
 

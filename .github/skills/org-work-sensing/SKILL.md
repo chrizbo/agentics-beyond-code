@@ -12,11 +12,25 @@ description: >
 
 # Org Work Sensing
 
-This skill helps Codex inspect work artifacts, infer operating patterns, and
+This skill helps the assistant inspect work artifacts, infer operating patterns, and
 recommend practical changes. Treat it as an assessment layer: it diagnoses what
 the work signals suggest, identifies what must be fixed before automation is
 useful, then routes setup or automation recommendations to other skills when
 needed.
+
+
+## Installed plugin context
+
+When installed as a plugin, resolve bundled repository paths from the package
+root (three directories above this `SKILL.md`), not the user's working folder.
+Resolve `references/`, `prompts/`, and `assets/` relative to this skill folder.
+The package is reference material; create deliverables in the user's selected
+workspace and assess the user's artifacts, never the bundled demo data.
+For an explicitly supplied source checkout, read that checkout's current
+workflows instead. Otherwise identify bundled workflows as the installed
+version's snapshot; fetch current upstream files when the user needs latest.
+Installing these skills does not connect services, install `gh`/`gh aw`, or
+activate workflows or scheduled tasks. Check available tools before using them.
 
 ## Core Workflow
 
@@ -75,6 +89,21 @@ needed.
   qualitative evidence.
 - Preserve uncertainty. Use confidence labels such as high, medium, or low when
   the evidence base is partial.
+
+## Calibrate conclusions to the evidence
+
+Apply uncertainty to recommendations, effort estimates, and readiness judgments
+as well as the summary, readiness table, and individual findings. A few unowned items establish an ownership gap in those items, not
+that the whole team lacks ownership. Missing information about an approval
+policy is an unknown, not proof that no policy exists. Waiting time alone does
+not establish a bottleneck without an expected turnaround or evidence of impact.
+Do not rule out capacity or other causes simply because the sample cannot show
+them. Use claim-specific confidence; directly observed counts and inferred
+causes need not have the same confidence.
+
+Read the inference guidance in `references/assessment-signals.md` for sparse
+samples. Keep proposed response windows and pilot durations labeled as examples
+to calibrate with the team, not thresholds established by the evidence.
 
 ## Output Pattern
 

@@ -1,0 +1,13 @@
+{
+  "name": "agentics-beyond-code",
+  "owner": {
+    "name": "Chris Butler"
+  },
+  "plugins": [
+    {
+      "name": "agentics-beyond-code",
+      "source": "./",
+      "description": "Assess team workflows, build an operating repo, and design GitHub or Claude-native automations."
+    }
+  ]
+}

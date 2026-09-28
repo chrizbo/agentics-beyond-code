@@ -18,6 +18,20 @@ This skill turns a non-coder's plain-language team or process problems into an
 Agentics Beyond Code repo setup: selected GitHub Agentic Workflows, supporting
 documents, folder structure, policies, and adoption steps.
 
+
+## Installed plugin context
+
+When installed as a plugin, resolve bundled repository paths from the package
+root (three directories above this `SKILL.md`), not the user's working folder.
+Resolve `references/`, `prompts/`, and `assets/` relative to this skill folder.
+The package is reference material; create deliverables in the user's selected
+workspace and assess the user's artifacts, never the bundled demo data.
+For an explicitly supplied source checkout, read that checkout's current
+workflows instead. Otherwise identify bundled workflows as the installed
+version's snapshot; fetch current upstream files when the user needs latest.
+Installing these skills does not connect services, install `gh`/`gh aw`, or
+activate workflows or scheduled tasks. Check available tools before using them.
+
 ## Core workflow
 
 1. Ask for, or infer from the user's message:

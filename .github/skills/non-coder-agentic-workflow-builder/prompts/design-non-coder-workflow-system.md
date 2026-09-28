@@ -84,6 +84,23 @@ Also create `.gitkeep` files for empty folders when needed:
 Then copy/adapt only the workflow and policy files needed by the selected
 workflow set. Avoid copying all workflows by default.
 
+### Output location and narrow requests
+
+When the user asks for only specific artifacts, create only those artifacts;
+the full scaffolding procedure applies to requests for a repo setup. Resolve
+blank templates from this skill's `assets/blank-repo/`, not the demo docs.
+
+Use the user's selected writable workspace. If no folder is connected, prepare
+the requested files as downloadable artifacts when supported and explain that
+saving to the requested local folder remains pending. Ask for folder access only
+when needed to finish that step. Do not substitute a connected external service
+as the destination without the user's direction. Never write deliverables into
+the installed plugin or claim an attachment was saved in the user's folder.
+
+For an unchanged template request, preserve placeholders and verify the copied
+files match the templates. When saving succeeds, report the actual destination
+paths. Preserve existing user content when a destination file already exists.
+
 ## Optional Project and Issue Setup
 
 Offer this module when the user wants GitHub to be the team's operating surface

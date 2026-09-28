@@ -29,6 +29,20 @@ Actions/gh-aw dependency, or when they want to see that the pattern this repo
 teaches isn't tied to GitHub at all. Use `non-coder-agentic-workflow-builder`
 when GitHub Issues/Projects/Discussions are the team's actual home.
 
+
+## Installed plugin context
+
+When installed as a plugin, resolve bundled repository paths from the package
+root (three directories above this `SKILL.md`), not the user's working folder.
+Resolve `references/`, `prompts/`, and `assets/` relative to this skill folder.
+The package is reference material; create deliverables in the user's selected
+workspace and assess the user's artifacts, never the bundled demo data.
+For an explicitly supplied source checkout, read that checkout's current
+workflows instead. Otherwise identify bundled workflows as the installed
+version's snapshot; fetch current upstream files when the user needs latest.
+Installing these skills does not connect services, install `gh`/`gh aw`, or
+activate workflows or scheduled tasks. Check available tools before using them.
+
 ## Core workflow
 
 First find out which of these two conversations this is — most requests are
@@ -108,6 +122,14 @@ doesn't exist as a workflow here yet.
 
 ### Both paths
 
+Respect an explicitly requested execution surface. A Cowork Scheduled Task and
+a Claude Code Routine are different products, even when both run weekly. If the
+requested surface cannot yet be verified to support the work, draft a conditional
+plan for that surface and name the unresolved operations. Offer a Routine as a
+separate alternative; do not substitute its setup steps or claim the prompt
+works on both. Use the classification below to recommend a surface when the
+user has not chosen one, or to explain an alternative's tradeoffs.
+
 1. Classify each step as a **Routine** (needs repo/file access, connectors, or
    multi-step tool use; triggered on a schedule, an API call, or a repo event)
    or a **Scheduled Task** (a recurring prompt against connectors that reads
@@ -146,6 +168,24 @@ doesn't exist as a workflow here yet.
    to GitHub Actions, say so and route to `agentic-workflows` and
    `non-coder-agentic-workflow-builder` instead — don't force the non-GitHub
    answer on a team for whom GitHub already works.
+
+## Port fidelity and practical checks
+
+Preserve the user's system of record and output destination where feasible.
+If missing access requires a different destination or an export pipeline,
+present that as an option with its added setup and maintenance, not an assumed
+choice. For a plan-only request, a conditional plan is sufficient; do not
+connect services, schedule work, or require a decision before drafting it.
+
+Before calling a plan ready to use, follow the source, capability, and input
+checks in `references/porting-a-workflow.md`. Verify specific read and write
+operations, not just connector names. Distinguish unavailable in this session,
+unsupported by the product, and not yet verified. Keep target repository URLs,
+project IDs, folders, and schedules configurable; do not silently adopt demo
+values. Preserve source URLs from input records where possible. Keep research
+focused on decisions needed for the port, and review the final prompt against
+one stated implementation path, valid commands, and all terminating outcomes
+using the reference's executable-procedure checks.
 
 ## Output standard
 

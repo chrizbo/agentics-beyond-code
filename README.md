@@ -6,6 +6,25 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 
 > **⏸️ Scheduled workflows are currently paused** to reduce API costs while this repo is in demo/reference mode. Workflows triggered by human activity (issue creation, Slack reactions, transcript pushes) remain active. To run the full system, trigger the [Sample Data Simulator](.github/workflows/sample-data-simulator.md) and [Sample Data Launch Creator](.github/workflows/sample-data-launch-creator.md) manually first, then follow the [stage run order](#running-workflows-manually). To re-enable scheduled runs, uncomment the `schedule:` lines in each workflow's `.md` file and recompile with `gh aw compile`.
 
+## Claude Cowork plugin
+
+The **Agentics Beyond Code** plugin bundles four skills for assessing team work,
+creating blank operating documents, designing GitHub Agentic Workflows, and
+planning Claude-native automations. It includes the templates and source
+examples those skills need. Installing it does not activate the workflows in
+this repository or connect any services.
+
+In Claude, add the repository marketplace `chrizbo/agentics-beyond-code` through
+**Customize → Plugins → Add marketplace**, then install `agentics-beyond-code`.
+For ZIP installation, prerequisites, example prompts, and updates, see the
+[plugin guide](docs/claude-cowork-plugin.md). This is a community plugin, not an
+Anthropic-endorsed integration; a public directory listing has not been submitted.
+
+The plugin has no hosted backend, analytics, or bundled connectors. Depending on
+your request, skills can read supplied files or connected work systems and produce
+files or draft automations. Data stays subject to the Claude environment and any
+services you authorize; see [data handling and submission notes](docs/anthropic-submission.md).
+
 ## 🎯 Who is this for?
 
 - **DRIs / Product Managers** — track launches, monitor feature health, keep roadmaps honest

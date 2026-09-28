@@ -24,6 +24,14 @@ environment required. Runs against whatever connectors the session has.
 Both are always-on in the sense that matters for this repo's philosophy:
 neither depends on a human remembering to open an app and click "run."
 
+## Honor an explicit product choice
+
+The table below is a starting heuristic, not permission to change the user's
+requested product or evidence of its current capabilities. Verify the operations
+needed on that surface. If they are unresolved, keep the requested plan
+conditional and present a different product as a separately labeled alternative.
+Do not put Routine creation instructions under a Cowork Scheduled Task heading.
+
 ## Decision table
 
 | Signal | Choose Routine | Choose Scheduled Task |
@@ -36,7 +44,7 @@ neither depends on a human remembering to open an app and click "run."
 | Needs idempotency checks against structured records (has this item already been processed?) | Yes, if those records live in files/a repo | Only if the connector itself exposes a queryable store (a spreadsheet, a database) the task can check without file access |
 
 When a step could go either way, default to the lighter-weight primitive
-(Scheduled Task) and only move to a Routine when the step's needs outgrow it —
+(Scheduled Task) and recommend a Routine alternative when the step's needs outgrow it —
 same instinct as this repo's own guidance to keep deterministic steps
 deterministic and agentic steps narrowly scoped.
 

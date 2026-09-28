@@ -49,3 +49,10 @@ Run:
 ```
 
 The check verifies the discovery links, validates each `SKILL.md`, and reports gh-aw version alignment.
+
+## Claude plugin distribution
+
+The root `.claude-plugin/plugin.json` loads `.github/skills/` directly.
+The marketplace catalog and ZIP builder package the same canonical files;
+see [Claude Cowork plugin](claude-cowork-plugin.md) for installation, builds,
+release versioning, and client smoke tests.

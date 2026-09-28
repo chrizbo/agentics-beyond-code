@@ -109,6 +109,56 @@ Avoid:
 - recommending automation before clarifying the human workflow
 - flattening all teams into the same process template
 
+### Sparse samples and confidence
+
+- Report the supplied counts without assuming disjoint groups, a denominator,
+  prevalence, or a trend. Separate confidence in the observation from confidence
+  in its explanation; a limited sample need not make an explicit count uncertain.
+- Distinguish an observed gap from an unknown. Missing owners on sampled items
+  are an observed gap. Whether an ownership policy exists is unknown unless
+  operating docs or other evidence establish it.
+- Describe delays before diagnosing bottlenecks. Compare waiting time with the
+  expected service window and downstream impact when available. Do not call a
+  queue the largest source of delay without comparisons to other stages.
+- Keep causes as alternatives until supported: unclear routing, unavailable
+  approvers, incomplete requests, and capacity constraints can produce similar
+  observations. Ask for evidence that distinguishes them.
+- Bound consequences: outdated statuses can distort reports that depend on
+  them; they do not prove that every report is wrong. Avoid universal claims
+  such as "nobody owns work" or "the team has no capacity problem."
+- Propose the smallest useful check or correction. Example response times and
+  observation periods are adjustable suggestions. Readiness depends on reliable
+  inputs for the selected automation, not an arbitrary number of elapsed weeks.
+
+For example, five unowned requests, three waiting two weeks for approval, and
+two completed requests with stale statuses support: "These examples show
+ownership gaps, approval waits, and outdated statuses. Their prevalence and
+causes remain unclear." They do not establish ten distinct affected requests,
+an absent approval policy, or a team-wide diagnosis. Use the same qualification
+in the executive summary and readiness table.
+
+### Carry uncertainty into recommendations
+
+Before finalizing, check that proposed actions do not assume facts the findings
+left unresolved. Refer to "affected requests" when groups might overlap; do not
+sum them into a unique-item count. Missing recorded ownership does not establish
+that no one is accountable: first identify any existing owner and record them,
+or assign one if needed. Verify completion and reconcile stale statuses rather
+than automatically prescribing closure.
+
+Do not invent cleanup durations or promise that a short intervention will yield
+a clean baseline. Estimate effort only with a stated basis and assumptions.
+Frame unverified causes as alternatives throughout, including under headings
+such as "what it likely means"; a definitive diagnosis followed by caveats is
+still a definitive diagnosis.
+
+Assess readiness for a specific automation and its consequences. A report that
+commits work based on inaccurate status has different prerequisites from a
+read-only check that flags missing owners for human review. The latter still
+requires usable inputs and may flag unrecorded owners rather than truly unowned
+work. Neither a blanket readiness verdict nor a claim that data-quality checks
+are independent of data quality follows from a few examples.
+
 ## Recommendation Catalog
 
 Map common patterns to interventions:

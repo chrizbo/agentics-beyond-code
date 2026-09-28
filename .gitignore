@@ -3,3 +3,9 @@ launch-data-summary.json
 
 # gh aw audit logs (generated locally)
 .github/aw/logs/
+
+# Locally built Claude plugin archives
+/dist/
+
+# macOS workspace metadata
+.DS_Store
