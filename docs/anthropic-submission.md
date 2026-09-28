@@ -1,6 +1,6 @@
 # Anthropic directory submission preparation
 
-Updated for v0.2.0. This is preparation, not an accepted listing.
+Updated for v0.2.1. This is preparation, not an accepted listing.
 
 ## Source fields
 
@@ -45,6 +45,11 @@ them. Implementing and activating those runtimes requires separate user-directed
 configuration. This external dependency is disclosed in the package README and
 source-access guide and must remain disclosed in the submission.
 
+## Privacy disclosure
+
+The package README links to the bundled [Privacy notice](../plugins/agentics-beyond-code/docs/privacy.md).
+The portal accepts a README Privacy link; no additional manifest field is needed.
+
 ## Draft data-handling answers
 
 - **Personal data:** potentially yes. Work artifacts supplied by users or
@@ -82,8 +87,9 @@ source-access guide and must remain disclosed in the submission.
 
 Local tests cover canonical-copy equality, absent runtime/discovery paths,
 provenance, generated-file drift and symlink rejection, and reproducible ZIPs.
-Claude CLI validation and renewed portal validation are separate checks and have
-not yet run for this package.
+Portal validation of v0.2.0 at c39749c passed all seven checks with no policy
+holds and one non-blocking icon warning. Revalidate v0.2.1 after the privacy
+notice update. Claude CLI validation has not run.
 
 [Submission process](https://claude.com/docs/plugins/submit) ·
 [Checklist](https://claude.com/docs/plugins/pre-submission-checklist) ·

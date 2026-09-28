@@ -62,6 +62,7 @@ def payload():
         'README.md': ROOT / 'packaging/claude/README.md',
         'LICENSE': ROOT / 'LICENSE',
         'docs/source-access.md': ROOT / 'packaging/claude/source-access.md',
+        'docs/privacy.md': ROOT / 'packaging/claude/privacy.md',
     }
     skills = list((ROOT / '.github/skills').glob('*/SKILL.md'))
     if len(skills) != 4:

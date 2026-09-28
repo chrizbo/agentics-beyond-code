@@ -1,6 +1,6 @@
 {
   "name": "agentics-beyond-code",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Assess team workflows, build an operating repo, and design GitHub or Claude-native automations.",
   "author": {
     "name": "Chris Butler"

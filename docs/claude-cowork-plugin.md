@@ -9,7 +9,7 @@ and checked for drift. Do not edit generated copies directly.
 
 In Claude's plugin settings, add the repository marketplace
 `chrizbo/agentics-beyond-code`, then install `agentics-beyond-code`. Alternatively,
-build or download `agentics-beyond-code-0.2.0.zip` and use the custom ZIP upload
+build or download `agentics-beyond-code-0.2.1.zip` and use the custom ZIP upload
 option. Start a new task, type `/` to find the skills, and select a writable folder
 when creating files. A directory listing has not been approved.
 

@@ -43,6 +43,9 @@ validation before production use. Start with local exports and blank templates.
 
 ## Data handling
 
+[Privacy](https://github.com/chrizbo/agentics-beyond-code/blob/main/plugins/agentics-beyond-code/docs/privacy.md)
+
+
 There is no hosted backend, telemetry, bundled credential, or registered MCP
 server. Assessments may read personal information in artifacts you supply.
 Generated files persist where you choose to save them; Claude and connected
