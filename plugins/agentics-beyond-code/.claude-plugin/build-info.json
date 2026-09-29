@@ -1,17 +1,17 @@
 {
-  "plugin_version": "0.2.1",
+  "plugin_version": "0.2.2",
   "generated": true,
   "source_revision": "a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79",
   "gh_aw_skill_version": "v0.89.21",
   "sha256": {
     ".claude-plugin/icon.png": "455bbb9ef038026c2a00b88bb598ed06bc079b073375e023d5be2e9aeab8d2ae",
-    ".claude-plugin/plugin.json": "ebc8a38f81617cad4f88b18f35d8fc84978b691470266dcf0c12882addd1e271",
+    ".claude-plugin/plugin.json": "96f3fae032691b761675aaccc17299d7bd2a318c1359d23968a933b7ba5e3c61",
     ".github/skills/agentic-workflows/.upstream-version": "1f34d04c04ec14514c49f8a194747d57a2508a59145a8683c032c62e1224dc23",
     ".github/skills/agentic-workflows/SKILL.md": "0c0ed35d9f5b43f9022d8e1e97590ac868adcb138d9d7019aeb1610aa1656968",
     ".github/skills/agentic-workflows/agents/openai.yaml": "f1469a81bf2da18c1f54612cae02a56d63cbb699aee74fc183a4adeec95e1d49",
     ".github/skills/claude-native-workflow-builder/SKILL.md": "b1d2c0a6df9c2feaf03322ddce67f148e6b58b1ad2b6dd70931058c6de64d8f7",
     ".github/skills/claude-native-workflow-builder/agents/openai.yaml": "3e194dd6315301f4b002cee14977ff143de8663e9b589db1b7f6c6e399bbc69f",
-    ".github/skills/claude-native-workflow-builder/references/porting-a-workflow.md": "3b0615df011685941f7ac80d2e68548e3b1fc5be4a178e22034c7984721ebab9",
+    ".github/skills/claude-native-workflow-builder/references/porting-a-workflow.md": "bab48ee1842a9d2aea5b7cd07b4860c7ac7a31128910a368e2ceec0d227d2371",
     ".github/skills/claude-native-workflow-builder/references/routine-vs-scheduled-task.md": "cb8501e2ffbe6810ab2c1593befca82e10f16f3527ce183dee877eb3cb9e9c51",
     ".github/skills/non-coder-agentic-workflow-builder/SKILL.md": "72eab35c189e97ada8d3f6c37e7fee5603b133cea16a8ce1ec2a76f5963dc95b",
     ".github/skills/non-coder-agentic-workflow-builder/agents/openai.yaml": "f1948492dabb2d520feb5d720fe0b0449a1b1f6ba062e37f6d67e15366e62d99",
@@ -33,7 +33,7 @@
     "LICENSE": "0b57642affa02b038c08d2ae25e02ea770e3998ae34026cc445444e21c91f2e9",
     "README.md": "9ba9188b9233cba498ad31dc313b93d0098e583d8c7cd6cb1f53b1e933b2e0cd",
     "docs/privacy.md": "57b1d865a84b8a463480100b5f15fd9550d2d00196dbd2bfe681cac0246b6f50",
-    "docs/source-access.md": "3d433dfea94cc010b1e17d1936be314190e5fd63ef1893a78f54b9cbf4a1bc38",
+    "docs/source-access.md": "cf8138562decca0c467e34f945850a767b2c47df26138917009cb037abca1d86",
     "source-index.json": "26b9669f5fc90243fa8775c39683bb1cf00aeb8596dba5b0796d2a3f4fe15f78"
   }
 }
