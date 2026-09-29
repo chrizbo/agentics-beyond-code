@@ -39,3 +39,27 @@ actual execution, and disclose what service receives each credential.
 `build-info.json` hashes describe the installed package; `source-index.json`
 hashes describe the external files. Neither proves that a file is the newest
 upstream version. Report the plugin version separately from the workflow revision.
+
+## Source-index lookup
+
+The top-level `files` value is an object keyed by repository-relative path,
+not a list of objects with a `path` field. Each value has `url`, `raw_url`,
+and `sha256`. For example, this read-only lookup prints only the selected
+workflow's metadata (it does not fetch or execute it):
+
+```sh
+python3 - "/absolute/path/to/plugin/source-index.json" <<'PYTHON'
+import json
+import sys
+
+with open(sys.argv[1], encoding="utf-8") as source:
+    index = json.load(source)
+path = ".github/workflows/friday-feedback-trends-report.md"
+entry = index["files"][path]
+print(json.dumps({"revision": index["revision"], "path": path, **entry}, indent=2))
+PYTHON
+```
+
+When searching by partial name, iterate `index["files"].items()` as
+`for path, metadata in index["files"].items()`; the path is the key.
+Do not dump the entire index when a targeted lookup is enough.
