@@ -139,6 +139,11 @@ still to implement rather than suggesting the original scripts already do it.
 Replace demo repository URLs, project numbers, and folder names with supplied
 targets or clearly marked placeholders. Retain original record URLs when
 available rather than reconstructing them against the example repository.
+Adapt strategy-document assumptions to the target: read its actual tradeoffs,
+headings, and identifiers rather than copying a demo count, numbering scheme,
+or example priorities. If the target document is unavailable, leave its content
+unresolved and require that read before ranking; do not invent tradeoffs.
+
 Do not invent sample exports or imply that raw fixtures already match a fetched
 project-data schema. State any transformation needed for a meaningful first test.
 
@@ -180,6 +185,12 @@ Walk through the instructions in order before delivering them:
 - Success, empty input, duplicate skip (if present), and incomplete paths agree
   with the final outcome list. A failure after an attempted write must report
   whether the write happened or is uncertain, not claim nothing was created.
+- After a timeout or ambiguous create response, reconcile against the destination
+  using the intended unique marker or exact title before considering a retry.
+  If the object exists, report its link without creating another. If the result
+  remains uncertain, stop with an uncertain-write outcome and no retry. Retry
+  only when non-creation is confirmed or a verified idempotency mechanism makes
+  the retry safe; a fixed retry count alone does not prevent duplicates.
 - A search-before-create duplicate check is best effort, not an enforced
   concurrency guarantee. Do not describe prompt rules as mechanical limits.
 

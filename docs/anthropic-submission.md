@@ -1,6 +1,7 @@
 # Anthropic directory submission preparation
 
-Updated for v0.2.1. This is preparation, not an accepted listing.
+Updated for v0.2.2. The owner confirmed v0.2.1 was approved and published.
+Version 0.2.2 requires its own review before publication.
 
 ## Source fields
 

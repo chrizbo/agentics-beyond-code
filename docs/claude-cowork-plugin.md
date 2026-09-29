@@ -117,3 +117,10 @@ Use fresh tasks after installation. The packaging change needs renewed testing.
 0.1.4/0.1.5 tests established previous behavior. They do not validate 0.2.0's new
 external-source path. Portal findings may remain and need an honest response;
 no zero-findings result is promised.
+
+## v0.2.2 review checks
+
+Repeat the draft-only Friday Feedback port in a fresh session. Confirm that the
+source index is read as a path-keyed object, ambiguous writes stop for
+reconciliation rather than automatic retry, and the target strategy is read
+without assuming five numbered tradeoffs. The source pin is unchanged.
