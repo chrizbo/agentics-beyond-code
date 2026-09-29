@@ -14,11 +14,14 @@ automations, Productboard, and Atlassian. It includes templates and references, 
 workflow sources from a pinned public repository revision. Installing it does not activate the workflows in
 this repository or connect any services.
 
-In Claude, add the repository marketplace `chrizbo/agentics-beyond-code` through
-**Customize → Plugins → Add marketplace**, then install `agentics-beyond-code`.
-For ZIP installation, prerequisites, example prompts, and updates, see the
-[plugin guide](docs/claude-cowork-plugin.md). This is a community plugin, not an
-Anthropic-endorsed integration; a public directory listing has not been submitted.
+Install it from the [Claude plugin directory](https://claude.ai/new#customize/plugins/id/0fc0c7e1-2215-4ba4-8c5f-c791333cbee4%40anthropic-plugin-directory) (sign in to Claude
+first), or go to **Customize → Plugins** and search for **Agentics Beyond Code**.
+If your Claude environment doesn't show directory plugins, add the repository
+marketplace `chrizbo/agentics-beyond-code` through **Customize → Plugins → Add
+marketplace**, then install `agentics-beyond-code`. For Claude Code, ZIP
+installation, prerequisites, example prompts, and updates, see the
+[plugin guide](docs/claude-cowork-plugin.md). This is a community plugin listed in
+Anthropic's directory, not an Anthropic-built integration.
 
 The plugin has no hosted backend, analytics, or bundled connectors. Depending on
 your request, skills can read supplied files or connected work systems and produce

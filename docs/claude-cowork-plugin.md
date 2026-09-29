@@ -7,11 +7,16 @@ and checked for drift. Do not edit generated copies directly.
 
 ## Install
 
-In Claude's plugin settings, add the repository marketplace
-`chrizbo/agentics-beyond-code`, then install `agentics-beyond-code`. Alternatively,
-build or download `agentics-beyond-code-0.5.0.zip` and use the custom ZIP upload
-option. Start a new task, type `/` to find the skills, and select a writable folder
-when creating files. A directory listing has not been approved.
+The plugin is listed in Anthropic's plugin directory. Open the
+[directory listing](https://claude.ai/new#customize/plugins/id/0fc0c7e1-2215-4ba4-8c5f-c791333cbee4%40anthropic-plugin-directory) while signed in to Claude, or go to
+**Customize → Plugins** and search for **Agentics Beyond Code**.
+
+Some Claude environments don't show directory plugins. In that case, add the
+repository marketplace `chrizbo/agentics-beyond-code` in Claude's plugin settings
+(**Customize → Plugins → Add marketplace**), then install `agentics-beyond-code`.
+Alternatively, build or download `agentics-beyond-code-0.5.0.zip` and use the
+custom ZIP upload option. Start a new task, type `/` to find the skills, and select
+a writable folder when creating files.
 
 [Claude installation guide](https://support.claude.com/en/articles/13837440-use-plugins-in-claude)
 
