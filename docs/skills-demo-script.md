@@ -18,7 +18,7 @@ a real backlog.
   `.github/skills/`, `.claude/skills/`, or `.agents/skills/`, and the skills
   can read workflows and demo data locally.
 - **Claude plugin:** install `agentics-beyond-code` (see the
-  [plugin guide](claude-cowork-plugin.md)). It ships four skills (no
+  [plugin guide](claude-cowork-plugin.md)). It ships five skills (no
   `agentic-workflows`). Workflow sources are fetched from the pinned public
   revision, so network access is needed. Prompts that say "this repo" need
   a checkout; use the plugin variants where a scene gives one.

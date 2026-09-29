@@ -10,6 +10,7 @@ skills=(
   "github-workflow-builder"
   "claude-native-workflow-builder"
   "productboard-agent-builder"
+  "atlassian-agent-builder"
 )
 
 check_link() {

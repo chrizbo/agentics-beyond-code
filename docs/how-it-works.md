@@ -179,6 +179,8 @@ Workflows define the **general pattern** (e.g., "assess readiness against a poli
       SKILL.md                         ← Build the design as Claude Routines and Scheduled Tasks
     productboard-agent-builder/
       SKILL.md                         ← Build the design as Productboard Spark skills
+    atlassian-agent-builder/
+      SKILL.md                         ← Build the design as Rovo agents with Jira or Confluence automation
     agentic-workflows/
       SKILL.md                         ← Skill for creating, updating, debugging, and compiling gh-aw workflows
   workflows/

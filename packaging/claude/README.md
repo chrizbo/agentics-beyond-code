@@ -4,7 +4,7 @@ A community plugin for product managers, operations leads, and teams who want
 to assess how work flows, improve operating documents, and design useful
 agentic workflows. It is not an official Anthropic integration.
 
-## Four skills
+## Five skills
 
 The skills follow one path: assess, design, then build where your team works.
 
@@ -17,6 +17,9 @@ The skills follow one path: assess, design, then build where your team works.
   Claude Scheduled Task and Routine plans, preserving human decision points.
 - **Productboard Agent Builder:** adapt workflows into Spark instructions, create
   skills through the browser when requested, and configure supported schedules.
+- **Atlassian Agent Builder:** adapt workflows into Rovo agents with Jira or
+  Confluence automation for schedules, events, and workflow transitions.
+  Deployment guidance is documentation-derived and not yet field-tested.
 
 Renamed in 0.4.0: Org Work Sensing is now the planner's Assess mode, and the
 Non-Coder Agentic Workflow Builder is split between the planner's Design mode
@@ -33,6 +36,7 @@ Start a fresh task and select a writable folder when creating files.
 - “Draft a Cowork Scheduled Task port of the Friday Feedback Trends Report. Read its recorded source; don't activate anything.”
 
 - “Use productboard-agent-builder to draft a Spark skill named assumption-surfacer from the source workflow. Return analysis in chat; do not deploy yet.”
+- “Use atlassian-agent-builder to adapt Intake Triage into a Rovo agent for Jira project KEY. Draft only; do not deploy.”
 
 Productboard deployment requires browser automation and a signed-in workspace;
 this plugin supplies neither access nor credentials. Browser creation and native
@@ -40,6 +44,10 @@ scheduling were exercised in one workspace. Event/webhook triggering remains
 unverified. See the bundled [field observations](.github/skills/productboard-agent-builder/references/observed-productboard-behavior.md)
 for the tested behavior and limitations. Request deployment and schedule activation
 explicitly; installing this plugin does not perform either.
+
+Atlassian deployment likewise requires a signed-in site with Rovo, and this
+plugin supplies no Atlassian access or credentials. No live Rovo test has been
+recorded yet; the builder marks site behavior it has not verified.
 
 Templates and skill references are included. Runtime workflows, integration
 scripts, compiled Actions, and demo data are not. For source-based work, the
@@ -68,7 +76,7 @@ There is no hosted backend, telemetry, bundled credential, or registered MCP
 server. Assessments may read personal information in artifacts you supply.
 Generated files persist where you choose to save them; Claude and connected
 services apply their own retention policies. Public-source and product-documentation
-reads go to GitHub, Anthropic, and Productboard. Do not send private work artifacts in those
+reads go to GitHub, Anthropic, Productboard, and Atlassian. Do not send private work artifacts in those
 requests. Additional work-system access depends on your requested task and
 explicitly authorized tools, not plugin installation.
 

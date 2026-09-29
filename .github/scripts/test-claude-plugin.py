@@ -26,7 +26,7 @@ class PackageTests(unittest.TestCase):
                 self.assertNotIn(name, self.data)
             elif path.is_file():
                 self.assertEqual(self.data[name], path.read_bytes())
-        self.assertEqual(sum(name.endswith('/SKILL.md') for name in self.data), 4)
+        self.assertEqual(sum(name.endswith('/SKILL.md') for name in self.data), 5)
         self.assertNotIn('.github/skills/agentic-workflows/SKILL.md', self.data)
 
     def test_no_runtime_or_discovery_paths(self):

@@ -104,6 +104,7 @@ tools happen to be available in this session.
 | GitHub Issues, Projects, or Discussions are the team's home and GitHub Actions is acceptable | `github-workflow-builder` |
 | The work's records live in GitHub, but people read and react in Slack or email | `github-workflow-builder`, with Slack or email as the delivery surface; name `claude-native-workflow-builder` as the alternative |
 | The team's records and habits live in Slack, Notion, Jira, Google Workspace, or email, or it wants no GitHub/gh-aw dependency | `claude-native-workflow-builder` (Claude Routines and Scheduled Tasks) |
+| Work is tracked in Jira and documented in Confluence, the site has Rovo, and the team wants agents and automation inside Atlassian | `atlassian-agent-builder` (Rovo agents with Jira or Confluence automation); name `claude-native-workflow-builder` as the alternative when Rovo is unavailable or the steps span tools outside Atlassian |
 | Product discovery, feedback, and planning live in Productboard | `productboard-agent-builder` (Spark skills) |
 
 Separate where the analysis runs from where people read the result. "We
