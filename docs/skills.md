@@ -71,6 +71,8 @@ Edit the canonical files under `.github/skills/`; the discovery links expose cha
 
 `.github/skills/productboard-agent-builder/` is maintained in this repository. It adapts selected workflows into Productboard Spark instructions, preserving evidence and human decisions, and designs or configures verified schedules and triggers. It distinguishes native Spark execution from external agents connected to Productboard.
 
+`.github/skills/atlassian-agent-builder/` is maintained in this repository. It adapts selected workflows into Atlassian Rovo agents and Jira or Confluence automation flows, keeping writes in automation actions where possible and preserving evidence and human decisions. It distinguishes Rovo agents, automation flows, Forge apps, and external agents using the Atlassian Rovo MCP Server.
+
 ## Using the Productboard Agent Builder
 
 Use `productboard-agent-builder` from a checkout of this repository or the
@@ -131,6 +133,40 @@ Maintain those observations there rather than duplicating UI instructions here.
 The repository checks below validate packaging and skill structure, not live
 Productboard behavior.
 
+## Using the Atlassian Agent Builder
+
+Use `atlassian-agent-builder` from a checkout of this repository or the Claude
+plugin (0.5.0 and later). The builder
+produces Rovo agent settings, Behavior instructions, and automation flow
+specifications; installing the builder does not create anything in Atlassian.
+
+Start with a draft:
+
+```text
+Use atlassian-agent-builder to adapt Intake Triage into a Rovo agent for Jira
+project KEY. Read the source workflow. Run it when the triage label is added, keep
+acceptance for a human, and show the agent and automation configuration. Do not
+deploy yet.
+```
+
+Then, when ready and signed in to the site in the browser:
+
+```text
+Create the prepared agent in Rovo Studio and the automation flow in project KEY.
+Check for existing matches, save the flow disabled, and verify the saved
+configuration from a fresh page load.
+```
+
+### What has been tested
+
+Nothing live yet. Draft behavior was checked with five CLI prompts on
+September 29, 2026. The deployment and trigger guidance is derived from Atlassian
+documentation checked September 29, 2026, which conflicts on whether agent write
+tools run inside automation flows. The builder therefore routes writes through
+automation actions that consume `{{agentResponse}}`. Record the first site test
+in the skill's
+[field observations](../.github/skills/atlassian-agent-builder/references/observed-atlassian-behavior.md).
+
 ## Validation
 
 Run:
@@ -145,7 +181,7 @@ The check verifies the discovery links, validates each `SKILL.md`, and reports g
 
 Canonical skills remain here under `.github/skills/`. The directory plugin in
 `plugins/agentics-beyond-code/` is generated from them and packaging inputs under
-`packaging/claude/`. The plugin ships four skills: the upstream
+`packaging/claude/`. The plugin ships five skills: the upstream
 `agentic-workflows` dispatcher is excluded (`EXCLUDED_SKILLS` in
 `.github/scripts/build-claude-plugin.py`) because it only fetches instructions
 from `github/gh-aw` and overlaps with `github-workflow-builder` in Cowork. The

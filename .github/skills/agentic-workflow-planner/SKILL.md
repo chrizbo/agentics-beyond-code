@@ -4,7 +4,7 @@ description: >
   The platform-neutral front door to Agentics Beyond Code. Use it to assess how
   a team or organization works today and to design which agentic workflows,
   living documents, and human approval points it should adopt, before building
-  on GitHub, Claude, or Productboard. Trigger on assessment requests such as a
+  on GitHub, Claude, Productboard, or Atlassian. Trigger on assessment requests such as a
   pre-work or readiness assessment, current-state and gap analysis, org health
   readout, delivery or process diagnosis, bottleneck analysis, or a review of
   GitHub, Jira, Linear, project boards, incidents, discussions, and operating
@@ -24,7 +24,8 @@ pipeline:
 ```text
 Assess  ->  Design  ->  Build (github-workflow-builder |
                                claude-native-workflow-builder |
-                               productboard-agent-builder)
+                               productboard-agent-builder |
+                               atlassian-agent-builder)
 ```
 
 It diagnoses what the work signals say, designs the smallest useful workflow
@@ -98,6 +99,7 @@ builder:
   GitHub Agentic Workflows
 - `claude-native-workflow-builder` for Claude Routines and Scheduled Tasks
 - `productboard-agent-builder` for Productboard Spark skills
+- `atlassian-agent-builder` for Rovo agents with Jira or Confluence automation
 
 When the user asked only for a recommendation, stop at the design and offer
 the builder as the next step.

@@ -154,6 +154,7 @@ Agentics Beyond Code without needing to start from workflow syntax.
 | GitHub Workflow Builder | Set up the chosen workflows on GitHub: gh-aw files, optional project boards, labels, issue templates, blank operating docs, policies, and repo folders | `.github/skills/github-workflow-builder/SKILL.md` |
 | Claude-Native Workflow Builder | Port or design workflows as Claude Routines and Scheduled Tasks | `.github/skills/claude-native-workflow-builder/SKILL.md` |
 | Productboard Agent Builder | Adapt workflows into Productboard Spark skills | `.github/skills/productboard-agent-builder/SKILL.md` |
+| Atlassian Agent Builder | Adapt workflows into Rovo agents with Jira or Confluence automation | `.github/skills/atlassian-agent-builder/SKILL.md` |
 | Agentic Workflows | Create, update, debug, compile, and validate GitHub Agentic Workflows (upstream gh-aw) | `.github/skills/agentic-workflows/SKILL.md` |
 
 Each skill is also linked from `.claude/skills/<name>/` and `.agents/skills/<name>/`.

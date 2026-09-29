@@ -7,7 +7,7 @@
     {
       "name": "agentics-beyond-code",
       "source": "./plugins/agentics-beyond-code",
-      "description": "Assess team workflows, build an operating repo, and design GitHub, Claude-native, or Productboard workflows."
+      "description": "Assess team workflows, build an operating repo, and design GitHub, Claude-native, Productboard, or Atlassian workflows."
     }
   ]
 }
