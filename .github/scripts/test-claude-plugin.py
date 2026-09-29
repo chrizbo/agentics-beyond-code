@@ -23,7 +23,7 @@ class PackageTests(unittest.TestCase):
         for path in (root / '.github/skills').rglob('*'):
             if path.is_file():
                 self.assertEqual(self.data[path.relative_to(root).as_posix()], path.read_bytes())
-        self.assertEqual(sum(name.endswith('/SKILL.md') for name in self.data), 4)
+        self.assertEqual(sum(name.endswith('/SKILL.md') for name in self.data), 5)
 
     def test_no_runtime_or_discovery_paths(self):
         for name in self.data:

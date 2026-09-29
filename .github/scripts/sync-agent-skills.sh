@@ -9,6 +9,7 @@ skills=(
   "non-coder-agentic-workflow-builder"
   "org-work-sensing"
   "claude-native-workflow-builder"
+  "productboard-agent-builder"
 )
 
 check_link() {

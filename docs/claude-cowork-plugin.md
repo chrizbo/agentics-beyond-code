@@ -1,6 +1,6 @@
 # Claude Cowork plugin
 
-The installable plugin lives in `plugins/agentics-beyond-code/`. It contains four
+The installable plugin lives in `plugins/agentics-beyond-code/`. It contains five
 skills, references, blank templates, a source index, and the project icon.
 Canonical skills remain in `.github/skills/`; the installed directory is generated
 and checked for drift. Do not edit generated copies directly.
@@ -9,7 +9,7 @@ and checked for drift. Do not edit generated copies directly.
 
 In Claude's plugin settings, add the repository marketplace
 `chrizbo/agentics-beyond-code`, then install `agentics-beyond-code`. Alternatively,
-build or download `agentics-beyond-code-0.2.1.zip` and use the custom ZIP upload
+build or download `agentics-beyond-code-0.3.0.zip` and use the custom ZIP upload
 option. Start a new task, type `/` to find the skills, and select a writable folder
 when creating files. A directory listing has not been approved.
 
@@ -27,6 +27,15 @@ For local testing from a separate working directory:
 ```bash
 claude --plugin-dir /absolute/path/to/agentics-beyond-code/plugins/agentics-beyond-code
 ```
+
+## Productboard builder in 0.3.0
+
+The package adds `productboard-agent-builder` for adapting repository workflows
+into Spark skills and creating them through an available signed-in browser.
+It includes native scheduling guidance and dated field-test findings, but no
+Productboard connector, credentials, or background execution service.
+See [usage and testing](skills.md#using-the-productboard-agent-builder) for example
+prompts, prerequisites, and the distinction between packaging checks and live tests.
 
 ## What changed in 0.2.0
 

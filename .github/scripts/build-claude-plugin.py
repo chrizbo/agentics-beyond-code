@@ -65,8 +65,8 @@ def payload():
         'docs/privacy.md': ROOT / 'packaging/claude/privacy.md',
     }
     skills = list((ROOT / '.github/skills').glob('*/SKILL.md'))
-    if len(skills) != 4:
-        raise ValueError('Review package scope when changing the four-skill inventory')
+    if len(skills) != 5:
+        raise ValueError('Review package scope when changing the five-skill inventory')
     for path in (ROOT / '.github/skills').rglob('*'):
         if path.is_symlink():
             raise ValueError(f'Canonical resources must be regular files: {path}')
@@ -133,7 +133,8 @@ def build(output, data):
     with zipfile.ZipFile(archive) as bundle:
         if bundle.testzip() is not None:
             raise ValueError('Archive integrity check failed')
-    print(f'{archive} (4 skills, {len(data)} files)')
+    skill_count = sum(name.endswith('/SKILL.md') for name in data)
+    print(f'{archive} ({skill_count} skills, {len(data)} files)')
     return archive
 
 

@@ -4,7 +4,7 @@ A community plugin for product managers, operations leads, and teams who want
 to assess how work flows, improve operating documents, and design useful
 agentic workflows. It is not an official Anthropic integration.
 
-## Four skills
+## Five skills
 
 - **Org Work Sensing:** assess supplied work artifacts, distinguish evidence
   from inference, and identify practical improvements.
@@ -14,6 +14,8 @@ agentic workflows. It is not an official Anthropic integration.
   Claude Scheduled Task and Routine plans, preserving human decision points.
 - **Agentic Workflows:** route GitHub workflow design and debugging to the
   upstream gh-aw instructions.
+- **Productboard Agent Builder:** adapt workflows into Spark instructions, create
+  skills through the browser when requested, and configure supported schedules.
 
 ## Try it
 
@@ -22,6 +24,15 @@ Start a fresh task and select a writable folder when creating files.
 - “Use org-work-sensing to assess these exported requests. Use only the supplied evidence.”
 - “Copy only the blank strategy and how-we-work templates into my test folder.”
 - “Draft a Cowork Scheduled Task port of the Friday Feedback Trends Report. Read its recorded source; don't activate anything.”
+
+- “Use productboard-agent-builder to draft a Spark skill named assumption-surfacer from the source workflow. Return analysis in chat; do not deploy yet.”
+
+Productboard deployment requires browser automation and a signed-in workspace;
+this plugin supplies neither access nor credentials. Browser creation and native
+scheduling were exercised in one workspace. Event/webhook triggering remains
+unverified. See the bundled [field observations](.github/skills/productboard-agent-builder/references/observed-productboard-behavior.md)
+for the tested behavior and limitations. Request deployment and schedule activation
+explicitly; installing this plugin does not perform either.
 
 Templates and skill references are included. Runtime workflows, integration
 scripts, compiled Actions, and demo data are not. For source-based work, the
@@ -50,7 +61,7 @@ There is no hosted backend, telemetry, bundled credential, or registered MCP
 server. Assessments may read personal information in artifacts you supply.
 Generated files persist where you choose to save them; Claude and connected
 services apply their own retention policies. Public-source and product-documentation
-reads go to GitHub and Anthropic. Do not send private work artifacts in those
+reads go to GitHub, Anthropic, and Productboard. Do not send private work artifacts in those
 requests. Additional work-system access depends on your requested task and
 explicitly authorized tools, not plugin installation.
 

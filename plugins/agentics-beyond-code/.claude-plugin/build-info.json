@@ -1,11 +1,11 @@
 {
-  "plugin_version": "0.2.1",
+  "plugin_version": "0.3.0",
   "generated": true,
   "source_revision": "a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79",
   "gh_aw_skill_version": "v0.89.21",
   "sha256": {
     ".claude-plugin/icon.png": "455bbb9ef038026c2a00b88bb598ed06bc079b073375e023d5be2e9aeab8d2ae",
-    ".claude-plugin/plugin.json": "ebc8a38f81617cad4f88b18f35d8fc84978b691470266dcf0c12882addd1e271",
+    ".claude-plugin/plugin.json": "f846507a5b462258774f76c015f537a3aed643d4f7b7245e8ac5e41f73bddcf9",
     ".github/skills/agentic-workflows/.upstream-version": "1f34d04c04ec14514c49f8a194747d57a2508a59145a8683c032c62e1224dc23",
     ".github/skills/agentic-workflows/SKILL.md": "0c0ed35d9f5b43f9022d8e1e97590ac868adcb138d9d7019aeb1610aa1656968",
     ".github/skills/agentic-workflows/agents/openai.yaml": "f1469a81bf2da18c1f54612cae02a56d63cbb699aee74fc183a4adeec95e1d49",
@@ -30,9 +30,14 @@
     ".github/skills/org-work-sensing/SKILL.md": "2695e2530eb97a44df81cce402c41caf02d6ebff4192584d09a17074d51df441",
     ".github/skills/org-work-sensing/agents/openai.yaml": "6f71e31b3468958509a2df5a6b47d2dbac5b010f30e4e74e10a9c85a19573247",
     ".github/skills/org-work-sensing/references/assessment-signals.md": "fdc129e0cfc196f907e78a3b03f650183a1686df4573a977d9cdab4c160c44f0",
+    ".github/skills/productboard-agent-builder/SKILL.md": "6f4a91e86f0a854f74447cdc114c38cb557605562f2e6b5f6b6303e530029cc2",
+    ".github/skills/productboard-agent-builder/references/create-in-productboard.md": "e7e49979e7dc6e25e91127a80e278555c59f3cae07cd7655f6ba8ea413e875f2",
+    ".github/skills/productboard-agent-builder/references/observed-productboard-behavior.md": "f9a89860cb1858062c49fee19057acb816647e0ff837c90e506ca967b7aab6c5",
+    ".github/skills/productboard-agent-builder/references/porting-checklist.md": "2d8be54d28ae082c07ea62ec5b92ba724127704ef4eb2048fc2b38f30aac33a4",
+    ".github/skills/productboard-agent-builder/references/triggers-and-schedules.md": "6452c39fa21388d8a7498364cf7edb3aada06da8ccfe6335d96359dde40e692d",
     "LICENSE": "0b57642affa02b038c08d2ae25e02ea770e3998ae34026cc445444e21c91f2e9",
-    "README.md": "9ba9188b9233cba498ad31dc313b93d0098e583d8c7cd6cb1f53b1e933b2e0cd",
-    "docs/privacy.md": "57b1d865a84b8a463480100b5f15fd9550d2d00196dbd2bfe681cac0246b6f50",
+    "README.md": "150166833d94db41839fbd2ca451537484bfa179ac6efa1deb75af77bb6f764f",
+    "docs/privacy.md": "16e5ea7e2100320bf6515f45f27d5b3207d53b2ec6755c22be3a6b443498142d",
     "docs/source-access.md": "3d433dfea94cc010b1e17d1936be314190e5fd63ef1893a78f54b9cbf4a1bc38",
     "source-index.json": "26b9669f5fc90243fa8775c39683bb1cf00aeb8596dba5b0796d2a3f4fe15f78"
   }
