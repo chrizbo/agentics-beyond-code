@@ -6,31 +6,6 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 
 > **⏸️ Scheduled workflows are currently paused** to reduce API costs while this repo is in demo/reference mode. Workflows triggered by human activity (issue creation, Slack reactions, transcript pushes) remain active. To run the full system, trigger the [Sample Data Simulator](.github/workflows/sample-data-simulator.md) and [Sample Data Launch Creator](.github/workflows/sample-data-launch-creator.md) manually first, then follow the [stage run order](#running-workflows-manually). To re-enable scheduled runs, uncomment the `schedule:` lines in each workflow's `.md` file and recompile with `gh aw compile`.
 
-## Claude Cowork plugin
-
-The **Agentics Beyond Code** plugin bundles five skills: a planner for assessing
-team work and designing workflows, plus builders for GitHub, Claude-native
-automations, Productboard, and Atlassian. It includes templates and references, plus an index for retrieving selected
-workflow sources from a pinned public repository revision. Installing it does not activate the workflows in
-this repository or connect any services.
-
-Install it from the [Claude plugin directory](https://claude.ai/new#customize/plugins/id/0fc0c7e1-2215-4ba4-8c5f-c791333cbee4%40anthropic-plugin-directory) (sign in to Claude
-first), or go to **Customize → Plugins** and search for **Agentics Beyond Code**.
-If your Claude environment doesn't show directory plugins, add the repository
-marketplace `chrizbo/agentics-beyond-code` through **Customize → Plugins → Add
-marketplace**, then install `agentics-beyond-code`. For Claude Code, ZIP
-installation, prerequisites, example prompts, and updates, see the
-[plugin guide](docs/claude-cowork-plugin.md). This is a community plugin listed in
-Anthropic's directory, not an Anthropic-built integration.
-
-The plugin has no hosted backend, analytics, or bundled connectors. Depending on
-your request, skills can read supplied files or connected work systems and produce
-files or draft automations. Data stays subject to the Claude environment and any
-services you authorize; see [data handling and submission notes](docs/anthropic-submission.md).
-
-The installable package is generated under [`plugins/agentics-beyond-code/`](plugins/agentics-beyond-code/).
-Runtime workflow files and integration scripts remain outside that package.
-
 ## 🎯 Who is this for?
 
 - **DRIs / Product Managers** — track launches, monitor feature health, keep roadmaps honest
@@ -193,6 +168,32 @@ agentic-workflow-planner          github-workflow-builder
 If you already know the platform and the workflow ("make the Friday trends
 report a Claude Routine"), go straight to that builder. To show the skills to
 someone else, follow the [skills demo script](docs/skills-demo-script.md).
+
+### Install as a Claude plugin
+
+The planner and the four platform builders are packaged as the **Agentics Beyond
+Code** Claude plugin, with templates, references, and an index for retrieving
+selected workflow sources from a pinned public repository revision. Installing it
+does not activate the workflows in this repository or connect any services.
+
+Install it from the [Claude plugin directory](https://claude.ai/new#customize/plugins/id/0fc0c7e1-2215-4ba4-8c5f-c791333cbee4%40anthropic-plugin-directory) (sign in to Claude
+first), or go to **Customize → Plugins** and search for **Agentics Beyond Code**.
+If your Claude environment doesn't show directory plugins, add the repository
+marketplace `chrizbo/agentics-beyond-code` through **Customize → Plugins → Add
+marketplace**, then install `agentics-beyond-code`. For Claude Code, ZIP
+installation, prerequisites, example prompts, and updates, see the
+[plugin guide](docs/claude-cowork-plugin.md). This is a community plugin listed in
+Anthropic's directory, not an Anthropic-built integration.
+
+The plugin has no hosted backend, analytics, or bundled connectors. Depending on
+your request, skills can read supplied files or connected work systems and produce
+files or draft automations. Data stays subject to the Claude environment and any
+services you authorize; see [data handling and submission notes](docs/anthropic-submission.md).
+
+The installable package is generated under [`plugins/agentics-beyond-code/`](plugins/agentics-beyond-code/).
+Runtime workflow files and integration scripts remain outside that package.
+
+### Skill layout in this repo
 
 Skills have one canonical copy and several discovery views:
 
