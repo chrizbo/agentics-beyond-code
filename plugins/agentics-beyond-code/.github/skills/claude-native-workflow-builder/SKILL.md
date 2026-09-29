@@ -18,15 +18,18 @@ description: >
 This skill turns a plain-language process problem into an always-on
 automation built with Claude Routines and Claude Scheduled Tasks: which one to
 use per step, what triggers it, where the human interpretation gate lives, and
-what org governance applies. It is the non-GitHub sibling of
-[`non-coder-agentic-workflow-builder`](../non-coder-agentic-workflow-builder/SKILL.md) —
-same philosophy (living documents, artifacts over roles, the PM/owner decides),
-different execution engine.
+what org governance applies. It is one of three platform builders, alongside
+[`github-workflow-builder`](../github-workflow-builder/SKILL.md) and
+[`productboard-agent-builder`](../productboard-agent-builder/SKILL.md): same
+philosophy (living documents, artifacts over roles, the PM/owner decides),
+different execution engine. Choosing which workflows to adopt, and whether
+Claude is the right platform, belongs to
+[`agentic-workflow-planner`](../agentic-workflow-planner/SKILL.md).
 
-Use this skill instead of `non-coder-agentic-workflow-builder` when the user's
+Use this skill instead of `github-workflow-builder` when the user's
 system of record isn't GitHub, when they explicitly don't want a GitHub
 Actions/gh-aw dependency, or when they want to see that the pattern this repo
-teaches isn't tied to GitHub at all. Use `non-coder-agentic-workflow-builder`
+teaches isn't tied to GitHub at all. Use `github-workflow-builder`
 when GitHub Issues/Projects/Discussions are the team's actual home.
 
 
@@ -38,7 +41,10 @@ Resolve `references/`, `prompts/`, and `assets/` relative to this skill folder.
 The package is reference material; create deliverables in the user's selected
 workspace and assess the user's artifacts, never the bundled demo data.
 For an explicitly supplied source checkout, read that checkout's current
-files. The directory plugin does not bundle runtime workflows, helper scripts,
+files. A checkout is the current working directory when it is this
+repository, or a path the user gives. Never search the file system for one
+(no `find /`, `mdfind`, or home-directory scans): that is slow and triggers
+operating-system privacy prompts. Use the pinned source index instead. The directory plugin does not bundle runtime workflows, helper scripts,
 or demo data. Before using a repository path outside this skill, read
 `docs/source-access.md` at the package root. It explains how to locate and fetch
 specific files from the recorded public source revision. If source access is
@@ -74,19 +80,23 @@ doesn't exist as a workflow here yet.
    repo. Do not reuse a cached summary from earlier in the conversation or any
    static example doc — the whole point of reading live is that these files
    are gh-aw's real source of truth and change as the team maintains them.
+   State where it came from in the setup plan: a local checkout (with its
+   commit, and whether it has uncommitted changes) or the plugin's pinned
+   public revision. Don't write "read live" without saying which.
 3. Read `references/porting-a-workflow.md` for the field-by-field mapping from
    a gh-aw workflow's frontmatter (`on:`, `engine:`, `steps:`, `tools:`,
    `safe-outputs:`, `permissions:`, `network:`) to a Routine or Scheduled
    Task's trigger, model, prompt, and connector scope — and critically, the
    caveat about `safe-outputs:` having no structural equivalent in a Routine.
-4. Before finalizing, verify the specific capabilities this workflow actually
-   uses against **live docs**, not just that reference file's table — fetch
-   the current [Claude Routines docs](https://code.claude.com/docs/en/routines)
-   and, for whichever gh-aw features this workflow relies on, the matching
-   upstream doc the `agentic-workflows` skill already routes to. Both products
-   change independently of this repo (Routines is an explicitly-labeled
-   research preview; gh-aw is on a pinned, upgradeable version) — treat the
-   reference file as a starting checklist, not the final word.
+4. Verify capabilities in proportion to the request, following the
+   verification levels in `references/porting-a-workflow.md`. For a draft,
+   work from the reference files without web lookups and label each
+   capability claim as coming from the reference, with its date. Fetch
+   official docs only when the user is about to create or activate
+   something, asks you to verify, or the port depends on a capability the
+   reference marks unverified. Never run open-ended web searches or read
+   issue trackers and forums unless the user asks; mark the capability
+   "unverified: confirm with a manual run" instead.
 5. Produce the ported prompt text per workflow (see Output standard) —
    labeled with which repo workflow it came from, the trigger to configure,
    and every safe-outputs constraint restated explicitly since nothing
@@ -100,22 +110,14 @@ doesn't exist as a workflow here yet.
 
 ### B. Designing a new automation
 
-1. Ask for, or infer from the user's message:
-   - the recurring process problem and its current manual steps
-   - which steps need judgment (dedupe, scoring, drafting) versus which are
-     purely mechanical (parsing, idempotency checks, formatting)
-   - what triggers each step in real life today: a cadence ("every Friday"),
-     an event ("when someone files feedback"), or an on-demand human action
-     ("when the PM approves it")
-   - where the team already looks for this kind of thing — Slack, email, a
-     spreadsheet, Notion, Jira, Linear, Google Docs, or GitHub — per this
-     repo's ["Your Habits Are Already Triggers"](../../../README.md#your-habits-are-already-triggers)
-     philosophy; don't introduce a new surface if an existing habit works
-   - who owns/governs the automation once it's running (a single person's
-     Claude account, or a Team/Enterprise-owned routine an admin can see and
-     disable)
-   - what a human must approve before anything becomes durable or visible to
-     others, and what's safe to happen automatically
+1. Start from a design. If `agentic-workflow-planner` already produced one,
+   use it. Otherwise run its Design mode
+   (`../agentic-workflow-planner/references/design.md`) briefly: problem and
+   manual steps, judgment versus mechanical steps, real-life triggers, where
+   the team already looks, the owner, and what a human must approve. Beyond
+   that shared intake, capture the Claude-specific choice: whether the
+   automation belongs to one person's Claude account or is a Team/Enterprise
+   routine an admin can see and disable.
 2. Read `references/routine-vs-scheduled-task.md` for the full decision
    framework, trigger mechanics, and org-governance details.
 3. Design the human interpretation gate explicitly. It should live wherever
@@ -169,8 +171,8 @@ user has not chosen one, or to explain an alternative's tradeoffs.
    web UI for Routines, the Claude Cowork UI or scheduled-tasks tools for
    Scheduled Tasks.
 4. If the user's actual system of record is GitHub and they have no objection
-   to GitHub Actions, say so and route to `agentic-workflows` and
-   `non-coder-agentic-workflow-builder` instead — don't force the non-GitHub
+   to GitHub Actions, say so and route to `github-workflow-builder`
+   instead — don't force the non-GitHub
    answer on a team for whom GitHub already works.
 
 ## Port fidelity and practical checks
@@ -220,6 +222,18 @@ workflow: name the source file it came from, the trigger to configure, and
 restate every write limit from that file as explicit prompt instructions,
 since a Routine has no structural equivalent that enforces them.
 
+Every prompt block must be complete enough to paste and run. Write out the
+workflow's reasoning steps in full; never leave a placeholder such as
+"[steps 1-6 go here]" or "restated in full when this is built". The only
+placeholders allowed are target-specific values (channel, repo, project
+number), marked in capitals. If you offer two surfaces, give one complete
+block for the requested surface and describe the alternative in a few
+sentences, rather than two partial blocks.
+
+Before sending, reread the response for gh-aw config names in backticks
+(`safe-outputs`, `timeout-minutes`, `max-ai-credits`, `network.allowed`,
+`permissions`, `on:`) and rewrite each as the behavior it produced.
+
 **Write every user-facing explanation in plain language, not gh-aw
 terminology.** Someone asking for this may have no gh-aw background at all —
 don't assume they know what `safe-outputs:`, `workflow_dispatch`,
@@ -234,9 +248,13 @@ someone triggered it manually." Use Claude-side product terms freely (Routine,
 Scheduled Task, connector, trigger, environment) since those are what the
 person will actually click on — the plain-language rule is specifically about
 not requiring gh-aw fluency to understand what changed and why it matters.
-This includes the **Connectors**/**Tools** row of the setup plan, which is an
-easy place for it to slip back in — say what the original could access and
-how (e.g. "everything here was plain command-line GitHub access, not a
+This includes the **Capability gaps** lists and the **Connectors**/**Tools**
+row of the setup plan, which are the easiest places for it to slip back in.
+For example, write "the original was hard-limited to one post per run", not
+`safe-outputs: create-discussion: max: 1`; write "the original stopped after
+20 minutes and had a per-run spending cap", not `timeout-minutes` or
+`max-ai-credits`. For the Connectors row, say what the original could
+access and how (e.g. "everything here was plain command-line GitHub access, not a
 separate integration"), not the literal config field names for how gh-aw
 expressed that.
 
@@ -268,7 +286,7 @@ Routines UI before:
 
 - Don't assume GitHub is the wrong choice by default — ask. This skill exists
   for when GitHub genuinely isn't the team's surface, not to talk every user
-  out of `non-coder-agentic-workflow-builder`.
+  out of `github-workflow-builder`.
 - Keep the same artifact-centered discipline as the rest of this repo: every
   automation produces something a human can read and act on (a report, a
   drafted item, a comment), never a silent action taken on someone's behalf.
@@ -309,8 +327,7 @@ Routines UI before:
 - Never present a port as a clean, capability-equivalent swap. gh-aw and
   Claude Routines/Scheduled Tasks are different products built by different
   teams on different release cadences, so there will always be things one can
-  do that the other can't yet, in both directions. Actively check for these
-  gaps against live docs — this skill's own reference material is a starting
-  point, not a permanent source of truth, exactly like the frozen example doc
-  this skill used to lean on before it was replaced with reading live repo
-  files. Name every gap found, not just the ones already documented.
+  do that the other can't yet, in both directions. Name every gap found, not
+  just the ones already documented. The reference files are dated snapshots:
+  say when a claim relies on them, and verify against official docs at
+  creation time rather than on every draft.

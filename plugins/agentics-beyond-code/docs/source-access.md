@@ -6,8 +6,12 @@ artifacts. Those paths in the skills refer to the external source repository.
 This is a real package boundary, not a relocation of executable files to evade
 review: no downloaded integration code runs as part of plugin installation.
 
-1. Prefer a source checkout explicitly supplied by the user. Read its current
-   files and report that checkout's revision or local edits when known.
+1. Prefer a source checkout explicitly supplied by the user: the current
+   working directory when it is this repository, or a path the user gives.
+   Read its current files and report that checkout's revision or local edits
+   when known. Never search the file system for a checkout (`find /`,
+   `mdfind`, home-directory scans); broad scans are slow and trigger
+   operating-system privacy prompts for Photos, Contacts, and similar folders.
 2. Otherwise read `source-index.json` at the plugin root. Its `repository`,
    `revision`, and file entries identify public reference files. Search the
    entries for the requested workflow or dependency; the list includes agentic

@@ -2,6 +2,33 @@
 
 This repository exposes the same skills through several discovery conventions so they work across coding tools without maintaining divergent copies.
 
+## How the skills fit together
+
+The repo-owned skills follow one path: assess → design → build.
+
+| Skill | Step | Owns |
+|---|---|---|
+| `agentic-workflow-planner` | Assess, Design | Readiness and current-state assessment; pain-point-to-workflow mapping; living-document requirements; human gates; choosing the platform; the handoff contract a builder starts from |
+| `github-workflow-builder` | Build | GitHub scaffolding: folders, blank docs, issue templates, labels, Projects, copied gh-aw workflows, `gh aw compile` |
+| `claude-native-workflow-builder` | Build | Claude Routines and Scheduled Tasks: surface choice, triggers, governance, port fidelity |
+| `productboard-agent-builder` | Build | Productboard Spark skills: adaptation, browser deployment, schedules |
+| `agentic-workflows` | gh-aw authoring | Upstream dispatcher for gh-aw prompts |
+
+Keep platform-neutral guidance in the planner (`references/assess.md`,
+`references/design.md`). Builders should reference it rather than restate it,
+and should hold only platform-specific steps. A request that already names a
+platform and a workflow goes straight to that builder.
+
+For a presenter walkthrough of every skill, see the
+[skills demo script](skills-demo-script.md).
+
+### Renamed in plugin 0.4.0
+
+| Old name | New location |
+|---|---|
+| `org-work-sensing` | Assess mode of `agentic-workflow-planner` |
+| `non-coder-agentic-workflow-builder` | Design mode of `agentic-workflow-planner` (workflow selection) and `github-workflow-builder` (GitHub setup) |
+
 ## Layout
 
 | Path | Purpose |
@@ -34,11 +61,13 @@ The repository's installed CLI or generated workflow action versions can differ.
 
 ### Repo-owned skills
 
-`.github/skills/non-coder-agentic-workflow-builder/` is maintained in this repository. Edit the canonical files there; the discovery links expose changes to other tools automatically.
+Edit the canonical files under `.github/skills/`; the discovery links expose changes to other tools automatically.
 
-`.github/skills/org-work-sensing/` is maintained in this repository. Use it for current-state assessment, readiness gap analysis, and work-signal review before recommending agentic workflow setup.
+`.github/skills/agentic-workflow-planner/` is maintained in this repository. It is the platform-neutral front door: Assess mode (current-state assessment, readiness gaps, work-signal review) and Design mode (workflow selection, living documents, human gates, platform choice).
 
-`.github/skills/claude-native-workflow-builder/` is maintained in this repository. Use it to port this repo's existing workflows (one, several, or a whole pipeline) — or design a new always-on automation from scratch — onto Claude Routines and Claude Scheduled Tasks instead of GitHub Agentic Workflows. It reads the current `.github/workflows/*.md`/`.yml` files directly rather than working from a separately maintained example, so the port stays current as those workflows change. The non-GitHub sibling of `non-coder-agentic-workflow-builder`.
+`.github/skills/github-workflow-builder/` is maintained in this repository. It builds a planner design on GitHub. Its blank templates in `assets/blank-repo/` are also the living-document templates the other builders point to.
+
+`.github/skills/claude-native-workflow-builder/` is maintained in this repository. Use it to port this repo's existing workflows (one, several, or a whole pipeline) — or build a new always-on automation — onto Claude Routines and Claude Scheduled Tasks instead of GitHub Agentic Workflows. It reads the current `.github/workflows/*.md`/`.yml` files directly rather than working from a separately maintained example, so the port stays current as those workflows change.
 
 `.github/skills/productboard-agent-builder/` is maintained in this repository. It adapts selected workflows into Productboard Spark instructions, preserving evidence and human decisions, and designs or configures verified schedules and triggers. It distinguishes native Spark execution from external agents connected to Productboard.
 
@@ -116,7 +145,12 @@ The check verifies the discovery links, validates each `SKILL.md`, and reports g
 
 Canonical skills remain here under `.github/skills/`. The directory plugin in
 `plugins/agentics-beyond-code/` is generated from them and packaging inputs under
-`packaging/claude/`. Do not edit generated copies or discovery links separately.
+`packaging/claude/`. The plugin ships four skills: the upstream
+`agentic-workflows` dispatcher is excluded (`EXCLUDED_SKILLS` in
+`.github/scripts/build-claude-plugin.py`) because it only fetches instructions
+from `github/gh-aw` and overlaps with `github-workflow-builder` in Cowork. The
+builders use it when present and otherwise fetch the gh-aw instructions
+directly. Do not edit generated copies or discovery links separately.
 The root marketplace points to this generated package. After skill edits, run:
 
 ```bash

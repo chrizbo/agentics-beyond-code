@@ -21,9 +21,13 @@ class PackageTests(unittest.TestCase):
     def test_canonical_skills_and_templates_unchanged(self):
         root = builder.ROOT
         for path in (root / '.github/skills').rglob('*'):
-            if path.is_file():
-                self.assertEqual(self.data[path.relative_to(root).as_posix()], path.read_bytes())
-        self.assertEqual(sum(name.endswith('/SKILL.md') for name in self.data), 5)
+            name = path.relative_to(root).as_posix()
+            if path.relative_to(root / '.github/skills').parts[0] in builder.EXCLUDED_SKILLS:
+                self.assertNotIn(name, self.data)
+            elif path.is_file():
+                self.assertEqual(self.data[name], path.read_bytes())
+        self.assertEqual(sum(name.endswith('/SKILL.md') for name in self.data), 4)
+        self.assertNotIn('.github/skills/agentic-workflows/SKILL.md', self.data)
 
     def test_no_runtime_or_discovery_paths(self):
         for name in self.data:

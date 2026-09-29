@@ -8,9 +8,9 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 
 ## Claude Cowork plugin
 
-The **Agentics Beyond Code** plugin bundles four skills for assessing team work,
-creating blank operating documents, designing GitHub Agentic Workflows, and
-planning Claude-native automations. It includes templates and references, plus an index for retrieving selected
+The **Agentics Beyond Code** plugin bundles four skills: a planner for assessing
+team work and designing workflows, plus builders for GitHub, Claude-native
+automations, and Productboard. It includes templates and references, plus an index for retrieving selected
 workflow sources from a pinned public repository revision. Installing it does not activate the workflows in
 this repository or connect any services.
 
@@ -166,14 +166,28 @@ Good agentic systems compound. The process analyzer detects drift, the decision 
 
 ## 🧰 Agent Skills
 
-This repo includes reusable agent skills for setting up and maintaining
-Agentics Beyond Code workflows:
+This repo includes reusable agent skills for adopting Agentics Beyond Code
+workflows. They follow one path: **assess** how the team works, **design** the
+smallest useful set of workflows, then **build** them on the platform where the
+team's work already lives.
 
-- **[Non-Coder Agentic Workflow Builder](.github/skills/non-coder-agentic-workflow-builder/SKILL.md)** — helps product, ops, compliance, GTM, design, research, support, customer success, program, and leadership users turn process problems into a repo setup with workflows, project boards, issue templates, labels, blank strategy/how-we-work docs, policies, and folders.
-- **[Agentic Workflows](.github/skills/agentic-workflows/SKILL.md)** — helps create, update, debug, compile, and validate GitHub Agentic Workflows. Bundled from the [gh-aw framework](https://github.github.io/gh-aw/).
-- **[Org Work Sensing](.github/skills/org-work-sensing/SKILL.md)** — assesses current-state work signals (GitHub, Jira, Linear, docs) and readiness gaps before recommending an agentic workflow setup.
-- **[Productboard Agent Builder](.github/skills/productboard-agent-builder/SKILL.md)** — adapts these workflows into Productboard Spark skills, creates them through the browser when requested, and configures supported native schedules. Preserves evidence and human decision points. See [usage and testing](docs/skills.md#using-the-productboard-agent-builder).
-- **[Claude-Native Workflow Builder](.github/skills/claude-native-workflow-builder/SKILL.md)** — the non-GitHub sibling: ports this repo's existing workflows (one, a few, or a whole pipeline), or designs a new one from scratch, as Claude Routines and Scheduled Tasks instead of GitHub Agentic Workflows, for teams whose system of record isn't GitHub or who just want a slice of this repo without the rest of the scaffolding.
+```text
+agentic-workflow-planner          github-workflow-builder
+  Assess -> Design  ───────────>  claude-native-workflow-builder
+  (platform-neutral)              productboard-agent-builder
+```
+
+| Skill | Step | Use it when |
+|---|---|---|
+| **[Agentic Workflow Planner](.github/skills/agentic-workflow-planner/SKILL.md)** | Assess, Design | You want a readiness or current-state assessment from GitHub, Jira, Linear, or docs, or you want to know which workflows to adopt and where they should run. Start here if you're unsure. |
+| **[GitHub Workflow Builder](.github/skills/github-workflow-builder/SKILL.md)** | Build: GitHub | Your team lives in GitHub Issues/Projects/Discussions. Sets up gh-aw workflows, blank strategy/how-we-work docs, policies, issue templates, labels, and project boards. |
+| **[Claude-Native Workflow Builder](.github/skills/claude-native-workflow-builder/SKILL.md)** | Build: Claude | Your team lives in Slack, Notion, Jira, Google Workspace, or email, or you want one workflow without the GitHub scaffolding. Ports or designs Claude Routines and Scheduled Tasks. |
+| **[Productboard Agent Builder](.github/skills/productboard-agent-builder/SKILL.md)** | Build: Productboard | Product discovery, feedback, and planning live in Productboard. Adapts workflows into Spark skills and configures supported schedules. See [usage and testing](docs/skills.md#using-the-productboard-agent-builder). |
+| **[Agentic Workflows](.github/skills/agentic-workflows/SKILL.md)** | gh-aw authoring | Creating, debugging, or compiling gh-aw workflow files directly. Maintained upstream by the [gh-aw framework](https://github.github.io/gh-aw/). In this repo only; not in the Claude plugin. |
+
+If you already know the platform and the workflow ("make the Friday trends
+report a Claude Routine"), go straight to that builder. To show the skills to
+someone else, follow the [skills demo script](docs/skills-demo-script.md).
 
 Skills have one canonical copy and several discovery views:
 
@@ -191,6 +205,8 @@ The `agentic-workflows` skill is maintained upstream by GitHub Next. See
 
 - **[Getting Started](docs/setup.md)** — prerequisites, installation, and first run
 - **[How It Works](docs/how-it-works.md)** — architecture, issue hierarchy, and customization
+- **[Agent Skills](docs/skills.md)** — how the planner and platform builders fit together, ownership, and validation
+- **[Skills Demo Script](docs/skills-demo-script.md)** — a 25-minute presenter walkthrough of each skill using the simulated org
 - **[FAQ](docs/faq.md)** — common questions about setup, workflows, and costs
 - **[Workflow Ideas](docs/workflow-ideas.md)** — catalog of future workflow ideas for PM, ops, compliance, and GTM
 - **[External Integration Patterns](docs/external-integration-patterns.md)** — future work for integrating with Slack, Jira, Microsoft 365, Google Workspace, Salesforce, ServiceNow, Notion, Asana, and Linear

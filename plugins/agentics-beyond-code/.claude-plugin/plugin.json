@@ -1,7 +1,7 @@
 {
   "name": "agentics-beyond-code",
-  "version": "0.3.0",
-  "description": "Assess team workflows, build an operating repo, and design GitHub, Claude-native, or Productboard workflows.",
+  "version": "0.4.0",
+  "description": "Assess team workflows, design the right agentic workflows, and build them on GitHub, Claude, or Productboard.",
   "author": {
     "name": "Chris Butler"
   },

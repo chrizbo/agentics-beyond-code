@@ -13,20 +13,41 @@ as described in `SKILL.md`.
 Do not describe a bundled file as current upstream. This reference explains
 what to do with the source you find.
 
-## Verify against live docs before finalizing a port — this file goes stale too
+## Verification levels
+
+Reference last updated: 2026-09-29. Update this line whenever you re-verify
+a capability against official docs, and correct the table if it changed.
+
+Match verification effort to the request:
+
+| Request | Web lookups |
+|---|---|
+| Draft or plan only (the default) | None. Use this file and `routine-vs-scheduled-task.md`. Label claims "per reference, updated 2026-09-29" and list what to confirm before creation. |
+| The port depends on a capability this file marks "no equivalent" or "check the current UI" | At most one fetch of that surface's official docs page. |
+| About to create or activate, or the user asks you to verify | Fetch the official docs for the specific capabilities this port uses. |
+
+Official sources only: [Claude Routines docs](https://code.claude.com/docs/en/routines),
+[Cowork scheduled tasks](https://support.claude.com/en/articles/13854387-schedule-recurring-tasks-in-claude-cowork),
+and the gh-aw docs. Do not run general web searches or read issue trackers
+and forums unless the user asks. If official docs don't settle a question
+(for example, whether a connector's write tool is available in scheduled
+runs), don't keep searching: mark it "unverified: confirm with a manual run"
+under "Before this will work."
+
+Read the source workflow file itself for gh-aw behavior. Fetch gh-aw docs only
+for a frontmatter key or safe output the table below doesn't cover.
+
+## Why this file can go stale
 
 The table below is this skill's current understanding, not a guarantee. Both
 sides of this port are products that change on their own schedule, not on this
 repo's: Claude Routines is explicitly labeled "research preview — behavior,
 limits, and the API surface may change" in its own docs, and gh-aw ships new
-releases regularly (this repo tracks a specific pinned version in
-`.github/skills/agentic-workflows/.upstream-version` for exactly that reason).
-A hardcoded comparison table is subject to the same drift this skill exists to
-avoid — see the "read live, not frozen" default this reference already
-inherits from `SKILL.md`.
+releases regularly (this repo pins a specific gh-aw version for exactly that
+reason). That is why every claim taken from this file is labeled with its
+date, and why creation-time verification matters.
 
-Before finalizing a port, especially for anything below marked as
-"no equivalent" or "check the current UI," reverify against:
+When a verification level above calls for a lookup, use:
 
 - **Claude Routines**: fetch [code.claude.com/docs/en/routines](https://code.claude.com/docs/en/routines)
   (and linked pages like cloud environments, MCP connectors, or desktop
@@ -34,8 +55,9 @@ Before finalizing a port, especially for anything below marked as
   this file's summary of what it supports.
 - **gh-aw**: for the specific feature the workflow being ported actually uses
   (a particular `safe-outputs:` type, a particular `on:` trigger, a particular
-  tool), check the matching upstream doc the `agentic-workflows` skill already
-  routes to (e.g. `safe-outputs-automation.md`, `safe-outputs-content.md`,
+  tool), check the matching upstream gh-aw doc (the `agentic-workflows` skill
+  routes to these when present; otherwise fetch them from `github/gh-aw`,
+  e.g. `safe-outputs-automation.md`, `safe-outputs-content.md`,
   `github-agentic-workflows.md`) or [github.github.io/gh-aw](https://github.github.io/gh-aw/),
   not just this table's one-line summary of it.
 
@@ -182,6 +204,12 @@ Walk through the instructions in order before delivering them:
 - Empty-input checks occur immediately after the required read, before analysis
   or any write. Duplicate checks stop before publishing. Ensure each branch
   terminates with a defined outcome, including any newly proposed duplicate skip.
+- Keep each outcome as visible as it was in the original. If the original made
+  failure visible (a failing run, or an explicit "report incomplete" call),
+  the port must too: post a short "could not run this week: <reason>" message
+  to the destination or notify the owner. Never turn a visible failure into a
+  silent stop. Empty input may end quietly only if the original also ended
+  quietly (for example, recorded a no-op without posting).
 - Success, empty input, duplicate skip (if present), and incomplete paths agree
   with the final outcome list. A failure after an attempted write must report
   whether the write happened or is uncertain, not claim nothing was created.

@@ -6,8 +6,8 @@ cd "$repo_root"
 
 skills=(
   "agentic-workflows"
-  "non-coder-agentic-workflow-builder"
-  "org-work-sensing"
+  "agentic-workflow-planner"
+  "github-workflow-builder"
   "claude-native-workflow-builder"
   "productboard-agent-builder"
 )

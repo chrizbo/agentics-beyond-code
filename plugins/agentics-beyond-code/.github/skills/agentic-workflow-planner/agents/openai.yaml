@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agentic Workflow Planner"
+  short_description: "Assess readiness and design agentic workflows for any platform"
+  default_prompt: "Use $agentic-workflow-planner to assess how my team works and recommend which agentic workflows to adopt and where they should run."

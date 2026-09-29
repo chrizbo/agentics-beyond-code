@@ -171,8 +171,14 @@ Workflows define the **general pattern** (e.g., "assess readiness against a poli
 ```
 .github/
   skills/
-    non-coder-agentic-workflow-builder/
-      SKILL.md                         ← Skill for turning non-coder process problems into workflow, project, and issue setups
+    agentic-workflow-planner/
+      SKILL.md                         ← Assess current work, then design which workflows to adopt and where they run
+    github-workflow-builder/
+      SKILL.md                         ← Build the design on GitHub: workflows, docs, project boards, issue templates
+    claude-native-workflow-builder/
+      SKILL.md                         ← Build the design as Claude Routines and Scheduled Tasks
+    productboard-agent-builder/
+      SKILL.md                         ← Build the design as Productboard Spark skills
     agentic-workflows/
       SKILL.md                         ← Skill for creating, updating, debugging, and compiling gh-aw workflows
   workflows/
@@ -215,9 +221,9 @@ This means:
 - Policy changes take effect immediately (no recompilation)
 - Compliance teams own their policy files independently
 - Auditors can review policies as plain markdown
-- Non-coders can ask an agent to use the skills to choose workflows, set up
-  project boards and issue templates, and scaffold supporting documents before
-  touching gh-aw syntax.
+- Non-coders can ask an agent to use the planner skill to choose workflows,
+  then a builder skill to set up project boards, issue templates, and
+  supporting documents before touching gh-aw syntax.
 
 ### 6. Deterministic pre-steps for structured data
 

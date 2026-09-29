@@ -1,6 +1,6 @@
 # Claude Cowork plugin
 
-The installable plugin lives in `plugins/agentics-beyond-code/`. It contains five
+The installable plugin lives in `plugins/agentics-beyond-code/`. It contains four
 skills, references, blank templates, a source index, and the project icon.
 Canonical skills remain in `.github/skills/`; the installed directory is generated
 and checked for drift. Do not edit generated copies directly.
@@ -9,7 +9,7 @@ and checked for drift. Do not edit generated copies directly.
 
 In Claude's plugin settings, add the repository marketplace
 `chrizbo/agentics-beyond-code`, then install `agentics-beyond-code`. Alternatively,
-build or download `agentics-beyond-code-0.3.0.zip` and use the custom ZIP upload
+build or download `agentics-beyond-code-0.4.0.zip` and use the custom ZIP upload
 option. Start a new task, type `/` to find the skills, and select a writable folder
 when creating files. A directory listing has not been approved.
 
@@ -27,6 +27,21 @@ For local testing from a separate working directory:
 ```bash
 claude --plugin-dir /absolute/path/to/agentics-beyond-code/plugins/agentics-beyond-code
 ```
+
+## Skill reorganization in 0.4.0
+
+Skills now follow one path: assess, design, then build on a platform.
+
+- `org-work-sensing` became the Assess mode of `agentic-workflow-planner`.
+- `non-coder-agentic-workflow-builder` was split. Workflow selection moved to
+  the planner's Design mode, and GitHub setup is now `github-workflow-builder`.
+- The upstream `agentic-workflows` dispatcher is no longer packaged. It only
+  fetched instructions from `github/gh-aw` and competed with the GitHub
+  builder. It remains in the repository for Copilot and gh-aw users.
+
+Prompts that name an old skill should use the new name. Start a fresh task
+after updating. See the [skills demo script](skills-demo-script.md) for a
+walkthrough of each skill.
 
 ## Productboard builder in 0.3.0
 
@@ -108,15 +123,46 @@ Use fresh tasks after installation. The packaging change needs renewed testing.
 
 | Request | Expected behavior |
 |---|---|
-| Use org-work-sensing with five unowned requests, three waiting two weeks for approval, and two completed with stale statuses. | Reads the local reference; does not total overlapping groups or invent effort, causes, or team-wide conclusions. |
+| Use agentic-workflow-planner to assess five unowned requests, three waiting two weeks for approval, and two completed with stale statuses. | Reads the local reference; does not total overlapping groups or invent effort, causes, or team-wide conclusions. |
 | Copy only blank strategy and how-we-work docs to a connected empty folder. | Reads bundled templates, preserves placeholders, reports actual saved paths and exact-copy verification. |
 | Draft a Cowork Scheduled Task port of Friday Feedback Trends Report using the plugin's recorded source; do not activate anything. | Reads the source index and fetches the pinned workflow and needed dependencies. Identifies them as external, keeps the requested surface, uses one configuration block, and reports unverified runtime prerequisites. |
 | Repeat the source-based port with network unavailable and no checkout. | Explains the missing source and requests the relevant files or a checkout; does not fabricate a port or claim to read bundled workflows. |
-| Use agentic-workflows to explain workflow design without creating anything. | Loads the upstream dispatcher and relevant upstream instructions, or discloses unavailable network access. |
 
 0.1.4/0.1.5 tests established previous behavior. They do not validate 0.2.0's new
 external-source path. Portal findings may remain and need an honest response;
 no zero-findings result is promised.
+
+## Smoke tests for 0.4.0
+
+| Request | Expected behavior |
+|---|---|
+| Assess our team's readiness for agentic workflows from these exported issues. | Uses the planner's Assess mode and names readiness gaps before recommending workflows. |
+| What workflows do I need for customer feedback? We live in Slack. | Uses the planner's Design mode, selects existing feedback workflows, and names a platform per workflow with a reason. With no other evidence, expect Claude-native; if the conversation showed records in GitHub, expect GitHub with Slack delivery. |
+| Set up the decision log workflow in our GitHub repo; draft only. | Uses `github-workflow-builder`; fetches gh-aw guidance from `github/gh-aw` since `agentic-workflows` isn't installed. |
+| Type `/` in a fresh task. | Shows four Agentics Beyond Code skills and no `agentic-workflows`. |
+
+## 0.4.0 test run (2026-09-29)
+
+All five scenes in the [skills demo script](skills-demo-script.md) were run
+with `claude --plugin-dir` from an empty folder. Each run's output was checked
+against the source workflows. These are bounded observations from one
+machine, not guarantees.
+
+| Scene | Result | Skill changes made from the run |
+|---|---|---|
+| 1. Planner, Assess | Pass. Separated evidence from inference, recognized fixture data, stopped before recommending workflows. | Demo script needs a plugin-mode prompt naming the repo, and `gh auth refresh -s read:project`. |
+| 2. Planner, Design | Pass. Kept analysis on GitHub (where Scene 1 found the records) with Slack as the delivery surface. | Platform guidance now separates where analysis runs from where people read results. |
+| 3. GitHub builder | Pass after fixes. First run copied a Projects dependency the user excluded and a compiled `.lock.yml`. | Adapt workflows to the user's constraints; never copy lock files; ask which AI provider the org uses and set `engine:`. |
+| 4. Claude-native builder | Pass after fixes. Early runs ran a `find /` disk scan (triggering macOS privacy prompts), made open-ended web searches, used gh-aw config names, and left placeholder steps in prompts. | No file-system scans in any skill; tiered verification (no web lookups for drafts); complete prompt blocks; jargon self-check; failures stay as visible as in the original. |
+| 5. Productboard builder | Pass after fixes. Claimed the skill was read-only "mechanically," omitted the revision, and nested code fences. | No "by construction" enforcement claims; name the revision; use longer outer fences. |
+
+Not yet tested: reading sources from the pinned revision. With `--plugin-dir`
+inside a checkout, the skills correctly use the checkout instead. Install
+from the ZIP outside the repo to exercise the pinned path.
+
+Scene 1 also surfaced a workflow bug unrelated to the skills:
+`create-work-item.md` adds `feedback:converted` without removing
+`feedback:needs-pm-review`.
 
 ## v0.2.2 review checks
 

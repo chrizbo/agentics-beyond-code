@@ -45,6 +45,8 @@ its own separate AI-credit budget.
 
 The workflows use the gh-aw Codex engine (`engine: codex`), so model usage is billed to the OpenAI account associated with the API key you store as a repository secret.
 
+**Adopting workflows in your own repo?** You don't have to use OpenAI. Each workflow's `engine:` block can point at any engine gh-aw supports; see the [gh-aw engine docs](https://github.github.io/gh-aw/reference/engines/) for current options and secrets. The GitHub Workflow Builder skill asks which AI provider your org uses and sets this for you.
+
 1. Create an OpenAI API key from your OpenAI Platform account.
 2. Add it as a repository secret:
 
@@ -146,24 +148,30 @@ gh auth refresh -s read:project,project
 This repo ships with reusable skills that help people set up and maintain
 Agentics Beyond Code without needing to start from workflow syntax.
 
-| Skill | Use it for | Canonical path | Local mirror |
-|-------|------------|----------------|--------------|
-| Non-Coder Agentic Workflow Builder | Turn team/process problems into a recommended workflow set, optional project boards, labels, issue templates, blank operating docs, policies, and repo folders | `.github/skills/non-coder-agentic-workflow-builder/SKILL.md` | `.claude/skills/non-coder-agentic-workflow-builder/SKILL.md` |
-| Agentic Workflows | Create, update, debug, compile, and validate GitHub Agentic Workflows | `.github/skills/agentic-workflows/SKILL.md` | `.claude/skills/agentic-workflows/SKILL.md` |
+| Skill | Use it for | Canonical path |
+|-------|------------|----------------|
+| Agentic Workflow Planner | Assess current work and readiness, then design which workflows to adopt and which platform each runs on | `.github/skills/agentic-workflow-planner/SKILL.md` |
+| GitHub Workflow Builder | Set up the chosen workflows on GitHub: gh-aw files, optional project boards, labels, issue templates, blank operating docs, policies, and repo folders | `.github/skills/github-workflow-builder/SKILL.md` |
+| Claude-Native Workflow Builder | Port or design workflows as Claude Routines and Scheduled Tasks | `.github/skills/claude-native-workflow-builder/SKILL.md` |
+| Productboard Agent Builder | Adapt workflows into Productboard Spark skills | `.github/skills/productboard-agent-builder/SKILL.md` |
+| Agentic Workflows | Create, update, debug, compile, and validate GitHub Agentic Workflows (upstream gh-aw) | `.github/skills/agentic-workflows/SKILL.md` |
+
+Each skill is also linked from `.claude/skills/<name>/` and `.agents/skills/<name>/`.
 
 The `.github/skills/` copy follows the GitHub skills convention used by
 `gh skill` and by repositories such as `github/gh-aw`. The `.claude/skills/`
-copy is kept in sync so local Claude-style agents can use the same guidance
-without extra installation steps.
+links keep local Claude-style agents on the same guidance without extra
+installation steps.
 
-For a new non-coding team, start with the Non-Coder Agentic Workflow Builder.
-Give it the problems you want to solve, the artifacts you already use, and how
-aggressive you want automation to be. It will map those needs to this repo's
-workflow catalog and, if you want GitHub as the operating surface, help set up
-project boards, issue hierarchy, labels, and issue templates. It can also
-scaffold blank `docs/strategy.md`, `docs/how-we-work.md`, `decisions/`,
-`transcripts/`, `.github/policies/`, `.github/workflows/`, and
-`.github/ISSUE_TEMPLATE/` as needed.
+For a new non-coding team, start with the Agentic Workflow Planner. Give it the
+problems you want to solve, the artifacts you already use, and how aggressive
+you want automation to be. It maps those needs to this repo's workflow catalog
+and recommends where each workflow should run. If GitHub is the operating
+surface, the GitHub Workflow Builder then sets up project boards, issue
+hierarchy, labels, and issue templates, and scaffolds blank `docs/strategy.md`,
+`docs/how-we-work.md`, `decisions/`, `transcripts/`, `.github/policies/`,
+`.github/workflows/`, and `.github/ISSUE_TEMPLATE/` as needed. See the
+[skills demo script](skills-demo-script.md) for a guided walkthrough.
 
 ## Setting Up Your Repository
 

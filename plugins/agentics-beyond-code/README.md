@@ -4,24 +4,31 @@ A community plugin for product managers, operations leads, and teams who want
 to assess how work flows, improve operating documents, and design useful
 agentic workflows. It is not an official Anthropic integration.
 
-## Five skills
+## Four skills
 
-- **Org Work Sensing:** assess supplied work artifacts, distinguish evidence
-  from inference, and identify practical improvements.
-- **Non-Coder Agentic Workflow Builder:** create blank operating docs and plan
-  or build a GitHub-based workflow setup in your chosen workspace.
+The skills follow one path: assess, design, then build where your team works.
+
+- **Agentic Workflow Planner:** start here. Assess supplied work artifacts,
+  distinguishing evidence from inference, then design the smallest useful set
+  of workflows and choose where each should run.
+- **GitHub Workflow Builder:** create blank operating docs and build a
+  GitHub-based workflow setup in your chosen workspace.
 - **Claude-Native Workflow Builder:** adapt existing workflows or design new
   Claude Scheduled Task and Routine plans, preserving human decision points.
-- **Agentic Workflows:** route GitHub workflow design and debugging to the
-  upstream gh-aw instructions.
 - **Productboard Agent Builder:** adapt workflows into Spark instructions, create
   skills through the browser when requested, and configure supported schedules.
+
+Renamed in 0.4.0: Org Work Sensing is now the planner's Assess mode, and the
+Non-Coder Agentic Workflow Builder is split between the planner's Design mode
+and the GitHub Workflow Builder. The upstream gh-aw dispatcher skill is no
+longer packaged; the GitHub builder fetches gh-aw instructions directly.
 
 ## Try it
 
 Start a fresh task and select a writable folder when creating files.
 
-- “Use org-work-sensing to assess these exported requests. Use only the supplied evidence.”
+- “Use agentic-workflow-planner to assess these exported requests. Use only the supplied evidence.”
+- “Use agentic-workflow-planner to recommend workflows for our customer feedback process. We live in Slack.”
 - “Copy only the blank strategy and how-we-work templates into my test folder.”
 - “Draft a Cowork Scheduled Task port of the Friday Feedback Trends Report. Read its recorded source; don't activate anything.”
 
@@ -39,7 +46,7 @@ scripts, compiled Actions, and demo data are not. For source-based work, the
 skills use your supplied checkout or retrieve selected public files from the
 revision in `source-index.json`; see [source access](docs/source-access.md).
 Without network access or a checkout, workflow porting remains incomplete.
-The GitHub dispatcher also retrieves upstream instructions from `github/gh-aw`.
+The GitHub builder also retrieves gh-aw authoring instructions from `github/gh-aw`.
 
 ## Installation and prerequisites
 
@@ -86,5 +93,5 @@ depends on the installation route.
 [Source and releases](https://github.com/chrizbo/agentics-beyond-code) ·
 [Report an issue](https://github.com/chrizbo/agentics-beyond-code/issues)
 
-MIT licensed. Chris Butler. The GitHub Agentic Workflows dispatcher is maintained
-upstream by GitHub Next; its snapshot version is preserved with that skill.
+MIT licensed. Chris Butler. GitHub Agentic Workflows is maintained upstream by
+GitHub Next.

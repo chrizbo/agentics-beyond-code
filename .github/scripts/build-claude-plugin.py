@@ -10,6 +10,8 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[2]
 PACKAGE = Path('plugins/agentics-beyond-code')
+# Upstream gh-aw dispatcher stays in the repo for Copilot/gh-aw users but is not packaged.
+EXCLUDED_SKILLS = {'agentic-workflows'}
 
 
 def encoded(value):
@@ -64,10 +66,12 @@ def payload():
         'docs/source-access.md': ROOT / 'packaging/claude/source-access.md',
         'docs/privacy.md': ROOT / 'packaging/claude/privacy.md',
     }
-    skills = list((ROOT / '.github/skills').glob('*/SKILL.md'))
-    if len(skills) != 5:
-        raise ValueError('Review package scope when changing the five-skill inventory')
+    skills = [p for p in (ROOT / '.github/skills').glob('*/SKILL.md') if p.parent.name not in EXCLUDED_SKILLS]
+    if len(skills) != 4:
+        raise ValueError('Review package scope when changing the four-skill package inventory')
     for path in (ROOT / '.github/skills').rglob('*'):
+        if path.relative_to(ROOT / '.github/skills').parts[0] in EXCLUDED_SKILLS:
+            continue
         if path.is_symlink():
             raise ValueError(f'Canonical resources must be regular files: {path}')
         if path.is_file():
@@ -84,7 +88,6 @@ def payload():
         'plugin_version': manifest['version'],
         'generated': True,
         'source_revision': json.loads(data['source-index.json'])['revision'],
-        'gh_aw_skill_version': (ROOT / '.github/skills/agentic-workflows/.upstream-version').read_text().strip(),
         'sha256': {name: hashlib.sha256(content).hexdigest() for name, content in sorted(data.items())},
     })
     return dict(sorted(data.items()))

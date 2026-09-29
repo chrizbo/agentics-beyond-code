@@ -33,8 +33,10 @@ do not load the entire workflow catalog. Treat generated `.lock.yml` files as
 implementation evidence when needed, not the authoring source. Record which
 source and revision you actually inspected, including local modifications.
 
-For a new process, establish the intended artifact, evidence sources, scope,
-reviewer, destination, and invocation. Reuse relevant repository patterns without
+For a new process, start from an `agentic-workflow-planner` design when one
+exists, or run its Design mode (`../agentic-workflow-planner/references/design.md`)
+briefly. Then establish the Spark-specific details: intended artifact,
+evidence sources, scope, reviewer, destination, and invocation. Reuse relevant repository patterns without
 claiming the new design is an exact port. Preserve the user's requested skill
 name exactly; otherwise choose a plain descriptive name without repository
 prefixes or test suffixes unless requested. Ask only for missing decisions that
@@ -45,8 +47,10 @@ change the output; use clearly marked placeholders for target-specific values.
 In this repository, resolve repository paths from its root. In the generated
 plugin, the package root is three directories above this file. Read the package's
 `docs/source-access.md` before accessing workflows outside this skill: they are
-not bundled. Use a supplied checkout or the recorded source index to fetch the
-selected files. Name the retrieved revision rather than calling it current
+not bundled. Use a supplied checkout (the working directory when it is this
+repository, or a path the user gives) or the recorded source index to fetch
+the selected files. Never search the file system for a checkout; broad scans
+trigger operating-system privacy prompts. Name the retrieved revision rather than calling it current
 upstream. If neither source is accessible, request the relevant files and offer
 only a clearly labeled new design meanwhile. Resolve this skill's references
 relative to this folder; write user deliverables in their chosen workspace.
@@ -74,7 +78,11 @@ relative to this folder; write user deliverables in their chosen workspace.
    instructions unless the chosen environment has verified support for them.
 5. Write the actual instructions, not just a setup recommendation. Preserve all
    applicable limits; explicitly identify limits that cannot be enforced or
-   translated. Prompt restrictions are not mechanical enforcement. Scope real
+   translated. Prompt restrictions are not mechanical enforcement: a Spark
+   skill's instructions cannot remove tools from the agent, so do not describe
+   a skill as read-only "by construction" or "mechanically." Say the rule is an
+   instruction, and that actual limits come from the invoking user's
+   Productboard permissions unless a verified control restricts tools. Scope real
    access where verified controls permit it. Preserve human approval before
    accepting work or making commitments; never infer approval from silence.
 6. Review the complete procedure against a small supplied sample or clearly
@@ -127,13 +135,16 @@ execution. Creating this builder does not itself activate any live agent.
 
 For a build request, provide:
 
-- The selected source and a short explanation of what changes in Productboard.
+- The selected source, including the revision or checkout commit you read, and
+  a short explanation of what changes in Productboard.
 - A proposed skill name, concise description, invocation, and visibility.
 - A fenced, paste-ready **Instructions** block containing the completed workflow.
   Define input scope, necessary context, ordered actions, output format, evidence
   links, permitted mutations, human gate, and stop conditions. Include a short
   input/output example when it clarifies ambiguous behavior. Fill known values;
-  enumerate only genuinely unresolved placeholders outside the block.
+  enumerate only genuinely unresolved placeholders outside the block. If the
+  instructions themselves contain a fenced block (such as an output template),
+  wrap the whole block in a longer fence (````) so it pastes intact.
 - Numbered setup steps for the verified surface, a small first test, and any
   blockers before use. Separate blocking missing operations from differences
   such as reduced enforcement. Identify the owner and how to disable a shared
