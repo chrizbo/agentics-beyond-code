@@ -77,8 +77,12 @@ appropriate tenant access and separate authorization.
 
 Also try the planner and one source-based port: confirm bundled references
 resolve and the selected source can be retrieved through `source-index.json`
-without a local checkout. Live client installation and these behavioral tests
-have not yet been performed; offline tests cover packaging only.
+without a local checkout. Local Mac installation and user-observed no-project drafting and source-reading
+smoke tests passed for 0.5.2. The source retrieval first failed and then succeeded
+on a follow-up; all five reported source hashes were independently checked
+against the pinned Git objects. See the
+[smoke-test record](../.github/skills/microsoft-365-agent-builder/references/observed-microsoft-behavior.md).
+Public upload and live tenant deployment remain untested.
 
 ## Updating and troubleshooting
 
