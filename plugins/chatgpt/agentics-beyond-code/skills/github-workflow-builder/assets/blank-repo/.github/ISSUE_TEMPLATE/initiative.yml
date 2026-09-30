@@ -1,0 +1,47 @@
+name: Initiative
+description: A strategic goal, program, or theme that may contain multiple pieces of work
+title: "[Initiative] "
+labels: ["initiative"]
+body:
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: What outcome are we trying to create?
+      placeholder: "Describe the strategic goal in plain language."
+    validations:
+      required: true
+  - type: textarea
+    id: success-criteria
+    attributes:
+      label: Success Criteria
+      description: How will we know this worked?
+      placeholder: |
+        - Metric or observable outcome
+        - Customer, team, or business signal
+        - Date or review point
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: What is in scope and out of scope?
+      placeholder: |
+        In scope:
+        - ...
+
+        Out of scope:
+        - ...
+  - type: input
+    id: owner
+    attributes:
+      label: Owner
+      description: Who is responsible for keeping this moving?
+      placeholder: "@username or team name"
+  - type: input
+    id: target-date
+    attributes:
+      label: Target Date
+      description: When should this be reviewed or completed?
+      placeholder: "YYYY-MM-DD"

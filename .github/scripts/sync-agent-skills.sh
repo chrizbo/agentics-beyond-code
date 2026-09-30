@@ -12,6 +12,7 @@ skills=(
   "productboard-agent-builder"
   "atlassian-agent-builder"
   "google-workspace-agent-builder"
+  "microsoft-365-agent-builder"
 )
 
 check_link() {

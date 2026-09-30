@@ -1,0 +1,4 @@
+interface:
+  display_name: "Microsoft 365 Agent Builder"
+  short_description: "Build Microsoft 365 agents and automations"
+  default_prompt: "Use $microsoft-365-agent-builder to adapt this workflow into a Microsoft 365 agent and automation for our tenant."

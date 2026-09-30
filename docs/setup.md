@@ -156,6 +156,7 @@ Agentics Beyond Code without needing to start from workflow syntax.
 | Productboard Agent Builder | Adapt workflows into Productboard Spark skills | `.github/skills/productboard-agent-builder/SKILL.md` |
 | Atlassian Agent Builder | Adapt workflows into Rovo agents with Jira or Confluence automation | `.github/skills/atlassian-agent-builder/SKILL.md` |
 | Google Workspace Agent Builder | Adapt workflows into Workspace Studio flows and skills matched to the team's Workspace plan | `.github/skills/google-workspace-agent-builder/SKILL.md` |
+| Microsoft 365 Agent Builder | Adapt workflows into Microsoft 365 agents and automations matched to tenant access and licensing | `.github/skills/microsoft-365-agent-builder/SKILL.md` |
 | Agentic Workflows | Create, update, debug, compile, and validate GitHub Agentic Workflows (upstream gh-aw) | `.github/skills/agentic-workflows/SKILL.md` |
 
 Each skill is also linked from `.claude/skills/<name>/` and `.agents/skills/<name>/`.
@@ -174,6 +175,16 @@ hierarchy, labels, and issue templates, and scaffolds blank `docs/strategy.md`,
 `docs/how-we-work.md`, `decisions/`, `transcripts/`, `.github/policies/`,
 `.github/workflows/`, and `.github/ISSUE_TEMPLATE/` as needed. See the
 [skills demo script](skills-demo-script.md) for a guided walkthrough.
+
+## Use the skills as a desktop plugin
+
+For an installation without repository skill discovery, use the
+[Claude plugin guide](claude-cowork-plugin.md) or the
+[ChatGPT/Codex Mac installation guide](chatgpt-plugin.md#install-on-a-mac).
+Both packages contain the planner and six platform builders. Choose the archive
+for your client, install it, and start a new chat. The ChatGPT/Codex package can
+be tested through a local marketplace; it is not yet publicly listed. Service
+connections and workflow activation are separate from installing skills.
 
 ## Setting Up Your Repository
 

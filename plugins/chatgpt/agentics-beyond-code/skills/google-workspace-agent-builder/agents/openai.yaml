@@ -1,0 +1,4 @@
+interface:
+  display_name: "Google Workspace Agent Builder"
+  short_description: "Port workflows to Workspace Studio flows and skills, matched to the team's Workspace plan"
+  default_prompt: "Use $google-workspace-agent-builder to adapt this workflow into a Workspace Studio flow or skill for our Google Workspace plan."

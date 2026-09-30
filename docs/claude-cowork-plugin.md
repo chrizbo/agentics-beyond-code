@@ -1,9 +1,12 @@
 # Claude Cowork plugin
 
-The installable plugin lives in `plugins/agentics-beyond-code/`. It contains six
+The installable plugin lives in `plugins/agentics-beyond-code/`. It contains seven
 skills, references, blank templates, a source index, and the project icon.
 Canonical skills remain in `.github/skills/`; the installed directory is generated
 and checked for drift. Do not edit generated copies directly.
+
+For ChatGPT or Codex, use the separate [Mac installation guide](chatgpt-plugin.md#install-on-a-mac)
+and the `-chatgpt.zip` archive. Both packages share the canonical skills.
 
 ## Install
 
@@ -14,7 +17,7 @@ The plugin is listed in Anthropic's plugin directory. Open the
 Some Claude environments don't show directory plugins. In that case, add the
 repository marketplace `chrizbo/agentics-beyond-code` in Claude's plugin settings
 (**Customize → Plugins → Add marketplace**), then install `agentics-beyond-code`.
-Alternatively, build or download `agentics-beyond-code-0.5.1.zip` and use the
+Alternatively, build or download `agentics-beyond-code-0.5.2.zip` and use the
 custom ZIP upload option. Start a new task, type `/` to find the skills, and select
 a writable folder when creating files.
 
@@ -32,6 +35,13 @@ For local testing from a separate working directory:
 ```bash
 claude --plugin-dir /absolute/path/to/agentics-beyond-code/plugins/agentics-beyond-code
 ```
+
+## Microsoft 365 builder in 0.5.2
+
+Adds `microsoft-365-agent-builder`, planner routing, and documentation for
+Microsoft 365 Agent Builder, Copilot Studio, and Power Automate. Includes
+licensing and identity checks, deployment guidance, and static validation
+scenarios. Live tenant deployment remains untested. See [usage](skills.md#using-the-microsoft-365-agent-builder).
 
 ## Google Workspace builder in 0.5.1
 
@@ -188,7 +198,7 @@ no zero-findings result is promised.
 | Assess our team's readiness for agentic workflows from these exported issues. | Uses the planner's Assess mode and names readiness gaps before recommending workflows. |
 | What workflows do I need for customer feedback? We live in Slack. | Uses the planner's Design mode, selects existing feedback workflows, and names a platform per workflow with a reason. With no other evidence, expect Claude-native; if the conversation showed records in GitHub, expect GitHub with Slack delivery. |
 | Set up the decision log workflow in our GitHub repo; draft only. | Uses `github-workflow-builder`; fetches gh-aw guidance from `github/gh-aw` since `agentic-workflows` isn't installed. |
-| Type `/` in a fresh task. | Shows six Agentics Beyond Code skills (five in 0.5.0, four in 0.4.0) and no `agentic-workflows`. |
+| Type `/` in a fresh task. | Shows seven Agentics Beyond Code skills (six in 0.5.1, five in 0.5.0, four in 0.4.0) and no `agentic-workflows`. |
 
 ## 0.4.0 test run (2026-09-29)
 

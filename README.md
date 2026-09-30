@@ -155,6 +155,7 @@ agentic-workflow-planner          github-workflow-builder
   (platform-neutral)              productboard-agent-builder
                                   atlassian-agent-builder
                                   google-workspace-agent-builder
+                                  microsoft-365-agent-builder
 ```
 
 | Skill | Step | Use it when |
@@ -165,6 +166,7 @@ agentic-workflow-planner          github-workflow-builder
 | **[Productboard Agent Builder](.github/skills/productboard-agent-builder/SKILL.md)** | Build: Productboard | Product discovery, feedback, and planning live in Productboard. Adapts workflows into Spark skills and configures supported schedules. See [usage and testing](docs/skills.md#using-the-productboard-agent-builder). |
 | **[Atlassian Agent Builder](.github/skills/atlassian-agent-builder/SKILL.md)** | Build: Atlassian | Work is tracked in Jira and documented in Confluence, and the team has Rovo. Adapts workflows into Rovo agents with Jira or Confluence automation for schedules, events, and workflow transitions. Deployment guidance is documentation-derived until field-tested; see [usage](docs/skills.md#using-the-atlassian-agent-builder). |
 | **[Google Workspace Agent Builder](.github/skills/google-workspace-agent-builder/SKILL.md)** | Build: Google Workspace | The team works in Gmail, Drive, Sheets, and Chat on a Workspace edition with Gemini. Checks the Workspace plan, admin settings, and Studio run quota, then adapts workflows into Workspace Studio flows and skills (or Apps Script or Gemini Enterprise where those fit better). Deployment guidance is documentation-derived until field-tested; see [usage](docs/skills.md#using-the-google-workspace-agent-builder). |
+| **[Microsoft 365 Agent Builder](.github/skills/microsoft-365-agent-builder/SKILL.md)** | Build: Microsoft 365 | Adapt workflows into Agent Builder agents, Copilot Studio agents, and Power Automate flows, checking tenant access, licensing, and execution identity. Deployment is not yet field-tested; see [usage](docs/skills.md#using-the-microsoft-365-agent-builder). |
 | **[Agentic Workflows](.github/skills/agentic-workflows/SKILL.md)** | gh-aw authoring | Creating, debugging, or compiling gh-aw workflow files directly. Maintained upstream by the [gh-aw framework](https://github.github.io/gh-aw/). In this repo only; not in the Claude plugin. |
 
 If you already know the platform and the workflow ("make the Friday trends
@@ -173,7 +175,7 @@ someone else, follow the [skills demo script](docs/skills-demo-script.md).
 
 ### Install as a Claude plugin
 
-The planner and the five platform builders are packaged as the **Agentics Beyond
+The planner and the six platform builders are packaged as the **Agentics Beyond
 Code** Claude plugin, with templates, references, and an index for retrieving
 selected workflow sources from a pinned public repository revision. Installing it
 does not activate the workflows in this repository or connect any services.
@@ -194,6 +196,27 @@ services you authorize; see [data handling and submission notes](docs/anthropic-
 
 The installable package is generated under [`plugins/agentics-beyond-code/`](plugins/agentics-beyond-code/).
 Runtime workflow files and integration scripts remain outside that package.
+
+### Install as a ChatGPT or Codex plugin
+
+The same seven skills are packaged for **ChatGPT and Codex**. On a Mac, start
+with a local installation: build or extract the ChatGPT package, then ask the
+built-in plugin creator to register its folder in your personal marketplace
+and install it. Start a new chat after installation. Use an `@` mention in
+ChatGPT or `$microsoft-365-agent-builder` (or another skill) in Codex.
+
+See the [Mac installation guide](docs/chatgpt-plugin.md#install-on-a-mac) for
+build commands, a copy-ready installation prompt, updates, and troubleshooting.
+Use `agentics-beyond-code-0.5.2-chatgpt.zip` for this package; the ZIP without
+`-chatgpt` is the Claude package. Local marketplace availability depends on the
+client and workspace; it does not automatically install the plugin on the web.
+
+There is no public OpenAI listing for this package yet. The guide also covers
+[workspace sharing and public directory submission](docs/chatgpt-plugin.md#public-directory-and-workspace-sharing).
+Installing the skills does not connect services or start automations. See the
+package's [data handling notes](plugins/chatgpt/agentics-beyond-code/docs/privacy.md).
+The generated package lives in
+[`plugins/chatgpt/agentics-beyond-code/`](plugins/chatgpt/agentics-beyond-code/).
 
 ### Skill layout in this repo
 
