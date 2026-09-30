@@ -2,6 +2,10 @@
 
 This repository exposes the same skills through several discovery conventions so they work across coding tools without maintaining divergent copies.
 
+For desktop installation, see the [Claude plugin guide](claude-cowork-plugin.md)
+or [ChatGPT/Codex on Mac](chatgpt-plugin.md#install-on-a-mac). Both distribute the
+same seven repo-owned skills; the upstream gh-aw dispatcher stays repo-only.
+
 ## How the skills fit together
 
 The repo-owned skills follow one path: assess → design → build.
@@ -12,6 +16,9 @@ The repo-owned skills follow one path: assess → design → build.
 | `github-workflow-builder` | Build | GitHub scaffolding: folders, blank docs, issue templates, labels, Projects, copied gh-aw workflows, `gh aw compile` |
 | `claude-native-workflow-builder` | Build | Claude Routines and Scheduled Tasks: surface choice, triggers, governance, port fidelity |
 | `productboard-agent-builder` | Build | Productboard Spark skills: adaptation, browser deployment, schedules |
+| `atlassian-agent-builder` | Build | Rovo agents and Jira/Confluence automation |
+| `google-workspace-agent-builder` | Build | Plan-aware Workspace Studio flows and skills |
+| `microsoft-365-agent-builder` | Build | Plan-aware Microsoft 365 agents and automations |
 | `agentic-workflows` | gh-aw authoring | Upstream dispatcher for gh-aw prompts |
 
 Keep platform-neutral guidance in the planner (`references/assess.md`,

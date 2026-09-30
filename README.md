@@ -175,7 +175,7 @@ someone else, follow the [skills demo script](docs/skills-demo-script.md).
 
 ### Install as a Claude plugin
 
-The planner and the five platform builders are packaged as the **Agentics Beyond
+The planner and the six platform builders are packaged as the **Agentics Beyond
 Code** Claude plugin, with templates, references, and an index for retrieving
 selected workflow sources from a pinned public repository revision. Installing it
 does not activate the workflows in this repository or connect any services.
@@ -196,6 +196,27 @@ services you authorize; see [data handling and submission notes](docs/anthropic-
 
 The installable package is generated under [`plugins/agentics-beyond-code/`](plugins/agentics-beyond-code/).
 Runtime workflow files and integration scripts remain outside that package.
+
+### Install as a ChatGPT or Codex plugin
+
+The same seven skills are packaged for **ChatGPT and Codex**. On a Mac, start
+with a local installation: build or extract the ChatGPT package, then ask the
+built-in plugin creator to register its folder in your personal marketplace
+and install it. Start a new chat after installation. Use an `@` mention in
+ChatGPT or `$microsoft-365-agent-builder` (or another skill) in Codex.
+
+See the [Mac installation guide](docs/chatgpt-plugin.md#install-on-a-mac) for
+build commands, a copy-ready installation prompt, updates, and troubleshooting.
+Use `agentics-beyond-code-0.5.2-chatgpt.zip` for this package; the ZIP without
+`-chatgpt` is the Claude package. Local marketplace availability depends on the
+client and workspace; it does not automatically install the plugin on the web.
+
+There is no public OpenAI listing for this package yet. The guide also covers
+[workspace sharing and public directory submission](docs/chatgpt-plugin.md#public-directory-and-workspace-sharing).
+Installing the skills does not connect services or start automations. See the
+package's [data handling notes](plugins/chatgpt/agentics-beyond-code/docs/privacy.md).
+The generated package lives in
+[`plugins/chatgpt/agentics-beyond-code/`](plugins/chatgpt/agentics-beyond-code/).
 
 ### Skill layout in this repo
 
@@ -254,8 +275,3 @@ Want to enable Agentics Beyond Code for your organization? Reach out to **Chris 
 ## 📄 License
 
 [MIT](LICENSE)
-
-### ChatGPT and Codex package
-
-A generated ChatGPT/Codex package shares the same canonical skills as the Claude
-plugin. See [build, local testing, and marketplace options](docs/chatgpt-plugin.md).

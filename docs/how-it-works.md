@@ -183,6 +183,8 @@ Workflows define the **general pattern** (e.g., "assess readiness against a poli
       SKILL.md                         ← Build the design as Rovo agents with Jira or Confluence automation
     google-workspace-agent-builder/
       SKILL.md                         ← Build the design as Workspace Studio flows and skills, matched to the Workspace plan
+    microsoft-365-agent-builder/
+      SKILL.md                         ← Build Microsoft 365 agents and automations matched to tenant plans
     agentic-workflows/
       SKILL.md                         ← Skill for creating, updating, debugging, and compiling gh-aw workflows
   workflows/
@@ -781,3 +783,11 @@ On a typical week:
 **On push to `/transcripts/`:**
 19. **Transcript Processor** — matches transcript content to open issues and
    posts summary comments with meeting context.
+
+## Desktop plugin packages
+
+Canonical skills also generate the [Claude package](claude-cowork-plugin.md) and
+the [ChatGPT/Codex package](chatgpt-plugin.md). The latter guide includes Mac
+installation through a local marketplace, a first test, updates, and publishing.
+Plugin installation provides instructions and references; workflow runtimes and
+service connections are configured separately.

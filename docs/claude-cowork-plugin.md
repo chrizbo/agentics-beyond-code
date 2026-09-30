@@ -5,6 +5,9 @@ skills, references, blank templates, a source index, and the project icon.
 Canonical skills remain in `.github/skills/`; the installed directory is generated
 and checked for drift. Do not edit generated copies directly.
 
+For ChatGPT or Codex, use the separate [Mac installation guide](chatgpt-plugin.md#install-on-a-mac)
+and the `-chatgpt.zip` archive. Both packages share the canonical skills.
+
 ## Install
 
 The plugin is listed in Anthropic's plugin directory. Open the

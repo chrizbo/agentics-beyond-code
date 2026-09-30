@@ -176,6 +176,16 @@ hierarchy, labels, and issue templates, and scaffolds blank `docs/strategy.md`,
 `.github/workflows/`, and `.github/ISSUE_TEMPLATE/` as needed. See the
 [skills demo script](skills-demo-script.md) for a guided walkthrough.
 
+## Use the skills as a desktop plugin
+
+For an installation without repository skill discovery, use the
+[Claude plugin guide](claude-cowork-plugin.md) or the
+[ChatGPT/Codex Mac installation guide](chatgpt-plugin.md#install-on-a-mac).
+Both packages contain the planner and six platform builders. Choose the archive
+for your client, install it, and start a new chat. The ChatGPT/Codex package can
+be tested through a local marketplace; it is not yet publicly listed. Service
+connections and workflow activation are separate from installing skills.
+
 ## Setting Up Your Repository
 
 ### 1. Clone and initialize
