@@ -42,6 +42,8 @@ class ChatGPTPackageTests(unittest.TestCase):
         self.assertLessEqual(len(interface['defaultPrompt']), 3)
         for prompt in interface['defaultPrompt']:
             self.assertLessEqual(len(prompt), 128)
+        self.assertRegex(interface['privacyPolicyURL'],
+                         r'^https://raw\.githubusercontent\.com/chrizbo/agentics-beyond-code/[0-9a-f]{40}/packaging/claude/privacy\.md$')
         import struct
         icon = self.data[interface['logo'].removeprefix('./')]
         self.assertEqual(icon[:8], b'\x89PNG\r\n\x1a\n')

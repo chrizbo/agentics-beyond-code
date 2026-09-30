@@ -19,8 +19,8 @@ python3 -B .github/scripts/build-chatgpt-plugin.py --check
 python3 -B .github/scripts/test-chatgpt-plugin.py
 ```
 
-The current archives are `dist/agentics-beyond-code-0.5.2.zip` for Claude and
-`dist/agentics-beyond-code-0.5.2-chatgpt.zip` for ChatGPT/Codex. The latter has a
+The current archives are `dist/agentics-beyond-code-0.5.3.zip` for Claude and
+`dist/agentics-beyond-code-0.5.3-chatgpt.zip` for ChatGPT/Codex. The latter has a
 SHA-256 sidecar. Validate the OpenAI manifest with the plugin-creator skill's
 `scripts/validate_plugin.py plugins/chatgpt/agentics-beyond-code` where available.
 
@@ -31,7 +31,7 @@ supported Codex or ChatGPT desktop client with plugin creation/installation
 available. Python 3 and Git are needed only if building from this checkout.
 
 1. From the repository checkout, run the build commands above. Alternatively,
-   extract `agentics-beyond-code-0.5.2-chatgpt.zip` into a folder named
+   extract `agentics-beyond-code-0.5.3-chatgpt.zip` into a folder named
    `agentics-beyond-code`. Keep the hidden `.codex-plugin` directory and all
    bundled `skills/`, `docs/`, and assets together.
 2. Copy the absolute path of the generated or extracted plugin folder. For a
@@ -43,7 +43,7 @@ available. Python 3 and Git are needed only if building from this checkout.
 Use plugin-creator to install the existing plugin at
 /absolute/path/to/agentics-beyond-code into my personal local marketplace
 and enable it. Preserve its existing skills and manifest, keep release version
-0.5.2, and preserve my other marketplace entries. Do not publish it.
+0.5.3, and preserve my other marketplace entries. Do not publish it.
 ```
 
 4. Follow any filesystem or workspace permission prompts. The installer should
@@ -89,7 +89,7 @@ Public upload and live tenant deployment remain untested.
 - After editing canonical skills, regenerate both packages. Rebuilding a ZIP
   does not refresh an installed cached copy.
 - Ask plugin-creator to refresh the existing installation from its actual local
-  marketplace and preserve the `0.5.2` release prefix. Its development update
+  marketplace and preserve the `0.5.3` release prefix. Its development update
   procedure can add a `+codex.<cachebuster>` suffix to a local installed-source
   copy. Keep that development suffix out of the canonical release manifest and
   release ZIPs. Reinstall, then start a new chat.
@@ -110,7 +110,7 @@ The [universal public plugin directory](https://developers.openai.com/plugins/de
 is shared by ChatGPT and Codex. From its linked submission portal:
 
 1. Choose the owning organization/project and verified developer identity.
-2. Upload `agentics-beyond-code-0.5.2-chatgpt.zip`.
+2. Upload `agentics-beyond-code-0.5.3-chatgpt.zip`.
 3. Resolve metadata and skill scan findings, complete the listing, and submit.
 4. Publish after approval. Generating the ZIP does not submit or publish it.
 
@@ -123,3 +123,16 @@ first public submission if a hosted integration is planned.
 For private team distribution, workspace admins can publish to their workspace
 where enabled. This is separate from both a local marketplace and the public
 directory. See [packaging and distribution](https://developers.openai.com/plugins/build/plugins).
+
+### Submission troubleshooting
+
+Version 0.5.3 adds a published privacy-policy URL to the manifest and describes
+functions without naming other AI assistants in the listing. The seven platform
+skills remain included. The policy link is pinned to a public commit so it is
+available before release and remains stable after branch cleanup.
+
+If the portal asks for a privacy-policy URL, use `interface.privacyPolicyURL`
+from the packaged `.codex-plugin/plugin.json`. Verify it opens without signing
+in. Re-upload the rebuilt ZIP and rerun the metadata checks. Wait for all seven
+skill scans to finish; successful local packaging checks do not confirm portal
+approval. Report any remaining findings separately.

@@ -1,10 +1,10 @@
 {
-  "plugin_version": "0.5.2",
+  "plugin_version": "0.5.3",
   "generated": true,
   "source_revision": "a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79",
   "sha256": {
     ".claude-plugin/icon.png": "455bbb9ef038026c2a00b88bb598ed06bc079b073375e023d5be2e9aeab8d2ae",
-    ".claude-plugin/plugin.json": "46f8f81777dd4c7746f55936e32a87d604d655403c8bc952a45f426d4cef2416",
+    ".claude-plugin/plugin.json": "46818dcb5d939f75cc05504784bad512566874ed7955d461e523eb3ce0c8f9a8",
     ".github/skills/agentic-workflow-planner/SKILL.md": "986226c38e0ad00f66a3b121f4bc11b1d049bf606bf320971df021e2239cf41a",
     ".github/skills/agentic-workflow-planner/agents/openai.yaml": "7c32c4cf852944c02ea28dba2f55313ea592e62033c0f3d0a44407856e3cd9a5",
     ".github/skills/agentic-workflow-planner/references/assess.md": "5973701c86cc93b8e42d0cfcfe2eb7dc55bba038a9351a864679e514f73c69cf",
@@ -55,7 +55,7 @@
     ".github/skills/productboard-agent-builder/references/triggers-and-schedules.md": "6452c39fa21388d8a7498364cf7edb3aada06da8ccfe6335d96359dde40e692d",
     "LICENSE": "0b57642affa02b038c08d2ae25e02ea770e3998ae34026cc445444e21c91f2e9",
     "README.md": "f03e913f5c674f76a3f922f93097cd4c63d7af444895666e333d66ce9aa74f03",
-    "docs/privacy.md": "404c88b38a8f870636fcfa25ac7f32feeec0d68dd0bb535b8ee53490d6056f96",
+    "docs/privacy.md": "19a0f6426c73903b4929b1f5b20056982d960986ec30d6576ca926a5a9ffefdd",
     "docs/source-access.md": "b45862a08799036f8f1eef671f9a8b483ad9ec1ff882ecea0a1b5eb65c35a189",
     "source-index.json": "26b9669f5fc90243fa8775c39683bb1cf00aeb8596dba5b0796d2a3f4fe15f78"
   }
