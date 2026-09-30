@@ -7,7 +7,7 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Agentics Beyond Code",
-    "shortDescription": "Design and build agentic workflows for your team",
+    "shortDescription": "Agentic workflows for teams",
     "longDescription": "Assess team workflows, design the right agentic workflows, and build them on GitHub, Claude, Productboard, Atlassian, Google Workspace, or Microsoft 365. Includes seven skills and supporting references; service connections are configured separately.",
     "developerName": "Chris Butler",
     "category": "Productivity",

@@ -33,6 +33,23 @@ class ChatGPTPackageTests(unittest.TestCase):
         for field in ('composerIcon', 'logo'):
             self.assertIn(manifest['interface'][field].removeprefix('./'), self.data)
 
+    def test_public_listing_limits_and_icon(self):
+        manifest = json.loads(self.data[builder.MANIFEST])
+        interface = manifest['interface']
+        for field, limit in [('displayName', 30), ('shortDescription', 30),
+                             ('longDescription', 4000), ('developerName', 80)]:
+            self.assertLessEqual(len(interface[field]), limit, field)
+        self.assertLessEqual(len(interface['defaultPrompt']), 3)
+        for prompt in interface['defaultPrompt']:
+            self.assertLessEqual(len(prompt), 128)
+        import struct
+        icon = self.data[interface['logo'].removeprefix('./')]
+        self.assertEqual(icon[:8], b'\x89PNG\r\n\x1a\n')
+        width, height = struct.unpack('>II', icon[16:24])
+        self.assertEqual(width, height)
+        self.assertTrue(48 <= width <= 4096)
+        self.assertLessEqual(len(icon), 5 * 1024 * 1024)
+
     def test_references_resolve_after_relocation(self):
         for name, content in self.data.items():
             if not name.startswith('skills/') or not name.endswith('.md'):
