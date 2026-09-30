@@ -207,7 +207,7 @@ ChatGPT or `$microsoft-365-agent-builder` (or another skill) in Codex.
 
 See the [Mac installation guide](docs/chatgpt-plugin.md#install-on-a-mac) for
 build commands, a copy-ready installation prompt, updates, and troubleshooting.
-Use `agentics-beyond-code-0.5.2-chatgpt.zip` for this package; the ZIP without
+Use `agentics-beyond-code-0.5.3-chatgpt.zip` for this package; the ZIP without
 `-chatgpt` is the Claude package. Local marketplace availability depends on the
 client and workspace; it does not automatically install the plugin on the web.
 

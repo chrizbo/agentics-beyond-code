@@ -1,6 +1,6 @@
 {
   "name": "agentics-beyond-code",
-  "description": "Assess team workflows, design the right agentic workflows, and build them on GitHub, Claude, Productboard, Atlassian, Google Workspace, or Microsoft 365.",
+  "description": "Assess team processes, design agentic workflows, and build practical automations with evidence, ownership, and human approval points.",
   "author": {
     "name": "Chris Butler"
   },
@@ -8,7 +8,7 @@
   "interface": {
     "displayName": "Agentics Beyond Code",
     "shortDescription": "Agentic workflows for teams",
-    "longDescription": "Assess team workflows, design the right agentic workflows, and build them on GitHub, Claude, Productboard, Atlassian, Google Workspace, or Microsoft 365. Includes seven skills and supporting references; service connections are configured separately.",
+    "longDescription": "Assess team processes, design agentic workflows, and build practical automations with evidence, ownership, and human approval points. Includes seven skills and supporting references for adapting workflows to your team\u2019s work systems; service connections are configured separately.",
     "developerName": "Chris Butler",
     "category": "Productivity",
     "capabilities": [
@@ -21,7 +21,8 @@
       "Assess our team\u2019s readiness for agentic workflows.",
       "Design workflows for our Microsoft 365 and GitHub team.",
       "Adapt our weekly status workflow for Teams."
-    ]
+    ],
+    "privacyPolicyURL": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/bddf88521147df45ecdae96a19e4be799044b95f/packaging/claude/privacy.md"
   },
   "homepage": "https://github.com/chrizbo/agentics-beyond-code",
   "repository": "https://github.com/chrizbo/agentics-beyond-code",

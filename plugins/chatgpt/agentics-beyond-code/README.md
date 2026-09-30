@@ -16,7 +16,7 @@ path; in ChatGPT Work, select `@Plugin Creator` if available.
 Use plugin-creator to install the existing plugin at
 /absolute/path/to/agentics-beyond-code into my personal local marketplace
 and enable it. Preserve its files and my other marketplace entries, keep
-release version 0.5.2, and do not publish it.
+release version 0.5.3, and do not publish it.
 ```
 
 After successful installation, start a new chat. In ChatGPT select the plugin
@@ -39,7 +39,7 @@ is needed for a draft. Live deployment remains untested.
 
 A new ZIP does not update a cached installation. Ask plugin-creator to refresh
 this package from the actual local marketplace, then start a fresh chat. Keep
-release version 0.5.2; any development cachebuster belongs only to a local copy.
+release version 0.5.3; any development cachebuster belongs only to a local copy.
 If references are missing, verify that the entire package was installed.
 There is no public OpenAI listing yet. Local validation and public approval are
 separate. See the repository's ChatGPT plugin guide for build and release steps.

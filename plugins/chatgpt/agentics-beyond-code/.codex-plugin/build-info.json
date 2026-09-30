@@ -1,13 +1,13 @@
 {
-  "plugin_version": "0.5.2",
+  "plugin_version": "0.5.3",
   "generated": true,
   "source_revision": "a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79",
   "sha256": {
-    ".codex-plugin/plugin.json": "3b8dc64828662432f0c395c0f3d15312d2b0770ff5a2b48353d1099e85cb06fc",
+    ".codex-plugin/plugin.json": "a7dc1c0d452bb6d867d24d1043d9970783b8b8eeb8ecc05d083aca568037d865",
     "LICENSE": "0b57642affa02b038c08d2ae25e02ea770e3998ae34026cc445444e21c91f2e9",
-    "README.md": "d0be0b7938cb096d64e947eade4a0af335afc0d2dab1310f626b3ed16cffa434",
+    "README.md": "d3bbacb6ed04de67fdad0326ab3e7c6157ac644d8745f23ba80d58c82195bc54",
     "assets/icon.png": "455bbb9ef038026c2a00b88bb598ed06bc079b073375e023d5be2e9aeab8d2ae",
-    "docs/privacy.md": "404c88b38a8f870636fcfa25ac7f32feeec0d68dd0bb535b8ee53490d6056f96",
+    "docs/privacy.md": "19a0f6426c73903b4929b1f5b20056982d960986ec30d6576ca926a5a9ffefdd",
     "docs/source-access.md": "b45862a08799036f8f1eef671f9a8b483ad9ec1ff882ecea0a1b5eb65c35a189",
     "skills/agentic-workflow-planner/SKILL.md": "256e66fc2d27399e7e7db8c834dda89e260dc205379042e36e88cf2b11a77b71",
     "skills/agentic-workflow-planner/agents/openai.yaml": "7c32c4cf852944c02ea28dba2f55313ea592e62033c0f3d0a44407856e3cd9a5",
