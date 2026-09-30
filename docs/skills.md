@@ -73,6 +73,8 @@ Edit the canonical files under `.github/skills/`; the discovery links expose cha
 
 `.github/skills/atlassian-agent-builder/` is maintained in this repository. It adapts selected workflows into Atlassian Rovo agents and Jira or Confluence automation flows, keeping writes in automation actions where possible and preserving evidence and human decisions. It distinguishes Rovo agents, automation flows, Forge apps, and external agents using the Atlassian Rovo MCP Server.
 
+`.github/skills/google-workspace-agent-builder/` is maintained in this repository. It adapts selected workflows into Google Workspace Studio flows and skills. Before drafting, it reasons about which Google surface fits: Workspace edition, add-ons, admin settings, and Studio run quota decide between a Studio flow, a skill alone, Apps Script, Gemini Enterprise, a hybrid with GitHub, or a handoff to the Claude-native builder. Dated availability data lives in its `references/surfaces-and-plans.md`.
+
 ## Using the Productboard Agent Builder
 
 Use `productboard-agent-builder` from a checkout of this repository or the
@@ -167,6 +169,68 @@ automation actions that consume `{{agentResponse}}`. Record the first site test
 in the skill's
 [field observations](../.github/skills/atlassian-agent-builder/references/observed-atlassian-behavior.md).
 
+## Using the Google Workspace Agent Builder
+
+Use `google-workspace-agent-builder` from a checkout of this repository or the
+Claude plugin (0.5.1 and later). The builder produces a surface decision, Studio
+skill instructions, and a flow specification; installing the builder does not
+create anything in Google Workspace.
+
+Tell it your Workspace edition and any add-ons if you know them. Without them it
+gives a conditional recommendation.
+
+```text
+Use google-workspace-agent-builder to adapt Intake Triage for our team. We're on
+Business Standard and feedback arrives by email to a shared inbox, about 15 a
+day. Keep acceptance for a human and show the flow and skill. Do not deploy yet.
+```
+
+Then, when ready and signed in to Workspace Studio in the browser:
+
+```text
+Create the prepared skill and flow in Workspace Studio. Check for existing
+matches, save the flow turned off, and verify the saved configuration from a
+fresh page load.
+```
+
+The builder never changes Admin console settings. It names the settings an admin
+must turn on, such as custom steps, integrations, or webhooks.
+
+### What has been tested
+
+Nothing live yet. The surface, edition, and quota guidance is derived from Google
+documentation and announcements checked September 29, 2026, including the
+September 17 custom starters, custom steps, integrations, and webhooks release.
+Some per-edition quotas come from third-party summaries and are marked as such.
+Six CLI prompts checked routing and surface reasoning in plan mode: Business
+Starter per-email triage (quota exceeded, so it batched to a daily run), Business
+Plus weekly status Doc, GitHub records with Gmail delivery on Business Standard,
+a personal Gmail account, an unknown edition (conditional recommendation), and
+planner routing. The webhook-direction and personal-account guidance was
+tightened after those runs.
+
+Full drafts were then reviewed by adapting the decision log workflow
+(Business Standard, transcripts in Drive) with the packaged plugin, three
+times. Each review tightened the builder:
+
+- First draft: it read the paused schedule as manual-only, let the model
+  decide duplicates, had no fallback for an unparseable response, and named
+  gh-aw settings in its dropped list. This led to the shared
+  [reading guide](../.github/skills/agentic-workflow-planner/references/reading-workflow-sources.md)
+  and to fixes in both the Google and Atlassian builders.
+- Second draft: the schedule, fallback, and access-failure handling were
+  fixed. It still named gh-aw settings, and it invented a tracking Sheet for
+  GitHub comments.
+- Third draft: it kept the GitHub half in GitHub, checked duplicates in the
+  flow by file ID, and kept the source's one-PR-per-run limit as one digest
+  Doc per run. It still checked for empty input before checking for read
+  failures, and put "nothing found" and a bad response on the same branch.
+  The self-check now covers both. Settings names in backticks recurred in
+  every draft; check for them when reviewing output.
+
+The fixes from the third review have not been rerun. Record the first domain test in the skill's
+[field observations](../.github/skills/google-workspace-agent-builder/references/observed-google-workspace-behavior.md).
+
 ## Validation
 
 Run:
@@ -181,7 +245,7 @@ The check verifies the discovery links, validates each `SKILL.md`, and reports g
 
 Canonical skills remain here under `.github/skills/`. The directory plugin in
 `plugins/agentics-beyond-code/` is generated from them and packaging inputs under
-`packaging/claude/`. The plugin ships five skills: the upstream
+`packaging/claude/`. The plugin ships six skills: the upstream
 `agentic-workflows` dispatcher is excluded (`EXCLUDED_SKILLS` in
 `.github/scripts/build-claude-plugin.py`) because it only fetches instructions
 from `github/gh-aw` and overlaps with `github-workflow-builder` in Cowork. The

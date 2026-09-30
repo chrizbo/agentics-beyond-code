@@ -14,11 +14,11 @@ a real backlog.
 **Pick a runtime.**
 
 - **Repo checkout (recommended):** open Claude Code, Codex, or Copilot in a
-  checkout of this repo. All five skills are discoverable from
+  checkout of this repo. All six skills are discoverable from
   `.github/skills/`, `.claude/skills/`, or `.agents/skills/`, and the skills
   can read workflows and demo data locally.
 - **Claude plugin:** install `agentics-beyond-code` (see the
-  [plugin guide](claude-cowork-plugin.md)). It ships five skills (no
+  [plugin guide](claude-cowork-plugin.md)). It ships six skills (no
   `agentic-workflows`). Workflow sources are fetched from the pinned public
   revision, so network access is needed. Prompts that say "this repo" need
   a checkout; use the plugin variants where a scene gives one.

@@ -59,8 +59,10 @@ relative to this folder; write user deliverables in their chosen workspace.
 
 1. Extract the workflow contract: inputs and exclusions, active trigger,
    reasoning steps, artifact structure, allowed writes and exact limits,
-   duplicate handling, human decision gate, and terminating outcomes. Commented
-   schedules are not active. Distinguish inherited rules from proposed defaults.
+   duplicate handling, human decision gate, and terminating outcomes. Read the
+   source as [reading workflow sources](../agentic-workflow-planner/references/reading-workflow-sources.md)
+   describes; a `(disabled — re-enable …)` schedule is the intended cadence,
+   paused for the demo repository. Distinguish inherited rules from proposed defaults.
 2. Map each source artifact to the user's real Productboard context. Keep IDs,
    source links, dates, status meanings, customer relationships, and evidence
    provenance intact. A GitHub issue is not automatically a feature; feedback,

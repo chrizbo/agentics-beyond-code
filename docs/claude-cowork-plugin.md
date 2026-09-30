@@ -1,6 +1,6 @@
 # Claude Cowork plugin
 
-The installable plugin lives in `plugins/agentics-beyond-code/`. It contains five
+The installable plugin lives in `plugins/agentics-beyond-code/`. It contains six
 skills, references, blank templates, a source index, and the project icon.
 Canonical skills remain in `.github/skills/`; the installed directory is generated
 and checked for drift. Do not edit generated copies directly.
@@ -14,7 +14,7 @@ The plugin is listed in Anthropic's plugin directory. Open the
 Some Claude environments don't show directory plugins. In that case, add the
 repository marketplace `chrizbo/agentics-beyond-code` in Claude's plugin settings
 (**Customize → Plugins → Add marketplace**), then install `agentics-beyond-code`.
-Alternatively, build or download `agentics-beyond-code-0.5.0.zip` and use the
+Alternatively, build or download `agentics-beyond-code-0.5.1.zip` and use the
 custom ZIP upload option. Start a new task, type `/` to find the skills, and select
 a writable folder when creating files.
 
@@ -32,6 +32,38 @@ For local testing from a separate working directory:
 ```bash
 claude --plugin-dir /absolute/path/to/agentics-beyond-code/plugins/agentics-beyond-code
 ```
+
+## Google Workspace builder in 0.5.1
+
+The package adds `google-workspace-agent-builder` for adapting repository
+workflows into Google Workspace Studio flows and skills. Before drafting it
+chooses the Google surface from the team's Workspace edition, add-ons, admin
+settings, and Studio run quota, and can recommend a skill alone, Apps Script,
+Gemini Enterprise, a hybrid with GitHub, or the Claude-native builder instead.
+It follows the Atlassian builder's patterns: the flow gathers inputs and
+performs writes, Gemini only reasons, and a fallback branch writes nothing on a
+bad response. The planner now offers Google Workspace as a platform.
+Deployment guidance is documentation-derived; no live Studio test has been
+recorded. See [usage](skills.md#using-the-google-workspace-agent-builder).
+
+Also in 0.5.1:
+
+- **A shared guide for reading workflow sources.** The planner's
+  `references/reading-workflow-sources.md` is used by every builder. Schedules
+  that this demo repository paused with a `(disabled — re-enable …)` marker are
+  now ported as the intended cadence, turned off, with guidance for turning
+  them on. Before, builders ported them as manual-only. The guide also marks
+  the freshness check as demo scaffolding and asks builders to name the
+  workflows that consume a port's output.
+- **Google and Atlassian builder fixes** from a reviewed decision-log draft:
+  - the flow, not the model, builds names and duplicate keys and enforces the
+    source's per-run limit
+  - the fallback covers any unparseable response
+  - a missing-access case must end differently from an empty one
+  - no notifications the source didn't send
+  - dropped settings are described with plain-language rewrites
+- **Directory listing.** The plugin README now points to the Claude plugin
+  directory listing instead of saying the listing is pending.
 
 ## Atlassian builder in 0.5.0
 
@@ -156,7 +188,7 @@ no zero-findings result is promised.
 | Assess our team's readiness for agentic workflows from these exported issues. | Uses the planner's Assess mode and names readiness gaps before recommending workflows. |
 | What workflows do I need for customer feedback? We live in Slack. | Uses the planner's Design mode, selects existing feedback workflows, and names a platform per workflow with a reason. With no other evidence, expect Claude-native; if the conversation showed records in GitHub, expect GitHub with Slack delivery. |
 | Set up the decision log workflow in our GitHub repo; draft only. | Uses `github-workflow-builder`; fetches gh-aw guidance from `github/gh-aw` since `agentic-workflows` isn't installed. |
-| Type `/` in a fresh task. | Shows five Agentics Beyond Code skills (four in 0.4.0) and no `agentic-workflows`. |
+| Type `/` in a fresh task. | Shows six Agentics Beyond Code skills (five in 0.5.0, four in 0.4.0) and no `agentic-workflows`. |
 
 ## 0.4.0 test run (2026-09-29)
 

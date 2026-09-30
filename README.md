@@ -154,15 +154,17 @@ agentic-workflow-planner          github-workflow-builder
   Assess -> Design  ───────────>  claude-native-workflow-builder
   (platform-neutral)              productboard-agent-builder
                                   atlassian-agent-builder
+                                  google-workspace-agent-builder
 ```
 
 | Skill | Step | Use it when |
 |---|---|---|
 | **[Agentic Workflow Planner](.github/skills/agentic-workflow-planner/SKILL.md)** | Assess, Design | You want a readiness or current-state assessment from GitHub, Jira, Linear, or docs, or you want to know which workflows to adopt and where they should run. Start here if you're unsure. |
 | **[GitHub Workflow Builder](.github/skills/github-workflow-builder/SKILL.md)** | Build: GitHub | Your team lives in GitHub Issues/Projects/Discussions. Sets up gh-aw workflows, blank strategy/how-we-work docs, policies, issue templates, labels, and project boards. |
-| **[Claude-Native Workflow Builder](.github/skills/claude-native-workflow-builder/SKILL.md)** | Build: Claude | Your team lives in Slack, Notion, Jira, Google Workspace, or email, or you want one workflow without the GitHub scaffolding. Ports or designs Claude Routines and Scheduled Tasks. |
+| **[Claude-Native Workflow Builder](.github/skills/claude-native-workflow-builder/SKILL.md)** | Build: Claude | Your team lives in Slack, Notion, Jira, or email (or Google Workspace without Workspace Studio), or you want one workflow without the GitHub scaffolding. Ports or designs Claude Routines and Scheduled Tasks. |
 | **[Productboard Agent Builder](.github/skills/productboard-agent-builder/SKILL.md)** | Build: Productboard | Product discovery, feedback, and planning live in Productboard. Adapts workflows into Spark skills and configures supported schedules. See [usage and testing](docs/skills.md#using-the-productboard-agent-builder). |
 | **[Atlassian Agent Builder](.github/skills/atlassian-agent-builder/SKILL.md)** | Build: Atlassian | Work is tracked in Jira and documented in Confluence, and the team has Rovo. Adapts workflows into Rovo agents with Jira or Confluence automation for schedules, events, and workflow transitions. Deployment guidance is documentation-derived until field-tested; see [usage](docs/skills.md#using-the-atlassian-agent-builder). |
+| **[Google Workspace Agent Builder](.github/skills/google-workspace-agent-builder/SKILL.md)** | Build: Google Workspace | The team works in Gmail, Drive, Sheets, and Chat on a Workspace edition with Gemini. Checks the Workspace plan, admin settings, and Studio run quota, then adapts workflows into Workspace Studio flows and skills (or Apps Script or Gemini Enterprise where those fit better). Deployment guidance is documentation-derived until field-tested; see [usage](docs/skills.md#using-the-google-workspace-agent-builder). |
 | **[Agentic Workflows](.github/skills/agentic-workflows/SKILL.md)** | gh-aw authoring | Creating, debugging, or compiling gh-aw workflow files directly. Maintained upstream by the [gh-aw framework](https://github.github.io/gh-aw/). In this repo only; not in the Claude plugin. |
 
 If you already know the platform and the workflow ("make the Friday trends
@@ -171,7 +173,7 @@ someone else, follow the [skills demo script](docs/skills-demo-script.md).
 
 ### Install as a Claude plugin
 
-The planner and the four platform builders are packaged as the **Agentics Beyond
+The planner and the five platform builders are packaged as the **Agentics Beyond
 Code** Claude plugin, with templates, references, and an index for retrieving
 selected workflow sources from a pinned public repository revision. Installing it
 does not activate the workflows in this repository or connect any services.

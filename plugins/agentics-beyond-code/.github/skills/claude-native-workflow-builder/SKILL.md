@@ -18,10 +18,11 @@ description: >
 This skill turns a plain-language process problem into an always-on
 automation built with Claude Routines and Claude Scheduled Tasks: which one to
 use per step, what triggers it, where the human interpretation gate lives, and
-what org governance applies. It is one of four platform builders, alongside
+what org governance applies. It is one of five platform builders, alongside
 [`github-workflow-builder`](../github-workflow-builder/SKILL.md),
-[`productboard-agent-builder`](../productboard-agent-builder/SKILL.md), and
-[`atlassian-agent-builder`](../atlassian-agent-builder/SKILL.md): same
+[`productboard-agent-builder`](../productboard-agent-builder/SKILL.md),
+[`atlassian-agent-builder`](../atlassian-agent-builder/SKILL.md), and
+[`google-workspace-agent-builder`](../google-workspace-agent-builder/SKILL.md): same
 philosophy (living documents, artifacts over roles, the PM/owner decides),
 different execution engine. Choosing which workflows to adopt, and whether
 Claude is the right platform, belongs to
@@ -33,7 +34,9 @@ Actions/gh-aw dependency, or when they want to see that the pattern this repo
 teaches isn't tied to GitHub at all. Use `github-workflow-builder`
 when GitHub Issues/Projects/Discussions are the team's actual home. Use
 `atlassian-agent-builder` when the team wants the automation to run inside
-Jira or Confluence as a Rovo agent rather than as a Claude Routine.
+Jira or Confluence as a Rovo agent rather than as a Claude Routine, and
+`google-workspace-agent-builder` when it should run inside Google Workspace as a
+Workspace Studio flow or skill.
 
 
 ## Installed plugin context
