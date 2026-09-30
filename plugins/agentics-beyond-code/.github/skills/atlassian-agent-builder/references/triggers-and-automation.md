@@ -44,7 +44,9 @@ Include only fields relevant to the selected trigger:
   step, and how their results are passed in the prompt.
 - Agent step: selected agent, exact prompt, and expected response shape.
 - Fallback: when the response is missing, unparseable, or has an unexpected
-  value, write nothing and notify the owner.
+  value, write nothing and notify the owner. A valid "nothing found"
+  answer is not a fallback: it stops quietly as the source does. Check lookup
+  and access failures before the empty check.
 - Follow-up actions: each write, its target, its limit, and the smart value
   format (`.markdown`, `.adf`, `.asString`, `.asObject`) it consumes. Branch
   on an explicit empty result so no empty artifact is published.

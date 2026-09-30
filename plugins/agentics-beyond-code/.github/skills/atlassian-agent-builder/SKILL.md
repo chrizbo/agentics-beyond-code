@@ -87,8 +87,13 @@ relative to this folder; write user deliverables in their chosen workspace.
 
 1. Extract the workflow contract: inputs and exclusions, active trigger,
    reasoning steps, artifact structure, allowed writes and exact limits,
-   duplicate handling, human decision gate, and terminating outcomes. Commented
-   schedules are not active. Include imported shared steps and fields produced
+   duplicate handling, human decision gate, and terminating outcomes. Read the
+   source as [reading workflow sources](../agentic-workflow-planner/references/reading-workflow-sources.md)
+   describes. A schedule commented out with a `(disabled — re-enable …)`
+   marker is the intended cadence, paused because this is a demo repository:
+   port it turned off and include "Turning on the schedule" guidance. Name the
+   workflows that consume this one's output and the fields they depend on; a
+   moved destination or dropped field is a broken dependency. Include imported shared steps and fields produced
    by setup scripts, and say for each whether it is ported or dropped. Name
    every field a rule depends on (such as phase, target date, or completeness)
    and where it will come from in Jira; flag any rule that cannot fire without
@@ -128,10 +133,16 @@ relative to this folder; write user deliverables in their chosen workspace.
    perform the permitted writes with fixed limits. In an automation flow, do
    not depend on the agent's own tools for reads either: gather JQL results
    with automation lookup actions and pass them in the prompt, so the design
-   works whichever documented behavior holds. Compute titles, dates,
-   duplicate checks, and empty-input status in automation, not in the model,
-   so the values the flow checks and the values it writes are the same; with
-   a JSON response too, the agent never returns the title or date. When
+   works whichever documented behavior holds. Compute page and work item
+   names, run dates, duplicate keys and checks, and empty-input status in
+   automation, not in the model, so the values the flow checks and the values
+   it writes are the same. The model may extract content fields from the evidence,
+   such as a decision's title or a meeting date stated in a transcript; the
+   flow still builds the file or page name and the duplicate key from them,
+   and checks the key before writing. When one run can produce several items,
+   restate the source's per-run limit as behavior (for example "at most one
+   review bundle per run") and enforce it in the flow; if the platform cannot
+   iterate over items natively, say so instead of choosing a limit. When
    the agent produces one artifact, have it return that artifact as plain
    text; use a JSON response only when follow-up actions need several fields,
    and never ask for fenced JSON. For a rule that reads one product and writes
@@ -161,7 +172,9 @@ relative to this folder; write user deliverables in their chosen workspace.
    and report which cases you checked and the result of each; do not defer
    it to the user's first test. State each case's expected result from the
    source's rules before running it, and show the output each case actually
-   produces, not only the step meant to handle it. If a case does not match, revise the
+   produces, not only the step meant to handle it. The missing-access case must end differently from the
+   empty case, with an error or owner notification rather than a "nothing
+   found" result; if it does not, fix the design. If a case does not match, revise the
    instructions and rerun; do not explain the mismatch away. Keep a claim
    marked unverified everywhere it appears in the output. Review branches
    for contradictory stop/continue instructions and test meaning rather than
@@ -223,8 +236,9 @@ For a build request, provide:
   not substitute them, and automation treats them as smart values. Put the
   procedure in Behavior, and keep the automation prompt short, passing inputs
   as real smart values (for example `{{issue.key}}` and lookup results). Include
-  a fallback branch for a missing, unparseable,
-  or unexpected response that writes nothing and notifies the owner. Write
+  a fallback branch for any response that is missing, is neither the defined
+  empty value nor parseable in the defined shape, or has an unexpected value;
+  it writes nothing and notifies the owner. Write
   every step in full; the only placeholders allowed are
   site-specific values (project key, space key, parent page) in capitals. If
   the instructions contain a fenced block, such as an output template, wrap
@@ -232,6 +246,10 @@ For a build request, provide:
 - When automation is needed, an automation specification: scope, trigger,
   conditions, Use Rovo agent prompt, follow-up actions with limits, rule actor,
   loop prevention, and enabled state.
+- When the schedule starts disabled, a short **Turning on the schedule**
+  section as the reading guide describes: why it is off, what to check first,
+  how to enable and disable the rule, and what one run costs in Rovo credits
+  and automation usage.
 - Numbered setup steps and a small first test on a low-stakes item. The test
   must be able to fire: a disabled rule does not run on events, so use a
   sandbox project, a temporary manual trigger, or a condition that limits the
@@ -246,8 +264,9 @@ Attribute a claim to a reference only when the reference makes it; mark
 other site details, such as exact smart value syntax, as unverified in your
 own words. Describe the source's limits as behavior, not configuration names. Write "the
 original could add at most two comments per run", not gh-aw keys such as
-`safe-outputs`, `max-ai-credits`, or `on:`. Reread the response for them before
-sending.
+`safe-outputs`, `max-ai-credits`, or `on:`. Reread the response
+for them before sending. The reading guide's last table gives rewrites for the
+common ones.
 
 Drafting does not authorize deployment, sharing, connecting accounts, or
 enabling automation. If the user requests those actions too, carry out what is
@@ -288,12 +307,26 @@ These are the mistakes that recur in practice.
   guard, imported step, and script-produced field is listed.
 - **Fidelity:** label and value names match the source exactly (colons
   included); no categories, risk levels, or output sections were added or
-  widened; a commented-out schedule is described as inactive.
-- **Flow values:** automation computes titles, dates, duplicate checks, and
-  empty-input status. The agent returns neither title nor date.
+  widened; a paused `(disabled — re-enable …)`
+  schedule is ported as the intended cadence, turned off, with Turning on the
+  schedule guidance; no notifications or messages were added that the source
+  did not send (offer them as optional new choices).
+- **Flow values:** automation computes page and work item names, run dates,
+  duplicate keys and checks, and empty-input status; the agent extracts
+  content only. The source's per-run limit is restated as behavior and
+  enforced by the flow. The model may suggest that an item is a
+  duplicate, but a flow step compares the duplicate key before every write and
+  decides.
+- **Downstream:** workflows that consume the output are named, and any
+  dependency the port breaks is under Before this will work.
 - **Response shape:** Behavior has no `{{...}}` placeholders; the prompt passes
   real smart values; JSON is unfenced and used only when needed; a fallback
-  branch writes nothing on a bad response.
+  branch writes nothing on a bad response. The empty result and the fallback
+  are separate branches: a valid "nothing found" answer stops quietly as the
+  source does, while a missing or unparseable answer notifies the owner. Never
+  tell the model to return the empty value when it cannot produce the shape.
+  Check read and access failures before the empty check, so a failed read
+  never looks like a quiet day.
 - **Reads and hierarchy:** automation inputs come from lookup actions, not
   agent tools; hierarchy JQL uses Parent, not Epic Link.
 - **Permissions:** an agent in a flow runs as the user who configured the flow;
@@ -304,9 +337,15 @@ These are the mistakes that recur in practice.
   unverified without a source, everywhere it appears.
 - **Walkthrough:** each case lists its expected result and the output it
   actually produced (for the main case, a short sample of the real output), including a missing-access case and, for analysis
-  workflows, a negative case with no high-risk findings.
+  workflows, a negative case with no high-risk findings; the missing-access case ends differently from the empty case.
 - **Wording:** no gh-aw setting names, including in lists of what was
   dropped (describe the behavior, such as "a per-run spending cap"); no repository or gh-aw mentions in agent
-  names, descriptions, or starters; owner is a role or placeholder.
+  names, descriptions, or starters; owner is a role or placeholder. Scan the whole response, including dropped lists,
+  tables, and human-gate notes, for any backticked source setting such as
+  `max-ai-credits`, `timeout-minutes`, `strict`, `network`, `workflow_dispatch`,
+  `auto-merge`, `draft`, `max`, or `safe-outputs` (including values such as
+  `max: 1` or `draft: false`), and rewrite each as behavior: "a per-run
+  spending cap", "a 20-minute run limit", "a manual trigger", "the change
+  lands without review", "at most one review PR per run".
 - **Status:** gaps are split into Before this will work and Things to be aware
   of, and nothing is described as created or tested unless it was.

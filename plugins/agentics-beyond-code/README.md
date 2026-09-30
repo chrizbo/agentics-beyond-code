@@ -4,7 +4,7 @@ A community plugin for product managers, operations leads, and teams who want
 to assess how work flows, improve operating documents, and design useful
 agentic workflows. It is not an official Anthropic integration.
 
-## Five skills
+## Six skills
 
 The skills follow one path: assess, design, then build where your team works.
 
@@ -19,6 +19,10 @@ The skills follow one path: assess, design, then build where your team works.
   skills through the browser when requested, and configure supported schedules.
 - **Atlassian Agent Builder:** adapt workflows into Rovo agents with Jira or
   Confluence automation for schedules, events, and workflow transitions.
+  Deployment guidance is documentation-derived and not yet field-tested.
+- **Google Workspace Agent Builder:** check the team's Workspace edition,
+  admin settings, and Studio run quota, then adapt workflows into Workspace
+  Studio flows and skills, or recommend a better-fitting Google or Claude option.
   Deployment guidance is documentation-derived and not yet field-tested.
 
 Renamed in 0.4.0: Org Work Sensing is now the planner's Assess mode, and the
@@ -37,6 +41,7 @@ Start a fresh task and select a writable folder when creating files.
 
 - “Use productboard-agent-builder to draft a Spark skill named assumption-surfacer from the source workflow. Return analysis in chat; do not deploy yet.”
 - “Use atlassian-agent-builder to adapt Intake Triage into a Rovo agent for Jira project KEY. Draft only; do not deploy.”
+- “Use google-workspace-agent-builder to adapt the weekly status report for our Business Starter domain. Draft only.”
 
 Productboard deployment requires browser automation and a signed-in workspace;
 this plugin supplies neither access nor credentials. Browser creation and native
@@ -49,6 +54,10 @@ Atlassian deployment likewise requires a signed-in site with Rovo, and this
 plugin supplies no Atlassian access or credentials. No live Rovo test has been
 recorded yet; the builder marks site behavior it has not verified.
 
+Google Workspace deployment requires a signed-in account on an eligible
+Workspace edition with Gemini turned on. Some steps also need admin settings
+that the builder names but never changes. No live Studio test has been recorded yet.
+
 Templates and skill references are included. Runtime workflows, integration
 scripts, compiled Actions, and demo data are not. For source-based work, the
 skills use your supplied checkout or retrieve selected public files from the
@@ -58,9 +67,11 @@ The GitHub builder also retrieves gh-aw authoring instructions from `github/gh-a
 
 ## Installation and prerequisites
 
-Install through the `chrizbo/agentics-beyond-code` repository marketplace or
-upload the release ZIP using Claude's custom plugin upload option. Type `/` to
-find the skills. A public directory listing is pending validation and review.
+Install from the [Claude plugin directory](https://claude.ai/new#customize/plugins/id/0fc0c7e1-2215-4ba4-8c5f-c791333cbee4%40anthropic-plugin-directory)
+(or search **Agentics Beyond Code** under **Customize → Plugins**), through the
+`chrizbo/agentics-beyond-code` repository marketplace, or by uploading the
+release ZIP using Claude's custom plugin upload option. Type `/` to find the
+skills.
 
 This plugin does not install command-line tools, configure credentials, connect
 services, or activate automations. Implementing a workflow may require a separate
@@ -76,7 +87,7 @@ There is no hosted backend, telemetry, bundled credential, or registered MCP
 server. Assessments may read personal information in artifacts you supply.
 Generated files persist where you choose to save them; Claude and connected
 services apply their own retention policies. Public-source and product-documentation
-reads go to GitHub, Anthropic, Productboard, and Atlassian. Do not send private work artifacts in those
+reads go to GitHub, Anthropic, Productboard, Atlassian, and Google. Do not send private work artifacts in those
 requests. Additional work-system access depends on your requested task and
 explicitly authorized tools, not plugin installation.
 

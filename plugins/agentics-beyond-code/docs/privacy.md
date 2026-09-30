@@ -23,7 +23,7 @@ policies; deleting a local file does not delete copies held by those services.
 ## Network requests and other services
 
 Skills may retrieve public reference files from GitHub, including
-raw.githubusercontent.com, and public product documentation from Anthropic, Productboard, and Atlassian.
+raw.githubusercontent.com, and public product documentation from Anthropic, Productboard, Atlassian, and Google.
 These services receive the requests and ordinary connection metadata according
 to their own policies. Private work artifacts and credentials are not needed
 for these public reference requests and should not be included in them.

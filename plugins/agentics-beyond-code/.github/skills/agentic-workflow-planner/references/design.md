@@ -103,9 +103,14 @@ tools happen to be available in this session.
 |---|---|
 | GitHub Issues, Projects, or Discussions are the team's home and GitHub Actions is acceptable | `github-workflow-builder` |
 | The work's records live in GitHub, but people read and react in Slack or email | `github-workflow-builder`, with Slack or email as the delivery surface; name `claude-native-workflow-builder` as the alternative |
-| The team's records and habits live in Slack, Notion, Jira, Google Workspace, or email, or it wants no GitHub/gh-aw dependency | `claude-native-workflow-builder` (Claude Routines and Scheduled Tasks) |
+| The team's records and habits live in Slack, Notion, Jira, or email, or in Google Workspace without Workspace Studio available, or it wants no GitHub/gh-aw dependency | `claude-native-workflow-builder` (Claude Routines and Scheduled Tasks) |
 | Work is tracked in Jira and documented in Confluence, the site has Rovo, and the team wants agents and automation inside Atlassian | `atlassian-agent-builder` (Rovo agents with Jira or Confluence automation); name `claude-native-workflow-builder` as the alternative when Rovo is unavailable or the steps span tools outside Atlassian |
+| The team's records and habits live in Gmail, Drive, Sheets, or Chat, the organization has a Google Workspace edition with Gemini, and it wants the automation inside Google | `google-workspace-agent-builder` (Workspace Studio flows and skills); name `claude-native-workflow-builder` as the alternative for personal accounts, Gemini turned off, or steps outside Google |
 | Product discovery, feedback, and planning live in Productboard | `productboard-agent-builder` (Spark skills) |
+
+For a Google-centric team, the Workspace edition, add-ons, admin settings,
+and Studio run quota decide which Google option is viable; recommend Google
+as the platform and let `google-workspace-agent-builder` confirm the surface.
 
 Separate where the analysis runs from where people read the result. "We
 live in Slack" can mean records live there too, or only that the team reads

@@ -134,7 +134,11 @@ prompt-only restrictions, and verify the former rather than assuming it exists.
 ### Preserve the workflow's contract
 
 - Name the original input sources, output destination, allowed writes, human
-  decision gate, and active trigger. A commented-out schedule is not active.
+  decision gate, and active trigger. Read the source as
+  [reading workflow sources](../../agentic-workflow-planner/references/reading-workflow-sources.md)
+  describes: a `(disabled — re-enable …)` schedule is the intended cadence,
+  paused for the demo repository, so port it turned off with guidance for
+  turning it on.
 - If the requested surface lacks an operation, describe the missing access and
   offer the smallest viable alternatives. Moving a report to another service
   or retaining GitHub Actions for exports is an architectural choice, not an

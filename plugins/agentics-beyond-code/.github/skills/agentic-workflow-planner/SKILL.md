@@ -4,7 +4,7 @@ description: >
   The platform-neutral front door to Agentics Beyond Code. Use it to assess how
   a team or organization works today and to design which agentic workflows,
   living documents, and human approval points it should adopt, before building
-  on GitHub, Claude, Productboard, or Atlassian. Trigger on assessment requests such as a
+  on GitHub, Claude, Productboard, Atlassian, or Google Workspace. Trigger on assessment requests such as a
   pre-work or readiness assessment, current-state and gap analysis, org health
   readout, delivery or process diagnosis, bottleneck analysis, or a review of
   GitHub, Jira, Linear, project boards, incidents, discussions, and operating
@@ -25,7 +25,8 @@ pipeline:
 Assess  ->  Design  ->  Build (github-workflow-builder |
                                claude-native-workflow-builder |
                                productboard-agent-builder |
-                               atlassian-agent-builder)
+                               atlassian-agent-builder |
+                               google-workspace-agent-builder)
 ```
 
 It diagnoses what the work signals say, designs the smallest useful workflow
@@ -60,6 +61,12 @@ activate workflows or scheduled tasks. Check available tools before using them.
 | To know what is happening, what is broken, or whether the team is ready | **Assess** | `references/assess.md`, then `references/assessment-signals.md` for substantive work |
 | To know which workflows to adopt, or to turn a process into automation | **Design** | `references/design.md` |
 | Both, or "where do we start" | Assess, then Design | both, in order |
+
+When a design selects an existing repository workflow, read it as
+`references/reading-workflow-sources.md` describes. Every platform builder uses
+the same guide. It covers which parts carry the workflow's meaning, schedules
+paused for this demo repository, demo scaffolding to drop, and downstream
+workflows that consume the output.
 
 If the user already names a platform and a specific workflow to port (for
 example, "make the Friday trends report a Claude Routine"), skip this skill
@@ -100,6 +107,8 @@ builder:
 - `claude-native-workflow-builder` for Claude Routines and Scheduled Tasks
 - `productboard-agent-builder` for Productboard Spark skills
 - `atlassian-agent-builder` for Rovo agents with Jira or Confluence automation
+- `google-workspace-agent-builder` for Workspace Studio flows and skills, matched
+  to the team's Workspace plan
 
 When the user asked only for a recommendation, stop at the design and offer
 the builder as the next step.
