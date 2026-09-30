@@ -14,7 +14,7 @@ The plugin is listed in Anthropic's plugin directory. Open the
 Some Claude environments don't show directory plugins. In that case, add the
 repository marketplace `chrizbo/agentics-beyond-code` in Claude's plugin settings
 (**Customize → Plugins → Add marketplace**), then install `agentics-beyond-code`.
-Alternatively, build or download `agentics-beyond-code-0.6.0.zip` and use the
+Alternatively, build or download `agentics-beyond-code-0.5.2.zip` and use the
 custom ZIP upload option. Start a new task, type `/` to find the skills, and select
 a writable folder when creating files.
 
@@ -33,7 +33,7 @@ For local testing from a separate working directory:
 claude --plugin-dir /absolute/path/to/agentics-beyond-code/plugins/agentics-beyond-code
 ```
 
-## Microsoft 365 builder in 0.6.0
+## Microsoft 365 builder in 0.5.2
 
 Adds `microsoft-365-agent-builder`, planner routing, and documentation for
 Microsoft 365 Agent Builder, Copilot Studio, and Power Automate. Includes

@@ -93,9 +93,9 @@ def payload():
     return dict(sorted(data.items()))
 
 
-def sync(data):
-    directory = ROOT / PACKAGE
-    old_index = directory / '.claude-plugin/build-info.json'
+def sync(data, package=PACKAGE, info_path='.claude-plugin/build-info.json'):
+    directory = ROOT / package
+    old_index = directory / info_path
     previous = set(json.loads(old_index.read_text())['sha256']) if old_index.is_file() else set()
     for path in directory.rglob('*') if directory.exists() else []:
         if path.is_symlink():
@@ -110,8 +110,8 @@ def sync(data):
         path.write_bytes(content)
 
 
-def check(data):
-    directory = ROOT / PACKAGE
+def check(data, package=PACKAGE):
+    directory = ROOT / package
     actual = {}
     for path in directory.rglob('*'):
         if path.is_symlink():
@@ -123,10 +123,10 @@ def check(data):
         raise ValueError('Generated plugin is stale; run --sync. Differences: ' + ', '.join(names))
 
 
-def build(output, data):
-    manifest = json.loads(data['.claude-plugin/plugin.json'])
+def build(output, data, manifest_path='.claude-plugin/plugin.json', suffix=''):
+    manifest = json.loads(data[manifest_path])
     output.mkdir(parents=True, exist_ok=True)
-    archive = output / f"{manifest['name']}-{manifest['version']}.zip"
+    archive = output / f"{manifest['name']}-{manifest['version']}{suffix}.zip"
     with zipfile.ZipFile(archive, 'w', compression=zipfile.ZIP_DEFLATED) as bundle:
         for name, content in data.items():
             info = zipfile.ZipInfo(name, date_time=(2020, 1, 1, 0, 0, 0))

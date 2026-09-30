@@ -283,3 +283,10 @@ python3 -B .github/scripts/test-claude-plugin.py
 
 See [Claude Cowork plugin](claude-cowork-plugin.md) for source-access differences,
 versioning, release builds, and behavioral smoke tests.
+
+## ChatGPT and Codex distribution
+
+The OpenAI package is generated from the same canonical skills. After editing
+skills, also run `python3 -B .github/scripts/build-chatgpt-plugin.py --sync`,
+then `--check` and `.github/scripts/test-chatgpt-plugin.py`. See
+[ChatGPT plugin](chatgpt-plugin.md) for package validation and distribution.

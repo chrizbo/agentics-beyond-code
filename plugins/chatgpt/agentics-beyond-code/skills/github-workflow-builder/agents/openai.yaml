@@ -1,0 +1,4 @@
+interface:
+  display_name: "GitHub Workflow Builder"
+  short_description: "Set up agentic workflows, docs, and templates on GitHub"
+  default_prompt: "Use $github-workflow-builder to set up this repo's workflows for my team on GitHub."

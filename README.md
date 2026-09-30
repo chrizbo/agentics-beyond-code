@@ -254,3 +254,8 @@ Want to enable Agentics Beyond Code for your organization? Reach out to **Chris 
 ## 📄 License
 
 [MIT](LICENSE)
+
+### ChatGPT and Codex package
+
+A generated ChatGPT/Codex package shares the same canonical skills as the Claude
+plugin. See [build, local testing, and marketplace options](docs/chatgpt-plugin.md).

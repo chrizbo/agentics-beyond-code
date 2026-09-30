@@ -1,0 +1,4 @@
+interface:
+  display_name: "Atlassian Agent Builder"
+  short_description: "Port workflows to Rovo agents and Jira or Confluence automation"
+  default_prompt: "Use $atlassian-agent-builder to adapt this workflow into a Rovo agent with Jira or Confluence automation."

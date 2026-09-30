@@ -1,0 +1,726 @@
+{
+  "repository": "https://github.com/chrizbo/agentics-beyond-code",
+  "revision": "a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79",
+  "files": {
+    ".github/ISSUE_TEMPLATE/initiative.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/ISSUE_TEMPLATE/initiative.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/ISSUE_TEMPLATE/initiative.yml",
+      "sha256": "2fddea29bd874fdb28f57ab8e8da269686b37bf70e35bcc90a6cb8d04f845361"
+    },
+    ".github/ISSUE_TEMPLATE/intake.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/ISSUE_TEMPLATE/intake.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/ISSUE_TEMPLATE/intake.yml",
+      "sha256": "9546ee7389d95797468602d60a90c6878f9b02c894ddb53ad0b913b66d62c9aa"
+    },
+    ".github/ISSUE_TEMPLATE/launch.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/ISSUE_TEMPLATE/launch.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/ISSUE_TEMPLATE/launch.yml",
+      "sha256": "19bbe1998c844ae24605955bfe0c560b119c7ae99e91fc82cc75404db9134c7c"
+    },
+    ".github/policies/accessibility-review-policy.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/policies/accessibility-review-policy.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/policies/accessibility-review-policy.md",
+      "sha256": "1a75b6bd6411a3d10282bcc84cbd07795da4f4a96afe2aca5f05843591ca457e"
+    },
+    ".github/policies/launch-readiness-policy.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/policies/launch-readiness-policy.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/policies/launch-readiness-policy.md",
+      "sha256": "fd6ecf099acdbfd2917aff1f67aa5497a81340e9a0450750aad8731d5efadb8e"
+    },
+    ".github/policies/leadership-brief-alex-chen.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/policies/leadership-brief-alex-chen.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/policies/leadership-brief-alex-chen.md",
+      "sha256": "57c52b1ed3b90e8b42c30c03fbcdbee7be9e675187acba1840b00340864ec16a"
+    },
+    ".github/policies/leadership-brief-priya-sharma.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/policies/leadership-brief-priya-sharma.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/policies/leadership-brief-priya-sharma.md",
+      "sha256": "615de293acf73db0f1eed61a827d4df72e196d7abb72926b40da0efa2343ff71"
+    },
+    ".github/policies/privacy-review-policy.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/policies/privacy-review-policy.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/policies/privacy-review-policy.md",
+      "sha256": "af8decc9ec9baa65268964f543b8bdfd264bf7c0a40e74a9a70a894f626440bf"
+    },
+    ".github/policies/responsible-ai-review-policy.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/policies/responsible-ai-review-policy.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/policies/responsible-ai-review-policy.md",
+      "sha256": "7894a748f7038ee24d6383026b09c6c658a6cb42a51adba876df2a7f5b4eede4"
+    },
+    ".github/policies/security-review-policy.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/policies/security-review-policy.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/policies/security-review-policy.md",
+      "sha256": "ffd2f5bcc7b43872401e5a8d7a150df89330f2b3d90e8c013ae98158a0560711"
+    },
+    ".github/policies/voice-and-tone-policy.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/policies/voice-and-tone-policy.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/policies/voice-and-tone-policy.md",
+      "sha256": "a5829d57c9d6aa9eb232af5f0097ed8ce2e6844bfd94a1afc734349d9195980b"
+    },
+    ".github/policies/weekly-status-policy.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/policies/weekly-status-policy.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/policies/weekly-status-policy.md",
+      "sha256": "dd17c2faf37461f6d6322d041602664f9c7150596be285bddee449a96a3fcdef"
+    },
+    ".github/scripts/apply-feedback-intake.mjs": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/apply-feedback-intake.mjs",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/apply-feedback-intake.mjs",
+      "sha256": "9f68d001abe7044c04d2caf29ac975d5ea5416800368b157e4800a05ef6cf8e5"
+    },
+    ".github/scripts/build-claude-plugin.py": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/build-claude-plugin.py",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/build-claude-plugin.py",
+      "sha256": "1650cb8da7a010f868558f518d8b522be424c4de947a472ce520ece90f3bccd1"
+    },
+    ".github/scripts/fetch-calendar-data.sh": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/fetch-calendar-data.sh",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/fetch-calendar-data.sh",
+      "sha256": "d9674cb23cc26af64df5e06b81d2026f75f9f75d285333993a6a841018fe1234"
+    },
+    ".github/scripts/fetch-calendar-week.sh": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/fetch-calendar-week.sh",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/fetch-calendar-week.sh",
+      "sha256": "b2ce4cc24f9abf338cb2a14159df3994f3bb257dc825145026156d944495d667"
+    },
+    ".github/scripts/fetch-feedback-queue.mjs": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/fetch-feedback-queue.mjs",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/fetch-feedback-queue.mjs",
+      "sha256": "cfa7844a3ed7a9a71d942afa62f035eb82238d85e29ba81a017f018a90f70bd3"
+    },
+    ".github/scripts/fetch-launch-data.sh": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/fetch-launch-data.sh",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/fetch-launch-data.sh",
+      "sha256": "f96b1095f11000ec6e892e50888b171721cddd1a380231b52f014b7d0ae6488d"
+    },
+    ".github/scripts/fetch-workflow-health-data.sh": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/fetch-workflow-health-data.sh",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/fetch-workflow-health-data.sh",
+      "sha256": "f07a1bf992351f67a82ebfb4672a7721ce194938f52c9bcc26f12427e39784af"
+    },
+    ".github/scripts/google-docs/status-draft-dispatch.mjs": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-draft-dispatch.mjs",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-draft-dispatch.mjs",
+      "sha256": "926a6013be9565b3cf053ec5e79a93955a0a1a36cd6588ffd52af7bc5cd57558"
+    },
+    ".github/scripts/google-docs/status-draft-plan.mjs": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-draft-plan.mjs",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-draft-plan.mjs",
+      "sha256": "34fc50cb78fb36c6d2e5ac05eb0ad4e7c8a6ab7a413ae216634d17de10d5fbfe"
+    },
+    ".github/scripts/google-docs/status-draft-plan.test.mjs": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-draft-plan.test.mjs",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-draft-plan.test.mjs",
+      "sha256": "31fc09df5e127a0f6ddf982dc69f7d94d291fa702bf4bea282f913280dd293a0"
+    },
+    ".github/scripts/google-docs/status-draft-slack.mjs": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-draft-slack.mjs",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-draft-slack.mjs",
+      "sha256": "c091ac9b7c908d9a11491a86d2c5e0953c131fa529d2ecdf00af87b8dad869b7"
+    },
+    ".github/scripts/google-docs/status-draft-slack.test.mjs": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-draft-slack.test.mjs",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-draft-slack.test.mjs",
+      "sha256": "19ddad80197a5c53e633b52575fbb5cd3223aed8296d5cfc247878a1761e51ae"
+    },
+    ".github/scripts/google-docs/status-draft-write.mjs": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-draft-write.mjs",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-draft-write.mjs",
+      "sha256": "092d084db1ee1ea5bd3d4dd6bc7cd68821c5567c68c3fcf3825081dc70d01112"
+    },
+    ".github/scripts/google-docs/status-draft-write.test.mjs": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-draft-write.test.mjs",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-draft-write.test.mjs",
+      "sha256": "f486734a85a7abbd6a06e3ec04ade3db83495b8a7a202b14e62a9f0e410c1ebc"
+    },
+    ".github/scripts/google-docs/status-finalization-convert.mjs": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-finalization-convert.mjs",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-finalization-convert.mjs",
+      "sha256": "f7078bdee830f80d4ed5654807a67b2102efe45566ccf5a5db4b4bfdf3762072"
+    },
+    ".github/scripts/google-docs/status-finalization-convert.test.mjs": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-finalization-convert.test.mjs",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-finalization-convert.test.mjs",
+      "sha256": "a366dcf8509c3af5054a2ba31b1db174e9ea91d9d971959b42d5347597a4023e"
+    },
+    ".github/scripts/google-docs/status-finalization-dispatch.mjs": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-finalization-dispatch.mjs",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-finalization-dispatch.mjs",
+      "sha256": "5f757f80475a465021828b4885113a20d33d29b885c20730edea82282de19862"
+    },
+    ".github/scripts/google-docs/status-finalization-gate.mjs": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-finalization-gate.mjs",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-finalization-gate.mjs",
+      "sha256": "0a2323f8a8c2061b84e7bd1ee7ad24cdafa2aba4bd3b6b6b880e42d2c7f1d5bb"
+    },
+    ".github/scripts/google-docs/status-finalization-gate.test.mjs": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-finalization-gate.test.mjs",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-finalization-gate.test.mjs",
+      "sha256": "e22068a5825e7648946c233e68286217bf420b3c05d8e8f99e5952c850d745b8"
+    },
+    ".github/scripts/google-docs/status-finalization-publish.mjs": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-finalization-publish.mjs",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-finalization-publish.mjs",
+      "sha256": "266d9ced36826e7182cc978d54b243cf989f548942f402a8ec3d2d4af20ec28d"
+    },
+    ".github/scripts/google-docs/status-finalization-publish.test.mjs": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-finalization-publish.test.mjs",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-finalization-publish.test.mjs",
+      "sha256": "7255a36aa8de47d7d82a2689134552db838baa76a96509a62f3c6eca863d4f7d"
+    },
+    ".github/scripts/google-docs/status-finalization-resolved-gates.mjs": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-finalization-resolved-gates.mjs",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-docs/status-finalization-resolved-gates.mjs",
+      "sha256": "2d1a7c8517b5b5f73f66f34ffa2b7eab58d2e27161356f8f12138cae6bb7b34f"
+    },
+    ".github/scripts/google-oauth-authorize.mjs": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-oauth-authorize.mjs",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-oauth-authorize.mjs",
+      "sha256": "4ae9b69244829e2f50230f9d365ace6efdf823e4b246a8d73b0b305db350299a"
+    },
+    ".github/scripts/google-oauth-token.sh": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-oauth-token.sh",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/google-oauth-token.sh",
+      "sha256": "b3973967f7c432a0e8091506c04f63679eae67f86724d0b8f0010a7c4e07426d"
+    },
+    ".github/scripts/normalize-feedback-fixtures.mjs": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/normalize-feedback-fixtures.mjs",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/normalize-feedback-fixtures.mjs",
+      "sha256": "82112eeadb97c4d66193f5a30e59bd787aae81e4bfa9582180215675a9d7a992"
+    },
+    ".github/scripts/safe-output-handlers.test.mjs": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/safe-output-handlers.test.mjs",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/safe-output-handlers.test.mjs",
+      "sha256": "5919d3828111777521ab76c01d49aa22b5293887cad4bee5003064e4bcc62465"
+    },
+    ".github/scripts/slack-reaction-intake-candidates.mjs": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/slack-reaction-intake-candidates.mjs",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/slack-reaction-intake-candidates.mjs",
+      "sha256": "cd3008c1cf9cc2b28cf7e349c0777fd94f51914c0f1d77d419dafab841e345b7"
+    },
+    ".github/scripts/sync-agent-skills.sh": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/sync-agent-skills.sh",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/sync-agent-skills.sh",
+      "sha256": "db347d25fa843f0dfecad1a1d32a154b193e293dd79aaf5b67c8e432bb630cce"
+    },
+    ".github/scripts/test-workflow-health-data.py": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/test-workflow-health-data.py",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/test-workflow-health-data.py",
+      "sha256": "0f0f3eb743b442c988aee945101ca9c4ed7dd6beb4a1c1e366c0e7c7afd5a2fd"
+    },
+    ".github/scripts/write-meeting-brief.sh": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/write-meeting-brief.sh",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/scripts/write-meeting-brief.sh",
+      "sha256": "3cd6d83b13f6b0de0db2fed56990bfe807870163f89ece63da127488e2d98a25"
+    },
+    ".github/workflows/adversarial-pm.lock.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/adversarial-pm.lock.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/adversarial-pm.lock.yml",
+      "sha256": "a55bdb25401411d3d6b4577201e931f60238c5a1c16d4aead90d1e9512a3b2e7"
+    },
+    ".github/workflows/adversarial-pm.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/adversarial-pm.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/adversarial-pm.md",
+      "sha256": "e9ec48d1bb3e9371fe2705ecfb1edf57c7ee37e4def58519c304d1e4bd81ede0"
+    },
+    ".github/workflows/agentics-maintenance.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/agentics-maintenance.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/agentics-maintenance.yml",
+      "sha256": "1bd3d62cf80e72ae91ff9aa0ac5410af441d8d0ddb9484706ed35d8a8e0811c2"
+    },
+    ".github/workflows/assumption-surfacer.lock.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/assumption-surfacer.lock.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/assumption-surfacer.lock.yml",
+      "sha256": "8efe51aadf53bc32c9a527a3ba896f5ee7817995f3b62a9af5e3bf1eb6edac34"
+    },
+    ".github/workflows/assumption-surfacer.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/assumption-surfacer.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/assumption-surfacer.md",
+      "sha256": "df295bf92e646d03cbc14e861f2b25b8105acf8c0bab60367fedc1251e53583e"
+    },
+    ".github/workflows/calendar-load-report.lock.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/calendar-load-report.lock.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/calendar-load-report.lock.yml",
+      "sha256": "a77f12473bbc2f9372f073800df8f83ee4bdee06d9b33acd31e95f7bd7f54daf"
+    },
+    ".github/workflows/calendar-load-report.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/calendar-load-report.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/calendar-load-report.md",
+      "sha256": "b25dab89c9922b48c9cb22e57d1dd07e6bdf3918d71bcac567de93a2b869b6d5"
+    },
+    ".github/workflows/calendar-strategy-audit.lock.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/calendar-strategy-audit.lock.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/calendar-strategy-audit.lock.yml",
+      "sha256": "4a0caf6ca6962b2fbf863941ef802e3debfbdbdc77a07e8871077a9ed8b6c6d8"
+    },
+    ".github/workflows/calendar-strategy-audit.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/calendar-strategy-audit.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/calendar-strategy-audit.md",
+      "sha256": "6ea536bf70e24ded27f34163a0fed2f2e0fa074afee6a536d2dbf689c80851e7"
+    },
+    ".github/workflows/chaos-monkey.lock.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/chaos-monkey.lock.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/chaos-monkey.lock.yml",
+      "sha256": "2dde4e84cd4c5eabad489e55d3131a51f855287b03c1bb9ff224879d11f464a9"
+    },
+    ".github/workflows/chaos-monkey.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/chaos-monkey.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/chaos-monkey.md",
+      "sha256": "c228f3f72d48e862e5cce5588478af914de890d47d669bf53c64ed5c47be2eee"
+    },
+    ".github/workflows/commitment-reconciler.lock.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/commitment-reconciler.lock.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/commitment-reconciler.lock.yml",
+      "sha256": "8d1451a3aab2520a71c1f0c88867cf1cd8ea1bb399ad6bcd85df529b287aa4d1"
+    },
+    ".github/workflows/commitment-reconciler.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/commitment-reconciler.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/commitment-reconciler.md",
+      "sha256": "291dbdc6f9b29ede4af2af4d11227342022eb5066027aef59aa2b654fbe83e2c"
+    },
+    ".github/workflows/compliance-review.lock.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/compliance-review.lock.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/compliance-review.lock.yml",
+      "sha256": "fcf28ca750428387f0d314794a7b2b55da7522e454055bf275efdc8228884bf7"
+    },
+    ".github/workflows/compliance-review.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/compliance-review.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/compliance-review.md",
+      "sha256": "498537d5dc7a756f1197cc78d2359d66f93ac56795e9264efadbd447584514b1"
+    },
+    ".github/workflows/compliance-team-reports.lock.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/compliance-team-reports.lock.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/compliance-team-reports.lock.yml",
+      "sha256": "99110938834539af42bf87140979b65732a6ec7af020424f30c9d0c586f3b732"
+    },
+    ".github/workflows/compliance-team-reports.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/compliance-team-reports.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/compliance-team-reports.md",
+      "sha256": "e99e02e16e3327e346af6e97762566224d63da5c6170a08b58aa2398aa5b6980"
+    },
+    ".github/workflows/copilot-setup-steps.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/copilot-setup-steps.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/copilot-setup-steps.yml",
+      "sha256": "3231daf5eeca68df90f198b5241e0ce745e3bda5876ce32a16e7d9b0a1eb08d3"
+    },
+    ".github/workflows/create-work-item.lock.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/create-work-item.lock.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/create-work-item.lock.yml",
+      "sha256": "45d7ccf0d7452b9f60a7d8874af4129bf71aa7df6b071e5af0d0cb25f1f4f6cd"
+    },
+    ".github/workflows/create-work-item.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/create-work-item.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/create-work-item.md",
+      "sha256": "becb7d22bfa8df986fc50b3bf865247d92a0da2fc1c1690da74fb0730db9b8c8"
+    },
+    ".github/workflows/customer-feedback-intake.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/customer-feedback-intake.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/customer-feedback-intake.yml",
+      "sha256": "daa5a0c961fd417e862b53fcb08823e08c415055355cbf22766032255e1a711e"
+    },
+    ".github/workflows/daily-standup-prep.lock.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/daily-standup-prep.lock.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/daily-standup-prep.lock.yml",
+      "sha256": "63b2834d93dfe4c9d86ce6737bd33b8037eab7302c2a7beaf483a7d317e631a2"
+    },
+    ".github/workflows/daily-standup-prep.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/daily-standup-prep.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/daily-standup-prep.md",
+      "sha256": "ee77086ec027add667f54ae5f950d1ed704db566b263c95a4d7ab26a7eac719f"
+    },
+    ".github/workflows/decision-log.lock.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/decision-log.lock.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/decision-log.lock.yml",
+      "sha256": "b44a9bec2db1b627d0d77ef71916785a0471f191380785ed335f2fd51e1c0d50"
+    },
+    ".github/workflows/decision-log.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/decision-log.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/decision-log.md",
+      "sha256": "c1bfcf4b87078c83fce2a896951a52131bce911e81c202a919def25708e7c887"
+    },
+    ".github/workflows/feedback-dedupe-triage.lock.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/feedback-dedupe-triage.lock.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/feedback-dedupe-triage.lock.yml",
+      "sha256": "ef9fb8c60dd7dd1b564660e66c8a230dd1a12d5cac8642a7707703d7dff31f58"
+    },
+    ".github/workflows/feedback-dedupe-triage.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/feedback-dedupe-triage.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/feedback-dedupe-triage.md",
+      "sha256": "0f3cc09f26c35f5a9e658b880030cf8c0bffbcc29ef2fc0de42c5fc64dfeead0"
+    },
+    ".github/workflows/friday-feedback-trends-report.lock.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/friday-feedback-trends-report.lock.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/friday-feedback-trends-report.lock.yml",
+      "sha256": "fba316ee11509c9f2bc86081495434274e3ad1fcc1812480bccb311b50727806"
+    },
+    ".github/workflows/friday-feedback-trends-report.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/friday-feedback-trends-report.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/friday-feedback-trends-report.md",
+      "sha256": "b2981537bbd82b378d1429582d9423c109f74b01b132d1d8cabf441bdf89ae22"
+    },
+    ".github/workflows/google-docs-status-draft-dispatch.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/google-docs-status-draft-dispatch.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/google-docs-status-draft-dispatch.yml",
+      "sha256": "0e9ad80e4b6009b7dcd7718d3d2f084122429ecb4d56151a63a4f8dad886c234"
+    },
+    ".github/workflows/google-docs-status-finalization-resolved-gates.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/google-docs-status-finalization-resolved-gates.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/google-docs-status-finalization-resolved-gates.yml",
+      "sha256": "a1729a9a693d1138e750c50cc3769b7d02ccc11aa39bc05714ba4b834397d847"
+    },
+    ".github/workflows/google-docs-status-finalization-staged.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/google-docs-status-finalization-staged.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/google-docs-status-finalization-staged.yml",
+      "sha256": "45ea80e67e9451e94ea4e0a695705613dd9a7b4fe40e70eab4e3144e3c2cda15"
+    },
+    ".github/workflows/gtm-content.lock.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/gtm-content.lock.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/gtm-content.lock.yml",
+      "sha256": "d70970024a96f29b26b01a16245762be60a2726be1b0d857c0c0adbe73676af6"
+    },
+    ".github/workflows/gtm-content.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/gtm-content.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/gtm-content.md",
+      "sha256": "b77644e2f8e84471e362c9ee76e9bd6084b5385b57aa7d44e5e943649e234e6d"
+    },
+    ".github/workflows/gtm-team-reports.lock.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/gtm-team-reports.lock.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/gtm-team-reports.lock.yml",
+      "sha256": "8bb2bd616c61015bde527a26ce51d20fe996ca8f46398c8fb4e25420dc3666a3"
+    },
+    ".github/workflows/gtm-team-reports.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/gtm-team-reports.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/gtm-team-reports.md",
+      "sha256": "fdb337bf32fb292b51be0f111e0241dc900af976769acdf1f267065e62067c2f"
+    },
+    ".github/workflows/intake-triage.lock.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/intake-triage.lock.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/intake-triage.lock.yml",
+      "sha256": "77266ca15a6ea3aac13a4f597111bd5240c3f494c5d9ad0a320258a867416648"
+    },
+    ".github/workflows/intake-triage.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/intake-triage.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/intake-triage.md",
+      "sha256": "ccb32e6a2a016e40714240b255f85b557c48d8b23304cd8a9743d2d7c10196bc"
+    },
+    ".github/workflows/launch-readiness.lock.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/launch-readiness.lock.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/launch-readiness.lock.yml",
+      "sha256": "33e88372caa6bf48569f70863cf59d0f0554a79f738717dc2aec6c05f7429fd0"
+    },
+    ".github/workflows/launch-readiness.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/launch-readiness.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/launch-readiness.md",
+      "sha256": "bf25a3dfb17c1aecb893120b9a7160368187fcc4437c67c77c2e58fa918a50d7"
+    },
+    ".github/workflows/leadership-brief.lock.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/leadership-brief.lock.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/leadership-brief.lock.yml",
+      "sha256": "8822eb68cec69e656e2039a5071ba30ae7e43d12b731fa8a410ffab3e532aabd"
+    },
+    ".github/workflows/leadership-brief.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/leadership-brief.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/leadership-brief.md",
+      "sha256": "26d84ccf86128865f98ae44e8916bce141df8fa52ab93704da0518638f4e9adc"
+    },
+    ".github/workflows/process-analyzer.lock.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/process-analyzer.lock.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/process-analyzer.lock.yml",
+      "sha256": "9a04ca3b62802134a3d57302eb83ba3bb9f89c60412038ef04c3535ba6570fc1"
+    },
+    ".github/workflows/process-analyzer.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/process-analyzer.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/process-analyzer.md",
+      "sha256": "e058fedf1dc8cd7c2dd3b899f5fd68515bca5a2a8f81ef138cfda67b1bb012ac"
+    },
+    ".github/workflows/sample-data-launch-creator.lock.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/sample-data-launch-creator.lock.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/sample-data-launch-creator.lock.yml",
+      "sha256": "439f3526a874819865bf279872cd65cfc8047fef7598edb775d8a31eceb594a2"
+    },
+    ".github/workflows/sample-data-launch-creator.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/sample-data-launch-creator.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/sample-data-launch-creator.md",
+      "sha256": "acd6f0ae20a868acbf7965234b5bd46d3acc73b767c215d182e1fb31fef87abd"
+    },
+    ".github/workflows/sample-data-simulator.lock.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/sample-data-simulator.lock.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/sample-data-simulator.lock.yml",
+      "sha256": "93c3a0647f383bc0e89b0910b61a2a193db0d5c21fc78d1128c1603a12ef5b51"
+    },
+    ".github/workflows/sample-data-simulator.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/sample-data-simulator.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/sample-data-simulator.md",
+      "sha256": "a1fa3f8e75496e53aa033b107979e62d61bb8f328ba4c303d429c1b6bbe7603d"
+    },
+    ".github/workflows/shared/calendar-safe-outputs.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/shared/calendar-safe-outputs.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/shared/calendar-safe-outputs.md",
+      "sha256": "2a65712ca3d1bd873650663eb47969dce820864425a0b7b20cd7aba0500a2bcf"
+    },
+    ".github/workflows/shared/freshness-check.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/shared/freshness-check.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/shared/freshness-check.md",
+      "sha256": "f9da54bc4eb4495459b423aa9e31cd82940724dcd063339ff318e7d984a972b8"
+    },
+    ".github/workflows/shared/slack-safe-outputs.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/shared/slack-safe-outputs.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/shared/slack-safe-outputs.md",
+      "sha256": "aad89e0fc737a5dde471ee9218dbce03b6134c692406f41da3a3061b33dfe1d3"
+    },
+    ".github/workflows/slack-context-processor.lock.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/slack-context-processor.lock.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/slack-context-processor.lock.yml",
+      "sha256": "45cd11e7f7d45205ac028de6456df32c2d11eb61ad1ca13bc87af3920ece249b"
+    },
+    ".github/workflows/slack-context-processor.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/slack-context-processor.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/slack-context-processor.md",
+      "sha256": "62e28aed81c47206cef2e633862919681b48226f734b432198676a841af9e864"
+    },
+    ".github/workflows/slack-fixture-fetcher.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/slack-fixture-fetcher.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/slack-fixture-fetcher.yml",
+      "sha256": "febe1f2350176ed80350317db6f18f5d6e17941bf09dfa8572141b976d738f6e"
+    },
+    ".github/workflows/slack-intake-triage-dispatch.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/slack-intake-triage-dispatch.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/slack-intake-triage-dispatch.yml",
+      "sha256": "6389bb38db54be2fbc5f2b16356c76ba7786d7481101812ced531c0a495fb05a"
+    },
+    ".github/workflows/slack-postback-dispatch.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/slack-postback-dispatch.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/slack-postback-dispatch.yml",
+      "sha256": "a34bdc730aba6f73aac97c00afb56c6a10b6dff17181a33baf09e7759740aecb"
+    },
+    ".github/workflows/slack-reaction-intake.lock.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/slack-reaction-intake.lock.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/slack-reaction-intake.lock.yml",
+      "sha256": "1f1a02cb216bde4a1588c6331d754f5856148a29638d44f14f05ee6cb1952f19"
+    },
+    ".github/workflows/slack-reaction-intake.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/slack-reaction-intake.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/slack-reaction-intake.md",
+      "sha256": "04a8095e0047704d06d965f8efc70db345ac6af9e4186827c22878bd890e7a43"
+    },
+    ".github/workflows/slack-report-back-dispatch.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/slack-report-back-dispatch.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/slack-report-back-dispatch.yml",
+      "sha256": "9f6f165431bbd358d45c86a0071bd07ddff504b45ee028628c319006dd144b5d"
+    },
+    ".github/workflows/slack-triage-postback-dispatch.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/slack-triage-postback-dispatch.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/slack-triage-postback-dispatch.yml",
+      "sha256": "d1377ab690e8d621b96baf745b0f9ce157b365a9e4b5812767a6f374e908291f"
+    },
+    ".github/workflows/strategy-alignment.lock.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/strategy-alignment.lock.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/strategy-alignment.lock.yml",
+      "sha256": "15f72607f7057dde80e8f22e9bfa2bcee8cf8085faf464122c9a544cf7d3e716"
+    },
+    ".github/workflows/strategy-alignment.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/strategy-alignment.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/strategy-alignment.md",
+      "sha256": "c1199765f7be9cc49e8921b58a7eb53dec6320a518eb0702eb69455a7f574d80"
+    },
+    ".github/workflows/transcript-processor.lock.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/transcript-processor.lock.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/transcript-processor.lock.yml",
+      "sha256": "8ba9312c249dfacee1e545c4f0842040156be58420f929ec93a4654291bf6850"
+    },
+    ".github/workflows/transcript-processor.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/transcript-processor.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/transcript-processor.md",
+      "sha256": "0c87d8ea9e6f425c4971506d722a985546894922a26f4b830b19e7e7a3d10e00"
+    },
+    ".github/workflows/weekly-status.lock.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/weekly-status.lock.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/weekly-status.lock.yml",
+      "sha256": "2b27283aadd4de027bae4f5f0ec45e3863d6deacd6d249ab16c07b99b35f16c3"
+    },
+    ".github/workflows/weekly-status.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/weekly-status.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/weekly-status.md",
+      "sha256": "dc7a1e61b73353ac601a56d7ac849ddde33b2a942abe97d61f1d05e94075bb0b"
+    },
+    ".github/workflows/workflow-health.lock.yml": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/workflow-health.lock.yml",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/workflow-health.lock.yml",
+      "sha256": "35b7d7bb8c73bc12a66557919e1fc243e4dfaa045ba1a4dfea1049f9bb5e8414"
+    },
+    ".github/workflows/workflow-health.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/workflow-health.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/.github/workflows/workflow-health.md",
+      "sha256": "6048ee77f1daf630e61d6c0b82f21c4266db3e6cc0ddbafa43fb78af7839ef7d"
+    },
+    "README.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/README.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/README.md",
+      "sha256": "38b5813b6222b1ff11f8b18be99e708eeeb902bcff5f8719b9ced0ae9f5bb77b"
+    },
+    "docs/anthropic-submission.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/anthropic-submission.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/anthropic-submission.md",
+      "sha256": "f05c27fbc17235b751f494bffbd15ef4cadaf3083092557fcd05f32f382ef1f0"
+    },
+    "docs/calendar-audit.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/calendar-audit.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/calendar-audit.md",
+      "sha256": "8379a759bda8704a3b307d67e7e6648ed223edab25e0274b3b49f44b3ace8636"
+    },
+    "docs/claude-cowork-plugin.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/claude-cowork-plugin.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/claude-cowork-plugin.md",
+      "sha256": "29cbb5c3b28267e3258f3b2a684402a01dbf2fc3a0c2033e2c92ee5b71b4238b"
+    },
+    "docs/codex-workflows.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/codex-workflows.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/codex-workflows.md",
+      "sha256": "6af27a94e6a3ac2fef9a22f1e8e4b8cd0c290607994dc43bef3aea914225d767"
+    },
+    "docs/cross-channel-customer-feedback-workflow-spec.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/cross-channel-customer-feedback-workflow-spec.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/cross-channel-customer-feedback-workflow-spec.md",
+      "sha256": "abb9bfe61184a2264e9b68168258796abeb188bba5cb906c9a6aafadd047d13f"
+    },
+    "docs/external-integration-patterns.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/external-integration-patterns.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/external-integration-patterns.md",
+      "sha256": "d856af156dfa92eb73668fff826bab8ac99d28e729fd6427c2d92c6c22d83118"
+    },
+    "docs/faq.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/faq.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/faq.md",
+      "sha256": "7e6db4c814a5931dd5f7174d7f2ddc49eb881669558dee980a053f470a875e3f"
+    },
+    "docs/google-docs-integration-plan.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/google-docs-integration-plan.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/google-docs-integration-plan.md",
+      "sha256": "acb3d87ca22e3183b26bca28d8f9a973097c9405a8c2a72418a6e22632956c8e"
+    },
+    "docs/how-it-works.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/how-it-works.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/how-it-works.md",
+      "sha256": "26e657cc715b8de2405864cfb871f98ed3ac62ca7799daa55ea7729ff21f4837"
+    },
+    "docs/how-we-work.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/how-we-work.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/how-we-work.md",
+      "sha256": "392f4509fbf0752492401ae8fbd568220d8181acca3b83b4a89f092943206ab9"
+    },
+    "docs/setup.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/setup.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/setup.md",
+      "sha256": "79ee0e48ba530e9d17c3beeb58347c622aaec44d26ae84d08cb35bd14c0e5165"
+    },
+    "docs/skills.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/skills.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/skills.md",
+      "sha256": "e9aac74d0542c653ac4bf3b3041d3df7eabc0db800d8e7c360883aafec9b0d1a"
+    },
+    "docs/slack-integration-plan.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/slack-integration-plan.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/slack-integration-plan.md",
+      "sha256": "f287ed6c9b4ac76cfc54c46ad62ddd0590d8ab4e62094152bb537dfbd5fadece"
+    },
+    "docs/strategy.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/strategy.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/strategy.md",
+      "sha256": "131159a5bf85ca07f953be147f19803331d405f2a72f462dadfb7a60b39a2694"
+    },
+    "docs/workflow-ideas.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/workflow-ideas.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/docs/workflow-ideas.md",
+      "sha256": "18b2979dd49f1fe0b16b7fe0933bbb5689a57db66a85d3743b432418a9ee8230"
+    },
+    "feedback-fixtures/discord/community-feedback.json": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/feedback-fixtures/discord/community-feedback.json",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/feedback-fixtures/discord/community-feedback.json",
+      "sha256": "e9903eeba2b14660a96ec387a10d5681a5e0ca918bcd3bc0510df6e69ad7c220"
+    },
+    "feedback-fixtures/open-source-repos/agentics-beyond-code-test/github-feedback.json": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/feedback-fixtures/open-source-repos/agentics-beyond-code-test/github-feedback.json",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/feedback-fixtures/open-source-repos/agentics-beyond-code-test/github-feedback.json",
+      "sha256": "001d1264f030ea88f09c0de5a9b77a254e14085bf3e290b3ffcf96552e10c290"
+    },
+    "feedback-fixtures/slack/field-feedback.json": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/feedback-fixtures/slack/field-feedback.json",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/feedback-fixtures/slack/field-feedback.json",
+      "sha256": "6caff9dde9b1a42c50369c19c7b2acb62c475fa04cf1d68732bbf99150e97119"
+    },
+    "google-calendar-fixtures/README.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/google-calendar-fixtures/README.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/google-calendar-fixtures/README.md",
+      "sha256": "4bb02169925c5f63ea503c3f5e375dd6015b6e13480627d7b3c61030287f5264"
+    },
+    "google-calendar-fixtures/manifest.json": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/google-calendar-fixtures/manifest.json",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/google-calendar-fixtures/manifest.json",
+      "sha256": "8041c93a2b8910f9f33b2b15de71d806f58affa4943aba5771c597f40830d0f9"
+    },
+    "google-calendar-fixtures/today-sample.json": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/google-calendar-fixtures/today-sample.json",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/google-calendar-fixtures/today-sample.json",
+      "sha256": "c02acf031a1784588d55d7b74a0c2491117eb80bb7efeb728bd64cc153495eea"
+    },
+    "google-calendar-fixtures/week-sample.json": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/google-calendar-fixtures/week-sample.json",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/google-calendar-fixtures/week-sample.json",
+      "sha256": "291efa11de1e6b0fa5cf0848bfeea84be3718b42c19ad6b011af4f9e6fd06612"
+    },
+    "google-docs-fixtures/README.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/google-docs-fixtures/README.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/google-docs-fixtures/README.md",
+      "sha256": "73c5f61f3bd1df2b1d9630b3fa747c0af4335c01d57dde8c3885df88089c211c"
+    },
+    "google-docs-fixtures/documents/audit-export-launch-plan.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/google-docs-fixtures/documents/audit-export-launch-plan.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/google-docs-fixtures/documents/audit-export-launch-plan.md",
+      "sha256": "7b27831b1adf45c87560e48e8e1fd99a30177aedea200b9bf61b79029a9955bf"
+    },
+    "google-docs-fixtures/documents/customer-advisory-atlas-bank-notes.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/google-docs-fixtures/documents/customer-advisory-atlas-bank-notes.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/google-docs-fixtures/documents/customer-advisory-atlas-bank-notes.md",
+      "sha256": "4f887387b6ec61b81c1b390e21248cb483371715d4e272929028ba8458b260f3"
+    },
+    "google-docs-fixtures/documents/product-council-audit-export-decision-brief.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/google-docs-fixtures/documents/product-council-audit-export-decision-brief.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/google-docs-fixtures/documents/product-council-audit-export-decision-brief.md",
+      "sha256": "4abf48fbb6f7619812126b7093e72064a88fafae9238137b57e12a86f5ee6139"
+    },
+    "google-docs-fixtures/documents/security-data-retention-policy-draft.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/google-docs-fixtures/documents/security-data-retention-policy-draft.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/google-docs-fixtures/documents/security-data-retention-policy-draft.md",
+      "sha256": "b2e481c61bea519830433539ef522b1dfd860aad905d7b2a1f44cd950e2def96"
+    },
+    "google-docs-fixtures/documents/weekly-program-brief.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/google-docs-fixtures/documents/weekly-program-brief.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/google-docs-fixtures/documents/weekly-program-brief.md",
+      "sha256": "f55da3d368c73effaa4657399403e7ac673ec0fef4cbffb5d914be2cc1e19964"
+    },
+    "google-docs-fixtures/manifest.json": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/google-docs-fixtures/manifest.json",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/google-docs-fixtures/manifest.json",
+      "sha256": "d770a20033a91abd03f77ee080914cef03c8b54facf15ae754ee947a80a8b900"
+    },
+    "slack-fixtures/README.md": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/slack-fixtures/README.md",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/slack-fixtures/README.md",
+      "sha256": "43b3cd3af2261c0622bce95ae63ba58df41c6a7daf6f236404222d0e48e89465"
+    },
+    "slack-fixtures/slack-2026-06-01.json": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/slack-fixtures/slack-2026-06-01.json",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/slack-fixtures/slack-2026-06-01.json",
+      "sha256": "363686d76df0689dc028a725ea10e6774169f7498f68c3ec16e721b738a4ac08"
+    },
+    "slack-fixtures/slack-2026-06-02.json": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/slack-fixtures/slack-2026-06-02.json",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/slack-fixtures/slack-2026-06-02.json",
+      "sha256": "d4b04f0e1f4ec9e3c97486e64705389ef7bdc5da77987c4e0409ba25353a6ba7"
+    },
+    "slack-fixtures/slack-2026-06-03.json": {
+      "url": "https://github.com/chrizbo/agentics-beyond-code/blob/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/slack-fixtures/slack-2026-06-03.json",
+      "raw_url": "https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79/slack-fixtures/slack-2026-06-03.json",
+      "sha256": "f0bf201e00e297f8101b584eeb439be3e45a26ffa8ab55c79b45db5197a58719"
+    }
+  }
+}

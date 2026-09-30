@@ -1,10 +1,10 @@
 {
-  "plugin_version": "0.6.0",
+  "plugin_version": "0.5.2",
   "generated": true,
   "source_revision": "a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79",
   "sha256": {
     ".claude-plugin/icon.png": "455bbb9ef038026c2a00b88bb598ed06bc079b073375e023d5be2e9aeab8d2ae",
-    ".claude-plugin/plugin.json": "56065dd07b84a7ca0be782f515b56902121179ab67ca6e82c1ca898d93ae376c",
+    ".claude-plugin/plugin.json": "46f8f81777dd4c7746f55936e32a87d604d655403c8bc952a45f426d4cef2416",
     ".github/skills/agentic-workflow-planner/SKILL.md": "986226c38e0ad00f66a3b121f4bc11b1d049bf606bf320971df021e2239cf41a",
     ".github/skills/agentic-workflow-planner/agents/openai.yaml": "7c32c4cf852944c02ea28dba2f55313ea592e62033c0f3d0a44407856e3cd9a5",
     ".github/skills/agentic-workflow-planner/references/assess.md": "5973701c86cc93b8e42d0cfcfe2eb7dc55bba038a9351a864679e514f73c69cf",
