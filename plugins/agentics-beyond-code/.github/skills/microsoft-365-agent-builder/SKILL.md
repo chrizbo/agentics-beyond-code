@@ -34,7 +34,9 @@ Read its `docs/source-access.md` before accessing unbundled workflows. Use the
 supplied checkout or pinned source index; do not scan the filesystem for one.
 If source access fails, ask for the selected files and label any interim work
 as a new design. Resolve references relative to this skill; write deliverables
-in the user's workspace.
+in the user's selected output location. A source checkout is reference material,
+not an implicit output destination. For a draft-only request with no requested
+file, deliver in chat; create a document when requested and use the chosen folder.
 
 Establish the tenant, Power Platform environment when applicable, owner,
 intended audience, evidence locations, destination, and trigger. Reuse known
@@ -107,7 +109,11 @@ Verify each cross-platform operation and retain source IDs and links.
    access or failed reads from a successful read with no eligible items.
 5. Preserve human approval before commitments or source-required decisions.
    Specify the approver, exact artifact/version approved, rejection and timeout
-   branches, and subsequent action. A model-produced approval flag is not
+   branches, and subsequent action. Have the automation calculate version IDs
+   or digests and present the exact proposed content to the reviewer. Do not
+   require a nontechnical approver to calculate or paste a hash. Specify how a
+   rejection or deadline is recorded and checked; a prose timeout is not a
+   scheduled check. A model-produced approval flag is not
    approval. Prompt instructions do not enforce permissions; describe actual
    tool access and connection identity separately. Ensure the destination's
    audience may receive the source information.
@@ -122,7 +128,10 @@ Walk through a small supplied or clearly synthetic sample before delivery.
 Check normal input, empty input, access failure, malformed model output,
 conflicting evidence, repeat delivery, and approval rejection/timeout where
 applicable. State expected outcomes and actual walkthrough results. Fix
-mismatches. Call this a static walkthrough unless an actual tenant run occurred.
+mismatches. Show at least one concrete sample input and resulting draft or
+validation outcome; a table of intended branches alone is a design review, not
+evidence that those branches executed. Label walkthroughs, local executed tests,
+and live tenant tests separately.
 Use [validation scenarios](references/validation-scenarios.md) for representative
 requests and observable acceptance criteria.
 

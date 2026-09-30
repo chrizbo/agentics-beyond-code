@@ -23,7 +23,10 @@ Use a stable processing key and a durable ledger suited to the environment
 states such as pending, approved, completed, and failed. Store destination IDs
 so retries can recover after partial success. If atomic reservation is not
 available, report the duplicate risk. Bind approval to the proposed action and
-version; a changed proposal needs review again. Reject/timeout performs no
+version; a changed proposal needs review again. Generate the digest in the
+automation and show the proposed snapshot through the approval interface. The
+reviewer approves readable content rather than manually supplying a hash. Name
+the trigger or check that handles rejection and expiration. Reject/timeout performs no
 commitment. Ensure the chosen approval mechanism can accommodate the required
 wait without exceeding applicable run limits.
 
