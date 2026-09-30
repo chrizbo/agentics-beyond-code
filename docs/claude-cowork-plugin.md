@@ -17,7 +17,7 @@ The plugin is listed in Anthropic's plugin directory. Open the
 Some Claude environments don't show directory plugins. In that case, add the
 repository marketplace `chrizbo/agentics-beyond-code` in Claude's plugin settings
 (**Customize → Plugins → Add marketplace**), then install `agentics-beyond-code`.
-Alternatively, build or download `agentics-beyond-code-0.5.2.zip` and use the
+Alternatively, build or download `agentics-beyond-code-0.5.3.zip` and use the
 custom ZIP upload option. Start a new task, type `/` to find the skills, and select
 a writable folder when creating files.
 
@@ -35,6 +35,36 @@ For local testing from a separate working directory:
 ```bash
 claude --plugin-dir /absolute/path/to/agentics-beyond-code/plugins/agentics-beyond-code
 ```
+
+## Claude draft completion in 0.5.3
+
+The Claude-native builder now distinguishes required public workflow retrieval
+from optional product research. It resolves bundled references before reporting
+them missing and fetches a named workflow without first requesting repository
+attachment. Draft, adapt, and port requests require the complete prompt, report
+structure, setup steps, prerequisites, and capability gaps. Unknown target values
+remain configuration placeholders; drafts do not activate tasks or fabricate
+feedback findings.
+
+After updating the plugin, start a fresh task outside this repository and run:
+
+> Use the Agentics Beyond Code Claude-native workflow builder to draft a Cowork
+> Scheduled Task version of the Friday Feedback Trends Report
+
+Expected: read bundled references, retrieve the indexed public workflow and
+needed dependencies, identify its revision, and return a complete draft without
+asking to attach a repository. With network unavailable, report the failed read
+and request only the missing files. This is a behavioral smoke test; the offline
+packaging tests verify resource resolution but do not prove model behavior.
+
+Validation on 2026-09-30: all six Claude packaging tests and five shared ChatGPT
+packaging tests passed, including extraction into a temporary directory and
+resolution of the two references and recorded workflow metadata. Both generated
+packages and skill discovery checks passed. Claude CLI manifest validation
+passed with warnings about the existing icon field and marketplace description.
+The exact-prompt CLI smoke test was attempted from an empty temporary directory
+with read-only tools, but stopped at "Not logged in" before invoking the skill.
+End-to-end behavior in Claude remains unverified.
 
 ## Microsoft 365 builder in 0.5.2
 

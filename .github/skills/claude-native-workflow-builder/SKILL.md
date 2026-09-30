@@ -53,9 +53,15 @@ repository, or a path the user gives. Never search the file system for one
 operating-system privacy prompts. Use the pinned source index instead. The directory plugin does not bundle runtime workflows, helper scripts,
 or demo data. Before using a repository path outside this skill, read
 `docs/source-access.md` at the package root. It explains how to locate and fetch
-specific files from the recorded public source revision. If source access is
-unavailable, request a checkout or the relevant files; do not invent a workflow
-or say it was read. Blank templates and assessment references work offline.
+specific files from the recorded public source revision. Read the bundled
+references from this skill's own folder before concluding that they are missing. For a named workflow, use the source index to fetch its
+recorded public source and necessary dependencies automatically with available
+read-only tools. A drafting request includes these reads; do not first ask to
+attach a repository, connect GitHub, or choose a retrieval method. Request
+specific files or a checkout only after the available retrieval path fails or
+no read tool is available, and name the missing path and observed limitation.
+Do not invent a workflow or say it was read. Blank templates and assessment
+references work offline.
 Installing these skills does not connect services, install `gh`/`gh aw`, or
 activate workflows or scheduled tasks. Check available tools before using them.
 
@@ -75,11 +81,12 @@ doesn't exist as a workflow here yet.
 
 ### A. Porting an existing workflow
 
-1. Inventory the live catalog rather than recalling it from memory or from any
-   previously-written example: list `.github/workflows/*.md` (agentic) and
+1. If the user names a workflow, resolve that workflow directly; do not ask
+   them to select it again. Otherwise inventory the available source catalog
+   rather than recalling it from memory or from any previously-written example: list `.github/workflows/*.md` (agentic) and
    `.github/workflows/*.yml` (deterministic), or use the README's workflow
-   tables as an index. Ask which workflow(s) they want — one, a related
-   cluster (e.g. the whole customer-feedback pipeline), or "what's related to
+   tables as an index. If still unspecified, ask which workflow(s) they want —
+   one, a related cluster (e.g. the whole customer-feedback pipeline), or "what's related to
    X problem." Adopting just one or two is a completely normal outcome; don't
    push the rest of the repo's scaffolding on someone who didn't ask for it.
 2. For each selected workflow, read its **current** file directly out of the
@@ -96,8 +103,10 @@ doesn't exist as a workflow here yet.
    caveat about `safe-outputs:` having no structural equivalent in a Routine.
 4. Verify capabilities in proportion to the request, following the
    verification levels in `references/porting-a-workflow.md`. For a draft,
-   work from the reference files without web lookups and label each
-   capability claim as coming from the reference, with its date. Fetch
+   work from the reference files without extra product research and label each
+   capability claim as coming from the reference, with its date.
+   Source retrieval through the recorded public URLs is required when no
+   checkout is supplied; it is separate from product-capability research. Fetch
    official docs only when the user is about to create or activate
    something, asks you to verify, or the port depends on a capability the
    reference marks unverified. Never run open-ended web searches or read
@@ -215,8 +224,21 @@ with, per step:
 Then a rollout order: which steps to stand up first, and what needs to exist
 (a channel, a sheet, a connector) before that step can run.
 
-When the user asks to actually build it, write the exact prompt text for the
-Routine or Scheduled Task (what to read, what judgment to apply, what to write
+A request to "draft", "adapt", or "port" a named workflow asks for the complete
+configuration draft, not merely a recommendation or an offer to continue.
+Deliver the full task prompt, the report or other output structure and reasoning
+steps from the source, numbered setup instructions for the requested surface, prerequisites,
+and capability gaps in the same response. Leave unknown destination, schedule,
+timezone, and other target-specific values as clearly marked configuration
+placeholders; they do not block drafting. If source retrieval fails, report
+that limitation instead of claiming a complete source-grounded port.
+Drafting a report-producing task does not mean running it: generate an actual
+report from feedback records only when the user asks for a run and those
+records are available. Do not fabricate report findings or activate a schedule
+as part of a draft.
+
+When the user asks to draft, adapt, port, or build it, write the exact prompt
+text for the Routine or Scheduled Task (what to read, what judgment to apply, what to write
 and where, what never to do without a human saying so) directly into the
 response, in a fenced code block labeled with its destination — e.g.
 "Routine prompt — paste into `/schedule` or claude.ai/code" — so it can be

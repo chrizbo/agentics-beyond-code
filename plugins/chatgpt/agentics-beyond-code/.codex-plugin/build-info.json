@@ -1,9 +1,9 @@
 {
-  "plugin_version": "0.5.2",
+  "plugin_version": "0.5.3",
   "generated": true,
   "source_revision": "a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79",
   "sha256": {
-    ".codex-plugin/plugin.json": "3b8dc64828662432f0c395c0f3d15312d2b0770ff5a2b48353d1099e85cb06fc",
+    ".codex-plugin/plugin.json": "35b0597c37e521ff3d313798d96e579475b78005313f5a98cb6bcadf5e8fd4b6",
     "LICENSE": "0b57642affa02b038c08d2ae25e02ea770e3998ae34026cc445444e21c91f2e9",
     "README.md": "d0be0b7938cb096d64e947eade4a0af335afc0d2dab1310f626b3ed16cffa434",
     "assets/icon.png": "455bbb9ef038026c2a00b88bb598ed06bc079b073375e023d5be2e9aeab8d2ae",
@@ -21,9 +21,9 @@
     "skills/atlassian-agent-builder/references/observed-atlassian-behavior.md": "a61f3d9e7967ed0c2805183081fe2ad2447f27988b95461967f0e6ce9233f095",
     "skills/atlassian-agent-builder/references/porting-checklist.md": "0c7696eb07fa3b461c5890cee348fff515f1aff451091749ecf5b731da73a751",
     "skills/atlassian-agent-builder/references/triggers-and-automation.md": "eae6bcff475df6102e26f502f2c1244d61ab5493ebcc766a030d8be9da6370f0",
-    "skills/claude-native-workflow-builder/SKILL.md": "9658b200cce222f12b1bddeb502ee29f9a6381f5ad595415e3b94dc784f1a2d5",
+    "skills/claude-native-workflow-builder/SKILL.md": "ec6dd84af3669d4e4cd6563bf6f25a9ff1c106be806c224d734c66cca09077fa",
     "skills/claude-native-workflow-builder/agents/openai.yaml": "3e194dd6315301f4b002cee14977ff143de8663e9b589db1b7f6c6e399bbc69f",
-    "skills/claude-native-workflow-builder/references/porting-a-workflow.md": "38cad1a200fda314336274d51074743433e64019c9374be0248e873bb2b12f38",
+    "skills/claude-native-workflow-builder/references/porting-a-workflow.md": "498538d152ca2b019887d98586ee2c7b70f46a555684565bec3d8cac6fe0b69b",
     "skills/claude-native-workflow-builder/references/routine-vs-scheduled-task.md": "cb8501e2ffbe6810ab2c1593befca82e10f16f3527ce183dee877eb3cb9e9c51",
     "skills/github-workflow-builder/SKILL.md": "8f6d441b108ee4f8678d75496a820e6ba7064bd7d2d297b7ad1568c9602d8d7a",
     "skills/github-workflow-builder/agents/openai.yaml": "6dee5f77b3ea143a69565c2ce276772697d2f45ef5941954c9a30a8305232362",

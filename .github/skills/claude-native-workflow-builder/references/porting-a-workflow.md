@@ -18,9 +18,14 @@ what to do with the source you find.
 Reference last updated: 2026-09-29. Update this line whenever you re-verify
 a capability against official docs, and correct the table if it changed.
 
+The limits below apply to product-capability research, not source retrieval.
+Fetching the selected workflow and necessary dependencies at the recorded
+public revision is part of drafting when no checkout is supplied. Read bundled
+references relative to the skill folder; no repository attachment is needed.
+
 Match verification effort to the request:
 
-| Request | Web lookups |
+| Request | Product-capability lookups |
 |---|---|
 | Draft or plan only (the default) | None. Use this file and `routine-vs-scheduled-task.md`. Label claims "per reference, updated 2026-09-29" and list what to confirm before creation. |
 | The port depends on a capability this file marks "no equivalent" or "check the current UI" | At most one fetch of that surface's official docs page. |

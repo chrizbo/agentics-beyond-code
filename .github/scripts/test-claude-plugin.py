@@ -75,6 +75,29 @@ class PackageTests(unittest.TestCase):
             with zipfile.ZipFile(first) as archive:
                 self.assertEqual({n: archive.read(n) for n in archive.namelist()}, self.data)
 
+    def test_claude_port_resources_resolve_outside_checkout(self):
+        with tempfile.TemporaryDirectory() as temp:
+            installed = Path(temp) / 'installed-plugin'
+            archive = builder.build(Path(temp), self.data)
+            with zipfile.ZipFile(archive) as bundle:
+                bundle.extractall(installed)
+            skill = installed / '.github/skills/claude-native-workflow-builder/SKILL.md'
+            root = skill.parents[3]
+            self.assertEqual(root, installed)
+            for reference in ('porting-a-workflow.md', 'routine-vs-scheduled-task.md'):
+                self.assertTrue((skill.parent / 'references' / reference).is_file())
+            self.assertTrue((root / 'docs/source-access.md').is_file())
+            self.assertFalse((root / '.github/workflows').exists())
+            index = json.loads((root / 'source-index.json').read_text())
+            path = '.github/workflows/friday-feedback-trends-report.md'
+            entry = index['files'][path]
+            self.assertEqual(entry['raw_url'],
+                             'https://raw.githubusercontent.com/chrizbo/agentics-beyond-code/'
+                             + index['revision'] + '/' + path)
+            # Check against the recorded source bytes, without requiring a network.
+            source = builder.git('show', f"{index['revision']}:{path}")
+            self.assertEqual(hashlib.sha256(source).hexdigest(), entry['sha256'])
+
 
 if __name__ == '__main__':
     unittest.main()
