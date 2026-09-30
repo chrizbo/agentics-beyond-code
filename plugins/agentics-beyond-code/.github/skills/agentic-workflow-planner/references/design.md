@@ -106,11 +106,19 @@ tools happen to be available in this session.
 | The team's records and habits live in Slack, Notion, Jira, or email, or in Google Workspace without Workspace Studio available, or it wants no GitHub/gh-aw dependency | `claude-native-workflow-builder` (Claude Routines and Scheduled Tasks) |
 | Work is tracked in Jira and documented in Confluence, the site has Rovo, and the team wants agents and automation inside Atlassian | `atlassian-agent-builder` (Rovo agents with Jira or Confluence automation); name `claude-native-workflow-builder` as the alternative when Rovo is unavailable or the steps span tools outside Atlassian |
 | The team's records and habits live in Gmail, Drive, Sheets, or Chat, the organization has a Google Workspace edition with Gemini, and it wants the automation inside Google | `google-workspace-agent-builder` (Workspace Studio flows and skills); name `claude-native-workflow-builder` as the alternative for personal accounts, Gemini turned off, or steps outside Google |
+| The team works in Teams, SharePoint, Lists, Outlook, or Planner and wants Microsoft-hosted agents or automation | `microsoft-365-agent-builder`; confirm Agent Builder, Copilot Studio, or Power Automate suitability using tenant access, licensing, and execution identity |
 | Product discovery, feedback, and planning live in Productboard | `productboard-agent-builder` (Spark skills) |
 
 For a Google-centric team, the Workspace edition, add-ons, admin settings,
 and Studio run quota decide which Google option is viable; recommend Google
 as the platform and let `google-workspace-agent-builder` confirm the surface.
+
+For teams combining Microsoft 365 and GitHub, prefer keeping existing GitHub
+records and engineering automation in GitHub, with Microsoft 365 handling
+collaboration and delivery. Do not recommend Azure DevOps solely because the
+team uses Microsoft products. Choose it when requested, already established,
+or justified by a concrete requirement. Shared corporate ownership does not
+establish integration availability, entitlement, or access.
 
 Separate where the analysis runs from where people read the result. "We
 live in Slack" can mean records live there too, or only that the team reads

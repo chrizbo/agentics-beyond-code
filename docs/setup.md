@@ -156,6 +156,7 @@ Agentics Beyond Code without needing to start from workflow syntax.
 | Productboard Agent Builder | Adapt workflows into Productboard Spark skills | `.github/skills/productboard-agent-builder/SKILL.md` |
 | Atlassian Agent Builder | Adapt workflows into Rovo agents with Jira or Confluence automation | `.github/skills/atlassian-agent-builder/SKILL.md` |
 | Google Workspace Agent Builder | Adapt workflows into Workspace Studio flows and skills matched to the team's Workspace plan | `.github/skills/google-workspace-agent-builder/SKILL.md` |
+| Microsoft 365 Agent Builder | Adapt workflows into Microsoft 365 agents and automations matched to tenant access and licensing | `.github/skills/microsoft-365-agent-builder/SKILL.md` |
 | Agentic Workflows | Create, update, debug, compile, and validate GitHub Agentic Workflows (upstream gh-aw) | `.github/skills/agentic-workflows/SKILL.md` |
 
 Each skill is also linked from `.claude/skills/<name>/` and `.agents/skills/<name>/`.

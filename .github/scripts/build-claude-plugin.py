@@ -67,8 +67,8 @@ def payload():
         'docs/privacy.md': ROOT / 'packaging/claude/privacy.md',
     }
     skills = [p for p in (ROOT / '.github/skills').glob('*/SKILL.md') if p.parent.name not in EXCLUDED_SKILLS]
-    if len(skills) != 6:
-        raise ValueError('Review package scope when changing the six-skill package inventory')
+    if len(skills) != 7:
+        raise ValueError('Review package scope when changing the seven-skill package inventory')
     for path in (ROOT / '.github/skills').rglob('*'):
         if path.relative_to(ROOT / '.github/skills').parts[0] in EXCLUDED_SKILLS:
             continue

@@ -155,6 +155,7 @@ agentic-workflow-planner          github-workflow-builder
   (platform-neutral)              productboard-agent-builder
                                   atlassian-agent-builder
                                   google-workspace-agent-builder
+                                  microsoft-365-agent-builder
 ```
 
 | Skill | Step | Use it when |
@@ -165,6 +166,7 @@ agentic-workflow-planner          github-workflow-builder
 | **[Productboard Agent Builder](.github/skills/productboard-agent-builder/SKILL.md)** | Build: Productboard | Product discovery, feedback, and planning live in Productboard. Adapts workflows into Spark skills and configures supported schedules. See [usage and testing](docs/skills.md#using-the-productboard-agent-builder). |
 | **[Atlassian Agent Builder](.github/skills/atlassian-agent-builder/SKILL.md)** | Build: Atlassian | Work is tracked in Jira and documented in Confluence, and the team has Rovo. Adapts workflows into Rovo agents with Jira or Confluence automation for schedules, events, and workflow transitions. Deployment guidance is documentation-derived until field-tested; see [usage](docs/skills.md#using-the-atlassian-agent-builder). |
 | **[Google Workspace Agent Builder](.github/skills/google-workspace-agent-builder/SKILL.md)** | Build: Google Workspace | The team works in Gmail, Drive, Sheets, and Chat on a Workspace edition with Gemini. Checks the Workspace plan, admin settings, and Studio run quota, then adapts workflows into Workspace Studio flows and skills (or Apps Script or Gemini Enterprise where those fit better). Deployment guidance is documentation-derived until field-tested; see [usage](docs/skills.md#using-the-google-workspace-agent-builder). |
+| **[Microsoft 365 Agent Builder](.github/skills/microsoft-365-agent-builder/SKILL.md)** | Build: Microsoft 365 | Adapt workflows into Agent Builder agents, Copilot Studio agents, and Power Automate flows, checking tenant access, licensing, and execution identity. Deployment is not yet field-tested; see [usage](docs/skills.md#using-the-microsoft-365-agent-builder). |
 | **[Agentic Workflows](.github/skills/agentic-workflows/SKILL.md)** | gh-aw authoring | Creating, debugging, or compiling gh-aw workflow files directly. Maintained upstream by the [gh-aw framework](https://github.github.io/gh-aw/). In this repo only; not in the Claude plugin. |
 
 If you already know the platform and the workflow ("make the Friday trends

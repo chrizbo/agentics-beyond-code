@@ -114,3 +114,10 @@ depends on the installation route.
 
 MIT licensed. Chris Butler. GitHub Agentic Workflows is maintained upstream by
 GitHub Next.
+
+## Microsoft 365
+
+Use `microsoft-365-agent-builder` to adapt a workflow into a Microsoft 365 agent
+and Copilot Studio or Power Automate automation. Tenant access, licensing,
+connectors, and execution identity determine the surface. Drafting does not
+activate execution; deployment guidance has not yet been field-tested.

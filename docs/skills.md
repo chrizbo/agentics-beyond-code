@@ -231,6 +231,27 @@ times. Each review tightened the builder:
 The fixes from the third review have not been rerun. Record the first domain test in the skill's
 [field observations](../.github/skills/google-workspace-agent-builder/references/observed-google-workspace-behavior.md).
 
+## Using the Microsoft 365 agent builder
+
+Use `microsoft-365-agent-builder` to adapt a selected workflow into Microsoft
+365 Agent Builder, Copilot Studio, or Power Automate. It separates conversational
+agents from scheduled/event execution and checks licensing, connector access,
+connection identity, approval, and duplicate handling before proposing a build.
+Its plan matrix separates base Microsoft 365 subscriptions, Copilot assignments
+for maker and audience, Copilot Studio capacity, and Power Automate rights.
+Interactive included use is evaluated separately from unattended consumption.
+
+```text
+Use microsoft-365-agent-builder to adapt our weekly status report. Records are
+in Microsoft Lists and the team reads updates in Teams. Draft only; identify
+which licenses and tenant settings we need before setup.
+```
+
+The builder returns paste-ready instructions and an automation specification,
+including failure paths and on/off state. Unknown tenant facts remain explicit
+prerequisites. Microsoft Learn sources are linked in the skill's references;
+deployment has not been field-tested. Creating the skill does not deploy agents.
+
 ## Validation
 
 Run:
@@ -245,7 +266,7 @@ The check verifies the discovery links, validates each `SKILL.md`, and reports g
 
 Canonical skills remain here under `.github/skills/`. The directory plugin in
 `plugins/agentics-beyond-code/` is generated from them and packaging inputs under
-`packaging/claude/`. The plugin ships six skills: the upstream
+`packaging/claude/`. The plugin ships seven skills: the upstream
 `agentic-workflows` dispatcher is excluded (`EXCLUDED_SKILLS` in
 `.github/scripts/build-claude-plugin.py`) because it only fetches instructions
 from `github/gh-aw` and overlaps with `github-workflow-builder` in Cowork. The
