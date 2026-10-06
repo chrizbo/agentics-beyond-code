@@ -17,7 +17,7 @@ The plugin is listed in Anthropic's plugin directory. Open the
 Some Claude environments don't show directory plugins. In that case, add the
 repository marketplace `chrizbo/agentics-beyond-code` in Claude's plugin settings
 (**Customize → Plugins → Add marketplace**), then install `agentics-beyond-code`.
-Alternatively, build or download `agentics-beyond-code-0.5.3.zip` and use the
+Alternatively, build or download `agentics-beyond-code-0.5.4.zip` and use the
 custom ZIP upload option. Start a new task, type `/` to find the skills, and select
 a writable folder when creating files.
 
@@ -160,6 +160,15 @@ The plugin has no credential configuration, MCP servers, hooks, or automatic
 runtime. If implementation is requested later, the chosen runtime's credentials
 and dependencies must be configured explicitly. See the installed README and
 `docs/source-access.md` for data handling and source resolution.
+
+## Feedback consistency and short-answer checks in 0.5.4
+
+The canonical skills preserve manual input steps, approval actions, and
+verification status in shortened answers. The planner separates intake, review,
+and approved work destinations and states assumptions when ownership is unclear.
+Use the [feedback behavior evaluation](feedback-behavior-evaluation.md) for repeated
+fresh-chat checks, brevity follow-ups, and an unsupported churn-cause case.
+These new cases have not yet been run in Claude.
 
 ## Build, check, and release
 

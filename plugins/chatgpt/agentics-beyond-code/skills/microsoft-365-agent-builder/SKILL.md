@@ -153,3 +153,19 @@ specific blocked step. Never claim a saved prompt is a running automation.
 Deployment guidance is documentation-derived, not field-tested. Record actual
 tenant observations in [field observations](references/observed-microsoft-behavior.md)
 without secrets or private tenant data.
+
+## Short answers preserve operating requirements
+
+When summarizing or asked for a "short version", retain required manual steps,
+blocking prerequisites, the human approval action, and the verification status
+of the proposed workflow. Distinguish a drafted plan from configured or tested
+execution. Compress explanations and examples first; do not imply an automated
+input path when a person must forward email or supply an export. Keep these
+requirements in the shortened answer itself, even if they appeared earlier.
+A concise sentence can combine them: "Forward feedback manually to INTAKE;
+review the draft before approving work; execution has not been tested."
+Include only requirements that apply to this plan.
+
+Preserve the planner's chosen intake, review, and work destinations. If no
+contract exists, use the architecture selection guidance in
+`../agentic-workflow-planner/references/design.md` before choosing them.

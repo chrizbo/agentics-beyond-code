@@ -34,6 +34,32 @@ Useful inputs:
 - automation posture: observe only, suggest changes, or create work items
 - who owns the automation once it runs, and who can turn it off
 
+## Keep architecture choices stable
+
+Choose the intake record, review artifact, and committed work destination
+separately. A tool being mentioned does not establish that it owns all three.
+Use this order: the user's explicit destination and automation posture; the
+existing system of record for that artifact; then the smallest draft that fits
+the known process. Connector availability determines whether the plan can run,
+not which system should own the records. When the evidence leaves a tie, state
+one provisional choice and the assumption that decides it. Ask only if the
+missing choice changes the design; otherwise keep the destination configurable.
+Do not introduce a new log or duplicate tracker merely because access is missing.
+
+Distinguish raw intake, triaged feedback, proposed work, and approved work.
+For example, when Notion holds customer feedback and Asana holds approved work,
+retain feedback and review in Notion and create Asana work only after the stated
+human gate, unless the user explicitly requests Asana drafts as the review
+surface. A request for a shorter answer does not change this architecture.
+Revise the chosen path only when new evidence, a user instruction, or a concrete
+capability constraint warrants it; explain the reason for the change.
+
+In the handoff, name the intake source, system of record, review artifact and
+destination, approval action, committed work destination, manual steps, and
+unverified operations. Keep unknowns explicit rather than filling them from a
+tool's typical use. Builders preserve this contract and describe any necessary
+substitution before treating it as the implementation path.
+
 ## Pain point to workflow map
 
 Prefer workflows that already exist in `.github/workflows/` over new designs.

@@ -1,6 +1,6 @@
 {
   "name": "agentics-beyond-code",
-  "version": "0.5.3",
+  "version": "0.5.4",
   "description": "Assess team workflows, design the right agentic workflows, and build them on GitHub, Claude, Productboard, Atlassian, Google Workspace, or Microsoft 365.",
   "author": {
     "name": "Chris Butler"

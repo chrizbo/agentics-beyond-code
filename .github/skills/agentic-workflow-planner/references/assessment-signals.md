@@ -179,3 +179,13 @@ Map common patterns to interventions:
 When an intervention is an agentic workflow or operating artifact, continue in
 the planner's Design mode (`references/design.md`), which picks the platform
 builder.
+
+## Feedback coverage and account matching
+
+Feedback absent from a delivery tracker is not necessarily lost or untracked:
+it may remain in support email, call notes, or an intake log. Describe the
+observed destination gap without inventing the reason. Team headcount does not
+establish customer count or the sample size behind a churn metric. Account
+matching can establish overlap between complaints and churned customers and
+suggest hypotheses; it does not alone establish causation or prove an alert
+would have prevented churn. Retain those limits when proposing the next check.

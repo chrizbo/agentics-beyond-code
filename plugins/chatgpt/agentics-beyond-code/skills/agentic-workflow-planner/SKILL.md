@@ -116,6 +116,18 @@ builder:
 When the user asked only for a recommendation, stop at the design and offer
 the builder as the next step.
 
+## Short answers preserve operating requirements
+
+When summarizing or asked for a "short version", retain required manual steps,
+blocking prerequisites, the human approval action, and the verification status
+of the proposed workflow. Distinguish a drafted plan from configured or tested
+execution. Compress explanations and examples first; do not imply an automated
+input path when a person must forward email or supply an export. Keep these
+requirements in the shortened answer itself, even if they appeared earlier.
+A concise sentence can combine them: "Forward feedback manually to INTAKE;
+review the draft before approving work; execution has not been tested."
+Include only requirements that apply to this plan.
+
 ## Output standard
 
 - Assessment: use the structure in `references/assess.md`.
