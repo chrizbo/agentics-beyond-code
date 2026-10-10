@@ -192,6 +192,7 @@ Workflows define the **general pattern** (e.g., "assess readiness against a poli
     compliance-review.md             ← Compliance triage + sub-issues (weekly + on label)
     compliance-team-reports.md       ← Per-team compliance digests (weekly)
     gtm-content.md                   ← Changelog drafts + roadmap items (weekly)
+    release-story-seed.yml           ← Seeds the demo release story, one stage at a time (manual)
     weekly-status.md                 ← Leadership status rollup (weekly)
     leadership-brief.md              ← Personalized leadership briefs (weekly, one per leader)
     workflow-health.md               ← Agentic workflow health & cost report (weekly)
@@ -214,6 +215,9 @@ Workflows define the **general pattern** (e.g., "assess readiness against a poli
     voice-and-tone-policy.md         ← How we write customer-facing content
   scripts/
     fetch-launch-data.sh             ← Deterministic data fetching (shared)
+    blog/fetch-initiative-evidence.mjs ← Initiative/launch evidence: merged PRs, scope edits, decisions
+    release-story/                   ← Release story planner + seeder for demo data
+release-story-fixtures/              ← Demo release stories (seeded by release-story-seed.yml)
 decisions/                           ← Decision records (created by decision-log workflow)
 docs/
   how-we-work.md                     ← Team processes & norms (updated by process-analyzer workflow)
@@ -390,6 +394,27 @@ The policy at `.github/policies/voice-and-tone-policy.md` defines:
 - Tone guidance per content type (changelog vs. roadmap)
 - Formatting rules (sentence case, active voice, present/future tense)
 - Words to use and avoid
+
+### Release blog pipeline (in progress)
+
+The [Release Blog Pipeline](release-blog-pipeline.md) builds on the changelog
+draft. A marketer files a brief, and agents turn the initiative's history into
+an approved, published blog post. The brief and draft are approved from Slack
+or Google Docs, and the post ships as a PR that renders an HTML page.
+
+Two pieces exist today:
+
+- **Evidence fetch.** `.github/scripts/blog/fetch-initiative-evidence.mjs <issue>`
+  walks an initiative or launch tree. It writes `initiative-evidence.json`
+  with merged PRs (what they closed vs. only referenced), body edits on the
+  initiative and launch, work closed as not planned, discussion on the
+  initiative and launch, linked `decisions/*.md`, GTM drafts, approval
+  labels, and a single timeline.
+- **Demo release story.** `release-story-seed.yml` seeds
+  `release-story-fixtures/usage-insights.json` one stage at a time: the
+  structure, merged PRs, a mid-flight scope change with a decision record, and
+  the move to GA. It is a dry run unless `apply` is checked. Run the stages a
+  week or so apart so the history has real dates.
 
 ## Weekly Leadership Status
 
