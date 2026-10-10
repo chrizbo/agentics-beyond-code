@@ -17,7 +17,7 @@ The plugin is listed in Anthropic's plugin directory. Open the
 Some Claude environments don't show directory plugins. In that case, add the
 repository marketplace `chrizbo/agentics-beyond-code` in Claude's plugin settings
 (**Customize → Plugins → Add marketplace**), then install `agentics-beyond-code`.
-Alternatively, build or download `agentics-beyond-code-0.5.4.zip` and use the
+Alternatively, build or download `agentics-beyond-code-0.5.5.zip` and use the
 custom ZIP upload option. Start a new task, type `/` to find the skills, and select
 a writable folder when creating files.
 
@@ -160,6 +160,18 @@ The plugin has no credential configuration, MCP servers, hooks, or automatic
 runtime. If implementation is requested later, the chosen runtime's credentials
 and dependencies must be configured explicitly. See the installed README and
 `docs/source-access.md` for data handling and source resolution.
+
+## Release blog pipeline references in 0.5.5
+
+The planner's design catalog now lists the release blog pipeline
+([spec](release-blog-pipeline.md)) for teams whose release posts are assembled
+by hand from PRs, scope changes, and decisions. The catalog marks the pipeline
+as in progress: the brief template, blog post policy, brief builder, and
+`/approve-brief` gate exist, but drafting and publishing do not yet. The GitHub builder names `fetch-initiative-evidence.mjs` as a
+dependency for workflows that tell the story of an initiative or launch. The
+pinned source revision is unchanged, so packaged source links do not include
+these files until `packaging/claude/source.json` moves to a public commit that
+contains them.
 
 ## Feedback consistency and short-answer checks in 0.5.4
 

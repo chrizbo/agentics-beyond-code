@@ -1,0 +1,231 @@
+{
+  "id": "usage-insights",
+  "description": "Demo release story for the release blog pipeline: one initiative whose scope changes mid-flight, with merged PRs and a decision record that explain how it got to GA.",
+  "project": {
+    "owner": "chrizbo",
+    "number": 1,
+    "phaseField": "Phase"
+  },
+  "issues": [
+    {
+      "key": "initiative",
+      "title": "[Initiative] Self-Serve Usage Insights",
+      "labels": ["initiative"],
+      "body": "## Objective\nLet workspace admins understand and control their API usage without filing a support ticket.\n\n## Success Criteria\n- Admins can see usage by endpoint without contacting support\n- Usage-related support tickets drop by 30% within one quarter of GA\n\n## Scope\n- Usage data pipeline that aggregates API calls per workspace\n- Live per-minute usage chart in the admin console\n- CSV export of usage history\n- Threshold alerts before a workspace hits its plan limit\n\n## Planned Launches\n- {{issue:launch}}\n\n## DRI\n@chrizbo\n\n## Risks\n- Per-minute aggregation cost at our largest workspaces is unknown"
+    },
+    {
+      "key": "launch",
+      "parent": "initiative",
+      "title": "[Launch] Usage Insights Dashboard",
+      "labels": ["launch"],
+      "body": "## Overview\nA usage dashboard in the admin console that shows API usage by endpoint, with export and alerts.\n\n## Launch Type\nMajor\n\n## Success Criteria\n- [ ] Usage charts available to every workspace admin\n- [ ] CSV export of 13 months of history\n- [ ] Threshold alerts at 80% and 100% of plan limits\n\n## External Comms\nBlog post, changelog entry, in-app notification\n\n## Rollout Plan\nTeam → Alpha → Beta → GA"
+    },
+    {
+      "key": "epic-pipeline",
+      "parent": "launch",
+      "title": "Usage data pipeline",
+      "labels": ["epic"],
+      "body": "Aggregate and retain per-workspace API usage."
+    },
+    {
+      "key": "epic-dashboard",
+      "parent": "launch",
+      "title": "Dashboard experience",
+      "labels": ["epic"],
+      "body": "Charts and navigation for usage in the admin console."
+    },
+    {
+      "key": "epic-export",
+      "parent": "launch",
+      "title": "Export and alerts",
+      "labels": ["epic"],
+      "body": "Get usage data out of the dashboard and warn admins before limits."
+    },
+    {
+      "key": "task-ingest",
+      "parent": "epic-pipeline",
+      "title": "Aggregate API call counts per workspace and endpoint",
+      "body": "Roll up gateway logs into per-workspace, per-endpoint counts."
+    },
+    {
+      "key": "task-retention",
+      "parent": "epic-pipeline",
+      "title": "Retain 13 months of usage history",
+      "body": "Store aggregated usage long enough for year-over-year comparisons."
+    },
+    {
+      "key": "task-realtime",
+      "parent": "epic-dashboard",
+      "title": "Live per-minute usage chart",
+      "body": "Stream per-minute usage into a live chart."
+    },
+    {
+      "key": "task-a11y",
+      "parent": "epic-dashboard",
+      "title": "Keyboard and screen reader support for usage charts",
+      "body": "Charts expose data tables and are fully keyboard navigable."
+    },
+    {
+      "key": "task-csv",
+      "parent": "epic-export",
+      "title": "CSV export of usage by endpoint",
+      "body": "Download usage for any date range as CSV."
+    },
+    {
+      "key": "task-alerts",
+      "parent": "epic-export",
+      "title": "Usage threshold email alerts",
+      "body": "Email workspace admins at 80% and 100% of their plan limit."
+    },
+    {
+      "key": "task-docs",
+      "parent": "epic-dashboard",
+      "title": "Usage Insights help center article",
+      "body": "Customer-facing guide to reading the dashboard, exporting, and alerts."
+    },
+    {
+      "key": "task-daily",
+      "parent": "epic-dashboard",
+      "title": "Daily usage rollup charts by endpoint",
+      "body": "Replace the live per-minute chart with daily rollups that load instantly for every workspace size. See {{issue:initiative}} for the scope change."
+    }
+  ],
+  "stages": [
+    {
+      "name": "1-structure",
+      "summary": "Create the initiative, launch, epics, and original tasks.",
+      "actions": [
+        { "type": "create-issues", "keys": ["initiative", "launch", "epic-pipeline", "epic-dashboard", "epic-export", "task-ingest", "task-retention", "task-realtime", "task-a11y", "task-csv", "task-alerts", "task-docs"] },
+        { "type": "set-phase", "key": "launch", "phase": "Team" }
+      ]
+    },
+    {
+      "name": "2-pipeline",
+      "summary": "Ship the usage data pipeline and move to Alpha.",
+      "actions": [
+        {
+          "type": "merge-pr",
+          "key": "pr-ingest",
+          "closes": ["task-ingest"],
+          "title": "Aggregate gateway usage per workspace and endpoint",
+          "body": "Adds an hourly job that rolls gateway request logs into per-workspace, per-endpoint counts.\n\n- Backfills the last 30 days on first run\n- Counts are exact; sampling was rejected because billing disputes need exact numbers\n\nCloses {{issue:task-ingest}}",
+          "file": "release-story-fixtures/usage-insights/changes/usage-aggregation.md",
+          "content": "# Usage aggregation\n\nHourly job rolls gateway request logs into per-workspace, per-endpoint counts. Exact counts, 30-day backfill.\n"
+        },
+        {
+          "type": "merge-pr",
+          "key": "pr-retention",
+          "closes": ["task-retention"],
+          "title": "Retain 13 months of aggregated usage",
+          "body": "Keeps aggregated usage for 13 months so admins can compare the same month year over year. Raw logs keep their existing 30-day retention.\n\nCloses {{issue:task-retention}}",
+          "file": "release-story-fixtures/usage-insights/changes/usage-retention.md",
+          "content": "# Usage retention\n\nAggregated usage retained for 13 months. Raw gateway logs unchanged at 30 days.\n"
+        },
+        { "type": "set-phase", "key": "launch", "phase": "Alpha" }
+      ]
+    },
+    {
+      "name": "3-scope-change",
+      "summary": "Alpha feedback and cost data replace the live per-minute chart with daily rollups.",
+      "actions": [
+        {
+          "type": "comment",
+          "key": "launch",
+          "body": "Alpha readout: admins in all six alpha workspaces opened the dashboard to answer \"what did we use last month and which endpoint drove it.\" Nobody watched the live chart for more than a minute. Per-minute aggregation also costs about 9x the daily rollup at our largest workspace. Proposing we swap the live chart for daily rollups and spend the time on export and alerts instead."
+        },
+        {
+          "type": "edit-body",
+          "key": "initiative",
+          "body": "## Objective\nLet workspace admins understand and control their API usage without filing a support ticket.\n\n## Success Criteria\n- Admins can see usage by endpoint without contacting support\n- Usage-related support tickets drop by 30% within one quarter of GA\n\n## Scope\n- Usage data pipeline that aggregates API calls per workspace\n- ~~Live per-minute usage chart in the admin console~~ Daily usage rollups by endpoint (changed after Alpha, see decision record)\n- CSV export of usage history\n- Threshold alerts before a workspace hits its plan limit\n\n## Planned Launches\n- {{issue:launch}}\n\n## DRI\n@chrizbo\n\n## Risks\n- ~~Per-minute aggregation cost at our largest workspaces is unknown~~ Resolved by moving to daily rollups"
+        },
+        { "type": "create-issues", "keys": ["task-daily"] },
+        {
+          "type": "close-issue",
+          "key": "task-realtime",
+          "reason": "not planned",
+          "comment": "Descoped after Alpha in favor of {{issue:task-daily}}. See the decision record in decisions/."
+        },
+        {
+          "type": "merge-pr",
+          "key": "pr-decision",
+          "closes": [],
+          "references": ["initiative", "task-realtime", "task-daily"],
+          "title": "Decision: daily usage rollups over a live per-minute chart",
+          "body": "Records the post-Alpha scope change for {{issue:initiative}}.\n\nRefs {{issue:task-realtime}}, {{issue:task-daily}}",
+          "file": "decisions/{{date}}-daily-usage-rollups-over-live-chart.md",
+          "content": "# Daily Usage Rollups Over a Live Per-Minute Chart\n\n| Field | Value |\n|-------|-------|\n| **Date** | {{date}} |\n| **Status** | Accepted |\n| **Source** | {{issue:launch}} |\n| **Participants** | \\@chrizbo |\n| **Impact** | {{issue:initiative}}, {{issue:launch}}, {{issue:task-realtime}}, {{issue:task-daily}} |\n\n## Context\n\nAlpha admins used the dashboard to answer \"what did we use last month and which endpoint drove it.\" Nobody watched the live chart. Per-minute aggregation cost about 9x the daily rollup at the largest workspace.\n\n## Decision\n\nShip daily usage rollups by endpoint instead of a live per-minute chart. Use the freed time for CSV export and threshold alerts.\n\n## Options Considered\n\n### Option A: Daily rollups\n\nLoads instantly at every workspace size and answers the question admins actually asked.\n\n### Option B: Live per-minute chart\n\nMore impressive in a demo, rarely used in Alpha, and roughly 9x the aggregation cost.\n\n## Rationale\n\nThe team chose the view admins used over the one that demoed well, and moved the saved effort to export and alerts.\n"
+        }
+      ]
+    },
+    {
+      "name": "4-dashboard",
+      "summary": "Ship daily rollups and accessible charts, then move to Beta.",
+      "actions": [
+        {
+          "type": "merge-pr",
+          "key": "pr-daily",
+          "closes": ["task-daily"],
+          "title": "Daily usage rollup charts by endpoint",
+          "body": "Adds the usage dashboard with daily rollups by endpoint and a 13-month range picker. Median load time at the largest alpha workspace dropped from 6.2s (live prototype) to 0.4s.\n\nCloses {{issue:task-daily}}",
+          "file": "release-story-fixtures/usage-insights/changes/daily-rollup-charts.md",
+          "content": "# Daily rollup charts\n\nDashboard shows daily usage by endpoint with a 13-month range picker. Median load 0.4s at the largest alpha workspace.\n"
+        },
+        {
+          "type": "merge-pr",
+          "key": "pr-a11y",
+          "closes": ["task-a11y"],
+          "title": "Accessible usage charts with data table fallback",
+          "body": "Every chart now has a keyboard-navigable data table view and screen reader summaries. Verified with VoiceOver and NVDA.\n\nCloses {{issue:task-a11y}}",
+          "file": "release-story-fixtures/usage-insights/changes/accessible-charts.md",
+          "content": "# Accessible charts\n\nKeyboard-navigable data table view and screen reader summaries for every usage chart.\n"
+        },
+        { "type": "set-phase", "key": "launch", "phase": "Beta" }
+      ]
+    },
+    {
+      "name": "5-export-alerts",
+      "summary": "Ship CSV export and threshold alerts during Beta.",
+      "actions": [
+        {
+          "type": "merge-pr",
+          "key": "pr-csv",
+          "closes": ["task-csv"],
+          "title": "CSV export of usage by endpoint",
+          "body": "Admins can export usage for any date range in the last 13 months as CSV, one row per day and endpoint.\n\nCloses {{issue:task-csv}}",
+          "file": "release-story-fixtures/usage-insights/changes/csv-export.md",
+          "content": "# CSV export\n\nExport any date range in the last 13 months, one row per day and endpoint.\n"
+        },
+        {
+          "type": "merge-pr",
+          "key": "pr-alerts",
+          "closes": ["task-alerts"],
+          "title": "Usage threshold email alerts at 80% and 100%",
+          "body": "Emails workspace admins when usage reaches 80% and 100% of the plan limit. Admins can add extra recipients. Beta customers asked for this more than any other feature.\n\nCloses {{issue:task-alerts}}",
+          "file": "release-story-fixtures/usage-insights/changes/threshold-alerts.md",
+          "content": "# Threshold alerts\n\nEmail alerts at 80% and 100% of plan limit, with configurable extra recipients.\n"
+        },
+        {
+          "type": "comment",
+          "key": "launch",
+          "body": "Beta check-in: 41 workspaces enabled. Usage-related support tickets from beta workspaces are down 38% versus the prior month. One beta admin wrote: \"I found the endpoint behind our overage in two clicks instead of a support thread.\""
+        }
+      ]
+    },
+    {
+      "name": "6-ga",
+      "summary": "Publish the help article and move to GA.",
+      "actions": [
+        {
+          "type": "merge-pr",
+          "key": "pr-docs",
+          "closes": ["task-docs"],
+          "title": "Usage Insights help center article",
+          "body": "Customer-facing guide covering the dashboard, CSV export, and threshold alerts.\n\nCloses {{issue:task-docs}}",
+          "file": "release-story-fixtures/usage-insights/changes/help-article.md",
+          "content": "# Help center article\n\nGuide to the usage dashboard, CSV export, and threshold alerts.\n"
+        },
+        { "type": "set-phase", "key": "launch", "phase": "GA" }
+      ]
+    }
+  ]
+}

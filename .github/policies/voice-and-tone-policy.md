@@ -58,6 +58,14 @@ confident without being pushy or corporate.
 - **Example opener:** "We're adding support for EU payment methods so
   customers in Europe can pay with the options they expect."
 
+### Blog Posts
+
+- **Tone:** The same knowledgeable friend, with room to tell the story behind
+  the release, including what changed along the way
+- **Rules:** Structure, length, evidence requirements, and banned phrases live
+  in [`blog-post-policy.md`](blog-post-policy.md). Where the two disagree,
+  the blog post policy wins.
+
 ## Formatting Guidelines
 
 - Use **sentence case** for headings (not Title Case)
