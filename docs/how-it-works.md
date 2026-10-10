@@ -271,6 +271,9 @@ Readiness reports are posted as GitHub Discussions (not issues) to avoid clutter
 | `ready-for-review` | Ready for domain team review |
 | `ai:compliance-review` | Applied to compliance review sub-issues (distinguishes them from feature work) |
 | `ai:gtm` | Applied to GTM content sub-issues (changelog drafts, roadmap items) |
+| `blog-brief` | Release blog brief; starts the release blog pipeline |
+| `ai:needs:brief-approval` / `approved:brief` | Release blog Gate 1: brief waiting for approval / approved |
+| `ai:needs:draft-approval` / `approved:draft` | Release blog Gate 2: draft waiting for approval / approved |
 | `ai:meeting-discussed` | Applied to issues discussed in a meeting transcript |
 | `ai:process-update` | Applied to PRs updating `docs/how-we-work.md` from transcript analysis |
 | `ai:automation-candidate` | Applied to issues proposing automation of a manual process |
@@ -402,7 +405,19 @@ draft. A marketer files a brief, and agents turn the initiative's history into
 an approved, published blog post. The brief and draft are approved from Slack
 or Google Docs, and the post ships as a PR that renders an HTML page.
 
-Two pieces exist today:
+Built so far:
+
+- **Brief intake.** The *Release Blog Brief* issue template applies
+  `blog-brief`, which triggers `blog-brief-builder.md`. A pre-step
+  (`prepare-brief-context.mjs`) parses the brief and fetches its evidence. The
+  agent posts an evidence-backed brief that covers the claims table, a check
+  of the proof points, guardrails, publish blockers, and headlines. It then
+  adds `ai:needs:brief-approval` and moves the card on the
+  [Content Pipeline](https://github.com/users/chrizbo/projects/4) board. Rules
+  come from `.github/policies/blog-post-policy.md`.
+- **Gate 1.** Commenting `/approve-brief` runs `blog-gate-dispatch.yml`. It
+  checks the commenter, swaps `ai:needs:brief-approval` for
+  `approved:brief`, and moves the card to Drafting.
 
 - **Evidence fetch.** `.github/scripts/blog/fetch-initiative-evidence.mjs <issue>`
   walks an initiative or launch tree. It writes `initiative-evidence.json`

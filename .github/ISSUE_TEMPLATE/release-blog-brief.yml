@@ -1,0 +1,93 @@
+name: Release Blog Brief
+description: Ask for a release blog post about something we shipped
+title: "[Blog Brief] "
+labels: ["blog-brief"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Filing this brief starts the release blog pipeline. An agent gathers
+        evidence from the initiative or launch you link (merged PRs, scope
+        changes, decisions, and customer signal) and posts an evidence-backed
+        brief here for your approval. Nothing is drafted or published until
+        a person approves it. See docs/release-blog-pipeline.md.
+
+  - type: input
+    id: target
+    attributes:
+      label: Initiative or launch
+      description: The issue the post is about. Link the launch if there is one; otherwise the initiative.
+      placeholder: "#338"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: content-type
+    attributes:
+      label: Content type
+      options:
+        - Release post
+      default: 0
+    validations:
+      required: true
+
+  - type: textarea
+    id: audience
+    attributes:
+      label: Audience
+      description: Who is this for, and what do they already know?
+      placeholder: "Workspace admins at mid-size customers who have filed usage or billing tickets."
+    validations:
+      required: true
+
+  - type: input
+    id: key-message
+    attributes:
+      label: Key message
+      description: The one thing a reader should remember.
+      placeholder: "You can see and control your API usage yourself, without a support ticket."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proof-points
+    attributes:
+      label: Proof points wanted
+      description: Numbers, quotes, or examples you hope to use. The agent checks each one against the evidence and flags anything it can't support.
+      placeholder: |
+        - Drop in support tickets during beta
+        - A customer quote about finding an overage quickly
+
+  - type: input
+    id: cta
+    attributes:
+      label: Call to action
+      description: What should readers do next?
+      placeholder: "Open Settings → Usage to see your dashboard."
+    validations:
+      required: true
+
+  - type: textarea
+    id: claims-to-avoid
+    attributes:
+      label: Claims to avoid / legal notes
+      description: Anything the post must not say or imply.
+      placeholder: |
+        - No pricing changes
+        - Don't name beta customers
+
+  - type: input
+    id: target-date
+    attributes:
+      label: Target publish date
+      description: YYYY-MM-DD
+      placeholder: "2027-02-01"
+
+  - type: input
+    id: owner
+    attributes:
+      label: Owner
+      description: GitHub handle of the person who approves the brief and reviews the final PR.
+      placeholder: "@chrizbo"
+    validations:
+      required: true

@@ -166,8 +166,8 @@ and dependencies must be configured explicitly. See the installed README and
 The planner's design catalog now lists the release blog pipeline
 ([spec](release-blog-pipeline.md)) for teams whose release posts are assembled
 by hand from PRs, scope changes, and decisions. The catalog marks the pipeline
-as in progress: only the evidence fetch and the demo release story seeder
-exist. The GitHub builder names `fetch-initiative-evidence.mjs` as a
+as in progress: the brief template, blog post policy, brief builder, and
+`/approve-brief` gate exist, but drafting and publishing do not yet. The GitHub builder names `fetch-initiative-evidence.mjs` as a
 dependency for workflows that tell the story of an initiative or launch. The
 pinned source revision is unchanged, so packaged source links do not include
 these files until `packaging/claude/source.json` moves to a public commit that

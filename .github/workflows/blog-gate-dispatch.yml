@@ -1,0 +1,41 @@
+name: Blog Gate Dispatch
+
+# Applies release blog approval commands from brief comments
+# (docs/release-blog-pipeline.md). Labels are the canonical gate state; this
+# workflow changes them and moves the Content Pipeline card to match.
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: blog-gate-${{ github.event.issue.number }}
+  cancel-in-progress: false
+
+jobs:
+  gate:
+    if: |
+      !github.event.issue.pull_request &&
+      contains(github.event.issue.labels.*.name, 'blog-brief') &&
+      startsWith(github.event.comment.body, '/approve-brief')
+    runs-on: ubuntu-latest
+    env:
+      GH_REPO: ${{ github.repository }}
+      # AW_TOKEN can move cards on the Content Pipeline board; github.token cannot.
+      GH_TOKEN: ${{ secrets.AW_TOKEN || github.token }}
+      ISSUE_NUMBER: ${{ github.event.issue.number }}
+      COMMENT_BODY: ${{ github.event.comment.body }}
+      ACTOR: ${{ github.event.comment.user.login }}
+      BLOG_APPROVERS: ${{ vars.BLOG_APPROVERS }}
+      CONTENT_PROJECT_NUMBER: ${{ vars.CONTENT_PROJECT_NUMBER || '4' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply gate
+        run: node .github/scripts/blog/blog-gate.mjs

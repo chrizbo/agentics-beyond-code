@@ -74,7 +74,7 @@ have changed.
 | Launch status is hard to see | `launch-readiness.md`, `weekly-status.md` | launch template, launch tracker, launch readiness policy |
 | Compliance reviews are slow or inconsistent | `compliance-review.md`, `compliance-team-reports.md` | security/privacy/accessibility/responsible AI policies |
 | GTM work is forgotten late in launch | `gtm-content.md`, `gtm-team-reports.md` | voice and tone policy, launch structure |
-| Release posts are assembled by hand from scattered PRs, scope changes, and decisions | `gtm-content.md` today; the release blog pipeline in `docs/release-blog-pipeline.md` (in progress: only the evidence fetch and demo seeder exist) | brief template, voice and tone policy, decision records, initiative → launch → task structure with PRs that close tasks, a reviewed destination for the post |
+| Release posts are assembled by hand from scattered PRs, scope changes, and decisions | `gtm-content.md` today; the release blog pipeline in `docs/release-blog-pipeline.md` (in progress: the brief template, `blog-post-policy.md`, `blog-brief-builder.md`, and the `/approve-brief` gate exist; drafting and publishing do not yet) | brief template, voice and tone policy, decision records, initiative → launch → task structure with PRs that close tasks, a reviewed destination for the post |
 | Incoming requests are messy | `intake-triage.md` | intake template, strategy doc |
 | Standups are unfocused | `daily-standup-prep.md` | how-we-work doc, work tracker data |
 | Leaders need different views of the same work | `leadership-brief.md`, `weekly-status.md` | leadership brief and weekly status policies |

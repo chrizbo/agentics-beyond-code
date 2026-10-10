@@ -9,7 +9,7 @@
     ".github/skills/agentic-workflow-planner/agents/openai.yaml": "7c32c4cf852944c02ea28dba2f55313ea592e62033c0f3d0a44407856e3cd9a5",
     ".github/skills/agentic-workflow-planner/references/assess.md": "5973701c86cc93b8e42d0cfcfe2eb7dc55bba038a9351a864679e514f73c69cf",
     ".github/skills/agentic-workflow-planner/references/assessment-signals.md": "82548cc055e6fa94ebbac51d7aaf25c411c5ff7ae4ee2232a2c6d3d14d7a6440",
-    ".github/skills/agentic-workflow-planner/references/design.md": "cc41536bc22548547fecce2a2681e0c809745f9b6f6b3f98df221067cb76054e",
+    ".github/skills/agentic-workflow-planner/references/design.md": "6e16757c064e538f20c764935a587ba2a13481e146c616bda35b5a82bb32ec34",
     ".github/skills/agentic-workflow-planner/references/reading-workflow-sources.md": "034f85059203281bde5dd98bb434d8ece40d3f2179323154c5cc12249fa4f29c",
     ".github/skills/atlassian-agent-builder/SKILL.md": "b298f894ff2d9579eac1da58265c09633ad5b4c5bd250063456787356e843eb1",
     ".github/skills/atlassian-agent-builder/agents/openai.yaml": "0b4caacdf446282567e2468e7ff7ddbf0c969fc24938310d0abc3a261d2c69ba",

@@ -114,12 +114,19 @@ transition, so the audit trail always lives on the brief issue.
 
 ### Gate 1 — Brief approval
 
-- **On GitHub:** a `/approve-brief` comment from an allowlisted user.
+- **On GitHub (built):** a `/approve-brief` comment on the brief.
+  [`blog-gate-dispatch.yml`](../.github/workflows/blog-gate-dispatch.yml) runs
+  [`blog-gate.mjs`](../.github/scripts/blog/blog-gate.mjs). It accepts users
+  with write access, or only the logins in the repository variable
+  `BLOG_APPROVERS` when that is set. It swaps the labels, posts a receipt, and
+  moves the card to Drafting via
+  [`content-board.mjs`](../.github/scripts/blog/content-board.mjs). Other
+  commenters get a "not applied" reply.
 - **In Slack:** an approve reaction or reply in the brief thread from an
   allowlisted user. A dispatch workflow (`slack-blog-gate-dispatch.yml`)
   checks the Slack user against the allowlist and applies the same transition.
 - **Transition:** remove `ai:needs:brief-approval`, add `approved:brief`, and
-  record who approved, where, and when in the brief's state block.
+  post a receipt comment naming who approved and how.
 - A request for changes reruns Stage 1 with the requested edits as input.
 
 ### Stage 2 — `blog-draft-writer`
@@ -310,10 +317,10 @@ design catalog and to the `github-workflow-builder` assets, then run
 | Step | Status |
 |---|---|
 | Spec | ✅ |
-| Demo release story and seeder | ✅ built; stages not yet applied |
+| Demo release story and seeder | ✅ built; stage `1-structure` applied 2026-10-10 (#338–#349) |
 | Evidence fetch | ✅ built; tested against launch #3 |
 | Content Pipeline board (#4), gate labels, `CONTENT_PROJECT_NUMBER` | ✅ created; manual view and automation setup pending |
-| Brief template, blog policy, `blog-brief-builder`, Gate 1 | ⏳ |
+| Brief template, blog policy, `blog-brief-builder`, Gate 1 (`/approve-brief`) | ✅ built; not yet run (needs merge to `main`, and later demo stages for richer evidence) |
 | Docs draft generalization, `blog-draft-writer`, Gate 2 | ⏳ |
 | Guardrail check, renderer, blog shell, publisher, Pages deploy | ⏳ |
 | Slack postbacks and Slack gates | ⏳ |
