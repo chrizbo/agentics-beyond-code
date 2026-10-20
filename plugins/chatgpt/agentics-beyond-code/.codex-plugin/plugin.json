@@ -21,10 +21,12 @@
       "Assess our team’s readiness for agentic workflows.",
       "Design workflows for our Microsoft 365 and GitHub team.",
       "Adapt our weekly status workflow for Teams."
-    ]
+    ],
+    "supportURL": "https://github.com/chrizbo/agentics-beyond-code/issues",
+    "privacyPolicyURL": "https://github.com/chrizbo/agentics-beyond-code/blob/main/packaging/claude/privacy.md"
   },
   "homepage": "https://github.com/chrizbo/agentics-beyond-code",
   "repository": "https://github.com/chrizbo/agentics-beyond-code",
   "license": "MIT",
-  "version": "0.5.5"
+  "version": "0.5.6"
 }
