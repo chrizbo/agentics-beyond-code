@@ -106,6 +106,24 @@ when client controls differ from these instructions.
 
 ## Public directory and workspace sharing
 
+### October 20, 2026 submission findings
+
+The portal reported missing support, privacy, and terms URLs for 0.5.5, plus a
+restriction on new skills-only submissions. The 0.5.6 package adds the existing
+public GitHub Issues support link and privacy policy link. Its public description
+retains the supported platform names; the portal flagged those references as an
+informational finding.
+The privacy source now covers the AI assistant running the skills across hosts.
+
+`packaging/chatgpt/terms.md` is a draft for publisher review. Publish approved
+terms before adding their verified public URL as `interface.termsOfServiceURL`
+in `packaging/chatgpt/plugin.json`, then rebuild. Until that happens, 0.5.6 is
+an incomplete submission candidate. The revised privacy source also needs to be
+published so the public policy matches the bundled policy. The existing public
+privacy policy was fetched successfully during preparation; the revised content
+has only been verified locally. Portal scans must be rerun after upload, and the
+skills-only restriction still needs resolution with support.
+
 The [universal public plugin directory](https://developers.openai.com/plugins/deploy/submission)
 is shared by ChatGPT and Codex. From its linked submission portal:
 
