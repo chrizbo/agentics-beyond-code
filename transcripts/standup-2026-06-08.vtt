@@ -1,0 +1,30 @@
+WEBVTT
+
+1
+00:00:01.000 --> 00:00:05.500
+Sarah Chen: Alright, quick standup. Marcus, you're up.
+
+2
+00:00:06.000 --> 00:00:18.000
+Marcus Johnson: Yesterday I wrapped up the initial auth for the WebSocket server tied to issue #261 Backend Infrastructure. Tests are green. Today I’ll work on the fanout layer and error handling.
+
+3
+00:00:18.500 --> 00:00:30.000
+Priya Patel: I'm working on the notification tray and the integration with the export UI — referencing issue #6 Frontend Export UI. Hit a minor CSS bug but not blocking.
+
+4
+00:00:31.000 --> 00:00:43.000
+David Kim: QA verified the compliance review checklist for GDPR export (issue #50) and marked it ready. There's a small accessibility item on translations that needs follow-up.
+
+5
+00:00:44.000 --> 00:00:58.000
+Alex Rivera: Support runbook work (issue #8) is WIP; I'm pairing with Marcus for infra steps. We have a blocker on the pen test scheduling — waiting on external vendor confirmation.
+
+6
+00:00:59.000 --> 00:01:14.000
+Jordan Taylor: Design review for invoice settings (issue #174) is underway. We decided to proceed with a phased rollout for the settings update to reduce risk — flagging for release planning.
+
+7
+00:01:15.000 --> 00:01:30.000
+Sarah Chen: Delivery confidence is medium — we can ship the GDPR export with the current checklist, but translations (issues #18 and #19) and the pen test (issue #7) remain blockers. Decision needed on whether to ship translations in a follow-up patch.
+
