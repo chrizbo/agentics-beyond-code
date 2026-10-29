@@ -230,3 +230,5 @@ No gaps or patterns detected with enough evidence to report. No PR or discussion
 - **Preserve the audit doc history.** When updating `docs/calendar-audit.md`, always keep previous weekly entries. Never truncate.
 - **Fixture mode notice.** If `calendar-data-week.json` has `"is_fixture": true`, add a notice: `> ⚠️ This report uses fixture data.`
 - **Escape all \@mentions** to avoid notifications.
+
+Do not set `temporary_id` on `create_discussion`; it is optional and a malformed value makes the whole output fail validation.

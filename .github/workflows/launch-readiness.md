@@ -342,3 +342,5 @@ The `github_source_url` must be the discussion URL returned by `create_discussio
 - Use tables for scannable data; use prose only for risk explanations.
 - Escape all @mentions and issue references to avoid noisy notifications.
 - If no launches are found, create a brief report noting this.
+
+Do not set `temporary_id` on `create_discussion`; it is optional and a malformed value makes the whole output fail validation.

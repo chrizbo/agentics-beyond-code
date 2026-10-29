@@ -331,3 +331,5 @@ ask for input. Do not finish the run without a safe output call.
   (`[#123](url)`). A PM deciding to run `/create-work-item` on a feedback
   issue should be able to point back to this report by issue number as the
   reason the item was worth considering.
+
+Do not set `temporary_id` on `create_discussion`; it is optional and a malformed value makes the whole output fail validation.

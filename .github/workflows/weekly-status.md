@@ -300,7 +300,7 @@ Use the MCP tool interface to create safe outputs. Examples:
 }
 ```
 
-Configured title prefixes are added automatically — omit them from `title`. If you cannot create the required discussion, immediately call `report_incomplete` and stop — never ask for input. Do not finish the run without a safe output call.
+Configured title prefixes are added automatically — omit them from `title`. Do not set `temporary_id` on `create_discussion`; it is optional and a malformed value makes the whole output fail validation. If you cannot create the required discussion, immediately call `report_incomplete` and stop — never ask for input. Do not finish the run without a safe output call.
 
 ## Guidelines
 

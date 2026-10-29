@@ -433,3 +433,5 @@ Configured title prefixes are added automatically — omit them from `--title`. 
   include them — no workflow changes needed.
 - If a leader policy file is removed, their brief simply stops being
   generated — no cleanup needed.
+
+Do not set `temporary_id` on `create_discussion`; it is optional and a malformed value makes the whole output fail validation.

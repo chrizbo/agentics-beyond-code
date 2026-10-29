@@ -215,3 +215,5 @@ Use this body structure:
 - **Handle missing data gracefully.** If a contributor has no events this week, note "no meetings recorded" rather than computing a zero score.
 - **One discussion per run.** If a calendar load discussion already exists for this week, call `safeoutputs noop`.
 - **Fixture mode notice.** If `calendar-data-week.json` has `"is_fixture": true`, add a notice at the top: `> ⚠️ This report uses fixture data. Configure GOOGLE_CALENDAR_TOKEN to run against live calendar data.`
+
+Do not set `temporary_id` on `create_discussion`; it is optional and a malformed value makes the whole output fail validation.

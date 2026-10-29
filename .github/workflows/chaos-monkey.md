@@ -432,3 +432,5 @@ to show you what it's about to do.]
 
 - **If launch phase distribution is unavailable,** skip that signal — the
   other five signals are sufficient for a stasis assessment.
+
+Do not set `temporary_id` on `create_discussion`; it is optional and a malformed value makes the whole output fail validation.

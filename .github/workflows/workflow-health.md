@@ -410,3 +410,5 @@ Configured title prefixes are added automatically — omit them from `--title`. 
 - Use `<details>` blocks for verbose data so the report stays scannable.
 - Do not mention legacy premium-request billing in the cost section. This
   repository is currently using OpenAI via the Codex engine.
+
+Do not set `temporary_id` on `create_discussion`; it is optional and a malformed value makes the whole output fail validation.

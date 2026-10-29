@@ -246,3 +246,5 @@ Avoid default round-robin updates unless there is no higher-signal facilitation 
 - Use a facilitation style that rotates day to day; avoid repetitive round-robin standups.
 - Escape all @mentions and GitHub references (handled by safe outputs).
 - End with clear ownership language in each topic where possible.
+
+Do not set `temporary_id` on `create_discussion`; it is optional and a malformed value makes the whole output fail validation.

@@ -504,3 +504,5 @@ Configured title prefixes are added automatically — omit them from `--title`. 
   and note collaboration patterns positively.
 - **No blame.** Never single out individuals negatively in the retro. If
   someone is blocked or struggling, frame it as a team challenge.
+
+Do not set `temporary_id` on `create_discussion`; it is optional and a malformed value makes the whole output fail validation.
