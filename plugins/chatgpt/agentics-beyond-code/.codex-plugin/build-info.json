@@ -1,7 +1,7 @@
 {
   "plugin_version": "0.5.7",
   "generated": true,
-  "source_revision": "a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79",
+  "source_revision": "f8878863a2d6c35139b32240ec76b0c7b3a002ed",
   "sha256": {
     ".codex-plugin/plugin.json": "d003dcd7d25d3f7b7dcc1400224dab970eec97c75af4f7c57f57b1624871b7c9",
     "LICENSE": "0b57642affa02b038c08d2ae25e02ea770e3998ae34026cc445444e21c91f2e9",
@@ -57,6 +57,6 @@
     "skills/productboard-agent-builder/references/observed-productboard-behavior.md": "f9a89860cb1858062c49fee19057acb816647e0ff837c90e506ca967b7aab6c5",
     "skills/productboard-agent-builder/references/porting-checklist.md": "2d8be54d28ae082c07ea62ec5b92ba724127704ef4eb2048fc2b38f30aac33a4",
     "skills/productboard-agent-builder/references/triggers-and-schedules.md": "6452c39fa21388d8a7498364cf7edb3aada06da8ccfe6335d96359dde40e692d",
-    "source-index.json": "26b9669f5fc90243fa8775c39683bb1cf00aeb8596dba5b0796d2a3f4fe15f78"
+    "source-index.json": "4ab742c46c62a3f6aebecc7e70a1f7b20aa14af9ec422165ba245a848c63520a"
   }
 }

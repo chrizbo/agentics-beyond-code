@@ -168,10 +168,10 @@ The planner's design catalog now lists the release blog pipeline
 by hand from PRs, scope changes, and decisions. The catalog marks the pipeline
 as in progress: the brief template, blog post policy, brief builder, and
 `/approve-brief` gate exist, but drafting and publishing do not yet. The GitHub builder names `fetch-initiative-evidence.mjs` as a
-dependency for workflows that tell the story of an initiative or launch. The
-pinned source revision is unchanged, so packaged source links do not include
-these files until `packaging/claude/source.json` moves to a public commit that
-contains them.
+dependency for workflows that tell the story of an initiative or launch.  The
+pinned source revision is the PR #350 merge commit (`f887886`), so packaged
+source links include the pipeline spec, brief template, blog post policy, and
+brief builder.
 
 ## Feedback consistency and short-answer checks in 0.5.4
 

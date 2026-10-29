@@ -1,7 +1,7 @@
 {
   "plugin_version": "0.5.7",
   "generated": true,
-  "source_revision": "a34e86b5bcd5c65bf04b1ccfc792a4e969eabc79",
+  "source_revision": "f8878863a2d6c35139b32240ec76b0c7b3a002ed",
   "sha256": {
     ".claude-plugin/icon.png": "455bbb9ef038026c2a00b88bb598ed06bc079b073375e023d5be2e9aeab8d2ae",
     ".claude-plugin/plugin.json": "3e5984f6084836c5d32f61a5ea49c75efff955a28c611e9af1ed252307bd959a",
@@ -57,6 +57,6 @@
     "README.md": "f03e913f5c674f76a3f922f93097cd4c63d7af444895666e333d66ce9aa74f03",
     "docs/privacy.md": "b6d5492ece0ac4c6cd3bd80a17c3fa71dbe6fb2e2765b37713f07f68f09569d8",
     "docs/source-access.md": "b45862a08799036f8f1eef671f9a8b483ad9ec1ff882ecea0a1b5eb65c35a189",
-    "source-index.json": "26b9669f5fc90243fa8775c39683bb1cf00aeb8596dba5b0796d2a3f4fe15f78"
+    "source-index.json": "4ab742c46c62a3f6aebecc7e70a1f7b20aa14af9ec422165ba245a848c63520a"
   }
 }
