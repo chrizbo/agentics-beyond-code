@@ -1,0 +1,55 @@
+name: Release Story Seed
+
+# Seeds the demo release story used by the release blog pipeline
+# (docs/release-blog-pipeline.md). Run one stage at a time, a week or so
+# apart, so PR merge dates and scope edits accrue as real history.
+
+on:
+  workflow_dispatch:
+    inputs:
+      story:
+        description: "Story fixture file"
+        required: true
+        default: "release-story-fixtures/usage-insights.json"
+      stage:
+        description: "Stage name (for example 1-structure), all, or status"
+        required: true
+        default: "status"
+      apply:
+        description: "Write to GitHub (unchecked = dry run)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: release-story-seed
+  cancel-in-progress: false
+
+jobs:
+  seed:
+    runs-on: ubuntu-latest
+    env:
+      GH_REPO: ${{ github.repository }}
+      # AW_TOKEN can write the Launch Tracker project; github.token cannot.
+      GH_TOKEN: ${{ secrets.AW_TOKEN || github.token }}
+      RELEASE_STORY_ADMIN_MERGE: ${{ vars.RELEASE_STORY_ADMIN_MERGE }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Test planner
+        run: node --test .github/scripts/release-story/release-story-plan.test.mjs
+      - name: Seed
+        env:
+          STORY: ${{ inputs.story }}
+          STAGE: ${{ inputs.stage }}
+          APPLY: ${{ inputs.apply }}
+        run: |
+          args=("$STORY" "$STAGE")
+          if [ "$APPLY" = "true" ]; then args+=(--apply); fi
+          node .github/scripts/release-story/seed-release-story.mjs "${args[@]}"

@@ -170,6 +170,10 @@ Common dependencies:
   engines (check current gh-aw engine docs for names and secrets). A new team
   may prefer the engine it already pays for.
 - workflows that read project data may need `.github/scripts/fetch-launch-data.sh`
+- workflows that tell the story of an initiative or launch (release posts,
+  retrospectives) can use `.github/scripts/blog/fetch-initiative-evidence.mjs`
+  with `initiative-evidence.mjs`; it needs no project board, but PRs must
+  close or reference tasks in the tree to count as evidence
 - launch/compliance/GTM workflows need issue templates and policies
 - project-aware workflows need a project board with fields matching the
   workflow's assumptions, or the workflow prompt must be adapted to use labels

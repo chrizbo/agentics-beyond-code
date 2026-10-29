@@ -34,6 +34,8 @@ While [The Agentics](https://github.com/githubnext/agentics) focuses on engineer
 | [📣 GTM Content](.github/workflows/gtm-content.md) | Monday morning generation and refresh of changelog announcement drafts and public roadmap items as sub-issues, following the org's voice & tone policy | [Changelog draft - EU Payment Methods](https://github.com/chrizbo/agentics-beyond-code/issues/77) |
 | [📣 GTM Team Reports](.github/workflows/gtm-team-reports.md) | Monday morning report summarizing launches needing GTM action — missing changelog drafts, missing roadmap items, content needing refresh, and upcoming launches | [GTM readiness report - 2026-05-31](https://github.com/chrizbo/agentics-beyond-code/discussions/194) |
 
+> 🚧 **In progress: [Release Blog Pipeline](docs/release-blog-pipeline.md).** A marketer files a brief, and agents turn an initiative's merged PRs, scope changes, and decisions into an evidence-backed blog post. Humans approve the brief and the draft from Slack or Google Docs, and the post ships as a PR that renders an HTML blog page. Built so far: the [Release Blog Brief](.github/ISSUE_TEMPLATE/release-blog-brief.yml) template, the [blog post policy](.github/policies/blog-post-policy.md), the [📝 Release Blog Brief Builder](.github/workflows/blog-brief-builder.md), the `/approve-brief` gate ([Blog Gate Dispatch](.github/workflows/blog-gate-dispatch.yml)), the evidence fetch, and the [🧾 Release Story Seed](.github/workflows/release-story-seed.yml) demo data workflow. Progress is tracked on the [Content Pipeline](https://github.com/users/chrizbo/projects/4) board.
+
 ### 📥 Intake & Triage
 
 > Two of the workflows below read Slack, but from different surfaces: Slack
@@ -238,6 +240,7 @@ The `agentic-workflows` skill is maintained upstream by GitHub Next. See
 - **[How It Works](docs/how-it-works.md)** — architecture, issue hierarchy, and customization
 - **[Agent Skills](docs/skills.md)** — how the planner and platform builders fit together, ownership, and validation
 - **[Skills Demo Script](docs/skills-demo-script.md)** — a 25-minute presenter walkthrough of each skill using the simulated org
+- **[Release Blog Pipeline](docs/release-blog-pipeline.md)** — spec and build status for the GTM pipeline that turns an initiative's history into an approved, published release blog post (AI for Marketers Summit demo)
 - **[FAQ](docs/faq.md)** — common questions about setup, workflows, and costs
 - **[Workflow Ideas](docs/workflow-ideas.md)** — catalog of future workflow ideas for PM, ops, compliance, and GTM
 - **[External Integration Patterns](docs/external-integration-patterns.md)** — future work for integrating with Slack, Jira, Microsoft 365, Google Workspace, Salesforce, ServiceNow, Notion, Asana, and Linear
@@ -254,6 +257,7 @@ The `agentic-workflows` skill is maintained upstream by GitHub Next. See
 - **[Launch Tracker Project](https://github.com/users/chrizbo/projects/1)** — the sample GitHub Project with issues, launches, and workflow-generated artifacts
 - **[Intake Triage Project](https://github.com/users/chrizbo/projects/2)** — project board for triaging incoming feature requests and bug reports
 - **[Customer Feedback Queue Project](https://github.com/users/chrizbo/projects/3)** — project board for cross-channel customer feedback, dedupe clusters, and strategy/priority triage
+- **[Content Pipeline Project](https://github.com/users/chrizbo/projects/4)** — GTM content from brief to publish, one column per human approval gate (release blog pipeline)
 
 ## 🤝 Contributing
 
