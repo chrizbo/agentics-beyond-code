@@ -9,8 +9,8 @@ records the configuration audit prompted by the
 
 All 27 workflows now pin gh-aw **v1.0.1** and Codex CLI **0.154.0**, using
 OpenAI API credentials. The upgrade replaces the previous mixed v0.79.6 /
-v0.88.7 baseline and aligns setup tooling and the upstream skill. v1.0.1 was
-the latest stable [release](https://github.com/github/gh-aw/releases/tag/v1.0.1)
+v0.88.7 baseline and aligns setup tooling and the upstream skill. v0.89.21 was
+the latest stable [release](https://github.com/github/gh-aw/releases/tag/v0.89.21)
 checked on September 24, 2026.
 
 The model distribution is 11 `gpt-5-mini`, 8 `gpt-4o`, and 8 `gpt-5.3-codex`.
@@ -90,7 +90,7 @@ Keep the existing ABC pattern when adding or changing workflows:
    no-op behavior. For a required report, validate that it produced the
    required artifact or an explicit incomplete result.
 
-The v1.0.1 migration defaults `min-integrity: none` workflows to disabled
+The v0.89.21 migration defaults `min-integrity: none` workflows to disabled
 shell and local MCP when shell access is unspecified. That automatic change
 would break ABC's existing shell examples. Explicit shell declarations retain
 the prior execution capability and gh-proxy read path; integrity thresholds,
@@ -116,7 +116,7 @@ upgrading the compiler.
 
 ## Upgrade adjustments
 
-The v1.0.1 upgrade refreshed all compiled workflows, action pins, maintenance
+The v0.89.21 upgrade refreshed all compiled workflows, action pins, maintenance
 workflow, setup tooling, and the upstream dispatcher skill and agent. Alongside
 the explicit shell declarations:
 
