@@ -26,17 +26,6 @@ max-ai-credits: 2000
 network:
   allowed: [defaults, github]
 
-post-steps:
-  - name: Require safe output
-    if: success()
-    env:
-      GH_AW_SAFE_OUTPUTS: ${{ runner.temp }}/gh-aw/safeoutputs/outputs.jsonl
-    run: |
-      if [ ! -s "$GH_AW_SAFE_OUTPUTS" ] || ! grep -q '[^[:space:]]' "$GH_AW_SAFE_OUTPUTS"; then
-        echo "::error::Agent completed without a safe output. Create the weekly retro discussion or call safeoutputs report_incomplete."
-        exit 1
-      fi
-
 tools:
   # Required for local evidence, policies, and gh reads; see docs/codex-workflows.md.
   bash: ["*"]

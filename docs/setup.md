@@ -73,7 +73,7 @@ Current gh-aw documentation supports retaining `id: codex` while selecting a
 of the committed workflows.
 
 **Version baseline:** all ABC workflows, setup tooling, and the upstream skill
-now use gh-aw **v0.89.21**. The Copilot inference route remains optional; the
+now use gh-aw **v1.0.1**. The Copilot inference route remains optional; the
 committed workflows still use OpenAI. Before switching a workflow, inspect its
 compiled provider, credentials, network policy, and threat-detection job and
 validate a staged run. Future compiler upgrades should follow
@@ -137,7 +137,7 @@ gh auth login
 gh auth refresh -s read:project,project
 
 # Install the Agentic Workflows extension
-gh extension install github/gh-aw --pin v0.89.21
+gh extension install github/gh-aw --pin v1.0.1
 
 # Add project scopes (needed for launch tracker integration)
 gh auth refresh -s read:project,project

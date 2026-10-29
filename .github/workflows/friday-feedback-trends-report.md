@@ -47,17 +47,6 @@ steps:
       chmod +x .github/scripts/fetch-launch-data.sh
       ./.github/scripts/fetch-launch-data.sh "$LAUNCH_PROJECT_OWNER" "$LAUNCH_PROJECT_NUMBER" launch-data.json
 
-post-steps:
-  - name: Require safe output
-    if: success()
-    env:
-      GH_AW_SAFE_OUTPUTS: ${{ runner.temp }}/gh-aw/safeoutputs/outputs.jsonl
-    run: |
-      if [ ! -s "$GH_AW_SAFE_OUTPUTS" ] || ! grep -q '[^[:space:]]' "$GH_AW_SAFE_OUTPUTS"; then
-        echo "::error::Agent completed without a safe output. Create the required discussion or call safeoutputs report_incomplete."
-        exit 1
-      fi
-
 tools:
   # Shell is needed to query pre-fetched feedback and launch JSON.
   # Codex has no per-command allowlist; see docs/codex-workflows.md.

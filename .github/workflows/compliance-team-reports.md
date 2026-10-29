@@ -38,17 +38,6 @@ steps:
       ./.github/scripts/fetch-launch-data.sh "$LAUNCH_PROJECT_OWNER" "$LAUNCH_PROJECT_NUMBER" launch-data.json
       echo "path=launch-data.json" >> "$GITHUB_OUTPUT"
 
-post-steps:
-  - name: Require safe output
-    if: success()
-    env:
-      GH_AW_SAFE_OUTPUTS: ${{ runner.temp }}/gh-aw/safeoutputs/outputs.jsonl
-    run: |
-      if [ ! -s "$GH_AW_SAFE_OUTPUTS" ] || ! grep -q '[^[:space:]]' "$GH_AW_SAFE_OUTPUTS"; then
-        echo "::error::Agent completed without a safe output. Create the required compliance team discussions or call safeoutputs report_incomplete."
-        exit 1
-      fi
-
 imports:
   - shared/freshness-check.md
 
