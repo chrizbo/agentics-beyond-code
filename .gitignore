@@ -9,3 +9,7 @@ launch-data-summary.json
 
 # macOS workspace metadata
 .DS_Store
+
+# Python bytecode
+__pycache__/
+*.pyc
