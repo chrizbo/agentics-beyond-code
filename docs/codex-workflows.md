@@ -7,7 +7,7 @@ records the configuration audit prompted by the
 
 ## Committed configuration
 
-All 27 workflows now pin gh-aw **v0.89.21** and Codex CLI **0.154.0**, using
+All 27 workflows now pin gh-aw **v1.0.1** and Codex CLI **0.154.0**, using
 OpenAI API credentials. The upgrade replaces the previous mixed v0.79.6 /
 v0.88.7 baseline and aligns setup tooling and the upstream skill. v0.89.21 was
 the latest stable [release](https://github.com/github/gh-aw/releases/tag/v0.89.21)
@@ -223,7 +223,7 @@ gh aw compile --strict --no-emit
 git diff --check
 ```
 
-Use gh-aw v0.89.21. Compilation does not execute models or publish artifacts.
+Use gh-aw v1.0.1. Compilation does not execute models or publish artifacts.
 After changing a workflow, regenerate its lock with `gh aw compile <workflow-id> --strict`. Future compiler upgrades should follow the
 [upstream skill synchronization procedure](skills.md).
 

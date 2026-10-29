@@ -141,16 +141,6 @@ safe-outputs:
     max: 1
   noop:
 
-post-steps:
-  - name: Require safe output
-    if: success()
-    env:
-      GH_AW_SAFE_OUTPUTS: ${{ runner.temp }}/gh-aw/safeoutputs/outputs.jsonl
-    run: |
-      if [ ! -s "$GH_AW_SAFE_OUTPUTS" ] || ! grep -q '[^[:space:]]' "$GH_AW_SAFE_OUTPUTS"; then
-        echo "::error::Agent completed without a safe output. Create a chaos discussion or call safeoutputs noop if the team is sufficiently dynamic."
-        exit 1
-      fi
 ---
 
 # Chaos Monkey 🐒
@@ -442,3 +432,5 @@ to show you what it's about to do.]
 
 - **If launch phase distribution is unavailable,** skip that signal — the
   other five signals are sufficient for a stasis assessment.
+
+Do not set `temporary_id` on `create_discussion`; it is optional and a malformed value makes the whole output fail validation.

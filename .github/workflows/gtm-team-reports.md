@@ -278,3 +278,5 @@ Configured title prefixes are added automatically — omit them from `--title`. 
 - Escape all @mentions to avoid noisy notifications.
 - If a previous week's report exists (same title prefix), the new one
   will be created alongside it — discussions are append-only history.
+
+Do not set `temporary_id` on `create_discussion`; it is optional and a malformed value makes the whole output fail validation.
