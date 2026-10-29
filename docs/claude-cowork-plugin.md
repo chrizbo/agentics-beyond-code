@@ -17,7 +17,7 @@ The plugin is listed in Anthropic's plugin directory. Open the
 Some Claude environments don't show directory plugins. In that case, add the
 repository marketplace `chrizbo/agentics-beyond-code` in Claude's plugin settings
 (**Customize → Plugins → Add marketplace**), then install `agentics-beyond-code`.
-Alternatively, build or download `agentics-beyond-code-0.5.5.zip` and use the
+Alternatively, build or download `agentics-beyond-code-0.5.7.zip` and use the
 custom ZIP upload option. Start a new task, type `/` to find the skills, and select
 a writable folder when creating files.
 
@@ -161,7 +161,7 @@ runtime. If implementation is requested later, the chosen runtime's credentials
 and dependencies must be configured explicitly. See the installed README and
 `docs/source-access.md` for data handling and source resolution.
 
-## Release blog pipeline references in 0.5.5
+## Release blog pipeline references in 0.5.7
 
 The planner's design catalog now lists the release blog pipeline
 ([spec](release-blog-pipeline.md)) for teams whose release posts are assembled
